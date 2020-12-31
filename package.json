@@ -1,6 +1,6 @@
 {
   "name": "molecula-ui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "types": "dist/types/index.d.ts",
   "main": "dist/molecula-ui.cjs.js",
   "module": "dist/molecula-ui.esm.js",
