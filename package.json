@@ -1,6 +1,6 @@
 {
   "name": "molecula-ui",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "types": "dist/types/index.d.ts",
   "main": "dist/molecula-ui.cjs.js",
   "module": "dist/molecula-ui.esm.js",
@@ -9,7 +9,8 @@
   "scripts": {
     "serve": "vite",
     "build": "rollup -c",
-    "serve-rollup": "rollup -c rollup.config.js  --watch"
+    "serve-rollup": "rollup -c rollup.config.js  --watch",
+    "prepublish": "npm run build"
   },
   "lint-staged": {
     "*.{js,jsx,vue,ts,tsx}": [
