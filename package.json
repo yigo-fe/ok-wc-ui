@@ -1,5 +1,5 @@
 {
-  "name": "ok-ui",
+  "name": "ok-wc-ui",
   "version": "0.1.2",
   "types": "dist/types/index.d.ts",
   "main": "dist/molecula-ui.cjs.js",
