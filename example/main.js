@@ -1,11 +1,7 @@
-import './index.css'
+import '../packages'
 
 import { createApp } from 'vue'
 
-import App from '/@/App.vue'
-
-import packages from '../packages'
-
-console.log(packages)
+import App from './App.vue'
 
 createApp(App).mount('#app')

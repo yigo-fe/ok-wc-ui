@@ -6,11 +6,14 @@ import json from 'rollup-plugin-json'
 import postcss from 'rollup-plugin-postcss'
 import { terser } from 'rollup-plugin-terser'
 import VuePlugin from 'rollup-plugin-vue'
+// import replace from 'rollup-plugin-replace'
 
 import babel from './build/babel'
 import nodeResolve from './build/resolve'
 import ts from './build/ts'
 import pkg from './package.json'
+// import serve from 'rollup-plugin-serve'
+// import livereload from 'rollup-plugin-livereload'
 
 const createConfig = format => {
   const input = 'packages/index.ts'
@@ -43,6 +46,15 @@ const createConfig = format => {
     ts(),
     babelPlugin,
     filesize({ showBrotliSize: true }),
+    // replace({
+    //   'process.env.NODE_ENV': JSON.stringify('development'),
+    // }),
+    // serve({
+    //   open: true,
+    //   port: 8001,
+    //   openPage: './index.html',
+    // }),
+    // livereload(),
   ]
   if (isUmd) {
     output = {
