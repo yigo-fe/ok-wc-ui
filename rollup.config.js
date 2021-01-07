@@ -5,15 +5,13 @@ import filesize from 'rollup-plugin-filesize'
 import json from 'rollup-plugin-json'
 import postcss from 'rollup-plugin-postcss'
 import { terser } from 'rollup-plugin-terser'
-import VuePlugin from 'rollup-plugin-vue'
-// import replace from 'rollup-plugin-replace'
 
 import babel from './build/babel'
 import nodeResolve from './build/resolve'
 import ts from './build/ts'
 import pkg from './package.json'
-// import serve from 'rollup-plugin-serve'
-// import livereload from 'rollup-plugin-livereload'
+import serve from 'rollup-plugin-serve'
+import livereload from 'rollup-plugin-livereload'
 
 const createConfig = format => {
   const input = 'packages/index.ts'
@@ -24,17 +22,10 @@ const createConfig = format => {
   }
   const isUmd = format === 'umd'
   const babelPlugin = isUmd ? babel(false, false) : babel()
-  const external = isUmd
-    ? ['vue']
-    : id => {
-        return /core|^vue$/.test(id)
-      }
+
   const plugins = [
     alias(),
     nodeResolve(),
-    VuePlugin({
-      compileTemplate: true,
-    }),
     json(),
     postcss({
       extract: `css/${pkg.name}.css`,
@@ -46,31 +37,32 @@ const createConfig = format => {
     ts(),
     babelPlugin,
     filesize({ showBrotliSize: true }),
-    // replace({
-    //   'process.env.NODE_ENV': JSON.stringify('development'),
-    // }),
-    // serve({
-    //   open: true,
-    //   port: 8001,
-    //   openPage: './index.html',
-    // }),
-    // livereload(),
   ]
+
   if (isUmd) {
     output = {
       ...output,
       name: pkg.name,
-      globals: {
-        vue: 'Vue',
-      },
       // 只有umd需要压缩
       plugins: [terser()],
     }
   }
+
+  // 开发模式
+  if(process.env.NODE_MODE === 'development') {
+    plugins.push(
+      serve({
+        open: true,
+        port: 8001,
+        openPage: './example/index.html',
+      }),
+      livereload()
+    )
+  }
+
   return {
     input,
     output,
-    external,
     plugins,
   }
 }
