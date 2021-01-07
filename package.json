@@ -7,7 +7,7 @@
   "unpkg": "dist/ok-wc-ui.umd.min.js",
   "homepage": "https://github.com/yigo-fe/ok-wc-ui",
   "scripts": {
-    "serve": "NODE_ENV=development rollup -c -w",
+    "serve": "NODE_ENV=development rollup -c rollup.config.js -w",
     "build": "NODE_ENV=production rollup -c",
     "prepublish": "npm run build"
   },
