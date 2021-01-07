@@ -1,19 +1,17 @@
 import cjs from '@rollup/plugin-commonjs'
 import autoprefixer from 'autoprefixer'
 import alias from 'rollup-plugin-alias'
-import css from 'rollup-plugin-css-only'
 import filesize from 'rollup-plugin-filesize'
 import json from 'rollup-plugin-json'
 import postcss from 'rollup-plugin-postcss'
-import replace from 'rollup-plugin-replace'
 import { terser } from 'rollup-plugin-terser'
 
 import babel from './build/babel'
 import nodeResolve from './build/resolve'
 import ts from './build/ts'
 import pkg from './package.json'
-// import serve from 'rollup-plugin-serve'
-// import livereload from 'rollup-plugin-livereload'
+import serve from 'rollup-plugin-serve'
+import livereload from 'rollup-plugin-livereload'
 
 const createConfig = format => {
   const input = 'packages/index.ts'
@@ -29,7 +27,6 @@ const createConfig = format => {
     alias(),
     nodeResolve(),
     json(),
-    css({ output: false }),
     postcss({
       extract: false,
       inject: false,
@@ -41,21 +38,29 @@ const createConfig = format => {
     ts(),
     babelPlugin,
     filesize({ showBrotliSize: true }),
-    replace({
-      'process.env.NODE_ENV': JSON.stringify('development'),
-    }),
   ]
+
   if (isUmd) {
     output = {
       ...output,
       name: pkg.name,
-      globals: {
-        vue: 'Vue',
-      },
       // 只有umd需要压缩
       plugins: [terser()],
     }
   }
+
+  // 开发模式
+  if(process.env.NODE_MODE === 'development') {
+    plugins.push(
+      serve({
+        open: true,
+        port: 8001,
+        openPage: './example/index.html',
+      }),
+      livereload()
+    )
+  }
+
   return {
     input,
     output,

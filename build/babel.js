@@ -1,6 +1,6 @@
 import { babel } from '@rollup/plugin-babel'
 
-export default function (treeshake = true, polyfills = false, legacy = false) {
+export default function (treeshake = true, polyfills = false) {
   const plugins = treeshake
     ? [
         'babel-plugin-typescript-iife-enum',
@@ -18,9 +18,7 @@ export default function (treeshake = true, polyfills = false, legacy = false) {
       ]
     : [['@babel/plugin-transform-typescript', { isTSX: 'preserve' }]]
 
-  const presets = legacy
-    ? [
-        [
+  const presets = [[
           '@babel/preset-env',
           {
             modules: false,
@@ -31,9 +29,7 @@ export default function (treeshake = true, polyfills = false, legacy = false) {
             },
           },
         ],
-        '@vue/babel-preset-jsx',
       ]
-    : ['@vue/babel-preset-jsx']
 
   return babel({
     plugins,
@@ -41,6 +37,6 @@ export default function (treeshake = true, polyfills = false, legacy = false) {
     babelrc: false,
     babelHelpers: 'bundled',
     exclude: 'node_modules/**',
-    extensions: ['.js', '.jsx', '.tsx', '.ts', '.vue'],
+    extensions: ['.js', '.jsx', '.tsx', '.ts'],
   })
 }
