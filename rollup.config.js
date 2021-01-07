@@ -14,7 +14,6 @@ import serve from 'rollup-plugin-serve'
 import livereload from 'rollup-plugin-livereload'
 import replace from 'rollup-plugin-replace'
 
-
 const isPrd = process.env.NODE_ENV === 'production'
 
 const createConfig = format => {
@@ -26,13 +25,14 @@ const createConfig = format => {
   }
   const isUmd = format === 'umd'
   const babelPlugin = isUmd ? babel(false, false) : babel()
-
+  const external = isUmd ? [] : ['ok-lit']
   const plugins = [
     alias(),
     nodeResolve(),
     json(),
     postcss({
-      extract: `css/${pkg.name}.css`,
+      extract: false,
+      inject: false,
       extensions: ['css', 'less'],
       minimize: true,
       plugins: [autoprefixer],
@@ -42,7 +42,9 @@ const createConfig = format => {
     babelPlugin,
     filesize({ showBrotliSize: true }),
     replace({
-      'process.env.NODE_ENV': JSON.stringify(isPrd ? 'production':'development'),
+      'process.env.NODE_ENV': JSON.stringify(
+        isPrd ? 'production' : 'development'
+      ),
     }),
   ]
 
@@ -56,7 +58,7 @@ const createConfig = format => {
   }
 
   // 开发模式
-  if(!isPrd) {
+  if (!isPrd) {
     plugins.push(
       serve({
         open: true,
@@ -70,6 +72,7 @@ const createConfig = format => {
   return {
     input,
     output,
+    external,
     plugins,
   }
 }

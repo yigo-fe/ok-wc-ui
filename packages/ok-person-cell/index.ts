@@ -1,7 +1,13 @@
-// import './ok-person-cell.module.css's
+import {
+  classMap,
+  defineComponent,
+  html,
+  onMounted,
+  onUpdated,
+  reactive,
+} from 'ok-lit'
 
-import { defineComponent, html, onMounted, onUpdated, reactive } from 'ok-lit'
-import { classMap } from 'lit-html/directives/class-map'
+import css from './ok-person-cell.less'
 
 defineComponent(
   'ok-person-cell',
@@ -49,9 +55,15 @@ defineComponent(
 
     return () =>
       html`
+        <style>
+          ${css}
+        </style>
+
         <div class="${classMap(okPersonCellClass)}"></div>
         <button @click=${toggle}>toggle child</button>
-        <p>${state.text} <input value=${state.text} @input=${onInput} /></p>
+        <p class="ok-person-cell">
+          ${state.text} <input value=${state.text} @input=${onInput} />
+        </p>
         <p v-show="${state.show}">style display v-show</p>
         <p ref="p">A: ${state.childData.text}</p>
         ${state.show
