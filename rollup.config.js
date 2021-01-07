@@ -50,7 +50,7 @@ const createConfig = format => {
   }
 
   // 开发模式
-  if(process.env.NODE_MODE === 'development') {
+  if (process.env.NODE_ENV === 'development') {
     plugins.push(
       serve({
         open: true,

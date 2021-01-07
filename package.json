@@ -11,6 +11,12 @@
     "build": "cross-env NODE_ENV=production rollup -c",
     "prepublish": "npm run build"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
   "lint-staged": {
     "*.{js,js,ts,tsx,css,less}": [
       "prettier --write"
