@@ -1,12 +1,12 @@
 import cjs from '@rollup/plugin-commonjs'
 import autoprefixer from 'autoprefixer'
 import alias from 'rollup-plugin-alias'
+import css from 'rollup-plugin-css-only'
 import filesize from 'rollup-plugin-filesize'
 import json from 'rollup-plugin-json'
 import postcss from 'rollup-plugin-postcss'
+import replace from 'rollup-plugin-replace'
 import { terser } from 'rollup-plugin-terser'
-import VuePlugin from 'rollup-plugin-vue'
-// import replace from 'rollup-plugin-replace'
 
 import babel from './build/babel'
 import nodeResolve from './build/resolve'
@@ -24,20 +24,15 @@ const createConfig = format => {
   }
   const isUmd = format === 'umd'
   const babelPlugin = isUmd ? babel(false, false) : babel()
-  const external = isUmd
-    ? ['vue']
-    : id => {
-        return /core|^vue$/.test(id)
-      }
+  const external = isUmd ? [] : ['ok-lit']
   const plugins = [
     alias(),
     nodeResolve(),
-    VuePlugin({
-      compileTemplate: true,
-    }),
     json(),
+    css({ output: false }),
     postcss({
-      extract: `css/${pkg.name}.css`,
+      extract: false,
+      inject: false,
       extensions: ['css', 'less'],
       minimize: true,
       plugins: [autoprefixer],
@@ -46,15 +41,9 @@ const createConfig = format => {
     ts(),
     babelPlugin,
     filesize({ showBrotliSize: true }),
-    // replace({
-    //   'process.env.NODE_ENV': JSON.stringify('development'),
-    // }),
-    // serve({
-    //   open: true,
-    //   port: 8001,
-    //   openPage: './index.html',
-    // }),
-    // livereload(),
+    replace({
+      'process.env.NODE_ENV': JSON.stringify('development'),
+    }),
   ]
   if (isUmd) {
     output = {
