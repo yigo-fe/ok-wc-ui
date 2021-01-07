@@ -12,6 +12,10 @@ import ts from './build/ts'
 import pkg from './package.json'
 import serve from 'rollup-plugin-serve'
 import livereload from 'rollup-plugin-livereload'
+import replace from 'rollup-plugin-replace'
+
+
+const isPrd = process.env.NODE_ENV === 'production'
 
 const createConfig = format => {
   const input = 'packages/index.ts'
@@ -37,6 +41,9 @@ const createConfig = format => {
     ts(),
     babelPlugin,
     filesize({ showBrotliSize: true }),
+    replace({
+      'process.env.NODE_ENV': JSON.stringify(isPrd ? 'production':'development'),
+    }),
   ]
 
   if (isUmd) {
@@ -49,12 +56,12 @@ const createConfig = format => {
   }
 
   // 开发模式
-  if(process.env.NODE_ENV === 'development') {
+  if(!isPrd) {
     plugins.push(
       serve({
         open: true,
         port: 8001,
-        openPage: './example/index.html',
+        openPage: '/example/index.html',
       }),
       livereload()
     )
@@ -67,4 +74,6 @@ const createConfig = format => {
   }
 }
 
-export default () => ['esm', 'cjs', 'umd'].map(createConfig)
+const formats = isPrd ? ['esm', 'cjs', 'umd'] : ['umd']
+
+export default () => formats.map(createConfig)
