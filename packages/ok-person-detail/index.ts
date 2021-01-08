@@ -4,6 +4,7 @@ import {
   onMounted,
   onUnmounted,
   onUpdated,
+  PropType,
 } from 'ok-lit'
 
 import ks_kim from './assets/ks_kim.svg'
@@ -13,7 +14,7 @@ defineComponent(
   'ok-person-detail',
   {
     person: {
-      type: Object,
+      type: (Object as unknown) as PropType<any>,
       required: true,
     },
   },
