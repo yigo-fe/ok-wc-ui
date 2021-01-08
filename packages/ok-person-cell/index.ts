@@ -1,7 +1,6 @@
 import { createPopper, Instance } from '@popperjs/core'
 import { defineComponent, html, onMounted, PropType } from 'ok-lit'
 import { Person } from './person-cell.utlis'
-import { styleMap } from 'lit-html/directives/style-map'
 
 import okPersonCellCss from './assets/ok-person-cell.less'
 
@@ -88,34 +87,25 @@ defineComponent(
       }, 200)
     }
 
-    return () => {
-      const style = {
-        width: `${props.size}px`,
-        height: `${props.size}px`,
-      }
-
-      return html`
-        <style>
-          ${okPersonCellCss}
-        </style>
-        <span
+    return () => html`
+      <style>
+        ${okPersonCellCss}
+      </style>
+      <span
+        @mouseenter=${handleMouseenter}
+        @mouseleave=${handleMouseleave}
+        ref="personCell"
+        class="ok-person-cell"
+      >
+        <img src="${props.person.src}" />
+      </span>
+      <div ref="tooltip" id="tooltip">
+        <ok-person-detail
           @mouseenter=${handleMouseenter}
           @mouseleave=${handleMouseleave}
-          ref="personCell"
-          class="ok-person-cell"
-          style=${styleMap(style)}
-        >
-          <img src="${props.person.src}" />
-        </span>
-
-        <div ref="tooltip" id="tooltip">
-          <ok-person-detail
-            @mouseenter=${handleMouseenter}
-            @mouseleave=${handleMouseleave}
-            .person=${props.person}
-          ></ok-person-detail>
-        </div>
-      `
-    }
+          .person=${props.person}
+        ></ok-person-detail>
+      </div>
+    `
   }
 )
