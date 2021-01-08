@@ -4,41 +4,64 @@ import {
   onMounted,
   onUnmounted,
   onUpdated,
-  reactive,
 } from 'ok-lit'
 
-// defineComponent('ok-person-detail',{
-//   msg: {
-//     type: String,
-//     default: '',
-//   },
-//   data: {
-//     type: Object,
-//     default: {},
-//   }
-// } , (_props, context) => {
-//   const state = reactive({ count: 0 })
-//   const increase = () => {
-//     state.count++
-//     context.emit('increase', state.count)
-//   }
-//   onMounted(() => {
-//     console.log('child mounted')
-//   })
+import ks_kim from './assets/ks_kim.svg'
+import okPersonDetaillCss from './assets/ok-person-detail.less'
 
-//   onUpdated(() => {
-//     console.log('child updated')
-//   })
+defineComponent(
+  'ok-person-detail',
+  {
+    person: {
+      type: Object,
+      required: true,
+    },
+  },
+  (props, _context) => {
+    onMounted(() => {
+      console.log(props, 'child mounted')
+    })
 
-//   onUnmounted(() => {
-//     console.log('html child unmounted')
-//   })
+    onUpdated(() => {
+      console.log('child updated')
+    })
 
-//   return (msg: string, data: any) => html`
-//     <p>${msg}</p>
-//     <p>X: ${data?.text}</p>
-//     <p></p>
-//     <p>${state.count}</p>
-//     <button @click=${increase}>increase</button>
-//   `
-// })
+    onUnmounted(() => {
+      console.log('html child unmounted')
+    })
+
+    // 打开应用
+    const openApp = () => {
+      window.location.href = `kim://username?username=${props.person.id}`
+    }
+
+    return () => html`
+      <style>
+        ${okPersonDetaillCss}
+      </style>
+
+      <div class="ok-person-detail">
+        <header class="person-image">
+          <img src=${props.person.src} />
+          <div class="overlay">
+            <span class="person-name">${props.person.name}</span>
+          </div>
+        </header>
+        <footer class="person-detail-footer">
+          <div class="person-detail-info">
+            <span class="title">部门</span>
+            <span class="placeholder">${props.person.department}</span>
+          </div>
+          <div class="person-detail-info">
+            <span class="title">邮箱</span>
+            <span class="placeholder">${props.person.email}</span>
+          </div>
+          <div @click=${openApp} class="person-detail-button">
+            <img src=${ks_kim} />
+            发送Kim消息
+          </div>
+        </footer>
+      </div>
+    `
+  }
+)

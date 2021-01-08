@@ -1,18 +1,19 @@
 import cjs from '@rollup/plugin-commonjs'
+import image from '@rollup/plugin-image'
 import autoprefixer from 'autoprefixer'
 import alias from 'rollup-plugin-alias'
 import filesize from 'rollup-plugin-filesize'
 import json from 'rollup-plugin-json'
+import livereload from 'rollup-plugin-livereload'
 import postcss from 'rollup-plugin-postcss'
+import replace from 'rollup-plugin-replace'
+import serve from 'rollup-plugin-serve'
 import { terser } from 'rollup-plugin-terser'
 
 import babel from './build/babel'
 import nodeResolve from './build/resolve'
 import ts from './build/ts'
 import pkg from './package.json'
-import serve from 'rollup-plugin-serve'
-import livereload from 'rollup-plugin-livereload'
-import replace from 'rollup-plugin-replace'
 
 const isPrd = process.env.NODE_ENV === 'production'
 
@@ -39,6 +40,7 @@ const createConfig = format => {
     }),
     cjs(),
     ts(),
+    image(),
     babelPlugin,
     filesize({ showBrotliSize: true }),
     replace({
