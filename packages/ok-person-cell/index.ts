@@ -64,7 +64,7 @@ defineComponent(
       })
 
       // 初始化隐藏
-      setTimeout(() => {
+      requestAnimationFrame(() => {
         togglePoper(true)
       })
     })
