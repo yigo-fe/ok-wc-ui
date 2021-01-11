@@ -1,3 +1,4 @@
+import { handleImage } from '@c/utils'
 import {
   defineComponent,
   html,
@@ -7,8 +8,8 @@ import {
   PropType,
 } from 'ok-lit'
 
-import ks_kim from './assets/ks_kim.svg'
-import okPersonDetaillCss from './assets/ok-person-detail.less'
+import ks_kim from '../assets/ks_kim.svg'
+import okPersonDetaillCss from '../assets/ok-person-detail.less'
 
 defineComponent(
   'ok-person-detail',
@@ -33,7 +34,7 @@ defineComponent(
 
     // 打开应用
     const openApp = () => {
-      window.location.href = `kim://username?username=${props.person.id}`
+      window.location.href = `kim://username?username=${props.person.userName}`
     }
 
     return () => html`
@@ -43,7 +44,7 @@ defineComponent(
 
       <div class="ok-person-detail">
         <header class="person-image">
-          <img src=${props.person.src} />
+          <img src=${handleImage(props.person.headImage)} />
           <div class="overlay">
             <span class="person-name">${props.person.name}</span>
           </div>
@@ -51,7 +52,7 @@ defineComponent(
         <footer class="person-detail-footer">
           <div class="person-detail-info">
             <span class="title">部门</span>
-            <span class="placeholder">${props.person.department}</span>
+            <span class="placeholder">${props.person.deptName}</span>
           </div>
           <div class="person-detail-info">
             <span class="title">邮箱</span>
