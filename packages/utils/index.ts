@@ -3,7 +3,7 @@
  */
 import defaultImage from '../assets/defaultAvatar.png'
 const handleImage = (imageSrc?: string) => {
-  console.log(imageSrc, defaultImage)
+  // console.log(imageSrc, defaultImage)
   return imageSrc ? imageSrc : defaultImage
 }
 

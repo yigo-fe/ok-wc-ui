@@ -3,7 +3,7 @@ export interface Person {
   name: string
   userName: string
   deptId?: string
-  depttName: string
+  orgName: string
   email: string
   headImage: string
   active?: ACTIVE_TYPE

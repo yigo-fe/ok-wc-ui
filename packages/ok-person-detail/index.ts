@@ -21,15 +21,15 @@ defineComponent(
   },
   (props, _context) => {
     onMounted(() => {
-      console.log(props, 'child mounted')
+      // console.log(props, 'child mounted')
     })
 
     onUpdated(() => {
-      console.log('child updated')
+      // console.log('child updated')
     })
 
     onUnmounted(() => {
-      console.log('html child unmounted')
+      // console.log('html child unmounted')
     })
 
     // 打开应用
@@ -52,7 +52,7 @@ defineComponent(
         <footer class="person-detail-footer">
           <div class="person-detail-info">
             <span class="title">部门</span>
-            <span class="placeholder">${props.person.deptName}</span>
+            <span class="placeholder">${props.person.orgName}</span>
           </div>
           <div class="person-detail-info">
             <span class="title">邮箱</span>
