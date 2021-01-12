@@ -102,7 +102,7 @@ defineComponent(
         ref="personCell"
         class="ok-person-cell"
       >
-        <img src="${handleImage(props.person.headImage)}" />
+        <img src="${handleImage(props.person?.headImage)}" />
       </span>
       <div ref="tooltip" id="tooltip">
         <ok-person-detail

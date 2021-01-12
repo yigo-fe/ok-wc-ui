@@ -44,7 +44,7 @@ defineComponent(
 
       <div class="ok-person-detail">
         <header class="person-image">
-          <img src=${handleImage(props.person.headImage)} />
+          <img src=${handleImage(props.person?.headImage)} />
           <div class="overlay">
             <span class="person-name">${props.person.name}</span>
           </div>
