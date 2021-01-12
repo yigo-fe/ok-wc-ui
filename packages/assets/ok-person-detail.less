@@ -1,66 +1,74 @@
 .ok-person-detail {
   width: 320px;
   height: 434px;
-  background: #ffffff;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.12);
-  border-radius: 4px;
+  overflow: hidden;
   font-family: PingFang SC;
   font-style: normal;
-  overflow: hidden;
+  cursor: default;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+
   .person-image {
+    position: relative;
     width: 100%;
     height: 270px;
-    position: relative;
+
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
+
     .overlay {
       position: absolute;
-      height: 100%;
+      top: 0;
+      left: 0;
       width: 100%;
+      height: 100%;
       background: linear-gradient(
         180deg,
         rgba(0, 0, 0, 0.0001) 0%,
         rgba(0, 0, 0, 0.6) 99.42%
       );
-      mix-blend-mode: normal;
       // opacity: 0.6;
-      border-radius: 4px 4px 0px 0px;
-      top: 0;
-      left: 0;
+      border-radius: 4px 4px 0 0;
+      mix-blend-mode: normal;
     }
+
     .person-name {
       position: absolute;
-      left: 16px;
       bottom: 24px;
-      font-weight: 500;
-      font-size: 24px;
-      line-height: 24px;
-      color: #ffffff;
-      text-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
+      left: 16px;
       width: 288px;
-      white-space: pre-wrap;
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 24px;
+      color: #fff;
+      text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
       word-wrap: break-word;
+      white-space: pre-wrap;
     }
   }
 
   .person-detail-footer {
-    padding: 20px 16px;
-    height: 164px;
-    box-sizing: border-box;
     position: relative;
+    box-sizing: border-box;
+    height: 164px;
+    padding: 20px 16px;
+
     .person-detail-info {
       display: flex;
       margin-bottom: 12px;
+
       .title {
         width: 28px;
+        margin-right: 10px;
         font-size: 14px;
         line-height: 22px;
         color: #8f959e;
-        margin-right: 10px;
       }
+
       .placeholder {
         flex: 1;
         text-align: left;
@@ -72,21 +80,24 @@
         word-break: break-word;
       }
     }
+
     .person-detail-button {
       position: absolute;
+      bottom: 20px;
+      left: 16px;
+      box-sizing: border-box;
       display: flex;
       align-items: center;
       justify-content: center;
-      bottom: 20px;
-      left: 16px;
-      border: 1px solid #dee0e3;
-      box-sizing: border-box;
-      height: 32px;
       width: 288px;
-      border-radius: 2px;
+      height: 32px;
       font-size: 12px;
       line-height: 22px;
       color: #1f2329;
+      cursor: pointer;
+      border: 1px solid #dee0e3;
+      border-radius: 2px;
+
       img {
         margin-right: 6px;
       }

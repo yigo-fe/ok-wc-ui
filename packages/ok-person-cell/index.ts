@@ -19,7 +19,7 @@ defineComponent(
         id: '500',
         name: '小辛辛',
         userName: 'liuzhe',
-        deptName: 'HRBP-产品技术运营-北京',
+        orgName: 'HRBP-产品技术运营-北京',
         email: 'masiwei@kuaishou.com',
       },
       required: true,
