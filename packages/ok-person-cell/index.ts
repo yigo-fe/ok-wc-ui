@@ -29,6 +29,11 @@ defineComponent(
       default: 32,
       required: true,
     },
+    zIndex: {
+      type: String,
+      default: '9000',
+      required: true,
+    },
   },
   (props, context) => {
     let poper: Instance
@@ -50,7 +55,7 @@ defineComponent(
               ] = toggle
 
               // 提高层级避免遮盖
-              _ref.state.styles.popper.zIndex = '2222'
+              _ref.state.styles.popper.zIndex = (props.zIndex as unknown) as string
             },
           },
         ],
