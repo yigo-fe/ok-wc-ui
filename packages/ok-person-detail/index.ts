@@ -1,12 +1,5 @@
 import { handleImage } from '@c/utils'
-import {
-  defineComponent,
-  html,
-  onMounted,
-  onUnmounted,
-  onUpdated,
-  PropType,
-} from 'ok-lit'
+import { defineComponent, html, PropType } from 'ok-lit'
 
 import ks_kim from '../assets/ks_kim.svg'
 import okPersonDetaillCss from '../assets/ok-person-detail.less'
@@ -20,18 +13,6 @@ defineComponent(
     },
   },
   (props, _context) => {
-    onMounted(() => {
-      // console.log(props, 'child mounted')
-    })
-
-    onUpdated(() => {
-      // console.log('child updated')
-    })
-
-    onUnmounted(() => {
-      // console.log('html child unmounted')
-    })
-
     // 打开应用
     const openApp = () => {
       window.location.href = `kim://username?username=${props.person.userName}`
