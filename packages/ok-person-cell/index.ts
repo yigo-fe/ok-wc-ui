@@ -8,6 +8,7 @@ import { handleImage } from '@c/utils'
 /**
  * person: {Person} 用户信息
  * size: {number} 图片大小
+ * zIndex: {string} 卡片层级
  */
 
 defineComponent(
@@ -22,7 +23,7 @@ defineComponent(
         orgName: 'HRBP-产品技术运营-北京',
         email: 'masiwei@kuaishou.com',
       },
-      required: true,
+      // required: true,
     },
     size: {
       type: Number,

@@ -16,7 +16,7 @@ defineComponent(
   {
     person: {
       type: (Object as unknown) as PropType<any>,
-      required: true,
+      // required: true,
     },
   },
   (props, _context) => {
@@ -46,17 +46,17 @@ defineComponent(
         <header class="person-image">
           <img src=${handleImage(props.person?.headImage)} />
           <div class="overlay">
-            <span class="person-name">${props.person.name}</span>
+            <span class="person-name">${props.person?.name}</span>
           </div>
         </header>
         <footer class="person-detail-footer">
           <div class="person-detail-info">
             <span class="title">部门</span>
-            <span class="placeholder">${props.person.orgName}</span>
+            <span class="placeholder">${props.person?.orgName}</span>
           </div>
           <div class="person-detail-info">
             <span class="title">邮箱</span>
-            <span class="placeholder">${props.person.email}</span>
+            <span class="placeholder">${props.person?.email}</span>
           </div>
           <div @click=${openApp} class="person-detail-button">
             <img src=${ks_kim} />
