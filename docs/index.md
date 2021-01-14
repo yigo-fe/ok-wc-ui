@@ -3,11 +3,32 @@
 ```html
 <ok-person-cell></ok-person-cell>
 ```
+## 导入代码块
+<<< ./docs/.vitepress/components/person-cell.vue{5-10}
 
-<<< @/filepath/.vitepress/components/person-cell.vue
+## 示例
+<person-cell></person-cell>
 
 <ok-person-cell :person="{id: '500',
-name: '测试人员',
+name: '第二个测试',
 userName: 'liuzhe',
 orgName: 'HRBP-产品技术运营-北京',
 email: 'masiwei@kuaishou.com'}"></ok-person-cell>
+
+### 参数
+|  参数  | 说明  | 类型 | 默认值 |
+|  ---- | ----  |  ---- | ----  |
+| person | 人员信息 | [Person](/#Person)  | 单元格  |
+| 单元格 | 单元格 |  单元格 | 单元格  |
+
+
+### Person
+```typescript
+interface Person {
+  id: string | number,
+  name: string,
+  userName: string,
+  orgName: string,
+  email: string
+}
+```

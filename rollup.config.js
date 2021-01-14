@@ -25,7 +25,7 @@ const createConfig = format => {
     exports: 'named',
   }
   const isUmd = format === 'umd'
-  const babelPlugin = isUmd ? babel(false, false) : babel()
+  const babelPlugin = babel(false, false)
   const external = isUmd ? [] : ['ok-lit']
   const plugins = [
     alias(),
