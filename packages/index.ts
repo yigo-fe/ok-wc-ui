@@ -1,5 +1,4 @@
 import './jsx'
 import './ok-person'
 import './ok-person-detail'
-import './ok-person-card'
 import './ok-popover'

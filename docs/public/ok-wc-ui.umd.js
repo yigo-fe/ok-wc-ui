@@ -2849,8 +2849,7 @@
         default: {
           id: '500',
           name: '小辛辛',
-          userName: 'liuzhe',
-          orgName: 'HRBP-产品技术运营-北京',
+          department: 'HRBP-产品技术运营-北京',
           email: 'masiwei@kuaishou.com',
         },
         required: !0,
@@ -2906,7 +2905,7 @@
           '.ok-person-cell{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;border-radius:50%;overflow:hidden;width:100%;height:100%;max-width:56px;max-height:56px}.ok-person-cell img{width:100%;height:100%;-o-object-fit:cover;object-fit:cover}#tooltip[data-popper-reference-hidden]{visibility:hidden;pointer-events:none}',
           s,
           a,
-          ho(null === (t = e.person) || void 0 === t ? void 0 : t.headImage),
+          ho(null === (t = e.person) || void 0 === t ? void 0 : t.avatar),
           s,
           a,
           e.person
@@ -2964,9 +2963,9 @@
         return Ln(
           wo(),
           '.ok-person-detail{width:320px;height:434px;overflow:hidden;font-family:PingFang SC;font-style:normal;cursor:default;background:#fff;border-radius:4px;-webkit-box-shadow:0 2px 8px rgba(0,0,0,.12);box-shadow:0 2px 8px rgba(0,0,0,.12)}.ok-person-detail .person-image{position:relative;width:100%;height:270px}.ok-person-detail .person-image img{width:100%;height:100%;-o-object-fit:cover;object-fit:cover}.ok-person-detail .person-image .overlay{position:absolute;top:0;left:0;width:100%;height:100%;background:-webkit-gradient(linear,left top,left bottom,from(rgba(0,0,0,.0001)),color-stop(99.42%,rgba(0,0,0,.6)));background:linear-gradient(180deg,rgba(0,0,0,.0001),rgba(0,0,0,.6) 99.42%);border-radius:4px 4px 0 0;mix-blend-mode:normal}.ok-person-detail .person-image .person-name{position:absolute;bottom:24px;left:16px;width:288px;font-size:24px;font-weight:500;line-height:24px;color:#fff;text-shadow:0 1px 5px rgba(0,0,0,.2);word-wrap:break-word;white-space:pre-wrap}.ok-person-detail .person-detail-footer{position:relative;-webkit-box-sizing:border-box;box-sizing:border-box;height:164px;padding:20px 16px}.ok-person-detail .person-detail-footer .person-detail-info{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;margin-bottom:12px}.ok-person-detail .person-detail-footer .person-detail-info .title{width:28px;margin-right:10px;font-size:14px;line-height:22px;color:#8f959e}.ok-person-detail .person-detail-footer .person-detail-info .placeholder{-webkit-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1;text-align:left;font-size:14px;line-height:22px;color:#1f2329;overflow:hidden;white-space:pre-wrap;word-break:break-word}.ok-person-detail .person-detail-footer .person-detail-button{position:absolute;bottom:20px;left:16px;-webkit-box-sizing:border-box;box-sizing:border-box;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;width:288px;height:32px;font-size:12px;line-height:22px;color:#1f2329;cursor:pointer;border:1px solid #dee0e3;border-radius:2px}.ok-person-detail .person-detail-footer .person-detail-button img{margin-right:6px}',
-          ho(null === (t = e.person) || void 0 === t ? void 0 : t.headImage),
+          ho(null === (t = e.person) || void 0 === t ? void 0 : t.avatar),
           e.person.name,
-          e.person.orgName,
+          e.person.department,
           e.person.email,
           n,
           "data:image/svg+xml,%3csvg width='16' height='15' viewBox='0 0 16 15' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M8.75586 7.96582H14.3073V8.7397C14.3073 10.5806 12.791 12.073 10.9205 12.073H8.75586V7.96582Z' fill='%23FFA536'/%3e%3cpath d='M10.0649 0H12.5341C14.4483 0 16.0001 1.54588 16.0001 3.45281V8.68829H10.0649V0Z' fill='%23F8CF62'/%3e%3cpath d='M10.0649 0H12.5341C14.4483 0 16.0001 1.54588 16.0001 3.45281V8.68829H10.0649V0Z' fill='url(%23paint0_linear)'/%3e%3cpath d='M3.68926 0.0673828H10.1326V12.1407H3.68926C1.65174 12.1407 0 10.4945 0 8.46381V3.7443C0 1.71359 1.65174 0.0673828 3.68926 0.0673828Z' fill='%234290F5'/%3e%3cpath d='M10.1326 14.0592L8.30259 12.1066H3.68926C1.65174 12.1066 0 10.4558 0 8.41953V3.68703C0 1.65074 1.65174 0 3.68926 0H10.1326V14.0592Z' fill='url(%23paint1_linear)'/%3e%3cpath opacity='0.081' d='M10.1326 11.0877V12.5007C10.1082 12.9895 10.0585 13.4717 9.98499 13.946L8.30248 12.1569H3.68921C1.65171 12.1569 0 10.5116 0 8.48199V3.76508C0 1.7355 1.65171 0.0901908 3.68921 0.0901908L3.79032 0.0898438C7.43444 2.46252 9.90245 6.48135 10.1326 11.0877Z' fill='white'/%3e%3cpath d='M3.76855 2.73047C4.34187 2.73047 4.80663 3.19523 4.80663 3.76855C4.80663 4.34187 4.34187 4.80663 3.76855 4.80663C3.19523 4.80663 2.73047 4.34187 2.73047 3.76855C2.73047 3.19523 3.19523 2.73047 3.76855 2.73047Z' fill='white'/%3e%3cdefs%3e%3clinearGradient id='paint0_linear' x1='10.0423' y1='7.67833e-08' x2='15.9037' y2='3.33437' gradientUnits='userSpaceOnUse'%3e%3cstop stop-color='%23FFBF00'/%3e%3cstop offset='1' stop-color='%23F7C02E'/%3e%3c/linearGradient%3e%3clinearGradient id='paint1_linear' x1='1.30508' y1='-1.25339e-07' x2='9.19425' y2='6.4264' gradientUnits='userSpaceOnUse'%3e%3cstop stop-color='%230066F3'/%3e%3cstop offset='1' stop-color='%230383F9'/%3e%3c/linearGradient%3e%3c/defs%3e%3c/svg%3e"

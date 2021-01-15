@@ -1,11 +1,11 @@
 export interface Person {
   id?: string
   name: string
-  userName: string
   deptId?: string
-  orgName: string
+  department: string
   email: string
-  headImage: string
+  avatar: string
+  avatar_big?: string
   active?: ACTIVE_TYPE
 }
 

@@ -39,12 +39,19 @@ defineComponent(
               _ref.state.styles.popper.zIndex = (props.zIndex as unknown) as string
             },
           },
+          // {
+          //   name: 'arrow',
+          //   options: {
+          //     element: '[data-popper-arrow]',
+          //     // padding: 5, // 5px from the edges of the popper
+          //   },
+          // },
         ],
       })
     }
 
     onMounted(() => {
-      poper = createPopper(context.$refs.personCell, context.$refs.tooltip, {
+      poper = createPopper(context.$refs.reference, context.$refs.tooltip, {
         placement: 'left',
         strategy: 'fixed',
       })
@@ -80,14 +87,15 @@ defineComponent(
       <span
         @mouseenter=${handleMouseenter}
         @mouseleave=${handleMouseleave}
-        ref="personCell"
+        ref="reference"
         class="ok-person"
       >
         <slot></slot>
       </span>
       <div ref="tooltip" id="tooltip">
+        <div data-popper-arrow></div>
         <div @mouseenter=${handleMouseenter} @mouseleave=${handleMouseleave}>
-          <slot name="popover">popover</slot>
+          <slot name="content">popover</slot>
         </div>
       </div>
     `

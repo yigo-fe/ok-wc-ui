@@ -17,8 +17,7 @@ defineComponent(
       default: {
         id: '500',
         name: '小辛辛',
-        userName: 'liuzhe',
-        orgName: 'HRBP-产品技术运营-北京',
+        department: 'HRBP-产品技术运营-北京',
         email: 'masiwei@kuaishou.com',
       },
       // required: true,
@@ -28,11 +27,6 @@ defineComponent(
       default: 32,
       required: true,
     },
-    zIndex: {
-      type: String,
-      default: '9000',
-      required: true,
-    },
   },
   (props, context) => {
     return () => html`
@@ -40,7 +34,7 @@ defineComponent(
         ${okPersonCss}
       </style>
       <span class="ok-person">
-        <img src="${handleImage(props.person?.headImage)}" />
+        <img src="${handleImage(props.person)}" />
       </span>
     `
   }

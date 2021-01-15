@@ -14,8 +14,7 @@
 
 <ok-person :person="{id: '500',
 name: '第二个测试',
-userName: 'liuzhe',
-orgName: 'HRBP-产品技术运营-北京',
+department: 'HRBP-产品技术运营-北京',
 email: 'masiwei@kuaishou.com'}"></ok-person>
 
 ### 参数
@@ -31,8 +30,7 @@ email: 'masiwei@kuaishou.com'}"></ok-person>
 interface Person {
   id: string | number
   name: string
-  userName: string
-  orgName: string
+  department: string
   email: string
 }
 ```
