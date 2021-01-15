@@ -39,13 +39,13 @@ defineComponent(
               _ref.state.styles.popper.zIndex = (props.zIndex as unknown) as string
             },
           },
-          // {
-          //   name: 'arrow',
-          //   options: {
-          //     element: '[data-popper-arrow]',
-          //     // padding: 5, // 5px from the edges of the popper
-          //   },
-          // },
+          {
+            name: 'arrow',
+            options: {
+              element: '[data-popper-arrow]',
+              // padding: 5, // 5px from the edges of the popper
+            },
+          },
         ],
       })
     }

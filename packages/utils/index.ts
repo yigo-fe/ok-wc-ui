@@ -3,12 +3,12 @@
  * person: {人员信息}
  * definition: 清晰度，默认不开起
  */
-import { Person } from '@c/ok-person/person.utils'
+import { Person } from '@c/ok-wc-ui.d'
 import defaultImage from '../assets/defaultAvatar.png'
 
 const handleImage = (person: Person | undefined, definition = false) => {
   if (!person) return defaultImage
-  const resultImg = definition ? person.avatar_big : person.avatar
+  const resultImg = definition ? person.avatarBig : person.avatar
   return resultImg || person.avatar || defaultImage
 }
 

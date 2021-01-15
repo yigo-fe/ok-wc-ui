@@ -1,4 +1,4 @@
-import { Person } from '@c/ok-person/person.utils'
+import { Person } from '@c/ok-wc-ui.d'
 import { handleImage } from '@c/utils'
 import { defineComponent, html, PropType } from 'ok-lit'
 import ks_kim from '../assets/ks_kim.svg'
@@ -31,7 +31,11 @@ defineComponent(
       </style>
       <ok-popover>
         <slot>
-          <ok-person .person=${props.person} class="cell"></ok-person>
+          <ok-person
+            .size="middle"
+            .person=${props.person}
+            class="cell"
+          ></ok-person>
         </slot>
 
         <div slot="content" class="ok-person-detail">

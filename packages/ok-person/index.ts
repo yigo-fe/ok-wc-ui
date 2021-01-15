@@ -1,12 +1,15 @@
 import { defineComponent, html, PropType } from 'ok-lit'
-import { Person } from './person.utils'
+
+import { Person } from '@c/ok-wc-ui.d'
+import { SIZE_TYPE } from '@c/enum'
 
 import okPersonCss from '../assets/ok-person.less'
-import { handleImage } from '@c/utils'
 
 /**
  * person: {Person} 用户信息
- * size: {number} 图片大小
+ *
+ * 插槽：
+ *  person-info ：展示用户信息
  */
 
 defineComponent(
@@ -14,28 +17,28 @@ defineComponent(
   {
     person: {
       type: (Object as unknown) as PropType<Person>,
-      default: {
-        id: '500',
-        name: '小辛辛',
-        department: 'HRBP-产品技术运营-北京',
-        email: 'masiwei@kuaishou.com',
-      },
-      // required: true,
+      required: true,
     },
     size: {
-      type: Number,
-      default: 32,
+      type: (String as unknown) as SIZE_TYPE,
+      default: SIZE_TYPE.MIDDLE,
       required: true,
     },
   },
-  (props, context) => {
+  props => {
     return () => html`
       <style>
         ${okPersonCss}
       </style>
-      <span class="ok-person">
-        <img src="${handleImage(props.person)}" />
-      </span>
+      <div class="ok-person ok-person-${props.size}">
+        <ok-avatar class="avatar"></ok-avatar>
+        <slot name="person-info">
+          <div class="person-info">
+            <span>${props.person?.name}</span>
+            <span>${props.person?.department}</span>
+          </div>
+        </slot>
+      </div>
     `
   }
 )
