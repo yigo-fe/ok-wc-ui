@@ -34,8 +34,8 @@ defineComponent(
         <ok-avatar class="avatar"></ok-avatar>
         <slot name="person-info">
           <div class="person-info">
-            <span>${props.person?.name}</span>
-            <span>${props.person?.department}</span>
+            <span class="name">${props.person?.name}</span>
+            <span class="department">${props.person?.department}</span>
           </div>
         </slot>
       </div>
