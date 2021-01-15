@@ -79,31 +79,44 @@ defineComponent(
       let len = data.len > 5 ? 5 : data.len
       return len === index + 1
     }
-    const personsRender = (person: Person, index: number) => html`
-      <!-- 最多展示5个 -->
-      ${index < 5
-        ? html`
-            <div class="person-item">
-              <ok-avatar .person=${person}></ok-avatar>
-              ${isShowDetailText(index)
-                ? html`
-                    <span class="detail-text">
-                      ${data.len > 1 ? `...${data.len}` : person.name}
-                    </span>
-                  `
-                : ''}
-            </div>
-          `
-        : ''}
-    `
+    const personsRender = (person: Person, index: number) => {
+      const detailText = data.len > 1 ? `...${data.len}` : person.name
+      const detail = isShowDetailText(index)
+        ? html` <span class="detail-text"> ${detailText} </span> `
+        : ''
+      const personHtml =
+        index < 5
+          ? html`
+              <div class="person-item">
+                <ok-avatar .person=${person}></ok-avatar>
+                ${detail}
+              </div>
+            `
+          : ''
+
+      return html`${personHtml}`
+    }
 
     return () => html`
       <style>
         ${okPersonGroupCss}
       </style>
-      <div class="ok-person-group ok-person-group-${props.size}">
-        ${data.len ? repeat(props.persons, personsRender) : ''}
-      </div>
+      <ok-popover>
+        <div class="ok-person-group ok-person-group-${props.size}">
+          ${data.len ? repeat(props.persons, personsRender) : ''}
+        </div>
+        <!-- 人员列表 -->
+        <ul slot="content" class="person-list">
+          ${repeat(
+            props.persons,
+            (person: Person) => html`
+              <li class="person-list-item">
+                <ok-person-detail .person=${person}></ok-person-detail>
+              </li>
+            `
+          )}
+        </ul>
+      </ok-popover>
     `
   }
 )
