@@ -1,13 +1,13 @@
-import { Person } from './ok-person-cell/person-cell.utils'
+import { Person } from './ok-person/person.utils'
 
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      'ok-person-cell': OkPersonCellAttributes
+      'ok-person': OkPersonAttributes
       'ok-person-detail': OkPersonDetailAttributes
     }
 
-    interface OkPersonCellAttributes {
+    interface OkPersonAttributes {
       person: Person
       size: Number
       zIndex: String

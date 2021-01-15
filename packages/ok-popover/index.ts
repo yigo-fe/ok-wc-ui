@@ -1,35 +1,15 @@
 import { createPopper, Instance } from '@popperjs/core'
 import { defineComponent, html, onMounted, PropType } from 'ok-lit'
-import { Person } from './person-cell.utils'
 
-import okPersonCellCss from '../assets/ok-person-cell.less'
-import { handleImage } from '@c/utils'
+import popover from '../assets/ok-popover.less'
 
 /**
- * person: {Person} 用户信息
- * size: {number} 图片大小
  * zIndex: {string} 卡片层级
  */
 
 defineComponent(
-  'ok-person-cell',
+  'ok-popover',
   {
-    person: {
-      type: (Object as unknown) as PropType<Person>,
-      default: {
-        id: '500',
-        name: '小辛辛',
-        userName: 'liuzhe',
-        orgName: 'HRBP-产品技术运营-北京',
-        email: 'masiwei@kuaishou.com',
-      },
-      // required: true,
-    },
-    size: {
-      type: Number,
-      default: 32,
-      required: true,
-    },
     zIndex: {
       type: String,
       default: '9000',
@@ -95,23 +75,20 @@ defineComponent(
 
     return () => html`
       <style>
-        ${okPersonCellCss}
+        ${popover}
       </style>
       <span
         @mouseenter=${handleMouseenter}
         @mouseleave=${handleMouseleave}
         ref="personCell"
-        class="ok-person-cell"
+        class="ok-person"
       >
-        <img src="${handleImage(props.person?.headImage)}" />
+        <slot></slot>
       </span>
       <div ref="tooltip" id="tooltip">
-        <ok-person-detail
-          @mouseenter=${handleMouseenter}
-          @mouseleave=${handleMouseleave}
-          .person=${props.person}
-        >
-        </ok-person-detail>
+        <div @mouseenter=${handleMouseenter} @mouseleave=${handleMouseleave}>
+          <slot name="popover">popover</slot>
+        </div>
       </div>
     `
   }
