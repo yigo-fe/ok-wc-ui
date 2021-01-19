@@ -21,8 +21,11 @@
     }
   },
   "lint-staged": {
-    "*.{js,js,ts,tsx,css,less}": [
+    "*.{js,js,ts,tsx}": [
       "prettier --write"
+    ],
+    "*.{css,less}": [
+      "stylelint --fix"
     ]
   },
   "dependencies": {
@@ -49,6 +52,7 @@
     "clean-css": "^4.2.3",
     "cross-env": "^7.0.3",
     "eslint": "^7.16.0",
+    "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-prettier": "^3.3.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "husky": "^4.3.6",
@@ -68,8 +72,10 @@
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.29.0",
     "stylelint": "^13.8.0",
+    "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-recess-order": "^2.3.0",
     "stylelint-config-standard": "^20.0.0",
+    "stylelint-prettier": "^1.1.2",
     "typescript": "^4.1.3",
     "vitepress": "^0.11.2"
   }
