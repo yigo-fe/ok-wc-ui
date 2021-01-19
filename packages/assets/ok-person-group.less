@@ -1,42 +1,54 @@
 .ok-person-group {
   display: flex;
   align-items: center;
+
   &-small {
     font-size: 12px;
+
     .avatar {
-      height: 24px;
       width: 24px;
+      height: 24px;
     }
   }
+
   &-middle {
     font-size: 16px;
+
     .avatar {
-      height: 32px;
       width: 32px;
+      height: 32px;
     }
   }
+
   &-large {
     font-size: 20px;
+
     .avatar {
-      height: 40px;
       width: 40px;
+      height: 40px;
     }
   }
+
   .person-item {
     position: relative;
   }
+
   .person-item:nth-child(2) {
     transform: translateX(-50%);
   }
+
   .person-item:nth-child(3) {
     transform: translateX(-100%);
   }
+
   .person-item:nth-child(4) {
     transform: translateX(-150%);
   }
+
   .person-item:nth-child(5) {
     transform: translateX(-200%);
   }
+
   .detail-text {
     position: absolute;
     right: 0;
@@ -46,13 +58,14 @@
 }
 
 .person-list {
-  background-color: #fff;
+  height: 200px;
+  padding-left: 0;
   overflow-x: hidden;
   overflow-y: auto;
-  height: 200px;
   list-style: none;
-  padding-left: 0;
+  background-color: #fff;
   border-radius: 8px;
+
   &-item:not(:last-child) {
     border-bottom: 1px solid #ccc;
   }

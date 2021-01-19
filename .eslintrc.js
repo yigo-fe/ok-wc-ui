@@ -4,7 +4,7 @@ module.exports = {
     node: true,
     browser: true,
   },
-  extends: ['eslint:recommended'],
+  extends: ['eslint:recommended', 'plugin:prettier/recommended'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2020,
