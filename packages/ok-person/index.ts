@@ -6,10 +6,8 @@ import { SIZE_TYPE } from '@c/enum'
 import okPersonCss from '../assets/ok-person.less'
 
 /**
- * person: {Person} 用户信息
- *
- * 插槽：
- *  person-info ：展示用户信息
+ * @props person: {Person} 用户信息
+ * @slot person-info 展示用户信息位置
  */
 
 defineComponent(

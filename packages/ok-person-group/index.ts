@@ -1,16 +1,12 @@
 import { defineComponent, html, PropType, reactive } from 'ok-lit'
 import { repeat } from 'lit-html/directives/repeat'
-import { styleMap } from 'lit-html/directives/style-map'
 import { Person } from '@c/ok-wc-ui.d'
 import { SIZE_TYPE } from '@c/enum'
 
 import okPersonGroupCss from '../assets/ok-person-group.less'
 
 /**
- * persons: {Array<Person>} 用户信息组
- *
- * 插槽：
- *  persons-detail
+ * @props persons: {Array<Person>} 用户信息组
  */
 
 defineComponent(
