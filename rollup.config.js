@@ -9,6 +9,7 @@ import postcss from 'rollup-plugin-postcss'
 import replace from 'rollup-plugin-replace'
 import serve from 'rollup-plugin-serve'
 import { terser } from 'rollup-plugin-terser'
+import rimraf from 'rimraf'
 
 import babel from './build/babel'
 import nodeResolve from './build/resolve'
@@ -16,7 +17,10 @@ import ts from './build/ts'
 import pkg from './package.json'
 
 const isPrd = process.env.NODE_ENV === 'production'
-
+if (!isPrd) {
+  // 本地运行之前先清除node_modules下的缓存，否则typescript二次编译时会报错
+  rimraf('./node_modules/.cache', err => err && console.log(err))
+}
 const createConfig = format => {
   const input = 'packages/index.ts'
   let output = {
