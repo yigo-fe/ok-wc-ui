@@ -1,6 +1,7 @@
 import { Person } from '@c/ok-wc-ui.d'
 import { handleImage } from '@c/utils'
 import { defineComponent, html, PropType } from 'ok-lit'
+
 import ks_kim from '../assets/ks_kim.svg'
 import okPersonDetaillCss from '../assets/ok-person-detail.less'
 
@@ -8,7 +9,7 @@ defineComponent(
   'ok-person-detail',
   {
     person: {
-      type: (Object as unknown) as PropType<Person>,
+      type: (Object as any) as PropType<Person>,
       default: {
         id: '500',
         name: '小辛辛',
@@ -18,7 +19,7 @@ defineComponent(
       // required: true,
     },
   },
-  (props, _context) => {
+  props => {
     // 打开应用
     const openApp = () => {
       window.location.href = `kim://username?username=${
