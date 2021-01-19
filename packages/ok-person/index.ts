@@ -1,7 +1,6 @@
-import { defineComponent, html, PropType } from 'ok-lit'
-
-import { Person } from '@c/ok-wc-ui.d'
 import { SIZE_TYPE } from '@c/enum'
+import { Person } from '@c/ok-wc-ui.d'
+import { defineComponent, html, PropType } from 'ok-lit'
 
 import okPersonCss from '../assets/ok-person.less'
 

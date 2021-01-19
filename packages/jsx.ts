@@ -1,4 +1,5 @@
-import { Person } from './ok-wc-ui'
+import { SIZE_TYPE } from './enum'
+import { Person, POPOVER_PLACEMENT } from './ok-wc-ui'
 
 declare global {
   namespace JSX {
@@ -16,15 +17,17 @@ declare global {
 
     interface OkPersonGroupAttributes {
       person: Array<Person>
-      size: 'large' | 'middle' | 'small'
+      size: SIZE_TYPE
     }
     interface OkPersonAttributes {
       person: Person
-      size: 'large' | 'middle' | 'small'
+      size: SIZE_TYPE
     }
 
     interface OkPopoverAttributes {
       zIndex: String
+      placement: POPOVER_PLACEMENT
+      delayShow: number
     }
     interface OkPersonDetailAttributes {
       person: Person

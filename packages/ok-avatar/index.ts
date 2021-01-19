@@ -1,8 +1,8 @@
-import { defineComponent, html, PropType } from 'ok-lit'
 import { Person } from '@c/ok-wc-ui.d'
+import { handleImage } from '@c/utils'
+import { defineComponent, html, PropType } from 'ok-lit'
 
 import okAvatarCss from '../assets/ok-avatar.less'
-import { handleImage } from '@c/utils'
 
 /**
  * person: {Person} 用户信息
@@ -19,7 +19,7 @@ defineComponent(
       required: true,
     },
   },
-  (props, context) => {
+  props => {
     return () => html`
       <style>
         ${okAvatarCss}

@@ -38,7 +38,7 @@ defineComponent(
       <ok-popover>
         <slot>
           <ok-person
-            .size="middle"
+            size="middle"
             .person=${props.person}
             class="cell"
           ></ok-person>

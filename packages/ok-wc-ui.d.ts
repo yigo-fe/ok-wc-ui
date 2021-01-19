@@ -11,4 +11,21 @@ interface Person {
   active?: ACTIVE_TYPE
 }
 
-export { Person }
+type POPOVER_PLACEMENT =
+  | 'auto'
+  | 'auto-start'
+  | 'auto-end'
+  | 'top'
+  | 'bottom'
+  | 'right'
+  | 'left'
+  | 'top-start'
+  | 'top-end'
+  | 'bottom-start'
+  | 'bottom-end'
+  | 'right-start'
+  | 'right-end'
+  | 'left-start'
+  | 'left-end'
+
+export { Person, POPOVER_PLACEMENT }

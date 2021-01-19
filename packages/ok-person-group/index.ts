@@ -1,7 +1,7 @@
-import { defineComponent, html, PropType, reactive } from 'ok-lit'
-import { repeat } from 'lit-html/directives/repeat'
-import { Person } from '@c/ok-wc-ui.d'
 import { SIZE_TYPE } from '@c/enum'
+import { Person } from '@c/ok-wc-ui.d'
+import { repeat } from 'lit-html/directives/repeat'
+import { defineComponent, html, PropType, reactive } from 'ok-lit'
 
 import okPersonGroupCss from '../assets/ok-person-group.less'
 
@@ -33,30 +33,30 @@ defineComponent(
           department: 'HRBP-产品技术运营-北京',
           email: 'masiwei@kuaishou.com',
         },
-        {
-          id: '500',
-          name: '小辛辛',
-          department: 'HRBP-产品技术运营-北京',
-          email: 'masiwei@kuaishou.com',
-        },
-        {
-          id: '500',
-          name: '小辛辛',
-          department: 'HRBP-产品技术运营-北京',
-          email: 'masiwei@kuaishou.com',
-        },
-        {
-          id: '500',
-          name: '小辛辛',
-          department: 'HRBP-产品技术运营-北京',
-          email: 'masiwei@kuaishou.com',
-        },
-        {
-          id: '500',
-          name: '小辛辛',
-          department: 'HRBP-产品技术运营-北京',
-          email: 'masiwei@kuaishou.com',
-        },
+        // {
+        //   id: '500',
+        //   name: '小辛辛',
+        //   department: 'HRBP-产品技术运营-北京',
+        //   email: 'masiwei@kuaishou.com',
+        // },
+        // {
+        //   id: '500',
+        //   name: '小辛辛',
+        //   department: 'HRBP-产品技术运营-北京',
+        //   email: 'masiwei@kuaishou.com',
+        // },
+        // {
+        //   id: '500',
+        //   name: '小辛辛',
+        //   department: 'HRBP-产品技术运营-北京',
+        //   email: 'masiwei@kuaishou.com',
+        // },
+        // {
+        //   id: '500',
+        //   name: '小辛辛',
+        //   department: 'HRBP-产品技术运营-北京',
+        //   email: 'masiwei@kuaishou.com',
+        // },
       ],
       required: true,
     },

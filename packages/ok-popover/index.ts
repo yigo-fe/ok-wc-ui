@@ -1,12 +1,14 @@
+import { POPOVER_PLACEMENT } from '@c/ok-wc-ui'
 import { createPopper, Instance } from '@popperjs/core'
-import { defineComponent, html, onMounted, PropType } from 'ok-lit'
+import { defineComponent, html, onMounted } from 'ok-lit'
+import { PropType } from 'ok-lit/dist/types/props'
 
 import popover from '../assets/ok-popover.less'
 
 /**
- * zIndex: {string} 卡片层级
- * TODO:
- *
+ * @props placement 弹层方向
+ * @props zIndex 卡片层级
+ * @props delayShow hover多久显示
  */
 
 defineComponent(
@@ -16,6 +18,14 @@ defineComponent(
       type: String,
       default: '9000',
       required: true,
+    },
+    placement: {
+      type: (String as unknown) as POPOVER_PLACEMENT,
+      default: 'auto',
+    },
+    delayShow: {
+      type: (Number as unknown) as PropType<number>,
+      default: 200,
     },
   },
   (props, context) => {
@@ -54,7 +64,7 @@ defineComponent(
 
     onMounted(() => {
       poper = createPopper(context.$refs.reference, context.$refs.tooltip, {
-        placement: 'left',
+        placement: props.placement,
         strategy: 'fixed',
       })
 
@@ -71,7 +81,7 @@ defineComponent(
       if (hideTimer) window.clearTimeout(hideTimer)
       showTimer = window.setTimeout(() => {
         togglePoper(false)
-      }, 200)
+      }, props.delayShow)
     }
 
     // 鼠标移除
@@ -79,7 +89,7 @@ defineComponent(
       if (showTimer) window.clearTimeout(showTimer)
       hideTimer = window.setTimeout(() => {
         togglePoper(true)
-      }, 200)
+      }, props.delayShow)
     }
 
     return () => html`
