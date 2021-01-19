@@ -55,7 +55,12 @@ const createConfig = format => {
       ...output,
       name: pkg.name,
       // 只有umd需要压缩
-      plugins: [terser({ output: { comments: false } })],
+      plugins: [
+        terser({
+          output: { comments: false },
+          compress: { drop_debugger: isPrd },
+        }),
+      ],
     }
   }
 
