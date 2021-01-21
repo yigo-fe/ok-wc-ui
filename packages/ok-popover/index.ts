@@ -1,14 +1,24 @@
 import { POPOVER_PLACEMENT } from '@c/ok-wc-ui'
-import { createPopper, Instance } from '@popperjs/core'
 import { defineComponent, html, onMounted } from 'ok-lit'
 import { PropType } from 'ok-lit/dist/types/props'
+import tippy, { Instance, Props } from 'tippy.js'
+import tippyCSS from 'tippy.js/dist/tippy.css'
 
-import popover from '../assets/ok-popover.less'
+import popoverCSS from '../assets/ok-popover.less'
 
 /**
  * @props placement 弹层方向
  * @props zIndex 卡片层级
  * @props delayShow hover多久显示
+ * @props content 气泡内容
+ * @props arrow 展示小箭头
+ * @props duration 过渡时间
+ * @props trigger 触发时机 hover / click
+ * @props hideOnClick 气泡是否点击隐藏
+ * @props popoverIndex 第几层气泡
+ *
+ * @slot default 触发气泡元素
+ * @slot content 气泡内容
  */
 
 defineComponent(
@@ -27,87 +37,88 @@ defineComponent(
       type: (Number as unknown) as PropType<number>,
       default: 200,
     },
+    content: {
+      type: String,
+      default: '',
+    },
+    arrow: {
+      type: (Boolean as unknown) as PropType<boolean>,
+      default: true,
+    },
+    hideOnClick: {
+      type: (Boolean as unknown) as PropType<boolean>,
+      default: false,
+    },
+    trigger: {
+      type: (String as unknown) as PropType<'click' | undefined>,
+      default: undefined,
+    },
+    duration: {
+      type: (Number as unknown) as PropType<number>,
+      default: 1000,
+    },
+    delay: {
+      type: (Array as unknown) as PropType<[number, number]>,
+      default: [100, 100],
+    },
+    popoverIndex: {
+      type: Number,
+      default: 1,
+    },
   },
   (props, context) => {
-    let poper: Instance
-    // 隐藏/显示poper
-    const togglePoper = (toggle: boolean) => {
-      poper.setOptions({
-        modifiers: [
-          {
-            name: 'offset',
-            options: {
-              offset: [0, 20],
-            },
-          },
-          {
-            name: 'hide',
-            fn: (_ref: Instance) => {
-              _ref.state.attributes.popper[
-                'data-popper-reference-hidden'
-              ] = toggle
-
-              // 提高层级避免遮盖
-              _ref.state.styles.popper.zIndex = (props.zIndex as unknown) as string
-            },
-          },
-          {
-            name: 'arrow',
-            options: {
-              element: '[data-popper-arrow]',
-              // padding: 5, // 5px from the edges of the popper
-            },
-          },
-        ],
-      })
-    }
-
+    let instance: any = null
     onMounted(() => {
-      poper = createPopper(context.$refs.reference, context.$refs.tooltip, {
+      instance = tippy(context.$refs.reference, {
+        content: props.content || context.$refs.tooltip,
+        popperOptions: {
+          strategy: 'fixed',
+        },
         placement: props.placement,
-        strategy: 'fixed',
+        theme: 'ok-ui',
+        interactive: true,
+        appendTo: 'parent', // 绑定到父元素
+        duration: props.duration,
+        arrow: props.arrow,
+        delay: props.delay,
+        trigger: props.trigger,
+        hideOnClick: props.hideOnClick,
+        // followCursor: true,
+        // plugins: [followCursor],
+        offset: (i: any) => {
+          // console.log(i, 'offset')
+          return [0, 10]
+        },
+        // render: (instance: Instance) => {
+        //   console.log(instance, 'render')
+        //   return {
+        //     popper: instance.popper,
+        //     onUpdate: (prevProps: Props, nextProps: Props) => {
+        //       console.log(prevProps, nextProps, 'onUpdate')
+        //     },
+        //   }
+        // },
+        // sticky: 'popper',
       })
-
-      // 初始化隐藏
-      requestAnimationFrame(() => {
-        togglePoper(true)
-      })
+      // console.log(instance)
+      // // 初始化隐藏
+      // requestAnimationFrame(() => {
+      //   instance.show()
+      // })
     })
-
-    let showTimer: number | undefined = undefined
-    let hideTimer: number | undefined = undefined
-    // 鼠标进入
-    const handleMouseenter = () => {
-      if (hideTimer) window.clearTimeout(hideTimer)
-      showTimer = window.setTimeout(() => {
-        togglePoper(false)
-      }, props.delayShow)
-    }
-
-    // 鼠标移除
-    const handleMouseleave = () => {
-      if (showTimer) window.clearTimeout(showTimer)
-      hideTimer = window.setTimeout(() => {
-        togglePoper(true)
-      }, props.delayShow)
-    }
 
     return () => html`
       <style>
-        ${popover}
+        ${tippyCSS + popoverCSS}
       </style>
-      <span
-        @mouseenter=${handleMouseenter}
-        @mouseleave=${handleMouseleave}
-        ref="reference"
-        class="ok-person"
-      >
-        <slot></slot>
-      </span>
-      <div ref="tooltip" id="tooltip">
-        <div data-popper-arrow></div>
-        <div @mouseenter=${handleMouseenter} @mouseleave=${handleMouseleave}>
-          <slot name="content">popover</slot>
+      <div id="parent">
+        <span ref="reference" class="ok-person" aria-expanded="true">
+          <slot></slot>
+        </span>
+        <div>
+          <div ref="tooltip">
+            <slot name="content">popover</slot>
+          </div>
         </div>
       </div>
     `

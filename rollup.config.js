@@ -1,6 +1,7 @@
 import cjs from '@rollup/plugin-commonjs'
 import image from '@rollup/plugin-image'
 import autoprefixer from 'autoprefixer'
+import rimraf from 'rimraf'
 import alias from 'rollup-plugin-alias'
 import filesize from 'rollup-plugin-filesize'
 import json from 'rollup-plugin-json'
@@ -9,7 +10,6 @@ import postcss from 'rollup-plugin-postcss'
 import replace from 'rollup-plugin-replace'
 import serve from 'rollup-plugin-serve'
 import { terser } from 'rollup-plugin-terser'
-import rimraf from 'rimraf'
 
 import babel from './build/babel'
 import nodeResolve from './build/resolve'
@@ -38,7 +38,7 @@ const createConfig = format => {
     postcss({
       extract: false,
       inject: false,
-      extensions: ['css', 'less'],
+      extensions: ['css', 'less', '.css'],
       minimize: true,
       plugins: [autoprefixer],
     }),

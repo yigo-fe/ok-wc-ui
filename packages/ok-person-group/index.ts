@@ -17,19 +17,19 @@ defineComponent(
       default: [
         {
           id: '500',
-          name: '小辛辛',
+          name: '小辛辛-1',
           department: 'HRBP-产品技术运营-北京',
           email: 'masiwei@kuaishou.com',
         },
         {
           id: '500',
-          name: '小辛辛',
+          name: '小辛辛-2',
           department: 'HRBP-产品技术运营-北京',
           email: 'masiwei@kuaishou.com',
         },
         {
           id: '500',
-          name: '小辛辛',
+          name: '小辛辛-3',
           department: 'HRBP-产品技术运营-北京',
           email: 'masiwei@kuaishou.com',
         },
@@ -97,7 +97,7 @@ defineComponent(
       <style>
         ${okPersonGroupCss}
       </style>
-      <ok-popover>
+      <ok-popover placement="top">
         <div class="ok-person-group ok-person-group-${props.size}">
           ${data.len ? repeat(props.persons, personsRender) : ''}
         </div>

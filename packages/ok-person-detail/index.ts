@@ -35,7 +35,7 @@ defineComponent(
       <style>
         ${okPersonDetaillCss}
       </style>
-      <ok-popover>
+      <ok-popover placement="left">
         <slot>
           <ok-person
             size="middle"
@@ -43,7 +43,6 @@ defineComponent(
             class="cell"
           ></ok-person>
         </slot>
-
         <div slot="content" class="ok-person-detail">
           <header class="person-image">
             <img src=${handleImage(props.person, true)} />
