@@ -4,7 +4,9 @@
  * definition: 清晰度，默认不开起
  */
 import { Person } from '@c/ok-wc-ui.d'
+
 import defaultImage from '../assets/defaultAvatar.png'
+import { setPopover } from './poper'
 
 const handleImage = (person: Person | undefined, definition = false) => {
   if (!person) return defaultImage
@@ -12,4 +14,4 @@ const handleImage = (person: Person | undefined, definition = false) => {
   return resultImg || person.avatar || defaultImage
 }
 
-export { handleImage }
+export { handleImage, setPopover }

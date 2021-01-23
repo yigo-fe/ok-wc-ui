@@ -1,3 +1,5 @@
+import { Instance, PopperElement, Props } from 'tippy.js'
+
 import { ACTIVE_TYPE } from './enum'
 
 interface Person {
