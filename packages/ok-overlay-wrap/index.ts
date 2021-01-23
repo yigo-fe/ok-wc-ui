@@ -4,7 +4,7 @@ import { PropType } from 'ok-lit/dist/types/props'
 import tippy, { Instance, Props } from 'tippy.js'
 import tippyCSS from 'tippy.js/dist/tippy.css'
 
-import popoverCSS from '../assets/ok-popover.less'
+import overlayCSS from '../assets/ok-overlay.less'
 
 /**
  * @props placement 弹层方向
@@ -22,7 +22,7 @@ import popoverCSS from '../assets/ok-popover.less'
  */
 
 defineComponent(
-  'ok-popover',
+  'ok-overlay-wrap',
   {
     zIndex: {
       type: String,
@@ -68,6 +68,8 @@ defineComponent(
   },
   (props, context) => {
     let instance: any = null
+    let instance1: any = null
+    let instance2: any = null
     onMounted(() => {
       instance = tippy(context.$refs.reference, {
         content: props.content || context.$refs.tooltip,
@@ -77,7 +79,69 @@ defineComponent(
         placement: props.placement,
         theme: 'ok-ui',
         interactive: true,
-        appendTo: document.body, // 绑定到父元素
+        appendTo: 'parent', // 绑定到父元素
+        duration: props.duration,
+        arrow: props.arrow,
+        delay: props.delay,
+        trigger: props.trigger,
+        hideOnClick: props.hideOnClick,
+        // followCursor: true,
+        // plugins: [followCursor],
+        offset: (i: any) => {
+          // console.log(i, 'offset')
+          return [0, 10]
+        },
+        // render: (instance: Instance) => {
+        //   console.log(instance, 'render')
+        //   return {
+        //     popper: instance.popper,
+        //     onUpdate: (prevProps: Props, nextProps: Props) => {
+        //       console.log(prevProps, nextProps, 'onUpdate')
+        //     },
+        //   }
+        // },
+        // sticky: 'popper',
+      })
+      instance1 = tippy(context.$refs.reference1, {
+        content: props.content || context.$refs.tooltip1,
+        // popperOptions: {
+        //   strategy: 'fixed',
+        // },
+        placement: props.placement,
+        theme: 'ok-ui',
+        interactive: true,
+        appendTo: 'parent', // 绑定到父元素
+        duration: props.duration,
+        arrow: props.arrow,
+        delay: props.delay,
+        trigger: props.trigger,
+        hideOnClick: props.hideOnClick,
+        // followCursor: true,
+        // plugins: [followCursor],
+        offset: (i: any) => {
+          // console.log(i, 'offset')
+          return [0, 10]
+        },
+        // render: (instance: Instance) => {
+        //   console.log(instance, 'render')
+        //   return {
+        //     popper: instance.popper,
+        //     onUpdate: (prevProps: Props, nextProps: Props) => {
+        //       console.log(prevProps, nextProps, 'onUpdate')
+        //     },
+        //   }
+        // },
+        // sticky: 'popper',
+      })
+      instance2 = tippy(context.$refs.reference1, {
+        content: props.content || context.$refs.tooltip1,
+        // popperOptions: {
+        //   strategy: 'fixed',
+        // },
+        placement: props.placement,
+        theme: 'ok-ui',
+        interactive: true,
+        appendTo: 'parent', // 绑定到父元素
         duration: props.duration,
         arrow: props.arrow,
         delay: props.delay,
@@ -104,20 +168,35 @@ defineComponent(
       // // 初始化隐藏
       requestAnimationFrame(() => {
         instance.show()
+        instance1.show()
+        instance2.show()
       })
     })
 
     return () => html`
       <style>
-        ${tippyCSS + popoverCSS}
+        ${tippyCSS + overlayCSS}
       </style>
       <div id="parent">
         <span ref="reference" class="ok-person" aria-expanded="true">
-          <slot></slot>
+          <slot><ok-avatar></ok-avatar></slot>
         </span>
-        <div>
-          <div ref="tooltip">
-            <slot name="content">popover</slot>
+
+        <div ref="tooltip">
+          <div id="parent1">
+            <div ref="reference1" class="reference1">第一层tooltip</div>
+            <div ref="tooltip1">
+              <div id="parent2">
+                <div ref="reference2" class="tooltip1">
+                  <ok-avatar></ok-avatar>
+                </div>
+                <div ref="tooltip2">
+                  <div class="tooltip2">
+                    <ok-avatar></ok-avatar>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
