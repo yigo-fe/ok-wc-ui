@@ -13,25 +13,25 @@ import tippy, { Instance } from 'tippy.js'
  * @offset 偏移量
  */
 class PopoverOptions {
-  public placement: POPOVER_PLACEMENT
+  public placement?: POPOVER_PLACEMENT
   // public delayShow: number
-  public arrow: boolean
-  public trigger: 'click' | undefined
-  public theme: string
-  public offset: [number, number]
+  public arrow?: boolean
+  public trigger?: 'click' | undefined
+  public theme?: string
+  public offset?: [number, number]
   // public animateFill: boolean
-  public appendTo: 'parent' | Element | ((ref: Element) => Element)
+  public appendTo?: 'parent' | Element | ((ref: Element) => Element)
   // public aria: {
   //   content?: 'auto' | 'describedby' | 'labelledby' | null
   //   expanded?: 'auto' | boolean
   // }
-  public delay: number | [number | null, number | null]
-  public duration: number | [number | null, number | null]
+  public delay?: number | [number | null, number | null]
+  public duration?: number | [number | null, number | null]
   // public followCursor: boolean | 'horizontal' | 'vertical' | 'initial'
   public hideOnClick?: boolean | 'toggle'
   // public ignoreAttributes: boolean
   // public inlinePositioning: boolean
-  public interactive: boolean
+  public interactive?: boolean
   // public interactiveBorder: number
   // public interactiveDebounce: number
   // public moveTransition: string
