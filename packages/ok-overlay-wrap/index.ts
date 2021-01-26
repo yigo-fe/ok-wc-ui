@@ -2,6 +2,7 @@ import { POPOVER_PLACEMENT } from '@c/ok-wc-ui'
 import { setPopover } from '@c/utils'
 import { defineComponent, html, onMounted } from 'ok-lit'
 import { PropType } from 'ok-lit/dist/types/props'
+import tippy, { createSingleton } from 'tippy.js'
 import tippyCSS from 'tippy.js/dist/tippy.css'
 
 import overlayCSS from '../assets/ok-overlay.less'
@@ -56,10 +57,19 @@ defineComponent(
     let instance1: any = null
     let instance2: any = null
     onMounted(() => {
-      instance = setPopover(context.$refs.reference, context.$refs.tooltip)
-      instance1 = setPopover(context.$refs.reference1, context.$refs.tooltip1)
-      instance2 = setPopover(context.$refs.reference2, context.$refs.tooltip2)
+      // instance = setPopover(context.$refs.reference, context.$refs.tooltip)
+      // instance1 = setPopover(context.$refs.reference1, context.$refs.tooltip1)
+      // instance2 = setPopover(context.$refs.reference2, context.$refs.tooltip2)
 
+      console.log(context.$refs.button)
+      const tippyInstances = tippy(context.$refs.button as HTMLElement[], {
+        content: context.$refs.tooltip as HTMLElement,
+        // appendTo: 'parent',
+      })
+      const singleton = createSingleton(tippyInstances, {
+        delay: 100,
+      })
+      singleton.show()
       // // 初始化隐藏
       requestAnimationFrame(() => {
         // instance.show()
@@ -72,7 +82,7 @@ defineComponent(
       <style>
         ${tippyCSS + overlayCSS}
       </style>
-      <div id="parent">
+      <!-- <div id="parent">
         <span ref="reference" class="ok-person" aria-expanded="false">
           <slot><ok-avatar></ok-avatar></slot>
         </span>
@@ -94,6 +104,14 @@ defineComponent(
             </div>
           </div>
         </div>
+      </div> -->
+      <div id="parent">
+        <button ref="button">999</button>
+        <button ref="button">999</button>
+        <button ref="button">999</button>
+        <button ref="button">999</button>
+
+        <div ref="tooltip">8888888</div>
       </div>
     `
   }

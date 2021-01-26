@@ -40,6 +40,7 @@
       height: 100%;
       font-size: 100%;
       line-height: 1;
+      color: rgba(0, 0, 0, 0.65);
       background: transparent;
       border-width: 0;
       border-radius: 4px;
@@ -208,9 +209,12 @@ ul {
 /** 下拉选  **/
 .ok-select-dropdown {
   box-sizing: border-box;
+  max-height: 298px;
   padding: 0;
+  padding: 5px 0;
   margin: 0;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   font-size: 14px;
   font-variant: tabular-nums;
   font-variant: normal;
@@ -226,13 +230,18 @@ ul {
   &-item {
     padding: 0 15px;
 
+    > .ok-person-card {
+      display: none;
+    }
+
     &:hover {
       background-color: #e6f7ff;
     }
   }
-  // .ok-select-dropdown-menu-item-selected {
-  //   color: rgba(0, 0, 0, 0.65);
-  //   font-weight: 600;
-  //   background-color: #fafafa;
-  // }
+
+  .ok-select-dropdown-menu-item-selected {
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.65);
+    background-color: #fafafa;
+  }
 }

@@ -1,4 +1,9 @@
-import { Instance, setPopover } from '@c/utils'
+import {
+  createSingleton,
+  Instance,
+  setMultiplePopover,
+  setPopover,
+} from '@c/utils'
 import { repeat } from 'lit-html/directives/repeat'
 import { computed, defineComponent, html, onMounted, ref } from 'ok-lit'
 import { PropType } from 'ok-lit/dist/types/props'
@@ -6,10 +11,20 @@ import tippyCSS from 'tippy.js/dist/tippy.css'
 
 import selectCSS from '../assets/ok-select.less'
 
+/**
+ * @props multiple 是否多选
+ * @props selectValue 已选中值
+ * @props filter-option 是否根据输入项进行筛选
+ */
+
 defineComponent(
-  'ok-select',
+  'ok-person-select',
   {
     multiple: {
+      type: Boolean,
+      default: true,
+    },
+    filterOption: {
       type: Boolean,
       default: true,
     },
@@ -18,13 +33,47 @@ defineComponent(
       required: true,
       default: [
         {
-          label: '一亿元一亿元一亿元一亿元一亿元一亿元一亿元一亿元',
-          value: '1',
+          value: '501',
+          label: '小辛辛-1',
+          department: 'HRBP-产品技术运营-北京',
+          email: 'masiwei@kuaishou.com',
         },
-        {
-          label: '二亿元',
-          value: '2',
-        },
+        // {
+        //   value: '500',
+        //   label: '小辛辛-2',
+        //   department: 'HRBP-产品技术运营-北京',
+        //   email: 'masiwei@kuaishou.com',
+        // },
+        // {
+        //   value: '500',
+        //   label: '小辛辛-3',
+        //   department: 'HRBP-产品技术运营-北京',
+        //   email: 'masiwei@kuaishou.com',
+        // },
+        // {
+        //   value: '500',
+        //   label: '小辛辛',
+        //   department: 'HRBP-产品技术运营-北京',
+        //   email: 'masiwei@kuaishou.com',
+        // },
+        // {
+        //   value: '500',
+        //   label: '小辛辛',
+        //   department: 'HRBP-产品技术运营-北京',
+        //   email: 'masiwei@kuaishou.com',
+        // },
+        // {
+        //   value: '500',
+        //   label: '小辛辛',
+        //   department: 'HRBP-产品技术运营-北京',
+        //   email: 'masiwei@kuaishou.com',
+        // },
+        // {
+        //   value: '500',
+        //   label: '小辛辛',
+        //   department: 'HRBP-产品技术运营-北京',
+        //   email: 'masiwei@kuaishou.com',
+        // },
       ],
     },
   },
@@ -33,16 +82,46 @@ defineComponent(
     // 选项
     const selectOptions = ref([
       {
-        label: '一亿元',
-        value: '1',
+        value: '501',
+        label: '小辛辛-1',
+        department: 'HRBP-产品技术运营-北京',
+        email: 'masiwei@kuaishou.com',
       },
       {
-        label: '二亿元',
-        value: '2',
+        value: '502',
+        label: '小辛辛-2',
+        department: 'HRBP-产品技术运营-北京',
+        email: 'masiwei@kuaishou.com',
       },
       {
-        label: '三亿元',
-        value: '3',
+        value: '503',
+        label: '小辛辛-3',
+        department: 'HRBP-产品技术运营-北京',
+        email: 'masiwei@kuaishou.com',
+      },
+      {
+        value: '504',
+        label: '小辛辛',
+        department: 'HRBP-产品技术运营-北京',
+        email: 'masiwei@kuaishou.com',
+      },
+      {
+        value: '505',
+        label: '小辛辛',
+        department: 'HRBP-产品技术运营-北京',
+        email: 'masiwei@kuaishou.com',
+      },
+      {
+        value: '506',
+        label: '小辛辛',
+        department: 'HRBP-产品技术运营-北京',
+        email: 'masiwei@kuaishou.com',
+      },
+      {
+        value: '507',
+        label: '小辛辛',
+        department: 'HRBP-产品技术运营-北京',
+        email: 'masiwei@kuaishou.com',
       },
     ])
 
@@ -53,8 +132,8 @@ defineComponent(
     const searchTextChange = (event: any) => {
       searchText.value = event.target.value
       // 计算输入框宽度
-      const searchInput = context.$refs.searchInput
-      const inputWidth = context.$refs.inputWidth
+      const searchInput = context.$refs.searchInput as HTMLElement
+      const inputWidth = context.$refs.inputWidth as HTMLElement
       searchInput.style.width =
         inputWidth.getBoundingClientRect().width + 10 + 'px'
 
@@ -68,7 +147,9 @@ defineComponent(
 
     // 计算下拉选位置
     const computedDropdown = () => {
-      const { searchInput, reference, tooltip } = context.$refs
+      const searchInput = context.$refs.searchInput as HTMLElement
+      const reference = context.$refs.reference as HTMLElement
+      const tooltip = context.$refs.tooltip as HTMLElement
       searchInput.focus()
       requestAnimationFrame(() => {
         const placement =
@@ -123,7 +204,7 @@ defineComponent(
     }
 
     onMounted(() => {
-      const { reference, tooltip, searchInput } = context.$refs
+      const { reference, tooltip, searchInput } = context.$refs as any
       tooltip.style.width = reference.getBoundingClientRect().width + 'px'
       poperInstance = setPopover(searchInput, tooltip, {
         placement: 'bottom',
@@ -133,6 +214,20 @@ defineComponent(
         duration: 0,
       })
       poperInstance.show()
+
+      const tippyInstances = setMultiplePopover(
+        context.$refs['ok-person'] as HTMLElement[],
+        (context.$refs['ok-person-card'] as HTMLElement[])[0] as HTMLElement,
+        {
+          appendTo: 'parent',
+        }
+      )
+      const singleton = createSingleton(tippyInstances, {
+        delay: 100,
+        placement: 'left',
+      })
+      console.log(singleton.show())
+
       computedDropdown()
     })
 
@@ -211,7 +306,16 @@ defineComponent(
                     @click=${() => onToggleSelect(val)}
                     value=${val.value}
                   >
-                    ${val.label}
+                    <ok-person
+                      ref="ok-person"
+                      class="ok-person"
+                      size="middle"
+                      .person=${{ ...val, name: val.label }}
+                    ></ok-person>
+                    <ok-person-card
+                      class="ok-person-card"
+                      ref="ok-person-card"
+                    ></ok-person-card>
                   </li>`
               )}
             </ul>

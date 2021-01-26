@@ -1,5 +1,5 @@
 import { POPOVER_PLACEMENT } from '@c/ok-wc-ui'
-import tippy, { Instance } from 'tippy.js'
+import tippy, { createSingleton, Instance, SingleTarget } from 'tippy.js'
 
 /**
  * @placement 弹层方向
@@ -67,8 +67,8 @@ class PopoverOptions {
  * @options {PopoverOptions}
  */
 const setPopover = function (
-  reference: HTMLElement,
-  tooltip: HTMLElement | string,
+  reference: SingleTarget,
+  tooltip?: HTMLElement | string,
   options?: PopoverOptions
 ): Instance {
   const instance = tippy(reference, {
@@ -79,5 +79,23 @@ const setPopover = function (
   return instance
 }
 
-export { setPopover }
+/**
+ * @reference 基元素数组
+ * @tooltip 气泡元素
+ * @options {PopoverOptions}
+ */
+const setMultiplePopover = function (
+  reference: string | Element[] | NodeList,
+  tooltip?: HTMLElement | string,
+  options?: PopoverOptions
+): Instance[] {
+  const instances = tippy(reference, {
+    content: tooltip,
+    ...new PopoverOptions(options),
+  })
+
+  return instances
+}
+
+export { createSingleton, setMultiplePopover, setPopover }
 export type { Instance }
