@@ -16,7 +16,7 @@ class PopoverOptions {
   public placement?: POPOVER_PLACEMENT
   // public delayShow: number
   public arrow?: boolean
-  public trigger?: 'click' | undefined
+  public trigger?: 'click' | 'focus' | undefined
   public theme?: string
   public offset?: [number, number]
   // public animateFill: boolean
@@ -80,3 +80,4 @@ const setPopover = function (
 }
 
 export { setPopover }
+export type { Instance }

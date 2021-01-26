@@ -1,4 +1,4 @@
-import { setPopover } from '@c/utils'
+import { Instance, setPopover } from '@c/utils'
 import { repeat } from 'lit-html/directives/repeat'
 import { computed, defineComponent, html, onMounted, ref } from 'ok-lit'
 import { PropType } from 'ok-lit/dist/types/props'
@@ -13,7 +13,7 @@ defineComponent(
       type: Boolean,
       default: true,
     },
-    SelectValue: {
+    selectValue: {
       type: (Array as unknown) as PropType<any[]>,
       required: true,
       default: [
@@ -29,7 +29,7 @@ defineComponent(
     },
   },
   (props, context) => {
-    let instance: any = null
+    let poperInstance: Instance
     // 选项
     const selectOptions = ref([
       {
@@ -45,8 +45,9 @@ defineComponent(
         value: '3',
       },
     ])
+
     // 是否有选中
-    const isSlect = computed(() => !!props.SelectValue.length)
+    const isSlect = computed(() => !!props.selectValue.length)
     // 搜索文本
     const searchText = ref('')
     const searchTextChange = (event: any) => {
@@ -56,39 +57,83 @@ defineComponent(
       const inputWidth = context.$refs.inputWidth
       searchInput.style.width =
         inputWidth.getBoundingClientRect().width + 10 + 'px'
+
+      computedDropdown()
     }
 
     // 点击select聚焦
     const onClickSelect = () => {
-      const searchInput = context.$refs.searchInput
-      searchInput.focus()
-      instance.show()
+      computedDropdown()
     }
+
+    // 计算下拉选位置
+    const computedDropdown = () => {
+      const { searchInput, reference, tooltip } = context.$refs
+      searchInput.focus()
+      requestAnimationFrame(() => {
+        const placement =
+          tooltip.parentElement?.parentElement?.dataset['placement']
+
+        // 计算偏移量
+        const {
+          width: referenceWidth,
+          left: referenceLeft,
+          top: referenceTop,
+        } = reference.getBoundingClientRect()
+        const {
+          width: searchInputWidth,
+          left: searchInputLeft,
+          top: searchInputTop,
+        } = searchInput.getBoundingClientRect()
+
+        let offsetY = 10
+        if (placement === 'top') {
+          offsetY = searchInputTop - referenceTop + 2
+        }
+
+        const offsetX =
+          referenceLeft +
+          referenceWidth / 2 -
+          (searchInputLeft + searchInputWidth / 2)
+
+        poperInstance.setProps({
+          offset: [offsetX, offsetY],
+        })
+      })
+    }
+
     // 失焦
     const onSearchInputBlur = () => {
-      // instance.hide()
+      // poperInstance.hide()
     }
 
     // 删除/选中
     const onToggleSelect = (currentVal: any) => {
-      console.log(currentVal)
-      const index = props.SelectValue.findIndex(
+      const currentIndex = props.selectValue.findIndex(
         (val: any) => val.value === currentVal.value
       )
-      index === -1
-        ? context.emit('change', [...props.SelectValue, currentVal])
-        : context.emit('change', props.SelectValue.splice(index, 1))
+      currentIndex === -1
+        ? context.emit('change', [...props.selectValue, currentVal])
+        : context.emit(
+            'change',
+            props.selectValue.filter(
+              (val: any, index) => index !== currentIndex
+            )
+          )
     }
 
     onMounted(() => {
-      const { reference, tooltip } = context.$refs
+      const { reference, tooltip, searchInput } = context.$refs
       tooltip.style.width = reference.getBoundingClientRect().width + 'px'
-      instance = setPopover(reference, tooltip, {
+      poperInstance = setPopover(searchInput, tooltip, {
         placement: 'bottom',
-        offset: [0, 2],
         arrow: false,
+        hideOnClick: false,
+        trigger: 'focus',
+        duration: 0,
       })
-      instance.show()
+      poperInstance.show()
+      computedDropdown()
     })
 
     return () => {
@@ -98,7 +143,7 @@ defineComponent(
           ? html`
               <ul>
                 ${repeat(
-                  props.SelectValue,
+                  props.selectValue,
                   (val: any) =>
                     html`<li
                       class="ok-select-selection__choice"
@@ -142,21 +187,21 @@ defineComponent(
         <style>
           ${tippyCSS + selectCSS}
         </style>
-        <div id="parent">
-          <div
-            ref="reference"
-            class="ok-select"
-            aria-expanded="false"
-            @click=${onClickSelect}
-          >
-            <div class="ok-select-selection ok-select-selection--multiple">
-              <div class="ok-select-selection__rendered">
-                ${selectInner.value}
-              </div>
+        <div
+          id="parent"
+          ref="reference"
+          aria-expanded="false"
+          class="ok-select"
+          @click=${onClickSelect}
+        >
+          <div class="ok-select-selection ok-select-selection--multiple">
+            <div class="ok-select-selection__rendered">
+              ${selectInner.value}
             </div>
           </div>
 
           <div ref="tooltip">
+            <!-- 下拉选 -->
             <ul class="ok-select-dropdown">
               ${repeat(
                 selectOptions.value,
