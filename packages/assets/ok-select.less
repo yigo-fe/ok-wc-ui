@@ -85,7 +85,7 @@
       max-width: 99%;
       padding: 0 20px 0 10px;
       margin-right: 4px;
-      overflow: hidden;
+      // overflow: hidden;
       color: rgba(0, 0, 0, 0.65);
       cursor: default;
       background-color: #fafafa;
@@ -96,10 +96,14 @@
       &__content {
         display: inline-block;
         max-width: 100%;
-        overflow: hidden;
+        // overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
         transition: margin 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+        > .ok-tag-person-card {
+          display: none;
+        }
       }
 
       &__remove {

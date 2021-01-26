@@ -1,7 +1,7 @@
 import {
-  createSingleton,
+  CreateSingletonInstance,
+  getSingleton,
   Instance,
-  setMultiplePopover,
   setPopover,
 } from '@c/utils'
 import { repeat } from 'lit-html/directives/repeat'
@@ -34,51 +34,23 @@ defineComponent(
       default: [
         {
           value: '501',
-          label: '小辛辛-1',
+          label: '小辛辛辛小辛辛小辛辛-1',
           department: 'HRBP-产品技术运营-北京',
           email: 'masiwei@kuaishou.com',
         },
-        // {
-        //   value: '500',
-        //   label: '小辛辛-2',
-        //   department: 'HRBP-产品技术运营-北京',
-        //   email: 'masiwei@kuaishou.com',
-        // },
-        // {
-        //   value: '500',
-        //   label: '小辛辛-3',
-        //   department: 'HRBP-产品技术运营-北京',
-        //   email: 'masiwei@kuaishou.com',
-        // },
-        // {
-        //   value: '500',
-        //   label: '小辛辛',
-        //   department: 'HRBP-产品技术运营-北京',
-        //   email: 'masiwei@kuaishou.com',
-        // },
-        // {
-        //   value: '500',
-        //   label: '小辛辛',
-        //   department: 'HRBP-产品技术运营-北京',
-        //   email: 'masiwei@kuaishou.com',
-        // },
-        // {
-        //   value: '500',
-        //   label: '小辛辛',
-        //   department: 'HRBP-产品技术运营-北京',
-        //   email: 'masiwei@kuaishou.com',
-        // },
-        // {
-        //   value: '500',
-        //   label: '小辛辛',
-        //   department: 'HRBP-产品技术运营-北京',
-        //   email: 'masiwei@kuaishou.com',
-        // },
+        {
+          value: '502',
+          label: '小辛辛辛小辛辛小辛辛-2',
+          department: 'HRBP-产品技术运营-北京',
+          email: 'masiwei@kuaishou.com',
+        },
       ],
     },
   },
   (props, context) => {
-    let poperInstance: Instance
+    let poperInstance: Instance // 下拉弹层
+    let dropDownSingleton: CreateSingletonInstance // 下拉选项-卡片弹层单例
+    let tagSingleton: CreateSingletonInstance // 选中tag-卡片弹层单例
     // 选项
     const selectOptions = ref([
       {
@@ -101,25 +73,25 @@ defineComponent(
       },
       {
         value: '504',
-        label: '小辛辛',
+        label: '小辛辛-4',
         department: 'HRBP-产品技术运营-北京',
         email: 'masiwei@kuaishou.com',
       },
       {
         value: '505',
-        label: '小辛辛',
+        label: '小辛辛-5',
         department: 'HRBP-产品技术运营-北京',
         email: 'masiwei@kuaishou.com',
       },
       {
         value: '506',
-        label: '小辛辛',
+        label: '小辛辛-6',
         department: 'HRBP-产品技术运营-北京',
         email: 'masiwei@kuaishou.com',
       },
       {
         value: '507',
-        label: '小辛辛',
+        label: '小辛辛-7',
         department: 'HRBP-产品技术运营-北京',
         email: 'masiwei@kuaishou.com',
       },
@@ -203,8 +175,32 @@ defineComponent(
           )
     }
 
-    onMounted(() => {
+    // 进入下拉选
+    const onMouseenterDropdown = (index: number) => {
+      requestAnimationFrame(() => {
+        dropDownSingleton.setContent(
+          (context.$refs['ok-person-card'] as HTMLElement[])[
+            index
+          ] as HTMLElement
+        )
+      })
+    }
+
+    // 进入选中tag
+    const onMouseenterTags = (index: number) => {
+      requestAnimationFrame(() => {
+        tagSingleton.setContent(
+          (context.$refs['ok-tag-person-card'] as HTMLElement[])[
+            index
+          ] as HTMLElement
+        )
+      })
+    }
+
+    // 弹层位置初始化
+    const selectPoperInit = () => {
       const { reference, tooltip, searchInput } = context.$refs as any
+      // 下拉选项弹层
       tooltip.style.width = reference.getBoundingClientRect().width + 'px'
       poperInstance = setPopover(searchInput, tooltip, {
         placement: 'bottom',
@@ -213,22 +209,23 @@ defineComponent(
         trigger: 'focus',
         duration: 0,
       })
-      poperInstance.show()
-
-      const tippyInstances = setMultiplePopover(
-        context.$refs['ok-person'] as HTMLElement[],
-        (context.$refs['ok-person-card'] as HTMLElement[])[0] as HTMLElement,
-        {
-          appendTo: 'parent',
-        }
-      )
-      const singleton = createSingleton(tippyInstances, {
-        delay: 100,
-        placement: 'left',
-      })
-      console.log(singleton.show())
-
+      // 计算下拉选项弹层位置
       computedDropdown()
+
+      // 下拉选项-人物卡片弹层
+      dropDownSingleton = getSingleton(
+        context.$refs['ok-person'] as HTMLElement[]
+      )
+
+      // 勾选tag-人物卡片弹层
+      tagSingleton = getSingleton(
+        context.$refs['ok-tag-person'] as HTMLElement[]
+      )
+      tagSingleton.show()
+    }
+
+    onMounted(() => {
+      selectPoperInit()
     })
 
     return () => {
@@ -239,13 +236,27 @@ defineComponent(
               <ul>
                 ${repeat(
                   props.selectValue,
-                  (val: any) =>
+                  (val: any, index: number) =>
                     html`<li
                       class="ok-select-selection__choice"
                       value=${val.value}
                     >
-                      <div class="ok-select-selection__choice__content">
-                        ${val.label}
+                      <div
+                        @mouseenter=${() => onMouseenterTags(index)}
+                        class="ok-select-selection__choice__content"
+                      >
+                        <ok-person
+                          ref="ok-tag-person"
+                          class="ok-tag-person"
+                          .showDepartment=${false}
+                          size="small"
+                          .person=${{ ...val, name: val.label }}
+                        ></ok-person>
+                        <ok-person-card
+                          .person=${{ ...val, name: val.label }}
+                          class="ok-tag-person-card"
+                          ref="ok-tag-person-card"
+                        ></ok-person-card>
                       </div>
                       <span
                         @click=${() => onToggleSelect(val)}
@@ -300,10 +311,11 @@ defineComponent(
             <ul class="ok-select-dropdown">
               ${repeat(
                 selectOptions.value,
-                (val: any) =>
+                (val: any, index: number) =>
                   html`<li
                     class="ok-select-dropdown-item"
                     @click=${() => onToggleSelect(val)}
+                    @mouseenter=${() => onMouseenterDropdown(index)}
                     value=${val.value}
                   >
                     <ok-person
@@ -313,6 +325,7 @@ defineComponent(
                       .person=${{ ...val, name: val.label }}
                     ></ok-person>
                     <ok-person-card
+                      .person=${{ ...val, name: val.label }}
                       class="ok-person-card"
                       ref="ok-person-card"
                     ></ok-person-card>

@@ -1,5 +1,10 @@
 import { POPOVER_PLACEMENT } from '@c/ok-wc-ui'
-import tippy, { createSingleton, Instance, SingleTarget } from 'tippy.js'
+import tippy, {
+  createSingleton,
+  CreateSingletonInstance,
+  Instance,
+  SingleTarget,
+} from 'tippy.js'
 
 /**
  * @placement 弹层方向
@@ -62,6 +67,8 @@ class PopoverOptions {
 }
 
 /**
+ * 创建弹层
+ *
  * @reference 基元素
  * @tooltip 气泡元素
  * @options {PopoverOptions}
@@ -80,6 +87,8 @@ const setPopover = function (
 }
 
 /**
+ * 创建建单例弹层（列表）
+ *
  * @reference 基元素数组
  * @tooltip 气泡元素
  * @options {PopoverOptions}
@@ -97,5 +106,26 @@ const setMultiplePopover = function (
   return instances
 }
 
-export { createSingleton, setMultiplePopover, setPopover }
-export type { Instance }
+/**
+ * 获取数组气泡-单例对象
+ */
+const getSingleton = (
+  reference: string | Element[] | NodeList,
+  tooltip?: HTMLElement | string
+): CreateSingletonInstance => {
+  const instances = setMultiplePopover(reference, tooltip)
+  const singleton = createSingleton(instances, {
+    delay: 0,
+    placement: 'left',
+    hideOnClick: false,
+    interactive: true,
+    arrow: false,
+    appendTo: 'parent',
+    theme: 'ok-ui',
+  })
+
+  return singleton
+}
+
+export { createSingleton, getSingleton, setMultiplePopover, setPopover }
+export type { CreateSingletonInstance, Instance }
