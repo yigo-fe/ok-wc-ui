@@ -6,7 +6,7 @@
 import { Person } from '@c/ok-wc-ui.d'
 
 import defaultImage from '../assets/defaultAvatar.png'
-import { setPopover } from './poper'
+export * from './poper'
 
 const handleImage = (person: Person | undefined, definition = false) => {
   if (!person) return defaultImage
@@ -14,4 +14,4 @@ const handleImage = (person: Person | undefined, definition = false) => {
   return resultImg || person.avatar || defaultImage
 }
 
-export { handleImage, setPopover }
+export { handleImage }

@@ -69,7 +69,7 @@ defineComponent(
   (props, context) => {
     let instance: any = null
     onMounted(() => {
-      instance = tippy(context.$refs.reference, {
+      instance = tippy(context.$refs.reference as HTMLElement, {
         content: props.content || context.$refs.tooltip,
         // popperOptions: {
         //   strategy: 'fixed',

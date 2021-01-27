@@ -6,6 +6,7 @@ import okPersonCss from '../assets/ok-person.less'
 
 /**
  * @props person: {Person} 用户信息
+ * @props showDepartment 展示部门信息
  * @slot person-info 展示用户信息位置
  */
 
@@ -21,6 +22,10 @@ defineComponent(
       default: SIZE_TYPE.MIDDLE,
       required: true,
     },
+    showDepartment: {
+      type: (Boolean as unknown) as boolean,
+      default: true,
+    },
   },
   props => {
     return () => html`
@@ -32,7 +37,11 @@ defineComponent(
         <slot name="person-info">
           <div class="person-info">
             <span class="name">${props.person?.name}</span>
-            <span class="department">${props.person?.department}</span>
+            ${props.showDepartment
+              ? html`<span class="department"
+                  >${props.person?.department}</span
+                >`
+              : ''}
           </div>
         </slot>
       </div>
