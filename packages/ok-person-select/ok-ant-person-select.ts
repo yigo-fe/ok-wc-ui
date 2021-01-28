@@ -1,3 +1,5 @@
+import './ok-person-cell' // 人员头像hover出卡片
+
 import { message } from 'ant-design-vue'
 import Select from 'ant-design-vue/lib/select'
 import { cloneDeep, debounce, isEqual } from 'lodash'
@@ -328,7 +330,7 @@ defineComponent('ok-ant-person-select', (props, cxt) => {
               <slot :item="d">
                 <div class="result-list-item">
                   <div class="user-img__avatar">
-                    <ok-avatar class="person-cell"></ok-avatar>
+                    <ok-person-cell class="person-cell"></ok-person-cell>
                   </div>
 
                   <div class="user-img__content">

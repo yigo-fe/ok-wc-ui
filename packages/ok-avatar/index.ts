@@ -1,6 +1,6 @@
 import { Person } from '@c/ok-wc-ui.d'
-import { handleImage, setPopover } from '@c/utils'
-import { defineComponent, html, onMounted, PropType } from 'ok-lit'
+import { handleImage } from '@c/utils'
+import { defineComponent, html, PropType } from 'ok-lit'
 
 import okAvatarCss from '../assets/ok-avatar.less'
 
@@ -19,30 +19,14 @@ defineComponent(
       required: true,
     },
   },
-  (props, contxt) => {
-    onMounted(() => {
-      setPopover(
-        contxt.$refs['ok-avatar'] as HTMLElement,
-        contxt.$refs['person-card'] as HTMLElement,
-        {
-          appendTo: document.body,
-          popperOptions: {
-            strategy: 'fixed',
-          },
-        }
-      )
-    })
-
+  props => {
     return () => html`
       <style>
         ${okAvatarCss}
       </style>
-
-      <span ref="ok-avatar" class="ok-avatar">
+      <span class="ok-avatar">
         <img src="${handleImage(props.person)}" />
       </span>
-
-      <ok-person-card ref="person-card"></ok-person-card>
     `
   }
 )
