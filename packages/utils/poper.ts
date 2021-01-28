@@ -20,6 +20,9 @@ import tippy, {
 class PopoverOptions {
   public placement?: POPOVER_PLACEMENT
   // public delayShow: number
+  public popperOptions?: {
+    strategy: 'fixed'
+  }
   public arrow?: boolean
   public trigger?: 'click' | 'focus' | undefined
   public theme?: string
@@ -63,6 +66,7 @@ class PopoverOptions {
     this.hideOnClick = props?.hideOnClick ?? false
     this.offset = props?.offset ?? [0, 0]
     this.interactive = props?.interactive ?? true
+    this.popperOptions = props?.popperOptions
   }
 }
 

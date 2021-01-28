@@ -1,0 +1,9 @@
+.department-search {
+  line-height: 32px;
+}
+.department-search.hide-tag .ant-select-selection-item {
+  display: none;
+}
+.ant-select-dropdown.department-search-dropdown .ant-select-item-empty {
+  text-align: center;
+}

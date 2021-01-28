@@ -8,20 +8,20 @@ import { computed, nextTick, ref, watch } from 'vue'
 import Vue from 'vue/dist/vue.cjs.prod.js'
 
 import AntCSS from './antd.min.css'
-import ASelectCSS from './ok-ant-person-select.less'
+import ASelectCSS from './ok-ant-department-search.less'
 
 /*
 	v-model
 		value									Array([])													双向绑定的已选中的值, 字符串数组
 	props
-		tagLabel							String('label')										已选择的显示值的key
-		tagValue							String('value')										已选择的后端值的key
-		multiple    					Boolean(false) 										是否多选,及最大长度是否为1, 注: antdv中的multiple属性一直为true
+		tagLabel							String('name')										已选择的显示值的key
+		tagValue							String('deptId')									已选择的后端值的key
+		multiple    					Boolean(true) 										是否多选,及最大长度是否为1, 注: antdv中的multiple属性一直为true
 		showTag								Boolean(true)											是否显示tag
-		rangeList   					Array([])													指定范围列表,为人员id组成的数组,有值时搜索功能为本地搜索,不掉接口
+		rangeList   					Array([])													指定范围列表,有值时搜索功能为本地搜索,不掉接口
 		rangeSearchKeys				Array([])													指定范围时为本地搜索, 此数组为本地搜索的匹配字段,没传则匹配所有字段
 		maxLimit							Number(99999)											可多选的最大数量
-		placeholder						String('请输入姓名, 邮箱前缀')				placeholder
+		placeholder						String('请输入部门')								placeholder
 		dropdownClassName			String('')												下拉弹层className
 		fixedList							Array([])													固定数据, 其选项不可删除
 		其他属性继承 a-select
@@ -30,13 +30,10 @@ import ASelectCSS from './ok-ant-person-select.less'
 			value								Array([])						已选中的值,字符串数组,同v-model
 */
 
-defineComponent('ok-ant-person-select', (props, cxt) => {
-  console.log(8888)
+defineComponent('ok-ant-department-search', (props, cxt) => {
   onMounted(() => {
     const app = Vue.createApp({
-      components: {
-        // PersonCell,
-      },
+      components: {},
       props: {
         value: {
           type: Array,
@@ -48,11 +45,11 @@ defineComponent('ok-ant-person-select', (props, cxt) => {
         },
         tagValue: {
           type: String,
-          default: 'number',
+          default: 'deptId',
         },
         multiple: {
           type: Boolean,
-          default: false,
+          default: true,
         },
         showTag: {
           type: Boolean,
@@ -72,7 +69,7 @@ defineComponent('ok-ant-person-select', (props, cxt) => {
         },
         placeholder: {
           type: String,
-          default: '请输入姓名, 邮箱前缀',
+          default: '请输入部门',
         },
         dropdownClassName: {
           type: String,
@@ -82,11 +79,11 @@ defineComponent('ok-ant-person-select', (props, cxt) => {
           type: Array,
           default: () => [],
         },
-        getUser: {
+        getDep: {
           type: Function,
           required: true,
         },
-        getUserList: {
+        getDepList: {
           type: Function,
           required: true,
         },
@@ -100,7 +97,7 @@ defineComponent('ok-ant-person-select', (props, cxt) => {
         const isRange = computed(() => props.rangeList.length > 0)
         // 渲染用 viweRangeList 数据, <userinfo>[]
         const viweRangeList = ref([])
-        // 指定范围是否改过, 改过的话, focus需要重新请求数据
+        // 指定范围是否改过, 改过的话, focus需要请求数据
         const isChangedRange = ref(true)
         watch(
           () => props.rangeList,
@@ -114,7 +111,7 @@ defineComponent('ok-ant-person-select', (props, cxt) => {
           if (isRange.value && isChangedRange.value) {
             isOpen.value = true
             props
-              .getUserList(props.rangeList as string[])
+              .getDepList(props.rangeList as string[])
               .then((res: any) => {
                 options.value = res
                 viweRangeList.value = res
@@ -140,7 +137,7 @@ defineComponent('ok-ant-person-select', (props, cxt) => {
             // 减少请求, 删除用filter
             if (newValue.length >= oldValue.length) {
               props
-                .getUserList(valueRef.value as string[])
+                .getDepList(valueRef.value as string[])
                 .then(async (res: any) => {
                   options.value = res
                 })
@@ -153,10 +150,7 @@ defineComponent('ok-ant-person-select', (props, cxt) => {
         )
         // 初始化赋给valueRef,并同步更新至父级
         let valueRef = ref(cloneDeep(props.value))
-        // 删除时使用, 获取之前的值,从而拿到删除的index
-        let oldValueRef = ref(cloneDeep(props.value))
-        watch(valueRef, async (newValue: any) => {
-          oldValueRef.value = newValue
+        watch(valueRef, async newValue => {
           context.emit('change', newValue)
           context.emit('update:value', newValue)
         })
@@ -168,18 +162,9 @@ defineComponent('ok-ant-person-select', (props, cxt) => {
           全员范围 && 无默认值 	-- 赋值[]
         */
         let options = ref()
-        let optionsT = ref([
-          {
-            tagValue: 'tagValue',
-            tagLabel: 'tagLabel',
-            name: 'name',
-            email: 'email',
-            orgName: 'orgName',
-          },
-        ])
         const initData = () => {
           if (isRange.value) {
-            props.getUserList(props.rangeList as string[]).then((res: any) => {
+            props.getDepList(props.rangeList as string[]).then((res: any) => {
               options.value = res
               viweRangeList.value = res
               isChangedRange.value = false
@@ -189,7 +174,7 @@ defineComponent('ok-ant-person-select', (props, cxt) => {
           } else {
             if (valueRef.value.length) {
               props
-                .getUserList(valueRef.value as string[])
+                .getDepList(valueRef.value as string[])
                 .then(async (res: any) => {
                   options.value = res
                   // 这一步是为了不让远程搜索时输入框聚焦时有下拉框
@@ -238,7 +223,7 @@ defineComponent('ok-ant-person-select', (props, cxt) => {
           } else {
             // 远程搜索
             props
-              .getUser(val)
+              .getDep(val)
               .then((res: any) => {
                 options.value = res
               })
@@ -262,9 +247,8 @@ defineComponent('ok-ant-person-select', (props, cxt) => {
         const handleDeselect = (val: string) => {
           // 处理不可删除逻辑
           if (props.fixedList.length > 0 && props.fixedList.includes(val)) {
-            const index = oldValueRef.value.indexOf(val)
-            valueRef.value.splice(index, 0, val)
-            message.warning('此用户不可删除')
+            message.warning('不可删除')
+            valueRef.value.unshift(val)
           }
         }
         const handleChange = async (val: string[]) => {
@@ -273,7 +257,7 @@ defineComponent('ok-ant-person-select', (props, cxt) => {
           valueRef.value = val.slice(-maxLimit)
           // 等渲染完再清空data, 要不然tag显示为id
           await nextTick()
-          // 单选下选择完关闭下拉框
+          //控制下拉框显隐
           if (!props.multiple) {
             if (!isRange.value) {
               options.value = []
@@ -288,7 +272,6 @@ defineComponent('ok-ant-person-select', (props, cxt) => {
           valueRef,
           loading,
           options,
-          optionsT,
           onFetch,
           onDropdownOff,
           handleChange,
@@ -298,51 +281,42 @@ defineComponent('ok-ant-person-select', (props, cxt) => {
         }
       },
       template: `
-        <div class="employee-search" :class="{ 'hide-tag': !showTag }">
-          <a-select
-            v-model:value="valueRef"
-            v-bind="$attrs"
-            mode="multiple"
-            style="width: 100%"
-            :filter-option="false"
-            :default-active-first-option="false"
-            :dropdown-class-name="dropdownClassName"
-            :placeholder="placeholder"
-            :not-found-content="isOpen ? undefined : null"
-            @focus="handleFocus"
-            @search="onFetch"
-            @change="handleChange"
-            @deselect="handleDeselect"
-            @dropdown-visible-change="onDropdownOff"
-          >
-            <template #notFoundContent>
-              <span v-if="loading">加载中</span>
-              <span v-else>暂无数据</span>
-            </template>
-            <a-select-option
-              v-for="d in optionsT"
-              :key="d[tagValue]"
-              :value="d[tagValue]"
-              :label="d[tagLabel]"
-            >
-              <slot :item="d">
-                <div class="result-list-item">
-                  <div class="user-img__avatar">
-                    <ok-avatar class="person-cell"></ok-avatar>
-                  </div>
-
-                  <div class="user-img__content">
-                    <p>
-                      <span class="user-img__name">{{ d.name }}</span>
-                      <span class="user-img__email">{{ d.email }}</span>
-                    </p>
-                    <p class="user-img__d">{{ d.orgName }}</p>
-                  </div>
-                </div>
-              </slot>
-            </a-select-option>
-          </a-select>
-        </div>
+        <div class="department-search" :class="{ 'hide-tag': !showTag }">
+	      	<a-select
+	      		v-model:value="valueRef"
+	      		v-bind="$attrs"
+	      		mode="multiple"
+	      		option-label-prop="label"
+	      		style="width: 100%"
+	      		:filter-option="false"
+	      		:default-active-first-option="false"
+	      		:dropdown-class-name="dropdownClassName"
+	      		:placeholder="placeholder"
+	      		:not-found-content="isOpen ? undefined : null"
+	      		@focus="handleFocus"
+	      		@search="onFetch"
+	      		@change="handleChange"
+	      		@deselect="handleDeselect"
+	      		@dropdown-visible-change="onDropdownOff"
+	      	>
+	      		<template #notFoundContent>
+	      			<span v-if="loading">加载中</span>
+	      			<span v-else>暂无数据</span>
+	      		</template>
+	      		<a-select-option
+	      			v-for="d in options"
+	      			:key="d[tagValue]"
+	      			:value="d[tagValue]"
+	      			:label="d[tagLabel]"
+	      		>
+	      			<slot :item="d">
+	      				<div class="result-list-item">
+	      					{{ d.name }}
+	      				</div>
+	      			</slot>
+	      		</a-select-option>
+	      	</a-select>
+	      </div>
       `,
     })
     // <person-cell class="user-img__avatar" :person="d"></person-cell>
@@ -354,6 +328,6 @@ defineComponent('ok-ant-person-select', (props, cxt) => {
     <style>
       ${AntCSS + ASelectCSS}
     </style>
-    <div ref="container" class="ok-ant-person-select"></div>
+    <div ref="container" class="ok-ant-department-search"></div>
   `
 })
