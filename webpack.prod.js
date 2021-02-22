@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-02-18 16:33:37
  * @LastEditors: 付静
- * @LastEditTime: 2021-02-22 15:18:44
+ * @LastEditTime: 2021-02-22 17:31:40
  * @FilePath: /webpack.prod.js
  */
 const path = require('path')
@@ -12,8 +12,7 @@ const { merge } = require('webpack-merge')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
-const TerserJSPlugin = require('terser-webpack-plugin')
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+// const TerserJSPlugin = require('terser-webpack-plugin')
 const webpackBaseConf = require('./webpack.base.config.js')
 module.exports = merge(webpackBaseConf, {
   mode: 'production',
@@ -55,7 +54,4 @@ module.exports = merge(webpackBaseConf, {
       },
     }),
   ],
-  optimization: {
-    minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
-  },
 })
