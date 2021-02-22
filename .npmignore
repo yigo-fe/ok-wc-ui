@@ -2,7 +2,6 @@ build/
 node_modules/
 example/
 packages/
-public/
 
 # html file
 index.html

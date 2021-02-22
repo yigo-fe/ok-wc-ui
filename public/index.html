@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./antd.min.css">
+  <link rel="stylesheet" href="./ok-ant-department-search.css">
+  <link rel="stylesheet" href="./ok-ant-person-select.css">
+  <title>ok-wc-ui</title>
+  <style>
+    #app {
+      /* height: 2000px;
+      width: 2000px;
+      background-color: rgb(37, 216, 171); */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    main {
+      /* margin-top: 1000px; */
+      width: 600px;
+      height: 600px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <main>
+      <!-- <ok-person-detail></ok-person-detail> -->
+      <!-- <ok-person-group></ok-person-group> -->
+      <!-- <ok-ant-person-select></ok-ant-person-select>
+      <ok-ant-department-search></ok-ant-department-search> -->
+
+      <ok-avatar></ok-avatar>
+
+      <section class="upload-demo">
+        <h3>列表上传</h3>
+        <upload-list>ok-upload-list</upload-list>
+        
+        <h3>拖拽上传</h3>
+        <upload-drag>ok-upload-drag</upload-drag>
+      </section>
+
+      <h3>文字多时</h3>
+      <div style="width: 200px;border: 1px solid #ccc;margin-bottom: 20px;">
+        <ok-tooltip title="text-文字多时，鼠标滑上显示文字多时，鼠标滑上显示文字多时，鼠标滑上显示" >
+          默认插槽-text，这里有很多很多很多很多很多很多很多很多很多很多很多很多很多很多很多很多文字
+        </ok-tooltip>
+      </div>
+
+      <h3>button</h3>
+      <ok-button></ok-button>
+
+      
+    </main>
+  </div>
+  <script type="module" src="../dist/ok-wc-ui.umd.js"></script>
+</body>
+</html>

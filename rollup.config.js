@@ -74,7 +74,7 @@ const createConfig = format => {
       serve({
         open: true,
         port: 8000,
-        openPage: '/example/index.html',
+        openPage: '/public/index.html',
       }),
       livereload()
     )
