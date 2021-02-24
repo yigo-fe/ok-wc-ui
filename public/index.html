@@ -32,14 +32,14 @@
       <!-- <ok-ant-person-select></ok-ant-person-select>
       <ok-ant-department-search></ok-ant-department-search> -->
 
-      <ok-avatar></ok-avatar>
+      <!-- <ok-avatar></ok-avatar> -->
 
       <section class="upload-demo">
         <h3>列表上传</h3>
-        <upload-list>ok-upload-list</upload-list>
+        <ok-upload-list></ok-upload-list>
         
         <h3>拖拽上传</h3>
-        <upload-drag>ok-upload-drag</upload-drag>
+        <ok-upload-drag style="width: 500px;"></ok-upload-drag>
       </section>
 
       <h3>文字多时</h3>
@@ -56,5 +56,20 @@
     </main>
   </div>
   <script type="module" src="../dist/ok-wc-ui.umd.js"></script>
+  <script >
+    var action = 'https://test.yigowork.com/apps/api//v1/private/attachment/uploadAttachments'
+    var uploadData = {
+      deletable: false,
+      'app_id': 'app_imvtxorkbj',
+      'form_key': 'form_d3ilmshgbu',
+      'element_id': 'c3m9lvfatzqrvtaw'
+    }
+    const okUpload = document.querySelector('ok-upload-drag')
+    okUpload.action = action
+    okUpload.data = uploadData
+    const okUploadList = document.querySelector('ok-upload-list')
+    okUploadList.action = action
+    okUploadList.data = uploadData
+  </script>
 </body>
 </html>

@@ -3,8 +3,8 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-02-22 15:51:43
- * @FilePath: /packages/ok-accessory/upload-drag.ts
+ * @LastEditTime: 2021-02-24 17:03:21
+ * @FilePath: /packages/ok-accessory/ok-upload-list.ts
  */
 
 /**
@@ -36,12 +36,11 @@
 
 import { defineComponent, html } from 'ok-lit'
 
-import CDN_PATH from '../path.config'
 import okUploadCss from './style/upload.less'
 import { UploadProps } from './upload.props'
 import useFileHandle from './upload-hook'
 defineComponent(
-  'upload-drag',
+  'ok-upload-list',
   {
     ...UploadProps,
   },
@@ -54,7 +53,9 @@ defineComponent(
       handleDetele,
       handleDownload,
     } = useFileHandle(props, context)
+
     displayFileList()
+
     /**
      * 列表上传，点击选择文件
      */
@@ -74,43 +75,24 @@ defineComponent(
       if (!files) return
       uploadFiles(files)
     }
-    /**
-     * 拖拽上传选择文件
-     * @param e emit事件
-     */
-    const dragFiles = (e: CustomEvent) => {
-      uploadFiles(e.detail)
-    }
 
-    // const a: any = window
-
-    // console.log('window.testLang', window, a.testLang)
-    // console.log(okUploadCss, css)
     return () => html`
-      <!-- <style lang="less">
-        @import './upload.css';
-      </style> -->
-      <style id="drag">
+      <style>
         ${okUploadCss}
       </style>
-      <link rel="stylesheet" .href="${CDN_PATH}common.css" />
-      <h3>this is h3</h3>
-      <span class="ok-test-css">this is test css</span>
-      <h3>测试background</h3>
-      <div class="test-bg"></div>
-      <div class="ok-upload ok-upload--drag" @click=${handleClick}>
-        <ok-upload-drag
-          .accept=${props.accept}
-          .disabled=${props.disabled}
-          @file=${dragFiles}
-        >
-          <slot></slot>
-        </ok-upload-drag>
 
+      <div
+        class="ok-upload ok-upload--${props.listType}"
+        tabindex="0"
+        @click=${handleClick}
+      >
+        <slot>
+          <div class="ok-upload-tip">点击上传</div>
+        </slot>
         <input
           style="display: none"
           ref="inputRef"
-          class="el-upload__input"
+          class="ok-upload__input"
           type="file"
           .name=${props.name}
           .multiple=${props.multiple}
@@ -118,14 +100,13 @@ defineComponent(
           @change=${handleChange}
         />
       </div>
-
-      <ok-upload-list
+      <ok-file-list
         @preview=${handleOnPreview}
         @delete=${handleDetele}
         @download=${handleDownload}
         .fileList=${fileLists.value}
         .listType=${props.listType}
-      ></ok-upload-list>
+      ></ok-file-list>
     `
   }
 )

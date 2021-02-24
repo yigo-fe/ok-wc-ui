@@ -3,12 +3,14 @@
  * @Author: 付静
  * @Date: 2021-01-25 15:53:09
  * @LastEditors: 付静
- * @LastEditTime: 2021-02-19 18:07:01
- * @FilePath: /packages/ok-accessory/upload-dragger.ts
+ * @LastEditTime: 2021-02-24 15:27:03
+ * @FilePath: /packages/ok-accessory/ok-upload-dragger.ts
  */
 
 import { classMap } from 'lit-html/directives/class-map.js'
 import { defineComponent, html, PropType, ref } from 'ok-lit'
+
+import okUploadDragCss from './style/ok-upload-dragger.less'
 
 defineComponent(
   'ok-upload-dragger',
@@ -81,22 +83,7 @@ defineComponent(
 
     return () => html`
       <style>
-        .ok-upload-dragger {
-          background-color: #fff;
-          border: 1px dashed #d9d9d9;
-          border-radius: 6px;
-          box-sizing: border-box;
-          width: 360px;
-          height: 180px;
-          text-align: center;
-          cursor: pointer;
-          position: relative;
-          overflow: hidden;
-        }
-        .ok-upload-dragger.dragover {
-          background-color: rgba(32, 159, 255, 0.06);
-          border: 2px dashed #409eff;
-        }
+        ${okUploadDragCss}
       </style>
       <div
         class="ok-upload-dragger ${classMap({ dragover: dragover.value })}"

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-02-08 13:54:19
+ * @LastEditTime: 2021-02-24 18:32:18
  * @FilePath: /packages/ok-accessory/upload-hook.ts
  */
 
@@ -50,6 +50,11 @@ export default function (props, context) {
   const reqs = ref({})
   let fileId = 0
   const fileLists = ref([] as any)
+
+  const action = ref(props.action)
+  const limit = ref(props.limit)
+  const data = ref(props.data)
+  const multiple = ref(props.multiple)
 
   const displayFileList = () => {
     props.fileList.forEach(file => {
@@ -156,7 +161,7 @@ export default function (props, context) {
   const handleProgress = (e: any, file: OkFile) => {
     updateStatus({ status: 'uploading', percentage: e.percent }, file)
     // 处理用户自定义事件
-    props.onProgress && props.onProgress(e, file, fileLists)
+    props.onProgress && props.onProgress(e, file, fileLists.value)
   }
 
   const handleSuccess = (res, file: OkFile) => {
@@ -165,23 +170,23 @@ export default function (props, context) {
     updateStatus({ status: 'success', response: res }, file)
     handleOnChange(file)
     // 处理用户自定义事件
-    props.onSuccess && props.onSuccess(res, file, fileLists)
+    props.onSuccess && props.onSuccess(res, file, fileLists.value)
   }
 
   const handleError = (err, file: OkFile) => {
     updateStatus({ status: 'fail' }, file)
     handleOnChange(file)
     // 处理用户自定义事件
-    props.onSuccess && props.onSuccess(err, file, fileLists)
+    props.onSuccess && props.onSuccess(err, file, fileLists.value)
   }
 
   const handleExceed = file => {
     console.log('handleExceed, props.onExceed', props.onExceed)
-    props.onExceed && props.onExceed(file, fileLists)
+    props.onExceed && props.onExceed(file, fileLists.value)
   }
 
   const handleOnChange = file => {
-    props.onChange && props.onChange(file, fileLists)
+    props.onChange && props.onChange(file, fileLists.value)
   }
   const handleOnPreview = file => {
     props.onPreview ? props.onPreview(file) : handlePreview(file)
@@ -191,7 +196,7 @@ export default function (props, context) {
    * @param data emit事件
    */
   const handleDetele = data => {
-    let idx = fileLists.value.findIndex(v => v.uid !== data.detail.uid)
+    let idx = fileLists.value.findIndex(v => v.uid === data.detail.uid)
     if (idx === -1) {
       console.warn('文件不存在')
       return
@@ -212,7 +217,7 @@ export default function (props, context) {
    * @param data
    */
   const handleDownload = data => {
-    let url = data.detail.response.data[0].online_view_url
+    let url = data.detail.response.data[0].download_url
     window.open(url, '_blank')
   }
 
@@ -239,7 +244,11 @@ export default function (props, context) {
   }
 
   return {
+    action,
+    limit,
+    data,
     fileLists,
+    multiple,
     displayFileList,
     uploadFiles,
     handleOnPreview,
