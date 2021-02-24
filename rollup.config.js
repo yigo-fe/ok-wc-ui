@@ -3,6 +3,7 @@ import image from '@rollup/plugin-image'
 import autoprefixer from 'autoprefixer'
 import rimraf from 'rimraf'
 import alias from 'rollup-plugin-alias'
+import copy from 'rollup-plugin-copy'
 import filesize from 'rollup-plugin-filesize'
 import json from 'rollup-plugin-json'
 import livereload from 'rollup-plugin-livereload'
@@ -51,6 +52,13 @@ const createConfig = format => {
       'process.env.NODE_ENV': JSON.stringify(
         isPrd ? 'production' : 'development'
       ),
+    }),
+    // copy 静态资源
+    copy({
+      targets: [
+        { src: 'public/common.css', dest: 'dist' },
+        { src: 'public/antd.min.css', dest: 'dist' },
+      ],
     }),
   ]
 

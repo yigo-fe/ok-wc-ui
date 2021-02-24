@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-02-18 16:33:37
  * @LastEditors: 付静
- * @LastEditTime: 2021-02-20 17:50:58
+ * @LastEditTime: 2021-02-23 15:28:18
  * @FilePath: /webpack.base.config.js
  */
 const path = require('path')
@@ -30,10 +30,6 @@ module.exports = {
         test: /\.(png|jpe?g|gif|svg)$/i,
         use: {
           loader: 'url-loader',
-          options: {
-            limit: 5 * 1024,
-            outputPath: 'img/',
-          },
         },
       },
       {
