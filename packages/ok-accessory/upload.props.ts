@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-02-05 19:42:22
  * @LastEditors: 付静
- * @LastEditTime: 2021-02-08 10:46:58
+ * @LastEditTime: 2021-02-25 20:10:21
  * @FilePath: /packages/ok-accessory/upload.props.ts
  */
 
@@ -124,6 +124,9 @@ const UploadProps = {
     type: Function,
   },
   onPreview: {
+    type: (Function as unknown) as PropType<(file: File) => void>,
+  },
+  onDownload: {
     type: (Function as unknown) as PropType<(file: File) => void>,
   },
 }

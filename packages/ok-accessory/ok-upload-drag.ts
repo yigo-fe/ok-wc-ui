@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-02-24 15:57:21
+ * @LastEditTime: 2021-02-25 20:32:23
  * @FilePath: /packages/ok-accessory/ok-upload-drag.ts
  */
 
@@ -50,7 +50,7 @@ defineComponent(
       fileLists,
       displayFileList,
       uploadFiles,
-      handleOnPreview,
+      handlePreview,
       handleDetele,
       handleDownload,
     } = useFileHandle(props, context)
@@ -115,7 +115,7 @@ defineComponent(
       </div>
 
       <ok-file-list
-        @preview=${handleOnPreview}
+        @preview=${handlePreview}
         @delete=${handleDetele}
         @download=${handleDownload}
         .fileList=${fileLists.value}

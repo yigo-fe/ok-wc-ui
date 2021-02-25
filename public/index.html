@@ -40,6 +40,9 @@
         
         <h3>拖拽上传</h3>
         <ok-upload-drag style="width: 500px;"></ok-upload-drag>
+
+        <h3>antd</h3>
+        <ok-attachment-drag></ok-attachment-drag> 
       </section>
 
       <h3>文字多时</h3>
@@ -55,7 +58,7 @@
       
     </main>
   </div>
-  <script type="module" src="../dist/ok-wc-ui.umd.js"></script>
+  <!-- <script type="module" src="../dist/ok-wc-ui.umd.js"></script> -->
   <script >
     var action = 'https://test.yigowork.com/apps/api//v1/private/attachment/uploadAttachments'
     var uploadData = {
@@ -70,6 +73,9 @@
     const okUploadList = document.querySelector('ok-upload-list')
     okUploadList.action = action
     okUploadList.data = uploadData
+    const okAttachmentDrag = document.querySelector('ok-attachment-drag')
+    okAttachmentDrag.action = action
+    okAttachmentDrag.data = uploadData
   </script>
 </body>
 </html>

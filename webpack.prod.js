@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-02-18 16:33:37
  * @LastEditors: 付静
- * @LastEditTime: 2021-02-22 17:31:40
+ * @LastEditTime: 2021-02-25 18:46:53
  * @FilePath: /webpack.prod.js
  */
 const path = require('path')
@@ -17,10 +17,7 @@ const webpackBaseConf = require('./webpack.base.config.js')
 module.exports = merge(webpackBaseConf, {
   mode: 'production',
   output: {
-    filename: '[name].js',
-    library: 'lib',
-    libraryTarget: 'umd',
-    libraryExport: 'default',
+    filename: 'ok-wc-ui.esm.js',
     path: path.resolve(__dirname, 'dist'),
   },
   module: {

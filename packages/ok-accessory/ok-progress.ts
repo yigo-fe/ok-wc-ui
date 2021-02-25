@@ -3,8 +3,8 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:09:30
  * @LastEditors: 付静
- * @LastEditTime: 2021-02-18 11:51:03
- * @FilePath: /packages/ok-accessory/progress.ts
+ * @LastEditTime: 2021-02-24 21:56:41
+ * @FilePath: /packages/ok-accessory/ok-progress.ts
  */
 
 import { styleMap } from 'lit-html/directives/style-map'
@@ -36,9 +36,6 @@ defineComponent(
     const width = computed(() => {
       return `${percentageFormate.value}%`
     })
-
-    console.log('width', width)
-
     return () => html`
       <style>
         .ok-progress-bar__outer {

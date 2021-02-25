@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-02-07 11:11:51
  * @LastEditors: 付静
- * @LastEditTime: 2021-02-20 17:21:05
+ * @LastEditTime: 2021-02-25 17:18:21
  * @FilePath: /webpack.dev.js
  */
 const webpack = require('webpack')
@@ -23,6 +23,7 @@ module.exports = merge(webpackBaseConf, {
   plugins: [
     new webpack.DefinePlugin({
       ENV: JSON.stringify('development'),
+      'process.env.TEST_IE': JSON.stringify(''),
     }),
     new HotModuleReplacementPlugin(),
   ],
