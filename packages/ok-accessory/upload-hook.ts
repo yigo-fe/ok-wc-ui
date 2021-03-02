@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-02-25 20:37:31
+ * @LastEditTime: 2021-03-01 17:43:50
  * @FilePath: /packages/ok-accessory/upload-hook.ts
  */
 
@@ -50,11 +50,6 @@ export default function (props, context) {
   const reqs = ref({})
   let fileId = 0
   const fileLists = ref([] as any)
-
-  const action = ref(props.action)
-  const limit = ref(props.limit)
-  const data = ref(props.data)
-  const multiple = ref(props.multiple)
 
   const displayFileList = () => {
     props.fileList.forEach(file => {
@@ -230,7 +225,6 @@ export default function (props, context) {
     if (file) {
       window.open(file.response.data[0].online_view_url, '_blank')
       // 处理用户自定义事件
-      console.log('handlePreview', file)
       props.onPreview && props.onPreview(file)
     }
   }
@@ -248,11 +242,7 @@ export default function (props, context) {
     })
   }
   return {
-    action,
-    limit,
-    data,
     fileLists,
-    multiple,
     displayFileList,
     uploadFiles,
     handlePreview,

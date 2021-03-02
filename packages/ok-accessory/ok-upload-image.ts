@@ -3,8 +3,8 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-02-26 17:40:03
- * @FilePath: /packages/ok-accessory/ok-upload-drag.ts
+ * @LastEditTime: 2021-03-01 19:59:15
+ * @FilePath: /packages/ok-accessory/ok-upload-image.ts
  */
 
 /**
@@ -37,15 +37,16 @@
 import { defineComponent, html } from 'ok-lit'
 
 import CDN_PATH from '../path.config'
-import okUploadCss from './style/upload.less'
+import okUploadImgCss from './style/ok-upload-image.less'
 import { UploadProps } from './upload.props'
 import useFileHandle from './upload-hook'
 defineComponent(
-  'ok-upload-drag',
+  'ok-upload-image',
   {
     ...UploadProps,
   },
   (props, context) => {
+    console.log(props)
     const {
       fileLists,
       displayFileList,
@@ -74,39 +75,34 @@ defineComponent(
       if (!files) return
       uploadFiles(files)
     }
-    /**
-     * 拖拽上传选择文件
-     * @param e emit事件
-     */
-    const dragFiles = (e: CustomEvent) => {
-      uploadFiles(e.detail)
-    }
-
-    const showWindow = () => {
-      console.log('window', window, window.$t.title)
-    }
 
     return () => html`
       <style>
-        ${okUploadCss}
+        ${okUploadImgCss} .icon {
+          display: block;
+          height: 100px;
+          line-height: 100px;
+          font-size: 42px;
+          margin: 10px auto;
+          color: #333;
+          transition: font-size 0.25s linear, width 0.25s linear;
+        }
       </style>
       <link rel="stylesheet" .href="${CDN_PATH}common.css" />
-      <!-- <h3>this is h3</h3> -->
-      <!-- <span class="ok-test-css">this is test css</span> -->
-      <!-- <h3>测试background</h3> -->
-      <!-- <div class="test-bg"></div> -->
-      <button @click=${showWindow}>click</button>
-      <div class="ok-upload ok-upload--drag" @click=${handleClick}>
-        <ok-upload-dragger
-          .accept=${props.accept}
-          .disabled=${props.disabled}
-          @file=${dragFiles}
-        >
-          <div class="upload-tip">
-            将文件拖拽至此，或<span class="upload-btn">点击上传</span>
-          </div>
-        </ok-upload-dragger>
-
+      <link
+        rel="stylesheet"
+        type="text/css"
+        .href="${CDN_PATH}iconfont/iconfont.css"
+      />
+      <ok-file-image
+        @preview=${handlePreview}
+        @delete=${handleDetele}
+        @download=${handleDownload}
+        .fileList=${fileLists.value}
+        .listType=${props.listType}
+      ></ok-file-image>
+      <div class="ok-upload ok-upload-image" @click=${handleClick}>
+        <span class="upload-img-icon pro-app-page page-addition"> </span>
         <input
           style="display: none"
           ref="inputRef"
@@ -118,14 +114,6 @@ defineComponent(
           @change=${handleChange}
         />
       </div>
-
-      <ok-file-list
-        @preview=${handlePreview}
-        @delete=${handleDetele}
-        @download=${handleDownload}
-        .fileList=${fileLists.value}
-        .listType=${props.listType}
-      ></ok-file-list>
     `
   }
 )

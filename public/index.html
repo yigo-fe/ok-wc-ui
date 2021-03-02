@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="./antd.min.css">
   <link rel="stylesheet" href="./ok-ant-department-search.css">
   <link rel="stylesheet" href="./ok-ant-person-select.css">
+  <link rel="stylesheet" href="./iconfont/iconfont.css">
   <title>ok-wc-ui</title>
   <style>
     #app {
@@ -43,6 +44,9 @@
 
         <h3>antd</h3>
         <ok-attachment-drag></ok-attachment-drag> 
+
+        <h3>图片上传</h3>
+        <ok-upload-image style="width: 500px;"></ok-upload-image>
       </section>
 
       <h3>文字多时</h3>
@@ -61,6 +65,7 @@
   <!-- <script type="module" src="../dist/ok-wc-ui.umd.js"></script> -->
   <script >
     var action = 'https://test.yigowork.com/apps/api//v1/private/attachment/uploadAttachments'
+    var actionImg = 'https://test.yigowork.com/apps/api//v1/private/attachment/uploadImages'
     var uploadData = {
       deletable: false,
       'app_id': 'app_imvtxorkbj',
@@ -76,6 +81,10 @@
     const okAttachmentDrag = document.querySelector('ok-attachment-drag')
     okAttachmentDrag.action = action
     okAttachmentDrag.data = uploadData
+
+    const okUploadImg = document.querySelector('ok-upload-image')
+    okUploadImg.action = actionImg
+    okUploadImg.multiple = true
   </script>
 </body>
 </html>

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-02-25 21:28:31
+ * @LastEditTime: 2021-02-26 17:27:34
  * @FilePath: /packages/ok-accessory/ok-file-table.ts
  */
 
@@ -12,6 +12,7 @@ import { defineComponent, html, onMounted, PropType } from 'ok-lit'
 import { createApp, ref } from 'vue'
 
 import CDN_PATH from '../path.config'
+import type { ListType, UploadFile } from './upload.type'
 defineComponent(
   'ok-file-table',
   {
