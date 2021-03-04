@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-28 19:07:13
  * @LastEditors: 付静
- * @LastEditTime: 2021-02-19 14:08:24
+ * @LastEditTime: 2021-03-04 18:30:00
  * @FilePath: /packages/ok-tooltip/index.ts
  */
 
@@ -132,14 +132,14 @@ defineComponent(
 
           // 处理文件后缀
           // TODO 嵌套标签
-          const handleSuffix = (fileName: string) => {
-            let idx = fileName.lastIndexOf('.')
-            nameStart.value = fileName.substr(0, idx - 2)
-            if (nameStart.value.length > 2) {
-              nameEnd.value = fileName.substr(idx - 2)
-            }
-          }
-          showSuffix.value && handleSuffix(innerHTML.value)
+          // const handleSuffix = (fileName: string) => {
+          //   let idx = fileName.lastIndexOf('.')
+          //   nameStart.value = fileName.substr(0, idx - 2)
+          //   if (nameStart.value.length > 2) {
+          //     nameEnd.value = fileName.substr(idx - 2)
+          //   }
+          // }
+          // showSuffix.value && handleSuffix(innerHTML.value)
 
           // 添加隐藏元素，根据高度对比，计算是否需要展示tooltip
           const mouseenter = () => {
