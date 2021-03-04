@@ -36,10 +36,10 @@ defineComponent(
         <ok-avatar class="avatar"></ok-avatar>
         <slot name="person-info">
           <div class="person-info">
-            <span class="name">${props.person?.name}</span>
+            <span class="name">${props.person?.employee_name}</span>
             ${props.showDepartment
               ? html`<span class="department"
-                  >${props.person?.department}</span
+                  >${props.person?.department_name}</span
                 >`
               : ''}
           </div>

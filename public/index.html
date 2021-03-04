@@ -8,83 +8,116 @@
   <link rel="stylesheet" href="./ok-ant-department-search.css">
   <link rel="stylesheet" href="./ok-ant-person-select.css">
   <link rel="stylesheet" href="./iconfont/iconfont.css">
+  <link rel="stylesheet" href="./common.css">
+  <link
+  rel="stylesheet"
+  href="https://unpkg.com/element-plus/lib/theme-chalk/index.css"
+/>
   <title>ok-wc-ui</title>
   <style>
     #app {
-      /* height: 2000px;
-      width: 2000px;
-      background-color: rgb(37, 216, 171); */
+      /* height: 2000px; */
+      /* width: 2000px; */
+      /* background-color: rgb(37, 216, 171); */
       display: flex;
       align-items: center;
       justify-content: center;
     }
     main {
-      /* margin-top: 1000px; */
-      width: 600px;
-      height: 600px;
+      margin-top: 100px;
+      /* width: 600px; */
+      /* height: 600px; */
     }
   </style>
 </head>
 <body>
+  <!-- <link rel="stylesheet" href="https://unpkg.com/element-plus/lib/theme-chalk/index.css"> -->
+<!-- 引入组件库 -->
+<!-- <script src="https://unpkg.com/element-plus/lib/index.full.js"></script> -->
   <div id="app">
     <main>
       <!-- <ok-person-detail></ok-person-detail> -->
       <!-- <ok-person-group></ok-person-group> -->
-      <!-- <ok-ant-person-select></ok-ant-person-select>
-      <ok-ant-department-search></ok-ant-department-search> -->
+      <!-- <ok-ant-person-select></ok-ant-person-select> -->
+      <!-- <ok-ant-department-search></ok-ant-department-search> -->
 
+      <!-- 人员图像 -->
       <!-- <ok-avatar></ok-avatar> -->
+      <!-- 人员卡片 -->
+      <ok-person-cell class="person-cell"></ok-person-cell>
+      <!-- 多人员list -->
+      <!-- <ok-person-group ></ok-person-group> -->
+      
+    
 
-      <section class="upload-demo">
+      <section style="display: none;" class="upload-demo">
         <h3>列表上传</h3>
-        <ok-upload-list></ok-upload-list>
+        <!-- <ok-upload-list></ok-upload-list> -->
         
         <h3>拖拽上传</h3>
-        <ok-upload-drag style="width: 500px;"></ok-upload-drag>
+        <!-- <ok-upload-drag style="width: 500px;"></ok-upload-drag> -->
 
         <h3>antd</h3>
-        <ok-attachment-drag></ok-attachment-drag> 
+        <!-- <ok-attachment-drag></ok-attachment-drag>  -->
 
         <h3>图片上传</h3>
-        <ok-upload-image style="width: 500px;"></ok-upload-image>
+        <!-- <ok-upload-image style="width: 500px;"></ok-upload-image> -->
       </section>
 
-      <h3>文字多时</h3>
-      <div style="width: 200px;border: 1px solid #ccc;margin-bottom: 20px;">
+      <!-- <h3>文字多时</h3> -->
+      <!-- <div style="width: 200px;border: 1px solid #ccc;margin-bottom: 20px;">
         <ok-tooltip title="text-文字多时，鼠标滑上显示文字多时，鼠标滑上显示文字多时，鼠标滑上显示" >
           默认插槽-text，这里有很多很多很多很多很多很多很多很多很多很多很多很多很多很多很多很多文字
         </ok-tooltip>
-      </div>
+      </div> -->
 
-      <h3>button</h3>
-      <ok-button></ok-button>
+      <!-- <h3>button</h3> -->
+      <!-- <ok-button></ok-button> -->
 
       
     </main>
   </div>
   <!-- <script type="module" src="../dist/ok-wc-ui.umd.js"></script> -->
-  <script >
-    var action = 'https://test.yigowork.com/apps/api//v1/private/attachment/uploadAttachments'
-    var actionImg = 'https://test.yigowork.com/apps/api//v1/private/attachment/uploadImages'
-    var uploadData = {
-      deletable: false,
-      'app_id': 'app_imvtxorkbj',
-      'form_key': 'form_d3ilmshgbu',
-      'element_id': 'c3m9lvfatzqrvtaw'
-    }
-    const okUpload = document.querySelector('ok-upload-drag')
-    okUpload.action = action
-    okUpload.data = uploadData
-    const okUploadList = document.querySelector('ok-upload-list')
-    okUploadList.action = action
-    okUploadList.data = uploadData
-    const okAttachmentDrag = document.querySelector('ok-attachment-drag')
-    okAttachmentDrag.action = action
-    okAttachmentDrag.data = uploadData
+  <script>
+    // var action = 'https://test.yigowork.com/apps/api//v1/private/attachment/uploadAttachments'
+    // var actionImg = 'https://test.yigowork.com/apps/api//v1/private/attachment/uploadImages'
+    // var uploadData = {
+    //   deletable: false,
+    //   'app_id': 'app_imvtxorkbj',
+    //   'form_key': 'form_d3ilmshgbu',
+    //   'element_id': 'c3m9lvfatzqrvtaw'
+    // }
+    // const okUpload = document.querySelector('ok-upload-drag')
+    // okUpload.action = action
+    // okUpload.data = uploadData
+    // const okUploadList = document.querySelector('ok-upload-list')
+    // okUploadList.action = action
+    // okUploadList.data = uploadData
+    // const okAttachmentDrag = document.querySelector('ok-attachment-drag')
+    // okAttachmentDrag.action = action
+    // okAttachmentDrag.data = uploadData
 
-    const okUploadImg = document.querySelector('ok-upload-image')
-    okUploadImg.action = actionImg
-    okUploadImg.multiple = true
+    // const okUploadImg = document.querySelector('ok-upload-image')
+    // okUploadImg.action = actionImg
+    // okUploadImg.multiple = true
+
+    const personInfo = {
+      avatar_url: "https://wework.qpic.cn/bizmail/cMLFZrYGchIibX5icVTGibh7b2oELMc9MsJYDiaCNNmTYREjGVRjlsq3mA/0",
+      department_id: "30",
+      department_name: "前端部",
+      email: "fujing@byteluck.com",
+      employee_card: "工号",
+      employee_en_name: "付静",
+      employee_id: "FuJing",
+      employee_name: "付静",
+      gender: 2,
+      msg_relation_type: "WX",
+      tenant_id: "test"
+    }
+
+    const okPersonCell = document.querySelector('ok-person-cell')
+    okPersonCell.personInfo = personInfo
+
   </script>
 </body>
 </html>

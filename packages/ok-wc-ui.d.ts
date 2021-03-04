@@ -1,16 +1,21 @@
 import { Instance, PopperElement, Props } from 'tippy.js'
 
-import { ACTIVE_TYPE } from './enum'
+import { ACTIVE_TYPE, GENDER_TYPE } from './enum'
 
 interface Person {
   id?: string
-  name: string
-  deptId?: string
-  department: string
-  email: string
-  avatar: string
-  avatarBig?: string
+  employee_name?: string
+  department_id?: string
+  department_name?: string
+  email?: string
+  avatar_url?: string
+  avatar_big?: string
+  avatar_small: string
   active?: ACTIVE_TYPE
+  gender?: GENDER_TYPE
+  tenant_id?: string
+  phone?: string
+  msg_relation_type?: string
 }
 
 type POPOVER_PLACEMENT =

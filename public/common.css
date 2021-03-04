@@ -107,3 +107,41 @@ h3{
 .common {
   color: coral;
 }
+
+/* personGroup Popper  */
+.popper-wraper {
+  list-style: none;
+  padding: 10px;
+  margin: 0;
+  width: 110px;
+  border-radius: 4px;
+  box-shadow: 0 0 9px 0 rgb(0 0 0 / 8%);
+  max-height: 140px;
+  overflow: auto;
+  background-color: #fff;
+}
+.popper-item {
+  position: relative;
+  display: flex;
+  padding: 2% 0;
+  color: #333;
+  font-size: 12px;
+  font-weight: normal;
+}
+.popper-item:hover {
+  background-color:#f7f8fc ;
+}
+
+
+.popper-item-name {
+  margin-left: 6px;
+}
+
+.popper-item-operate {
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
+.popper-item-operate:hover {
+  color: #3c8cff;
+}

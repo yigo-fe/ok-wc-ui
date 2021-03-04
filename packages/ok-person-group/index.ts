@@ -1,7 +1,7 @@
 import { SIZE_TYPE } from '@c/enum'
 import { Person } from '@c/ok-wc-ui.d'
-import { repeat } from 'lit-html/directives/repeat'
-import { defineComponent, html, PropType, reactive } from 'ok-lit'
+import { setPopover } from '@c/utils'
+import { computed, defineComponent, html, onMounted, PropType } from 'ok-lit'
 
 import okPersonGroupCss from '../assets/ok-person-group.less'
 
@@ -12,107 +12,109 @@ import okPersonGroupCss from '../assets/ok-person-group.less'
 defineComponent(
   'ok-person-group',
   {
-    persons: {
+    personList: {
       type: (Object as unknown) as PropType<Array<Person>>,
-      default: [
-        {
-          id: '500',
-          name: '小辛辛-1',
-          department: 'HRBP-产品技术运营-北京',
-          email: 'masiwei@kuaishou.com',
-        },
-        // {
-        //   id: '500',
-        //   name: '小辛辛-2',
-        //   department: 'HRBP-产品技术运营-北京',
-        //   email: 'masiwei@kuaishou.com',
-        // },
-        // {
-        //   id: '500',
-        //   name: '小辛辛-3',
-        //   department: 'HRBP-产品技术运营-北京',
-        //   email: 'masiwei@kuaishou.com',
-        // },
-        // {
-        //   id: '500',
-        //   name: '小辛辛',
-        //   department: 'HRBP-产品技术运营-北京',
-        //   email: 'masiwei@kuaishou.com',
-        // },
-        // {
-        //   id: '500',
-        //   name: '小辛辛',
-        //   department: 'HRBP-产品技术运营-北京',
-        //   email: 'masiwei@kuaishou.com',
-        // },
-        // {
-        //   id: '500',
-        //   name: '小辛辛',
-        //   department: 'HRBP-产品技术运营-北京',
-        //   email: 'masiwei@kuaishou.com',
-        // },
-        // {
-        //   id: '500',
-        //   name: '小辛辛',
-        //   department: 'HRBP-产品技术运营-北京',
-        //   email: 'masiwei@kuaishou.com',
-        // },
-      ],
       required: true,
     },
     size: {
       type: (String as unknown) as SIZE_TYPE,
-      default: SIZE_TYPE.MIDDLE,
-      required: true,
+      default: SIZE_TYPE.SMALL,
+    },
+    width: {
+      type: (String as unknown) as String,
+    },
+    height: {
+      type: (String as unknown) as String,
+    },
+    showDelete: {
+      type: (Boolean as unknown) as Boolean,
+      default: true,
+    },
+    detailSize: {
+      type: (String as unknown) as String,
+      default: 'mini',
+    },
+    detailWidth: {
+      type: (String as unknown) as String,
+      default: '',
+    },
+    detailHeight: {
+      type: (String as unknown) as String,
+      default: '',
     },
   },
-  props => {
-    const data = reactive({
-      len: props.persons.length,
+  (props, contxt) => {
+    const showList = computed(() => {
+      return props.personList?.slice(0, 3)
     })
 
-    const isShowDetailText = (index: number): boolean => {
-      let len = data.len > 5 ? 5 : data.len
-      return len === index + 1
-    }
-    const personsRender = (person: Person, index: number) => {
-      const detailText = data.len > 1 ? `...${data.len}` : person.name
-      const detail = isShowDetailText(index)
-        ? html` <span class="detail-text"> ${detailText} </span> `
-        : ''
-      const personHtml =
-        index < 5
-          ? html`
-              <div class="person-item">
-                <ok-avatar .person=${person}></ok-avatar>
-                ${detail}
-              </div>
-            `
-          : ''
+    onMounted(() => {
+      if (props.personList.length > 1) {
+        setPopover(
+          contxt.$refs['showMore'] as HTMLElement,
+          contxt.$refs['personGroupPopper'] as HTMLElement,
+          {
+            appendTo: document.body,
+            popperOptions: {
+              strategy: 'fixed',
+            },
+          }
+        )
+      }
+    })
 
-      return html`${personHtml}`
+    const avatarRender = () => {
+      return html`
+        ${showList.value.map(
+          item => html`<ok-person-cell
+            class="avatar-list"
+            .personInfo=${item}
+            .size=${props.size}
+            .width=${props.width}
+            .height=${props.height}
+          ></ok-person-cell>`
+        )}
+        ${showList.value.length === 1
+          ? html`<span class="single-user-name"
+              >${showList.value[0].employee_name}</span
+            >`
+          : html`<span ref="showMore" class="more"
+              >...${showList.value.length}</span
+            >`}
+      `
+    }
+
+    const popperRender = () => {
+      return html`
+        <ul ref="personGroupPopper" class="popper-wraper">
+          ${props.personList.map(
+            item =>
+              html`
+                <li class="popper-item">
+                  <ok-person-cell
+                    class="popper-item-avatar"
+                    .personInfo=${item}
+                    .size=${props.detailSize}
+                    .width=${props.detailWidth}
+                    .height=${props.detailHeight}
+                  ></ok-person-cell>
+                  <span class="popper-item-name">${item.employee_name}</span>
+                  ${props.showDelete &&
+                  html`<span class="popper-item-operate">x</span>`}
+                </li>
+              `
+          )}
+        </ul>
+      `
     }
 
     return () => html`
       <style>
         ${okPersonGroupCss}
       </style>
-      <ok-popover placement="top">
-        <div class="ok-person-group ok-person-group-${props.size}">
-          ${data.len ? repeat(props.persons, personsRender) : ''}
-        </div>
-        <!-- 人员列表 -->
-        <ul slot="content" class="person-list">
-          ${repeat(
-            props.persons,
-            (person: Person) => html`
-              <li class="person-list-item">
-                <ok-person-detail .person=${person}></ok-person-detail>
-              </li>
-            `
-          )}
-        </ul>
-      </ok-popover>
+      <div class="ok-person-group">
+        ${avatarRender()} ${props.personList.length > 1 ? popperRender() : ''}
+      </div>
     `
   }
 )

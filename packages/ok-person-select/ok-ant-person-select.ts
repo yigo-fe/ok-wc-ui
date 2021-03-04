@@ -1,5 +1,3 @@
-import './ok-person-cell' // 人员头像hover出卡片
-
 import { message } from 'ant-design-vue'
 import Select from 'ant-design-vue/lib/select'
 import { cloneDeep, debounce, isEqual } from 'lodash'

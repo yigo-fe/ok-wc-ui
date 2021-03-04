@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-02-18 16:01:20
  * @LastEditors: 付静
- * @LastEditTime: 2021-02-19 18:06:26
+ * @LastEditTime: 2021-03-04 16:47:33
  * @FilePath: /packages/ok-button/index.ts
  */
 import { Button } from 'ant-design-vue'

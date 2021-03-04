@@ -2,7 +2,7 @@ import { Person } from '@c/ok-wc-ui.d'
 import { handleImage } from '@c/utils'
 import { defineComponent, html, PropType } from 'ok-lit'
 
-import ks_kim from '../assets/ks_kim.svg'
+import ks_kim from '../assets/images/ks_kim.svg'
 import okPersonDetaillCss from '../assets/ok-person-detail.less'
 
 /**
@@ -16,19 +16,13 @@ defineComponent(
   {
     person: {
       type: (Object as any) as PropType<Person>,
-      default: {
-        id: '500',
-        name: '小辛辛',
-        department: 'HRBP-产品技术运营-北京',
-        email: 'masiwei@kuaishou.com',
-      },
     },
   },
   props => {
     // 打开应用
     const openApp = () => {
       window.location.href = `kim://username?username=${
-        props.person.email.split('@')[0]
+        props.person?.email?.split('@')[0]
       }`
     }
     return () => html`
@@ -47,13 +41,13 @@ defineComponent(
           <header class="person-image">
             <img src=${handleImage(props.person, true)} />
             <div class="overlay">
-              <span class="person-name">${props.person?.name}</span>
+              <span class="person-name">${props.person?.employee_name}</span>
             </div>
           </header>
           <footer class="person-detail-footer">
             <div class="person-detail-info">
               <span class="title">部门</span>
-              <span class="placeholder">${props.person?.department}</span>
+              <span class="placeholder">${props.person?.department_name}</span>
             </div>
             <div class="person-detail-info">
               <span class="title">邮箱</span>

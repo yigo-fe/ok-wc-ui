@@ -10,8 +10,8 @@ export * from './poper'
 
 const handleImage = (person: Person | undefined, definition = false) => {
   if (!person) return defaultImage
-  const resultImg = definition ? person.avatarBig : person.avatar
-  return resultImg || person.avatar || defaultImage
+  const resultImg = definition ? person.avatar_url : person.avatar_small
+  return resultImg || person.avatar_big || defaultImage
 }
 
 export { handleImage }
