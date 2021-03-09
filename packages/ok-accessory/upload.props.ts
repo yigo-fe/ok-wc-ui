@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-02-05 19:42:22
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-06 18:51:38
+ * @LastEditTime: 2021-03-09 18:33:16
  * @FilePath: /packages/ok-accessory/upload.props.ts
  */
 
@@ -125,11 +125,11 @@ const UploadProps = {
   },
   iconColor: {
     type: (String as unknown) as PropType<string>,
-    default: '#306eff',
+    default: '#6B66DC',
   },
   btnColor: {
     type: (String as unknown) as PropType<string>,
-    default: '#306eff',
+    default: '#6B66DC',
   },
 }
 

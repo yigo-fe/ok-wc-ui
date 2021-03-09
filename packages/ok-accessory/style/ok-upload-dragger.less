@@ -1,11 +1,13 @@
 
 .test{
-  color: #fff
+  background-color: transparent
 }
 
+@import url('../../assets/theme.less');
+
 .ok-upload-dragger{
-  background-color: #fff;
-  border: 1px dashed #d9d9d9;
+  background-color: @ok-white-color;
+  border: 1px dashed @ok-border-color-base;
   border-radius: 6px;
   box-sizing: border-box;
   width: 100%;
@@ -15,16 +17,15 @@
   position: relative;
   overflow: hidden;
   &:hover{
-    border-color: #409eff;
+    border-color: @ok-primary-color;
   }
   &.dragover {
     background-color: rgba(32, 159, 255, 0.06);
-    border: 2px dashed #409eff;
+    border: 2px dashed @ok-primary-color;
   }
 }
 
 .upload-tip{
-  
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -33,6 +34,6 @@
     padding: 0 30px;
     box-sizing: border-box;
   .upload-btn {
-    color:#1890ff ;
+    color:@ok-primary-color;
   }
 }

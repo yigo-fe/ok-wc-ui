@@ -1,18 +1,23 @@
 .test{
   background-color: transparent;
 }
+@import url('../../assets/theme.less');
+
 
 .ok-upload-image {
   display: inline-block;
-  background-color: #fbfdff;
-  border: 1px dashed #c0ccda;
+  background-color: @ok-white-color;
+  border: 1px dashed @ok-border-color-base;
   border-radius: 6px;
   box-sizing: border-box;
-  width: 148px;
-  height: 148px;
+  width: 100px;
+  height: 100px;
   cursor: pointer;
-  line-height: 146px;
+  line-height: 98px;
   vertical-align: top;
+  &:hover{
+    border-color: @ok-primary-color;
+  }
 
   .upload-img-icon{
     display: block;
@@ -40,11 +45,11 @@
   .ok-upload-list__item {
     overflow: hidden;
     background-color: #fff;
-    border: 1px solid #c0ccda;
+    border: 1px solid @ok-border-color-base;
     border-radius: 6px;
     box-sizing: border-box;
-    width: 148px;
-    height: 148px;
+    width: 100px;
+    height: 100px;
     margin: 0 8px 8px 0;
     display: inline-block;
     transition: all .5s cubic-bezier(.55,0,.1,1);
@@ -76,6 +81,9 @@
     transition: opacity .3s;
     &:hover {
       opacity: 1;
+    }
+    >i {
+      cursor: pointer;
     }
   }
 

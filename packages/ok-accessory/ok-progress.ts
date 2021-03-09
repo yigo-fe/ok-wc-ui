@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:09:30
  * @LastEditors: 付静
- * @LastEditTime: 2021-02-24 21:56:41
+ * @LastEditTime: 2021-03-09 19:49:59
  * @FilePath: /packages/ok-accessory/ok-progress.ts
  */
 
@@ -59,7 +59,7 @@ defineComponent(
           transition: width 0.6s ease;
         }
       </style>
-      <div class="ok-progress-bar__outer" style="width: 300px">
+      <div class="ok-progress-bar__outer" style="width: 100%">
         <div
           class="ok-progress-bar__inner"
           style=${styleMap({ width: `${width.value}` })}

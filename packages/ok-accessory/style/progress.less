@@ -2,6 +2,9 @@
 .test{
   background: transparent;
 }
+
+@import url('../../assets/theme.less');
+
 .ok-progress-bar__outer {
   height: 6px;
   border-radius: 100px;
@@ -15,7 +18,7 @@
   left: 0;
   top: 0;
   height: 100%;
-  background-color: #409eff;
+  background-color: @ok-primary-color;
   text-align: right;
   border-radius: 100px;
   line-height: 1;
@@ -25,6 +28,6 @@
     background-color: #67C23A;
   }
   &.fail {
-    background-color: #F56C6C;
+    background-color: @ok-error-color;
   }
 }

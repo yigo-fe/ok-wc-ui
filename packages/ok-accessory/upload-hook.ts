@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-08 17:03:35
+ * @LastEditTime: 2021-03-09 18:53:48
  * @FilePath: /packages/ok-accessory/upload-hook.ts
  */
 
@@ -219,7 +219,7 @@ export default function (props, context) {
   const handleDownload = data => {
     let file = fileLists.value.find(v => v.uid === data.detail.uid)
     if (file) {
-      window.open(file.response.data[0].download_url, '_blank')
+      // window.open(file.response.data[0].download_url, '_blank')
       // 处理用户自定义事件
       props.onDownload && props.onDownload(file)
     }

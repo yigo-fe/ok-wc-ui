@@ -1,3 +1,7 @@
+.t {
+  background-color: transparent;
+}
+@import url('../../assets/theme.less');
 .ok-upload {
   display: inline-block;
   width: 100%;
@@ -8,7 +12,6 @@
     outline: none;
   }
 }
-
 .upload-tip{
   display: flex;
   flex-direction: column;
@@ -18,7 +21,7 @@
   padding: 0 30px;
   box-sizing: border-box;
   .upload-btn {
-    color:#306eff;
+    color:@ok-primary-color;
   }
 }
 
@@ -30,8 +33,8 @@
   border-radius: 2px;
   text-align: center;
   &:hover{
-    background-color: #1890ff;
-    border-color: #1890ff;
+    background-color: @ok-primary-color;
+    border-color: @ok-primary-color;
     color: #fff;
   }
 }

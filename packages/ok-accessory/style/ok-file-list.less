@@ -3,6 +3,8 @@
   color: #fff;
 }
 
+@import url('../../assets/theme.less');
+
 .ok-file-list {
   margin: 0;
   padding: 0;
@@ -21,7 +23,7 @@
 .ok-file-list__item {
   transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
   font-size: 14px;
-  color: #606266;
+  color: @ok-file-list-color;
   line-height: 1;
   margin-top: 5px;
   position: relative;
@@ -32,12 +34,12 @@
 
 .ok-file-list--picture .ok-file-list__item {
   overflow: hidden;
-  background-color: #fff;
-  border: 1px solid #c0ccda;
+  background-color: @ok-white-color;
+  border: 1px solid @ok-border-color-base;
   border-radius: 6px;
   box-sizing: border-box;
-  width: 148px;
-  height: 148px;
+  width: 100px;
+  height: 100px;
   margin: 0 8px 8px 0;
   display: inline-block;
 }
@@ -45,22 +47,28 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  background: #f8f9fc;
+  background: @ok-file-list-bg-color;
   padding-left: 8px;
   padding-right: 8px;
   height: 31px;
   line-height: 31px;
   margin-top: 14px;
+  max-width: 100%;
 }
 
-.ok-file-list__item-name {
-  color: #606266;
+.ok-file-list__item_name {
+  color: @ok-file-list-color;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s;
+  max-width: calc(100% - 80px);
+}
+.ok-file-list__item_file_name {
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
-  transition: color 0.3s;
   white-space: nowrap;
+  max-width: calc(100% - 30px);
 }
 .ok-file-list__item .ok-icon-close {
   /* display: none; */
@@ -69,7 +77,7 @@
   right: 5px;
   cursor: pointer;
   opacity: 0.75;
-  color: #606266;
+  color: @ok-file-list-color;
   font-style: normal;
 
 }
@@ -92,7 +100,6 @@
   width: 24px;
   height: 24px;
   vertical-align: middle;
-  padding-bottom: 4px;
   margin-right: 6px;
 }
 
@@ -105,7 +112,7 @@
   line-height: 1;
   cursor: pointer;
   &:hover {
-    color: #409eff;
+    color: @ok-primary-color;
   }
   & +.file-icon-operate {
     margin-left: 12px;
