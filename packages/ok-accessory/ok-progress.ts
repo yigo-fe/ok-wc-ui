@@ -3,14 +3,12 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:09:30
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-09 19:49:59
+ * @LastEditTime: 2021-03-09 19:56:55
  * @FilePath: /packages/ok-accessory/ok-progress.ts
  */
 
 import { styleMap } from 'lit-html/directives/style-map'
 import { computed, defineComponent, html, PropType } from 'ok-lit'
-
-import okProgressCss from './style/progress.less'
 
 defineComponent(
   'ok-progress',

@@ -3,8 +3,8 @@
  * @Author: 付静
  * @Date: 2021-01-25 15:53:09
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-06 18:35:42
- * @FilePath: /packages/ok-accessory/ok-upload-draggercopy.ts
+ * @LastEditTime: 2021-03-09 19:57:04
+ * @FilePath: /packages/ok-accessory/ok-upload-dragger-vue.ts
  */
 
 import { defineComponent, html, onMounted, PropType } from 'ok-lit'
@@ -60,7 +60,7 @@ defineComponent(
                   if (/\/\*$/.test(acceptedType)) {
                     return baseType === acceptedType.replace(/\/\*$/, '')
                   }
-                  if (/^[^\/]+\/[^\/]+$/.test(acceptedType)) {
+                  if (/^[^/]+\/[^/]+$/.test(acceptedType)) {
                     return type === acceptedType
                   }
                   return false

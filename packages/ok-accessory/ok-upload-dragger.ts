@@ -57,7 +57,7 @@ defineComponent(
             if (/\/\*$/.test(acceptedType)) {
               return baseType === acceptedType.replace(/\/\*$/, '')
             }
-            if (/^[^\/]+\/[^\/]+$/.test(acceptedType)) {
+            if (/^[^/]+\/[^/]+$/.test(acceptedType)) {
               return type === acceptedType
             }
             return false

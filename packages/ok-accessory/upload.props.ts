@@ -1,16 +1,17 @@
+/* eslint-disable no-unused-vars */
 /*
  * @Descripttion:
  * @Author: 付静
  * @Date: 2021-02-05 19:42:22
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-09 18:33:16
+ * @LastEditTime: 2021-03-09 20:00:06
  * @FilePath: /packages/ok-accessory/upload.props.ts
  */
 
 import { PropType } from 'ok-lit'
 
 import ajax from './ajax'
-import type { FileHandler, ListType, OkFile, UploadStatus } from './upload.type'
+import type { FileHandler, ListType, OkFile } from './upload.type'
 
 type AjaxEventListener = (
   e: ProgressEvent,
@@ -19,14 +20,6 @@ type AjaxEventListener = (
 ) => unknown
 type Nullable<T> = T | null
 type PFileHandler<T> = PropType<FileHandler<T>>
-
-type UpdateFile = {
-  percentage?: number
-  status?: UploadStatus
-  response?: unknown
-  url?: string
-  raw?: OkFile
-}
 
 const UploadProps = {
   type: {
