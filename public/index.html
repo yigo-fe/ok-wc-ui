@@ -47,21 +47,24 @@
       <ok-person-cell class="person-cell"></ok-person-cell>
       <!-- 多人员list -->
       <!-- <ok-person-group ></ok-person-group> -->
+
+      <ok-person-card
+    ></ok-person-card>
       
     
 
-      <section style="display: none;" class="upload-demo">
+      <section  class="upload-demo">
         <h3>列表上传</h3>
-        <!-- <ok-upload-list></ok-upload-list> -->
+        <ok-upload-list></ok-upload-list>
         
         <h3>拖拽上传</h3>
-        <!-- <ok-upload-drag style="width: 500px;"></ok-upload-drag> -->
+        <ok-upload-drag style="width: 500px;"></ok-upload-drag>
 
         <h3>antd</h3>
         <!-- <ok-attachment-drag></ok-attachment-drag>  -->
 
         <h3>图片上传</h3>
-        <!-- <ok-upload-image style="width: 500px;"></ok-upload-image> -->
+        <ok-upload-image style="width: 500px;"></ok-upload-image>
       </section>
 
       <!-- <h3>文字多时</h3> -->
@@ -79,23 +82,22 @@
   </div>
   <!-- <script type="module" src="../dist/ok-wc-ui.umd.js"></script> -->
   <script>
-    // var action = 'https://test.yigowork.com/apps/api//v1/private/attachment/uploadAttachments'
-    // var actionImg = 'https://test.yigowork.com/apps/api//v1/private/attachment/uploadImages'
-    // var uploadData = {
-    //   deletable: false,
-    //   'app_id': 'app_imvtxorkbj',
-    //   'form_key': 'form_d3ilmshgbu',
-    //   'element_id': 'c3m9lvfatzqrvtaw'
-    // }
-    // const okUpload = document.querySelector('ok-upload-drag')
-    // okUpload.action = action
-    // okUpload.data = uploadData
-    // const okUploadList = document.querySelector('ok-upload-list')
-    // okUploadList.action = action
-    // okUploadList.data = uploadData
-    // const okAttachmentDrag = document.querySelector('ok-attachment-drag')
-    // okAttachmentDrag.action = action
-    // okAttachmentDrag.data = uploadData
+    // success
+	// cv3vj7pldi1gxo65
+
+  // 'app_id': 'app_imvtxorkbj',
+  //     'form_key': 'form_0wdfaktbsv',
+  //     'element_id': 'c8k95352g4qmvurx'
+
+    var action = 'https://huawei.yigowork.com/apps/api/v1/private/attachment/uploadAttachments'
+    var actionImg = 'https://huawei.yigowork.com/apps/api/v1/private/attachment/uploadImages'
+    var uploadData = {
+      deletable: false,
+      'app_id': 'app_7h13wiammq',
+      'form_key': 'form_molm8sjngo',
+      'element_id': 'ck6bmtiqjnks36em'
+    }
+
 
     // const okUploadImg = document.querySelector('ok-upload-image')
     // okUploadImg.action = actionImg
@@ -115,8 +117,27 @@
       tenant_id: "test"
     }
 
-    const okPersonCell = document.querySelector('ok-person-cell')
-    okPersonCell.personInfo = personInfo
+   
+
+
+    window.onload = ()=>{
+      const okUpload = document.querySelector('ok-upload-drag')
+      okUpload.action = action
+      okUpload.data = uploadData
+      const okUploadList = document.querySelector('ok-upload-list')
+      okUploadList.action = action
+      okUploadList.data = uploadData
+      okUploadList.multiple = true
+      // const okAttachmentDrag = document.querySelector('ok-attachment-drag')
+      // okAttachmentDrag.action = action
+      // okAttachmentDrag.data = uploadData
+
+      const okPersonCell = document.querySelector('ok-person-cell')
+      okPersonCell.personInfo = personInfo
+      const okPersonCard = document.querySelector('ok-person-card')
+      okPersonCard.personInfo = personInfo
+    }
+
 
   </script>
 </body>

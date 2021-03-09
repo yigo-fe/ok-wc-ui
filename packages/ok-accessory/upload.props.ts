@@ -3,20 +3,14 @@
  * @Author: 付静
  * @Date: 2021-02-05 19:42:22
  * @LastEditors: 付静
- * @LastEditTime: 2021-02-25 20:10:21
+ * @LastEditTime: 2021-03-06 18:51:38
  * @FilePath: /packages/ok-accessory/upload.props.ts
  */
 
 import { PropType } from 'ok-lit'
 
 import ajax from './ajax'
-import type {
-  FileHandler,
-  ListType,
-  OkFile,
-  UploadFile,
-  UploadStatus,
-} from './upload.type'
+import type { FileHandler, ListType, OkFile, UploadStatus } from './upload.type'
 
 type AjaxEventListener = (
   e: ProgressEvent,
@@ -69,8 +63,8 @@ const UploadProps = {
     default: '',
   },
   fileList: {
-    type: (Array as unknown) as PropType<UploadFile[]>,
-    default: () => [] as UploadFile[],
+    type: (Array as unknown) as PropType<[]>,
+    default: () => [],
   },
   autoUpload: {
     type: (Boolean as unknown) as PropType<boolean>,
@@ -128,6 +122,14 @@ const UploadProps = {
   },
   onDownload: {
     type: (Function as unknown) as PropType<(file: File) => void>,
+  },
+  iconColor: {
+    type: (String as unknown) as PropType<string>,
+    default: '#306eff',
+  },
+  btnColor: {
+    type: (String as unknown) as PropType<string>,
+    default: '#306eff',
   },
 }
 

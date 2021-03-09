@@ -1,4 +1,5 @@
 // import { Person } from '@c/ok-wc-ui.d'
+
 import { defineComponent, html, onMounted } from 'ok-lit'
 import { createApp, ref } from 'vue'
 
@@ -138,6 +139,12 @@ defineComponent(
       type: String,
       default: 'small',
     },
+    toOpenId: {
+      type: String,
+    },
+    isAwaken: {
+      type: Boolean,
+    },
   },
   (props, context) => {
     onMounted(() => {
@@ -146,22 +153,23 @@ defineComponent(
           const {
             textStyle,
             openApp,
-            userName,
-            btnText,
-            btnIcon,
             showTeam,
+            langPack,
+            personInfoCom,
+            showSendBtn,
           } = usePersonCardHandle(props)
 
           return {
-            personInfoCom: ref(props.personInfo),
+            personInfoCom,
             textStyle,
             openApp,
-            userName,
             maleIcon,
             femaleIcon,
-            btnText,
-            btnIcon,
             showTeam,
+            msgRelationType: ref(props.msgRelationType),
+            langPack,
+            showSendBtn,
+            i18n: ref(props.i18n),
           }
         },
         template: `
@@ -178,7 +186,7 @@ defineComponent(
               showMask
             ></ok-avatar>
             <span class="user-name-wraper">
-              <span class="person-card-name">{{userName}}</span>
+              <span class="person-card-name">{{personInfoCom['name'][i18n]}}</span>
               <img v-if="personInfoCom.gender ==2" :src="femaleIcon" class="gender-icon" />
               <img v-else :src="maleIcon" class="gender-icon" />
             </span>
@@ -187,19 +195,19 @@ defineComponent(
           <footer class="person-detail-footer">
             <div class="content-wraper">
               <div v-if="!personInfoCom.terminated && showTeam" class="item-row">
-                  <span class="item-label">部门：</span>
+                  <span class="item-label">{{langPack.team}}：</span>
                   <p class="item-content">{{ personInfoCom.department_name || '--'}}</p>
               </div>
               <div class="item-row">
-                  <span class="item-label">邮箱：</span>
+                  <span class="item-label">{{langPack.email}}：</span>
                   <p class="item-content">{{ personInfoCom.email || '--'}}</p>
               </div>
             </div>
             <slot name="footer-button">
-              <div class="btn-wraper" v-if="personInfoCom.msg_relation_type || props.msgRelationType">
+              <div class="btn-wraper" v-if="showSendBtn">
                 <div @click="openApp" class="person-detail-button">
-                <img :src='btnIcon' class="btnIcon" />
-                {{btnText}}
+                <img :src='langPack.sendIcon' class="btnIcon" />
+                {{langPack.sendLark}}
                 </div>
               </div>
             </slot>

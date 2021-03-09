@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-01 19:59:15
+ * @LastEditTime: 2021-03-08 15:43:58
  * @FilePath: /packages/ok-accessory/ok-upload-image.ts
  */
 
@@ -34,7 +34,7 @@
  *
  */
 
-import { defineComponent, html } from 'ok-lit'
+import { defineComponent, effect, html } from 'ok-lit'
 
 import CDN_PATH from '../path.config'
 import okUploadImgCss from './style/ok-upload-image.less'
@@ -46,7 +46,6 @@ defineComponent(
     ...UploadProps,
   },
   (props, context) => {
-    console.log(props)
     const {
       fileLists,
       displayFileList,
@@ -55,7 +54,9 @@ defineComponent(
       handleDetele,
       handleDownload,
     } = useFileHandle(props, context)
-    displayFileList()
+    effect(() => {
+      displayFileList()
+    })
     /**
      * 列表上传，点击选择文件
      */
@@ -102,7 +103,23 @@ defineComponent(
         .listType=${props.listType}
       ></ok-file-image>
       <div class="ok-upload ok-upload-image" @click=${handleClick}>
-        <span class="upload-img-icon pro-app-page page-addition"> </span>
+        <svg
+          t="1615189238946"
+          class="upload-img-icon"
+          viewBox="0 0 1024 1024"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          p-id="24594"
+          width="40"
+          height="40"
+        >
+          <path
+            d="M469.333333 469.333333V85.333333h85.333334v384h384v85.333334H554.666667v384h-85.333334V554.666667H85.333333v-85.333334z"
+            p-id="24595"
+            fill="#d9d9d9"
+          ></path>
+        </svg>
+        <!-- <span class="upload-img-icon pro-app-page page-addition"> </span> -->
         <input
           style="display: none"
           ref="inputRef"

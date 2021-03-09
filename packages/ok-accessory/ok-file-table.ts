@@ -3,15 +3,16 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-02-26 17:27:34
+ * @LastEditTime: 2021-03-08 17:03:06
  * @FilePath: /packages/ok-accessory/ok-file-table.ts
  */
 
 import { Button, Table } from 'ant-design-vue'
-import { defineComponent, html, onMounted, PropType } from 'ok-lit'
+import { computed, defineComponent, html, onMounted, PropType } from 'ok-lit'
 import { createApp, ref } from 'vue'
 
 import CDN_PATH from '../path.config'
+import okFileTableCss from './style/ok-file-table.less'
 import type { ListType, UploadFile } from './upload.type'
 defineComponent(
   'ok-file-table',
@@ -35,7 +36,13 @@ defineComponent(
     onMounted(() => {
       const options = {
         setup() {
-          const fileList = ref(props.fileList)
+          const fileList = computed(() => {
+            return props.fileList.map((file: any) => {
+              const time = file.response?.data[0]?.create_time
+              file.uploadTime = time ? new Date(time).toLocaleDateString() : ''
+              return file
+            })
+          })
 
           const columns = ref([
             {
@@ -50,8 +57,7 @@ defineComponent(
             },
             {
               title: '上传时间',
-              dataIndex: 'create_time',
-              slots: { customRender: 'time' },
+              dataIndex: 'uploadTime',
             },
             {
               title: '操作',
@@ -75,6 +81,11 @@ defineComponent(
           const handleDownload = (file: UploadFile) => {
             context.emit('download', file)
           }
+          console.log('fileList', fileList.value)
+
+          const getCreatTime = (item: any) => {
+            return item.response?.data[0]?.create_time
+          }
 
           return {
             columns,
@@ -82,12 +93,11 @@ defineComponent(
             handleDelete,
             handlePreview,
             handleDownload,
+            getCreatTime,
           }
         },
         template: `
-          <a-table v-if="fileList.length" :dataSource="fileList" :columns="columns">
-
-
+          <a-table class="ok-upload-list-table" v-if="fileList.length" :dataSource="fileList" :columns="columns">
             <template #type="{ record }">
               <span>
               {{
@@ -99,14 +109,14 @@ defineComponent(
             </template>
             <template #time="{ record }">
               <span>
-
+               {{record.response?.data[0]?.create_time}}
               </span>
             </template>
             <template #action="{ record }">
               <span>
                 <a-button type="link" @click="handleDownload(record)">下载</a-button>
                 <a-button type="link" @click="handlePreview(record)">预览</a-button>
-                <a-button type="link" @click="handleRemove(record)">删除</a-button>
+                <a-button type="link" @click="handleDelete(record)">删除</a-button>
               </span>
             </template>
           </a-table>
@@ -119,8 +129,11 @@ defineComponent(
     })
 
     return () => html`
+      <style>
+        ${okFileTableCss}
+      </style>
       <link rel="stylesheet" .href="${CDN_PATH}antd.min.css" />
-      <div ref="okProcess" class="ok-process-warp"></div>
+      <div ref="okProcess" class="ok-file-table"></div>
     `
   }
 )

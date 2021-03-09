@@ -62,9 +62,10 @@ class PopoverOptions {
     this.duration = props?.duration ?? 200
     this.arrow = props?.arrow ?? true
     this.delay = props?.delay ?? 0
-    this.trigger = props?.trigger ?? undefined
+    // this.trigger = props?.trigger ?? undefined
+    this.trigger = 'click'
     this.hideOnClick = props?.hideOnClick ?? false
-    this.offset = props?.offset ?? [0, 0]
+    this.offset = props?.offset ?? [0, 10]
     this.interactive = props?.interactive ?? true
     this.popperOptions = props?.popperOptions
   }
@@ -126,6 +127,7 @@ const getSingleton = (
     arrow: false,
     appendTo: 'parent',
     theme: 'ok-ui',
+    trigger: 'click',
   })
 
   return singleton

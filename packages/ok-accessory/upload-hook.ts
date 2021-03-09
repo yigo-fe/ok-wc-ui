@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-01 17:43:50
+ * @LastEditTime: 2021-03-08 17:03:35
  * @FilePath: /packages/ok-accessory/upload-hook.ts
  */
 
@@ -51,15 +51,17 @@ export default function (props, context) {
   let fileId = 0
   const fileLists = ref([] as any)
 
+  // 仅限于fileList 回显
   const displayFileList = () => {
     props.fileList.forEach(file => {
-      fileLists.push({
-        name: file.name,
+      fileLists.value.push({
+        name: file.file_name,
         percentage: 100,
         status: 'success',
         size: file.size,
         uid: fileId,
         raw: file,
+        response: { data: [file] },
       })
       fileId++
     })
@@ -138,7 +140,11 @@ export default function (props, context) {
         handleProgress(e, rawFile)
       },
       onSuccess: (res: any) => {
-        handleSuccess(res, rawFile)
+        if (res.code === '000000') {
+          handleSuccess(res, rawFile)
+        } else {
+          handleError(res, rawFile)
+        }
         delete reqs.value[uid]
       },
       onError: (err: any) => {
@@ -161,7 +167,6 @@ export default function (props, context) {
 
   const handleSuccess = (res, file: OkFile) => {
     // todo 处理返回字段路径问题
-    // res.data[0].online_view_url = 'http:' + res.data[0].online_view_url
     updateStatus({ status: 'success', response: res }, file)
     handleOnChange(file)
     // 处理用户自定义事件
@@ -169,7 +174,11 @@ export default function (props, context) {
   }
 
   const handleError = (err, file: OkFile) => {
+    // 更新状态
     updateStatus({ status: 'fail' }, file)
+    // 从列表中删除 TODO: 具体交互待产品确认
+    fileLists.value = fileLists.value.filter(v => v.uid !== file.uid)
+    // 触发onchange
     handleOnChange(file)
     // 处理用户自定义事件
     props.onSuccess && props.onSuccess(err, file, fileLists.value)
