@@ -50,10 +50,14 @@
   background: @ok-file-list-bg-color;
   padding-left: 8px;
   padding-right: 8px;
-  height: 31px;
-  line-height: 31px;
+  height: 36px;
+  line-height: 36px;
   margin-top: 14px;
   max-width: 100%;
+  border-radius: 4px;
+  &:hover {
+    background-color: @ok-file-list-bg-color-hover;
+  }
 }
 
 .ok-file-list__item_name {
@@ -61,7 +65,7 @@
   display: flex;
   align-items: center;
   transition: color 0.3s;
-  max-width: calc(100% - 80px);
+  flex: 1;
 }
 .ok-file-list__item_file_name {
   display: block;
@@ -71,7 +75,6 @@
   max-width: calc(100% - 30px);
 }
 .ok-file-list__item .ok-icon-close {
-  /* display: none; */
   position: absolute;
   top: 3px;
   right: 5px;
@@ -106,9 +109,12 @@
 .item-operation {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
 }
 
 .file-icon-operate {
+  display: flex;
+  align-items: center;
   line-height: 1;
   cursor: pointer;
   &:hover {

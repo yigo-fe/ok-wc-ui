@@ -3,8 +3,8 @@
  * @Author: 付静
  * @Date: 2021-03-03 15:31:09
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-04 09:58:49
- * @FilePath: /packages/ok-user/hook.ts
+ * @LastEditTime: 2021-03-10 13:34:03
+ * @FilePath: /packages/ok-avatar/hook.ts
  */
 import { computed, effect, ref } from 'ok-lit'
 
@@ -157,7 +157,8 @@ export default function (props) {
   }
 
   effect(() => {
-    getAvatarStyle()
+    if (props.personInfo?.employee_name || props.personInfo?.name)
+      getAvatarStyle()
   })
 
   return {

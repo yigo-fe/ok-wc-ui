@@ -1,6 +1,6 @@
 import { setPopover } from '@c/utils'
 import axios from 'axios'
-import { defineComponent, effect, html, onMounted, ref } from 'ok-lit'
+import { defineComponent, html, onMounted, ref } from 'ok-lit'
 
 import okAvatarCss from '../assets/ok-avatar.less'
 // import { personInfo } from '../mock'
@@ -17,19 +17,6 @@ defineComponent(
     ...props,
   },
   (props, contxt) => {
-    onMounted(() => {
-      setPopover(
-        contxt.$refs['ok-avatar'] as HTMLElement,
-        contxt.$refs['person-card'] as HTMLElement,
-        {
-          appendTo: document.body,
-          popperOptions: {
-            strategy: 'fixed',
-          },
-        }
-      )
-    })
-
     const toOpenId = ref('')
     const isAwaken = ref(false)
     const checkLardShow = (id: string) => {
@@ -49,7 +36,8 @@ defineComponent(
         })
     }
 
-    effect(() => {
+    const onTrigger = () => {
+      if (toOpenId.value) return
       const personInfo: any = props.personInfo
       const id =
         personInfo.employee_id ||
@@ -58,13 +46,26 @@ defineComponent(
         personInfo.employee_number
 
       id && checkLardShow(id)
+    }
+    onMounted(() => {
+      setPopover(
+        contxt.$refs['ok-person-trigger'] as HTMLElement,
+        contxt.$refs['person-card'] as HTMLElement,
+        {
+          appendTo: document.body,
+          popperOptions: {
+            strategy: 'fixed',
+          },
+          onTrigger: onTrigger,
+        }
+      )
     })
 
     return () => html`
       <style>
         ${okAvatarCss}
       </style>
-      <span ref="ok-avatar" class="ok-avatar">
+      <span ref="ok-person-trigger" class="ok-person-cell">
         <slot>
           <ok-avatar
             .personInfo=${props.personInfo}

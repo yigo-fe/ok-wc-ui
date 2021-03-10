@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-08 16:06:21
+ * @LastEditTime: 2021-03-10 16:17:09
  * @FilePath: /packages/ok-accessory/ok-upload-list.ts
  */
 
@@ -47,6 +47,10 @@ defineComponent(
   (props, context) => {
     const {
       fileLists,
+      showPreview,
+      showDownload,
+      showRemove,
+      hideUploader,
       displayFileList,
       uploadFiles,
       handlePreview,
@@ -78,36 +82,46 @@ defineComponent(
       uploadFiles(files)
     }
 
+    const renderUploader = () => {
+      if (!hideUploader.value)
+        return html`
+          <div
+            class="ok-upload ok-upload--${props.listType}"
+            tabindex="0"
+            @click=${handleClick}
+          >
+            <slot>
+              <div class="ok-upload-list-btn">点击上传</div>
+            </slot>
+            <input
+              style="display: none"
+              ref="inputRef"
+              class="ok-upload__input"
+              type="file"
+              .name=${props.name}
+              .multiple=${props.multiple}
+              .accept=${props.accept}
+              @change=${handleChange}
+            />
+          </div>
+        `
+    }
+
     return () => html`
       <style>
         ${okUploadCss}
       </style>
 
-      <div
-        class="ok-upload ok-upload--${props.listType}"
-        tabindex="0"
-        @click=${handleClick}
-      >
-        <slot>
-          <div class="ok-upload-tip">点击上传</div>
-        </slot>
-        <input
-          style="display: none"
-          ref="inputRef"
-          class="ok-upload__input"
-          type="file"
-          .name=${props.name}
-          .multiple=${props.multiple}
-          .accept=${props.accept}
-          @change=${handleChange}
-        />
-      </div>
+      ${renderUploader()}
       <ok-file-table
         @preview=${handlePreview}
         @delete=${handleDetele}
         @download=${handleDownload}
         .fileList=${fileLists.value}
         .listType=${props.listType}
+        .showPreview=${showPreview.value}
+        .showDownload=${showDownload.value}
+        .showRemove=${showRemove.value}
       ></ok-file-table>
     `
   }

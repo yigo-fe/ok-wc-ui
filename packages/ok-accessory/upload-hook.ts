@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-09 18:53:48
+ * @LastEditTime: 2021-03-10 14:02:32
  * @FilePath: /packages/ok-accessory/upload-hook.ts
  */
 
@@ -34,7 +34,7 @@
  *
  */
 
-import { ref } from 'ok-lit'
+import { computed, ref } from 'ok-lit'
 
 import type { OkFile, UploadStatus } from './upload.type'
 
@@ -50,6 +50,7 @@ export default function (props, context) {
   const reqs = ref({})
   let fileId = 0
   const fileLists = ref([] as any)
+  const maxSize = computed(() => props.maxSize * 1024 + 1)
 
   // 仅限于fileList 回显
   const displayFileList = () => {
@@ -67,6 +68,14 @@ export default function (props, context) {
     })
   }
 
+  const fileCheck = file => {
+    if (props.maxSize) {
+      return file.size < maxSize
+    } else {
+      return true
+    }
+  }
+
   /**
    *  文件上传前数据处理：判断limit, multiple; 添加UID; beforeUpload 钩子处理
    * @param files 本次要上传的文件
@@ -76,8 +85,6 @@ export default function (props, context) {
       props.limit &&
       Number(fileLists.value.length + files.length) > Number(props.limit)
     ) {
-      // props.onExceed(files, props.fileList)
-      console.warn('exceed')
       handleExceed(files)
       return
     }
@@ -90,14 +97,21 @@ export default function (props, context) {
     }
     postFiles.forEach(rawFile => {
       let file = rawFile as OkFile
+      // 检查文件大小是否符合条件
+      if (!fileCheck(file)) return
       file.uid = fileId
       fileId++
       handleFileList(file)
       // props.onStart(rawFile)
       handleOnChange(file)
-      // todo before-upload
-      // 开始上传
-      if (props.autoUpload) upload(file as OkFile)
+      // before-upload
+      if (
+        !props.beforeUpload ||
+        (props.beforeUpload && props.beforeUpload(file))
+      ) {
+        // 开始上传
+        if (props.autoUpload) upload(file as OkFile)
+      }
     })
   }
 
@@ -250,8 +264,18 @@ export default function (props, context) {
       curFile[key] = data[key]
     })
   }
+
+  const showPreview = computed(() => props.operation.includes('preview'))
+  const showDownload = computed(() => props.operation.includes('download'))
+  const showRemove = computed(() => props.operation.includes('remove'))
+  const hideUploader = computed(() => props.hideUploader)
+
   return {
+    showPreview,
+    showDownload,
+    showRemove,
     fileLists,
+    hideUploader,
     displayFileList,
     uploadFiles,
     handlePreview,

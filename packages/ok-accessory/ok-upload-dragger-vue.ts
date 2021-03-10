@@ -116,7 +116,7 @@ defineComponent(
               fill="#1296db"
             ></path>
           </svg>
-              将文件拖拽至此，或<span class="upload-btn">点击上传</span>
+          将文件拖到此处或 <span class="upload-btn">点击上传</span>
             </div>
           </div>
         `,

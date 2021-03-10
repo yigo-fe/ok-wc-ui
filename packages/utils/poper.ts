@@ -18,6 +18,7 @@ import tippy, {
  * @offset 偏移量
  */
 class PopoverOptions {
+  public onTrigger?: (instance: Instance, event: MouseEvent) => void
   public placement?: POPOVER_PLACEMENT
   // public delayShow: number
   public popperOptions?: {
@@ -67,6 +68,7 @@ class PopoverOptions {
     this.offset = props?.offset ?? [0, 10]
     this.interactive = props?.interactive ?? true
     this.popperOptions = props?.popperOptions
+    this.onTrigger = props?.onTrigger
   }
 }
 

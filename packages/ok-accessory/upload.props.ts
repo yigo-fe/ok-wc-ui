@@ -4,7 +4,7 @@
  * @Author: 付静
  * @Date: 2021-02-05 19:42:22
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-09 20:00:06
+ * @LastEditTime: 2021-03-10 14:01:22
  * @FilePath: /packages/ok-accessory/upload.props.ts
  */
 
@@ -123,6 +123,14 @@ const UploadProps = {
   btnColor: {
     type: (String as unknown) as PropType<string>,
     default: '#6B66DC',
+  },
+  operation: {
+    type: (Array as unknown) as PropType<string[]>,
+    default: () => ['preview', 'download', 'remove'],
+  },
+  hideUploader: {
+    type: (Boolean as unknown) as PropType<boolean>,
+    default: false,
   },
 }
 

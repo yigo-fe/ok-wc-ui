@@ -3,19 +3,19 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-10 13:15:16
- * @FilePath: /packages/ok-accessory/ok-file-table.ts
+ * @LastEditTime: 2021-03-10 10:26:44
+ * @FilePath: /packages/ok-accessory/ok-file-list.ts
  */
 
-import { Button, Table } from 'ant-design-vue'
 import { computed, defineComponent, html, onMounted, PropType } from 'ok-lit'
-import { createApp, ref } from 'vue'
+import { createApp } from 'vue'
 
+import fileIcon from '../assets/images/file.svg'
 import CDN_PATH from '../path.config'
-import okFileTableCss from './style/ok-file-table.less'
+import okUploadListCss from './style/ok-file-list.less'
 import type { ListType, UploadFile } from './upload.type'
 defineComponent(
-  'ok-file-table',
+  'ok-file-list',
   {
     fileList: {
       type: (Array as unknown) as PropType<UploadFile[]>,
@@ -45,39 +45,7 @@ defineComponent(
     onMounted(() => {
       const options = {
         setup() {
-          const fileList = computed(() => {
-            return props.fileList.map((file: any) => {
-              const time = file.response?.data[0]?.create_time
-              file.uploadTime = time ? new Date(time).toLocaleDateString() : ''
-              return file
-            })
-          })
-          const showPreview = computed(() => props.showPreview)
-          const showDownload = computed(() => props.showDownload)
-          const showRemove = computed(() => props.showRemove)
-
-          const columns = ref([
-            {
-              title: '附件名称',
-              dataIndex: 'name',
-              key: 'file_name',
-            },
-            {
-              title: '附件类型',
-              dataIndex: 'type',
-              slots: { customRender: 'type' },
-            },
-            {
-              title: '上传时间',
-              dataIndex: 'uploadTime',
-            },
-            {
-              title: '操作',
-              dataIndex: 'action',
-              slots: { customRender: 'action' },
-            },
-          ])
-
+          const fileList = computed(() => props.fileList)
           /**
            * 点击删除文件
            * @param file 要删除的文件
@@ -94,46 +62,26 @@ defineComponent(
             context.emit('download', file)
           }
 
-          const getCreatTime = (item: any) => {
-            return item.response?.data[0]?.create_time
-          }
+          const filelistIcon = fileIcon
 
           return {
-            columns,
+            filelistIcon,
             fileList,
-            showPreview,
-            showDownload,
-            showRemove,
             handleDelete,
             handlePreview,
             handleDownload,
-            getCreatTime,
           }
         },
         template: `
-          <a-table 
-            v-if="fileList.length" 
-            class="ok-upload-list-table"
-            :dataSource="fileList" 
-            :columns="columns" 
-            :pagination="false">
-            <template #type="{ record }">
-              <span>
-              {{
-                record.name.split('.')[
-                  record.name.split('.').length - 1
-                ]
-              }}
+          <li v-for="item in fileList" class="ok-file-list__item">
+            <div class="item-detail">
+              <span class="ok-file-list__item_name">
+                <img class="fileIcon" :src="filelistIcon" />
+                <span class="ok-file-list__item_file_name">{{item.name}}</span>
               </span>
-            </template>
-            <template #time="{ record }">
-              <span>
-               {{record.response?.data[0]?.create_time}}
-              </span>
-            </template>
-            <template #action="{ record }">
-              <span class="ok-upload-list__item-actions">
-                <i class="file-icon-operate" v-if="showPreview" @click="handlePreview(record)">
+
+              <div class="item-operation">
+                <i class="file-icon-operate" @click="handlePreview(item)">
                   <svg
                     t="1615028632085"
                     class="icon"
@@ -151,11 +99,14 @@ defineComponent(
                     ></path>
                   </svg>
                 </i>
-
-                <a class="file-icon-operate" v-if="showDownload"  
-                  :href="record.response && record.response.data ? record.response.data[0].download_url : ''"
+  
+                <a
+                  @click="handleDownload(item)"
+                  class="file-icon-operate"
+                  :href="item.response && item.response.data ? item.response.data[0].download_url : ''"
                   download
-                  @click="handleDownload(record)">
+                  class="el-upload-list__item-download"
+                >
                   <svg
                     t="1615028599608"
                     class="icon"
@@ -173,8 +124,8 @@ defineComponent(
                     ></path>
                   </svg>
                 </a>
-
-                <i class="file-icon-operate" v-if="showRemove" @click="handleDelete(record)">
+  
+                <i class="file-icon-operate" @click="handleDelete(item)">
                   <svg
                     t="1615028657246"
                     class="icon"
@@ -190,25 +141,36 @@ defineComponent(
                       p-id="24469"
                       fill="#6B66DC"
                     ></path>
-                  </svg> 
+                  </svg>
                 </i>
-              </span>
-            </template>
-          </a-table>
+              </div>
+              
+            </div>
+
+            <ok-progress
+              v-if="item.status === 'uploading'"
+              :percentage="item.percentage"
+              :status="item.status"
+            ></ok-progress>
+          
+          </li>
         `,
       }
       const app = createApp(options)
-      app.use(Table)
-      app.use(Button)
-      app.mount(context.$refs.okProcess as HTMLElement)
+      app.mount(context.$refs.okFileList as HTMLElement)
     })
 
     return () => html`
       <style>
-        ${okFileTableCss}
+        ${okUploadListCss}
       </style>
-      <link rel="stylesheet" .href="${CDN_PATH}antd.min.css" />
-      <div ref="okProcess" class="ok-file-table"></div>
+      <link rel="stylesheet" .href="${CDN_PATH}common.css" />
+      <ul
+        ref="okFileList"
+        class="ok-file-list ok-file-list--${props.listType} ${props.disabled
+          ? 'is-disabled'
+          : ''}"
+      ></ul>
     `
   }
 )

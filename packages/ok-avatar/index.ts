@@ -3,8 +3,8 @@
  * @Author: 付静
  * @Date: 2021-02-18 16:01:20
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-04 15:08:41
- * @FilePath: /packages/ok-user/index.ts
+ * @LastEditTime: 2021-03-10 13:36:19
+ * @FilePath: /packages/ok-avatar/index.ts
  */
 import { defineComponent, html, onMounted } from 'ok-lit'
 import { createApp } from 'vue'
@@ -54,6 +54,6 @@ defineComponent(
       app.mount(context.$refs.showUser as HTMLElement)
     })
 
-    return () => html` <div ref="showUser" class="ok-user"></div> `
+    return () => html` <span ref="showUser" class="ok-user"></span> `
   }
 )

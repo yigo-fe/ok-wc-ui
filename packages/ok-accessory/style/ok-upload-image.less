@@ -3,12 +3,17 @@
 }
 @import url('../../assets/theme.less');
 
+// 处理error style
+.ant-form-item-control.has-error .ok-upload-image{
+  border-color: @ok-error-color;
+}
+
 
 .ok-upload-image {
   display: inline-block;
   background-color: @ok-white-color;
-  border: 1px dashed @ok-border-color-base;
-  border-radius: 6px;
+  border: 1px solid @ok-border-color-base;
+  border-radius: @ok-border-radius-base;
   box-sizing: border-box;
   width: 100px;
   height: 100px;
@@ -86,8 +91,10 @@
       cursor: pointer;
     }
   }
+}
 
-
+.image-progress {
+  width: 100%;
 }
 
 .ok-process-wraper {
