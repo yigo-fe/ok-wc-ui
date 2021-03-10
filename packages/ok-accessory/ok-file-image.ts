@@ -10,7 +10,6 @@
 import { computed, defineComponent, html, onMounted, PropType } from 'ok-lit'
 import { createApp } from 'vue'
 
-import CDN_PATH from '../path.config'
 import okUploadImgCss from './style/ok-upload-image.less'
 import type { ListType, UploadFile } from './upload.type'
 defineComponent(

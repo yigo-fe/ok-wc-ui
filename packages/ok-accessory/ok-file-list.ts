@@ -3,13 +3,12 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-10 16:01:43
+ * @LastEditTime: 2021-03-10 17:04:20
  * @FilePath: /packages/ok-accessory/ok-file-list.ts
  */
 
 import { defineComponent, html, PropType } from 'ok-lit'
 
-import fileIcon from '../assets/images/file.svg'
 import CDN_PATH from '../path.config'
 import okUploadListCss from './style/ok-file-list.less'
 import type { ListType, UploadFile } from './upload.type'
