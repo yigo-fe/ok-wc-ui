@@ -60,6 +60,13 @@
         <h3>图片上传</h3>
         <ok-upload-image style="width: 500px;"></ok-upload-image>
 
+        <h3>人员选择tree</h3>
+        <ok-employee-select class="ok-employee-tree" mode="tree" placeholder="请选择" style="width: 300px;display: block;"></ok-employee-select>
+
+        <!-- <h3>人员选择select-antd</h3> -->
+        <!-- <ok-employee-select class="ok-employee-input" placeholder="请选择" style="width: 300px;display: block;"></ok-employee-select> -->
+
+
       </section>
 
       <!-- <h3>文字多时</h3> -->
@@ -142,6 +149,14 @@
       okPersonCell.personInfo = personInfo
       const okPersonCard = document.querySelector('ok-person-card')
       okPersonCard.personInfo = personInfo
+
+
+      const okEmployeeInput = document.querySelector('.ok-employee-tree')
+      okEmployeeInput.value = ["FanShuai", "LiTao"]
+      okEmployeeInput.range = ["FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing']
+      okEmployeeInput.update = (val)=>{
+        console.log('update-index',val)
+      }
     }
 
 

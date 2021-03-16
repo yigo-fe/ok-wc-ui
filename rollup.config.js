@@ -107,7 +107,5 @@ const createConfig = format => {
   }
 }
 
-// const formats = isPrd ? ['esm', 'cjs', 'umd'] : ['umd']
-const formats = isPrd ? ['esm', 'umd'] : ['umd']
-
+const formats = isPrd ? ['esm', 'cjs', 'umd'] : ['umd']
 export default () => formats.map(createConfig)

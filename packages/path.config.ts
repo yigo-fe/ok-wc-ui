@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-02-20 19:58:14
  * @LastEditors: 付静
- * @LastEditTime: 2021-02-25 10:44:18
+ * @LastEditTime: 2021-03-12 17:09:05
  * @FilePath: /packages/path.config.ts
  */
 const CDN_PATH =

@@ -1,8 +1,8 @@
 import { setPopover } from '@c/utils'
-import axios from 'axios'
 import { defineComponent, html, onMounted, ref } from 'ok-lit'
 
 import okAvatarCss from '../assets/ok-avatar.less'
+import { apiInit } from '../services/api'
 // import { personInfo } from '../mock'
 /**
  * person: {Person} 用户信息
@@ -17,23 +17,18 @@ defineComponent(
     ...props,
   },
   (props, contxt) => {
+    const api = apiInit()
     const toOpenId = ref('')
     const isAwaken = ref(false)
-    const checkLardShow = (id: string) => {
-      const w: any = window
-      axios
-        .post(`${w.larkUrl}/api/v1/private/user/getInfoByEmpId`, {
-          emp_id: id,
-        })
-        .then(res => {
-          let resData = res.data
-          if (resData.code === '000000') {
-            const fromOpenId = resData.data.from_open_id
-            toOpenId.value = resData.data.to_open_id
-            isAwaken.value = Boolean(fromOpenId && toOpenId.value)
-            console.log('isAwaken.value', isAwaken.value)
-          }
-        })
+
+    const checkLardShow = async (id: string) => {
+      const result = await api.default.GetInfoByEmpId({ emp_id: id })
+
+      if (result.code === '000000') {
+        const fromOpenId = result.data.from_open_id
+        toOpenId.value = result.data.to_open_id
+        isAwaken.value = Boolean(fromOpenId && toOpenId.value)
+      }
     }
 
     const onTrigger = () => {
