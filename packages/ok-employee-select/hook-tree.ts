@@ -3,18 +3,17 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:57:52
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-16 10:59:27
+ * @LastEditTime: 2021-03-17 16:39:35
  * @FilePath: /packages/ok-employee-select/hook-tree.ts
  */
 import { debounce } from 'lodash'
 import { effect } from 'ok-lit'
 import { computed, ref, watch } from 'vue'
+
 // 根据部门查询部门下直属人员
-const URL =
-  'https://test.yigowork.com/ego_app/api/v1/private/user/searchUserInfo'
-
-import axios from 'axios'
-
+// const URL =
+//   'https://test.yigowork.com/ego_app/api/v1/private/user/searchUserInfo'
+// import axios from 'axios'
 import folder from '../assets/file-icon/icon_file-folder_colorful.svg'
 import checked from '../assets/images/checked.svg'
 import close from '../assets/images/closed.svg'
@@ -26,10 +25,11 @@ export default function (props: any, context: any) {
   const placeholder = computed(() => props.placeholder)
   const isDisabled = computed(() => props.disabled)
   const multiple = computed(() => props.multiple)
+  const range = computed(() => props.range)
+  const secrecy = computed(() => props.secrecy)
   const noRemote = computed(() => props.range && props.range.length)
   const propsValue = computed(() => props.value)
   const value = ref<string[]>([])
-  value.value = propsValue.value
 
   const deptIcon = folder
   const checkedIcon = checked
@@ -49,7 +49,10 @@ export default function (props: any, context: any) {
 
   // 已选人员回显
   const displaySelected = async () => {
-    if (!value.value?.length) return
+    if (!value.value?.length) {
+      selectedList.value = []
+      return
+    }
     // 根据已选人员ids, 获取items
     const result = await api.default.ListUserInfoByIds({
       user_ids: value.value,
@@ -87,25 +90,41 @@ export default function (props: any, context: any) {
   }
 
   //查询部门下的人员
-  const searchEmployeeById = (key?: string) => {
-    axios
-      .post(URL, {
-        department_id: department_id.value,
-        param: param.value,
-      })
-      .then(res => {
-        const resData = res.data
-        if (resData.code === '000000') {
-          key === 'search'
-            ? (searchOptionsList.value = resData.data.rows)
-            : (employeeList.value = resData.data.rows)
-        }
-      })
+  const searchEmployeeById = async () => {
+    const result = await api.default.SearchDeptUserInfo({
+      department_id: department_id.value,
+      param: param.value,
+    })
+    if (result.code === '000000') {
+      const data: any = result.data?.rows
+      employeeList.value = data
+    }
+
+    // axios
+    //   .post(URL, {
+    //     department_id: department_id.value,
+    //     param: param.value,
+    //   })
+    //   .then(res => {
+    //     const resData = res.data
+    //     if (resData.code === '000000') {
+    //       employeeList.value = resData.data.rows
+    //     }
+    //   })
   }
 
   const getDeptAndEmployee = () => {
     searchDeptById()
     searchEmployeeById()
+  }
+
+  const searchEmployeeByKey = async () => {
+    if (!param.value) return
+    const result = await api.default.SearchUserInfo({ param: param.value })
+    if (result.code === '000000') {
+      const data: any = result.data?.rows
+      searchOptionsList.value = data
+    }
   }
 
   const filterRangeList = () => {
@@ -190,11 +209,11 @@ export default function (props: any, context: any) {
     visible.value = false
   }
 
-  const searchEmployeeByKey = () => {
-    noRemote.value ? filterRangeList() : searchEmployeeById()
+  const searchEmployee = () => {
+    noRemote.value ? filterRangeList() : searchEmployeeByKey()
   }
 
-  const searchByKey = debounce(searchEmployeeByKey, 800)
+  const searchByKey = debounce(searchEmployee, 500)
 
   watch(param, () => {
     isSearch.value = Boolean(param.value)
@@ -203,9 +222,9 @@ export default function (props: any, context: any) {
     }
   })
 
-  watch(value, val => {
-    context.emit('update', val)
-  })
+  // watch(value, val => {
+  //   context.emit('update', val)
+  // })
 
   effect(() => {
     const val = propsValue.value
@@ -221,6 +240,8 @@ export default function (props: any, context: any) {
     placeholder,
     isDisabled,
     multiple,
+    range,
+    secrecy,
     noRemote,
     deptIcon,
     checkedIcon,

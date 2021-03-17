@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-16 11:12:54
+ * @LastEditTime: 2021-03-16 22:08:20
  * @FilePath: /packages/ok-employee-select/index.ts
  */
 
@@ -16,7 +16,7 @@ defineComponent(
   'ok-employee-select',
   {
     value: {
-      type: (Array as unknown) as PropType<string[]>,
+      type: (Array as unknown) as PropType<[]>,
     },
     range: {
       type: (Array as unknown) as PropType<string[]>,
@@ -30,7 +30,11 @@ defineComponent(
     },
     multiple: {
       type: (Boolean as unknown) as PropType<boolean>,
-      default: true,
+      default: false,
+    },
+    secrecy: {
+      type: (Boolean as unknown) as PropType<boolean>,
+      default: false,
     },
     mode: {
       type: (String as unknown) as PropType<string>,
@@ -50,6 +54,8 @@ defineComponent(
           const placeholder = computed(() => props.placeholder)
           const multiple = computed(() => props.multiple)
           const range = computed(() => props.range)
+          // 组织架构是否开始保密
+          const secrecy = computed(() => props.secrecy)
 
           // 更新组件外部value
           const updateValue = (e: CustomEvent) => {
@@ -63,6 +69,7 @@ defineComponent(
             placeholder,
             multiple,
             range,
+            secrecy,
             updateValue,
           }
         },
@@ -74,6 +81,7 @@ defineComponent(
 					:range="range"
 					:disabled="disabled"
           :multiple="multiple"
+          :secrecy="secrecy"
 					@update="updateValue"
           class="ok-employee-tree"
 					></ok-employee-tree>

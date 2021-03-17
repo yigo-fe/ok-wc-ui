@@ -181,7 +181,9 @@ h3{
   margin-bottom: 10px;
 }
 
-.ok-employee-tree-modal .list-wraper {
+.ok-employee-tree-modal .list-wraper,
+.ok-employee-tree-modal .search-list,
+.ok-employee-tree-modal .selected-list {
   max-height: 400px;
   overflow: auto;
 }

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:25:18
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-15 17:25:47
+ * @LastEditTime: 2021-03-16 20:38:43
  * @FilePath: /packages/services/services.ts
  */
 import { FetchService } from './axios'
@@ -53,6 +53,15 @@ export default class {
    */
   public async SelectDeptList(data: any) {
     const result = await this.http.post(`/v1/private/dept/selectDeptList`, data)
+    return result
+  }
+
+  /**
+   * 根据dept_id 查询部门下所属人员
+   * @method
+   */
+  public async SearchDeptUserInfo(data: any) {
+    const result = await this.http.post(`/v1/private/user/searchUserInfo`, data)
     return result
   }
 }

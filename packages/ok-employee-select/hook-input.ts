@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-03 21:17:47
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-15 20:36:48
+ * @LastEditTime: 2021-03-17 16:45:30
  * @FilePath: /packages/ok-employee-select/hook-input.ts
  */
 
@@ -16,12 +16,20 @@ import search from '../assets/images/search.svg'
 import { apiInit } from '../services/api'
 export default function (props: any, context: any) {
   const api = apiInit()
+  // 下拉选择列表
   const options = ref([])
+  // 取巧，控制dropdown的展开和收起
   const isOpen = ref(false)
+  // 是否有范围限制
   const isRange = ref(false)
+  // 搜索loading
   const loading = ref(false)
+  // 最多展示的tag数量
   const maxTagCount = ref(0)
-  const exceedList = ref([])
+  // 溢出列表（more list）
+  const exceedList = ref(<any>[])
+  // 人员id和detial的map
+  // const employeeMap = {}
 
   const closeIcon = close
   const searchIcon = search
@@ -30,20 +38,34 @@ export default function (props: any, context: any) {
   const placeholder = computed(() => props.placeholder)
   const isDisabled = computed(() => props.disabled)
   const multiple = computed(() => props.multiple)
-  const isRemote = computed(() => props.range && props.range.length)
+  const noRemote = computed(() => props.range && props.range.length)
+
+  // 已选人员信息列表
+  // const selectedList = computed(() => {
+  //   return value.value.map(v => employeeMap[v]).filter(v => v)
+  // })
 
   const value = ref<string[]>([])
   value.value = propsValue.value || []
 
+  // 收集人员信息， 避免频繁请求接口
+  // const collectEmployeeMap = (list: any) => {
+  //   list.forEach((v: any) => {
+  //     employeeMap[v.employee_id] = v
+  //   })
+  // }
+
   // 人员搜索
   const onFetch = async (query: string) => {
-    if (isRemote.value) return
+    if (noRemote.value) return
     if (!query) return
     loading.value = true
     const result = await api.default.SearchUserInfo({ param: query })
+    loading.value = false
     if (result.code === '000000') {
       const data: any = result.data?.rows
       options.value = data
+      // collectEmployeeMap(options.value)
     }
   }
 
@@ -56,6 +78,8 @@ export default function (props: any, context: any) {
 
     if (elWith && elWith > 116) {
       maxTagCount.value = Math.floor((elWith - 10) / 106)
+      // 首次计算溢出人员
+      getExceedEmployee()
     }
   }
 
@@ -71,21 +95,17 @@ export default function (props: any, context: any) {
     if (result.code === '000000') {
       const data: any = result.data
       options.value = data
+      // collectEmployeeMap(options.value)
     }
-    // axios.post(URL_LIST, { user_ids: userIds }).then(res => {
-    //   const resData = res.data
-    //   if (resData.code === '000000') {
-    //     const data: any = resData.data
-    //     options.value = data
-    //   }
-    // })
   }
 
+  // 清除， 删除全部
   const clearSelected = () => {
     value.value = []
     context.emit('ichange', value.value)
   }
 
+  // 删除单个人员
   const handleDelete = (employee_id: string) => {
     value.value = value.value.filter(v => v !== employee_id)
     context.emit('ichange', value.value)
@@ -108,52 +128,51 @@ export default function (props: any, context: any) {
     isMouseenter.value = false
   }
 
-  const getExceedEmployee = async (exceedIds: string[]) => {
-    const result = await api.default.ListUserInfoByIds({
-      user_ids: exceedIds,
-    })
-    if (result.code === '000000') {
-      const data: any = result.data
-      exceedList.value = data
+  const getExceedEmployee = async () => {
+    if (maxTagCount.value && value.value.length > maxTagCount.value) {
+      const exceedIds = value.value.slice(maxTagCount.value)
+      const result = await api.default.ListUserInfoByIds({
+        user_ids: exceedIds,
+      })
+      if (result.code === '000000') {
+        const data: any = result.data
+        exceedList.value = data
+      }
     }
   }
 
   // 监听value变化， 处理溢出items
+  watch(value, val => {
+    if (typeof val === 'string') {
+      val = [val]
+      return
+    }
+    // 避免首次赋值时更新 todo -- 待优化
+    context.emit('update', val)
+    // value 变化， 计算溢出人员
+    getExceedEmployee()
+  })
+
   // effect(() => {
-  //   console.log('update')
   //   let val = value.value
-  //   typeof val === 'string' && (val = [val])
+  //   if (typeof val === 'string') {
+  //     val = [val]
+  //     return
+  //   }
+  //   // 避免首次赋值时更新 todo -- 待优化
   //   context.emit('update', val)
-  //   if (val.length > maxTagCount.value) {
+  //   if (maxTagCount.value && val.length > maxTagCount.value) {
   //     const exceedIds = val.slice(maxTagCount.value)
   //     getExceedEmployee(exceedIds)
   //   }
   // })
 
-  watch(value, val => {
-    typeof val === 'string' && (val = [val])
-    context.emit('update', val)
-    if (val.length > maxTagCount.value) {
-      const exceedIds = val.slice(maxTagCount.value)
-      getExceedEmployee(exceedIds)
-    }
-  })
-
-  // 监听外部设置的值变更
-  // watch(propsValue, val => {
-  //   console.log('watch-propsValue', val)
-  //   if (val?.length) {
-  //     value.value = typeof val === 'string' ? [val] : val
-  //     getRangeEmployeesByIds(val)
-  //   } else {
-  //     value.value = []
-  //   }
-  // })
-
+  // 监听（propsValue）外部设置的值变更
   effect(() => {
     const val = propsValue.value
     if (val?.length) {
       value.value = typeof val === 'string' ? [val] : val
+      // 回显
       getRangeEmployeesByIds(val)
     } else {
       value.value = []
@@ -161,11 +180,8 @@ export default function (props: any, context: any) {
   })
 
   // 指定范围
-  // watch(isRemote, val => {
-  //   val && getRangeEmployeesByIds(props.range)
-  // })
   effect(() => {
-    isRemote.value && getRangeEmployeesByIds(props.range)
+    noRemote.value && getRangeEmployeesByIds(props.range)
   })
 
   return {
@@ -180,9 +196,9 @@ export default function (props: any, context: any) {
     value,
     closeIcon,
     searchIcon,
-    maxTagCountComput,
+    isMouseenter,
     searchByKey,
-    isRemote,
+    noRemote,
     exceedList,
     setOpen,
     closeOpen,
@@ -190,6 +206,5 @@ export default function (props: any, context: any) {
     handleDelete,
     mouseenter,
     mouseleave,
-    isMouseenter,
   }
 }

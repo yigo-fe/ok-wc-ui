@@ -2,8 +2,17 @@
   background-color: transparent;
 }
 
+@import url('../../assets/theme.less');
 .ok-employee-tree-wraper {
 	width: 100%;
+}
+
+// 修改边框颜色
+.ok-employee-select.ant-select-multiple .ant-select-selector {
+	border-color: @ok-border-color-base;
+	&:hover {
+		border-color: @ok-border-color-hover;
+	}
 }
 
 // selected head 样式

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:56:38
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-16 10:59:52
+ * @LastEditTime: 2021-03-17 16:38:19
  * @FilePath: /packages/ok-employee-select/ok-employee-tree.ts
  */
 import {
@@ -42,9 +42,12 @@ defineComponent(
       type: (Boolean as unknown) as PropType<boolean>,
       default: false,
     },
+    secrecy: {
+      type: (Boolean as unknown) as PropType<boolean>,
+      default: false,
+    },
   },
   (props, context) => {
-    console.log(1, props)
     onMounted(() => {
       const options = {
         setup() {
@@ -53,6 +56,8 @@ defineComponent(
             placeholder,
             isDisabled,
             multiple,
+            range,
+            secrecy,
             noRemote,
             deptIcon,
             checkedIcon,
@@ -88,6 +93,8 @@ defineComponent(
             placeholder,
             isDisabled,
             multiple,
+            range,
+            secrecy,
             noRemote,
             visible,
             deptList,
@@ -141,7 +148,7 @@ defineComponent(
                   <a-input  
                     placeholder="请输入人员名称"
                     v-model:value="param"
-                    @change="searchByKey('search')">
+                    @change="searchByKey">
                     <template #prefix>
                       <img :src="searchIcon" class="dept-icon" />  
                     </template>
@@ -149,7 +156,7 @@ defineComponent(
                 </div>
 
                 <!--人员部门展示-->
-                <div class="tree-content" v-show="!isSearch">
+                <div class="tree-content" v-show="!isSearch && !secrecy">
                   <a-breadcrumb v-if="!noRemote">
                     <template #separator><span class="breadcrumb-separator"> > </span></template>
                     <a-breadcrumb-item @click="handleRootClick(item)">根目录</a-breadcrumb-item>
@@ -205,17 +212,18 @@ defineComponent(
                   <span class="selected-msg">已选：{{selectedList.length}}</span>
                   <span v-show="selectedList.length" class="clear-btn" @click="clearSelected">清除</span>
                 </div>
-
-                <p 
-                  class="item-detail employee" 
-                  v-for="employee in selectedList" 
-                  :key="employee.employee_id"  
-                  @click="cancelSelect(employee.employee_id)">
-                  <ok-person-cell :personInfo="employee"></ok-person-cell>               
-                  <span class="employee-name">{{employee.employee_name}}</span>
-                  <span class="email">{{employee.email}}</span>    
-                  <img :src="closeIcon" class="close-icon" />               
-                </p>
+                <div class="selected-list">
+                  <p 
+                    class="item-detail employee" 
+                    v-for="employee in selectedList" 
+                    :key="employee.employee_id"  
+                    @click="cancelSelect(employee.employee_id)">
+                    <ok-person-cell :personInfo="employee"></ok-person-cell>               
+                    <span class="employee-name">{{employee.employee_name}}</span>
+                    <span class="email">{{employee.email}}</span>    
+                    <img :src="closeIcon" class="close-icon" />               
+                  </p>
+                </div>
               
               </div>
             </div>

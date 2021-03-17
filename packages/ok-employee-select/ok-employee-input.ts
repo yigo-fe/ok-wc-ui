@@ -3,14 +3,14 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-16 11:11:59
+ * @LastEditTime: 2021-03-17 11:45:02
  * @FilePath: /packages/ok-employee-select/ok-employee-input.ts
  */
 import './ok-employee-more'
 
 import { Button, Select } from 'ant-design-vue'
 import { defineComponent, html, onMounted, PropType } from 'ok-lit'
-import { createApp, h } from 'vue'
+import { createApp, h, ref } from 'vue'
 
 import CDN_PATH from '../path.config'
 import useEmployeeSelect from './hook-input'
@@ -58,6 +58,7 @@ defineComponent(
             closeIcon,
             searchIcon,
             isMouseenter,
+            noRemote,
             setOpen,
             closeOpen,
             clearSelected,
@@ -76,7 +77,18 @@ defineComponent(
               onDelete: exceedDelete,
             })
           }
+
+          const okEmployeeInput: any = ref(null)
+
+          // 模拟单选
+          const handleSelect = val => {
+            if (multiple.value) return
+            value.value = [val]
+            okEmployeeInput.value?.blur()
+          }
+
           return {
+            okEmployeeInput,
             isDisabled,
             multiple,
             placeholder,
@@ -90,6 +102,7 @@ defineComponent(
             closeIcon,
             searchIcon,
             isMouseenter,
+            noRemote,
             maxTagPlaceholder,
             setOpen,
             closeOpen,
@@ -97,14 +110,17 @@ defineComponent(
             handleDelete,
             mouseenter,
             mouseleave,
+            handleSelect,
           }
         },
+        // :mode="multiple ? 'multiple': 'default'"
         template: `
-				<a-select					
+				<a-select
+          ref="okEmployeeInput"			
 					v-model:value="value"
-					:mode="multiple ? 'multiple': 'default'"
+					mode="multiple"
           :open="isOpen"
-					:filter-option="true"
+					:filter-option="noRemote ? true : false"
 					:default-active-first-option="false"
 					:placeholder="placeholder"
 					:disabled="isDisabled"
@@ -115,8 +131,9 @@ defineComponent(
 					dropdownClassName="userSelectDropdown"
 					style="width: 100%"
 					class="ok-employee-select"
-					@search="searchByKey" 
-          @click="setOpen" 
+					@search="searchByKey"
+          @select="handleSelect"
+          @click="setOpen"
           @blur="closeOpen" 
           @deselect="handleDelete" 
           @mouseenter="mouseenter" 

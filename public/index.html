@@ -32,6 +32,10 @@
 <!-- <script src="https://unpkg.com/element-plus/lib/index.full.js"></script> -->
   <div id="app">
     <main>
+
+      <ok-employee-select class="ok-employee-input" placeholder="请选择" style="width: 300px;display: block;"></ok-employee-select>
+
+
       <!-- <ok-person-detail></ok-person-detail> -->
       <!-- <ok-person-group></ok-person-group> -->
       <!-- <ok-ant-person-select></ok-ant-person-select> -->
@@ -40,7 +44,7 @@
       <!-- 人员图像 -->
       <!-- <ok-avatar></ok-avatar> -->
       <!-- 人员卡片 -->
-      <ok-person-cell class="person-cell"></ok-person-cell>
+      <ok-person-cell class="person-cell">haha</ok-person-cell>
       <!-- 多人员list -->
       <!-- <ok-person-group ></ok-person-group> -->
 
@@ -63,8 +67,7 @@
         <h3>人员选择tree</h3>
         <ok-employee-select class="ok-employee-tree" mode="tree" placeholder="请选择" style="width: 300px;display: block;"></ok-employee-select>
 
-        <!-- <h3>人员选择select-antd</h3> -->
-        <!-- <ok-employee-select class="ok-employee-input" placeholder="请选择" style="width: 300px;display: block;"></ok-employee-select> -->
+        <h3>人员选择select-antd</h3>
 
 
       </section>
@@ -117,7 +120,7 @@
       tenant_id: "test"
     }
 
-   
+
 
 
     window.onload = ()=>{
@@ -145,17 +148,30 @@
       // okAttachmentDrag.action = action
       // okAttachmentDrag.data = uploadData
 
+      // const okPersonGroup = document.querySelector('ok-person-group')
+      // okPersonGroup.personList = personList
+
       const okPersonCell = document.querySelector('ok-person-cell')
       okPersonCell.personInfo = personInfo
       const okPersonCard = document.querySelector('ok-person-card')
       okPersonCard.personInfo = personInfo
 
 
-      const okEmployeeInput = document.querySelector('.ok-employee-tree')
-      okEmployeeInput.value = ["FanShuai", "LiTao"]
+      const okEmployeeTree = document.querySelector('.ok-employee-tree')
+      // okEmployeeTree.value = ["FanShuai", "LiTao"]
+      okEmployeeTree.multiple = true
+      // okEmployeeTree.range = ["FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing']
+      okEmployeeTree.update = (val, list)=>{
+        // console.log('update-index',val, list)
+      }
+
+
+      const okEmployeeInput = document.querySelector('.ok-employee-input')
+      // okEmployeeInput.value = ["FanShuai", "LiTao"]
+      // okEmployeeInput.multiple = true
       okEmployeeInput.range = ["FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing']
-      okEmployeeInput.update = (val)=>{
-        console.log('update-index',val)
+      okEmployeeInput.update = (val, list)=>{
+        // console.log('update-index',val, list)
       }
     }
 
