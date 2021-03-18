@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-16 22:08:20
+ * @LastEditTime: 2021-03-18 16:08:06
  * @FilePath: /packages/ok-employee-select/index.ts
  */
 
@@ -41,7 +41,9 @@ defineComponent(
     },
     update: {
       // eslint-disable-next-line no-unused-vars
-      type: (Function as unknown) as PropType<(ids: string[]) => void>,
+      type: (Function as unknown) as PropType<
+        (ids: string[], options: []) => void
+      >,
     },
   },
   (props, context) => {
@@ -59,7 +61,7 @@ defineComponent(
 
           // 更新组件外部value
           const updateValue = (e: CustomEvent) => {
-            props.update && props.update(e.detail)
+            props.update && props.update(e.detail.value, e.detail.options)
           }
 
           return {

@@ -33,9 +33,9 @@
   <div id="app">
     <main>
 
-      <ok-employee-select class="ok-employee-input" placeholder="请选择" style="width: 300px;display: block;"></ok-employee-select>
+      <ok-employee-select class="ok-employee-input" placeholder="请选择" style="width: 200px;display: block;"></ok-employee-select>
 
-
+      <button onclick="testClick">test</button>
       <!-- <ok-person-detail></ok-person-detail> -->
       <!-- <ok-person-group></ok-person-group> -->
       <!-- <ok-ant-person-select></ok-ant-person-select> -->
@@ -65,7 +65,7 @@
         <ok-upload-image style="width: 500px;"></ok-upload-image>
 
         <h3>人员选择tree</h3>
-        <ok-employee-select class="ok-employee-tree" mode="tree" placeholder="请选择" style="width: 300px;display: block;"></ok-employee-select>
+        <!-- <ok-employee-select class="ok-employee-tree" mode="tree" placeholder="请选择" style="width: 300px;display: block;"></ok-employee-select> -->
 
         <h3>人员选择select-antd</h3>
 
@@ -157,23 +157,40 @@
       okPersonCard.personInfo = personInfo
 
 
-      const okEmployeeTree = document.querySelector('.ok-employee-tree')
+      // const okEmployeeTree = document.querySelector('.ok-employee-tree')
       // okEmployeeTree.value = ["FanShuai", "LiTao"]
-      okEmployeeTree.multiple = true
+      // okEmployeeTree.multiple = true
       // okEmployeeTree.range = ["FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing']
-      okEmployeeTree.update = (val, list)=>{
-        // console.log('update-index',val, list)
-      }
+      // okEmployeeTree.update = (val, list)=>{
+      //   // console.log('update-index',val, list)
+      // }
 
 
       const okEmployeeInput = document.querySelector('.ok-employee-input')
-      // okEmployeeInput.value = ["FanShuai", "LiTao"]
-      // okEmployeeInput.multiple = true
-      okEmployeeInput.range = ["FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing']
-      okEmployeeInput.update = (val, list)=>{
-        // console.log('update-index',val, list)
+      okEmployeeInput.value = ["FanShuai", 'LiTao']
+      // okEmployeeInput.value = []
+      okEmployeeInput.multiple = true
+      // okEmployeeInput.range = ["FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing']
+      okEmployeeInput.update = ({value, options})=>{
+        // console.log('update-index',value, options)
+        // okEmployeeInput.value = value
       }
+
+      setTimeout(()=>{
+        okEmployeeInput.multiple = false
+        console.log(false)
+      }, 5000)
+
+
     }
+
+    function testClick (){
+      console.log(okEmployeeInput.multiple)
+      const okEmployeeInput = document.querySelector('.ok-employee-input')
+      okEmployeeInput.multiple = !okEmployeeInput.multiple
+      
+      }
+
 
 
   </script>

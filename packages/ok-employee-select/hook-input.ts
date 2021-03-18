@@ -3,11 +3,11 @@
  * @Author: 付静
  * @Date: 2021-03-03 21:17:47
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-17 16:45:30
+ * @LastEditTime: 2021-03-18 16:05:44
  * @FilePath: /packages/ok-employee-select/hook-input.ts
  */
 
-import { debounce } from 'lodash'
+import { debounce, difference } from 'lodash'
 import { effect } from 'ok-lit'
 import { computed, nextTick, ref, watch } from 'vue'
 
@@ -25,11 +25,11 @@ export default function (props: any, context: any) {
   // 搜索loading
   const loading = ref(false)
   // 最多展示的tag数量
-  const maxTagCount = ref(0)
+  const maxTagCount = ref(1)
   // 溢出列表（more list）
   const exceedList = ref(<any>[])
   // 人员id和detial的map
-  // const employeeMap = {}
+  const employeeMap = {}
 
   const closeIcon = close
   const searchIcon = search
@@ -41,19 +41,18 @@ export default function (props: any, context: any) {
   const noRemote = computed(() => props.range && props.range.length)
 
   // 已选人员信息列表
-  // const selectedList = computed(() => {
-  //   return value.value.map(v => employeeMap[v]).filter(v => v)
-  // })
+  const selectedList = computed(() => {
+    return value.value.map(v => employeeMap[v]).filter(v => v)
+  })
 
   const value = ref<string[]>([])
-  value.value = propsValue.value || []
 
   // 收集人员信息， 避免频繁请求接口
-  // const collectEmployeeMap = (list: any) => {
-  //   list.forEach((v: any) => {
-  //     employeeMap[v.employee_id] = v
-  //   })
-  // }
+  const collectEmployeeMap = (list: any) => {
+    list.forEach((v: any) => {
+      employeeMap[v.employee_id] = v
+    })
+  }
 
   // 人员搜索
   const onFetch = async (query: string) => {
@@ -65,26 +64,52 @@ export default function (props: any, context: any) {
     if (result.code === '000000') {
       const data: any = result.data?.rows
       options.value = data
-      // collectEmployeeMap(options.value)
+      collectEmployeeMap(options.value)
     }
   }
 
   const searchByKey = debounce(onFetch, 500)
 
+  // 处理溢出人员
+
+  // 获取溢出人员信息
+  const getExceedEmployee = async () => {
+    if (!maxTagCount.value) {
+      exceedList.value.length && (exceedList.value = [])
+      return
+    } else {
+      // employeeMap 中取值， 避免频繁请求接口数据
+      const exceedIds = value.value.slice(maxTagCount.value)
+      exceedList.value = exceedIds.map(v => employeeMap[v]).filter(v => v)
+    }
+
+    // if (value.value.length > maxTagCount.value) {
+    //   const exceedIds = value.value.slice(maxTagCount.value)
+    //   const result = await api.default.ListUserInfoByIds({
+    //     user_ids: exceedIds,
+    //   })
+    //   if (result.code === '000000') {
+    //     const data: any = result.data
+    //     exceedList.value = data
+    //   }
+    // }
+  }
+
   // 处理最多能展示多少个tag
   const maxTagCountComput = () => {
     const el = context.$refs.showEmployeeSelectInput as HTMLElement
     const elWith = el.offsetWidth
+    if (!elWith) return
 
-    if (elWith && elWith > 116) {
-      maxTagCount.value = Math.floor((elWith - 10) / 106)
-      // 首次计算溢出人员
-      getExceedEmployee()
-    }
+    maxTagCount.value = elWith > 185 ? Math.floor((elWith - 75) / 108) : 0
+    // 首次计算溢出人员
+    getExceedEmployee()
   }
 
   nextTick(() => {
-    maxTagCountComput()
+    setTimeout(() => {
+      maxTagCountComput()
+    }, 500)
   })
 
   // 查询指定人员信息
@@ -95,7 +120,7 @@ export default function (props: any, context: any) {
     if (result.code === '000000') {
       const data: any = result.data
       options.value = data
-      // collectEmployeeMap(options.value)
+      collectEmployeeMap(options.value)
     }
   }
 
@@ -128,53 +153,45 @@ export default function (props: any, context: any) {
     isMouseenter.value = false
   }
 
-  const getExceedEmployee = async () => {
-    if (maxTagCount.value && value.value.length > maxTagCount.value) {
-      const exceedIds = value.value.slice(maxTagCount.value)
-      const result = await api.default.ListUserInfoByIds({
-        user_ids: exceedIds,
-      })
-      if (result.code === '000000') {
-        const data: any = result.data
-        exceedList.value = data
-      }
-    }
-  }
+  // 避免首次value赋值时触发更新
+  let isInitial = true
 
   // 监听value变化， 处理溢出items
   watch(value, val => {
-    if (typeof val === 'string') {
-      val = [val]
-      return
+    // console.log('watch', val, isInitial)
+    //有初始值， 特殊处理
+    if (props.value?.length) {
+      if (isInitial && !difference(props.value, val).length) {
+        isInitial = false
+        return
+      }
+      if (isInitial) return
     }
-    // 避免首次赋值时更新 todo -- 待优化
-    context.emit('update', val)
+    // console.log('watch-update', val, isInitial)
+    // 非initial, update value
+    context.emit('update', { value: val, options: selectedList.value })
     // value 变化， 计算溢出人员
     getExceedEmployee()
   })
 
-  // effect(() => {
-  //   let val = value.value
-  //   if (typeof val === 'string') {
-  //     val = [val]
-  //     return
-  //   }
-  //   // 避免首次赋值时更新 todo -- 待优化
-  //   context.emit('update', val)
-  //   if (maxTagCount.value && val.length > maxTagCount.value) {
-  //     const exceedIds = val.slice(maxTagCount.value)
-  //     getExceedEmployee(exceedIds)
-  //   }
-  // })
+  // 监听外部传入值变化，设置value
+  watch(propsValue, val => {
+    // 如果propsValue和value一样( 都没有值| 值都一样)，则不再更新
+    if (
+      (!val?.length && !value.value.length) ||
+      !difference(val, value.value).length
+    )
+      return
 
-  // 监听（propsValue）外部设置的值变更
-  effect(() => {
-    const val = propsValue.value
+    // 更新初始值
+    isInitial = true
     if (val?.length) {
+      // 更新value；获取detail,回显信息
       value.value = typeof val === 'string' ? [val] : val
       // 回显
       getRangeEmployeesByIds(val)
-    } else {
+    } else if (value.value?.length) {
+      // 清除已选的值
       value.value = []
     }
   })
@@ -182,6 +199,14 @@ export default function (props: any, context: any) {
   // 指定范围
   effect(() => {
     noRemote.value && getRangeEmployeesByIds(props.range)
+  })
+
+  // 处理多选变单选时value
+  effect(() => {
+    const val = multiple.value
+    if (!val && value.value?.length > 1) {
+      value.value = value.value.slice(0, 1)
+    }
   })
 
   return {
