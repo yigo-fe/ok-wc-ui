@@ -47,9 +47,7 @@ function getInstance(serverPath: string) {
     (res: any) => {
       // 判断是否有权限
       if (res.data && res.data.code === '502106') {
-        window.location.replace(
-          `${location.origin}${process.env.VUE_APP_NOT_ACCESS}`
-        )
+        window.location.replace('https://www.byteluck.com')
       }
       if (res.data instanceof Blob) {
         return res
@@ -61,9 +59,7 @@ function getInstance(serverPath: string) {
     },
     (error: any) => {
       if (error.response && `${error.response.status}` === '401') {
-        const url = `${
-          process.env.VUE_APP_NO_AUTH_PATH
-        }?redirectUri=${encodeURIComponent(window.location.href)}&type=0`
+        const url = 'https://www.byteluck.com'
         window.location.replace(url)
       } else {
         return Promise.reject(error)
