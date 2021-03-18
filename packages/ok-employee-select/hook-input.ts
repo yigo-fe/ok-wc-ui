@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-03 21:17:47
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-18 20:54:06
+ * @LastEditTime: 2021-03-18 22:37:02
  * @FilePath: /packages/ok-employee-select/hook-input.ts
  */
 
@@ -36,7 +36,8 @@ export default function (props: any, context: any) {
 
   const propsValue = computed(() => {
     // 监听外部传入值变化，设置value --- 解决打包后watch不生效的问题
-    handlePropsValChange()
+    // debugger
+    // console.log('computed', props.value)
     return props.value
   })
   const placeholder = computed(() => props.placeholder)
@@ -202,6 +203,19 @@ export default function (props: any, context: any) {
     // value 变化， 计算溢出人员
     getExceedEmployee()
   })
+  // effect(() => {
+  //   console.log('effect', propsValue.value)
+  // })
+
+  watch(
+    () => props.value,
+    () => {
+      handlePropsValChange()
+    }
+  )
+  // watch(props.value, () => {
+  //   console.log('propsvalue')
+  // })
 
   // 指定范围
   effect(() => {
