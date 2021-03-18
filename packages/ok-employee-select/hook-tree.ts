@@ -3,12 +3,12 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:57:52
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-17 16:39:35
+ * @LastEditTime: 2021-03-18 17:59:03
  * @FilePath: /packages/ok-employee-select/hook-tree.ts
  */
 import { debounce } from 'lodash'
 import { effect } from 'ok-lit'
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 
 // 根据部门查询部门下直属人员
 // const URL =
@@ -20,7 +20,7 @@ import close from '../assets/images/closed.svg'
 import search from '../assets/images/search.svg'
 import { apiInit } from '../services/api'
 
-export default function (props: any, context: any) {
+export default function (props: any) {
   const api = apiInit()
   const placeholder = computed(() => props.placeholder)
   const isDisabled = computed(() => props.disabled)
@@ -44,7 +44,9 @@ export default function (props: any, context: any) {
   const searchOptionsList = ref<any[]>([])
   const deptList = ref<string[]>([])
   const employeeList = ref<string[]>([])
-  const breadcrumbList = ref<any[]>([])
+  const breadcrumbList = ref<any[]>([
+    { department_id: '1', department_name: '根目录' },
+  ])
   const selectedList = ref<any[]>([])
 
   // 已选人员回显
@@ -192,7 +194,7 @@ export default function (props: any, context: any) {
     if (event?.path[0]?.className === 'head-clear-icon') return
     visible.value = true
 
-    breadcrumbList.value = []
+    breadcrumbList.value = [{ department_id: '1', department_name: '根目录' }]
     department_id.value = '1'
     param.value = ''
     // 初始化树左侧数据
@@ -210,17 +212,19 @@ export default function (props: any, context: any) {
   }
 
   const searchEmployee = () => {
+    isSearch.value = Boolean(param.value)
+    if (!isSearch.value) return
     noRemote.value ? filterRangeList() : searchEmployeeByKey()
   }
 
   const searchByKey = debounce(searchEmployee, 500)
 
-  watch(param, () => {
-    isSearch.value = Boolean(param.value)
-    if (param.value) {
-      noRemote.value ? filterRangeList() : getDeptAndEmployee()
-    }
-  })
+  // watch(param, () => {
+  //   isSearch.value = Boolean(param.value)
+  //   if (param.value) {
+  //     noRemote.value ? filterRangeList() : getDeptAndEmployee()
+  //   }
+  // })
 
   // watch(value, val => {
   //   context.emit('update', val)

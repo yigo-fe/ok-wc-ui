@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:56:38
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-17 16:38:19
+ * @LastEditTime: 2021-03-18 17:59:13
  * @FilePath: /packages/ok-employee-select/ok-employee-tree.ts
  */
 import {
@@ -82,7 +82,7 @@ defineComponent(
             isSelected,
             clearSelected,
             searchByKey,
-          } = useEmployeeTree(props, context)
+          } = useEmployeeTree(props)
 
           const handleValChange = (e: CustomEvent) => {
             value.value = e.detail
@@ -159,7 +159,6 @@ defineComponent(
                 <div class="tree-content" v-show="!isSearch && !secrecy">
                   <a-breadcrumb v-if="!noRemote">
                     <template #separator><span class="breadcrumb-separator"> > </span></template>
-                    <a-breadcrumb-item @click="handleRootClick(item)">根目录</a-breadcrumb-item>
                     <a-breadcrumb-item href="" 
                       v-for=" item in breadcrumbList" 
                       :key="item.department_id"
@@ -231,7 +230,7 @@ defineComponent(
 
             <template #footer>
               <div>
-                <a-button @click="cancelHandle">取消</a-button>
+                <a-button class="btn-cancle" @click="cancelHandle">取消</a-button>
                 <a-button class="btn-ok" type="primary" @click="okHandle">确定</a-button>
               </div>
             </template>

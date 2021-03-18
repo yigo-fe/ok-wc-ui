@@ -172,6 +172,11 @@ h3{
   background:#EFF0F1;
   border-radius: 4px;
 }
+.tree-search .ant-input-affix-wrapper:focus {
+  box-shadow:none;
+  border-color: #5283F7;
+}
+
 .tree-search .ant-input-affix-wrapper input {
   background:#EFF0F1;
 }
@@ -194,7 +199,7 @@ h3{
   height: 40px;
   margin: 0;
   padding: 0 20px;
-
+  cursor: pointer;
 }
 .ok-employee-tree-modal .item-detail.selected,
 .ok-employee-tree-modal .item-detail:hover {
@@ -233,6 +238,16 @@ h3{
   text-align: center;
 }
 
+/* 面包屑hover */
+.ok-employee-tree-modal .ant-breadcrumb a:hover {
+  color: #5283F7;
+}
+
+/* 取消按钮hover */
+.ok-employee-tree-modal .btn-cancle.ant-btn:hover {
+  color: #5283F7;
+  border-color: #5283F7;
+}
 
 
 /* selected */

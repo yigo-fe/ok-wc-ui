@@ -65,7 +65,7 @@
         <ok-upload-image style="width: 500px;"></ok-upload-image>
 
         <h3>人员选择tree</h3>
-        <!-- <ok-employee-select class="ok-employee-tree" mode="tree" placeholder="请选择" style="width: 300px;display: block;"></ok-employee-select> -->
+        <ok-employee-select class="ok-employee-tree" mode="tree" placeholder="请选择" style="width: 300px;display: block;"></ok-employee-select>
 
         <h3>人员选择select-antd</h3>
 
@@ -167,7 +167,7 @@
 
 
       const okEmployeeInput = document.querySelector('.ok-employee-input')
-      okEmployeeInput.value = ["FanShuai", 'LiTao']
+      // okEmployeeInput.value = ["FanShuai", 'LiTao']
       // okEmployeeInput.value = []
       okEmployeeInput.multiple = true
       // okEmployeeInput.range = ["FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing']
@@ -176,10 +176,6 @@
         // okEmployeeInput.value = value
       }
 
-      setTimeout(()=>{
-        okEmployeeInput.multiple = false
-        console.log(false)
-      }, 5000)
 
 
     }

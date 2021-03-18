@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-17 11:45:02
+ * @LastEditTime: 2021-03-18 20:49:55
  * @FilePath: /packages/ok-employee-select/ok-employee-input.ts
  */
 import './ok-employee-more'
@@ -59,6 +59,7 @@ defineComponent(
             searchIcon,
             isMouseenter,
             noRemote,
+            propsValue,
             setOpen,
             closeOpen,
             clearSelected,
@@ -103,6 +104,7 @@ defineComponent(
             searchIcon,
             isMouseenter,
             noRemote,
+            propsValue,
             maxTagPlaceholder,
             setOpen,
             closeOpen,
@@ -118,6 +120,7 @@ defineComponent(
 				<a-select
           ref="okEmployeeInput"			
 					v-model:value="value"
+          :a="propsValue"
 					mode="multiple"
           :open="isOpen"
 					:filter-option="noRemote ? true : false"

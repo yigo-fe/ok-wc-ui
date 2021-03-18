@@ -3,11 +3,11 @@
  * @Author: 付静
  * @Date: 2021-03-03 21:17:47
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-18 16:05:44
+ * @LastEditTime: 2021-03-18 20:54:06
  * @FilePath: /packages/ok-employee-select/hook-input.ts
  */
 
-import { debounce, difference } from 'lodash'
+import { debounce } from 'lodash'
 import { effect } from 'ok-lit'
 import { computed, nextTick, ref, watch } from 'vue'
 
@@ -34,7 +34,11 @@ export default function (props: any, context: any) {
   const closeIcon = close
   const searchIcon = search
 
-  const propsValue = computed(() => props.value)
+  const propsValue = computed(() => {
+    // 监听外部传入值变化，设置value --- 解决打包后watch不生效的问题
+    handlePropsValChange()
+    return props.value
+  })
   const placeholder = computed(() => props.placeholder)
   const isDisabled = computed(() => props.disabled)
   const multiple = computed(() => props.multiple)
@@ -156,33 +160,20 @@ export default function (props: any, context: any) {
   // 避免首次value赋值时触发更新
   let isInitial = true
 
-  // 监听value变化， 处理溢出items
-  watch(value, val => {
-    // console.log('watch', val, isInitial)
-    //有初始值， 特殊处理
-    if (props.value?.length) {
-      if (isInitial && !difference(props.value, val).length) {
-        isInitial = false
-        return
-      }
-      if (isInitial) return
+  // 判断propsValue 是否和value一样
+  const propsValEqulValue = () => {
+    const l1 = props.value?.length || 0
+    const l2 = value.value?.length || 0
+    let same = false
+    if (l1 === l2) {
+      same = l1 ? props.value.every(v => value.value.indexOf(v) > -1) : true
     }
-    // console.log('watch-update', val, isInitial)
-    // 非initial, update value
-    context.emit('update', { value: val, options: selectedList.value })
-    // value 变化， 计算溢出人员
-    getExceedEmployee()
-  })
-
-  // 监听外部传入值变化，设置value
-  watch(propsValue, val => {
-    // 如果propsValue和value一样( 都没有值| 值都一样)，则不再更新
-    if (
-      (!val?.length && !value.value.length) ||
-      !difference(val, value.value).length
-    )
-      return
-
+    return same
+  }
+  // propsValue 变化时处理：
+  const handlePropsValChange = () => {
+    const val = props.value
+    if ((!val?.length && !value.value.length) || propsValEqulValue()) return
     // 更新初始值
     isInitial = true
     if (val?.length) {
@@ -194,6 +185,22 @@ export default function (props: any, context: any) {
       // 清除已选的值
       value.value = []
     }
+  }
+
+  // 监听value变化， 处理溢出items
+  watch(value, val => {
+    //有初始值， 特殊处理
+    if (props.value?.length) {
+      if (isInitial && propsValEqulValue()) {
+        isInitial = false
+        return
+      }
+      if (isInitial) return
+    }
+    // 非initial, update value
+    context.emit('update', { value: val, options: selectedList.value })
+    // value 变化， 计算溢出人员
+    getExceedEmployee()
   })
 
   // 指定范围
@@ -225,6 +232,7 @@ export default function (props: any, context: any) {
     searchByKey,
     noRemote,
     exceedList,
+    propsValue,
     setOpen,
     closeOpen,
     clearSelected,
