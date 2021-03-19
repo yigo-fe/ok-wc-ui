@@ -3,9 +3,10 @@
  * @Author: 付静
  * @Date: 2021-01-25 15:49:29
  * @LastEditors: 付静
- * @LastEditTime: 2021-01-27 15:34:24
+ * @LastEditTime: 2021-03-19 02:31:59
  * @FilePath: /packages/ok-accessory/ajax.ts
  */
+import { baseURL } from '../services/api'
 import type {
   OkUploadAjaxError,
   OkUploadProgressEvent,
@@ -59,7 +60,8 @@ export default function upload(option: OkUploadRequestOptions) {
   }
 
   const xhr = new XMLHttpRequest()
-  const action = option.action
+  // const action = option.action
+  const action = `${baseURL}${option.action}`
 
   if (xhr.upload) {
     xhr.upload.onprogress = function progress(e) {

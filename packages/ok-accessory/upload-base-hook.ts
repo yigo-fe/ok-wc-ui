@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-10 14:02:32
+ * @LastEditTime: 2021-03-19 02:11:38
  * @FilePath: /packages/ok-accessory/upload-hook.ts
  */
 
@@ -46,15 +46,15 @@ type UpdateFile = {
   raw?: OkFile
 }
 
-export default function (props, context) {
+export default function (props, context, config) {
   const reqs = ref({})
   let fileId = 0
   const fileLists = ref([] as any)
   const maxSize = computed(() => props.maxSize * 1024 + 1)
 
   // 仅限于fileList 回显
-  const displayFileList = () => {
-    props.fileList.forEach(file => {
+  const displayFileList = (defaultFileList: any) => {
+    defaultFileList.forEach(file => {
       fileLists.value.push({
         name: file.file_name,
         percentage: 100,
@@ -149,7 +149,7 @@ export default function (props, context) {
       file: rawFile,
       data: props.data,
       filename: props.name,
-      action: props.action,
+      action: config.action,
       onProgress: (e: ProgressEvent) => {
         handleProgress(e, rawFile)
       },
@@ -221,9 +221,8 @@ export default function (props, context) {
       !props.beforeRemove ||
       (props.beforeRemove && props.beforeRemove(file, fileLists))
     ) {
-      fileLists.value.splice(idx, 1)
-      // 处理用户自定义事件
-      props.onRemove && props.onRemove(file, fileLists)
+      // 组件内部接口删除
+      config.remove(file, fileLists.value, idx)
     }
   }
   /**

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-10 16:53:39
+ * @LastEditTime: 2021-03-19 02:21:55
  * @FilePath: /packages/ok-accessory/ok-upload-image.ts
  */
 
@@ -34,12 +34,12 @@
  *
  */
 
-import { defineComponent, effect, html } from 'ok-lit'
+import { defineComponent, html } from 'ok-lit'
 
 import CDN_PATH from '../path.config'
 import okUploadImgCss from './style/ok-upload-image.less'
 import { UploadProps } from './upload.props'
-import useFileHandle from './upload-hook'
+import useImageHandle from './upload-image-hook'
 defineComponent(
   'ok-upload-image',
   {
@@ -52,16 +52,12 @@ defineComponent(
       showRemove,
       fileLists,
       hideUploader,
-      displayFileList,
       uploadFiles,
       handlePreview,
       handleDetele,
       handleDownload,
-    } = useFileHandle(props, context)
+    } = useImageHandle(props, context)
 
-    effect(() => {
-      displayFileList()
-    })
     /**
      * 列表上传，点击选择文件
      */

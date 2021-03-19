@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-10 16:17:09
+ * @LastEditTime: 2021-03-19 02:25:06
  * @FilePath: /packages/ok-accessory/ok-upload-list.ts
  */
 
@@ -34,11 +34,11 @@
  *
  */
 
-import { defineComponent, effect, html } from 'ok-lit'
+import { defineComponent, html } from 'ok-lit'
 
 import okUploadCss from './style/upload.less'
 import { UploadProps } from './upload.props'
-import useFileHandle from './upload-hook'
+import useAttachmentHandle from './upload-attachment-hook'
 defineComponent(
   'ok-upload-list',
   {
@@ -51,16 +51,11 @@ defineComponent(
       showDownload,
       showRemove,
       hideUploader,
-      displayFileList,
       uploadFiles,
       handlePreview,
       handleDetele,
       handleDownload,
-    } = useFileHandle(props, context)
-
-    effect(() => {
-      displayFileList()
-    })
+    } = useAttachmentHandle(props, context)
 
     /**
      * 列表上传，点击选择文件

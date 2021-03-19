@@ -3,15 +3,11 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:25:18
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-16 20:38:43
+ * @LastEditTime: 2021-03-19 01:28:26
  * @FilePath: /packages/services/services.ts
  */
 import { FetchService } from './axios'
-/**
- *
- * @class Test
- * @param {(string)} [domainOrOptions] - The project domain.
- */
+import { typing } from './typing'
 export default class {
   public http: FetchService
   public constructor(http: FetchService) {
@@ -62,6 +58,104 @@ export default class {
    */
   public async SearchDeptUserInfo(data: any) {
     const result = await this.http.post(`/v1/private/user/searchUserInfo`, data)
+    return result
+  }
+
+  /**
+   * 文件删除
+   * @method
+   * @name #DelAttachmentPrivateV1GET
+   * @param {string} fileId - fileId
+   */
+  public async DelAttachmentPrivateV1GET(params: {
+    payload?: {}
+    query?: {
+      fileId?: string
+    }
+    path?: {}
+  }): Promise<typing.PlainResult> {
+    let path = ''
+    path = '/v1/private/attachment/del'
+    let body: any
+    const queryParameters: any = {}
+
+    if (params.query !== undefined && params.query['fileId'] !== undefined) {
+      queryParameters['fileId'] = params.query['fileId']
+    }
+
+    const result: typing.PlainResult = await this.http.request({
+      method: 'GET',
+      url: path,
+      params: queryParameters,
+      payload: body,
+    })
+    return result
+  }
+
+  /**
+   * 批量获取附件信息
+   * @method
+   * @name #GetAttachmentListAttachmentPrivateV1POST
+   * @param {array} fileIdList - fileIdList
+   */
+  public async GetAttachmentListAttachmentPrivateV1POST(params: {
+    payload?: {}
+    query?: {
+      fileIdList?: Array<string>
+    }
+    path?: {}
+  }): Promise<typing.ListResult$AttachmentDto$> {
+    let path = ''
+    path = '/v1/private/attachment/getAttachmentList'
+    let body: any
+    const queryParameters: any = {}
+
+    if (
+      params.query !== undefined &&
+      params.query['fileIdList'] !== undefined
+    ) {
+      queryParameters['fileIdList'] = params.query['fileIdList']
+    }
+
+    const result: typing.ListResult$AttachmentDto$ = await this.http.request({
+      method: 'POST',
+      url: path,
+      params: queryParameters,
+      payload: body,
+    })
+    return result
+  }
+  /**
+   * 批量获取图片信息
+   * @method
+   * @name #GetImageListAttachmentPrivateV1POST
+   * @param {array} fileIdList - fileIdList
+   */
+  public async GetImageListAttachmentPrivateV1POST(params: {
+    payload?: {}
+    query?: {
+      fileIdList?: Array<string>
+    }
+    path?: {}
+  }): Promise<typing.ListResult$ImageDto$> {
+    let path = ''
+    path = '/v1/private/attachment/getImageList'
+    let body: any
+    const queryParameters: any = {}
+
+    if (
+      params.query !== undefined &&
+      params.query['fileIdList'] !== undefined
+    ) {
+      queryParameters['fileIdList'] = params.query['fileIdList']
+    }
+
+    const result: typing.ListResult$ImageDto$ = await this.http.request({
+      method: 'POST',
+      url: path,
+      params: queryParameters,
+      payload: body,
+    })
     return result
   }
 }

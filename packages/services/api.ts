@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 16:58:26
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-15 20:37:49
+ * @LastEditTime: 2021-03-19 02:29:45
  * @FilePath: /packages/services/api.ts
  */
 
@@ -28,6 +28,7 @@ const baseURL =
     ? 'https://test.yigowork.com/apps/api'
     : window.okuiConfig.apiPath
 
+console.log('baseURL', baseURL)
 export function apiInit() {
   const httpClient = new HttpClient(baseURL)
   const serviceAuto = new Service(httpClient)
@@ -36,3 +37,5 @@ export function apiInit() {
     default: serviceAuto,
   }
 }
+
+export { baseURL }
