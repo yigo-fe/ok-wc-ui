@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-03 21:17:47
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-19 19:09:02
+ * @LastEditTime: 2021-03-19 19:54:05
  * @FilePath: /packages/ok-employee-select/hook-input.ts
  */
 
@@ -206,19 +206,19 @@ export default function (props: any, context: any) {
 
       // 非tree 模式
       //有初始值， 特殊处理
-      // if (propsValue.value?.length) {
-      //   if (isInitial && propsValEqulValue()) {
-      //     isInitial = false
-      //     return
-      //   }
-      //   if (isInitial) return
-      // }
-
-      if (isInitial && propsValEqulValue()) {
-        isInitial = false
-        return
+      if (propsValue.value?.length) {
+        if (isInitial && propsValEqulValue()) {
+          isInitial = false
+          return
+        }
+        if (isInitial) return
       }
-      if (isInitial) return
+
+      // if (isInitial && propsValEqulValue()) {
+      //   isInitial = false
+      //   return
+      // }
+      // if (isInitial) return
 
       // 非initial, update value
       context.emit('update', { value: val, options: selectedList.value })
