@@ -3,12 +3,12 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:57:52
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-18 17:59:03
+ * @LastEditTime: 2021-03-19 14:00:49
  * @FilePath: /packages/ok-employee-select/hook-tree.ts
  */
 import { debounce } from 'lodash'
 import { effect } from 'ok-lit'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 // 根据部门查询部门下直属人员
 // const URL =
@@ -20,7 +20,7 @@ import close from '../assets/images/closed.svg'
 import search from '../assets/images/search.svg'
 import { apiInit } from '../services/api'
 
-export default function (props: any) {
+export default function (props: any, context: any) {
   const api = apiInit()
   const placeholder = computed(() => props.placeholder)
   const isDisabled = computed(() => props.disabled)
@@ -29,7 +29,13 @@ export default function (props: any) {
   const secrecy = computed(() => props.secrecy)
   const noRemote = computed(() => props.range && props.range.length)
   const propsValue = computed(() => props.value)
+
   const value = ref<string[]>([])
+  const wang = ref([])
+
+  effect(() => {
+    wang.value = props.value
+  })
 
   const deptIcon = folder
   const checkedIcon = checked
@@ -229,15 +235,69 @@ export default function (props: any) {
   // watch(value, val => {
   //   context.emit('update', val)
   // })
+  // 避免首次value赋值时触发更新
+  let isInitial = true
 
-  effect(() => {
+  // 判断propsValue 是否和value一样
+  const propsValEqulValue = () => {
+    const l1 = propsValue.value?.length || 0
+    const l2 = value.value?.length || 0
+    let same = false
+    if (l1 === l2) {
+      same = l1
+        ? propsValue.value.every(v => value.value.indexOf(v) > -1)
+        : true
+    }
+    return same
+  }
+
+  const handlePropsValChange = () => {
     const val = propsValue.value
+    if ((!val?.length && !value.value.length) || propsValEqulValue()) return
+    // 更新初始值
+    isInitial = true
     if (val?.length) {
-      value.value = typeof val === 'string' ? [val] : val
-    } else {
+      // 更新value；获取detail,回显信息
+      value.value = val
+    } else if (value.value?.length) {
+      // 清除已选的值
       value.value = []
     }
-  })
+  }
+
+  // 监听value变化， 处理溢出items
+  watch(
+    () => value.value,
+    val => {
+      // console.log(
+      //   'watch-value',
+      //   value.value,
+      //   propsValue.value,
+      //   isInitial,
+      //   propsValEqulValue()
+      // )
+      //有初始值， 特殊处理
+      if (propsValue.value?.length) {
+        if (isInitial && propsValEqulValue()) {
+          isInitial = false
+          return
+        }
+        if (isInitial) return
+      }
+      // console.log('update')
+      // 非initial, update value
+      context.emit('update', { value: val, options: selectedList.value })
+    }
+  )
+  // setTimeout(() => {
+  watch(
+    () => props.value,
+    () => {
+      // console.log('watch-propsValue.value', propsValue.value)
+      handlePropsValChange()
+    }
+  )
+  // }, 300)
 
   return {
     value,
@@ -259,6 +319,7 @@ export default function (props: any) {
     selectedList,
     isSearch,
     param,
+    propsValue,
     handleDeptClick,
     handleEmployeeSelect,
     cancelHandle,
@@ -271,5 +332,6 @@ export default function (props: any) {
     isSelected,
     searchEmployeeById,
     searchByKey,
+    wang,
   }
 }

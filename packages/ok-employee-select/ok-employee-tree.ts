@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:56:38
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-18 17:59:13
+ * @LastEditTime: 2021-03-19 14:12:35
  * @FilePath: /packages/ok-employee-select/ok-employee-tree.ts
  */
 import {
@@ -82,8 +82,10 @@ defineComponent(
             isSelected,
             clearSelected,
             searchByKey,
-          } = useEmployeeTree(props)
+            wang,
+          } = useEmployeeTree(props, context)
 
+          // input 中删除时， 更新value
           const handleValChange = (e: CustomEvent) => {
             value.value = e.detail
           }
@@ -120,12 +122,14 @@ defineComponent(
             clearSelected,
             searchByKey,
             handleValChange,
+            wang,
           }
         },
         template: `
           <ok-employee-input 
             @ichange="handleValChange"
             @click="handleOpenModal"
+            :key="wang"
             :value="value"
             :placeholder="placeholder"
             :range="range"

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-03 21:17:47
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-18 22:37:02
+ * @LastEditTime: 2021-03-19 14:00:37
  * @FilePath: /packages/ok-employee-select/hook-input.ts
  */
 
@@ -38,12 +38,16 @@ export default function (props: any, context: any) {
     // 监听外部传入值变化，设置value --- 解决打包后watch不生效的问题
     // debugger
     // console.log('computed', props.value)
-    return props.value
+    if (!props.value) return []
+    else {
+      return typeof props.value === 'string' ? [props.value] : props.value
+    }
   })
   const placeholder = computed(() => props.placeholder)
   const isDisabled = computed(() => props.disabled)
   const multiple = computed(() => props.multiple)
   const noRemote = computed(() => props.range && props.range.length)
+  const isTree = computed(() => props.mode === 'tree')
 
   // 已选人员信息列表
   const selectedList = computed(() => {
@@ -142,7 +146,7 @@ export default function (props: any, context: any) {
   }
 
   const setOpen = (event: any) => {
-    if (props.mode) return
+    if (isTree.value) return
     if (event?.path[0]?.className === 'head-clear-icon') return
     isOpen.value = true
   }
@@ -163,25 +167,33 @@ export default function (props: any, context: any) {
 
   // 判断propsValue 是否和value一样
   const propsValEqulValue = () => {
-    const l1 = props.value?.length || 0
+    const l1 = propsValue.value?.length || 0
     const l2 = value.value?.length || 0
     let same = false
     if (l1 === l2) {
-      same = l1 ? props.value.every(v => value.value.indexOf(v) > -1) : true
+      same = l1
+        ? propsValue.value.every(v => value.value.indexOf(v) > -1)
+        : true
     }
     return same
   }
   // propsValue 变化时处理：
   const handlePropsValChange = () => {
-    const val = props.value
+    // console.log(
+    //   'handlePropsValChange',
+    //   props.value,
+    //   value.value,
+    //   propsValEqulValue()
+    // )
+    const val = propsValue.value
     if ((!val?.length && !value.value.length) || propsValEqulValue()) return
     // 更新初始值
     isInitial = true
     if (val?.length) {
       // 更新value；获取detail,回显信息
-      value.value = typeof val === 'string' ? [val] : val
-      // 回显
-      getRangeEmployeesByIds(val)
+      value.value = val
+      // 回显: 如果已有固定范围， 则不需要更新options
+      !props.range?.length && getRangeEmployeesByIds(val)
     } else if (value.value?.length) {
       // 清除已选的值
       value.value = []
@@ -189,33 +201,39 @@ export default function (props: any, context: any) {
   }
 
   // 监听value变化， 处理溢出items
-  watch(value, val => {
-    //有初始值， 特殊处理
-    if (props.value?.length) {
-      if (isInitial && propsValEqulValue()) {
-        isInitial = false
+  watch(
+    () => value.value,
+    val => {
+      //如果是tree 模式， 不需要在此处update, 只需更新input中展示即可
+      if (isTree.value) {
+        getExceedEmployee()
         return
       }
-      if (isInitial) return
-    }
-    // 非initial, update value
-    context.emit('update', { value: val, options: selectedList.value })
-    // value 变化， 计算溢出人员
-    getExceedEmployee()
-  })
-  // effect(() => {
-  //   console.log('effect', propsValue.value)
-  // })
 
+      // 非tree 模式
+      //有初始值， 特殊处理
+      if (propsValue.value?.length) {
+        if (isInitial && propsValEqulValue()) {
+          isInitial = false
+          return
+        }
+        if (isInitial) return
+      }
+      // 非initial, update value
+      context.emit('update', { value: val, options: selectedList.value })
+      // value 变化， 计算溢出人员
+      getExceedEmployee()
+    }
+  )
+
+  // 监听外部出入值propsValue, 赋值value
   watch(
-    () => props.value,
+    () => propsValue.value,
     () => {
+      // console.log('watch-propsvalue', propsValue.value, value.value)
       handlePropsValChange()
     }
   )
-  // watch(props.value, () => {
-  //   console.log('propsvalue')
-  // })
 
   // 指定范围
   effect(() => {
