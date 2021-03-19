@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-03 21:17:47
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-19 14:00:37
+ * @LastEditTime: 2021-03-19 19:09:02
  * @FilePath: /packages/ok-employee-select/hook-input.ts
  */
 
@@ -179,12 +179,6 @@ export default function (props: any, context: any) {
   }
   // propsValue 变化时处理：
   const handlePropsValChange = () => {
-    // console.log(
-    //   'handlePropsValChange',
-    //   props.value,
-    //   value.value,
-    //   propsValEqulValue()
-    // )
     const val = propsValue.value
     if ((!val?.length && !value.value.length) || propsValEqulValue()) return
     // 更新初始值
@@ -212,13 +206,20 @@ export default function (props: any, context: any) {
 
       // 非tree 模式
       //有初始值， 特殊处理
-      if (propsValue.value?.length) {
-        if (isInitial && propsValEqulValue()) {
-          isInitial = false
-          return
-        }
-        if (isInitial) return
+      // if (propsValue.value?.length) {
+      //   if (isInitial && propsValEqulValue()) {
+      //     isInitial = false
+      //     return
+      //   }
+      //   if (isInitial) return
+      // }
+
+      if (isInitial && propsValEqulValue()) {
+        isInitial = false
+        return
       }
+      if (isInitial) return
+
       // 非initial, update value
       context.emit('update', { value: val, options: selectedList.value })
       // value 变化， 计算溢出人员
@@ -228,7 +229,7 @@ export default function (props: any, context: any) {
 
   // 监听外部出入值propsValue, 赋值value
   watch(
-    () => propsValue.value,
+    () => props.value,
     () => {
       // console.log('watch-propsvalue', propsValue.value, value.value)
       handlePropsValChange()

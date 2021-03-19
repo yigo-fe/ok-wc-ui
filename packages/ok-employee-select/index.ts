@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-19 14:12:52
+ * @LastEditTime: 2021-03-19 19:07:46
  * @FilePath: /packages/ok-employee-select/index.ts
  */
 
@@ -14,7 +14,7 @@ import CDN_PATH from '../path.config'
 
 const propsOptions = {
   value: {
-    type: (Array as unknown) as PropType<[]>,
+    type: (Array as unknown) as PropType<string[]>,
   },
   range: {
     type: (Array as unknown) as PropType<string[]>,

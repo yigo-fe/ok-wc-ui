@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:57:52
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-19 14:00:49
+ * @LastEditTime: 2021-03-19 19:08:17
  * @FilePath: /packages/ok-employee-select/hook-tree.ts
  */
 import { debounce } from 'lodash'
@@ -269,22 +269,22 @@ export default function (props: any, context: any) {
   watch(
     () => value.value,
     val => {
-      // console.log(
-      //   'watch-value',
-      //   value.value,
-      //   propsValue.value,
-      //   isInitial,
-      //   propsValEqulValue()
-      // )
+      // debugger
       //有初始值， 特殊处理
-      if (propsValue.value?.length) {
-        if (isInitial && propsValEqulValue()) {
-          isInitial = false
-          return
-        }
-        if (isInitial) return
+      // if (propsValue.value?.length) {
+      //   if (isInitial && propsValEqulValue()) {
+      //     isInitial = false
+      //     return
+      //   }
+      //   if (isInitial) return
+      // }
+
+      if (isInitial && propsValEqulValue()) {
+        isInitial = false
+        return
       }
-      // console.log('update')
+      if (isInitial) return
+
       // 非initial, update value
       context.emit('update', { value: val, options: selectedList.value })
     }

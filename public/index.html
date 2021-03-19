@@ -36,6 +36,7 @@
       <ok-employee-select class="ok-employee-input" placeholder="请选择" style="width: 200px;display: block;"></ok-employee-select>
 
       <button onclick="testClick()">test</button>
+      <button onclick="testClick2()">test2</button>
       <!-- <ok-person-detail></ok-person-detail> -->
       <!-- <ok-person-group></ok-person-group> -->
       <!-- <ok-ant-person-select></ok-ant-person-select> -->
@@ -158,8 +159,7 @@
 
 
       const okEmployeeTree = document.querySelector('.ok-employee-tree')
-      setTimeout(()=>{okEmployeeTree.value = ["FanShuai"]},300)
-      
+      okEmployeeTree.value = []
       // okEmployeeTree.multiple = true
       // okEmployeeTree.range = ["FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing']
       okEmployeeTree.update = (val, list)=>{
@@ -182,11 +182,27 @@
     }
 
     function testClick (){
+      console.log(1)
+      // const okEmployeeInput = document.querySelector('.ok-employee-input')
+      // okEmployeeInput.value = ['FuJing'] 
+      
+      const okEmployeeTree = document.querySelector('.ok-employee-tree')
+      okEmployeeTree.value = ['FuJing'] 
+
+      
+    }
+
+    function testClick2 (){
       // const okEmployeeInput = document.querySelector('.ok-employee-input')
       // okEmployeeInput.value = ['FuJing'] 
 
       const okEmployeeTree = document.querySelector('.ok-employee-tree')
-      okEmployeeTree.value = ['FuJing'] 
+      okEmployeeTree.value = [] 
+      // setTimeout(()=>{
+      //   okEmployeeTree.value = [] 
+      // },1000)
+
+      console.log(2)
     }
 
 

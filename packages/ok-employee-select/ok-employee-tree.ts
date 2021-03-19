@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:56:38
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-19 14:12:35
+ * @LastEditTime: 2021-03-19 18:27:16
  * @FilePath: /packages/ok-employee-select/ok-employee-tree.ts
  */
 import {
@@ -129,7 +129,6 @@ defineComponent(
           <ok-employee-input 
             @ichange="handleValChange"
             @click="handleOpenModal"
-            :key="wang"
             :value="value"
             :placeholder="placeholder"
             :range="range"

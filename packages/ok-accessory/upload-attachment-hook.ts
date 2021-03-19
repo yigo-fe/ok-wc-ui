@@ -3,12 +3,13 @@
  * @Author: 付静
  * @Date: 2021-03-19 01:13:31
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-19 02:34:15
+ * @LastEditTime: 2021-03-19 19:10:43
  * @FilePath: /packages/ok-accessory/upload-attachment-hook.ts
  */
 import { watch } from 'vue'
 
 import { apiInit } from '../services/api'
+import { sourceHost } from '../services/api'
 import useUploadHandler from './upload-base-hook'
 export default function (props, context) {
   const api = apiInit()
@@ -28,9 +29,11 @@ export default function (props, context) {
 
   // 获取默认值
   const getDefaultFileList = async (ids: string[]) => {
-    const result = await api.default.GetAttachmentListAttachmentPrivateV1POST({
-      query: { fileIdList: ids },
-    })
+    const result: any = await api.default.GetAttachmentListAttachmentPublicV1POST(
+      {
+        query: { fileIdList: ids, sourceHost: sourceHost },
+      }
+    )
     if (result.code === '000000') {
       // fileLists.value = result.data
       displayFileList(result.data)

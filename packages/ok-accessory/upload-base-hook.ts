@@ -3,8 +3,8 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-19 02:11:38
- * @FilePath: /packages/ok-accessory/upload-hook.ts
+ * @LastEditTime: 2021-03-19 19:09:26
+ * @FilePath: /packages/ok-accessory/upload-base-hook.ts
  */
 
 /**
