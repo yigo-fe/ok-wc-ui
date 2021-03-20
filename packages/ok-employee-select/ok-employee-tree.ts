@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:56:38
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-19 18:27:16
+ * @LastEditTime: 2021-03-20 15:03:16
  * @FilePath: /packages/ok-employee-select/ok-employee-tree.ts
  */
 import {
@@ -15,37 +15,18 @@ import {
   Select,
   Tree,
 } from 'ant-design-vue'
-import { defineComponent, html, onMounted, PropType } from 'ok-lit'
+import { defineComponent, html, onMounted } from 'ok-lit'
 import { createApp } from 'vue'
 
 import CDN_PATH from '../path.config'
+import { propsOptions } from './employee-props'
 import useEmployeeTree from './hook-tree'
 import okEmployeeTreeCss from './style/ok-employee-tree.less'
 
 defineComponent(
   'ok-employee-tree',
   {
-    value: {
-      type: (Array as unknown) as PropType<string[]>,
-    },
-    placeholder: {
-      type: (String as unknown) as PropType<string>,
-    },
-    range: {
-      type: (Array as unknown) as PropType<string[]>,
-    },
-    disabled: {
-      type: (Boolean as unknown) as PropType<boolean>,
-      default: false,
-    },
-    multiple: {
-      type: (Boolean as unknown) as PropType<boolean>,
-      default: false,
-    },
-    secrecy: {
-      type: (Boolean as unknown) as PropType<boolean>,
-      default: false,
-    },
+    ...propsOptions,
   },
   (props, context) => {
     onMounted(() => {
@@ -66,11 +47,11 @@ defineComponent(
             visible,
             deptList,
             employeeList,
-            searchOptionsList,
+            searchResultList,
             breadcrumbList,
             selectedList,
             isSearch,
-            param,
+            queryKey,
             handleDeptClick,
             handleEmployeeSelect,
             cancelHandle,
@@ -82,7 +63,6 @@ defineComponent(
             isSelected,
             clearSelected,
             searchByKey,
-            wang,
           } = useEmployeeTree(props, context)
 
           // input 中删除时， 更新value
@@ -101,7 +81,7 @@ defineComponent(
             visible,
             deptList,
             employeeList,
-            searchOptionsList,
+            searchResultList,
             breadcrumbList,
             selectedList,
             isSearch,
@@ -109,7 +89,7 @@ defineComponent(
             checkedIcon,
             closeIcon,
             searchIcon,
-            param,
+            queryKey,
             handleDeptClick,
             handleEmployeeSelect,
             cancelHandle,
@@ -122,7 +102,6 @@ defineComponent(
             clearSelected,
             searchByKey,
             handleValChange,
-            wang,
           }
         },
         template: `
@@ -150,7 +129,7 @@ defineComponent(
                 <div class="tree-search">
                   <a-input  
                     placeholder="请输入人员名称"
-                    v-model:value="param"
+                    v-model:value="queryKey"
                     @change="searchByKey">
                     <template #prefix>
                       <img :src="searchIcon" class="dept-icon" />  
@@ -159,7 +138,7 @@ defineComponent(
                 </div>
 
                 <!--人员部门展示-->
-                <div class="tree-content" v-show="!isSearch && !secrecy">
+                <div class="tree-content" v-show="!queryKey && !secrecy">
                   <a-breadcrumb v-if="!noRemote">
                     <template #separator><span class="breadcrumb-separator"> > </span></template>
                     <a-breadcrumb-item href="" 
@@ -194,9 +173,9 @@ defineComponent(
                 <!--搜索的列表-->
                 <div v-show="isSearch" class="search-list">
                   <p  
-                    v-show= "searchOptionsList.length"
+                    v-show= "searchResultList.length"
                     class="item-detail employee"                   
-                    v-for="employee in searchOptionsList" 
+                    v-for="employee in searchResultList" 
                     :key="employee.employee_id"                  
                     @click="handleEmployeeSelect(employee)">
                     <ok-person-cell :personInfo="employee"></ok-person-cell>               
@@ -204,7 +183,7 @@ defineComponent(
                     <span class="email">{{employee.email}}</span>
                     <img v-if="isSelected(employee.employee_id)" :src="checkedIcon" class="checked-icon" />                 
                   </p>
-                  <p v-show="!searchOptionsList.length" class="empty-text">暂无数据</p>
+                  <p v-show="!searchResultList.length" class="empty-text">暂无数据</p>
                 </div>               
 
               </div>
@@ -225,11 +204,9 @@ defineComponent(
                     <span class="email">{{employee.email}}</span>    
                     <img :src="closeIcon" class="close-icon" />               
                   </p>
-                </div>
-              
+                </div>            
               </div>
             </div>
-
 
             <template #footer>
               <div>
@@ -237,7 +214,6 @@ defineComponent(
                 <a-button class="btn-ok" type="primary" @click="okHandle">确定</a-button>
               </div>
             </template>
-
           </a-modal>
         `,
       }

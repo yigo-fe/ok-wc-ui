@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 16:58:26
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-19 19:19:46
+ * @LastEditTime: 2021-03-20 14:51:39
  * @FilePath: /packages/services/api.ts
  */
 
@@ -11,6 +11,7 @@ import { HttpClient } from './axios'
 import Service from './services'
 
 declare global {
+  // eslint-disable-next-line no-unused-vars
   interface Window {
     // ok-wc-ui 配置
     okuiConfig: {
@@ -25,13 +26,13 @@ declare global {
 
 const baseURL =
   process.env.NODE_ENV === 'development'
-    ? 'https://test.yigowork.com/apps/api'
+    ? 'https://check.baiteda.com/apps/api'
     : window.okuiConfig.apiPath
 
+// 文件上传
 const sourceHost =
-  process.env.NODE_ENV === 'development' ? 'https://test.yigowork.com/' : ''
+  process.env.NODE_ENV === 'development' ? 'https://check.baiteda.com' : ''
 
-console.log('baseURL', baseURL)
 export function apiInit() {
   const httpClient = new HttpClient(baseURL)
   const serviceAuto = new Service(httpClient)

@@ -4,7 +4,7 @@
  * @Author: 付静
  * @Date: 2021-02-05 19:42:22
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-10 14:01:22
+ * @LastEditTime: 2021-03-20 15:54:41
  * @FilePath: /packages/ok-accessory/upload.props.ts
  */
 
@@ -81,7 +81,6 @@ const UploadProps = {
   },
   action: {
     type: (String as unknown) as PropType<string>,
-    required: true,
   },
   onProgress: {
     type: (Function as unknown) as PropType<AjaxEventListener>,
@@ -131,6 +130,12 @@ const UploadProps = {
   hideUploader: {
     type: (Boolean as unknown) as PropType<boolean>,
     default: false,
+  },
+  update: {
+    type: (Function as unknown) as PropType<
+      // eslint-disable-next-line no-unused-vars
+      (ids: string[], lists: []) => void
+    >,
   },
 }
 

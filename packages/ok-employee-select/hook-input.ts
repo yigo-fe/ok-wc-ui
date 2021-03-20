@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-03 21:17:47
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-19 19:54:05
+ * @LastEditTime: 2021-03-20 19:28:39
  * @FilePath: /packages/ok-employee-select/hook-input.ts
  */
 
@@ -36,8 +36,6 @@ export default function (props: any, context: any) {
 
   const propsValue = computed(() => {
     // 监听外部传入值变化，设置value --- 解决打包后watch不生效的问题
-    // debugger
-    // console.log('computed', props.value)
     if (!props.value) return []
     else {
       return typeof props.value === 'string' ? [props.value] : props.value
@@ -79,6 +77,18 @@ export default function (props: any, context: any) {
 
   const searchByKey = debounce(onFetch, 500)
 
+  // 人员id根据查询指定人员信息: 1. 默认值回显；2. 查询指定范围
+  const getRangeEmployeesByIds = async (userIds: string[]) => {
+    if (!userIds?.length) options.value = []
+
+    const result = await api.default.ListUserInfoByIds({ user_ids: userIds })
+    if (result.code === '000000') {
+      const data: any = result.data
+      options.value = data
+      collectEmployeeMap(options.value)
+    }
+  }
+
   // 处理溢出人员
 
   // 获取溢出人员信息
@@ -91,17 +101,6 @@ export default function (props: any, context: any) {
       const exceedIds = value.value.slice(maxTagCount.value)
       exceedList.value = exceedIds.map(v => employeeMap[v]).filter(v => v)
     }
-
-    // if (value.value.length > maxTagCount.value) {
-    //   const exceedIds = value.value.slice(maxTagCount.value)
-    //   const result = await api.default.ListUserInfoByIds({
-    //     user_ids: exceedIds,
-    //   })
-    //   if (result.code === '000000') {
-    //     const data: any = result.data
-    //     exceedList.value = data
-    //   }
-    // }
   }
 
   // 处理最多能展示多少个tag
@@ -110,7 +109,7 @@ export default function (props: any, context: any) {
     const elWith = el.offsetWidth
     if (!elWith) return
 
-    maxTagCount.value = elWith > 185 ? Math.floor((elWith - 75) / 108) : 0
+    maxTagCount.value = elWith > 185 ? Math.floor((elWith - 75) / 108) : 1
     // 首次计算溢出人员
     getExceedEmployee()
   }
@@ -120,18 +119,6 @@ export default function (props: any, context: any) {
       maxTagCountComput()
     }, 500)
   })
-
-  // 查询指定人员信息
-  const getRangeEmployeesByIds = async (userIds: string[]) => {
-    if (!userIds?.length) options.value = []
-
-    const result = await api.default.ListUserInfoByIds({ user_ids: userIds })
-    if (result.code === '000000') {
-      const data: any = result.data
-      options.value = data
-      collectEmployeeMap(options.value)
-    }
-  }
 
   // 清除， 删除全部
   const clearSelected = () => {
@@ -177,6 +164,38 @@ export default function (props: any, context: any) {
     }
     return same
   }
+
+  // 组件内部value变化时处理：1. 触发组件update，同步外部数据; 2. 计算溢出标签，展示'更多'组件
+  const handleValueChange = () => {
+    //如果是tree 模式， 不需要在此处update, 只需更新input中展示即可
+    if (isTree.value) {
+      getExceedEmployee()
+      return
+    }
+
+    // 非tree 模式
+    const val = value.value
+
+    //有初始值， 特殊处理
+    if (propsValue.value?.length) {
+      if (isInitial && propsValEqulValue()) {
+        isInitial = false
+        return
+      }
+      if (isInitial) return
+    }
+
+    isInitial = false
+
+    // 非initial, update value
+    context.emit('update', {
+      value: val,
+      options: selectedList.value,
+    })
+    // value 变化， 计算溢出人员
+    getExceedEmployee()
+  }
+
   // propsValue 变化时处理：
   const handlePropsValChange = () => {
     const val = propsValue.value
@@ -197,33 +216,12 @@ export default function (props: any, context: any) {
   // 监听value变化， 处理溢出items
   watch(
     () => value.value,
-    val => {
-      //如果是tree 模式， 不需要在此处update, 只需更新input中展示即可
-      if (isTree.value) {
-        getExceedEmployee()
-        return
-      }
-
-      // 非tree 模式
-      //有初始值， 特殊处理
-      if (propsValue.value?.length) {
-        if (isInitial && propsValEqulValue()) {
-          isInitial = false
-          return
-        }
-        if (isInitial) return
-      }
-
-      // if (isInitial && propsValEqulValue()) {
-      //   isInitial = false
-      //   return
-      // }
-      // if (isInitial) return
-
-      // 非initial, update value
-      context.emit('update', { value: val, options: selectedList.value })
-      // value 变化， 计算溢出人员
-      getExceedEmployee()
+    () => {
+      handleValueChange()
+    },
+    {
+      immediate: true,
+      deep: true,
     }
   )
 
@@ -233,6 +231,10 @@ export default function (props: any, context: any) {
     () => {
       // console.log('watch-propsvalue', propsValue.value, value.value)
       handlePropsValChange()
+    },
+    {
+      immediate: true,
+      deep: true,
     }
   )
 

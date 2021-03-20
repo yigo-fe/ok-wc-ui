@@ -3,41 +3,23 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-18 20:49:55
+ * @LastEditTime: 2021-03-20 15:01:19
  * @FilePath: /packages/ok-employee-select/ok-employee-input.ts
  */
 import './ok-employee-more'
 
 import { Button, Select } from 'ant-design-vue'
-import { defineComponent, html, onMounted, PropType } from 'ok-lit'
+import { defineComponent, html, onMounted } from 'ok-lit'
 import { createApp, h, ref } from 'vue'
 
 import CDN_PATH from '../path.config'
+import { propsOptions } from './employee-props'
 import useEmployeeSelect from './hook-input'
 import okEmployeeSelectCss from './style/ok-employee-select.less'
 defineComponent(
   'ok-employee-input',
   {
-    value: {
-      type: (Array as unknown) as PropType<string[]>,
-    },
-    placeholder: {
-      type: (String as unknown) as PropType<string>,
-    },
-    range: {
-      type: (Array as unknown) as PropType<string[]>,
-    },
-    disabled: {
-      type: (Boolean as unknown) as PropType<boolean>,
-      default: false,
-    },
-    mode: {
-      type: (String as unknown) as PropType<string>,
-    },
-    multiple: {
-      type: (Boolean as unknown) as PropType<boolean>,
-      default: false,
-    },
+    ...propsOptions,
   },
   (props, context) => {
     onMounted(() => {
@@ -115,7 +97,7 @@ defineComponent(
             handleSelect,
           }
         },
-        // :mode="multiple ? 'multiple': 'default'"
+        // (此处全部设置多选，用多选模拟单选):mode="multiple ? 'multiple': 'default'"
         template: `
 				<a-select
           ref="okEmployeeInput"			

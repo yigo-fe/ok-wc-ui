@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:09:30
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-09 19:56:55
+ * @LastEditTime: 2021-03-20 15:40:27
  * @FilePath: /packages/ok-accessory/ok-progress.ts
  */
 
@@ -27,10 +27,10 @@ defineComponent(
       return parseInt(p.toFixed(), 10)
     })
 
-    const content = computed(() => {
-      return `${percentageFormate.value}%`
-    })
-
+    // const content = computed(() => {
+    //   return `${percentageFormate.value}%`
+    // })
+    // <span>${content.value}</span>
     const width = computed(() => {
       return `${percentageFormate.value}%`
     })
@@ -63,7 +63,6 @@ defineComponent(
           style=${styleMap({ width: `${width.value}` })}
         ></div>
       </div>
-      <span>${content.value}</span>
     `
   }
 )

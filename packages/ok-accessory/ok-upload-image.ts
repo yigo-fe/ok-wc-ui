@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-19 02:21:55
+ * @LastEditTime: 2021-03-20 15:38:51
  * @FilePath: /packages/ok-accessory/ok-upload-image.ts
  */
 
@@ -118,7 +118,6 @@ defineComponent(
         ${okUploadImgCss}
       </style>
       <link rel="stylesheet" .href="${CDN_PATH}common.css" />
-      ${renderUploader()}
       <ok-file-image
         @preview=${handlePreview}
         @delete=${handleDetele}
@@ -129,6 +128,7 @@ defineComponent(
         .showDownload=${showDownload.value}
         .showRemove=${showRemove.value}
       ></ok-file-image>
+      ${renderUploader()}
     `
   }
 )

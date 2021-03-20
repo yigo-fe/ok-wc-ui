@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:09:30
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-09 19:49:26
+ * @LastEditTime: 2021-03-20 16:17:17
  * @FilePath: /packages/ok-accessory/ok-progress-vue.ts
  */
 
@@ -33,6 +33,9 @@ defineComponent(
             percentage.value = `${parseInt(p.toFixed(), 10)}%`
           })
 
+          // 展示上传进度数值， 暂时不要
+          // <span>{{percentage}}</span>
+
           return {
             percentage,
           }
@@ -44,7 +47,6 @@ defineComponent(
               :style="{ width: percentage}"
             ></div>
           </div>
-          <span>{{percentage}}</span>
         `,
       }
       const app = createApp(options)

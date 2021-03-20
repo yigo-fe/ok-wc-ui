@@ -3,11 +3,10 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:57:52
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-19 19:54:26
+ * @LastEditTime: 2021-03-20 19:29:11
  * @FilePath: /packages/ok-employee-select/hook-tree.ts
  */
 import { debounce } from 'lodash'
-import { effect } from 'ok-lit'
 import { computed, ref, watch } from 'vue'
 
 // 根据部门查询部门下直属人员
@@ -22,38 +21,51 @@ import { apiInit } from '../services/api'
 
 export default function (props: any, context: any) {
   const api = apiInit()
+  // placeholder
   const placeholder = computed(() => props.placeholder)
+  // disabled
   const isDisabled = computed(() => props.disabled)
+  // multiple
   const multiple = computed(() => props.multiple)
+  // 指定可选人员范围 (string[])：如果指定了可选范围， 则为本地模式， 不再进行远程搜索
   const range = computed(() => props.range)
+  // 是否开启了组价架构保密：如果开启了，则不展示组织架构树，只能进行搜索
   const secrecy = computed(() => props.secrecy)
   const noRemote = computed(() => props.range && props.range.length)
+  // 组件外部传入的初始value
   const propsValue = computed(() => props.value)
 
+  // 保存组件内部已选ids
   const value = ref<string[]>([])
-  const wang = ref([])
 
-  effect(() => {
-    wang.value = props.value
-  })
+  // modal 展示与否
+  const visible = ref(false)
+  const isSearch = ref(false)
 
+  // 组织架构面包屑
+  const breadcrumbList = ref<any[]>([
+    { department_id: '1', department_name: '根目录' },
+  ])
+
+  // 查询参数 - 当前部门id
+  let department_id = ref('1')
+  // 查询参数 - 人员搜索关键字
+  let queryKey = ref('')
+  // 组织架构树 - 部门列表
+  const deptList = ref<string[]>([])
+  // 组织架构树 - 人员列表
+  const employeeList = ref<string[]>([])
+  // 搜索结果 - 人员列表
+  const searchResultList = ref<any[]>([])
+
+  // 已选人员信息集合
+  const selectedList = ref<any[]>([])
+
+  // icon
   const deptIcon = folder
   const checkedIcon = checked
   const closeIcon = close
   const searchIcon = search
-  const visible = ref(false)
-  const isSearch = ref(false)
-
-  let department_id = ref('1')
-  let param = ref('')
-
-  const searchOptionsList = ref<any[]>([])
-  const deptList = ref<string[]>([])
-  const employeeList = ref<string[]>([])
-  const breadcrumbList = ref<any[]>([
-    { department_id: '1', department_name: '根目录' },
-  ])
-  const selectedList = ref<any[]>([])
 
   // 已选人员回显
   const displaySelected = async () => {
@@ -101,43 +113,34 @@ export default function (props: any, context: any) {
   const searchEmployeeById = async () => {
     const result = await api.default.SearchDeptUserInfo({
       department_id: department_id.value,
-      param: param.value,
+      param: queryKey.value,
     })
     if (result.code === '000000') {
       const data: any = result.data?.rows
       employeeList.value = data
     }
-
-    // axios
-    //   .post(URL, {
-    //     department_id: department_id.value,
-    //     param: param.value,
-    //   })
-    //   .then(res => {
-    //     const resData = res.data
-    //     if (resData.code === '000000') {
-    //       employeeList.value = resData.data.rows
-    //     }
-    //   })
   }
 
+  // 查询部门和人员
   const getDeptAndEmployee = () => {
     searchDeptById()
     searchEmployeeById()
   }
 
+  // 根据关键字查询人员信息
   const searchEmployeeByKey = async () => {
-    if (!param.value) return
-    const result = await api.default.SearchUserInfo({ param: param.value })
+    if (!queryKey.value) return
+    const result = await api.default.SearchUserInfo({ param: queryKey.value })
     if (result.code === '000000') {
       const data: any = result.data?.rows
-      searchOptionsList.value = data
+      searchResultList.value = data
     }
   }
 
+  // 有range时，本地过滤人员信息
   const filterRangeList = () => {
-    searchOptionsList.value = employeeList.value.filter(
-      (v: any) => v.employee_name.indexOf(param.value) > -1
+    searchResultList.value = employeeList.value.filter(
+      (v: any) => v.employee_name.indexOf(queryKey.value) > -1
     )
   }
 
@@ -154,7 +157,6 @@ export default function (props: any, context: any) {
     selectedList.value = selectedList.value.filter(
       (v: any) => v.employee_id !== employee_id
     )
-    // 取消左侧树的选中状态
   }
 
   const clearSelected = () => {
@@ -164,10 +166,11 @@ export default function (props: any, context: any) {
   const handleRootClick = () => {
     breadcrumbList.value = []
     department_id.value = '1'
-    param.value = ''
+    queryKey.value = ''
     getDeptAndEmployee()
   }
 
+  // 判断是否已选中
   const isSelected = (employee_id: string) => {
     return (
       selectedList.value.findIndex((v: any) => v.employee_id === employee_id) >
@@ -175,6 +178,11 @@ export default function (props: any, context: any) {
     )
   }
 
+  /**
+   * 点击左侧人员：
+   * 1. 如果已选，则本次是取消。如果未选过，则本次是选中， 放入selectedList中；
+   * 2. 区分单选和多选
+   */
   const handleEmployeeSelect = (employee: any) => {
     // 区分单选和多选
     isSelected(employee.employee_id)
@@ -202,7 +210,7 @@ export default function (props: any, context: any) {
 
     breadcrumbList.value = [{ department_id: '1', department_name: '根目录' }]
     department_id.value = '1'
-    param.value = ''
+    queryKey.value = ''
     // 初始化树左侧数据
     noRemote.value ? getRangeList() : getDeptAndEmployee()
     // 回显已选值
@@ -217,24 +225,16 @@ export default function (props: any, context: any) {
     visible.value = false
   }
 
+  // 搜索框：判断是本地or远程搜索
   const searchEmployee = () => {
-    isSearch.value = Boolean(param.value)
-    if (!isSearch.value) return
+    if (!queryKey.value) return
     noRemote.value ? filterRangeList() : searchEmployeeByKey()
   }
 
   const searchByKey = debounce(searchEmployee, 500)
 
-  // watch(param, () => {
-  //   isSearch.value = Boolean(param.value)
-  //   if (param.value) {
-  //     noRemote.value ? filterRangeList() : getDeptAndEmployee()
-  //   }
-  // })
+  // 以下处理watch props.value 和value.value：
 
-  // watch(value, val => {
-  //   context.emit('update', val)
-  // })
   // 避免首次value赋值时触发更新
   let isInitial = true
 
@@ -251,6 +251,33 @@ export default function (props: any, context: any) {
     return same
   }
 
+  // watch value 变化： 调用update,更新组件外部值
+  const handleValueChange = () => {
+    const val = value.value
+    //有初始值， 特殊处理
+    if (propsValue.value?.length) {
+      if (isInitial && propsValEqulValue()) {
+        isInitial = false
+        return
+      }
+      if (isInitial) return
+    }
+    isInitial = false
+    // 非initial, update value
+    context.emit('update', { value: val, options: selectedList.value })
+  }
+  watch(
+    () => value.value,
+    () => {
+      handleValueChange()
+    },
+    {
+      immediate: true,
+      deep: true,
+    }
+  )
+
+  // watch props.value, 赋值组件内部value
   const handlePropsValChange = () => {
     const val = propsValue.value
     if ((!val?.length && !value.value.length) || propsValEqulValue()) return
@@ -264,40 +291,17 @@ export default function (props: any, context: any) {
       value.value = []
     }
   }
-
-  // 监听value变化， 处理溢出items
   watch(
-    () => value.value,
-    val => {
-      // debugger
-      //有初始值， 特殊处理
-      if (propsValue.value?.length) {
-        if (isInitial && propsValEqulValue()) {
-          isInitial = false
-          return
-        }
-        if (isInitial) return
-      }
-
-      // if (isInitial && propsValEqulValue()) {
-      //   isInitial = false
-      //   return
-      // }
-      // if (isInitial) return
-
-      // 非initial, update value
-      context.emit('update', { value: val, options: selectedList.value })
-    }
-  )
-  // setTimeout(() => {
-  watch(
-    () => props.value,
+    () => propsValue.value,
     () => {
       // console.log('watch-propsValue.value', propsValue.value)
       handlePropsValChange()
+    },
+    {
+      immediate: true,
+      deep: true,
     }
   )
-  // }, 300)
 
   return {
     value,
@@ -314,11 +318,11 @@ export default function (props: any, context: any) {
     visible,
     deptList,
     employeeList,
-    searchOptionsList,
+    searchResultList,
     breadcrumbList,
     selectedList,
     isSearch,
-    param,
+    queryKey,
     propsValue,
     handleDeptClick,
     handleEmployeeSelect,
@@ -332,6 +336,5 @@ export default function (props: any, context: any) {
     isSelected,
     searchEmployeeById,
     searchByKey,
-    wang,
   }
 }

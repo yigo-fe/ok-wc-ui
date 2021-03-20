@@ -126,8 +126,8 @@
 
     window.onload = ()=>{
       const okUpload = document.querySelector('ok-upload-drag')
-      okUpload.action = action
-      okUpload.data = uploadData
+      // okUpload.action = action
+      // okUpload.data = uploadData
       // okUpload.operation = ['preview']
       // okUpload.hideUploader = true
 
@@ -170,11 +170,11 @@
       const okEmployeeInput = document.querySelector('.ok-employee-input')
       okEmployeeInput.value = ["FanShuai"]
       // okEmployeeInput.value = []
-      okEmployeeInput.multiple = true
-      okEmployeeInput.range = ["FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing']
-      okEmployeeInput.update = ({value, options})=>{
-        // console.log('update-index',value, options)
-        // okEmployeeInput.value = value
+      // okEmployeeInput.multiple = true
+      // okEmployeeInput.range = ["FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing']
+      okEmployeeInput.update = (a, b)=>{
+        console.log('update-index',a, b)
+        okEmployeeInput.value = a
       }
 
 
@@ -183,11 +183,14 @@
 
     function testClick (){
       console.log(1)
-      // const okEmployeeInput = document.querySelector('.ok-employee-input')
-      // okEmployeeInput.value = ['FuJing'] 
+      setTimeout(()=>{
+        const okEmployeeInput = document.querySelector('.ok-employee-input')
+      okEmployeeInput.multiple = true 
+      }, 1000)
+  
       
-      const okEmployeeTree = document.querySelector('.ok-employee-tree')
-      okEmployeeTree.value = ['FuJing'] 
+      // const okEmployeeTree = document.querySelector('.ok-employee-tree')
+      // okEmployeeTree.value = ['FuJing'] 
 
       
     }

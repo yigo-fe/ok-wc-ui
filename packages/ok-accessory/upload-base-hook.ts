@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-19 19:09:26
+ * @LastEditTime: 2021-03-20 17:12:44
  * @FilePath: /packages/ok-accessory/upload-base-hook.ts
  */
 
@@ -35,6 +35,7 @@
  */
 
 import { computed, ref } from 'ok-lit'
+import { watch } from 'vue'
 
 import type { OkFile, UploadStatus } from './upload.type'
 
@@ -51,22 +52,12 @@ export default function (props, context, config) {
   let fileId = 0
   const fileLists = ref([] as any)
   const maxSize = computed(() => props.maxSize * 1024 + 1)
+  const propsValue = computed(() => props.fileList)
 
-  // 仅限于fileList 回显
-  const displayFileList = (defaultFileList: any) => {
-    defaultFileList.forEach(file => {
-      fileLists.value.push({
-        name: file.file_name,
-        percentage: 100,
-        status: 'success',
-        size: file.size,
-        uid: fileId,
-        raw: file,
-        response: { data: [file] },
-      })
-      fileId++
-    })
-  }
+  const showPreview = computed(() => props.operation.includes('preview'))
+  const showDownload = computed(() => props.operation.includes('download'))
+  const showRemove = computed(() => props.operation.includes('remove'))
+  const hideUploader = computed(() => props.hideUploader)
 
   const fileCheck = file => {
     if (props.maxSize) {
@@ -176,7 +167,8 @@ export default function (props, context, config) {
   const handleProgress = (e: any, file: OkFile) => {
     updateStatus({ status: 'uploading', percentage: e.percent }, file)
     // 处理用户自定义事件
-    props.onProgress && props.onProgress(e, file, fileLists.value)
+    props.onProgress &&
+      props.onProgress({ e, file, fileLists: fileLists.value })
   }
 
   const handleSuccess = (res, file: OkFile) => {
@@ -184,7 +176,10 @@ export default function (props, context, config) {
     updateStatus({ status: 'success', response: res }, file)
     handleOnChange(file)
     // 处理用户自定义事件
-    props.onSuccess && props.onSuccess(res, file, fileLists.value)
+    props.onSuccess &&
+      props.onSuccess({ res, file, fileLists: fileLists.value })
+    // 更新value
+    props.update && props.update({ file, fileLists: fileLists.value })
   }
 
   const handleError = (err, file: OkFile) => {
@@ -195,15 +190,15 @@ export default function (props, context, config) {
     // 触发onchange
     handleOnChange(file)
     // 处理用户自定义事件
-    props.onSuccess && props.onSuccess(err, file, fileLists.value)
+    props.onError && props.onError({ err, file, fileLists: fileLists.value })
   }
 
   const handleExceed = file => {
-    props.onExceed && props.onExceed(file, fileLists.value)
+    props.onExceed && props.onExceed({ file, fileLists: fileLists.value })
   }
 
   const handleOnChange = file => {
-    props.onChange && props.onChange(file, fileLists.value)
+    props.onChange && props.onChange({ file, fileLists: fileLists.value })
   }
   /**
    * 删除文件
@@ -219,10 +214,11 @@ export default function (props, context, config) {
     // 处理beforeRemove
     if (
       !props.beforeRemove ||
-      (props.beforeRemove && props.beforeRemove(file, fileLists))
+      (props.beforeRemove &&
+        props.beforeRemove({ file, fileLists: fileLists.value }))
     ) {
       // 组件内部接口删除
-      config.remove(file, fileLists.value, idx)
+      config.remove({ file, index: idx, fileLists: fileLists.value })
     }
   }
   /**
@@ -264,10 +260,60 @@ export default function (props, context, config) {
     })
   }
 
-  const showPreview = computed(() => props.operation.includes('preview'))
-  const showDownload = computed(() => props.operation.includes('download'))
-  const showRemove = computed(() => props.operation.includes('remove'))
-  const hideUploader = computed(() => props.hideUploader)
+  // 仅限于fileList 回显
+  const displayFileList = (defaultFileList: any) => {
+    defaultFileList.forEach(file => {
+      fileLists.value.push({
+        name: file.file_name,
+        percentage: 100,
+        status: 'success',
+        size: file.size,
+        uid: fileId,
+        raw: file,
+        response: { data: [file] },
+      })
+      fileId++
+    })
+  }
+
+  // 获取默认列表
+  const handleDefaultlist = async (ids: string) => {
+    const result = await config.getDefaultFileList(ids)
+    if (result.code === '000000') {
+      displayFileList(result.data)
+    }
+  }
+
+  // 判断propsValue 是否和value一样
+  const propsValEqulValue = () => {
+    const l1 = propsValue.value?.length || 0
+    const l2 = fileLists.value?.length || 0
+
+    let same = false
+    if (l1 === l2) {
+      const fileIds = fileLists.value
+        .map((v: any) => v.response?.data?.[0]?.file_id)
+        .filter((v: any) => v)
+
+      same = l1 ? propsValue.value.every(v => fileIds.indexOf(v) > -1) : true
+    }
+    return same
+  }
+
+  watch(
+    () => propsValue.value,
+    () => {
+      const ids = props.fileList
+      // 如果propsValue 和fileList 一样， 不做处理
+      if (propsValEqulValue()) return
+
+      ids.length ? handleDefaultlist(ids) : (fileLists.value = [])
+    },
+    {
+      immediate: true,
+      deep: true,
+    }
+  )
 
   return {
     showPreview,
