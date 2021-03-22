@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:57:52
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-20 19:29:11
+ * @LastEditTime: 2021-03-22 14:40:41
  * @FilePath: /packages/ok-employee-select/hook-tree.ts
  */
 import { debounce } from 'lodash'
@@ -40,7 +40,6 @@ export default function (props: any, context: any) {
 
   // modal 展示与否
   const visible = ref(false)
-  const isSearch = ref(false)
 
   // 组织架构面包屑
   const breadcrumbList = ref<any[]>([
@@ -321,7 +320,6 @@ export default function (props: any, context: any) {
     searchResultList,
     breadcrumbList,
     selectedList,
-    isSearch,
     queryKey,
     propsValue,
     handleDeptClick,

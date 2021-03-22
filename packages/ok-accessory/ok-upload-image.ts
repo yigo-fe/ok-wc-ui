@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-20 15:38:51
+ * @LastEditTime: 2021-03-22 14:25:25
  * @FilePath: /packages/ok-accessory/ok-upload-image.ts
  */
 
@@ -34,6 +34,7 @@
  *
  */
 
+import { classMap } from 'lit-html/directives/class-map.js'
 import { defineComponent, html } from 'ok-lit'
 
 import CDN_PATH from '../path.config'
@@ -81,7 +82,14 @@ defineComponent(
     const renderUploader = () => {
       if (!hideUploader.value)
         return html`
-          <div class="ok-upload ok-upload-image" @click=${handleClick}>
+          <div
+            class=${classMap({
+              'ok-upload': true,
+              'ok-upload-image': true,
+              disabled: props.disabled,
+            })}
+            @click=${handleClick}
+          >
             <svg
               t="1615189238946"
               class="upload-img-icon"

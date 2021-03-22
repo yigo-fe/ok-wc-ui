@@ -24,6 +24,9 @@
       /* width: 600px; */
       /* height: 600px; */
     }
+    .divider {
+      margin-bottom: 20px;
+    }
   </style>
 </head>
 <body>
@@ -33,10 +36,18 @@
   <div id="app">
     <main>
 
-      <ok-employee-select class="ok-employee-input" placeholder="请选择" style="width: 200px;display: block;"></ok-employee-select>
+      <div class="divider">
+        <button onclick="testClick()">test</button>
+        <button onclick="testClick2()">test2</button>
+      </div>
+      <h3>人员选择select-antd</h3>
+      <ok-employee-select class="divider ok-employee-input" placeholder="请选择" style="width: 200px;display: block;"></ok-employee-select>
 
-      <button onclick="testClick()">test</button>
-      <button onclick="testClick2()">test2</button>
+      <ok-employee-select class="divider ok-employee-input2" placeholder="请选择" style="width: 200px;display: block;"></ok-employee-select>
+
+      <h3>人员选择tree</h3>
+      <ok-employee-select class="divider ok-employee-tree" mode="tree" placeholder="请选择" style="width: 300px;display: block;"></ok-employee-select>
+
       <!-- <ok-person-detail></ok-person-detail> -->
       <!-- <ok-person-group></ok-person-group> -->
       <!-- <ok-ant-person-select></ok-ant-person-select> -->
@@ -45,14 +56,13 @@
       <!-- 人员图像 -->
       <!-- <ok-avatar></ok-avatar> -->
       <!-- 人员卡片 -->
-      <ok-person-cell class="person-cell">haha</ok-person-cell>
+      <!-- <ok-person-cell class="person-cell">haha</ok-person-cell> -->
       <!-- 多人员list -->
       <!-- <ok-person-group ></ok-person-group> -->
 
-      <ok-person-card
-    ></ok-person-card>
+      <!-- <ok-person-card></ok-person-card> -->
 
-      <section  class="upload-demo">
+      <section  class="divider upload-demo">
         <h3>列表上传</h3>
         <ok-upload-list></ok-upload-list>
         
@@ -64,12 +74,6 @@
 
         <h3>图片上传</h3>
         <ok-upload-image style="width: 500px;"></ok-upload-image>
-
-        <h3>人员选择tree</h3>
-        <ok-employee-select class="ok-employee-tree" mode="tree" placeholder="请选择" style="width: 300px;display: block;"></ok-employee-select>
-
-        <h3>人员选择select-antd</h3>
-
 
       </section>
 
@@ -130,11 +134,13 @@
       // okUpload.data = uploadData
       // okUpload.operation = ['preview']
       // okUpload.hideUploader = true
+      okUpload.disabled = true
 
       const okUploadList = document.querySelector('ok-upload-list')
       okUploadList.action = action
       okUploadList.data = uploadData
       okUploadList.multiple = true
+      okUploadList.disabled = true
       okUploadList.operation = ['download']
       // okUploadList.hideUploader = true
 
@@ -142,6 +148,7 @@
       const okUploadImg = document.querySelector('ok-upload-image')
       okUploadImg.action = actionImg
       okUploadImg.multiple = true
+      okUploadImg.disabled = true
       okUploadImg.operation = ['remove']
       // okUploadImg.hideUploader = true
 
@@ -152,10 +159,11 @@
       // const okPersonGroup = document.querySelector('ok-person-group')
       // okPersonGroup.personList = personList
 
-      const okPersonCell = document.querySelector('ok-person-cell')
-      okPersonCell.personInfo = personInfo
-      const okPersonCard = document.querySelector('ok-person-card')
-      okPersonCard.personInfo = personInfo
+      // const okPersonCell = document.querySelector('ok-person-cell')
+      // okPersonCell.personInfo = personInfo
+
+      // const okPersonCard = document.querySelector('ok-person-card')
+      // okPersonCard.personInfo = personInfo
 
 
       const okEmployeeTree = document.querySelector('.ok-employee-tree')
@@ -164,33 +172,49 @@
       // okEmployeeTree.range = ["FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing']
       okEmployeeTree.update = (val, list)=>{
         console.log('tree-update-index',val, list)
+        okEmployeeTree.value = val
       }
 
 
-      const okEmployeeInput = document.querySelector('.ok-employee-input')
-      okEmployeeInput.value = ["FanShuai"]
-      // okEmployeeInput.value = []
-      // okEmployeeInput.multiple = true
-      // okEmployeeInput.range = ["FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing']
-      okEmployeeInput.update = (a, b)=>{
-        console.log('update-index',a, b)
-        okEmployeeInput.value = a
-      }
+      // const okEmployeeInput = document.querySelector('.ok-employee-input')
+      // // okEmployeeInput.value = ["FanShuai"]
+      // // okEmployeeInput.value = []
+      // // okEmployeeInput.multiple = true
+      // // okEmployeeInput.range = ["FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing']
+      // okEmployeeInput.update = (val, list)=>{
+      //   console.log('update-index',val, list)
+      //   okEmployeeInput.value = val
+      // }
 
+            const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
+      // okEmployeeInput2.value = ["FanShuai"]
+      // okEmployeeInput2.value = []
+      // okEmployeeInput2.multiple = true
+      // okEmployeeInput2.range = ["FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing']
+      okEmployeeInput2.update = (val, list)=>{
+        console.log('okEmployeeInput2 -update-index',val, list)
+        okEmployeeInput2.value = val
+      }
 
 
     }
 
     function testClick (){
-      console.log(1)
-      setTimeout(()=>{
-        const okEmployeeInput = document.querySelector('.ok-employee-input')
-      okEmployeeInput.multiple = true 
-      }, 1000)
+      // setTimeout(()=>{
+      //   // const okEmployeeInput = document.querySelector('.ok-employee-input')
+      //   // okEmployeeInput.multiple = true 
+
+      //   const okEmployeeTree = document.querySelector('.ok-employee-tree')
+      //   okEmployeeTree.multiple = true 
+      // }, 500)
   
-      
       // const okEmployeeTree = document.querySelector('.ok-employee-tree')
       // okEmployeeTree.value = ['FuJing'] 
+
+
+
+      const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
+      okEmployeeInput2.value = ['FuJing'] 
 
       
     }
@@ -199,13 +223,13 @@
       // const okEmployeeInput = document.querySelector('.ok-employee-input')
       // okEmployeeInput.value = ['FuJing'] 
 
-      const okEmployeeTree = document.querySelector('.ok-employee-tree')
-      okEmployeeTree.value = [] 
-      // setTimeout(()=>{
-      //   okEmployeeTree.value = [] 
-      // },1000)
+      // const okEmployeeTree = document.querySelector('.ok-employee-tree')
+      // okEmployeeTree.value = [] 
 
-      console.log(2)
+
+      const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
+      okEmployeeInput2.value = [] 
+
     }
 
 

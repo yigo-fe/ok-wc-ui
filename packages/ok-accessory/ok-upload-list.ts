@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-19 02:25:06
+ * @LastEditTime: 2021-03-22 14:37:08
  * @FilePath: /packages/ok-accessory/ok-upload-list.ts
  */
 
@@ -33,7 +33,7 @@
  * 上传成功之后展示filelist的数据格式
  *
  */
-
+import { classMap } from 'lit-html/directives/class-map.js'
 import { defineComponent, html } from 'ok-lit'
 
 import okUploadCss from './style/upload.less'
@@ -81,12 +81,23 @@ defineComponent(
       if (!hideUploader.value)
         return html`
           <div
-            class="ok-upload ok-upload--${props.listType}"
+            class=${classMap({
+              'ok-upload': true,
+              'ok-upload--text': true,
+              disabled: props.disabled,
+            })}
             tabindex="0"
             @click=${handleClick}
           >
             <slot>
-              <div class="ok-upload-list-btn">点击上传</div>
+              <div
+                class=${classMap({
+                  'ok-upload-list-btn': true,
+                  disabled: props.disabled,
+                })}
+              >
+                点击上传
+              </div>
             </slot>
             <input
               style="display: none"

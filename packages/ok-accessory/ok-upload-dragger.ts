@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 15:53:09
  * @LastEditors: 付静
- * @LastEditTime: 2021-02-24 15:27:03
+ * @LastEditTime: 2021-03-22 14:32:00
  * @FilePath: /packages/ok-accessory/ok-upload-dragger.ts
  */
 
@@ -86,7 +86,10 @@ defineComponent(
         ${okUploadDragCss}
       </style>
       <div
-        class="ok-upload-dragger ${classMap({ dragover: dragover.value })}"
+        class="ok-upload-dragger ${classMap({
+          dragover: dragover.value,
+          disabled: props.disabled,
+        })}"
         @drop=${onDrop}
         @dragover=${onDragover}
         @dragleave=${onDragleave}

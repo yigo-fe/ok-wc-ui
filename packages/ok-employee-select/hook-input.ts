@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-03 21:17:47
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-20 19:28:39
+ * @LastEditTime: 2021-03-22 14:41:24
  * @FilePath: /packages/ok-employee-select/hook-input.ts
  */
 
@@ -97,9 +97,17 @@ export default function (props: any, context: any) {
       exceedList.value.length && (exceedList.value = [])
       return
     } else {
-      // employeeMap 中取值， 避免频繁请求接口数据
       const exceedIds = value.value.slice(maxTagCount.value)
-      exceedList.value = exceedIds.map(v => employeeMap[v]).filter(v => v)
+
+      const result = await api.default.ListUserInfoByIds({
+        user_ids: exceedIds,
+      })
+      if (result.code === '000000') {
+        const data: any = result.data
+        exceedList.value = data
+      }
+      // employeeMap 中取值， 避免频繁请求接口数据 (tree 模式有问题)
+      // exceedList.value = exceedIds.map(v => employeeMap[v]).filter(v => v)
     }
   }
 

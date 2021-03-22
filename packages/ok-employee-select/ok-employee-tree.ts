@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:56:38
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-20 15:03:16
+ * @LastEditTime: 2021-03-22 14:40:28
  * @FilePath: /packages/ok-employee-select/ok-employee-tree.ts
  */
 import {
@@ -50,7 +50,6 @@ defineComponent(
             searchResultList,
             breadcrumbList,
             selectedList,
-            isSearch,
             queryKey,
             handleDeptClick,
             handleEmployeeSelect,
@@ -84,7 +83,6 @@ defineComponent(
             searchResultList,
             breadcrumbList,
             selectedList,
-            isSearch,
             deptIcon,
             checkedIcon,
             closeIcon,
@@ -171,7 +169,7 @@ defineComponent(
 
                 
                 <!--搜索的列表-->
-                <div v-show="isSearch" class="search-list">
+                <div v-show="queryKey" class="search-list">
                   <p  
                     v-show= "searchResultList.length"
                     class="item-detail employee"                   
