@@ -134,13 +134,13 @@
       // okUpload.data = uploadData
       // okUpload.operation = ['preview']
       // okUpload.hideUploader = true
-      okUpload.disabled = true
+      // okUpload.disabled = true
 
       const okUploadList = document.querySelector('ok-upload-list')
-      okUploadList.action = action
-      okUploadList.data = uploadData
+      // okUploadList.action = action
+      // okUploadList.data = uploadData
       okUploadList.multiple = true
-      okUploadList.disabled = true
+      // okUploadList.disabled = true
       okUploadList.operation = ['download']
       // okUploadList.hideUploader = true
 
@@ -148,8 +148,8 @@
       const okUploadImg = document.querySelector('ok-upload-image')
       okUploadImg.action = actionImg
       okUploadImg.multiple = true
-      okUploadImg.disabled = true
-      okUploadImg.operation = ['remove']
+      // okUploadImg.disabled = true
+      // okUploadImg.operation = ['remove']
       // okUploadImg.hideUploader = true
 
       // const okAttachmentDrag = document.querySelector('ok-attachment-drag')
@@ -167,29 +167,29 @@
 
 
       const okEmployeeTree = document.querySelector('.ok-employee-tree')
-      okEmployeeTree.value = []
-      // okEmployeeTree.multiple = true
+      okEmployeeTree.value = ['FanShuai']
+      okEmployeeTree.disabled = true
       // okEmployeeTree.range = ["FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing']
       okEmployeeTree.update = (val, list)=>{
         console.log('tree-update-index',val, list)
-        okEmployeeTree.value = val
+        // okEmployeeTree.value = val
       }
 
 
-      // const okEmployeeInput = document.querySelector('.ok-employee-input')
-      // // okEmployeeInput.value = ["FanShuai"]
-      // // okEmployeeInput.value = []
-      // // okEmployeeInput.multiple = true
-      // // okEmployeeInput.range = ["FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing']
-      // okEmployeeInput.update = (val, list)=>{
-      //   console.log('update-index',val, list)
-      //   okEmployeeInput.value = val
-      // }
+      const okEmployeeInput = document.querySelector('.ok-employee-input')
+      okEmployeeInput.value = ["FanShuai"]
+      // okEmployeeInput.value = []
+      // okEmployeeInput.disabled = true
+      // okEmployeeInput.range = ["FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing']
+      okEmployeeInput.update = (val, list)=>{
+        console.log('update-index',val, list)
+        okEmployeeInput.value = val
+      }
 
-            const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
-      // okEmployeeInput2.value = ["FanShuai"]
+      const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
+      okEmployeeInput2.value = ["FanShuai"]
       // okEmployeeInput2.value = []
-      // okEmployeeInput2.multiple = true
+      okEmployeeInput2.disabled = true
       // okEmployeeInput2.range = ["FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing']
       okEmployeeInput2.update = (val, list)=>{
         console.log('okEmployeeInput2 -update-index',val, list)
@@ -201,20 +201,21 @@
 
     function testClick (){
       // setTimeout(()=>{
-      //   // const okEmployeeInput = document.querySelector('.ok-employee-input')
-      //   // okEmployeeInput.multiple = true 
+      //   const okEmployeeInput = document.querySelector('.ok-employee-input')
+      //   okEmployeeInput.multiple = true 
 
-      //   const okEmployeeTree = document.querySelector('.ok-employee-tree')
-      //   okEmployeeTree.multiple = true 
+      //   // const okEmployeeTree = document.querySelector('.ok-employee-tree')
+      //   // okEmployeeTree.multiple = true 
+
       // }, 500)
   
-      // const okEmployeeTree = document.querySelector('.ok-employee-tree')
-      // okEmployeeTree.value = ['FuJing'] 
+      const okEmployeeTree = document.querySelector('.ok-employee-tree')
+      okEmployeeTree.value = ['FuJing'] 
 
 
 
-      const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
-      okEmployeeInput2.value = ['FuJing'] 
+      // const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
+      // okEmployeeInput2.value = ['FuJing'] 
 
       
     }
@@ -227,8 +228,8 @@
       // okEmployeeTree.value = [] 
 
 
-      const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
-      okEmployeeInput2.value = [] 
+      // const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
+      // okEmployeeInput2.value = [] 
 
     }
 

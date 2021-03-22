@@ -44,6 +44,7 @@
   border-radius: 2px;
   text-align: center;
   color: @ok-text-color;
+  font-size: 14px;
   &:hover{
     background-color: @ok-primary-color;
     border-color: @ok-primary-color;
@@ -55,6 +56,14 @@
     color: @ok-text-color;
     cursor: not-allowed;
   }
+}
+
+.ok-file-table-wraper {
+  display: block;
+  font-size: 0;
+}
+.ok-upload--text+.ok-file-table-wraper {
+  margin-top: 10px;
 }
 
 

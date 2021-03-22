@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-19 01:13:31
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-20 17:25:27
+ * @LastEditTime: 2021-03-22 16:28:21
  * @FilePath: /packages/ok-accessory/upload-attachment-hook.ts
  */
 
@@ -25,6 +25,19 @@ export default function (props, context) {
 
       // 更新value
       props.update && props.update({ file, fileLists })
+    }
+  }
+
+  /**
+   * 预览: 文件
+   * @param data
+   */
+  const handlePreview = data => {
+    let file = fileLists.value.find(v => v.uid === data.detail.uid)
+    if (file) {
+      window.open(file.response.data[0].online_view_url, '_blank')
+      // 处理用户自定义事件
+      props.onPreview && props.onPreview(file)
     }
   }
 
@@ -61,7 +74,6 @@ export default function (props, context) {
     hideUploader,
     displayFileList,
     uploadFiles,
-    handlePreview,
     handleDetele,
     handleDownload,
   } = useUploadHandler(props, context, config)

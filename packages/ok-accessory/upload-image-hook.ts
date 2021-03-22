@@ -3,11 +3,11 @@
  * @Author: 付静
  * @Date: 2021-03-19 01:13:31
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-20 17:21:11
+ * @LastEditTime: 2021-03-22 16:28:28
  * @FilePath: /packages/ok-accessory/upload-image-hook.ts
  */
 
-import { apiInit } from '../services/api'
+import { apiInit, sourceHost } from '../services/api'
 import useUploadHandler from './upload-base-hook'
 export default function (props, context) {
   const api = apiInit()
@@ -24,6 +24,22 @@ export default function (props, context) {
       props.onRemove && props.onRemove({ file, fileLists })
       // update value
       props.update && props.update({ file, fileLists })
+    }
+  }
+
+  /**
+   * 预览：图片
+   * @param data
+   */
+  const handlePreview = data => {
+    let file = fileLists.value.find(v => v.uid === data.detail.uid)
+    if (file) {
+      const path = file?.response?.data?.[0].file_path
+      const url = path ? `${sourceHost}${path}` : ''
+
+      window.open(url, '_blank')
+      // 处理用户自定义事件
+      props.onPreview && props.onPreview(file)
     }
   }
 
@@ -59,7 +75,6 @@ export default function (props, context) {
     hideUploader,
     displayFileList,
     uploadFiles,
-    handlePreview,
     handleDetele,
     handleDownload,
   } = useUploadHandler(props, context, config)

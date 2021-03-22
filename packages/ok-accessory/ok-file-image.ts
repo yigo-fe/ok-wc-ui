@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-10 16:53:48
+ * @LastEditTime: 2021-03-22 16:29:11
  * @FilePath: /packages/ok-accessory/ok-file-image.ts
  */
 
@@ -98,7 +98,7 @@ defineComponent(
                 </svg>
               </i>
 
-              <a v-if="showDownload" @click="handleDownload(file)">
+              <a v-if="showDownload" :href="file?.response?.data?.[0]?.download_url" @click="handleDownload(file)">
                 <svg
                   t="1615028599608"
                   class="icon"

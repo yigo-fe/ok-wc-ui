@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-20 17:12:44
+ * @LastEditTime: 2021-03-22 19:07:19
  * @FilePath: /packages/ok-accessory/upload-base-hook.ts
  */
 
@@ -177,7 +177,7 @@ export default function (props, context, config) {
     handleOnChange(file)
     // 处理用户自定义事件
     props.onSuccess &&
-      props.onSuccess({ res, file, fileLists: fileLists.value })
+      props.onSuccess({ response: res, file, fileLists: fileLists.value })
     // 更新value
     props.update && props.update({ file, fileLists: fileLists.value })
   }
@@ -190,7 +190,8 @@ export default function (props, context, config) {
     // 触发onchange
     handleOnChange(file)
     // 处理用户自定义事件
-    props.onError && props.onError({ err, file, fileLists: fileLists.value })
+    props.onError &&
+      props.onError({ error: err, file, fileLists: fileLists.value })
   }
 
   const handleExceed = file => {
@@ -231,19 +232,6 @@ export default function (props, context, config) {
       // window.open(file.response.data[0].download_url, '_blank')
       // 处理用户自定义事件
       props.onDownload && props.onDownload(file)
-    }
-  }
-
-  /**
-   * 下载
-   * @param data
-   */
-  const handlePreview = data => {
-    let file = fileLists.value.find(v => v.uid === data.detail.uid)
-    if (file) {
-      window.open(file.response.data[0].online_view_url, '_blank')
-      // 处理用户自定义事件
-      props.onPreview && props.onPreview(file)
     }
   }
 
@@ -323,7 +311,6 @@ export default function (props, context, config) {
     hideUploader,
     displayFileList,
     uploadFiles,
-    handlePreview,
     handleDetele,
     handleDownload,
   }

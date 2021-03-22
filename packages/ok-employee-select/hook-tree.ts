@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:57:52
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-22 14:40:41
+ * @LastEditTime: 2021-03-22 16:34:41
  * @FilePath: /packages/ok-employee-select/hook-tree.ts
  */
 import { debounce } from 'lodash'
@@ -203,6 +203,7 @@ export default function (props: any, context: any) {
 
   // 打开modal
   const handleOpenModal = (event: any) => {
+    if (isDisabled.value) return
     // 注意点击清除按钮 不能触发弹窗打开
     if (event?.path[0]?.className === 'head-clear-icon') return
     visible.value = true

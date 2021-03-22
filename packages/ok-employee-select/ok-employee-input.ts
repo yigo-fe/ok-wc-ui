@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-20 15:01:19
+ * @LastEditTime: 2021-03-22 16:38:30
  * @FilePath: /packages/ok-employee-select/ok-employee-input.ts
  */
 import './ok-employee-more'
@@ -125,7 +125,7 @@ defineComponent(
           @mouseleave="mouseleave" >
 
           <template #suffixIcon>
-            <img v-if="isMouseenter" :src="closeIcon" class="head-clear-icon" @click="clearSelected" />
+            <img v-if="isMouseenter && !isDisabled" :src="closeIcon" class="head-clear-icon" @click="clearSelected" />
             <img v-else :src="searchIcon" class="head-search-icon"/>
           </template>
 

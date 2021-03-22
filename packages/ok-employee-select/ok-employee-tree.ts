@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:56:38
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-22 14:40:28
+ * @LastEditTime: 2021-03-22 16:34:03
  * @FilePath: /packages/ok-employee-select/ok-employee-tree.ts
  */
 import {
@@ -109,7 +109,7 @@ defineComponent(
             :value="value"
             :placeholder="placeholder"
             :range="range"
-            :disabled="disabled"
+            :disabled="isDisabled"
             :multiple="multiple"
             mode="tree"
             ></ok-employee-input>

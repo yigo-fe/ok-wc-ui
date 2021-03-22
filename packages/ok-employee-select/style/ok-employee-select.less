@@ -8,12 +8,19 @@
 }
 
 // 修改边框颜色
-.ok-employee-select.ant-select-multiple .ant-select-selector {
-	border-color: @ok-border-color-base;
-	&:hover {
-		border-color: @ok-border-color-hover;
+.ok-employee-select.ant-select-multiple {
+	.ant-select-selector {
+		border-color: @ok-border-color-base;
+		&:hover {
+			border-color: @ok-border-color-hover;
+		}
 	}
-}
+	&.ant-select-disabled {
+		.ant-select-selector:hover {
+			border-color: @ok-border-color-base;
+		}
+	}
+} 
 
 // selected head 样式
 .ant-select-selection-item {

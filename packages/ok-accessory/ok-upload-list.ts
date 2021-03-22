@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-22 14:37:08
+ * @LastEditTime: 2021-03-22 16:56:38
  * @FilePath: /packages/ok-accessory/ok-upload-list.ts
  */
 
@@ -120,6 +120,7 @@ defineComponent(
 
       ${renderUploader()}
       <ok-file-table
+        class="ok-file-table-wraper"
         @preview=${handlePreview}
         @delete=${handleDetele}
         @download=${handleDownload}
