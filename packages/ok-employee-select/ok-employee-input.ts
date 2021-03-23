@@ -3,13 +3,13 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-22 16:38:30
+ * @LastEditTime: 2021-03-23 16:15:47
  * @FilePath: /packages/ok-employee-select/ok-employee-input.ts
  */
 import './ok-employee-more'
 
 import { Button, Select } from 'ant-design-vue'
-import { defineComponent, html, onMounted } from 'ok-lit'
+import { defineComponent, effect, html, onMounted } from 'ok-lit'
 import { createApp, h, ref } from 'vue'
 
 import CDN_PATH from '../path.config'
@@ -39,6 +39,7 @@ defineComponent(
             exceedList,
             closeIcon,
             searchIcon,
+            borderless,
             isMouseenter,
             noRemote,
             propsValue,
@@ -84,6 +85,7 @@ defineComponent(
             searchByKey,
             closeIcon,
             searchIcon,
+            borderless,
             isMouseenter,
             noRemote,
             propsValue,
@@ -99,6 +101,7 @@ defineComponent(
         },
         // (此处全部设置多选，用多选模拟单选):mode="multiple ? 'multiple': 'default'"
         template: `
+        {{noBorder}}
 				<a-select
           ref="okEmployeeInput"			
 					v-model:value="value"
@@ -116,6 +119,7 @@ defineComponent(
 					dropdownClassName="userSelectDropdown"
 					style="width: 100%"
 					class="ok-employee-select"
+          :class="{'no-border': borderless}"
 					@search="searchByKey"
           @select="handleSelect"
           @click="setOpen"

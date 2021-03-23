@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-19 01:13:31
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-22 16:28:21
+ * @LastEditTime: 2021-03-23 15:14:21
  * @FilePath: /packages/ok-accessory/upload-attachment-hook.ts
  */
 
@@ -72,6 +72,7 @@ export default function (props, context) {
     showRemove,
     fileLists,
     hideUploader,
+    disabled,
     displayFileList,
     uploadFiles,
     handleDetele,
@@ -84,6 +85,7 @@ export default function (props, context) {
     showRemove,
     fileLists,
     hideUploader,
+    disabled,
     displayFileList,
     uploadFiles,
     handlePreview,

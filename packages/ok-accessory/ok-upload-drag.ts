@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-22 14:21:24
+ * @LastEditTime: 2021-03-23 15:29:25
  * @FilePath: /packages/ok-accessory/ok-upload-drag.ts
  */
 
@@ -37,6 +37,7 @@
 import { classMap } from 'lit-html/directives/class-map.js'
 import { styleMap } from 'lit-html/directives/style-map'
 import { defineComponent, html } from 'ok-lit'
+import { ref } from 'vue'
 
 import CDN_PATH from '../path.config'
 import okUploadCss from './style/upload.less'
@@ -54,6 +55,7 @@ defineComponent(
       showRemove,
       fileLists,
       hideUploader,
+      disabled,
       uploadFiles,
       handlePreview,
       handleDetele,
@@ -64,14 +66,14 @@ defineComponent(
      * 列表上传，点击选择文件
      */
     const handleClick = () => {
-      if (!props.disabled) {
+      if (!disabled.value) {
         let inputRef = context.$refs.inputRef as HTMLInputElement
         inputRef.value = ''
         inputRef.click()
       }
     }
     /**
-     * 列表上传选中文件
+     * 点击上传选中文件
      * @param e 选中的文件
      */
     const handleChange = (e: DragEvent) => {
@@ -79,27 +81,84 @@ defineComponent(
       if (!files) return
       uploadFiles(files)
     }
+
     /**
      * 拖拽上传选择文件
-     * @param e emit事件
+     *
      */
-    const dragFiles = (e: CustomEvent) => {
-      uploadFiles(e.detail)
+    const dragover = ref(false)
+    const onDrop = (e: DragEvent) => {
+      e.preventDefault()
+      if (disabled.value) return
+      let files = (e.dataTransfer as DataTransfer).files
+      // 更改拖拽中状态
+      dragover.value = false
+
+      const accept = props.accept
+
+      if (!accept) {
+        uploadFiles(files)
+        // context.emit('file', files)
+        return
+      }
+
+      // 根据accept过滤符合条件的文件
+      const acceptedFiles = Array.from(files).filter(file => {
+        const { type, name } = file
+        const extension =
+          name.indexOf('.') > -1 ? `.${name.split('.').pop()}` : ''
+        const baseType = type.replace(/\/.*$/, '')
+        return accept
+          .split(',')
+          .map(type => type.trim())
+          .filter(type => type)
+          .some(acceptedType => {
+            if (acceptedType.startsWith('.')) {
+              return extension === acceptedType
+            }
+            if (/\/\*$/.test(acceptedType)) {
+              return baseType === acceptedType.replace(/\/\*$/, '')
+            }
+            if (/^[^/]+\/[^/]+$/.test(acceptedType)) {
+              return type === acceptedType
+            }
+            return false
+          })
+      })
+
+      if (!acceptedFiles.length) {
+        console.warn('文件格式不正确')
+      }
+      uploadFiles((acceptedFiles as unknown) as FileList)
+      // context.emit('file', acceptedFiles)
+    }
+
+    const onDragover = (e: DragEvent) => {
+      e.preventDefault()
+      if (!disabled.value) dragover.value = true
+    }
+
+    const onDragleave = (e: DragEvent) => {
+      e.preventDefault()
+      dragover.value = false
     }
 
     const renderUploader = () => {
       if (!hideUploader.value)
         return html`
-          <div class="ok-upload ok-upload--drag" @click=${handleClick}>
-            <ok-upload-dragger
-              .accept=${props.accept}
-              .disabled=${props.disabled}
-              @file=${dragFiles}
-            >
+          <div
+            class="ok-upload ok-upload--drag"
+            @drop=${onDrop}
+            @dragover=${onDragover}
+            @dragleave=${onDragleave}
+            @click=${handleClick}
+          >
+            <slot>
               <div
                 class=${classMap({
-                  'upload-tip': true,
+                  'upload-inner': true,
                   disabled: props.disabled,
+                  dragover: dragover.value,
                 })}
               >
                 <svg
@@ -120,7 +179,7 @@ defineComponent(
                 </svg>
 
                 <!-- <i class="ok-upload-drag-icon pro-app-page page-shangchuan1"></i> -->
-                <p>
+                <p class="upload-inner-text">
                   将文件拖到此处或
                   <span
                     class="upload-btn"
@@ -131,7 +190,7 @@ defineComponent(
                   >
                 </p>
               </div>
-            </ok-upload-dragger>
+            </slot>
 
             <input
               style="display: none"

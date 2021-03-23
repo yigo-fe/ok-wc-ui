@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-19 01:13:31
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-22 16:28:28
+ * @LastEditTime: 2021-03-23 16:56:03
  * @FilePath: /packages/ok-accessory/upload-image-hook.ts
  */
 
@@ -35,9 +35,9 @@ export default function (props, context) {
     let file = fileLists.value.find(v => v.uid === data.detail.uid)
     if (file) {
       const path = file?.response?.data?.[0].file_path
-      const url = path ? `${sourceHost}${path}` : ''
+      // const url = path ? `${sourceHost}${path}` : ''
 
-      window.open(url, '_blank')
+      window.open(path, '_blank')
       // 处理用户自定义事件
       props.onPreview && props.onPreview(file)
     }

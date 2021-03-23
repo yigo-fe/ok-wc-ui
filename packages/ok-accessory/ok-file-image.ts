@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-22 16:29:11
+ * @LastEditTime: 2021-03-23 14:44:47
  * @FilePath: /packages/ok-accessory/ok-file-image.ts
  */
 
@@ -38,6 +38,9 @@ defineComponent(
     showRemove: {
       type: (Boolean as unknown) as PropType<boolean>,
     },
+    thumbStyle: {
+      type: (Object as unknown) as PropType<object>,
+    },
   },
   (props, context) => {
     onMounted(() => {
@@ -47,6 +50,7 @@ defineComponent(
           const showPreview = computed(() => props.showPreview)
           const showDownload = computed(() => props.showDownload)
           const showRemove = computed(() => props.showRemove)
+          const thumbStyle = computed(() => props.thumbStyle)
           /**
            * 点击删除文件
            * @param file 要删除的文件
@@ -67,13 +71,14 @@ defineComponent(
             showPreview,
             showDownload,
             showRemove,
+            thumbStyle,
             handleDelete,
             handlePreview,
             handleDownload,
           }
         },
         template: `
-          <li v-for="file in fileList" :key="file.id" :class="['ok-upload-list__item', 'is-' + file.status]">
+          <li v-for="file in fileList" :key="file.id" :class="['ok-upload-list__item', 'is-' + file.status]" :style="thumbStyle">
             <div v-if="file.status === 'uploading'" class="ok-process-wraper" >
               <ok-progress class="image-progress" :percentage="file.percentage" :status="file.status" ></ok-progress>
             </div>

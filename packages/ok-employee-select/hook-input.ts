@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-03 21:17:47
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-22 14:41:24
+ * @LastEditTime: 2021-03-23 16:15:32
  * @FilePath: /packages/ok-employee-select/hook-input.ts
  */
 
@@ -14,6 +14,8 @@ import { computed, nextTick, ref, watch } from 'vue'
 import close from '../assets/images/closed.svg'
 import search from '../assets/images/search.svg'
 import { apiInit } from '../services/api'
+import { isSameArray } from '../utils/index'
+
 export default function (props: any, context: any) {
   const api = apiInit()
   // 下拉选择列表
@@ -46,6 +48,8 @@ export default function (props: any, context: any) {
   const multiple = computed(() => props.multiple)
   const noRemote = computed(() => props.range && props.range.length)
   const isTree = computed(() => props.mode === 'tree')
+  // 不展示展示边框
+  const borderless = computed(() => props.borderless)
 
   // 已选人员信息列表
   const selectedList = computed(() => {
@@ -158,7 +162,7 @@ export default function (props: any, context: any) {
   }
 
   // 避免首次value赋值时触发更新
-  let isInitial = true
+  let isInitial = false
 
   // 判断propsValue 是否和value一样
   const propsValEqulValue = () => {
@@ -183,17 +187,21 @@ export default function (props: any, context: any) {
 
     // 非tree 模式
     const val = value.value
-
-    //有初始值， 特殊处理
-    if (propsValue.value?.length) {
-      if (isInitial && propsValEqulValue()) {
-        isInitial = false
-        return
-      }
-      if (isInitial) return
+    if (isInitial) {
+      isInitial = false
+      return
     }
 
-    isInitial = false
+    //有初始值， 特殊处理
+    // if (propsValue.value?.length) {
+    //   if (isInitial && propsValEqulValue()) {
+    //     isInitial = false
+    //     return
+    //   }
+    //   if (isInitial) return
+    // }
+
+    // isInitial = false
 
     // 非initial, update value
     context.emit('update', {
@@ -224,7 +232,9 @@ export default function (props: any, context: any) {
   // 监听value变化， 处理溢出items
   watch(
     () => value.value,
-    () => {
+    (val, oldVal) => {
+      // 有时val和oldValue一样也会触发，具体原因待排查
+      if (isSameArray(val, oldVal)) return
       handleValueChange()
     },
     {
@@ -236,7 +246,9 @@ export default function (props: any, context: any) {
   // 监听外部出入值propsValue, 赋值value
   watch(
     () => props.value,
-    () => {
+    (val, oldVal) => {
+      // 有时val和oldValue一样也会触发，具体原因待排查
+      if (isSameArray(val, oldVal)) return
       // console.log('watch-propsvalue', propsValue.value, value.value)
       handlePropsValChange()
     },
@@ -271,6 +283,7 @@ export default function (props: any, context: any) {
     value,
     closeIcon,
     searchIcon,
+    borderless,
     isMouseenter,
     searchByKey,
     noRemote,

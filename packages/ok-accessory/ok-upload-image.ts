@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-22 14:25:25
+ * @LastEditTime: 2021-03-23 15:04:21
  * @FilePath: /packages/ok-accessory/ok-upload-image.ts
  */
 
@@ -90,22 +90,26 @@ defineComponent(
             })}
             @click=${handleClick}
           >
-            <svg
-              t="1615189238946"
-              class="upload-img-icon"
-              viewBox="0 0 1024 1024"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              p-id="24594"
-              width="40"
-              height="40"
-            >
-              <path
-                d="M469.333333 469.333333V85.333333h85.333334v384h384v85.333334H554.666667v384h-85.333334V554.666667H85.333333v-85.333334z"
-                p-id="24595"
-                fill="#d9d9d9"
-              ></path>
-            </svg>
+            <slot>
+              <div class="ok-upload-image-inner">
+                <svg
+                  t="1615189238946"
+                  class="upload-img-icon"
+                  viewBox="0 0 1024 1024"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  p-id="24594"
+                  width="40"
+                  height="40"
+                >
+                  <path
+                    d="M469.333333 469.333333V85.333333h85.333334v384h384v85.333334H554.666667v384h-85.333334V554.666667H85.333333v-85.333334z"
+                    p-id="24595"
+                    fill="#d9d9d9"
+                  ></path>
+                </svg>
+              </div>
+            </slot>
             <!-- <span class="upload-img-icon pro-app-page page-addition"> </span> -->
             <input
               style="display: none"
@@ -135,6 +139,7 @@ defineComponent(
         .showPreview=${showPreview.value}
         .showDownload=${showDownload.value}
         .showRemove=${showRemove.value}
+        .thumbStyle=${props.thumbStyle}
       ></ok-file-image>
       ${renderUploader()}
     `

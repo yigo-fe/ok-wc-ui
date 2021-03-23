@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-22 19:07:19
+ * @LastEditTime: 2021-03-23 15:13:58
  * @FilePath: /packages/ok-accessory/upload-base-hook.ts
  */
 
@@ -34,9 +34,10 @@
  *
  */
 
-import { computed, ref } from 'ok-lit'
-import { watch } from 'vue'
+import { computed } from 'ok-lit'
+import { reactive, ref, watch } from 'vue'
 
+import { isSameArray } from '../utils/index'
 import type { OkFile, UploadStatus } from './upload.type'
 
 type UpdateFile = {
@@ -58,6 +59,10 @@ export default function (props, context, config) {
   const showDownload = computed(() => props.operation.includes('download'))
   const showRemove = computed(() => props.operation.includes('remove'))
   const hideUploader = computed(() => props.hideUploader)
+  const disabled = computed(() => props.disabled)
+
+  // 所有已上传文件 file_id 和 file 的map
+  const fileMap = reactive({})
 
   const fileCheck = file => {
     if (props.maxSize) {
@@ -172,7 +177,11 @@ export default function (props, context, config) {
   }
 
   const handleSuccess = (res, file: OkFile) => {
-    // todo 处理返回字段路径问题
+    // 收集已上传文件
+    const uploadedFile = res?.data?.[0]
+    const file_id = uploadedFile?.file_id
+    fileMap[file_id] = uploadedFile
+    // 更新传输列表状态
     updateStatus({ status: 'success', response: res }, file)
     handleOnChange(file)
     // 处理用户自定义事件
@@ -251,16 +260,21 @@ export default function (props, context, config) {
   // 仅限于fileList 回显
   const displayFileList = (defaultFileList: any) => {
     defaultFileList.forEach(file => {
-      fileLists.value.push({
-        name: file.file_name,
-        percentage: 100,
-        status: 'success',
-        size: file.size,
-        uid: fileId,
-        raw: file,
-        response: { data: [file] },
-      })
-      fileId++
+      const file_id = file.file_id
+      // 判断文件是否已在fileList中
+      if (!fileMap[file_id]) {
+        fileLists.value.push({
+          name: file.file_name,
+          percentage: 100,
+          status: 'success',
+          size: file.size,
+          uid: fileId,
+          raw: file,
+          response: { data: [file] },
+        })
+        fileId++
+      }
+      fileMap[file_id] = file
     })
   }
 
@@ -290,11 +304,14 @@ export default function (props, context, config) {
 
   watch(
     () => propsValue.value,
-    () => {
-      const ids = props.fileList
+    (val, oldVal) => {
+      // 有时val和oldValue一样也会触发，具体原因待排查
+      if (isSameArray(val, oldVal)) return
+
       // 如果propsValue 和fileList 一样， 不做处理
       if (propsValEqulValue()) return
 
+      const ids = props.fileList
       ids.length ? handleDefaultlist(ids) : (fileLists.value = [])
     },
     {
@@ -309,6 +326,7 @@ export default function (props, context, config) {
     showRemove,
     fileLists,
     hideUploader,
+    disabled,
     displayFileList,
     uploadFiles,
     handleDetele,

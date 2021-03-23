@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-20 14:56:24
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-20 15:03:43
+ * @LastEditTime: 2021-03-23 16:16:42
  * @FilePath: /packages/ok-employee-select/employee-props.ts
  */
 
@@ -22,6 +22,10 @@ const propsOptions = {
     type: (String as unknown) as PropType<string>,
   },
   disabled: {
+    type: (Boolean as unknown) as PropType<boolean>,
+    default: false,
+  },
+  borderless: {
     type: (Boolean as unknown) as PropType<boolean>,
     default: false,
   },

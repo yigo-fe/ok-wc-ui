@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:57:52
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-22 16:34:41
+ * @LastEditTime: 2021-03-23 16:16:06
  * @FilePath: /packages/ok-employee-select/hook-tree.ts
  */
 import { debounce } from 'lodash'
@@ -18,6 +18,7 @@ import checked from '../assets/images/checked.svg'
 import close from '../assets/images/closed.svg'
 import search from '../assets/images/search.svg'
 import { apiInit } from '../services/api'
+import { isSameArray } from '../utils/index'
 
 export default function (props: any, context: any) {
   const api = apiInit()
@@ -29,6 +30,8 @@ export default function (props: any, context: any) {
   const multiple = computed(() => props.multiple)
   // 指定可选人员范围 (string[])：如果指定了可选范围， 则为本地模式， 不再进行远程搜索
   const range = computed(() => props.range)
+  // 不展示展示边框
+  const borderless = computed(() => props.borderless)
   // 是否开启了组价架构保密：如果开启了，则不展示组织架构树，只能进行搜索
   const secrecy = computed(() => props.secrecy)
   const noRemote = computed(() => props.range && props.range.length)
@@ -236,7 +239,7 @@ export default function (props: any, context: any) {
   // 以下处理watch props.value 和value.value：
 
   // 避免首次value赋值时触发更新
-  let isInitial = true
+  let isInitial = false
 
   // 判断propsValue 是否和value一样
   const propsValEqulValue = () => {
@@ -254,21 +257,17 @@ export default function (props: any, context: any) {
   // watch value 变化： 调用update,更新组件外部值
   const handleValueChange = () => {
     const val = value.value
-    //有初始值， 特殊处理
-    if (propsValue.value?.length) {
-      if (isInitial && propsValEqulValue()) {
-        isInitial = false
-        return
-      }
-      if (isInitial) return
+    if (isInitial) {
+      isInitial = false
+      return
     }
-    isInitial = false
-    // 非initial, update value
     context.emit('update', { value: val, options: selectedList.value })
   }
   watch(
     () => value.value,
-    () => {
+    (val, oldVal) => {
+      // 有时val和oldValue一样也会触发，具体原因待排查
+      if (isSameArray(val, oldVal)) return
       handleValueChange()
     },
     {
@@ -293,8 +292,9 @@ export default function (props: any, context: any) {
   }
   watch(
     () => propsValue.value,
-    () => {
-      // console.log('watch-propsValue.value', propsValue.value)
+    (val, oldVal) => {
+      // 有时val和oldValue一样也会触发，具体原因待排查
+      if (isSameArray(val, oldVal)) return
       handlePropsValChange()
     },
     {
@@ -315,6 +315,7 @@ export default function (props: any, context: any) {
     checkedIcon,
     closeIcon,
     searchIcon,
+    borderless,
     visible,
     deptList,
     employeeList,

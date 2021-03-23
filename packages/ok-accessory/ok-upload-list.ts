@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-22 16:56:38
+ * @LastEditTime: 2021-03-23 15:52:30
  * @FilePath: /packages/ok-accessory/ok-upload-list.ts
  */
 
@@ -96,7 +96,7 @@ defineComponent(
                   disabled: props.disabled,
                 })}
               >
-                点击上传
+                <span class="btn-text">点击上传</span>
               </div>
             </slot>
             <input

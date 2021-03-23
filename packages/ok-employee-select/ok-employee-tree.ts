@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:56:38
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-22 16:34:03
+ * @LastEditTime: 2021-03-23 16:16:16
  * @FilePath: /packages/ok-employee-select/ok-employee-tree.ts
  */
 import {
@@ -44,6 +44,7 @@ defineComponent(
             checkedIcon,
             closeIcon,
             searchIcon,
+            borderless,
             visible,
             deptList,
             employeeList,
@@ -87,6 +88,7 @@ defineComponent(
             checkedIcon,
             closeIcon,
             searchIcon,
+            borderless,
             queryKey,
             handleDeptClick,
             handleEmployeeSelect,
@@ -111,6 +113,7 @@ defineComponent(
             :range="range"
             :disabled="isDisabled"
             :multiple="multiple"
+            :borderless="borderless"
             mode="tree"
             ></ok-employee-input>
 

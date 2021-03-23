@@ -4,7 +4,7 @@
  * @Author: 付静
  * @Date: 2021-02-05 19:42:22
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-20 15:54:41
+ * @LastEditTime: 2021-03-23 15:36:44
  * @FilePath: /packages/ok-accessory/upload.props.ts
  */
 
@@ -39,7 +39,6 @@ const UploadProps = {
     type: (String as unknown) as PropType<string>,
     default: '',
   },
-
   disabled: {
     type: (Boolean as unknown) as PropType<boolean>,
   },
@@ -130,6 +129,9 @@ const UploadProps = {
   hideUploader: {
     type: (Boolean as unknown) as PropType<boolean>,
     default: false,
+  },
+  thumbStyle: {
+    type: (Object as unknown) as PropType<object>,
   },
   update: {
     type: (Function as unknown) as PropType<

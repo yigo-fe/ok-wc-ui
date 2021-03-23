@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 16:58:26
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-22 16:24:30
+ * @LastEditTime: 2021-03-23 16:28:36
  * @FilePath: /packages/services/api.ts
  */
 
@@ -32,6 +32,8 @@ const baseURL =
 // 文件上传
 const sourceHost =
   process.env.NODE_ENV === 'development' ? 'https://check.baiteda.com/' : ''
+
+// console.log(baseURL, sourceHost)
 
 export function apiInit() {
   const httpClient = new HttpClient(baseURL)

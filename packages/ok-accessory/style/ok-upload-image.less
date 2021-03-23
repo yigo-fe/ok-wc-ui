@@ -11,22 +11,25 @@
 
 .ok-upload-image {
   display: inline-block;
-  background-color: @ok-white-color;
-  border: 1px solid @ok-border-color-base;
-  border-radius: @ok-border-radius-base;
-  box-sizing: border-box;
-  width: 100px;
-  height: 100px;
-  cursor: pointer;
-  line-height: 98px;
-  vertical-align: top;
-  &:hover{
-    border-color: @ok-primary-color;
-  }
-  &.disabled {
-    border-color: @ok-border-color-base;
-    background-color: @ok-base-bg-color;
-    cursor: not-allowed;
+  .ok-upload-image-inner {
+    width: 100px;
+    height: 100px;
+    box-sizing: border-box;
+    display: inline-block;
+    background-color: @ok-white-color;
+    border: 1px solid @ok-border-color-base;
+    border-radius: @ok-border-radius-base;
+    line-height: 98px;
+    vertical-align: top;
+    cursor: pointer;
+    &:hover{
+      border-color: @ok-primary-color;
+    }
+    &.disabled {
+      border-color: @ok-border-color-base;
+      background-color: @ok-base-bg-color;
+      cursor: not-allowed;
+    }
   }
 
   .upload-img-icon{
@@ -49,9 +52,6 @@
   margin: 0;
   display: inline;
   vertical-align: top;
-
-
-
   .ok-upload-list__item {
     overflow: hidden;
     background-color: #fff;

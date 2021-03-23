@@ -65,15 +65,32 @@
       <section  class="divider upload-demo">
         <h3>列表上传</h3>
         <ok-upload-list></ok-upload-list>
+
+        <h3>列表上传 slot </h3>
+        <!-- <ok-upload-list style="width: 500px; display: block; font-size: 0;">
+          <div style="width: 100%;height: 150px; font-size: 14px;display: block; border: 1px solid red;">这里是slot</div>
+        </ok-upload-list> -->
+        
+        <h3>拖拽上传 slot</h3>
+        <ok-upload-drag style="width: 500px; display: block; font-size: 0;"> 
+          <div style="width: 100%;height: 150px; font-size: 14px;display: block; border: 1px solid red;">这里是slot</div>
+        </ok-upload-drag>
         
         <h3>拖拽上传</h3>
-        <ok-upload-drag style="width: 500px;"></ok-upload-drag>
+        <ok-upload-drag style="width: 500px; display: block; font-size: 0;"></ok-upload-drag>
 
         <h3>antd</h3>
         <!-- <ok-attachment-drag></ok-attachment-drag>  -->
 
-        <h3>图片上传</h3>
-        <ok-upload-image style="width: 500px;"></ok-upload-image>
+        <!-- <h3>图片上传</h3> -->
+        <!-- <ok-upload-image style="width: 500px;"></ok-upload-image> -->
+
+
+        <h3>图片上传 slot</h3>
+        <ok-upload-image style="width: 500px; display: block; font-size: 0;">
+          <div style="width: 200px;height: 200px; font-size: 14px;display: block; border: 1px solid red;">这里是slot</div>
+
+        </ok-upload-image>
 
       </section>
 
@@ -130,11 +147,20 @@
 
     window.onload = ()=>{
       const okUpload = document.querySelector('ok-upload-drag')
-      // okUpload.action = action
+      okUpload.multiple = true
+      okUpload.noBorder = true
       // okUpload.data = uploadData
       // okUpload.operation = ['preview']
       // okUpload.hideUploader = true
       // okUpload.disabled = true
+      okUpload.update = (data)=>{
+        const fileIds = data.fileLists
+                              .map((v) => v.response?.data?.[0]?.file_id)
+                              .filter((v) => v)
+        console.log('okUpload - update', fileIds)
+        okUpload.fileList = fileIds
+
+      }
 
       const okUploadList = document.querySelector('ok-upload-list')
       // okUploadList.action = action
@@ -146,8 +172,13 @@
 
 
       const okUploadImg = document.querySelector('ok-upload-image')
-      okUploadImg.action = actionImg
+      // okUploadImg.action = actionImg
       okUploadImg.multiple = true
+      okUploadImg.noBorder = true
+      okUploadImg.thumbStyle = {
+        width: '150px',
+        height: '150px'
+      }
       // okUploadImg.disabled = true
       // okUploadImg.operation = ['remove']
       // okUploadImg.hideUploader = true
@@ -165,6 +196,15 @@
       // const okPersonCard = document.querySelector('ok-person-card')
       // okPersonCard.personInfo = personInfo
 
+      okUploadImg.update = (data)=>{
+        const fileIds = data.fileLists
+                          .map((v) => v.response?.data?.[0]?.file_id)
+                          .filter((v) => v)
+        console.log('okUploadImg - update', fileIds)
+        okUploadImg.fileList = fileIds
+
+      }
+
 
       const okEmployeeTree = document.querySelector('.ok-employee-tree')
       okEmployeeTree.value = ['FanShuai']
@@ -177,9 +217,10 @@
 
 
       const okEmployeeInput = document.querySelector('.ok-employee-input')
-      okEmployeeInput.value = ["FanShuai"]
+      okEmployeeInput.value = ["FuJing"]
       // okEmployeeInput.value = []
-      // okEmployeeInput.disabled = true
+      okEmployeeInput.borderless = true
+      okEmployeeInput.disabled = true
       // okEmployeeInput.range = ["FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing']
       okEmployeeInput.update = (val, list)=>{
         console.log('update-index',val, list)
@@ -188,8 +229,8 @@
 
       const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
       okEmployeeInput2.value = ["FanShuai"]
-      // okEmployeeInput2.value = []
-      okEmployeeInput2.disabled = true
+      okEmployeeInput2.borderless = true
+      // okEmployeeInput2.disabled = true
       // okEmployeeInput2.range = ["FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing']
       okEmployeeInput2.update = (val, list)=>{
         console.log('okEmployeeInput2 -update-index',val, list)
@@ -208,9 +249,12 @@
       //   // okEmployeeTree.multiple = true 
 
       // }, 500)
+
+        const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
+      okEmployeeInput2.value = ['FuJing'] 
   
-      const okEmployeeTree = document.querySelector('.ok-employee-tree')
-      okEmployeeTree.value = ['FuJing'] 
+      // const okEmployeeTree = document.querySelector('.ok-employee-tree')
+      // okEmployeeTree.value = ['FuJing'] 
 
 
 
@@ -228,8 +272,8 @@
       // okEmployeeTree.value = [] 
 
 
-      // const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
-      // okEmployeeInput2.value = [] 
+      const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
+      okEmployeeInput2.value = [] 
 
     }
 
