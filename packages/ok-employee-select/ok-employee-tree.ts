@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:56:38
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-23 16:16:16
+ * @LastEditTime: 2021-03-25 22:44:23
  * @FilePath: /packages/ok-employee-select/ok-employee-tree.ts
  */
 import {
@@ -21,7 +21,7 @@ import { createApp } from 'vue'
 import CDN_PATH from '../path.config'
 import { propsOptions } from './employee-props'
 import useEmployeeTree from './hook-tree'
-import okEmployeeTreeCss from './style/ok-employee-tree.less'
+// import okEmployeeTreeCss from './style/ok-employee-tree.less'
 
 defineComponent(
   'ok-employee-tree',
@@ -124,7 +124,7 @@ defineComponent(
             width="824px" 
             height="660px">
             <template #closeIcon></template>
-            <div class="content-wraper">
+            <div class="employee-tree-content-wraper">
 
               <div class="tree-wraper">
                 <div class="tree-search">
@@ -231,9 +231,7 @@ defineComponent(
 
     return () => html`
       <link rel="stylesheet" .href="${CDN_PATH}antd.min.css" />
-      <style>
-        ${okEmployeeTreeCss}
-      </style>
+      <link rel="stylesheet" .href="${CDN_PATH}common.css" />
 
       <div ref="showEmployeeTree" class="ok-employee-tree-wraper"></div>
     `

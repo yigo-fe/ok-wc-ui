@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-25 13:14:30
+ * @LastEditTime: 2021-03-25 21:59:03
  * @FilePath: /packages/ok-employee-select/ok-employee-input.ts
  */
 import './ok-employee-more'
@@ -15,7 +15,7 @@ import { createApp, h, ref } from 'vue'
 import CDN_PATH from '../path.config'
 import { propsOptions } from './employee-props'
 import useEmployeeSelect from './hook-input'
-import okEmployeeSelectCss from './style/ok-employee-select.less'
+// import okEmployeeSelectCss from './style/ok-employee-select.less'
 defineComponent(
   'ok-employee-input',
   {
@@ -179,18 +179,14 @@ defineComponent(
       }
 
       const app = createApp(options)
-
       app.use(Button)
       app.use(Select)
-
       app.mount(context.$refs.showEmployeeSelectInput as HTMLElement)
     })
 
     return () => html`
       <link rel="stylesheet" .href="${CDN_PATH}antd.min.css" />
-      <style>
-        ${okEmployeeSelectCss}
-      </style>
+      <link rel="stylesheet" .href="${CDN_PATH}common.css" />
       <div ref="showEmployeeSelectInput" class="ok-employee-tree-wraper"></div>
     `
   }

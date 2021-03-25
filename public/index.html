@@ -163,6 +163,10 @@
       // okUpload.operation = ['preview']
       // okUpload.hideUploader = true
       // okUpload.disabled = true
+      okUpload.limit = 3
+      okUpload.onExceed = ()=>{
+        console.log('附件超出了')
+      }
       okUpload.update = (data)=>{
         const fileIds = data.fileLists
                               .map((v) => v.response?.data?.[0]?.file_id)
@@ -214,6 +218,9 @@
       okUploadImg.multiple = true
       okUploadImg.limit = 3
       okUploadImg.noBorder = true
+      okUploadImg.onExceed = ()=>{
+        console.log('图片超出了')
+      }
       // okUploadImg.disabled = true
       okUploadImg.thumbStyle = {
         width: '150px',
@@ -242,11 +249,6 @@
                           .filter((v) => v)
         console.log('okUploadImg - update', fileIds)
         okUploadImg.fileList = fileIds
-
-      }
-
-      okUploadImg.onExceed = (data)=>{
-        console.log(data)
 
       }
 
