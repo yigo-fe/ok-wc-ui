@@ -1,12 +1,11 @@
 /*
  * @Descripttion:
  * @Author: 付静
- * @Date: 2021-03-03 21:17:47
+ * @Date: 2021-03-23 21:37:38
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-25 11:25:06
- * @FilePath: /packages/ok-employee-select/hook-input.ts
+ * @LastEditTime: 2021-03-24 16:42:24
+ * @FilePath: /packages/ok-department-select/hook-input.ts
  */
-
 import { debounce } from 'lodash'
 import { effect } from 'ok-lit'
 import { computed, nextTick, ref, watch } from 'vue'
@@ -65,33 +64,42 @@ export default function (props: any, context: any) {
     })
   }
 
-  // 人员搜索
+  // 搜索
   const onFetch = async (query: string) => {
     if (noRemote.value) return
     if (!query) return
     loading.value = true
-    const result = await api.default.SearchUserInfo({ param: query })
+    const result = await api.default.SearchDeptPrivateV1POST({
+      payload: {
+        param: query,
+        display_level: 1,
+      },
+    })
     loading.value = false
     if (result.code === '000000') {
-      const data: any = result.data?.rows
+      const data: any = result.data
+      data?.forEach((item: any) => {
+        item.departmentId = item.department_id
+        item.displayValue = item.display_value
+      })
       options.value = data
-      collectEmployeeMap(options.value)
     }
   }
 
   const searchByKey = debounce(onFetch, 500)
 
   // 人员id根据查询指定人员信息: 1. 默认值回显；2. 查询指定范围
-  const getRangeEmployeesByIds = async (userIds: string[]) => {
-    if (!userIds?.length) options.value = []
+  // const getRangeEmployeesByIds = async (userIds: string[]) => {
+  //   console.log('getRangeEmployeesByIds - exceed', userIds)
+  //   if (!userIds?.length) options.value = []
 
-    const result = await api.default.ListUserInfoByIds({ user_ids: userIds })
-    if (result.code === '000000') {
-      const data: any = result.data
-      options.value = data
-      collectEmployeeMap(options.value)
-    }
-  }
+  //   const result = await api.default.ListUserInfoByIds({ user_ids: userIds })
+  //   if (result.code === '000000') {
+  //     const data: any = result.data
+  //     options.value = data
+  //     collectEmployeeMap(options.value)
+  //   }
+  // }
 
   // 处理溢出人员
 
@@ -124,7 +132,7 @@ export default function (props: any, context: any) {
 
   // 处理最多能展示多少个tag
   const maxTagCountComput = () => {
-    const el = context.$refs.showEmployeeSelectInput as HTMLElement
+    const el = context.$refs.showDepartmentInput as HTMLElement
     const elWith = el.offsetWidth
     if (!elWith) return
 
@@ -200,18 +208,6 @@ export default function (props: any, context: any) {
       isInitial = false
       return
     }
-
-    //有初始值， 特殊处理
-    // if (propsValue.value?.length) {
-    //   if (isInitial && propsValEqulValue()) {
-    //     isInitial = false
-    //     return
-    //   }
-    //   if (isInitial) return
-    // }
-
-    // isInitial = false
-
     // 非initial, update value
     context.emit('update', {
       value: val,
@@ -230,8 +226,6 @@ export default function (props: any, context: any) {
     if (val?.length) {
       // 更新value；获取detail,回显信息
       value.value = val
-      // 回显: 如果已有固定范围， 则不需要更新options
-      !props.range?.length && getRangeEmployeesByIds(val)
     } else if (value.value?.length) {
       // 清除已选的值
       value.value = []
@@ -265,11 +259,6 @@ export default function (props: any, context: any) {
       deep: true,
     }
   )
-
-  // 指定范围
-  effect(() => {
-    noRemote.value && getRangeEmployeesByIds(props.range)
-  })
 
   // 处理多选变单选时value
   effect(() => {

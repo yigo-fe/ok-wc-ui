@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-23 15:13:58
+ * @LastEditTime: 2021-03-25 11:28:08
  * @FilePath: /packages/ok-accessory/upload-base-hook.ts
  */
 
@@ -169,6 +169,34 @@ export default function (props, context, config) {
     }
   }
 
+  // 从上传列表中删除文件
+  const removeFileList = file => {
+    let idx = fileLists.value.findIndex(v => v.uid === file.uid)
+    if (idx === -1) {
+      console.warn('文件不存在')
+      return
+    }
+    fileLists.value.splice(idx, 1)
+  }
+  // 终止上传
+  const handleAbort = data => {
+    const file = data.detail
+    const _reqs = reqs.value
+    if (file) {
+      const uid = file.uid
+      if (_reqs[uid]) {
+        ;(_reqs[uid] as XMLHttpRequest).abort()
+        removeFileList(file)
+      }
+    } else {
+      Object.keys(_reqs).forEach(uid => {
+        if (_reqs[uid]) (_reqs[uid] as XMLHttpRequest).abort()
+        delete _reqs[uid]
+        removeFileList(file)
+      })
+    }
+  }
+
   const handleProgress = (e: any, file: OkFile) => {
     updateStatus({ status: 'uploading', percentage: e.percent }, file)
     // 处理用户自定义事件
@@ -331,5 +359,6 @@ export default function (props, context, config) {
     uploadFiles,
     handleDetele,
     handleDownload,
+    handleAbort,
   }
 }

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:57:52
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-23 16:16:06
+ * @LastEditTime: 2021-03-25 11:25:53
  * @FilePath: /packages/ok-employee-select/hook-tree.ts
  */
 import { debounce } from 'lodash'
@@ -205,10 +205,11 @@ export default function (props: any, context: any) {
   }
 
   // 打开modal
-  const handleOpenModal = (event: any) => {
+  const handleOpenModal = (evt: any) => {
     if (isDisabled.value) return
     // 注意点击清除按钮 不能触发弹窗打开
-    if (event?.path[0]?.className === 'head-clear-icon') return
+    const path = evt.path || (evt.composedPath && evt.composedPath()) || []
+    if (path?.[0]?.className === 'head-clear-icon') return
     visible.value = true
 
     breadcrumbList.value = [{ department_id: '1', department_name: '根目录' }]

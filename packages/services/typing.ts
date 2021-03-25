@@ -214,6 +214,14 @@ declare namespace typing {
 
     tenant_id?: string
   }
+  interface ParamBo {
+    display_level?: number
+
+    /**
+     * 参数
+     */
+    param?: string
+  }
 }
 
 export type { typing }

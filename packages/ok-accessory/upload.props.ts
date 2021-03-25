@@ -4,7 +4,7 @@
  * @Author: 付静
  * @Date: 2021-02-05 19:42:22
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-23 15:36:44
+ * @LastEditTime: 2021-03-24 19:04:39
  * @FilePath: /packages/ok-accessory/upload.props.ts
  */
 
@@ -116,11 +116,11 @@ const UploadProps = {
   },
   iconColor: {
     type: (String as unknown) as PropType<string>,
-    default: '#6B66DC',
+    default: '#5283F7',
   },
   btnColor: {
     type: (String as unknown) as PropType<string>,
-    default: '#6B66DC',
+    default: '#5283F7',
   },
   operation: {
     type: (Array as unknown) as PropType<string[]>,
@@ -132,6 +132,10 @@ const UploadProps = {
   },
   thumbStyle: {
     type: (Object as unknown) as PropType<object>,
+  },
+  subtable: {
+    type: (Boolean as unknown) as PropType<boolean>,
+    default: false,
   },
   update: {
     type: (Function as unknown) as PropType<

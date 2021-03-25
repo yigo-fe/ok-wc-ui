@@ -3,8 +3,8 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-23 15:04:21
- * @FilePath: /packages/ok-accessory/ok-upload-image.ts
+ * @LastEditTime: 2021-03-25 10:52:50
+ * @FilePath: /packages/ok-accessory/ok-upload-subtable/ok-upload-subtable-image.ts
  */
 
 /**
@@ -35,16 +35,28 @@
  */
 
 import { classMap } from 'lit-html/directives/class-map.js'
-import { defineComponent, html } from 'ok-lit'
+import { defineComponent, html, PropType } from 'ok-lit'
 
-import CDN_PATH from '../path.config'
-import okUploadImgCss from './style/ok-upload-image.less'
-import { UploadProps } from './upload.props'
-import useImageHandle from './upload-image-hook'
+import { okPrimaryColor } from '../../assets/theme'
+import CDN_PATH from '../../path.config'
+import useImageHandle from '../ok-upload-image/upload-image-hook'
+import okUploadCss from '../style/upload.less'
+import { UploadProps } from '../upload.props'
 defineComponent(
-  'ok-upload-image',
+  'ok-upload-subtable-image',
   {
     ...UploadProps,
+    maxHeight: {
+      type: (String as unknown) as PropType<string>,
+      default: '180px',
+    },
+    type: {
+      type: (String as unknown) as PropType<string>,
+    },
+    accept: {
+      type: (String as unknown) as PropType<string>,
+      default: '.jpg,.jpeg,.gif,.tif,.tiff,.bmp,.png',
+    },
   },
   (props, context) => {
     const {
@@ -53,24 +65,26 @@ defineComponent(
       showRemove,
       fileLists,
       hideUploader,
+      disabled,
       uploadFiles,
       handlePreview,
       handleDetele,
       handleDownload,
+      handleAbort,
     } = useImageHandle(props, context)
 
     /**
      * 列表上传，点击选择文件
      */
     const handleClick = () => {
-      if (!props.disabled) {
+      if (!disabled.value) {
         let inputRef = context.$refs.inputRef as HTMLInputElement
         inputRef.value = ''
         inputRef.click()
       }
     }
     /**
-     * 列表上传选中文件
+     * 点击上传选中文件
      * @param e 选中的文件
      */
     const handleChange = (e: DragEvent) => {
@@ -82,35 +96,35 @@ defineComponent(
     const renderUploader = () => {
       if (!hideUploader.value)
         return html`
-          <div
-            class=${classMap({
-              'ok-upload': true,
-              'ok-upload-image': true,
-              disabled: props.disabled,
-            })}
-            @click=${handleClick}
-          >
+          <div class="ok-upload ok-upload--subtable" @click=${handleClick}>
             <slot>
-              <div class="ok-upload-image-inner">
+              <div
+                class=${classMap({
+                  'upload-subtable-inner': true,
+                  disabled: props.disabled,
+                  'has-file': fileLists.value,
+                })}
+              >
                 <svg
-                  t="1615189238946"
-                  class="upload-img-icon"
+                  t="1616578828719"
+                  class="icon"
                   viewBox="0 0 1024 1024"
                   version="1.1"
                   xmlns="http://www.w3.org/2000/svg"
-                  p-id="24594"
-                  width="40"
-                  height="40"
+                  p-id="27171"
+                  width="20"
+                  height="20"
                 >
                   <path
-                    d="M469.333333 469.333333V85.333333h85.333334v384h384v85.333334H554.666667v384h-85.333334V554.666667H85.333333v-85.333334z"
-                    p-id="24595"
-                    fill="#d9d9d9"
+                    d="M917.333333 682.666667v213.333333a42.666667 42.666667 0 0 1-42.666666 42.666667H149.333333a42.666667 42.666667 0 0 1-42.666666-42.666667V682.666667h85.333333v170.666666h640v-170.666666h85.333333zM554.666667 243.498667l203.861333 203.882666 60.352-60.352L517.184 85.333333 215.466667 387.029333l60.330666 60.352L469.333333 253.866667v503.168h85.333334V243.498667z"
+                    p-id="27172"
+                    fill=${okPrimaryColor}
                   ></path>
                 </svg>
+                <span class="upload-text">上传图片</span>
               </div>
             </slot>
-            <!-- <span class="upload-img-icon pro-app-page page-addition"> </span> -->
+
             <input
               style="display: none"
               ref="inputRef"
@@ -127,20 +141,21 @@ defineComponent(
 
     return () => html`
       <style>
-        ${okUploadImgCss}
+        ${okUploadCss}
       </style>
       <link rel="stylesheet" .href="${CDN_PATH}common.css" />
-      <ok-file-image
+      <ok-file-list
         @preview=${handlePreview}
         @delete=${handleDetele}
         @download=${handleDownload}
+        @abort=${handleAbort}
         .fileList=${fileLists.value}
         .listType=${props.listType}
         .showPreview=${showPreview.value}
         .showDownload=${showDownload.value}
         .showRemove=${showRemove.value}
-        .thumbStyle=${props.thumbStyle}
-      ></ok-file-image>
+        .maxHeight=${props.maxHeight}
+      ></ok-file-list>
       ${renderUploader()}
     `
   }

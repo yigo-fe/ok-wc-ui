@@ -25,12 +25,16 @@
     &:hover{
       border-color: @ok-primary-color;
     }
-    &.disabled {
+  
+  }
+  &.disabled {
+    .ok-upload-image-inner {
       border-color: @ok-border-color-base;
       background-color: @ok-base-bg-color;
       cursor: not-allowed;
     }
   }
+
 
   .upload-img-icon{
     display: block;
@@ -41,6 +45,7 @@
     margin: 0 auto;
   }
 }
+
 
 .ok-upload-list {
   margin: 0;

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:09:30
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-20 15:40:27
+ * @LastEditTime: 2021-03-24 18:51:17
  * @FilePath: /packages/ok-accessory/ok-progress.ts
  */
 
@@ -37,9 +37,9 @@ defineComponent(
     return () => html`
       <style>
         .ok-progress-bar__outer {
-          height: 6px;
+          height: 2px;
           border-radius: 100px;
-          background-color: #ebeef5;
+          background-color: #e7edf4;
           overflow: hidden;
           position: relative;
           vertical-align: middle;
@@ -49,7 +49,7 @@ defineComponent(
           left: 0;
           top: 0;
           height: 100%;
-          background-color: #409eff;
+          background-color: #5283f7;
           text-align: right;
           border-radius: 100px;
           line-height: 1;

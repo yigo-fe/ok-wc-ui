@@ -23,7 +23,6 @@
   background-color: @ok-base-bg-color;
   color:@ok-text-color;
   font-size:14px;
-  background-color: @ok-white-color;
   border: 1px solid @ok-border-color-base;
   border-radius: @ok-border-radius-base;
   &:hover{
@@ -36,6 +35,9 @@
   &.disabled {
     cursor: not-allowed;
     border-color: @ok-border-color-base;
+  }
+  &.has-file {
+    margin-bottom: 10px;
   }
   .upload-btn {
     color:@ok-primary-color;
@@ -85,6 +87,27 @@
   margin-top: 10px;
 }
 
+// 明细子表
+.upload-subtable-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid @ok-primary-color;
+  box-sizing: border-box;
+  border-radius: 4px;
+  height: 32px;
+  &:hover {
+    border-color:@btn-hover-color;
+  }
+  &.has-file {
+    margin-top: 10px;
+  }
+}
+.upload-text {
+  font-size: 14px;
+  color: @ok-primary-color;
+  margin-left: 8px;
+}
 
 
 // test

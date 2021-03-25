@@ -3,12 +3,12 @@
  * @Author: 付静
  * @Date: 2021-03-19 01:13:31
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-23 15:14:21
+ * @LastEditTime: 2021-03-24 16:52:07
  * @FilePath: /packages/ok-accessory/upload-attachment-hook.ts
  */
 
-import { apiInit } from '../services/api'
-import useUploadHandler from './upload-base-hook'
+import { apiInit } from '../../services/api'
+import useUploadHandler from '../upload-base-hook'
 export default function (props, context) {
   const api = apiInit()
   // 删除文件
@@ -77,6 +77,7 @@ export default function (props, context) {
     uploadFiles,
     handleDetele,
     handleDownload,
+    handleAbort,
   } = useUploadHandler(props, context, config)
 
   return {
@@ -91,5 +92,6 @@ export default function (props, context) {
     handlePreview,
     handleDetele,
     handleDownload,
+    handleAbort,
   }
 }

@@ -40,6 +40,11 @@
         <button onclick="testClick()">test</button>
         <button onclick="testClick2()">test2</button>
       </div>
+
+      <h3>部门选择 input </h3>
+      <ok-department-select class="divider ok-department-input" placeholder="请选择" style="width: 200px;display: block;"></ok-department-select>
+
+
       <h3>人员选择select-antd</h3>
       <ok-employee-select class="divider ok-employee-input" placeholder="请选择" style="width: 200px;display: block;"></ok-employee-select>
 
@@ -66,15 +71,20 @@
         <h3>列表上传</h3>
         <ok-upload-list></ok-upload-list>
 
+        <h3>明细字表上传</h3>
+        <ok-upload-subtable-file></ok-upload-subtable-file>
+        <h3>明细字表上传 - image</h3>
+        <ok-upload-subtable-image class="ok-upload-subtable-image"></ok-upload-subtable-image>
+
         <h3>列表上传 slot </h3>
         <!-- <ok-upload-list style="width: 500px; display: block; font-size: 0;">
           <div style="width: 100%;height: 150px; font-size: 14px;display: block; border: 1px solid red;">这里是slot</div>
         </ok-upload-list> -->
         
-        <h3>拖拽上传 slot</h3>
+        <!-- <h3>拖拽上传 slot</h3>
         <ok-upload-drag style="width: 500px; display: block; font-size: 0;"> 
           <div style="width: 100%;height: 150px; font-size: 14px;display: block; border: 1px solid red;">这里是slot</div>
-        </ok-upload-drag>
+        </ok-upload-drag> -->
         
         <h3>拖拽上传</h3>
         <ok-upload-drag style="width: 500px; display: block; font-size: 0;"></ok-upload-drag>
@@ -82,15 +92,15 @@
         <h3>antd</h3>
         <!-- <ok-attachment-drag></ok-attachment-drag>  -->
 
-        <!-- <h3>图片上传</h3> -->
-        <!-- <ok-upload-image style="width: 500px;"></ok-upload-image> -->
+        <h3>图片上传</h3>
+        <ok-upload-image style="width: 500px;"></ok-upload-image>
 
 
-        <h3>图片上传 slot</h3>
-        <ok-upload-image style="width: 500px; display: block; font-size: 0;">
+        <!-- <h3>图片上传 slot</h3> -->
+        <!-- <ok-upload-image style="width: 500px; display: block; font-size: 0;">
           <div style="width: 200px;height: 200px; font-size: 14px;display: block; border: 1px solid red;">这里是slot</div>
 
-        </ok-upload-image>
+        </ok-upload-image> -->
 
       </section>
 
@@ -162,6 +172,34 @@
 
       }
 
+
+      const okUploadSubtable = document.querySelector('ok-upload-subtable-file')
+      // okUploadSubtable.action = action
+      // okUploadSubtable.data = uploadData
+      okUploadSubtable.multiple = true
+      // okUploadSubtable.disabled = true
+      // okUploadSubtable.operation = ['download']
+      // okUploadSubtable.hideUploader = true
+      okUploadSubtable.update = (data)=>{
+        console.log('file', data)
+      }
+
+      const okUploadSubtableImage = document.querySelector('.ok-upload-subtable-image')
+      // okUploadSubtable.action = action
+      // okUploadSubtable.data = uploadData
+      okUploadSubtableImage.multiple = true
+      okUploadSubtableImage.type = 'image'
+      // okUploadSubtable.disabled = true
+      // okUploadSubtable.operation = ['download']
+      // okUploadSubtable.hideUploader = true
+      okUploadSubtableImage.update = (data)=>{
+        console.log('image', data)
+      }
+
+
+
+      
+
       const okUploadList = document.querySelector('ok-upload-list')
       // okUploadList.action = action
       // okUploadList.data = uploadData
@@ -174,7 +212,9 @@
       const okUploadImg = document.querySelector('ok-upload-image')
       // okUploadImg.action = actionImg
       okUploadImg.multiple = true
+      okUploadImg.limit = 3
       okUploadImg.noBorder = true
+      // okUploadImg.disabled = true
       okUploadImg.thumbStyle = {
         width: '150px',
         height: '150px'
@@ -205,37 +245,53 @@
 
       }
 
+      okUploadImg.onExceed = (data)=>{
+        console.log(data)
 
-      const okEmployeeTree = document.querySelector('.ok-employee-tree')
-      okEmployeeTree.value = ['FanShuai']
-      okEmployeeTree.disabled = true
-      // okEmployeeTree.range = ["FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing']
-      okEmployeeTree.update = (val, list)=>{
-        console.log('tree-update-index',val, list)
-        // okEmployeeTree.value = val
       }
+
+
+      // const okEmployeeTree = document.querySelector('.ok-employee-tree')
+      // okEmployeeTree.value = ['FanShuai']
+      // okEmployeeTree.disabled = true
+      // // okEmployeeTree.range = ["FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing']
+      // okEmployeeTree.update = (val, list)=>{
+      //   console.log('tree-update-index',val, list)
+      //   // okEmployeeTree.value = val
+      // }
 
 
       const okEmployeeInput = document.querySelector('.ok-employee-input')
       okEmployeeInput.value = ["FuJing"]
       // okEmployeeInput.value = []
-      okEmployeeInput.borderless = true
-      okEmployeeInput.disabled = true
+      okEmployeeInput.multiple = true
+      // okEmployeeInput.borderless = true
+      // okEmployeeInput.disabled = true
       // okEmployeeInput.range = ["FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing']
       okEmployeeInput.update = (val, list)=>{
         console.log('update-index',val, list)
-        okEmployeeInput.value = val
+        // okEmployeeInput.value = val
       }
 
       const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
       okEmployeeInput2.value = ["FanShuai"]
-      okEmployeeInput2.borderless = true
+      okEmployeeInput2.multiple = true
       // okEmployeeInput2.disabled = true
       // okEmployeeInput2.range = ["FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing']
       okEmployeeInput2.update = (val, list)=>{
         console.log('okEmployeeInput2 -update-index',val, list)
-        okEmployeeInput2.value = val
+        // okEmployeeInput2.value = val
       }
+
+
+      // setTimeout(()=>{
+      //   console.log('set')
+
+      //   const okEmployeeInput = document.querySelector('.ok-employee-input')
+      //   okEmployeeInput.value = ["FengHaiLi"]
+      //   const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
+      // okEmployeeInput2.value = ["LiTao"]
+      // }, 1000)
 
 
     }
@@ -250,8 +306,8 @@
 
       // }, 500)
 
-        const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
-      okEmployeeInput2.value = ['FuJing'] 
+      //   const okEmployeeInput = document.querySelector('.ok-employee-input')
+      // okEmployeeInput.value = ['FengHaiLi'] 
   
       // const okEmployeeTree = document.querySelector('.ok-employee-tree')
       // okEmployeeTree.value = ['FuJing'] 
@@ -272,8 +328,8 @@
       // okEmployeeTree.value = [] 
 
 
-      const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
-      okEmployeeInput2.value = [] 
+      // const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
+      // okEmployeeInput2.value = [] 
 
     }
 

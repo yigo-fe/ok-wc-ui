@@ -1,12 +1,11 @@
 /*
  * @Descripttion:
  * @Author: 付静
- * @Date: 2021-03-20 14:56:24
+ * @Date: 2021-03-23 21:02:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-25 11:01:38
- * @FilePath: /packages/ok-employee-select/employee-props.ts
+ * @LastEditTime: 2021-03-23 21:02:51
+ * @FilePath: /packages/ok-department-select/department-props.ts
  */
-
 import { PropType } from 'ok-lit'
 
 export type ModeType = 'tree' | 'default'

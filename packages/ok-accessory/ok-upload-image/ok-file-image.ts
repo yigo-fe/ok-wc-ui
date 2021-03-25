@@ -3,15 +3,15 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-23 14:44:47
- * @FilePath: /packages/ok-accessory/ok-file-image.ts
+ * @LastEditTime: 2021-03-25 10:42:11
+ * @FilePath: /packages/ok-accessory/ok-upload-image/ok-file-image.ts
  */
 
 import { computed, defineComponent, html, onMounted, PropType } from 'ok-lit'
 import { createApp } from 'vue'
 
-import okUploadImgCss from './style/ok-upload-image.less'
-import type { ListType, UploadFile } from './upload.type'
+import okUploadImgCss from '../style/ok-upload-image.less'
+import type { ListType, UploadFile } from '../upload.type'
 defineComponent(
   'ok-file-image',
   {

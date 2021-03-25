@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-10 14:22:53
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-10 16:52:01
+ * @LastEditTime: 2021-03-24 15:47:33
  * @FilePath: /packages/ok-accessory/ok-file-icon.ts
  */
 import { computed, defineComponent, html, onMounted, PropType } from 'ok-lit'
@@ -22,10 +22,14 @@ import folder from '../assets/file-icon/icon_file-folder_colorful.svg'
 import img from '../assets/file-icon/icon_file-image_colorful.svg'
 import ios from '../assets/file-icon/icon_file-ios_colorful.svg'
 import keynote from '../assets/file-icon/icon_file-keynote_colorful.svg'
+import mindnode from '../assets/file-icon/icon_file-mindnote_colorful.svg'
+import pages from '../assets/file-icon/icon_file-nages_colorful.svg'
 import numbers from '../assets/file-icon/icon_file-numbers_colorful.svg'
 import pdf from '../assets/file-icon/icon_file-pdf_colorful.svg'
 import ppt from '../assets/file-icon/icon_file-ppt_colorful.svg'
 import ps from '../assets/file-icon/icon_file-ps_colorful.svg'
+import sketch from '../assets/file-icon/icon_file-sketch_colorful.svg'
+import sld from '../assets/file-icon/icon_file-slide_colorful.svg'
 import text from '../assets/file-icon/icon_file-text_colorful.svg'
 import unknow from '../assets/file-icon/icon_file-unknow_colorful.svg'
 import video from '../assets/file-icon/icon_file-video_colorful.svg'
@@ -57,7 +61,10 @@ defineComponent(
               case 'apk':
                 icon = android
                 break
-              case 'audio':
+              case 'rmvb':
+              case 'flv':
+              case 'mp4':
+              case 'avi':
                 icon = audio
                 break
               case 'bi':
@@ -72,7 +79,7 @@ defineComponent(
               case 'folder':
                 icon = folder
                 break
-              case 'keynote':
+              case 'key':
                 icon = keynote
                 break
               case 'png':
@@ -102,6 +109,18 @@ defineComponent(
                 break
               case 'ps':
                 icon = ps
+                break
+              case 'pages':
+                icon = pages
+                break
+              case 'sketch':
+                icon = sketch
+                break
+              case 'sld':
+                icon = sld
+                break
+              case 'mindnode':
+                icon = mindnode
                 break
               case 'numbers':
                 icon = numbers

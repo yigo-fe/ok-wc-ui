@@ -3,12 +3,12 @@
  * @Author: 付静
  * @Date: 2021-03-19 01:13:31
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-23 16:56:03
- * @FilePath: /packages/ok-accessory/upload-image-hook.ts
+ * @LastEditTime: 2021-03-25 10:38:07
+ * @FilePath: /packages/ok-accessory/ok-upload-image/upload-image-hook.ts
  */
 
-import { apiInit, sourceHost } from '../services/api'
-import useUploadHandler from './upload-base-hook'
+import { apiInit, sourceHost } from '../../services/api'
+import useUploadHandler from '../upload-base-hook'
 export default function (props, context) {
   const api = apiInit()
   // 删除文件
@@ -73,10 +73,12 @@ export default function (props, context) {
     showRemove,
     fileLists,
     hideUploader,
+    disabled,
     displayFileList,
     uploadFiles,
     handleDetele,
     handleDownload,
+    handleAbort,
   } = useUploadHandler(props, context, config)
 
   return {
@@ -85,10 +87,12 @@ export default function (props, context) {
     showRemove,
     fileLists,
     hideUploader,
+    disabled,
     displayFileList,
     uploadFiles,
     handlePreview,
     handleDetele,
     handleDownload,
+    handleAbort,
   }
 }

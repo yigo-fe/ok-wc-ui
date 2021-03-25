@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 16:58:26
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-23 16:28:36
+ * @LastEditTime: 2021-03-23 17:34:42
  * @FilePath: /packages/services/api.ts
  */
 
@@ -17,6 +17,7 @@ declare global {
     okuiConfig: {
       env: 'PRD'
       apiPath: string
+      sourceHost: string
       basePath: string
     }
   }
@@ -31,7 +32,9 @@ const baseURL =
 
 // 文件上传
 const sourceHost =
-  process.env.NODE_ENV === 'development' ? 'https://check.baiteda.com/' : ''
+  process.env.NODE_ENV === 'development'
+    ? 'https://check.baiteda.com/'
+    : window.okuiConfig.sourceHost
 
 // console.log(baseURL, sourceHost)
 

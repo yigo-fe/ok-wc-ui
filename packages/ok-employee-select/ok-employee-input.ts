@@ -3,13 +3,13 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-23 16:15:47
+ * @LastEditTime: 2021-03-24 19:11:16
  * @FilePath: /packages/ok-employee-select/ok-employee-input.ts
  */
 import './ok-employee-more'
 
 import { Button, Select } from 'ant-design-vue'
-import { defineComponent, effect, html, onMounted } from 'ok-lit'
+import { defineComponent, html, onMounted } from 'ok-lit'
 import { createApp, h, ref } from 'vue'
 
 import CDN_PATH from '../path.config'
@@ -101,7 +101,6 @@ defineComponent(
         },
         // (此处全部设置多选，用多选模拟单选):mode="multiple ? 'multiple': 'default'"
         template: `
-        {{noBorder}}
 				<a-select
           ref="okEmployeeInput"			
 					v-model:value="value"
