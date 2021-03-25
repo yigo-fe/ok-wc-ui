@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:57:52
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-25 11:25:53
+ * @LastEditTime: 2021-03-25 15:26:05
  * @FilePath: /packages/ok-employee-select/hook-tree.ts
  */
 import { debounce } from 'lodash'
@@ -141,8 +141,11 @@ export default function (props: any, context: any) {
 
   // 有range时，本地过滤人员信息
   const filterRangeList = () => {
+    console.log()
     searchResultList.value = employeeList.value.filter(
-      (v: any) => v.employee_name.indexOf(queryKey.value) > -1
+      (v: any) =>
+        v.employee_name.indexOf(queryKey.value) > -1 ||
+        v.employee_id?.toLowerCase().indexOf(queryKey.value?.toLowerCase()) > -1
     )
   }
 

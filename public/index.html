@@ -251,14 +251,14 @@
       }
 
 
-      // const okEmployeeTree = document.querySelector('.ok-employee-tree')
-      // okEmployeeTree.value = ['FanShuai']
+      const okEmployeeTree = document.querySelector('.ok-employee-tree')
+      okEmployeeTree.value = ['FanShuai']
       // okEmployeeTree.disabled = true
-      // // okEmployeeTree.range = ["FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing']
-      // okEmployeeTree.update = (val, list)=>{
-      //   console.log('tree-update-index',val, list)
-      //   // okEmployeeTree.value = val
-      // }
+      okEmployeeTree.range = ['FuJing',"FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing', 'WangChao', 'WangYiJie']
+      okEmployeeTree.update = (val, list)=>{
+        console.log('tree-update-index',val, list)
+        // okEmployeeTree.value = val
+      }
 
 
       const okEmployeeInput = document.querySelector('.ok-employee-input')
@@ -267,7 +267,7 @@
       okEmployeeInput.multiple = true
       // okEmployeeInput.borderless = true
       // okEmployeeInput.disabled = true
-      // okEmployeeInput.range = ["FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing']
+      okEmployeeInput.range = ['FuJing',"FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing', 'WangChao', 'WangYiJie']
       okEmployeeInput.update = (val, list)=>{
         console.log('update-index',val, list)
         // okEmployeeInput.value = val

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-03 21:17:47
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-25 11:25:06
+ * @LastEditTime: 2021-03-25 13:22:53
  * @FilePath: /packages/ok-employee-select/hook-input.ts
  */
 
@@ -63,6 +63,16 @@ export default function (props: any, context: any) {
     list.forEach((v: any) => {
       employeeMap[v.employee_id] = v
     })
+  }
+
+  const filterOption = (inputValue: string, option: any) => {
+    const optionDetail = employeeMap[option.value]
+    const query = inputValue?.toLowerCase()
+    const employeeId = optionDetail?.employee_id?.toLowerCase()
+    return (
+      employeeId?.indexOf(query) > -1 ||
+      optionDetail?.employee_name?.indexOf(inputValue) > -1
+    )
   }
 
   // 人员搜索
@@ -303,5 +313,6 @@ export default function (props: any, context: any) {
     handleDelete,
     mouseenter,
     mouseleave,
+    filterOption,
   }
 }

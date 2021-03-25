@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-24 19:11:16
+ * @LastEditTime: 2021-03-25 13:14:30
  * @FilePath: /packages/ok-employee-select/ok-employee-input.ts
  */
 import './ok-employee-more'
@@ -49,6 +49,7 @@ defineComponent(
             handleDelete,
             mouseenter,
             mouseleave,
+            filterOption,
           } = useEmployeeSelect(props, context)
 
           const exceedDelete = (e: CustomEvent) => {
@@ -97,6 +98,7 @@ defineComponent(
             mouseenter,
             mouseleave,
             handleSelect,
+            filterOption,
           }
         },
         // (此处全部设置多选，用多选模拟单选):mode="multiple ? 'multiple': 'default'"
@@ -107,7 +109,7 @@ defineComponent(
           :a="propsValue"
 					mode="multiple"
           :open="isOpen"
-					:filter-option="noRemote ? true : false"
+					:filter-option="noRemote ? filterOption : false"
 					:default-active-first-option="false"
 					:placeholder="placeholder"
 					:disabled="isDisabled"
