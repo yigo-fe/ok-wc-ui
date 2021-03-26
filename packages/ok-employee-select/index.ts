@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-22 17:08:28
+ * @LastEditTime: 2021-03-25 23:14:54
  * @FilePath: /packages/ok-employee-select/index.ts
  */
 
@@ -82,7 +82,7 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
       },
       template: `
 				<ok-employee-tree 
-					v-show="mode==='tree'"			
+					v-if="mode==='tree'"			
 					:value="value"
 					:placeholder="placeholder"
 					:range="range"
@@ -94,7 +94,7 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
 					></ok-employee-tree>
 					
 					<ok-employee-input 
-						v-show="mode!=='tree'"
+						v-else
 						:value="value"
             :placeholder="placeholder"
             :range="range"

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:57:52
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-25 15:26:05
+ * @LastEditTime: 2021-03-25 23:14:20
  * @FilePath: /packages/ok-employee-select/hook-tree.ts
  */
 import { debounce } from 'lodash'
@@ -243,7 +243,7 @@ export default function (props: any, context: any) {
   // 以下处理watch props.value 和value.value：
 
   // 避免首次value赋值时触发更新
-  let isInitial = false
+  // let isInitial = false
 
   // 判断propsValue 是否和value一样
   const propsValEqulValue = () => {
@@ -261,10 +261,10 @@ export default function (props: any, context: any) {
   // watch value 变化： 调用update,更新组件外部值
   const handleValueChange = () => {
     const val = value.value
-    if (isInitial) {
-      isInitial = false
-      return
-    }
+    // if (isInitial) {
+    //   isInitial = false
+    //   return
+    // }
     context.emit('update', { value: val, options: selectedList.value })
   }
   watch(
@@ -285,7 +285,7 @@ export default function (props: any, context: any) {
     const val = propsValue.value
     if ((!val?.length && !value.value.length) || propsValEqulValue()) return
     // 更新初始值
-    isInitial = true
+    // isInitial = true
     if (val?.length) {
       // 更新value；获取detail,回显信息
       value.value = val

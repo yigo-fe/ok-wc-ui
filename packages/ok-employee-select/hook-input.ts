@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-03 21:17:47
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-25 13:22:53
+ * @LastEditTime: 2021-03-25 23:15:42
  * @FilePath: /packages/ok-employee-select/hook-input.ts
  */
 
@@ -181,7 +181,7 @@ export default function (props: any, context: any) {
   }
 
   // 避免首次value赋值时触发更新
-  let isInitial = false
+  // let isInitial = false
 
   // 判断propsValue 是否和value一样
   const propsValEqulValue = () => {
@@ -206,21 +206,10 @@ export default function (props: any, context: any) {
 
     // 非tree 模式
     const val = value.value
-    if (isInitial) {
-      isInitial = false
-      return
-    }
-
-    //有初始值， 特殊处理
-    // if (propsValue.value?.length) {
-    //   if (isInitial && propsValEqulValue()) {
-    //     isInitial = false
-    //     return
-    //   }
-    //   if (isInitial) return
+    // if (isInitial) {
+    //   isInitial = false
+    //   return
     // }
-
-    // isInitial = false
 
     // 非initial, update value
     context.emit('update', {
@@ -236,7 +225,7 @@ export default function (props: any, context: any) {
     const val = propsValue.value
     if ((!val?.length && !value.value.length) || propsValEqulValue()) return
     // 更新初始值
-    isInitial = true
+    // isInitial = true
     if (val?.length) {
       // 更新value；获取detail,回显信息
       value.value = val

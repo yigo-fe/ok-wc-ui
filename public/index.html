@@ -264,25 +264,25 @@
 
 
       const okEmployeeInput = document.querySelector('.ok-employee-input')
-      okEmployeeInput.value = ["FuJing"]
+      // okEmployeeInput.value = ["FuJing"]
       // okEmployeeInput.value = []
       okEmployeeInput.multiple = true
       // okEmployeeInput.borderless = true
       // okEmployeeInput.disabled = true
       okEmployeeInput.range = ['FuJing',"FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing', 'WangChao', 'WangYiJie']
       okEmployeeInput.update = (val, list)=>{
-        console.log('update-index',val, list)
-        // okEmployeeInput.value = val
+        console.log('update-index',val)
+        okEmployeeInput.value = val
       }
 
       const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
-      okEmployeeInput2.value = ["FanShuai"]
+      // okEmployeeInput2.value = ["FanShuai"]
       okEmployeeInput2.multiple = true
       // okEmployeeInput2.disabled = true
       // okEmployeeInput2.range = ["FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing']
       okEmployeeInput2.update = (val, list)=>{
         console.log('okEmployeeInput2 -update-index',val, list)
-        // okEmployeeInput2.value = val
+        okEmployeeInput2.value = val
       }
 
 
@@ -308,8 +308,8 @@
 
       // }, 500)
 
-      //   const okEmployeeInput = document.querySelector('.ok-employee-input')
-      // okEmployeeInput.value = ['FengHaiLi'] 
+        const okEmployeeInput = document.querySelector('.ok-employee-input')
+      okEmployeeInput.value = ['FengHaiLi'] 
   
       // const okEmployeeTree = document.querySelector('.ok-employee-tree')
       // okEmployeeTree.value = ['FuJing'] 
@@ -323,8 +323,8 @@
     }
 
     function testClick2 (){
-      // const okEmployeeInput = document.querySelector('.ok-employee-input')
-      // okEmployeeInput.value = ['FuJing'] 
+      const okEmployeeInput = document.querySelector('.ok-employee-input')
+      okEmployeeInput.value = [] 
 
       // const okEmployeeTree = document.querySelector('.ok-employee-tree')
       // okEmployeeTree.value = [] 
