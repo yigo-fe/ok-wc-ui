@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-25 10:40:47
+ * @LastEditTime: 2021-03-27 14:22:04
  * @FilePath: /packages/ok-accessory/ok-upload-drag/ok-upload-drag.ts
  */
 
@@ -62,6 +62,7 @@ defineComponent(
       handleDetele,
       handleDownload,
       handleAbort,
+      handleRemoveFileList,
     } = useAttachmentHandle(props, context)
 
     /**
@@ -96,43 +97,8 @@ defineComponent(
       // 更改拖拽中状态
       dragover.value = false
 
-      const accept = props.accept
-
-      if (!accept) {
-        uploadFiles(files)
-        // context.emit('file', files)
-        return
-      }
-
-      // 根据accept过滤符合条件的文件
-      const acceptedFiles = Array.from(files).filter(file => {
-        const { type, name } = file
-        const extension =
-          name.indexOf('.') > -1 ? `.${name.split('.').pop()}` : ''
-        const baseType = type.replace(/\/.*$/, '')
-        return accept
-          .split(',')
-          .map(type => type.trim())
-          .filter(type => type)
-          .some(acceptedType => {
-            if (acceptedType.startsWith('.')) {
-              return extension === acceptedType
-            }
-            if (/\/\*$/.test(acceptedType)) {
-              return baseType === acceptedType.replace(/\/\*$/, '')
-            }
-            if (/^[^/]+\/[^/]+$/.test(acceptedType)) {
-              return type === acceptedType
-            }
-            return false
-          })
-      })
-
-      if (!acceptedFiles.length) {
-        console.warn('文件格式不正确')
-      }
-      uploadFiles((acceptedFiles as unknown) as FileList)
-      // context.emit('file', acceptedFiles)
+      // 格式验证统一在beforeUpload中处理
+      uploadFiles(files)
     }
 
     const onDragover = (e: DragEvent) => {
@@ -221,6 +187,7 @@ defineComponent(
         @delete=${handleDetele}
         @download=${handleDownload}
         @abort=${handleAbort}
+        @remove=${handleRemoveFileList}
         .fileList=${fileLists.value}
         .listType=${props.listType}
         .showPreview=${showPreview.value}

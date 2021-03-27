@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-25 10:42:00
+ * @LastEditTime: 2021-03-27 14:11:52
  * @FilePath: /packages/ok-accessory/ok-upload-drag/ok-file-list.ts
  */
 
@@ -61,8 +61,14 @@ defineComponent(
       context.emit('download', file)
     }
 
+    // 终止上传
     const handleAbort = (file: UploadFile) => {
       context.emit('abort', file)
+    }
+
+    // 从上传列表移除
+    const removeFileList = (file: UploadFile) => {
+      context.emit('remove', file)
     }
 
     // 上传中： 展示上传进度百分比及终止上传按钮
@@ -93,6 +99,27 @@ defineComponent(
             </span>
           </div>
         `
+      } else if (item.status === 'fail') {
+        return html`
+          <span class="abort-btn" @click=${() => removeFileList(item)}>
+            <svg
+              t="1616573273136"
+              class="icon"
+              viewBox="0 0 1024 1024"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              p-id="27041"
+              width="12"
+              height="12"
+            >
+              <path
+                d="M512 451.669333L813.696 149.952l60.352 60.352L572.330667 512l301.717333 301.696-60.352 60.352L512 572.330667 210.304 874.048l-60.352-60.352L451.669333 512 149.952 210.304l60.352-60.352L512 451.669333z"
+                p-id="27042"
+                fill="#5283F7"
+              ></path>
+            </svg>
+          </span>
+        `
       }
     }
 
@@ -101,7 +128,7 @@ defineComponent(
      * @param item 当前文件
      */
     const renderProgress = (item: UploadFile) => {
-      if (item.status === 'uploading') {
+      if (item.status === 'uploading' || item.status === 'fail') {
         return html`
           <ok-progress
             class="file-list-progress"

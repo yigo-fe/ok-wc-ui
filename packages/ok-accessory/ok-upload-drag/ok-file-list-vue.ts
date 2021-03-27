@@ -3,8 +3,8 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-24 19:08:02
- * @FilePath: /packages/ok-accessory/ok-file-list-vue.ts
+ * @LastEditTime: 2021-03-27 13:52:32
+ * @FilePath: /packages/ok-accessory/ok-upload-drag/ok-file-list-vue.ts
  */
 
 import { computed, defineComponent, html, onMounted, PropType } from 'ok-lit'
@@ -148,7 +148,7 @@ defineComponent(
             </div>
 
             <ok-progress
-              v-if="item.status === 'uploading'"
+              v-if="item.status === 'uploading' || item.status === 'fail'"
               :percentage="item.percentage"
               :status="item.status"
             ></ok-progress>

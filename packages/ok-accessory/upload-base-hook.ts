@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-25 11:28:08
+ * @LastEditTime: 2021-03-27 14:27:32
  * @FilePath: /packages/ok-accessory/upload-base-hook.ts
  */
 
@@ -52,7 +52,6 @@ export default function (props, context, config) {
   const reqs = ref({})
   let fileId = 0
   const fileLists = ref([] as any)
-  const maxSize = computed(() => props.maxSize * 1024 + 1)
   const propsValue = computed(() => props.fileList)
 
   const showPreview = computed(() => props.operation.includes('preview'))
@@ -63,14 +62,6 @@ export default function (props, context, config) {
 
   // 所有已上传文件 file_id 和 file 的map
   const fileMap = reactive({})
-
-  const fileCheck = file => {
-    if (props.maxSize) {
-      return file.size < maxSize
-    } else {
-      return true
-    }
-  }
 
   /**
    *  文件上传前数据处理：判断limit, multiple; 添加UID; beforeUpload 钩子处理
@@ -93,18 +84,17 @@ export default function (props, context, config) {
     }
     postFiles.forEach(rawFile => {
       let file = rawFile as OkFile
-      // 检查文件大小是否符合条件
-      if (!fileCheck(file)) return
-      file.uid = fileId
-      fileId++
-      handleFileList(file)
-      // props.onStart(rawFile)
-      handleOnChange(file)
-      // before-upload
+      // 文件格式及大小都在组件外部判断
       if (
         !props.beforeUpload ||
         (props.beforeUpload && props.beforeUpload(file))
       ) {
+        file.uid = fileId
+        fileId++
+        handleFileList(file)
+        // props.onStart(rawFile)
+        handleOnChange(file)
+        // before-upload
         // 开始上传
         if (props.autoUpload) upload(file as OkFile)
       }
@@ -223,7 +213,9 @@ export default function (props, context, config) {
     // 更新状态
     updateStatus({ status: 'fail' }, file)
     // 从列表中删除 TODO: 具体交互待产品确认
-    fileLists.value = fileLists.value.filter(v => v.uid !== file.uid)
+    // fileLists.value = fileLists.value.filter(v => v.uid !== file.uid)
+    // 上传失败， 更新传输列表状态
+    updateStatus({ status: 'fail', response: err }, file)
     // 触发onchange
     handleOnChange(file)
     // 处理用户自定义事件
@@ -360,5 +352,6 @@ export default function (props, context, config) {
     handleDetele,
     handleDownload,
     handleAbort,
+    removeFileList,
   }
 }

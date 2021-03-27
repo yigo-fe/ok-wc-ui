@@ -3,8 +3,8 @@
  * @Author: 付静
  * @Date: 2021-03-19 01:13:31
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-24 16:52:07
- * @FilePath: /packages/ok-accessory/upload-attachment-hook.ts
+ * @LastEditTime: 2021-03-27 14:11:38
+ * @FilePath: /packages/ok-accessory/ok-upload-drag/upload-attachment-hook.ts
  */
 
 import { apiInit } from '../../services/api'
@@ -46,15 +46,6 @@ export default function (props, context) {
     return await api.default.GetAttachmentListAttachmentPrivateV1POST({
       file_id_list: ids,
     })
-
-    // const result: any = await api.default.GetAttachmentListAttachmentPrivateV1POST(
-    //   {
-    //     file_id_list: ids,
-    //   }
-    // )
-    // if (result.code === '000000') {
-    //   displayFileList(result.data)
-    // }
   }
   // test:
   // const a = ['ab22a2cfdc310739fff09a08607f5534']
@@ -78,7 +69,12 @@ export default function (props, context) {
     handleDetele,
     handleDownload,
     handleAbort,
+    removeFileList,
   } = useUploadHandler(props, context, config)
+
+  const handleRemoveFileList = (e: CustomEvent) => {
+    removeFileList(e.detail)
+  }
 
   return {
     showPreview,
@@ -93,5 +89,6 @@ export default function (props, context) {
     handleDetele,
     handleDownload,
     handleAbort,
+    handleRemoveFileList,
   }
 }

@@ -4,7 +4,7 @@
  * @Author: 付静
  * @Date: 2021-02-05 19:42:22
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-24 19:04:39
+ * @LastEditTime: 2021-03-27 14:33:42
  * @FilePath: /packages/ok-accessory/upload.props.ts
  */
 
@@ -52,7 +52,6 @@ const UploadProps = {
   },
   limit: {
     type: (Number as unknown) as PropType<Nullable<number>>,
-    default: '',
   },
   fileList: {
     type: (Array as unknown) as PropType<[]>,

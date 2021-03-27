@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-19 01:13:31
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-25 10:38:07
+ * @LastEditTime: 2021-03-27 10:38:33
  * @FilePath: /packages/ok-accessory/ok-upload-image/upload-image-hook.ts
  */
 
@@ -35,9 +35,15 @@ export default function (props, context) {
     let file = fileLists.value.find(v => v.uid === data.detail.uid)
     if (file) {
       const path = file?.response?.data?.[0].file_path
-      // const url = path ? `${sourceHost}${path}` : ''
+      // todo 兼容
+      let url: any = ''
+      if (path && /^\/\//.test(path)) {
+        url = path
+      } else {
+        url = path ? `${sourceHost}${path}` : ''
+      }
 
-      window.open(path, '_blank')
+      window.open(url, '_blank')
       // 处理用户自定义事件
       props.onPreview && props.onPreview(file)
     }
@@ -48,13 +54,6 @@ export default function (props, context) {
     return await api.default.GetImageListAttachmentPrivateV1POST({
       file_id_list: ids,
     })
-
-    // const result: any = await api.default.GetImageListAttachmentPrivateV1POST({
-    //   file_id_list: ids,
-    // })
-    // if (result.code === '000000') {
-    //   displayFileList(result.data)
-    // }
   }
 
   // test:

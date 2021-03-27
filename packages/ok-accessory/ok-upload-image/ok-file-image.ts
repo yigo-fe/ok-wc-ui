@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-25 10:42:11
+ * @LastEditTime: 2021-03-27 13:51:57
  * @FilePath: /packages/ok-accessory/ok-upload-image/ok-file-image.ts
  */
 
@@ -79,7 +79,7 @@ defineComponent(
         },
         template: `
           <li v-for="file in fileList" :key="file.id" :class="['ok-upload-list__item', 'is-' + file.status]" :style="thumbStyle">
-            <div v-if="file.status === 'uploading'" class="ok-process-wraper" >
+            <div v-if="file.status === 'uploading' || file.status === 'fail'" class="ok-process-wraper" >
               <ok-progress class="image-progress" :percentage="file.percentage" :status="file.status" ></ok-progress>
             </div>
             <img class="ok-upload-list__item-thumbnail" v-show="file?.response?.data[0]?.thumb_url" :src="file?.response?.data[0]?.thumb_url" />
