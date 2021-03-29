@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-27 14:27:32
+ * @LastEditTime: 2021-03-27 16:42:26
  * @FilePath: /packages/ok-accessory/upload-base-hook.ts
  */
 
@@ -214,8 +214,6 @@ export default function (props, context, config) {
     updateStatus({ status: 'fail' }, file)
     // 从列表中删除 TODO: 具体交互待产品确认
     // fileLists.value = fileLists.value.filter(v => v.uid !== file.uid)
-    // 上传失败， 更新传输列表状态
-    updateStatus({ status: 'fail', response: err }, file)
     // 触发onchange
     handleOnChange(file)
     // 处理用户自定义事件
@@ -262,6 +260,11 @@ export default function (props, context, config) {
       // 处理用户自定义事件
       props.onDownload && props.onDownload(file)
     }
+  }
+
+  // 上传失败， 从传输列表中移除
+  const handleRemoveFileList = (e: CustomEvent) => {
+    removeFileList(e.detail)
   }
 
   /**
@@ -352,6 +355,6 @@ export default function (props, context, config) {
     handleDetele,
     handleDownload,
     handleAbort,
-    removeFileList,
+    handleRemoveFileList,
   }
 }

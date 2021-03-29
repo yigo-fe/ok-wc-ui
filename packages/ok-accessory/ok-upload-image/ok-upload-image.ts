@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-25 10:42:24
+ * @LastEditTime: 2021-03-27 16:42:59
  * @FilePath: /packages/ok-accessory/ok-upload-image/ok-upload-image.ts
  */
 
@@ -61,6 +61,8 @@ defineComponent(
       handlePreview,
       handleDetele,
       handleDownload,
+      handleAbort,
+      handleRemoveFileList,
     } = useImageHandle(props, context)
 
     /**
@@ -138,6 +140,8 @@ defineComponent(
         @preview=${handlePreview}
         @delete=${handleDetele}
         @download=${handleDownload}
+        @abort=${handleAbort}
+        @remove=${handleRemoveFileList}
         .fileList=${fileLists.value}
         .listType=${props.listType}
         .showPreview=${showPreview.value}

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-19 01:13:31
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-27 14:11:38
+ * @LastEditTime: 2021-03-27 16:42:36
  * @FilePath: /packages/ok-accessory/ok-upload-drag/upload-attachment-hook.ts
  */
 
@@ -69,12 +69,8 @@ export default function (props, context) {
     handleDetele,
     handleDownload,
     handleAbort,
-    removeFileList,
+    handleRemoveFileList,
   } = useUploadHandler(props, context, config)
-
-  const handleRemoveFileList = (e: CustomEvent) => {
-    removeFileList(e.detail)
-  }
 
   return {
     showPreview,

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-19 01:13:31
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-27 10:38:33
+ * @LastEditTime: 2021-03-27 17:22:10
  * @FilePath: /packages/ok-accessory/ok-upload-image/upload-image-hook.ts
  */
 
@@ -40,7 +40,7 @@ export default function (props, context) {
       if (path && /^\/\//.test(path)) {
         url = path
       } else {
-        url = path ? `${sourceHost}${path}` : ''
+        url = path ? `${sourceHost}/${path}` : ''
       }
 
       window.open(url, '_blank')
@@ -78,6 +78,7 @@ export default function (props, context) {
     handleDetele,
     handleDownload,
     handleAbort,
+    handleRemoveFileList,
   } = useUploadHandler(props, context, config)
 
   return {
@@ -93,5 +94,6 @@ export default function (props, context) {
     handleDetele,
     handleDownload,
     handleAbort,
+    handleRemoveFileList,
   }
 }

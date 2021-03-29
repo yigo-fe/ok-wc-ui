@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-27 13:51:57
+ * @LastEditTime: 2021-03-27 17:06:59
  * @FilePath: /packages/ok-accessory/ok-upload-image/ok-file-image.ts
  */
 
@@ -11,7 +11,7 @@ import { computed, defineComponent, html, onMounted, PropType } from 'ok-lit'
 import { createApp } from 'vue'
 
 import okUploadImgCss from '../style/ok-upload-image.less'
-import type { ListType, UploadFile } from '../upload.type'
+import type { ListType, UploadFile, UploadStatus } from '../upload.type'
 defineComponent(
   'ok-file-image',
   {
@@ -66,6 +66,14 @@ defineComponent(
           const handleDownload = (file: UploadFile) => {
             context.emit('download', file)
           }
+
+          // 上传中， 上传失败 的关闭按钮
+          const handleCloseClick = (file: UploadFile, status: UploadStatus) => {
+            // 上传中： 终止上传； 上传失败： 从传输列表中移除
+            const event = status === 'uploading' ? 'abort' : 'remove'
+            context.emit(event, file)
+          }
+
           return {
             fileList,
             showPreview,
@@ -75,15 +83,37 @@ defineComponent(
             handleDelete,
             handlePreview,
             handleDownload,
+            handleCloseClick,
           }
         },
         template: `
           <li v-for="file in fileList" :key="file.id" :class="['ok-upload-list__item', 'is-' + file.status]" :style="thumbStyle">
             <div v-if="file.status === 'uploading' || file.status === 'fail'" class="ok-process-wraper" >
-              <ok-progress class="image-progress" :percentage="file.percentage" :status="file.status" ></ok-progress>
+              <div class="image-process-wraper">
+                <ok-progress class="image-progress" :percentage="file.percentage" :status="file.status" ></ok-progress>
+                <span class="image-close-btn" @click="handleCloseClick(file, file.status)">
+                  <svg
+                    t="1616573273136"
+                    class="icon"
+                    viewBox="0 0 1024 1024"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    p-id="27041"
+                    width="12"
+                    height="12"
+                  >
+                    <path
+                      d="M512 451.669333L813.696 149.952l60.352 60.352L572.330667 512l301.717333 301.696-60.352 60.352L512 572.330667 210.304 874.048l-60.352-60.352L451.669333 512 149.952 210.304l60.352-60.352L512 451.669333z"
+                      p-id="27042"
+                      fill="#5283F7"
+                    ></path>
+                  </svg>
+                </span>
+              </div>
+
             </div>
             <img class="ok-upload-list__item-thumbnail" v-show="file?.response?.data[0]?.thumb_url" :src="file?.response?.data[0]?.thumb_url" />
-            <span class="ok-upload-list__item-actions">
+            <span class="ok-upload-list__item-actions" v-show="file?.response?.data[0]?.thumb_url">
               <i v-if="showPreview" @click="handlePreview(file)">
                 <svg
                   t="1615028632085"
@@ -120,10 +150,7 @@ defineComponent(
                     fill="#fff"
                   ></path>
                 </svg>
-              </a>
-
-
-              
+              </a>        
               <i v-if="showRemove" @click="handleDelete(file)">
                 <svg
                   t="1615028657246"
