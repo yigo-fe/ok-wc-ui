@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-25 21:59:03
+ * @LastEditTime: 2021-03-29 22:02:01
  * @FilePath: /packages/ok-employee-select/ok-employee-input.ts
  */
 import './ok-employee-more'
@@ -50,6 +50,7 @@ defineComponent(
             mouseenter,
             mouseleave,
             filterOption,
+            dropdownVisibleChange,
           } = useEmployeeSelect(props, context)
 
           const exceedDelete = (e: CustomEvent) => {
@@ -99,6 +100,7 @@ defineComponent(
             mouseleave,
             handleSelect,
             filterOption,
+            dropdownVisibleChange,
           }
         },
         // (此处全部设置多选，用多选模拟单选):mode="multiple ? 'multiple': 'default'"
@@ -127,10 +129,11 @@ defineComponent(
           @blur="closeOpen" 
           @deselect="handleDelete" 
           @mouseenter="mouseenter" 
-          @mouseleave="mouseleave" >
+          @mouseleave="mouseleave" 
+          @dropdownVisibleChange="dropdownVisibleChange">
 
           <template #suffixIcon>
-            <img v-if="isMouseenter && !isDisabled" :src="closeIcon" class="head-clear-icon" @click="clearSelected" />
+            <img v-if="isMouseenter && !isDisabled && value.length" :src="closeIcon" class="head-clear-icon" @click="clearSelected" />
             <img v-else :src="searchIcon" class="head-search-icon"/>
           </template>
 

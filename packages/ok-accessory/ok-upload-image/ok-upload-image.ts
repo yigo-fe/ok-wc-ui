@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-27 16:42:59
+ * @LastEditTime: 2021-03-29 22:15:31
  * @FilePath: /packages/ok-accessory/ok-upload-image/ok-upload-image.ts
  */
 
@@ -137,6 +137,7 @@ defineComponent(
       </style>
       <link rel="stylesheet" .href="${CDN_PATH}common.css" />
       <ok-file-image
+        class="ok-file-image-list"
         @preview=${handlePreview}
         @delete=${handleDetele}
         @download=${handleDownload}

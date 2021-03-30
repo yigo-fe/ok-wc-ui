@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-03 21:17:47
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-25 23:15:42
+ * @LastEditTime: 2021-03-29 22:00:51
  * @FilePath: /packages/ok-employee-select/hook-input.ts
  */
 
@@ -180,6 +180,14 @@ export default function (props: any, context: any) {
     isMouseenter.value = false
   }
 
+  // 远程模式下, 如果未选中， 清除options缓存
+  const dropdownVisibleChange = open => {
+    if (!open) return
+    if (isRange && !value.value.length) {
+      options.value = []
+    }
+  }
+
   // 避免首次value赋值时触发更新
   // let isInitial = false
 
@@ -303,5 +311,6 @@ export default function (props: any, context: any) {
     mouseenter,
     mouseleave,
     filterOption,
+    dropdownVisibleChange,
   }
 }
