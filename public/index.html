@@ -45,13 +45,13 @@
       <ok-department-select class="divider ok-department-input" placeholder="请选择" style="width: 200px;display: block;"></ok-department-select>
 
 
-      <h3>人员选择select-antd</h3>
-      <ok-employee-select class="divider ok-employee-input" placeholder="请选择1" style="width: 200px;display: block;"></ok-employee-select>
+      <!-- <h3>人员选择select-antd</h3> -->
+      <!-- <ok-employee-select class="divider ok-employee-input" placeholder="请选择1" style="width: 200px;display: block;"></ok-employee-select> -->
 
-      <ok-employee-select class="divider ok-employee-input2" placeholder="请选择2" style="width: 200px;display: block;"></ok-employee-select>
+      <!-- <ok-employee-select class="divider ok-employee-input2" placeholder="请选择2" style="width: 200px;display: block;"></ok-employee-select> -->
 
-      <h3>人员选择tree</h3>
-      <ok-employee-select class="divider ok-employee-tree" mode="tree" placeholder="请选择3" style="width: 300px;display: block;"></ok-employee-select>
+      <!-- <h3>人员选择tree</h3> -->
+      <!-- <ok-employee-select class="divider ok-employee-tree" mode="tree" placeholder="请选择3" style="width: 300px;display: block;"></ok-employee-select> -->
 
       <!-- <ok-person-detail></ok-person-detail> -->
       <!-- <ok-person-group></ok-person-group> -->
@@ -253,37 +253,37 @@
       }
 
 
-      const okEmployeeTree = document.querySelector('.ok-employee-tree')
-      okEmployeeTree.value = ['FanShuai']
-      // okEmployeeTree.disabled = true
-      okEmployeeTree.range = ['FuJing',"FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing', 'WangChao', 'WangYiJie']
-      okEmployeeTree.update = (val, list)=>{
-        console.log('tree-update-index',val, list)
-        // okEmployeeTree.value = val
-      }
+      // const okEmployeeTree = document.querySelector('.ok-employee-tree')
+      // okEmployeeTree.value = ['FanShuai']
+      // // okEmployeeTree.disabled = true
+      // okEmployeeTree.range = ['FuJing',"FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing', 'WangChao', 'WangYiJie']
+      // okEmployeeTree.update = (val, list)=>{
+      //   console.log('tree-update-index',val, list)
+      //   // okEmployeeTree.value = val
+      // }
 
 
-      const okEmployeeInput = document.querySelector('.ok-employee-input')
-      // okEmployeeInput.value = ["FuJing"]
-      // okEmployeeInput.value = []
-      okEmployeeInput.multiple = true
-      // okEmployeeInput.borderless = true
-      // okEmployeeInput.disabled = true
-      okEmployeeInput.range = ['FuJing',"FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing', 'WangChao', 'WangYiJie']
-      okEmployeeInput.update = (val, list)=>{
-        console.log('update-index',val)
-        okEmployeeInput.value = val
-      }
+      // const okEmployeeInput = document.querySelector('.ok-employee-input')
+      // // okEmployeeInput.value = ["FuJing"]
+      // // okEmployeeInput.value = []
+      // okEmployeeInput.multiple = true
+      // // okEmployeeInput.borderless = true
+      // // okEmployeeInput.disabled = true
+      // okEmployeeInput.range = ['FuJing',"FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing', 'WangChao', 'WangYiJie']
+      // okEmployeeInput.update = (val, list)=>{
+      //   console.log('update-index',val)
+      //   okEmployeeInput.value = val
+      // }
 
-      const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
-      // okEmployeeInput2.value = ["FanShuai"]
-      okEmployeeInput2.multiple = true
-      // okEmployeeInput2.disabled = true
-      // okEmployeeInput2.range = ["FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing']
-      okEmployeeInput2.update = (val, list)=>{
-        console.log('okEmployeeInput2 -update-index',val, list)
-        okEmployeeInput2.value = val
-      }
+      // const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
+      // // okEmployeeInput2.value = ["FanShuai"]
+      // okEmployeeInput2.multiple = true
+      // // okEmployeeInput2.disabled = true
+      // // okEmployeeInput2.range = ["FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing']
+      // okEmployeeInput2.update = (val, list)=>{
+      //   console.log('okEmployeeInput2 -update-index',val, list)
+      //   okEmployeeInput2.value = val
+      // }
 
 
       // setTimeout(()=>{

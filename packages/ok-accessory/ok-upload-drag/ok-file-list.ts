@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-27 14:11:52
+ * @LastEditTime: 2021-03-30 10:20:01
  * @FilePath: /packages/ok-accessory/ok-upload-drag/ok-file-list.ts
  */
 
@@ -41,7 +41,7 @@ defineComponent(
       type: (Boolean as unknown) as PropType<boolean>,
     },
     maxHeight: {
-      type: (Number as unknown) as PropType<number>,
+      type: (String as unknown) as PropType<string>,
     },
   },
   (props, context) => {
