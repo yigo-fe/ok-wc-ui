@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-20 14:56:24
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-25 11:01:38
+ * @LastEditTime: 2021-03-31 18:08:10
  * @FilePath: /packages/ok-employee-select/employee-props.ts
  */
 
@@ -13,7 +13,7 @@ export type ModeType = 'tree' | 'default'
 
 const propsOptions = {
   value: {
-    type: (Array as unknown) as PropType<string[]>,
+    type: [Array, String],
   },
   range: {
     type: (Array as unknown) as PropType<string[]>,

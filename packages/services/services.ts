@@ -4,7 +4,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:25:18
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-30 18:21:42
+ * @LastEditTime: 2021-03-31 18:42:02
  * @FilePath: /packages/services/services.ts
  */
 import { FetchService } from './axios'
@@ -24,14 +24,31 @@ export default class {
   }
 
   /**
-   * 根据employee_id 批量获取用户消息
+   * 根据员工编号批量员工信息
    * @method
+   * @name #ListUserInfoByIdsUserPrivateV1POST
+   * @param {} param - param
    */
-  public async ListUserInfoByIds(data: any) {
-    const result = await this.http.post(
-      `/v1/private/user/listUserInfoByIds`,
-      data
-    )
+  public async ListUserInfoByIdsUserPrivateV1POST(params: {
+    payload?: typing.UserIdQuery
+    query?: {}
+    path?: {}
+  }): Promise<typing.ListResult$UserDto$> {
+    let path = ''
+    path = '/v1/private/user/listUserInfoByIds'
+    let body: any
+    const queryParameters: any = {}
+
+    if (params.payload !== undefined) {
+      body = params.payload
+    }
+
+    const result: typing.ListResult$UserDto$ = await this.http.request({
+      method: 'POST',
+      url: path,
+      params: queryParameters,
+      payload: body,
+    })
     return result
   }
 

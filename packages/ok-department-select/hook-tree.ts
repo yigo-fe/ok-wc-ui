@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 22:07:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-31 13:50:10
+ * @LastEditTime: 2021-03-31 18:07:08
  * @FilePath: /packages/ok-department-select/hook-tree.ts
  */
 import { debounce } from 'lodash'
@@ -36,7 +36,7 @@ export default function (props: any, context: any) {
     clearSelected,
     handleDelete,
     maxTagPlaceholder,
-  } = useBaseHandle(props, context, 'tree')
+  } = useBaseHandle(props, context)
 
   // icon
   const deptIcon = folder

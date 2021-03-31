@@ -46,13 +46,13 @@
       <ok-department-select mode="tree" class="divider ok-department-tree" placeholder="请选择部门" style="width: 200px;display: block;"></ok-department-select>
 
 
-      <h3>人员选择select-antd</h3>
-      <ok-employee-select class="divider ok-employee-input" placeholder="请选择1" style="width: 200px;display: block;"></ok-employee-select>
+      <!-- <h3>人员选择select-antd</h3> -->
+      <!-- <ok-employee-select class="divider ok-employee-input" placeholder="请选择1" style="width: 200px;display: block;"></ok-employee-select> -->
 
       <!-- <ok-employee-select class="divider ok-employee-input2" placeholder="请选择2" style="width: 200px;display: block;"></ok-employee-select> -->
 
-      <!-- <h3>人员选择tree</h3> -->
-      <!-- <ok-employee-select class="divider ok-employee-tree" mode="tree" placeholder="请选择3" style="width: 300px;display: block;"></ok-employee-select> -->
+      <h3>人员选择tree</h3>
+      <ok-employee-select class="divider ok-employee-tree" mode="tree" placeholder="请选择3" style="width: 300px;display: block;"></ok-employee-select>
 
       <!-- <ok-person-detail></ok-person-detail> -->
       <!-- <ok-person-group></ok-person-group> -->
@@ -273,27 +273,27 @@
       }
 
 
-      // const okEmployeeTree = document.querySelector('.ok-employee-tree')
-      // okEmployeeTree.value = ['FanShuai']
-      // // okEmployeeTree.disabled = true
+      const okEmployeeTree = document.querySelector('.ok-employee-tree')
+      okEmployeeTree.value = ['FanShuai']
+      // okEmployeeTree.disabled = true
       // okEmployeeTree.range = ['FuJing',"FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing', 'WangChao', 'WangYiJie']
-      // okEmployeeTree.update = (val, list)=>{
-      //   console.log('tree-update-index',val, list)
-      //   // okEmployeeTree.value = val
-      // }
-
-
-      const okEmployeeInput = document.querySelector('.ok-employee-input')
-      // okEmployeeInput.value = ["FuJing"]
-      // okEmployeeInput.value = []
-      okEmployeeInput.multiple = true
-      // okEmployeeInput.borderless = true
-      // okEmployeeInput.disabled = true
-      okEmployeeInput.range = ['FuJing',"FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing', 'WangChao', 'WangYiJie']
-      okEmployeeInput.update = (val, list)=>{
-        console.log('update-index',val)
-        okEmployeeInput.value = val
+      okEmployeeTree.update = (val, list)=>{
+        console.log('tree-update-index',val, list)
+        // okEmployeeTree.value = val
       }
+
+
+      // const okEmployeeInput = document.querySelector('.ok-employee-input')
+      // okEmployeeInput.value = ["FuJing"]
+      // // okEmployeeInput.value = []
+      // okEmployeeInput.multiple = true
+      // // okEmployeeInput.borderless = true
+      // // okEmployeeInput.disabled = true
+      // // okEmployeeInput.range = ['FuJing',"FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing', 'WangChao', 'WangYiJie']
+      // okEmployeeInput.update = (val, list)=>{
+      //   console.log('update-index',val)
+      //   okEmployeeInput.value = val
+      // }
 
       // const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
       // // okEmployeeInput2.value = ["FanShuai"]

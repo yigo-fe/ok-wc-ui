@@ -3,10 +3,10 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:01:15
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-30 21:08:06
+ * @LastEditTime: 2021-03-31 18:09:21
  * @FilePath: /packages/ok-department-select/index.ts
  */
-import { defineComponent, effect, html, onMounted } from 'ok-lit'
+import { defineComponent, html, onMounted } from 'ok-lit'
 import { computed, createApp } from 'vue'
 
 import CDN_PATH from '../path.config'
@@ -36,9 +36,6 @@ defineComponent(
     const secrecy = computed(() => props.secrecy)
     // 不展示边框
     const borderless = computed(() => props.borderless)
-    effect(() => {
-      console.log(props.mode, props.placeholder)
-    })
 
     onMounted(() => {
       const options = {

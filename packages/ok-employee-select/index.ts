@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-25 23:14:54
+ * @LastEditTime: 2021-03-31 16:44:40
  * @FilePath: /packages/ok-employee-select/index.ts
  */
 
@@ -60,6 +60,8 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
         const disabled = computed(() => props.disabled)
         const placeholder = computed(() => props.placeholder)
         const multiple = computed(() => props.multiple)
+        // 无边框
+        const borderless = computed(() => props.borderless)
         const range = computed(() => props.range)
         // 组织架构是否开始保密
         const secrecy = computed(() => props.secrecy)
@@ -77,6 +79,7 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
           multiple,
           range,
           secrecy,
+          borderless,
           updateValue,
         }
       },
@@ -89,6 +92,7 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
 					:disabled="disabled"
           :multiple="multiple"
           :secrecy="secrecy"
+          :borderless="borderless"
 					@update="updateValue"
           class="ok-employee-tree"
 					></ok-employee-tree>
@@ -100,6 +104,7 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
             :range="range"
             :disabled="disabled"
             :multiple="multiple"
+            :borderless="borderless"
 						@update="updateValue"
             class="ok-employee-input"
 						></ok-employee-input>

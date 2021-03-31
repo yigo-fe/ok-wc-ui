@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:57:52
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-31 13:48:38
+ * @LastEditTime: 2021-03-31 18:54:12
  * @FilePath: /packages/ok-employee-select/hook-tree.ts
  */
 import { debounce } from 'lodash'
@@ -76,11 +76,13 @@ export default function (props: any, context: any) {
       return
     }
     // 根据已选人员ids, 获取items
-    const result = await api.default.ListUserInfoByIds({
-      user_ids: value.value,
+    const result = await api.default.ListUserInfoByIdsUserPrivateV1POST({
+      payload: {
+        user_ids: value.value,
+      },
     })
     if (result.code === '000000') {
-      selectedList.value = result.data
+      selectedList.value = result.data as []
     }
   }
 
@@ -199,11 +201,13 @@ export default function (props: any, context: any) {
 
   // 查询指定范围人员
   const getRangeList = async () => {
-    const result = await api.default.ListUserInfoByIds({
-      user_ids: props.range,
+    const result = await api.default.ListUserInfoByIdsUserPrivateV1POST({
+      payload: {
+        user_ids: props.range,
+      },
     })
     if (result.code === '000000') {
-      employeeList.value = result.data
+      employeeList.value = result.data as []
     }
   }
 
@@ -265,11 +269,13 @@ export default function (props: any, context: any) {
     //   isInitial = false
     //   return
     // }
+    console.log('handleValueChange - tree-update', val)
     context.emit('update', { value: val, options: selectedList.value })
   }
   watch(
     () => value.value,
     (val, oldVal) => {
+      console.log('tree-watch - value.value', value.value)
       // 有时val和oldValue一样也会触发，具体原因待排查
       if (isSameArray(val, oldVal)) return
       handleValueChange()

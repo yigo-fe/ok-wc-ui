@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:37:38
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-31 13:43:40
+ * @LastEditTime: 2021-03-31 18:07:01
  * @FilePath: /packages/ok-department-select/hook-input.ts
  */
 import { debounce } from 'lodash'
@@ -34,7 +34,7 @@ export default function (props: any, context: any) {
     clearSelected,
     handleDelete,
     maxTagPlaceholder,
-  } = useBaseHandle(props, context, 'input')
+  } = useBaseHandle(props, context)
 
   // 远程模式下, 如果未选中， 清除options缓存
   const dropdownVisibleChange = open => {

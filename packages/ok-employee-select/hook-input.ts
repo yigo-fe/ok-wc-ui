@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-03 21:17:47
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-31 13:48:02
+ * @LastEditTime: 2021-03-31 18:47:50
  * @FilePath: /packages/ok-employee-select/hook-input.ts
  */
 
@@ -95,7 +95,11 @@ export default function (props: any, context: any) {
   const getRangeEmployeesByIds = async (userIds: string[]) => {
     if (!userIds?.length) options.value = []
 
-    const result = await api.default.ListUserInfoByIds({ user_ids: userIds })
+    const result = await api.default.ListUserInfoByIdsUserPrivateV1POST({
+      payload: {
+        user_ids: userIds,
+      },
+    })
     if (result.code === '000000') {
       const data: any = result.data
       options.value = data
@@ -120,8 +124,10 @@ export default function (props: any, context: any) {
         return
       }
 
-      const result = await api.default.ListUserInfoByIds({
-        user_ids: exceedIds,
+      const result = await api.default.ListUserInfoByIdsUserPrivateV1POST({
+        payload: {
+          user_ids: exceedIds,
+        },
       })
       if (result.code === '000000') {
         const data: any = result.data
@@ -206,6 +212,7 @@ export default function (props: any, context: any) {
 
   // 组件内部value变化时处理：1. 触发组件update，同步外部数据; 2. 计算溢出标签，展示'更多'组件
   const handleValueChange = () => {
+    console.log('handleValueChange')
     //如果是tree 模式， 不需要在此处update, 只需更新input中展示即可
     if (isTree.value) {
       getExceedEmployee()
@@ -213,7 +220,7 @@ export default function (props: any, context: any) {
     }
 
     const val = value.value
-
+    console.log('handleValueChange - update', val)
     context.emit('update', {
       value: val,
       options: selectedList.value,

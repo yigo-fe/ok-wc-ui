@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 22:08:42
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-31 13:50:19
+ * @LastEditTime: 2021-03-31 18:06:45
  * @FilePath: /packages/ok-department-select/hook-base.ts
  */
 import { effect } from 'ok-lit'
@@ -13,7 +13,7 @@ import close from '../assets/images/closed.svg'
 import search from '../assets/images/search.svg'
 import { apiInit } from '../services/api'
 import { isSameArray } from '../utils/index'
-export default function (props: any, context: any, flag: string) {
+export default function (props: any, context: any) {
   const testVal = ref([])
   effect(() => {
     testVal.value = props.value
@@ -93,7 +93,6 @@ export default function (props: any, context: any, flag: string) {
       exceedList.value.length && (exceedList.value = [])
       return
     } else {
-      debugger
       const exceedIds = value.value.slice(maxTagCount.value)
 
       if (!exceedIds.length) {
@@ -209,7 +208,6 @@ export default function (props: any, context: any, flag: string) {
   watch(
     () => value.value,
     (val, oldVal) => {
-      debugger
       // 有时val和oldValue一样也会触发，具体原因待排查
       if (isSameArray(val, oldVal)) return
       handleValueChange()
@@ -269,10 +267,6 @@ export default function (props: any, context: any, flag: string) {
       immediate: true,
     }
   )
-
-  effect(() => {
-    console.log(flag, props)
-  })
 
   return {
     testVal,
