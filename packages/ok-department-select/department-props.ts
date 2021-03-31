@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:02:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-23 21:02:51
+ * @LastEditTime: 2021-03-30 11:36:46
  * @FilePath: /packages/ok-department-select/department-props.ts
  */
 import { PropType } from 'ok-lit'
@@ -12,10 +12,7 @@ export type ModeType = 'tree' | 'default'
 
 const propsOptions = {
   value: {
-    type: (Array as unknown) as PropType<string[]>,
-  },
-  range: {
-    type: (Array as unknown) as PropType<string[]>,
+    type: [Array, String],
   },
   placeholder: {
     type: (String as unknown) as PropType<string>,
@@ -39,6 +36,10 @@ const propsOptions = {
   mode: {
     type: (String as unknown) as PropType<ModeType>,
     default: 'default',
+  },
+  level: {
+    type: (String as unknown) as PropType<string>,
+    default: '1',
   },
   update: {
     type: (Function as unknown) as PropType<

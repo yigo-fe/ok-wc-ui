@@ -399,3 +399,60 @@ h3{
   /* 人员选择-树 */
   .breadcrumb-separator{color:#646a73}
   .ok-employee-tree-wraper{width:100%}
+
+  /* 部门选择 */
+
+  .employee-tree-content-wraper .tree-item-icon {
+    width: 18px;
+    height: 18px;
+    margin: 0 5px 0 8px;
+  }
+
+  /* 修改checkbox样式 */
+  .employee-tree-content-wraper .ant-checkbox-inner {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-color: #fff;
+    border: 1px solid #DEE0E3;
+    border-radius: 4px;
+    border-collapse: separate;
+    transition: all 0.3s;
+  }
+  .employee-tree-content-wraper .ant-checkbox-checked .ant-checkbox-inner {
+    background-color: #5283F7;
+    border-color: #5283F7;
+  }
+
+   /* 修改item样式 */
+  .employee-tree-content-wraper .department-tree-item {
+    display: flex;
+    align-items: center;
+  }
+  .employee-tree-content-wraper .search-result-item,
+  .employee-tree-content-wraper .selected-department-item {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    height: 40px;
+  }
+
+
+  .employee-tree-content-wraper .ant-tree li {
+    padding: 0;
+  }
+  .employee-tree-content-wraper .ant-tree li .ant-tree-node-content-wrapper {
+    height: 40px;
+    line-height: 40px;
+  }
+
+  .employee-tree-content-wraper .ant-tree li span.ant-tree-switcher {
+    top: 8px;
+  }
+
+  .employee-tree-content-wraper .tree-content {
+    padding: 0 20px 0 15px;
+  }

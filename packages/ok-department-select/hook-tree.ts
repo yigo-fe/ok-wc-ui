@@ -3,112 +3,215 @@
  * @Author: 付静
  * @Date: 2021-03-23 22:07:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-24 09:49:21
+ * @LastEditTime: 2021-03-31 13:50:10
  * @FilePath: /packages/ok-department-select/hook-tree.ts
  */
-// import { debounce } from 'lodash'
-// import { effect } from 'ok-lit'
-import { computed, nextTick, ref, watch } from 'vue'
+import { debounce } from 'lodash'
+import { computed, nextTick, ref } from 'vue'
 
-import { isSameArray } from '../utils/index'
+import folder from '../assets/file-icon/icon_file-folder_colorful.svg'
+import checked from '../assets/images/checked.svg'
 import useBaseHandle from './hook-base'
 
 export default function (props: any, context: any) {
-  const { api, placeholder, isDisabled, multiple } = useBaseHandle(
-    props,
-    context
-  )
+  const {
+    api,
+    testVal,
+    value,
+    options,
+    placeholder,
+    isDisabled,
+    multiple,
+    closeIcon,
+    searchIcon,
+    borderless,
+    isMouseenter,
+    maxTagCount,
+    displayLevel,
+    departmentMap,
+    mouseenter,
+    mouseleave,
+    searchDept,
+    collectdepartmentMap,
+    clearSelected,
+    handleDelete,
+    maxTagPlaceholder,
+  } = useBaseHandle(props, context, 'tree')
+
+  // icon
+  const deptIcon = folder
+  const checkedIcon = checked
+
   // 是否开启了组价架构保密：如果开启了，则不展示组织架构树，只能进行搜索
   const secrecy = computed(() => props.secrecy)
+  // 保留弹窗内部临时value
+  const tempSelected = ref<any>([])
 
-  // 组件外部传入的初始value
-  const propsValue = computed(() => {
-    if (!props.value) {
-      return []
-    } else {
-      return Array.isArray(props.value) ? props.value : [props.value]
-    }
-  })
-
-  // 保存组件内部已选ids
-  const value = ref<string[]>([])
+  const treeData = ref<any>([])
+  const expandedKeys = ref<any>([])
+  const scopedSlots = {
+    title: 'title',
+  }
   // 搜索结果 - 人员列表
   const searchResultList = ref<any[]>([])
-
   // 已选人员信息集合
-  const selectedList = ref<any[]>([])
+  const selectedList = computed(() =>
+    tempSelected.value.map(v => departmentMap.value[v]).filter(v => v)
+  )
+
+  // 入口： 获取根目录
+  const getRootTree = async () => {
+    const result = await api.default.GetRootDeptDeptPrivateV1POST({})
+    if (result.code === '000000') {
+      const data: any = result.data
+      data.scopedSlots = scopedSlots
+      treeData.value = [data]
+      expandedKeys.value = [data.department_id]
+
+      collectdepartmentMap([data])
+    }
+  }
+
+  // 懒加载获取数据
+  const loadData = (treeNode: any) => {
+    return new Promise((resolve: any) => {
+      if (treeNode.dataRef.children) {
+        resolve()
+        return
+      }
+      api.default
+        .SelectDeptListDeptPrivateV1POST({
+          payload: {
+            display_level: displayLevel.value,
+            parent_dept_id: treeNode.dataRef.department_id,
+          },
+        })
+        .then((res: any) => {
+          if (res.code === '000000') {
+            res.data.forEach((item: any) => {
+              item.scopedSlots = scopedSlots
+              item.isLeaf = !item.has_child
+            })
+            treeNode.dataRef.children = res.data
+          }
+          collectdepartmentMap(res.data)
+          nextTick(() => {
+            treeData.value = [...treeData.value]
+            resolve()
+          })
+        })
+    })
+  }
+
+  // 搜索loading
+  const loading = ref(false)
+  const queryKey = ref('')
+
+  // 搜索
+  const onFetch = async () => {
+    if (!queryKey.value) return
+    loading.value = true
+    const result = await searchDept(queryKey.value)
+    loading.value = false
+    if (result.code === '000000') {
+      const data: any = result.data
+      data?.forEach((item: any) => {
+        item.departmentId = item.department_id
+        item.displayValue = item.display_value
+      })
+      searchResultList.value = data
+      collectdepartmentMap(data)
+    }
+  }
+
+  const searchByKey = debounce(onFetch, 500)
 
   // modal 展示与否
   const visible = ref(false)
 
-  // 判断propsValue 是否和value一样
-  const propsValEqulValue = () => {
-    const l1 = propsValue.value?.length || 0
-    const l2 = value.value?.length || 0
-    let same = false
-    if (l1 === l2) {
-      same = l1
-        ? propsValue.value.every(v => value.value.indexOf(v) > -1)
-        : true
-    }
-    return same
+  // 打开modal
+  const handleOpenModal = (evt: any) => {
+    if (isDisabled.value) return
+    // 注意点击清除按钮 不能触发弹窗打开
+    const path = evt.path || (evt.composedPath && evt.composedPath()) || []
+    if (path?.[0]?.className === 'head-clear-icon') return
+    visible.value = true
+
+    queryKey.value = ''
+    expandedKeys.value = []
+    tempSelected.value = [...value.value]
+    // 初始化树左侧数据
+    getRootTree()
   }
 
-  let isInitial = false
-
-  // watch value 变化： 调用update,更新组件外部值
-  const handleValueChange = () => {
-    const val = value.value
-    if (isInitial) {
-      isInitial = false
-      return
-    }
-    context.emit('update', { value: val, options: selectedList.value })
+  const cancelSelect = (id: string) => {
+    // 取消选中列表状态
+    tempSelected.value = tempSelected.value.filter((v: string) => v !== id)
   }
-  watch(
-    () => value.value,
-    (val, oldVal) => {
-      // 有时val和oldValue一样也会触发，具体原因待排查
-      if (isSameArray(val, oldVal)) return
-      handleValueChange()
-    },
-    {
-      immediate: true,
-      deep: true,
-    }
-  )
 
-  // watch props.value, 赋值组件内部value
-  const handlePropsValChange = () => {
-    const val = propsValue.value
-    if ((!val?.length && !value.value.length) || propsValEqulValue()) return
-    // 更新初始值
-    isInitial = true
-    if (val?.length) {
-      // 更新value；获取detail,回显信息
-      value.value = val
-    } else if (value.value?.length) {
-      // 清除已选的值
-      value.value = []
-    }
+  // 判断是否已选中
+  const isSelected = (id: string) => {
+    return tempSelected.value.includes(id)
   }
-  watch(
-    () => propsValue.value,
-    (val, oldVal) => {
-      // 有时val和oldValue一样也会触发，具体原因待排查
-      if (isSameArray(val, oldVal)) return
-      handlePropsValChange()
-    },
-    {
-      immediate: true,
-      deep: true,
-    }
-  )
+
+  /**
+   * 点击左侧人员：
+   * 1. 如果已选，则本次是取消。如果未选过，则本次是选中， 放入selectedList中；
+   * 2. 区分单选和多选
+   */
+  const handleSelect = (id: string) => {
+    // 区分单选和多选
+    isSelected(id)
+      ? cancelSelect(id)
+      : multiple.value
+      ? tempSelected.value.push(id)
+      : (tempSelected.value = [id])
+  }
+
+  const cancelHandle = () => {
+    visible.value = false
+  }
+  const okHandle = () => {
+    // 点击确定时， 更新value
+    value.value = [...tempSelected.value]
+    // 回显
+    options.value = value.value.map(v => departmentMap.value[v])
+    visible.value = false
+  }
 
   return {
-    placeholder,
+    testVal,
     isDisabled,
+    placeholder,
+    multiple,
+    loading,
+    maxTagCount,
+    value,
+    options,
+    closeIcon,
+    searchIcon,
+    deptIcon,
+    checkedIcon,
+    borderless,
     visible,
     searchResultList,
+    selectedList,
+    isMouseenter,
+    queryKey,
+    searchByKey,
+    treeData,
+    expandedKeys,
+    secrecy,
+    mouseenter,
+    mouseleave,
+    clearSelected,
+    handleDelete,
+    maxTagPlaceholder,
+    handleSelect,
+    handleOpenModal,
+    cancelHandle,
+    okHandle,
+    loadData,
+    isSelected,
   }
 }

@@ -3,10 +3,10 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:01:15
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-23 21:30:28
+ * @LastEditTime: 2021-03-30 21:08:06
  * @FilePath: /packages/ok-department-select/index.ts
  */
-import { defineComponent, html, onMounted } from 'ok-lit'
+import { defineComponent, effect, html, onMounted } from 'ok-lit'
 import { computed, createApp } from 'vue'
 
 import CDN_PATH from '../path.config'
@@ -16,71 +16,82 @@ defineComponent(
   'ok-department-select',
   { ...propsOptions },
   (props, context) => {
+    const mode = computed(() => props.mode)
+    const value = computed(() => {
+      if (!props.value) {
+        return []
+      } else {
+        return Array.isArray(props.value) ? props.value : [props.value]
+      }
+    })
+
+    const placeholder = computed(() => props.placeholder)
+    // disabled
+    const disabled = computed(() => props.disabled)
+    // multiple
+    const multiple = computed(() => props.multiple)
+    // 显示层级
+    const displayLevel = computed(() => props.level)
+    // 组织架构保密
+    const secrecy = computed(() => props.secrecy)
+    // 不展示边框
+    const borderless = computed(() => props.borderless)
+    effect(() => {
+      console.log(props.mode, props.placeholder)
+    })
+
     onMounted(() => {
       const options = {
         setup() {
-          const mode = computed(() => props.mode)
-          const value = computed(() => {
-            if (!props.value) {
-              return []
-            } else {
-              return typeof props.value === 'string'
-                ? [props.value]
-                : props.value
-            }
-          })
-          const disabled = computed(() => props.disabled)
-          const placeholder = computed(() => props.placeholder)
-          const multiple = computed(() => props.multiple)
-          const range = computed(() => props.range)
-          // 组织架构是否开始保密
-          const secrecy = computed(() => props.secrecy)
-
           // 更新组件外部value
           const updateValue = (e: CustomEvent) => {
             props.update && props.update(e.detail.value, e.detail.options)
           }
-
           return {
             mode,
             value,
-            disabled,
             placeholder,
+            disabled,
             multiple,
-            range,
+            displayLevel,
             secrecy,
+            borderless,
             updateValue,
           }
         },
         template: `
 				<ok-department-tree 
-					v-show="mode==='tree'"			
+					v-if="mode==='tree'"			
 					:value="value"
 					:placeholder="placeholder"
-					:range="range"
 					:disabled="disabled"
-          :multiple="multiple"
+          :multiple="multiple"         
+          :level="displayLevel"
           :secrecy="secrecy"
+          :borderless="borderless"
 					@update="updateValue"
           class="ok-employee-tree"
 					></ok-department-tree>
 					
 					<ok-department-input 
-						v-show="mode!=='tree'"
+            v-if="mode==='default'"
 						:value="value"
             :placeholder="placeholder"
-            :range="range"
             :disabled="disabled"
             :multiple="multiple"
+            :level="displayLevel"
+            :borderless="borderless"
 						@update="updateValue"
             class="ok-employee-input"
 						></ok-department-input>
       	`,
       }
 
-      const app = createApp(options)
+      setTimeout(() => {
+        const app = createApp(options)
 
-      app.mount(context.$refs.showEmployeeSelect as HTMLElement)
+        app.mount(context.$refs.showEmployeeSelect as HTMLElement)
+      })
     })
 
     return () => html`

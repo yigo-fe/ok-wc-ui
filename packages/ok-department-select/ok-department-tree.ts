@@ -3,59 +3,143 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:03:32
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-24 09:46:55
+ * @LastEditTime: 2021-03-31 13:34:48
  * @FilePath: /packages/ok-department-select/ok-department-tree.ts
  */
-import { Select } from 'ant-design-vue'
+import {
+  Button,
+  Checkbox,
+  Input,
+  Modal,
+  Popover,
+  Select,
+  Tree,
+} from 'ant-design-vue'
 import { defineComponent, html, onMounted } from 'ok-lit'
 import { createApp } from 'vue'
 
 import CDN_PATH from '../path.config'
-import useDepartmentInput from './hook-input'
+import { propsOptions } from './department-props'
+import useDepartmentInput from './hook-tree'
 import okDepartmentInputCss from './style/ok-department-input.less'
-defineComponent('ok-department-tree', {}, (props, context) => {
+defineComponent('ok-department-tree', { ...propsOptions }, (props, context) => {
   onMounted(() => {
     const options = {
       setup() {
         const {
+          testVal,
           value,
           multiple,
           placeholder,
           isDisabled,
           options,
-          isOpen,
+          queryKey,
           searchByKey,
-          setOpen,
-          closeOpen,
+          maxTagCount,
+          visible,
+          searchResultList,
+          selectedList,
+          isMouseenter,
+          closeIcon,
+          searchIcon,
+          deptIcon,
+          checkedIcon,
+          treeData,
+          expandedKeys,
+          secrecy,
+          handleSelect,
+          maxTagPlaceholder,
+          handleOpenModal,
+          clearSelected,
+          handleDelete,
+          mouseenter,
+          mouseleave,
+          cancelHandle,
+          okHandle,
+          loadData,
+          isSelected,
         } = useDepartmentInput(props, context)
         return {
+          testVal,
           value,
           multiple,
           placeholder,
           isDisabled,
           options,
-          isOpen,
+          queryKey,
           searchByKey,
-          setOpen,
-          closeOpen,
+          maxTagCount,
+          visible,
+          searchResultList,
+          selectedList,
+          isMouseenter,
+          closeIcon,
+          searchIcon,
+          deptIcon,
+          checkedIcon,
+          treeData,
+          expandedKeys,
+          secrecy,
+          handleSelect,
+          maxTagPlaceholder,
+          handleOpenModal,
+          clearSelected,
+          handleDelete,
+          mouseenter,
+          mouseleave,
+          cancelHandle,
+          okHandle,
+          loadData,
+          isSelected,
         }
       },
       template: `
-        <div></div>
+        <a-select
+          ref="okDepartmentInputRef"	
+          show-search
+          showArrow
+          class="ok-department-select"
+          :test="testVal"
+          mode="multiple"
+          :placeholder="placeholder"
+          :disabled="isDisabled"      
+          :value="value"
+          :maxTagCount="maxTagCount"
+          :maxTagPlaceholder="maxTagPlaceholder"
+          :open="false"
+          @click="handleOpenModal"
+          @deselect="handleDelete" 
+          @mouseenter="mouseenter" 
+          @mouseleave="mouseleave" 
+        >
+
+          <template #suffixIcon>
+            <img v-if="isMouseenter && !isDisabled && value.length" :src="closeIcon" class="head-clear-icon" @click="clearSelected" />
+            <img v-else :src="searchIcon" class="head-search-icon"/>
+          </template>
+
+          <a-select-option
+            v-for="item in options"
+            :key="item.department_id"
+            :value="item.department_id"
+            >{{ item.display_value }}</a-select-option
+          >
+        </a-select>
 
         <a-modal 
-          class="ok-department-tree-modal"
+          class="ok-employee-tree-modal"
           :visible="visible" 
-          title="人员选择" 
+          title="部门选择" 
           width="824px" 
-          height="660px">
+          height="660px" 
+          destroyOnClose>
           <template #closeIcon></template>
-          <div class="content-wraper">
+          <div class="employee-tree-content-wraper">
 
             <div class="tree-wraper">
               <div class="tree-search">
                 <a-input  
-                  placeholder="请输入人员名称"
+                  placeholder="请输入部门名称"
                   v-model:value="queryKey"
                   @change="searchByKey">
                   <template #prefix>
@@ -65,51 +149,61 @@ defineComponent('ok-department-tree', {}, (props, context) => {
               </div>
 
               <!--人员部门展示-->
-              <div class="tree-content" v-show="!queryKey && !secrecy">
-                <a-breadcrumb v-if="!noRemote">
-                  <template #separator><span class="breadcrumb-separator"> > </span></template>
-                  <a-breadcrumb-item href="" 
-                    v-for=" item in breadcrumbList" 
-                    :key="item.department_id"
-                    @click="setBreadcrumb(item)"
-                    >{{item.department_name}}</a-breadcrumb-item>
-                </a-breadcrumb>
-
-                <div class="list-wraper">
-                  <p v-for="dept in deptList" 
-                    :key="dept.department_id" 
-                    class="item-detail dept" 
-                    @click="handleDeptClick(dept)">
-                    <img :src="deptIcon" class="dept-icon" />
-                    <span>{{dept.department_name}}</span>
-                  </p>
-                  <p class="item-detail employee" 
-                    v-for="employee in employeeList" 
-                    :key="employee.employee_id"   
-                    @click="handleEmployeeSelect(employee)">
-                    <ok-person-cell :personInfo="employee"></ok-person-cell>               
-                    <span class="employee-name">{{employee.employee_name}}</span>
-                    <span class="email">{{employee.email}}</span>   
-                    <img v-if="isSelected(employee.employee_id)" :src="checkedIcon" class="checked-icon" /> 
-                  </p>
-                </div>
+              <div class="tree-content" v-show="!queryKey && !secrecy">          
+                <a-tree
+                  :selectable="false"
+                  :replaceFields="{ key: 'department_id' }"
+                  :tree-data="treeData"
+                  :load-data="loadData"
+                  :expandedKeys="expandedKeys"
+                >
+                  <template v-slot:title="{ department_name, department_id }">
+                    <span
+                      @click="handleSelect(department_id)"
+                      class="department-tree-item"
+                    >
+                      <a-checkbox
+                        :checked="isSelected(department_id)"
+                        class="tree-checkbox"
+                      >
+                      </a-checkbox>
+                      <img
+                        class="tree-item-icon"
+                        :src="deptIcon"
+                        alt=""
+                      />
+                      <span>{{ department_name }}</span>
+                    </span>
+                  </template>
+                </a-tree>
               
               </div>
 
               
               <!--搜索的列表-->
               <div v-show="queryKey" class="search-list">
-                <p  
-                  v-show= "searchResultList.length"
-                  class="item-detail employee"                   
-                  v-for="employee in searchResultList" 
-                  :key="employee.employee_id"                  
-                  @click="handleEmployeeSelect(employee)">
-                  <ok-person-cell :personInfo="employee"></ok-person-cell>               
-                  <span class="employee-name">{{employee.employee_name}}</span>
-                  <span class="email">{{employee.email}}</span>
-                  <img v-if="isSelected(employee.employee_id)" :src="checkedIcon" class="checked-icon" />                 
-                </p>
+
+                <ul v-show="searchResultList.length">
+                  <li
+                    class="search-result-item"
+                    v-for="item in searchResultList"
+                    :key="item.department_id"                  
+                  >
+                    <a-checkbox
+                      :checked="isSelected(item.department_id)"
+                      @click="handleSelect(item.department_id)"
+                    ></a-checkbox>
+                    <img
+                      class="tree-item-icon"
+                      :src="deptIcon"
+                      alt=""
+                    />
+                    <span class="item-display-value">{{
+                      item.display_value
+                    }}</span>
+                  </li>
+                </ul>
+					
                 <p v-show="!searchResultList.length" class="empty-text">暂无数据</p>
               </div>               
 
@@ -120,18 +214,30 @@ defineComponent('ok-department-tree', {}, (props, context) => {
                 <span class="selected-msg">已选：{{selectedList.length}}</span>
                 <span v-show="selectedList.length" class="clear-btn" @click="clearSelected">清除</span>
               </div>
-              <div class="selected-list">
-                <p 
-                  class="item-detail employee" 
-                  v-for="employee in selectedList" 
-                  :key="employee.employee_id"  
-                  @click="cancelSelect(employee.employee_id)">
-                  <ok-person-cell :personInfo="employee"></ok-person-cell>               
-                  <span class="employee-name">{{employee.employee_name}}</span>
-                  <span class="email">{{employee.email}}</span>    
-                  <img :src="closeIcon" class="close-icon" />               
-                </p>
-              </div>            
+
+              <ul class="selected-list">
+                <li
+                  class="selected-department-item"
+                  v-for="(item, index) in selectedList"
+                  :key="index"
+                >
+                  <a-checkbox
+                    :checked="isSelected(item.department_id)"
+                    @click="handleSelect(item.department_id)"
+                  ></a-checkbox>
+                  <img
+                    class="tree-item-icon"
+                    :src="deptIcon"
+                    alt=""
+                  />
+                  <span class="item-display-value">{{
+                    item.display_value
+                  }}</span>
+
+                  <img :src="closeIcon" class="close-icon" /> 
+                </li>
+              </ul>
+           
             </div>
           </div>
 
@@ -142,15 +248,17 @@ defineComponent('ok-department-tree', {}, (props, context) => {
             </div>
           </template>
         </a-modal>
-
-
-
       `,
     }
 
     const app = createApp(options)
+    app.use(Checkbox)
+    app.use(Popover)
     app.use(Select)
-
+    app.use(Button)
+    app.use(Input)
+    app.use(Modal)
+    app.use(Tree)
     app.mount(context.$refs.showDepartmentTree as HTMLElement)
   })
   return () => html`

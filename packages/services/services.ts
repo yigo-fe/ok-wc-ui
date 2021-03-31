@@ -1,9 +1,10 @@
+/* eslint-disable no-unused-vars */
 /*
  * @Descripttion:
  * @Author: 付静
  * @Date: 2021-03-15 17:25:18
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-23 21:56:13
+ * @LastEditTime: 2021-03-30 18:21:42
  * @FilePath: /packages/services/services.ts
  */
 import { FetchService } from './axios'
@@ -117,6 +118,59 @@ export default class {
   }
 
   /**
+   * 获取根部门
+   * @method
+   * @name #GetRootDeptDeptPrivateV1POST
+   */
+  public async GetRootDeptDeptPrivateV1POST(params: {
+    payload?: {}
+    query?: {}
+    path?: {}
+  }): Promise<typing.PlainResult$DepartmentDto$> {
+    let path = ''
+    path = '/v1/private/dept/getRootDept'
+    let body: any
+    const queryParameters: any = {}
+
+    const result: typing.PlainResult$DepartmentDto$ = await this.http.request({
+      method: 'POST',
+      url: path,
+      params: queryParameters,
+      payload: body,
+    })
+    return result
+  }
+
+  /**
+   * 部门列表
+   * @method
+   * @name #SelectDeptListDeptPrivateV1POST
+   * @param {} param - param
+   */
+  public async SelectDeptListDeptPrivateV1POST(params: {
+    payload?: typing.DeptParam
+    query?: {}
+    path?: {}
+  }): Promise<typing.ListResult$DepartmentDto$> {
+    let path = ''
+    path = '/v1/private/dept/selectDeptList'
+    let body: any
+    const queryParameters: any = {}
+
+    if (params.payload !== undefined) {
+      body = params.payload
+    }
+
+    const result: typing.ListResult$DepartmentDto$ = await this.http.request({
+      method: 'POST',
+      url: path,
+      params: queryParameters,
+      payload: body,
+    })
+    return result
+  }
+
+  /**
    * 根据部门名模糊查询相关部门-限制5个
    * @method
    * @name #SearchDeptPrivateV1POST
@@ -137,6 +191,34 @@ export default class {
     }
 
     const result: typing.PlainResult = await this.http.request({
+      method: 'POST',
+      url: path,
+      params: queryParameters,
+      payload: body,
+    })
+    return result
+  }
+  /**
+   * 根据部门ID查询部门
+   * @method
+   * @name #GetDepartmentsByIdsDeptPrivateV1POST
+   * @param {} param - param
+   */
+  public async GetDepartmentsByIdsDeptPrivateV1POST(params: {
+    payload?: typing.DeptIdsParam
+    query?: {}
+    path?: {}
+  }): Promise<typing.ListResult$DepartmentDto$> {
+    let path = ''
+    path = '/v1/private/dept/getDepartmentsByIds'
+    let body: any
+    const queryParameters: any = {}
+
+    if (params.payload !== undefined) {
+      body = params.payload
+    }
+
+    const result: typing.ListResult$DepartmentDto$ = await this.http.request({
       method: 'POST',
       url: path,
       params: queryParameters,

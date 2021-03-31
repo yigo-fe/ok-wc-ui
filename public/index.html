@@ -5,8 +5,8 @@
   <link rel="icon" href="/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./antd.min.css">
-  <link rel="stylesheet" href="./ok-ant-department-search.css">
-  <link rel="stylesheet" href="./ok-ant-person-select.css">
+  <!-- <link rel="stylesheet" href="./ok-ant-department-search.css"> -->
+  <!-- <link rel="stylesheet" href="./ok-ant-person-select.css"> -->
   <link rel="stylesheet" href="./iconfont/iconfont.css">
   <link rel="stylesheet" href="./common.css">
   <title>ok-wc-ui</title>
@@ -42,11 +42,12 @@
       </div>
 
       <h3>部门选择 input </h3>
-      <ok-department-select class="divider ok-department-input" placeholder="请选择" style="width: 200px;display: block;"></ok-department-select>
+      <ok-department-select class="divider ok-department-input" placeholder="请选择部门" style="width: 200px;display: block;"></ok-department-select>
+      <ok-department-select mode="tree" class="divider ok-department-tree" placeholder="请选择部门" style="width: 200px;display: block;"></ok-department-select>
 
 
-      <!-- <h3>人员选择select-antd</h3> -->
-      <!-- <ok-employee-select class="divider ok-employee-input" placeholder="请选择1" style="width: 200px;display: block;"></ok-employee-select> -->
+      <h3>人员选择select-antd</h3>
+      <ok-employee-select class="divider ok-employee-input" placeholder="请选择1" style="width: 200px;display: block;"></ok-employee-select>
 
       <!-- <ok-employee-select class="divider ok-employee-input2" placeholder="请选择2" style="width: 200px;display: block;"></ok-employee-select> -->
 
@@ -253,6 +254,25 @@
       }
 
 
+      const okDeptInput = document.querySelector('.ok-department-input')
+      // okDeptInput.value = ['13','14', '17', '18', '19']
+      // okDeptInput.multiple = true
+      // okDeptInput.disabled = true
+      okDeptInput.update = (val, list)=>{
+        console.log('dept-input-update-index',val, list)
+        // okEmployeeTree.value = val
+      }
+
+      const okDeptTree = document.querySelector('.ok-department-tree')
+      // okDeptTree.value = ['13','14', '17', '18', '19']
+      okDeptTree.multiple = true
+      // okDeptTree.disabled = true
+      okDeptTree.update = (val, list)=>{
+        console.log('dept-tree-update-index',val, list)
+        // okEmployeeTree.value = val
+      }
+
+
       // const okEmployeeTree = document.querySelector('.ok-employee-tree')
       // okEmployeeTree.value = ['FanShuai']
       // // okEmployeeTree.disabled = true
@@ -263,17 +283,17 @@
       // }
 
 
-      // const okEmployeeInput = document.querySelector('.ok-employee-input')
-      // // okEmployeeInput.value = ["FuJing"]
-      // // okEmployeeInput.value = []
-      // okEmployeeInput.multiple = true
-      // // okEmployeeInput.borderless = true
-      // // okEmployeeInput.disabled = true
-      // okEmployeeInput.range = ['FuJing',"FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing', 'WangChao', 'WangYiJie']
-      // okEmployeeInput.update = (val, list)=>{
-      //   console.log('update-index',val)
-      //   okEmployeeInput.value = val
-      // }
+      const okEmployeeInput = document.querySelector('.ok-employee-input')
+      // okEmployeeInput.value = ["FuJing"]
+      // okEmployeeInput.value = []
+      okEmployeeInput.multiple = true
+      // okEmployeeInput.borderless = true
+      // okEmployeeInput.disabled = true
+      okEmployeeInput.range = ['FuJing',"FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing', 'WangChao', 'WangYiJie']
+      okEmployeeInput.update = (val, list)=>{
+        console.log('update-index',val)
+        okEmployeeInput.value = val
+      }
 
       // const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
       // // okEmployeeInput2.value = ["FanShuai"]

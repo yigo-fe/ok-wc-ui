@@ -222,6 +222,102 @@ declare namespace typing {
      */
     param?: string
   }
+
+  interface DeptIdsParam {
+    /**
+     * 部门ID集合
+     */
+    department_ids?: Array<string>
+
+    /**
+     * 显示层级
+     */
+    display_level?: number
+  }
+
+  interface DepartmentDto {
+    department_en_name?: string
+
+    department_id?: string
+
+    department_ja_name?: string
+
+    department_name?: string
+
+    dept_id_path?: string
+
+    dept_level_no?: string
+
+    display_value?: string
+
+    has_child?: boolean
+
+    leader_eid?: string
+
+    leader_name?: string
+
+    order?: number
+
+    parent_id?: string
+  }
+
+  interface ListResult$DepartmentDto$ {
+    /**
+     * 状态码
+     */
+    code?: string
+
+    /**
+     * 数据
+     */
+    data?: Array<DepartmentDto>
+
+    /**
+     * 返回结果描述
+     */
+    message?: string
+
+    state?: 'SUCCESS' | 'FAIL' | 'ERROR'
+
+    timestamp?: string
+  }
+  interface DeptParam {
+    /**
+     * 部门名称
+     */
+    department_name?: string
+
+    /**
+     * 显示层级
+     */
+    display_level?: number
+
+    /**
+     * 父部门id
+     */
+    parent_dept_id?: string
+  }
+
+  interface PlainResult$DepartmentDto$ {
+    /**
+     * 状态码
+     */
+    code?: string
+
+    /**
+     * 返回结果对象
+     */
+    data?: DepartmentDto
+
+    /**
+     * 返回结果描述
+     */
+    message?: string
+
+    state?: 'SUCCESS' | 'FAIL' | 'ERROR'
+
+    timestamp?: string
+  }
 }
 
 export type { typing }

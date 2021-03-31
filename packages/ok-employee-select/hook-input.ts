@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-03 21:17:47
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-29 22:00:51
+ * @LastEditTime: 2021-03-31 13:48:02
  * @FilePath: /packages/ok-employee-select/hook-input.ts
  */
 
@@ -183,7 +183,7 @@ export default function (props: any, context: any) {
   // 远程模式下, 如果未选中， 清除options缓存
   const dropdownVisibleChange = open => {
     if (!open) return
-    if (isRange && !value.value.length) {
+    if (!isRange && !value.value.length) {
       options.value = []
     }
   }
@@ -212,14 +212,8 @@ export default function (props: any, context: any) {
       return
     }
 
-    // 非tree 模式
     const val = value.value
-    // if (isInitial) {
-    //   isInitial = false
-    //   return
-    // }
 
-    // 非initial, update value
     context.emit('update', {
       value: val,
       options: selectedList.value,
@@ -235,8 +229,8 @@ export default function (props: any, context: any) {
     // 更新初始值
     // isInitial = true
     if (val?.length) {
-      // 更新value；获取detail,回显信息
-      value.value = val
+      // 更新value；获取detail,回显信息; 注意处理单选
+      value.value = multiple.value ? val : val.slice(0, 1)
       // 回显: 如果已有固定范围， 则不需要更新options
       !props.range?.length && getRangeEmployeesByIds(val)
     } else if (value.value?.length) {

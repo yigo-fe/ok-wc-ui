@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:57:52
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-25 23:14:20
+ * @LastEditTime: 2021-03-31 13:48:38
  * @FilePath: /packages/ok-employee-select/hook-tree.ts
  */
 import { debounce } from 'lodash'
@@ -287,8 +287,8 @@ export default function (props: any, context: any) {
     // 更新初始值
     // isInitial = true
     if (val?.length) {
-      // 更新value；获取detail,回显信息
-      value.value = val
+      // 更新value；获取detail,回显信息; 注意处理单选
+      value.value = multiple.value ? val : val.slice(0, 1)
     } else if (value.value?.length) {
       // 清除已选的值
       value.value = []
