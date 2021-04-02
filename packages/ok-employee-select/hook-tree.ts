@@ -3,46 +3,49 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:57:52
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-31 18:54:12
+ * @LastEditTime: 2021-04-01 15:51:21
  * @FilePath: /packages/ok-employee-select/hook-tree.ts
  */
 import { debounce } from 'lodash'
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 
-// 根据部门查询部门下直属人员
-// const URL =
-//   'https://test.yigowork.com/ego_app/api/v1/private/user/searchUserInfo'
-// import axios from 'axios'
 import folder from '../assets/file-icon/icon_file-folder_colorful.svg'
 import checked from '../assets/images/checked.svg'
-import close from '../assets/images/closed.svg'
-import search from '../assets/images/search.svg'
-import { apiInit } from '../services/api'
-import { isSameArray } from '../utils/index'
-
+import useBaseHandle from './hook-base'
 export default function (props: any, context: any) {
-  const api = apiInit()
-  // placeholder
-  const placeholder = computed(() => props.placeholder)
-  // disabled
-  const isDisabled = computed(() => props.disabled)
-  // multiple
-  const multiple = computed(() => props.multiple)
-  // 指定可选人员范围 (string[])：如果指定了可选范围， 则为本地模式， 不再进行远程搜索
-  const range = computed(() => props.range)
-  // 不展示展示边框
-  const borderless = computed(() => props.borderless)
+  const {
+    testVal,
+    api,
+    value,
+    options,
+    placeholder,
+    disabled,
+    multiple,
+    range,
+    remote,
+    closeIcon,
+    searchIcon,
+    borderless,
+    isMouseenter,
+    maxTagCount,
+    infoMap,
+    mouseenter,
+    mouseleave,
+    searchUser,
+    collectMap,
+    clearSelected,
+    handleDelete,
+    maxTagPlaceholder,
+  } = useBaseHandle(props, context)
+
   // 是否开启了组价架构保密：如果开启了，则不展示组织架构树，只能进行搜索
   const secrecy = computed(() => props.secrecy)
-  const noRemote = computed(() => props.range && props.range.length)
-  // 组件外部传入的初始value
-  const propsValue = computed(() => props.value)
-
-  // 保存组件内部已选ids
-  const value = ref<string[]>([])
 
   // modal 展示与否
   const visible = ref(false)
+
+  // 保留弹窗内部临时value
+  const tempSelected = ref<any>([])
 
   // 组织架构面包屑
   const breadcrumbList = ref<any[]>([
@@ -56,35 +59,18 @@ export default function (props: any, context: any) {
   // 组织架构树 - 部门列表
   const deptList = ref<string[]>([])
   // 组织架构树 - 人员列表
-  const employeeList = ref<string[]>([])
+  const employeeList = ref<any>([])
   // 搜索结果 - 人员列表
   const searchResultList = ref<any[]>([])
 
   // 已选人员信息集合
-  const selectedList = ref<any[]>([])
+  const selectedList = computed(() =>
+    tempSelected.value.map(v => infoMap.value[v]).filter(v => v)
+  )
 
   // icon
   const deptIcon = folder
   const checkedIcon = checked
-  const closeIcon = close
-  const searchIcon = search
-
-  // 已选人员回显
-  const displaySelected = async () => {
-    if (!value.value?.length) {
-      selectedList.value = []
-      return
-    }
-    // 根据已选人员ids, 获取items
-    const result = await api.default.ListUserInfoByIdsUserPrivateV1POST({
-      payload: {
-        user_ids: value.value,
-      },
-    })
-    if (result.code === '000000') {
-      selectedList.value = result.data as []
-    }
-  }
 
   // 设置面包屑
   const setBreadcrumb = (department: any) => {
@@ -121,7 +107,9 @@ export default function (props: any, context: any) {
     })
     if (result.code === '000000') {
       const data: any = result.data?.rows
-      employeeList.value = data
+      employeeList.value = result.data?.rows
+      // 收集信息
+      collectMap(data)
     }
   }
 
@@ -134,21 +122,26 @@ export default function (props: any, context: any) {
   // 根据关键字查询人员信息
   const searchEmployeeByKey = async () => {
     if (!queryKey.value) return
-    const result = await api.default.SearchUserInfo({ param: queryKey.value })
+    const result = await searchUser(queryKey.value)
     if (result.code === '000000') {
       const data: any = result.data?.rows
       searchResultList.value = data
+      // 收集信息
+      collectMap(data)
     }
   }
 
   // 有range时，本地过滤人员信息
   const filterRangeList = () => {
-    console.log()
-    searchResultList.value = employeeList.value.filter(
-      (v: any) =>
+    searchResultList.value = employeeList.value.filter((v: any) => {
+      const email = v?.email?.split('@')[0].toLowerCase()
+      return (
         v.employee_name.indexOf(queryKey.value) > -1 ||
-        v.employee_id?.toLowerCase().indexOf(queryKey.value?.toLowerCase()) > -1
-    )
+        v.employee_id?.toLowerCase().indexOf(queryKey.value?.toLowerCase()) >
+          -1 ||
+        email?.indexOf(queryKey.value) > -1
+      )
+    })
   }
 
   // 点击部门：查询子部门， 及直属人员， 设置面包屑
@@ -159,17 +152,6 @@ export default function (props: any, context: any) {
     setBreadcrumb(department)
   }
 
-  const cancelSelect = (employee_id: string) => {
-    // 取消选中列表状态
-    selectedList.value = selectedList.value.filter(
-      (v: any) => v.employee_id !== employee_id
-    )
-  }
-
-  const clearSelected = () => {
-    selectedList.value = []
-  }
-
   const handleRootClick = () => {
     breadcrumbList.value = []
     department_id.value = '1'
@@ -177,12 +159,15 @@ export default function (props: any, context: any) {
     getDeptAndEmployee()
   }
 
+  // 弹窗内部取消选中
+  const cancelSelect = (id: string) => {
+    // 取消选中列表状态
+    tempSelected.value = tempSelected.value.filter((v: string) => v !== id)
+  }
+
   // 判断是否已选中
-  const isSelected = (employee_id: string) => {
-    return (
-      selectedList.value.findIndex((v: any) => v.employee_id === employee_id) >
-      -1
-    )
+  const isSelected = (id: string) => {
+    return tempSelected.value.includes(id)
   }
 
   /**
@@ -190,30 +175,25 @@ export default function (props: any, context: any) {
    * 1. 如果已选，则本次是取消。如果未选过，则本次是选中， 放入selectedList中；
    * 2. 区分单选和多选
    */
-  const handleEmployeeSelect = (employee: any) => {
+  const handleEmployeeSelect = (id: string) => {
     // 区分单选和多选
-    isSelected(employee.employee_id)
-      ? cancelSelect(employee.employee_id)
+    isSelected(id)
+      ? cancelSelect(id)
       : multiple.value
-      ? selectedList.value.push(employee)
-      : (selectedList.value = [employee])
+      ? tempSelected.value.push(id)
+      : (tempSelected.value = [id])
   }
 
-  // 查询指定范围人员
+  // 非远程模式下，获取指定范围人员信息
   const getRangeList = async () => {
-    const result = await api.default.ListUserInfoByIdsUserPrivateV1POST({
-      payload: {
-        user_ids: props.range,
-      },
-    })
-    if (result.code === '000000') {
-      employeeList.value = result.data as []
-    }
+    employeeList.value = range.value
+      .map((v: string) => infoMap.value[v])
+      .filter(v => v)
   }
 
   // 打开modal
   const handleOpenModal = (evt: any) => {
-    if (isDisabled.value) return
+    if (disabled.value) return
     // 注意点击清除按钮 不能触发弹窗打开
     const path = evt.path || (evt.composedPath && evt.composedPath()) || []
     if (path?.[0]?.className === 'head-clear-icon') return
@@ -222,105 +202,42 @@ export default function (props: any, context: any) {
     breadcrumbList.value = [{ department_id: '1', department_name: '根目录' }]
     department_id.value = '1'
     queryKey.value = ''
+    tempSelected.value = [...value.value]
     // 初始化树左侧数据
-    noRemote.value ? getRangeList() : getDeptAndEmployee()
-    // 回显已选值
-    displaySelected()
+    !remote.value ? getRangeList() : getDeptAndEmployee()
+    // // 回显已选值
+    // displaySelected()
   }
 
   const cancelHandle = () => {
     visible.value = false
   }
   const okHandle = () => {
-    value.value = selectedList.value.map(v => v.employee_id)
+    // 点击确定时， 更新value
+    value.value = [...tempSelected.value]
+    // 回显
+    options.value = value.value.map(v => infoMap.value[v])
     visible.value = false
   }
 
   // 搜索框：判断是本地or远程搜索
   const searchEmployee = () => {
     if (!queryKey.value) return
-    noRemote.value ? filterRangeList() : searchEmployeeByKey()
+    !remote.value ? filterRangeList() : searchEmployeeByKey()
   }
 
   const searchByKey = debounce(searchEmployee, 500)
 
-  // 以下处理watch props.value 和value.value：
-
-  // 避免首次value赋值时触发更新
-  // let isInitial = false
-
-  // 判断propsValue 是否和value一样
-  const propsValEqulValue = () => {
-    const l1 = propsValue.value?.length || 0
-    const l2 = value.value?.length || 0
-    let same = false
-    if (l1 === l2) {
-      same = l1
-        ? propsValue.value.every(v => value.value.indexOf(v) > -1)
-        : true
-    }
-    return same
-  }
-
-  // watch value 变化： 调用update,更新组件外部值
-  const handleValueChange = () => {
-    const val = value.value
-    // if (isInitial) {
-    //   isInitial = false
-    //   return
-    // }
-    console.log('handleValueChange - tree-update', val)
-    context.emit('update', { value: val, options: selectedList.value })
-  }
-  watch(
-    () => value.value,
-    (val, oldVal) => {
-      console.log('tree-watch - value.value', value.value)
-      // 有时val和oldValue一样也会触发，具体原因待排查
-      if (isSameArray(val, oldVal)) return
-      handleValueChange()
-    },
-    {
-      immediate: true,
-      deep: true,
-    }
-  )
-
-  // watch props.value, 赋值组件内部value
-  const handlePropsValChange = () => {
-    const val = propsValue.value
-    if ((!val?.length && !value.value.length) || propsValEqulValue()) return
-    // 更新初始值
-    // isInitial = true
-    if (val?.length) {
-      // 更新value；获取detail,回显信息; 注意处理单选
-      value.value = multiple.value ? val : val.slice(0, 1)
-    } else if (value.value?.length) {
-      // 清除已选的值
-      value.value = []
-    }
-  }
-  watch(
-    () => propsValue.value,
-    (val, oldVal) => {
-      // 有时val和oldValue一样也会触发，具体原因待排查
-      if (isSameArray(val, oldVal)) return
-      handlePropsValChange()
-    },
-    {
-      immediate: true,
-      deep: true,
-    }
-  )
-
   return {
+    testVal,
     value,
+    options,
     placeholder,
-    isDisabled,
+    disabled,
     multiple,
     range,
     secrecy,
-    noRemote,
+    remote,
     deptIcon,
     checkedIcon,
     closeIcon,
@@ -333,7 +250,12 @@ export default function (props: any, context: any) {
     breadcrumbList,
     selectedList,
     queryKey,
-    propsValue,
+    isMouseenter,
+    maxTagCount,
+    handleDelete,
+    maxTagPlaceholder,
+    mouseenter,
+    mouseleave,
     handleDeptClick,
     handleEmployeeSelect,
     cancelHandle,

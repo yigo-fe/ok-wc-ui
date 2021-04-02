@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:56:38
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-25 22:44:23
+ * @LastEditTime: 2021-04-01 15:08:59
  * @FilePath: /packages/ok-employee-select/ok-employee-tree.ts
  */
 import {
@@ -13,7 +13,6 @@ import {
   Modal,
   Popover,
   Select,
-  Tree,
 } from 'ant-design-vue'
 import { defineComponent, html, onMounted } from 'ok-lit'
 import { createApp } from 'vue'
@@ -33,13 +32,15 @@ defineComponent(
       const options = {
         setup() {
           const {
+            testVal,
             value,
+            options,
             placeholder,
-            isDisabled,
+            disabled,
             multiple,
             range,
             secrecy,
-            noRemote,
+            remote,
             deptIcon,
             checkedIcon,
             closeIcon,
@@ -52,6 +53,12 @@ defineComponent(
             breadcrumbList,
             selectedList,
             queryKey,
+            isMouseenter,
+            maxTagCount,
+            handleDelete,
+            maxTagPlaceholder,
+            mouseenter,
+            mouseleave,
             handleDeptClick,
             handleEmployeeSelect,
             cancelHandle,
@@ -60,36 +67,40 @@ defineComponent(
             setBreadcrumb,
             handleRootClick,
             cancelSelect,
-            isSelected,
             clearSelected,
+            isSelected,
+            searchEmployeeById,
             searchByKey,
           } = useEmployeeTree(props, context)
 
-          // input 中删除时， 更新value
-          const handleValChange = (e: CustomEvent) => {
-            value.value = e.detail
-          }
-
           return {
+            testVal,
             value,
+            options,
             placeholder,
-            isDisabled,
+            disabled,
             multiple,
             range,
             secrecy,
-            noRemote,
+            remote,
+            deptIcon,
+            checkedIcon,
+            closeIcon,
+            searchIcon,
+            borderless,
             visible,
             deptList,
             employeeList,
             searchResultList,
             breadcrumbList,
             selectedList,
-            deptIcon,
-            checkedIcon,
-            closeIcon,
-            searchIcon,
-            borderless,
             queryKey,
+            isMouseenter,
+            maxTagCount,
+            handleDelete,
+            maxTagPlaceholder,
+            mouseenter,
+            mouseleave,
             handleDeptClick,
             handleEmployeeSelect,
             cancelHandle,
@@ -98,24 +109,74 @@ defineComponent(
             setBreadcrumb,
             handleRootClick,
             cancelSelect,
-            isSelected,
             clearSelected,
+            isSelected,
+            searchEmployeeById,
             searchByKey,
-            handleValChange,
           }
         },
         template: `
-          <ok-employee-input 
-            @ichange="handleValChange"
-            @click="handleOpenModal"
+          <a-select
+            ref="okEmployeeInput"			
             :value="value"
+            :a="testVal"
+            mode="multiple"
+            showArrow
+            showSearch          
+            style="width: 100%"
+            class="ok-employee-select"
+            :class="{'no-border': borderless}"
+            :open="false"         
             :placeholder="placeholder"
-            :range="range"
-            :disabled="isDisabled"
-            :multiple="multiple"
-            :borderless="borderless"
-            mode="tree"
-            ></ok-employee-input>
+            :disabled="disabled"
+            :maxTagCount="maxTagCount"
+            :maxTagPlaceholder="maxTagPlaceholder"
+            @click="handleOpenModal"        
+            @deselect="handleDelete" 
+            @mouseenter="mouseenter" 
+            @mouseleave="mouseleave" >
+
+            <template #suffixIcon>
+              <img v-if="isMouseenter && !disabled && value.length" :src="closeIcon" class="head-clear-icon" @click="clearSelected" />
+              <img v-else :src="searchIcon" class="head-search-icon"/>
+            </template>
+
+            <a-select-option
+              v-for="employee in options"
+              :key="employee.employee_id"
+              :value="employee.employee_id"
+            >
+              <slot :item="employee">
+                <div class="option-list-item" :class="{'isDropdown': open}">
+                  <div class="selected-head">
+                    <ok-person-cell
+                      class="user-img__avatar__head"
+                      :personInfo="employee"
+                      width="20"
+                      height="20"
+                    ></ok-person-cell>
+                    <span class="selected-head-name-head">{{ employee.employee_name }}</span>
+                  </div>
+                  <div class="selected-option">
+                    <ok-person-cell
+                      class="user-img__avatar"
+                      :personInfo="employee"
+                      width="40"
+                      height="40"
+                    ></ok-person-cell>
+
+                    <div class="user-img__content">
+                      <p>
+                        <span class="user-img__name">{{ employee.employee_name }}</span>
+                        <span class="user-img__email">{{ employee.email }}</span>
+                      </p>
+                      <p class="user-img__d">{{ employee.department_name }}</p>
+                    </div>
+                  </div>
+                </div>
+              </slot>
+            </a-select-option>
+          </a-select>
 
           <a-modal 
             class="ok-employee-tree-modal"
@@ -140,7 +201,7 @@ defineComponent(
 
                 <!--人员部门展示-->
                 <div class="tree-content" v-show="!queryKey && !secrecy">
-                  <a-breadcrumb v-if="!noRemote">
+                  <a-breadcrumb v-if="remote">
                     <template #separator><span class="breadcrumb-separator"> > </span></template>
                     <a-breadcrumb-item href="" 
                       v-for=" item in breadcrumbList" 
@@ -160,7 +221,7 @@ defineComponent(
                     <p class="item-detail employee" 
                       v-for="employee in employeeList" 
                       :key="employee.employee_id"   
-                      @click="handleEmployeeSelect(employee)">
+                      @click="handleEmployeeSelect(employee.employee_id)">
                       <ok-person-cell :personInfo="employee"></ok-person-cell>               
                       <span class="employee-name">{{employee.employee_name}}</span>
                       <span class="email">{{employee.email}}</span>   
@@ -178,7 +239,7 @@ defineComponent(
                     class="item-detail employee"                   
                     v-for="employee in searchResultList" 
                     :key="employee.employee_id"                  
-                    @click="handleEmployeeSelect(employee)">
+                    @click="handleEmployeeSelect(employee.employee_id)">
                     <ok-person-cell :personInfo="employee"></ok-person-cell>               
                     <span class="employee-name">{{employee.employee_name}}</span>
                     <span class="email">{{employee.email}}</span>
@@ -225,7 +286,6 @@ defineComponent(
       app.use(Button)
       app.use(Input)
       app.use(Modal)
-      app.use(Tree)
       app.mount(context.$refs.showEmployeeTree as HTMLElement)
     })
 

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-31 16:44:40
+ * @LastEditTime: 2021-04-01 15:18:17
  * @FilePath: /packages/ok-employee-select/index.ts
  */
 
@@ -11,38 +11,6 @@ import { defineComponent, html, onMounted } from 'ok-lit'
 import { computed, createApp } from 'vue'
 
 import CDN_PATH from '../path.config'
-// const propsOptions = {
-//   value: {
-//     type: (Array as unknown) as PropType<string[]>,
-//   },
-//   range: {
-//     type: (Array as unknown) as PropType<string[]>,
-//   },
-//   placeholder: {
-//     type: (String as unknown) as PropType<string>,
-//   },
-//   disabled: {
-//     type: (Boolean as unknown) as PropType<boolean>,
-//     default: false,
-//   },
-//   multiple: {
-//     type: (Boolean as unknown) as PropType<boolean>,
-//     default: false,
-//   },
-//   secrecy: {
-//     type: (Boolean as unknown) as PropType<boolean>,
-//     default: false,
-//   },
-//   mode: {
-//     type: (String as unknown) as PropType<string>,
-//   },
-//   update: {
-//     type: (Function as unknown) as PropType<
-//       // eslint-disable-next-line no-unused-vars
-//       (ids: string[], options: []) => void
-//     >,
-//   },
-// }
 import { propsOptions } from './employee-props'
 
 defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
