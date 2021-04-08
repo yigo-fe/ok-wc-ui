@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 15:16:57
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-08 18:31:05
+ * @LastEditTime: 2021-04-08 21:23:45
  * @FilePath: /packages/ok-employee-select/hook.ts
  */
 import { debounce } from 'lodash'
@@ -236,7 +236,7 @@ export default function (props: any, context: any) {
   }
 
   // init回显：根据ids查询信息: 1. 默认值回显; 2. 收集
-  let initDisplay = async (ids: string[]) => {
+  let initDisplay = async (ids: string[], flag?: string) => {
     // 如果是本地
     const params = remote ? ids : props.range
     if (!params?.length) options.value = []
@@ -248,6 +248,10 @@ export default function (props: any, context: any) {
       collectMap(options.value)
       // 处理溢出
       getExceed()
+      if (!flag) {
+        // 更新value；获取detail,回显信息; 注意处理单选
+        value.value = multiple.value ? ids : ids.slice(0, 1)
+      }
     }
   }
 
@@ -293,8 +297,6 @@ export default function (props: any, context: any) {
     if ((!val?.length && !value.value.length) || propsValEqulValue()) return
     // 更新初始值
     if (val?.length) {
-      // 更新value；获取detail,回显信息; 注意处理单选
-      value.value = multiple.value ? val : val.slice(0, 1)
       // 回显: 更新options
       initDisplay(val)
     } else if (value.value?.length) {
@@ -332,7 +334,7 @@ export default function (props: any, context: any) {
 
   effect(() => {
     if (props.range?.length) {
-      initDisplay(props.range)
+      initDisplay(props.range, 'range')
     }
   })
 

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 20:15:04
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-08 20:47:42
+ * @LastEditTime: 2021-04-08 21:24:15
  * @FilePath: /packages/ok-department-select/hook.ts
  */
 import { debounce } from 'lodash'
@@ -212,20 +212,6 @@ export default function (props: any, context: any) {
     })
   }
 
-  // init回显：部门id根据查询指定部门信息: 1. 默认值回显; 2. 收集
-  let getDeptInfoByIds = async (ids: string[]) => {
-    if (!ids?.length) options.value = []
-    const result = await getDepartmentsByIds(ids)
-    if (result.code === '000000') {
-      const data: any = result.data
-      options.value = data
-      // 收集map
-      collectMap(options.value)
-      // 处理溢出
-      getExceed()
-    }
-  }
-
   // 远程模式下, 如果未选中， 清除options缓存
   const dropdownVisibleChange = open => {
     if (!open) return
@@ -250,10 +236,8 @@ export default function (props: any, context: any) {
   // 组件内部value变化时处理：1. 触发组件update，同步外部数据; 2. 计算溢出标签，展示'更多'组件
   const handleValueChange = () => {
     const val = value.value
-    context.emit('update', {
-      value: val,
-      options: selectedList.value,
-    })
+    // 更新组件外部value
+    props.update && props.update(val, selectedList.value)
     // value 变化， 计算溢出人员
     getExceed()
   }
@@ -272,16 +256,30 @@ export default function (props: any, context: any) {
     }
   )
 
+  // init回显：部门id根据查询指定部门信息: 1. 默认值回显; 2. 收集
+  let initDisplay = async (ids: string[]) => {
+    if (!ids?.length) options.value = []
+    const result = await getDepartmentsByIds(ids)
+    if (result.code === '000000') {
+      const data: any = result.data
+      options.value = data
+      // 收集map
+      collectMap(options.value)
+      // 处理溢出
+      getExceed()
+      // 更新value；获取detail,回显信息; 注意处理单选
+      value.value = multiple.value ? ids : ids.slice(0, 1)
+    }
+  }
+
   // propsValue 变化时处理：
   const handlePropsValChange = () => {
     const val = propsValue.value
     if ((!val?.length && !value.value.length) || propsValEqulValue()) return
     // 更新初始值
     if (val?.length) {
-      // 更新value；获取detail,回显信息; 注意处理单选
-      value.value = multiple.value ? val : val.slice(0, 1)
       // 回显: 更新options
-      getDeptInfoByIds(val)
+      initDisplay(val)
     } else if (value.value?.length) {
       // 清除已选的值
       value.value = []

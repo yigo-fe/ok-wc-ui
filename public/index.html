@@ -265,31 +265,31 @@
 
 
       const okDeptInput = document.querySelector('.ok-department-input')
-      // okDeptInput.value = ['13','14', '17', '18', '19']
+      okDeptInput.value = ['13','14', '17', '18', '19']
       okDeptInput.multiple = true
       // okDeptInput.disabled = true
       okDeptInput.update = (val, list)=>{
         console.log('dept-input-update-index',val, list)
-        okEmployeeTree.value = val
+        // okDeptInput.value = val
       }
 
-      // const okDeptTree = document.querySelector('.ok-department-tree')
-      // // okDeptTree.value = ['13','14', '17', '18', '19']
-      // // okDeptTree.multiple = true
-      // // okDeptTree.disabled = true
-      // okDeptTree.update = (val, list)=>{
-      //   console.log('dept-tree-update-index',val, list)
-      //   // okEmployeeTree.value = val
-      // }
+      const okDeptTree = document.querySelector('.ok-department-tree')
+      okDeptTree.value = ['13','14', '17', '18', '19']
+      okDeptTree.multiple = true
+      // okDeptTree.disabled = true
+      okDeptTree.update = (val, list)=>{
+        console.log('dept-tree-update-index',val, list)
+        // okDeptTree.value = val
+      }
 
 
       const okEmployeeTree = document.querySelector('.ok-employee-tree')
-      // okEmployeeTree.value = ['LiTao']
+      okEmployeeTree.value = ['LiTao']
       // okEmployeeTree.disabled = true
       okEmployeeTree.multiple = true
       // okEmployeeTree.range = ['FuJing',"FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing', 'WangChao', 'WangYiJie']
       okEmployeeTree.update = (val, list)=>{
-        console.log('tree-update-index',val, list)
+        console.log('employee-tree-update-index',val, list)
         okEmployeeTree.value = val
       }
 
@@ -302,7 +302,7 @@
       // okEmployeeInput.disabled = true
       // okEmployeeInput.range = ['FuJing',"FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing', 'WangChao', 'WangYiJie']
       okEmployeeInput.update = (val, list)=>{
-        console.log('update-index',val)
+        console.log('update-index',val,list)
         // okEmployeeInput.value = val
       }
 
