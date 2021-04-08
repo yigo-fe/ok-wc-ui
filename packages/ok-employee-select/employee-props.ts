@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-20 14:56:24
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-31 18:08:10
+ * @LastEditTime: 2021-04-08 18:30:05
  * @FilePath: /packages/ok-employee-select/employee-props.ts
  */
 
@@ -40,6 +40,10 @@ const propsOptions = {
   mode: {
     type: (String as unknown) as PropType<ModeType>,
     default: 'default',
+  },
+  hideMenuOnMultiple: {
+    type: (Boolean as unknown) as PropType<boolean>,
+    default: false,
   },
   update: {
     type: (Function as unknown) as PropType<

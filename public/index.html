@@ -284,26 +284,26 @@
 
 
       const okEmployeeTree = document.querySelector('.ok-employee-tree')
-      // okEmployeeTree.value = ['FanShuai']
+      // okEmployeeTree.value = ['LiTao']
       // okEmployeeTree.disabled = true
       okEmployeeTree.multiple = true
-      okEmployeeTree.range = ['FuJing',"FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing', 'WangChao', 'WangYiJie']
+      // okEmployeeTree.range = ['FuJing',"FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing', 'WangChao', 'WangYiJie']
       okEmployeeTree.update = (val, list)=>{
         console.log('tree-update-index',val, list)
-        // okEmployeeTree.value = val
+        okEmployeeTree.value = val
       }
 
 
       const okEmployeeInput = document.querySelector('.ok-employee-input')
-      // okEmployeeInput.value = ["FuJing"]
+      okEmployeeInput.value = ["FuJing"]
       // okEmployeeInput.value = []
-      okEmployeeInput.multiple = true
+      // okEmployeeInput.multiple = true
       // okEmployeeInput.borderless = true
       // okEmployeeInput.disabled = true
-      okEmployeeInput.range = ['FuJing',"FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing', 'WangChao', 'WangYiJie']
+      // okEmployeeInput.range = ['FuJing',"FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing', 'WangChao', 'WangYiJie']
       okEmployeeInput.update = (val, list)=>{
         console.log('update-index',val)
-        okEmployeeInput.value = val
+        // okEmployeeInput.value = val
       }
 
       // const okEmployeeInput2 = document.querySelector('.ok-employee-input2')

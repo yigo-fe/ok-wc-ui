@@ -3,7 +3,6 @@
  * person: {人员信息}
  * definition: 清晰度，默认不开起
  */
-import { Person } from '@c/ok-wc-ui.d'
 
 export * from './poper'
 

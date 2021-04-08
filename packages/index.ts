@@ -20,8 +20,8 @@ import './ok-accessory/ok-upload-image/ok-upload-image'
 import './ok-accessory/ok-file-icon'
 // 人员选择
 import './ok-employee-select'
-import './ok-employee-select/ok-employee-input'
-import './ok-employee-select/ok-employee-tree'
+// import './ok-employee-select/ok-employee-input'
+// import './ok-employee-select/ok-employee-tree'
 // 部门选择
 import './ok-department-select'
 import './ok-department-select/ok-department-input'

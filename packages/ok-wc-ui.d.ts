@@ -1,4 +1,4 @@
-import { Instance, PopperElement, Props } from 'tippy.js'
+// import { Instance, PopperElement, Props } from 'tippy.js'
 
 import { ACTIVE_TYPE, GENDER_TYPE } from './enum'
 

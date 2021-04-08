@@ -3,41 +3,67 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:56:38
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-01 15:08:59
- * @FilePath: /packages/ok-employee-select/ok-employee-tree.ts
+ * @LastEditTime: 2021-04-08 18:10:20
+ * @FilePath: /packages/ok-employee-select/ok-employee-modal.ts
  */
-import {
-  Breadcrumb,
-  Button,
-  Input,
-  Modal,
-  Popover,
-  Select,
-} from 'ant-design-vue'
-import { defineComponent, html, onMounted } from 'ok-lit'
+
+import { Breadcrumb, Button, Input, Modal } from 'ant-design-vue'
+import { defineComponent, html, onMounted, PropType } from 'ok-lit'
 import { createApp } from 'vue'
 
 import CDN_PATH from '../path.config'
-import { propsOptions } from './employee-props'
-import useEmployeeTree from './hook-tree'
-// import okEmployeeTreeCss from './style/ok-employee-tree.less'
-
+import useModalHandle from './hook-modal'
 defineComponent(
-  'ok-employee-tree',
+  'ok-employee-modal',
   {
-    ...propsOptions,
+    multiple: {
+      type: (Boolean as unknown) as PropType<boolean>,
+      default: false,
+    },
+    range: {
+      type: (Array as unknown) as PropType<string[]>,
+    },
+    secrecy: {
+      type: (Boolean as unknown) as PropType<boolean>,
+      default: false,
+    },
+    visible: {
+      type: (Boolean as unknown) as PropType<boolean>,
+      default: false,
+    },
+    inputValue: {
+      type: (Array as unknown) as PropType<string[]>,
+      default: () => {
+        return []
+      },
+    },
+    infoMap: {
+      type: (Object as unknown) as PropType<object>,
+      default: () => {
+        return {}
+      },
+    },
+    collect: {
+      type: (Function as unknown) as PropType<
+        // eslint-disable-next-line no-unused-vars
+        (list: []) => void
+      >,
+    },
+    change: {
+      type: (Function as unknown) as PropType<
+        // eslint-disable-next-line no-unused-vars
+        (ids: string[]) => void
+      >,
+    },
+    close: {
+      type: (Function as unknown) as PropType<() => void>,
+    },
   },
   (props, context) => {
     onMounted(() => {
       const options = {
         setup() {
           const {
-            testVal,
-            value,
-            options,
-            placeholder,
-            disabled,
-            multiple,
             range,
             secrecy,
             remote,
@@ -45,7 +71,6 @@ defineComponent(
             checkedIcon,
             closeIcon,
             searchIcon,
-            borderless,
             visible,
             deptList,
             employeeList,
@@ -53,33 +78,19 @@ defineComponent(
             breadcrumbList,
             selectedList,
             queryKey,
-            isMouseenter,
-            maxTagCount,
-            handleDelete,
-            maxTagPlaceholder,
-            mouseenter,
-            mouseleave,
             handleDeptClick,
             handleEmployeeSelect,
             cancelHandle,
             okHandle,
-            handleOpenModal,
             setBreadcrumb,
             handleRootClick,
             cancelSelect,
             clearSelected,
             isSelected,
-            searchEmployeeById,
             searchByKey,
-          } = useEmployeeTree(props, context)
+          } = useModalHandle(props)
 
           return {
-            testVal,
-            value,
-            options,
-            placeholder,
-            disabled,
-            multiple,
             range,
             secrecy,
             remote,
@@ -87,7 +98,6 @@ defineComponent(
             checkedIcon,
             closeIcon,
             searchIcon,
-            borderless,
             visible,
             deptList,
             employeeList,
@@ -95,89 +105,19 @@ defineComponent(
             breadcrumbList,
             selectedList,
             queryKey,
-            isMouseenter,
-            maxTagCount,
-            handleDelete,
-            maxTagPlaceholder,
-            mouseenter,
-            mouseleave,
             handleDeptClick,
             handleEmployeeSelect,
             cancelHandle,
             okHandle,
-            handleOpenModal,
             setBreadcrumb,
             handleRootClick,
             cancelSelect,
             clearSelected,
             isSelected,
-            searchEmployeeById,
             searchByKey,
           }
         },
         template: `
-          <a-select
-            ref="okEmployeeInput"			
-            :value="value"
-            :a="testVal"
-            mode="multiple"
-            showArrow
-            showSearch          
-            style="width: 100%"
-            class="ok-employee-select"
-            :class="{'no-border': borderless}"
-            :open="false"         
-            :placeholder="placeholder"
-            :disabled="disabled"
-            :maxTagCount="maxTagCount"
-            :maxTagPlaceholder="maxTagPlaceholder"
-            @click="handleOpenModal"        
-            @deselect="handleDelete" 
-            @mouseenter="mouseenter" 
-            @mouseleave="mouseleave" >
-
-            <template #suffixIcon>
-              <img v-if="isMouseenter && !disabled && value.length" :src="closeIcon" class="head-clear-icon" @click="clearSelected" />
-              <img v-else :src="searchIcon" class="head-search-icon"/>
-            </template>
-
-            <a-select-option
-              v-for="employee in options"
-              :key="employee.employee_id"
-              :value="employee.employee_id"
-            >
-              <slot :item="employee">
-                <div class="option-list-item" :class="{'isDropdown': open}">
-                  <div class="selected-head">
-                    <ok-person-cell
-                      class="user-img__avatar__head"
-                      :personInfo="employee"
-                      width="20"
-                      height="20"
-                    ></ok-person-cell>
-                    <span class="selected-head-name-head">{{ employee.employee_name }}</span>
-                  </div>
-                  <div class="selected-option">
-                    <ok-person-cell
-                      class="user-img__avatar"
-                      :personInfo="employee"
-                      width="40"
-                      height="40"
-                    ></ok-person-cell>
-
-                    <div class="user-img__content">
-                      <p>
-                        <span class="user-img__name">{{ employee.employee_name }}</span>
-                        <span class="user-img__email">{{ employee.email }}</span>
-                      </p>
-                      <p class="user-img__d">{{ employee.department_name }}</p>
-                    </div>
-                  </div>
-                </div>
-              </slot>
-            </a-select-option>
-          </a-select>
-
           <a-modal 
             class="ok-employee-tree-modal"
             :visible="visible" 
@@ -280,20 +220,17 @@ defineComponent(
         `,
       }
       const app = createApp(options)
-      app.use(Breadcrumb)
-      app.use(Popover)
-      app.use(Select)
+      app.use(Modal)
       app.use(Button)
       app.use(Input)
-      app.use(Modal)
-      app.mount(context.$refs.showEmployeeTree as HTMLElement)
+      app.use(Breadcrumb)
+      app.mount(context.$refs.showEmployeeModal as HTMLElement)
     })
 
     return () => html`
       <link rel="stylesheet" .href="${CDN_PATH}antd.min.css" />
       <link rel="stylesheet" .href="${CDN_PATH}common.css" />
-
-      <div ref="showEmployeeTree" class="ok-employee-tree-wraper"></div>
+      <div ref="showEmployeeModal" class="ok-employee-modal"></div>
     `
   }
 )

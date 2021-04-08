@@ -1,12 +1,13 @@
 /*
  * @Descripttion:
  * @Author: 付静
- * @Date: 2021-03-31 21:45:21
+ * @Date: 2021-04-08 15:16:57
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-01 15:30:14
- * @FilePath: /packages/ok-employee-select/hook-base.ts
+ * @LastEditTime: 2021-04-08 18:31:05
+ * @FilePath: /packages/ok-employee-select/hook.ts
  */
-import { effect } from 'ok-lit'
+import { debounce } from 'lodash'
+import { effect, onMounted } from 'ok-lit'
 import { computed, h, nextTick, ref, watch } from 'vue'
 
 import close from '../assets/images/closed.svg'
@@ -31,6 +32,16 @@ export default function (props: any, context: any) {
   const range = computed(() => props.range)
   // 指定范围，本地搜索， 非远程
   const remote = computed(() => !props.range?.length)
+  // 是否开启了组价架构保密：如果开启了，则不展示组织架构树，只能进行搜索
+  const secrecy = computed(() => props.secrecy)
+
+  // 是否开启了组价架构保密：如果开启了，则不展示组织架构树，只能进行搜索
+  const mode = computed(() => props.mode)
+  // 多选时选中某项是否收起下拉菜单
+  const hideMenuOnMultiple = computed(() => props.hideMenuOnMultiple)
+
+  // modal 展示与否
+  const visible = ref(false)
 
   // 最多展示的tag数量
   const maxTagCount = ref(1)
@@ -83,6 +94,47 @@ export default function (props: any, context: any) {
     return await api.default.SearchUserInfo({ param: query })
   }
 
+  // 远程模式下, 如果未选中， 清除options缓存
+  const dropdownVisibleChange = open => {
+    if (!open) return
+    if (remote.value && !value.value.length) {
+      options.value = []
+    }
+  }
+
+  // 搜索loading
+  const loading = ref(false)
+
+  // 本地搜索
+  const filterOption = (inputValue: string, option: any) => {
+    const optionDetail = infoMap.value[option.value]
+    const query = inputValue?.toLowerCase()
+    const employeeId = optionDetail?.employee_id?.toLowerCase()
+    const email = optionDetail?.email?.split('@')[0].toLowerCase()
+    return (
+      employeeId?.indexOf(query) > -1 ||
+      optionDetail?.employee_name?.indexOf(inputValue) > -1 ||
+      email?.indexOf(inputValue) > -1
+    )
+  }
+
+  // 人员搜索
+  const onFetch = async (query: string) => {
+    // 本地模式不需要远程搜索
+    if (!remote.value) return
+    if (!query) return
+    loading.value = true
+    const result = await searchUser(query)
+    loading.value = false
+    if (result.code === '000000') {
+      const data: any = result.data?.rows
+      options.value = data
+      collectMap(options.value)
+    }
+  }
+
+  const searchByKey = debounce(onFetch, 500)
+
   // 处理溢出
   const getExceed = async () => {
     if (!maxTagCount.value) {
@@ -113,21 +165,43 @@ export default function (props: any, context: any) {
     !exceedList.value.length && getExceed()
   }
 
-  nextTick(() => {
-    setTimeout(() => {
+  onMounted(() => {
+    nextTick(() => {
       maxTagCountComput()
-    }, 500)
+    })
   })
 
+  // 打开下拉框
   const isOpen = ref(false)
-  const setOpen = (evt: any) => {
-    // 兼容Safari
-    const path = evt.path || (evt.composedPath && evt.composedPath()) || []
-    if (path?.[0]?.className === 'head-clear-icon') return
+  const setOpen = () => {
     isOpen.value = true
   }
   const closeOpen = () => {
     isOpen.value = false
+  }
+
+  // 打开modal
+  const handleOpenModal = () => {
+    visible.value = true
+  }
+  const handleCloseModal = () => {
+    visible.value = false
+  }
+
+  const handleInputClick = (evt: any) => {
+    if (disabled.value) return
+    // 注意点击清除按钮 不能触发弹窗打开
+    const path = evt.path || (evt.composedPath && evt.composedPath()) || []
+    if (path?.[0]?.className === 'head-clear-icon') return
+    mode.value === 'tree' ? handleOpenModal() : setOpen()
+  }
+
+  // 弹窗点击确定时，更新value
+  const handleModalChange = (tempSelected: string) => {
+    // 点击确定时， 更新value
+    value.value = [...tempSelected]
+    // 回显
+    options.value = value.value.map(v => infoMap.value[v])
   }
 
   const isMouseenter = ref(false)
@@ -141,7 +215,6 @@ export default function (props: any, context: any) {
   // 清除， 删除全部
   const clearSelected = () => {
     value.value = []
-    context.emit('ichange', value.value)
   }
 
   // 删除单个
@@ -165,8 +238,7 @@ export default function (props: any, context: any) {
   // init回显：根据ids查询信息: 1. 默认值回显; 2. 收集
   let initDisplay = async (ids: string[]) => {
     // 如果是本地
-
-    const params = remote.value ? ids : props.range
+    const params = remote ? ids : props.range
     if (!params?.length) options.value = []
     const result = await getItemByIds(params)
     if (result.code === '000000') {
@@ -195,10 +267,8 @@ export default function (props: any, context: any) {
   // 组件内部value变化时处理：1. 触发组件update，同步外部数据; 2. 计算溢出标签，展示'更多'组件
   const handleValueChange = () => {
     const val = value.value
-    context.emit('update', {
-      value: val,
-      options: selectedList.value,
-    })
+    // 更新组件外部value
+    props.update && props.update(val, selectedList.value)
     // value 变化， 计算溢出人员
     getExceed()
   }
@@ -248,13 +318,6 @@ export default function (props: any, context: any) {
   )
 
   // 处理多选变单选时value
-  // effect(() => {
-  //   const val = multiple.value
-  //   if (!val && value.value?.length > 1) {
-  //     value.value = value.value.slice(0, 1)
-  //   }
-  // })
-
   watch(
     () => multiple.value,
     val => {
@@ -267,17 +330,11 @@ export default function (props: any, context: any) {
     }
   )
 
-  watch(
-    () => props.range,
-    val => {
-      if (val && props.range?.length) {
-        initDisplay(props.range)
-      }
-    },
-    {
-      immediate: true,
+  effect(() => {
+    if (props.range?.length) {
+      initDisplay(props.range)
     }
-  )
+  })
 
   return {
     testVal,
@@ -298,16 +355,27 @@ export default function (props: any, context: any) {
     exceedList,
     infoMap,
     selectedList,
+    secrecy,
+    visible,
+    loading,
+    mode,
+    hideMenuOnMultiple,
     getExceed,
-    setOpen,
+    handleInputClick,
     closeOpen,
     mouseenter,
     mouseleave,
     searchUser,
     getItemByIds,
-    collectMap,
     clearSelected,
     handleDelete,
     maxTagPlaceholder,
+    dropdownVisibleChange,
+    filterOption,
+    searchByKey,
+    handleModalChange,
+    handleCloseModal,
+    handleOpenModal,
+    collectMap,
   }
 }

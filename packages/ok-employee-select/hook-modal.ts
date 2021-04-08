@@ -1,48 +1,47 @@
 /*
  * @Descripttion:
  * @Author: 付静
- * @Date: 2021-03-15 17:57:52
+ * @Date: 2021-04-08 15:19:21
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-01 15:51:21
- * @FilePath: /packages/ok-employee-select/hook-tree.ts
+ * @LastEditTime: 2021-04-08 18:02:50
+ * @FilePath: /packages/ok-employee-select/hook-modal.ts
  */
 import { debounce } from 'lodash'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 import folder from '../assets/file-icon/icon_file-folder_colorful.svg'
 import checked from '../assets/images/checked.svg'
-import useBaseHandle from './hook-base'
-export default function (props: any, context: any) {
-  const {
-    testVal,
-    api,
-    value,
-    options,
-    placeholder,
-    disabled,
-    multiple,
-    range,
-    remote,
-    closeIcon,
-    searchIcon,
-    borderless,
-    isMouseenter,
-    maxTagCount,
-    infoMap,
-    mouseenter,
-    mouseleave,
-    searchUser,
-    collectMap,
-    clearSelected,
-    handleDelete,
-    maxTagPlaceholder,
-  } = useBaseHandle(props, context)
-
+import close from '../assets/images/closed.svg'
+import search from '../assets/images/search.svg'
+import { apiInit } from '../services/api'
+export default function (props: any) {
+  const api = apiInit()
+  // multiple
+  const multiple = computed(() => props.multiple)
+  // 限定范围
+  const range = computed(() => props.range)
+  // 指定范围，本地搜索， 非远程
+  const remote = computed(() => !props.range?.length)
   // 是否开启了组价架构保密：如果开启了，则不展示组织架构树，只能进行搜索
   const secrecy = computed(() => props.secrecy)
+  // 人员信息集合
+  const infoMapInner = computed(() => props.infoMap)
+  // modal是否可见
+  const visible = computed(() => props.visible)
 
-  // modal 展示与否
-  const visible = ref(false)
+  const closeIcon = close
+  const searchIcon = search
+
+  // 组件外部传入的初始value
+  const propsValue = computed(() => {
+    if (!props.inputValue) {
+      return []
+    } else {
+      return Array.isArray(props.inputValue)
+        ? props.inputValue
+        : [props.inputValue]
+    }
+  })
 
   // 保留弹窗内部临时value
   const tempSelected = ref<any>([])
@@ -63,9 +62,9 @@ export default function (props: any, context: any) {
   // 搜索结果 - 人员列表
   const searchResultList = ref<any[]>([])
 
-  // 已选人员信息集合
+  // 获取已选人员
   const selectedList = computed(() =>
-    tempSelected.value.map(v => infoMap.value[v]).filter(v => v)
+    tempSelected.value.map(v => infoMapInner.value[v]).filter(v => v)
   )
 
   // icon
@@ -106,10 +105,9 @@ export default function (props: any, context: any) {
       param: queryKey.value,
     })
     if (result.code === '000000') {
-      const data: any = result.data?.rows
       employeeList.value = result.data?.rows
       // 收集信息
-      collectMap(data)
+      props.collect && props.collect(employeeList.value)
     }
   }
 
@@ -122,12 +120,12 @@ export default function (props: any, context: any) {
   // 根据关键字查询人员信息
   const searchEmployeeByKey = async () => {
     if (!queryKey.value) return
-    const result = await searchUser(queryKey.value)
+    const result = await api.default.SearchUserInfo({ param: queryKey.value })
     if (result.code === '000000') {
       const data: any = result.data?.rows
       searchResultList.value = data
       // 收集信息
-      collectMap(data)
+      props.collect && props.collect(employeeList.value)
     }
   }
 
@@ -152,6 +150,7 @@ export default function (props: any, context: any) {
     setBreadcrumb(department)
   }
 
+  // 点击面包屑的根节点
   const handleRootClick = () => {
     breadcrumbList.value = []
     department_id.value = '1'
@@ -187,37 +186,26 @@ export default function (props: any, context: any) {
   // 非远程模式下，获取指定范围人员信息
   const getRangeList = async () => {
     employeeList.value = range.value
-      .map((v: string) => infoMap.value[v])
+      .map((v: string) => infoMapInner.value[v])
       .filter(v => v)
   }
 
   // 打开modal
-  const handleOpenModal = (evt: any) => {
-    if (disabled.value) return
-    // 注意点击清除按钮 不能触发弹窗打开
-    const path = evt.path || (evt.composedPath && evt.composedPath()) || []
-    if (path?.[0]?.className === 'head-clear-icon') return
-    visible.value = true
-
+  const handleOpenModal = () => {
     breadcrumbList.value = [{ department_id: '1', department_name: '根目录' }]
     department_id.value = '1'
     queryKey.value = ''
-    tempSelected.value = [...value.value]
+    tempSelected.value = [...propsValue.value]
     // 初始化树左侧数据
     !remote.value ? getRangeList() : getDeptAndEmployee()
-    // // 回显已选值
-    // displaySelected()
   }
 
   const cancelHandle = () => {
-    visible.value = false
+    props.close && props.close()
   }
   const okHandle = () => {
-    // 点击确定时， 更新value
-    value.value = [...tempSelected.value]
-    // 回显
-    options.value = value.value.map(v => infoMap.value[v])
-    visible.value = false
+    props.change && props.change(tempSelected.value)
+    props.close && props.close()
   }
 
   // 搜索框：判断是本地or远程搜索
@@ -228,13 +216,21 @@ export default function (props: any, context: any) {
 
   const searchByKey = debounce(searchEmployee, 500)
 
+  const clearSelected = () => {
+    tempSelected.value = []
+  }
+
+  watch(
+    () => visible.value,
+    val => {
+      val && handleOpenModal()
+    },
+    {
+      immediate: true,
+    }
+  )
+
   return {
-    testVal,
-    value,
-    options,
-    placeholder,
-    disabled,
-    multiple,
     range,
     secrecy,
     remote,
@@ -242,7 +238,6 @@ export default function (props: any, context: any) {
     checkedIcon,
     closeIcon,
     searchIcon,
-    borderless,
     visible,
     deptList,
     employeeList,
@@ -250,23 +245,15 @@ export default function (props: any, context: any) {
     breadcrumbList,
     selectedList,
     queryKey,
-    isMouseenter,
-    maxTagCount,
-    handleDelete,
-    maxTagPlaceholder,
-    mouseenter,
-    mouseleave,
     handleDeptClick,
     handleEmployeeSelect,
     cancelHandle,
     okHandle,
-    handleOpenModal,
     setBreadcrumb,
     handleRootClick,
     cancelSelect,
     clearSelected,
     isSelected,
-    searchEmployeeById,
     searchByKey,
   }
 }
