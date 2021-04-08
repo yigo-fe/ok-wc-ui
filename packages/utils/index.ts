@@ -5,14 +5,7 @@
  */
 import { Person } from '@c/ok-wc-ui.d'
 
-import defaultImage from '../assets/defaultAvatar.png'
 export * from './poper'
-
-const handleImage = (person: Person | undefined, definition = false) => {
-  if (!person) return defaultImage
-  const resultImg = definition ? person.avatar_url : person.avatar_small
-  return resultImg || person.avatar_big || defaultImage
-}
 
 const isSameArray = (arr1: any, arr2: any) => {
   const l1 = arr1?.length || 0
@@ -24,4 +17,4 @@ const isSameArray = (arr1: any, arr2: any) => {
   return same
 }
 
-export { handleImage, isSameArray }
+export { isSameArray }

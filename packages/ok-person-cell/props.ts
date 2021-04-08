@@ -3,49 +3,51 @@
  * @Author: 付静
  * @Date: 2021-03-04 13:47:46
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-04 13:48:30
- * @FilePath: /packages/ok-user/props.ts
+ * @LastEditTime: 2021-04-08 11:59:02
+ * @FilePath: /packages/ok-person-cell/props.ts
  */
+
+import { PropType } from 'ok-lit'
 const props = {
   personInfo: {
     // 人员信息
-    type: Object,
+    type: (Object as unknown) as PropType<object>,
     default() {
       return {}
     },
   },
   i18n: {
-    type: String,
+    type: (String as unknown) as PropType<string>,
     default: 'zh',
   },
   avatarClass: {
     // 人员图像class
-    type: String,
+    type: (String as unknown) as PropType<string>,
     default: '',
   },
   size: {
     // 默认尺寸
-    type: String,
+    type: (String as unknown) as PropType<string>,
     default: 'small',
   },
   width: {
     // 自定义宽度
-    type: String,
+    type: (String as unknown) as PropType<string>,
     default: '',
   },
   height: {
     // 自定义高度
-    type: String,
+    type: (String as unknown) as PropType<string>,
     default: '',
   },
   round: {
     // 是否为圆形图像，默认圆形
-    type: Boolean,
+    type: (Boolean as unknown) as PropType<boolean>,
     default: true,
   },
   // 文字图像的背景图：female 女， male 男
   background: {
-    type: Object,
+    type: (Object as unknown) as PropType<object>,
     default() {
       return {
         female: 'linear-gradient(180deg, #FD99D5 0%, #E672B7 100%)',
@@ -55,21 +57,21 @@ const props = {
   },
   // 人员图像父元素style
   avatarWapper: {
-    type: Object,
+    type: (Object as unknown) as PropType<object>,
     default() {
       return {}
     },
   },
   // 人员图像style
   avatarStyle: {
-    type: Object,
+    type: (Object as unknown) as PropType<object>,
     default() {
       return {}
     },
   },
   // 人员文字图像(无图片时，展示人员姓名)style
   textStyle: {
-    type: Object,
+    type: (Object as unknown) as PropType<object>,
     default() {
       return {}
     },

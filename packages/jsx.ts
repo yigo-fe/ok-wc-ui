@@ -5,9 +5,7 @@ declare global {
   namespace JSX {
     interface IntrinsicElements {
       'ok-avatar': OkAvatarAttributes // 人员头像
-      'ok-person': OkPersonAttributes // 人员信息
       'ok-person-group': OkPersonGroupAttributes // 人员信息组
-      'ok-person-detail': OkPersonDetailAttributes // 人员卡片
       'ok-popper': OkPopoverAttributes // 弹层
     }
 

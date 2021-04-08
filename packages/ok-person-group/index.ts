@@ -3,7 +3,7 @@ import { Person } from '@c/ok-wc-ui.d'
 import { setPopover } from '@c/utils'
 import { computed, defineComponent, html, onMounted, PropType } from 'ok-lit'
 
-import okPersonGroupCss from '../assets/ok-person-group.less'
+import okPersonGroupCss from './style/ok-person-group.less'
 
 /**
  * @props persons: {Array<Person>} 用户信息组

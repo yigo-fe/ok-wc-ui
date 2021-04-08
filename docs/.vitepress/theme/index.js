@@ -9,6 +9,5 @@ export default {
     // 任何以“ok-”开头的元素都将被识别为自定义元素
     app.config.isCustomElement = tag => tag.startsWith('ok-')
     app.component('PersonCell', PersonCell)
-    app.component('ok-person', { render: () => h('ok-person') })
   },
 }

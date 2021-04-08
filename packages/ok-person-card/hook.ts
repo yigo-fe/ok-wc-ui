@@ -3,10 +3,9 @@
  * @Author: 付静
  * @Date: 2021-03-03 17:28:13
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-09 15:12:36
+ * @LastEditTime: 2021-04-08 14:57:32
  * @FilePath: /packages/ok-person-card/hook.ts
  */
-// import ks_kim from '../assets/ks_kim.svg'
 import { computed, effect } from 'ok-lit'
 import { ref } from 'vue'
 

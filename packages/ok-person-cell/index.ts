@@ -1,7 +1,6 @@
 import { setPopover } from '@c/utils'
 import { defineComponent, html, onMounted, ref } from 'ok-lit'
 
-import okAvatarCss from '../assets/ok-avatar.less'
 import { apiInit } from '../services/api'
 // import { personInfo } from '../mock'
 /**
@@ -55,11 +54,7 @@ defineComponent(
         }
       )
     })
-
     return () => html`
-      <style>
-        ${okAvatarCss}
-      </style>
       <span ref="ok-person-trigger" class="ok-person-cell">
         <slot>
           <ok-avatar
