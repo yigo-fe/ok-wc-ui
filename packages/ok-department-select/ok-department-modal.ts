@@ -3,129 +3,115 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:03:32
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-31 13:34:48
- * @FilePath: /packages/ok-department-select/ok-department-tree.ts
+ * @LastEditTime: 2021-04-08 20:51:35
+ * @FilePath: /packages/ok-department-select/ok-department-modal.ts
  */
-import {
-  Button,
-  Checkbox,
-  Input,
-  Modal,
-  Popover,
-  Select,
-  Tree,
-} from 'ant-design-vue'
-import { defineComponent, html, onMounted } from 'ok-lit'
+import { Button, Checkbox, Input, Modal, Tree } from 'ant-design-vue'
+import { defineComponent, html, onMounted, PropType } from 'ok-lit'
 import { createApp } from 'vue'
 
 import CDN_PATH from '../path.config'
-import { propsOptions } from './department-props'
-import useDepartmentInput from './hook-tree'
+import useDepartmentModal from './hook-modal'
 import okDepartmentInputCss from './style/ok-department-input.less'
-defineComponent('ok-department-tree', { ...propsOptions }, (props, context) => {
-  onMounted(() => {
-    const options = {
-      setup() {
-        const {
-          testVal,
-          value,
-          multiple,
-          placeholder,
-          isDisabled,
-          options,
-          queryKey,
-          searchByKey,
-          maxTagCount,
-          visible,
-          searchResultList,
-          selectedList,
-          isMouseenter,
-          closeIcon,
-          searchIcon,
-          deptIcon,
-          checkedIcon,
-          treeData,
-          expandedKeys,
-          secrecy,
-          handleSelect,
-          maxTagPlaceholder,
-          handleOpenModal,
-          clearSelected,
-          handleDelete,
-          mouseenter,
-          mouseleave,
-          cancelHandle,
-          okHandle,
-          loadData,
-          isSelected,
-        } = useDepartmentInput(props, context)
-        return {
-          testVal,
-          value,
-          multiple,
-          placeholder,
-          isDisabled,
-          options,
-          queryKey,
-          searchByKey,
-          maxTagCount,
-          visible,
-          searchResultList,
-          selectedList,
-          isMouseenter,
-          closeIcon,
-          searchIcon,
-          deptIcon,
-          checkedIcon,
-          treeData,
-          expandedKeys,
-          secrecy,
-          handleSelect,
-          maxTagPlaceholder,
-          handleOpenModal,
-          clearSelected,
-          handleDelete,
-          mouseenter,
-          mouseleave,
-          cancelHandle,
-          okHandle,
-          loadData,
-          isSelected,
-        }
+defineComponent(
+  'ok-department-modal',
+  {
+    multiple: {
+      type: (Boolean as unknown) as PropType<boolean>,
+      default: false,
+    },
+    displayLevel: {
+      type: (String as unknown) as PropType<string>,
+    },
+    secrecy: {
+      type: (Boolean as unknown) as PropType<boolean>,
+      default: false,
+    },
+    visible: {
+      type: (Boolean as unknown) as PropType<boolean>,
+      default: false,
+    },
+    inputValue: {
+      type: (Array as unknown) as PropType<string[]>,
+      default: () => {
+        return []
       },
-      template: `
-        <a-select
-          ref="okDepartmentInputRef"	
-          show-search
-          showArrow
-          class="ok-department-select"
-          :test="testVal"
-          mode="multiple"
-          :placeholder="placeholder"
-          :disabled="isDisabled"      
-          :value="value"
-          :maxTagCount="maxTagCount"
-          :maxTagPlaceholder="maxTagPlaceholder"
-          :open="false"
-          @click="handleOpenModal"
-          @deselect="handleDelete" 
-          @mouseenter="mouseenter" 
-          @mouseleave="mouseleave" 
-        >
-
-          <template #suffixIcon>
-            <img v-if="isMouseenter && !isDisabled && value.length" :src="closeIcon" class="head-clear-icon" @click="clearSelected" />
-            <img v-else :src="searchIcon" class="head-search-icon"/>
-          </template>
-
-          <a-select-option
-            v-for="item in options"
-            :key="item.department_id"
-            :value="item.department_id"
-            >{{ item.display_value }}</a-select-option
-          >
-        </a-select>
-
+    },
+    infoMap: {
+      type: (Object as unknown) as PropType<object>,
+      default: () => {
+        return {}
+      },
+    },
+    collect: {
+      type: (Function as unknown) as PropType<
+        // eslint-disable-next-line no-unused-vars
+        (list: []) => void
+      >,
+    },
+    change: {
+      type: (Function as unknown) as PropType<
+        // eslint-disable-next-line no-unused-vars
+        (ids: string[]) => void
+      >,
+    },
+    close: {
+      type: (Function as unknown) as PropType<() => void>,
+    },
+  },
+  (props, context) => {
+    onMounted(() => {
+      const options = {
+        setup() {
+          const {
+            multiple,
+            queryKey,
+            searchByKey,
+            visible,
+            searchResultList,
+            selectedList,
+            closeIcon,
+            searchIcon,
+            deptIcon,
+            checkedIcon,
+            treeData,
+            secrecy,
+            expandedKeys,
+            handleSelect,
+            handleOpenModal,
+            clearSelected,
+            cancelSelect,
+            cancelHandle,
+            okHandle,
+            loadData,
+            isSelected,
+          } = useDepartmentModal(props)
+          return {
+            multiple,
+            options,
+            queryKey,
+            searchByKey,
+            visible,
+            searchResultList,
+            selectedList,
+            closeIcon,
+            searchIcon,
+            deptIcon,
+            checkedIcon,
+            treeData,
+            secrecy,
+            expandedKeys,
+            handleSelect,
+            handleOpenModal,
+            clearSelected,
+            cancelSelect,
+            cancelHandle,
+            okHandle,
+            loadData,
+            isSelected,
+          }
+        },
+        template: `
         <a-modal 
           class="ok-employee-tree-modal"
           :visible="visible" 
@@ -223,7 +209,7 @@ defineComponent('ok-department-tree', { ...propsOptions }, (props, context) => {
                 >
                   <a-checkbox
                     :checked="isSelected(item.department_id)"
-                    @click="handleSelect(item.department_id)"
+                    @click="cancelSelect(item.department_id)"
                   ></a-checkbox>
                   <img
                     class="tree-item-icon"
@@ -249,24 +235,23 @@ defineComponent('ok-department-tree', { ...propsOptions }, (props, context) => {
           </template>
         </a-modal>
       `,
-    }
+      }
 
-    const app = createApp(options)
-    app.use(Checkbox)
-    app.use(Popover)
-    app.use(Select)
-    app.use(Button)
-    app.use(Input)
-    app.use(Modal)
-    app.use(Tree)
-    app.mount(context.$refs.showDepartmentTree as HTMLElement)
-  })
-  return () => html`
-    <link rel="stylesheet" .href="${CDN_PATH}antd.min.css" />
-    <style>
-      ${okDepartmentInputCss}
-    </style>
+      const app = createApp(options)
+      app.use(Checkbox)
+      app.use(Button)
+      app.use(Input)
+      app.use(Modal)
+      app.use(Tree)
+      app.mount(context.$refs.showDepartmentTree as HTMLElement)
+    })
+    return () => html`
+      <link rel="stylesheet" .href="${CDN_PATH}antd.min.css" />
+      <style>
+        ${okDepartmentInputCss}
+      </style>
 
-    <div ref="showDepartmentTree" class="ok-department-select-wraper"></div>
-  `
-})
+      <div ref="showDepartmentTree" class="ok-department-select-wraper"></div>
+    `
+  }
+)

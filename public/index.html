@@ -266,11 +266,11 @@
 
       const okDeptInput = document.querySelector('.ok-department-input')
       // okDeptInput.value = ['13','14', '17', '18', '19']
-      // okDeptInput.multiple = true
+      okDeptInput.multiple = true
       // okDeptInput.disabled = true
       okDeptInput.update = (val, list)=>{
         console.log('dept-input-update-index',val, list)
-        // okEmployeeTree.value = val
+        okEmployeeTree.value = val
       }
 
       // const okDeptTree = document.querySelector('.ok-department-tree')
@@ -350,6 +350,9 @@
       // const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
       // okEmployeeInput2.value = ['FuJing'] 
 
+      const okDeptInput = document.querySelector('.ok-department-input')
+      // okDeptInput.value = ['13','14', '17', '18', '19']
+      okDeptInput.value = ['18']
       
     }
 
@@ -363,6 +366,9 @@
 
       // const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
       // okEmployeeInput2.value = [] 
+
+      const okDeptInput = document.querySelector('.ok-department-input')
+      okDeptInput.value = []
 
     }
 

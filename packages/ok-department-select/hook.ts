@@ -1,11 +1,12 @@
 /*
  * @Descripttion:
  * @Author: 付静
- * @Date: 2021-03-23 22:08:42
+ * @Date: 2021-04-08 20:15:04
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-31 18:06:45
- * @FilePath: /packages/ok-department-select/hook-base.ts
+ * @LastEditTime: 2021-04-08 20:47:42
+ * @FilePath: /packages/ok-department-select/hook.ts
  */
+import { debounce } from 'lodash'
 import { effect } from 'ok-lit'
 import { computed, h, nextTick, ref, watch } from 'vue'
 
@@ -19,10 +20,12 @@ export default function (props: any, context: any) {
     testVal.value = props.value
   })
   const api = apiInit()
+  // 模式： tree / select
+  const mode = computed(() => props.mode)
   // placeholder
   const placeholder = computed(() => props.placeholder)
   // disabled
-  const isDisabled = computed(() => props.disabled)
+  const disabled = computed(() => props.disabled)
   // multiple
   const multiple = computed(() => props.multiple)
   // 显示层级
@@ -34,6 +37,8 @@ export default function (props: any, context: any) {
   const maxTagCount = ref(1)
   // 溢出列表（more list）
   const exceedList = ref(<any>[])
+  // 弹窗是否可见
+  const visible = ref(false)
 
   // 组件外部传入的初始value
   const propsValue = computed(() => {
@@ -54,16 +59,16 @@ export default function (props: any, context: any) {
   const options = ref<any>([])
 
   // 部门id和detial的map
-  const departmentMap = ref({})
+  const infoMap = ref({})
   // 已选部门信息列表
   const selectedList = computed(() => {
-    return value.value.map(v => departmentMap.value[v]).filter(v => v)
+    return value.value.map(v => infoMap.value[v]).filter(v => v)
   })
 
   // 收集部门信息， 避免频繁请求接口
-  const collectdepartmentMap = (list: any) => {
+  const collectMap = (list: any) => {
     list.forEach((v: any) => {
-      departmentMap.value[v.department_id] = v
+      infoMap.value[v.department_id] = v
     })
   }
 
@@ -82,10 +87,32 @@ export default function (props: any, context: any) {
     return await api.default.SearchDeptPrivateV1POST({
       payload: {
         param: query,
-        display_level: 1,
+        display_level: displayLevel.value,
       },
     })
   }
+
+  // 搜索loading
+  const loading = ref(false)
+
+  // 搜索
+  const onFetch = async (query: string) => {
+    if (!query) return
+    loading.value = true
+    const result = await searchDept(query)
+    loading.value = false
+    if (result.code === '000000') {
+      const data: any = result.data
+      data?.forEach((item: any) => {
+        item.departmentId = item.department_id
+        item.displayValue = item.display_value
+      })
+      options.value = data
+      collectMap(data)
+    }
+  }
+
+  const searchByKey = debounce(onFetch, 500)
 
   // 处理溢出部门
   const getExceed = async () => {
@@ -102,10 +129,8 @@ export default function (props: any, context: any) {
         }
         return
       }
-      // departmentMap 中取值， 避免频繁请求接口数据
-      exceedList.value = exceedIds
-        .map(v => departmentMap.value[v])
-        .filter(v => v)
+      // infoMap 中取值， 避免频繁请求接口数据
+      exceedList.value = exceedIds.map(v => infoMap.value[v]).filter(v => v)
     }
   }
   // 处理最多能展示多少个tag
@@ -125,15 +150,37 @@ export default function (props: any, context: any) {
     }, 500)
   })
 
+  // 打开下拉框
   const isOpen = ref(false)
-  const setOpen = (evt: any) => {
-    // 兼容Safari
-    const path = evt.path || (evt.composedPath && evt.composedPath()) || []
-    if (path?.[0]?.className === 'head-clear-icon') return
+  const setOpen = () => {
     isOpen.value = true
   }
   const closeOpen = () => {
     isOpen.value = false
+  }
+
+  // 打开modal
+  const handleOpenModal = () => {
+    visible.value = true
+  }
+  const handleCloseModal = () => {
+    visible.value = false
+  }
+
+  const handleInputClick = (evt: any) => {
+    if (disabled.value) return
+    // 注意点击清除按钮 不能触发弹窗打开
+    const path = evt.path || (evt.composedPath && evt.composedPath()) || []
+    if (path?.[0]?.className === 'head-clear-icon') return
+    mode.value === 'tree' ? handleOpenModal() : setOpen()
+  }
+
+  // 弹窗点击确定时，更新value
+  const handleModalChange = (tempSelected: string) => {
+    // 点击确定时， 更新value
+    value.value = [...tempSelected]
+    // 回显
+    options.value = value.value.map(v => infoMap.value[v])
   }
 
   const isMouseenter = ref(false)
@@ -147,7 +194,6 @@ export default function (props: any, context: any) {
   // 清除， 删除全部
   const clearSelected = () => {
     value.value = []
-    context.emit('ichange', value.value)
   }
 
   // 删除单个部门
@@ -174,9 +220,17 @@ export default function (props: any, context: any) {
       const data: any = result.data
       options.value = data
       // 收集map
-      collectdepartmentMap(options.value)
+      collectMap(options.value)
       // 处理溢出
       getExceed()
+    }
+  }
+
+  // 远程模式下, 如果未选中， 清除options缓存
+  const dropdownVisibleChange = open => {
+    if (!open) return
+    if (!value.value.length) {
+      options.value = []
     }
   }
 
@@ -270,11 +324,10 @@ export default function (props: any, context: any) {
 
   return {
     testVal,
-    api,
     value,
     options,
     placeholder,
-    isDisabled,
+    disabled,
     multiple,
     displayLevel,
     closeIcon,
@@ -284,7 +337,10 @@ export default function (props: any, context: any) {
     isMouseenter,
     maxTagCount,
     exceedList,
-    departmentMap,
+    infoMap,
+    visible,
+    loading,
+    mode,
     getExceed,
     setOpen,
     closeOpen,
@@ -292,9 +348,15 @@ export default function (props: any, context: any) {
     mouseleave,
     searchDept,
     getDepartmentsByIds,
-    collectdepartmentMap,
+    collectMap,
     clearSelected,
     handleDelete,
     maxTagPlaceholder,
+    handleOpenModal,
+    handleCloseModal,
+    handleInputClick,
+    dropdownVisibleChange,
+    searchByKey,
+    handleModalChange,
   }
 }
