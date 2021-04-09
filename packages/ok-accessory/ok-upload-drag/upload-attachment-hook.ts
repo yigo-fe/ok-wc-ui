@@ -3,12 +3,32 @@
  * @Author: 付静
  * @Date: 2021-03-19 01:13:31
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-27 16:42:36
+ * @LastEditTime: 2021-04-09 09:58:58
  * @FilePath: /packages/ok-accessory/ok-upload-drag/upload-attachment-hook.ts
  */
 
+import { message } from 'ant-design-vue'
+
 import { apiInit } from '../../services/api'
 import useUploadHandler from '../upload-base-hook'
+import { getFileType } from '../utils'
+const canPreview = [
+  'jpg',
+  'jpeg',
+  'gif',
+  'tif',
+  'tiff',
+  'bmp',
+  'png',
+  'svg',
+  'pdf',
+  'doc',
+  'docx',
+  'xlsx',
+  'xls',
+  'ppt',
+  'pptx',
+]
 export default function (props, context) {
   const api = apiInit()
   // 删除文件
@@ -34,11 +54,16 @@ export default function (props, context) {
    */
   const handlePreview = data => {
     let file = fileLists.value.find(v => v.uid === data.detail.uid)
-    if (file) {
+    if (!file) return
+    // 图片、PDF、word、PPT、excel
+    const suffix = getFileType(file.response?.data?.[0]?.file_name)
+    if (canPreview.includes(suffix)) {
       window.open(file.response.data[0].online_view_url, '_blank')
-      // 处理用户自定义事件
-      props.onPreview && props.onPreview(file)
+    } else {
+      message.error('当前文件暂不支持预览')
     }
+    // 处理用户自定义事件
+    props.onPreview && props.onPreview(file)
   }
 
   // 获取默认值
