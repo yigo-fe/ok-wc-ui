@@ -47,9 +47,11 @@
     display: block;
     text-align: center;
     font-size: 40px;
-    color: #d9d9d9;
     height: 100%;
     margin: 0 auto;
+    path {
+      fill: @ok-picture-bg-color;
+    }
   }
 }
 
@@ -130,6 +132,10 @@
 
 .image-close-btn {
   cursor: pointer;
+}
+
+.abort-icon path {
+  fill: @ok-primary-color;
 }
 
 

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-08 21:32:19
+ * @LastEditTime: 2021-04-09 10:53:43
  * @FilePath: /packages/ok-accessory/ok-upload-image/ok-upload-image.ts
  */
 
@@ -115,7 +115,6 @@ defineComponent(
                   <path
                     d="M469.333333 469.333333V85.333333h85.333334v384h384v85.333334H554.666667v384h-85.333334V554.666667H85.333333v-85.333334z"
                     p-id="24595"
-                    fill="#d9d9d9"
                   ></path>
                 </svg>
               </div>

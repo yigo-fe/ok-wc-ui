@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-27 17:06:59
+ * @LastEditTime: 2021-04-09 11:05:25
  * @FilePath: /packages/ok-accessory/ok-upload-image/ok-file-image.ts
  */
 
@@ -94,7 +94,7 @@ defineComponent(
                 <span class="image-close-btn" @click="handleCloseClick(file, file.status)">
                   <svg
                     t="1616573273136"
-                    class="icon"
+                    class="icon abort-icon"
                     viewBox="0 0 1024 1024"
                     version="1.1"
                     xmlns="http://www.w3.org/2000/svg"
@@ -105,7 +105,6 @@ defineComponent(
                     <path
                       d="M512 451.669333L813.696 149.952l60.352 60.352L572.330667 512l301.717333 301.696-60.352 60.352L512 572.330667 210.304 874.048l-60.352-60.352L451.669333 512 149.952 210.304l60.352-60.352L512 451.669333z"
                       p-id="27042"
-                      fill="#5283F7"
                     ></path>
                   </svg>
                 </span>
