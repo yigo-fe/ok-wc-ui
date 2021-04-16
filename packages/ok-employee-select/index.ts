@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-08 18:33:16
+ * @LastEditTime: 2021-04-16 22:23:16
  * @FilePath: /packages/ok-employee-select/index.ts
  */
 
@@ -21,6 +21,8 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
   onMounted(() => {
     const options = {
       setup() {
+        const okEmployeeInput: any = ref(null)
+
         const {
           testVal,
           api,
@@ -63,8 +65,6 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
           handleOpenModal,
           collectMap,
         } = useEmployeeSelect(props, context)
-
-        const okEmployeeInput: any = ref(null)
 
         // 模拟单选
         const handleSelect = val => {

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:56:38
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-08 18:10:20
+ * @LastEditTime: 2021-04-16 22:08:22
  * @FilePath: /packages/ok-employee-select/ok-employee-modal.ts
  */
 
@@ -200,11 +200,11 @@ defineComponent(
                     class="item-detail employee" 
                     v-for="employee in selectedList" 
                     :key="employee.employee_id"  
-                    @click="cancelSelect(employee.employee_id)">
+                    >
                     <ok-person-cell :personInfo="employee"></ok-person-cell>               
                     <span class="employee-name">{{employee.employee_name}}</span>
                     <span class="email">{{employee.email}}</span>    
-                    <img :src="closeIcon" class="close-icon" />               
+                    <img @click="cancelSelect(employee.employee_id)" :src="closeIcon" class="close-icon" />               
                   </p>
                 </div>            
               </div>

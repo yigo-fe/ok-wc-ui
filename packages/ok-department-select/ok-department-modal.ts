@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:03:32
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-16 21:21:14
+ * @LastEditTime: 2021-04-16 22:07:17
  * @FilePath: /packages/ok-department-select/ok-department-modal.ts
  */
 import { Button, Checkbox, Input, Modal, Tree } from 'ant-design-vue'
@@ -179,7 +179,7 @@ defineComponent(
                     item.display_value
                   }}</span>
 
-                  <img :src="closeIcon" class="close-icon" /> 
+                  <img @click="cancelSelect(item.department_id)" :src="closeIcon" class="close-icon" /> 
                 </li>
               </ul>
            

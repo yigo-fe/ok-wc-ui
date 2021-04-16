@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 15:19:21
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-08 18:02:50
+ * @LastEditTime: 2021-04-16 22:05:32
  * @FilePath: /packages/ok-employee-select/hook-modal.ts
  */
 import { debounce } from 'lodash'
@@ -63,13 +63,19 @@ export default function (props: any) {
   const searchResultList = ref<any[]>([])
 
   // 获取已选人员
-  const selectedList = computed(() =>
-    tempSelected.value.map(v => infoMapInner.value[v]).filter(v => v)
-  )
+  const selectedList = computed(() => {
+    return tempSelected.value.map(v => infoMapInner.value[v]).filter(v => v)
+  })
 
   // icon
   const deptIcon = folder
   const checkedIcon = checked
+
+  const collectMap = (list: any) => {
+    list.forEach((v: any) => {
+      infoMapInner.value[v.employee_id] = v
+    })
+  }
 
   // 设置面包屑
   const setBreadcrumb = (department: any) => {
@@ -107,6 +113,7 @@ export default function (props: any) {
     if (result.code === '000000') {
       employeeList.value = result.data?.rows
       // 收集信息
+      collectMap(employeeList.value)
       props.collect && props.collect(employeeList.value)
     }
   }
@@ -124,7 +131,9 @@ export default function (props: any) {
     if (result.code === '000000') {
       const data: any = result.data?.rows
       searchResultList.value = data
+
       // 收集信息
+      collectMap(searchResultList.value)
       props.collect && props.collect(employeeList.value)
     }
   }
@@ -175,12 +184,15 @@ export default function (props: any) {
    * 2. 区分单选和多选
    */
   const handleEmployeeSelect = (id: string) => {
+    console.log(id)
     // 区分单选和多选
     isSelected(id)
       ? cancelSelect(id)
       : multiple.value
       ? tempSelected.value.push(id)
       : (tempSelected.value = [id])
+
+    console.log(tempSelected.value)
   }
 
   // 非远程模式下，获取指定范围人员信息
