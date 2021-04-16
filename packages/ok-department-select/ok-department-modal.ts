@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:03:32
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-08 20:51:35
+ * @LastEditTime: 2021-04-16 21:21:14
  * @FilePath: /packages/ok-department-select/ok-department-modal.ts
  */
 import { Button, Checkbox, Input, Modal, Tree } from 'ant-design-vue'
@@ -63,52 +63,9 @@ defineComponent(
     onMounted(() => {
       const options = {
         setup() {
-          const {
-            multiple,
-            queryKey,
-            searchByKey,
-            visible,
-            searchResultList,
-            selectedList,
-            closeIcon,
-            searchIcon,
-            deptIcon,
-            checkedIcon,
-            treeData,
-            secrecy,
-            expandedKeys,
-            handleSelect,
-            handleOpenModal,
-            clearSelected,
-            cancelSelect,
-            cancelHandle,
-            okHandle,
-            loadData,
-            isSelected,
-          } = useDepartmentModal(props)
+          const params = useDepartmentModal(props)
           return {
-            multiple,
-            options,
-            queryKey,
-            searchByKey,
-            visible,
-            searchResultList,
-            selectedList,
-            closeIcon,
-            searchIcon,
-            deptIcon,
-            checkedIcon,
-            treeData,
-            secrecy,
-            expandedKeys,
-            handleSelect,
-            handleOpenModal,
-            clearSelected,
-            cancelSelect,
-            cancelHandle,
-            okHandle,
-            loadData,
-            isSelected,
+            ...params,
           }
         },
         template: `
@@ -133,9 +90,11 @@ defineComponent(
                   </template>
                 </a-input>                    
               </div>
+          
+             
 
               <!--人员部门展示-->
-              <div class="tree-content" v-show="!queryKey && !secrecy">          
+              <div class="tree-content department" v-show="!queryKey && !secrecy">          
                 <a-tree
                   :selectable="false"
                   :replaceFields="{ key: 'department_id' }"

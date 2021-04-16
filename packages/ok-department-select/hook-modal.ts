@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 18:41:06
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-08 20:51:21
+ * @LastEditTime: 2021-04-16 21:15:42
  * @FilePath: /packages/ok-department-select/hook-modal.ts
  */
 import { debounce } from 'lodash'
@@ -95,6 +95,7 @@ export default function (props: any) {
               item.isLeaf = !item.has_child
             })
             treeNode.dataRef.children = res.data
+            expandedKeys.value.push(treeNode.dataRef.department_id)
           }
           // 收集信息
           props.collect && props.collect(res.data)

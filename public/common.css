@@ -676,3 +676,8 @@ h3{
   .employee-tree-content-wraper .tree-content {
     padding: 0 20px 0 15px;
   }
+
+  .employee-tree-content-wraper .tree-content.department {
+    max-height: 400px;
+    overflow: auto;
+  }
