@@ -3,14 +3,14 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-09 11:05:25
+ * @LastEditTime: 2021-04-16 21:01:33
  * @FilePath: /packages/ok-accessory/ok-upload-image/ok-file-image.ts
  */
 
 import { computed, defineComponent, html, onMounted, PropType } from 'ok-lit'
 import { createApp } from 'vue'
 
-import okUploadImgCss from '../style/ok-upload-image.less'
+import CDN_PATH from '../../path.config'
 import type { ListType, UploadFile, UploadStatus } from '../upload.type'
 defineComponent(
   'ok-file-image',
@@ -177,9 +177,7 @@ defineComponent(
     })
 
     return () => html`
-      <style>
-        ${okUploadImgCss}
-      </style>
+      <link rel="stylesheet" .href="${CDN_PATH}common.css" />
       <ul ref="okUploadImage" class="ok-upload-list ok-upload-list-image"></ul>
     `
   }

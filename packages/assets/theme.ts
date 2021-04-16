@@ -7,10 +7,10 @@
  * @FilePath: /packages/assets/theme.ts
  */
 
-const okPrimaryColor = '#5283F7'
-const okTextColor = '#5283F7'
-const okTextColorSecondary = '#5283F7'
-const okBaseBgColor = '#5283F7'
+const okPrimaryColor = '#4c78fc'
+const okTextColor = '#4c78fc'
+const okTextColorSecondary = '#4c78fc'
+const okBaseBgColor = '#4c78fc'
 const okUploadColor = '#bbbfc4'
 
 export {

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-09 10:53:43
+ * @LastEditTime: 2021-04-16 20:45:28
  * @FilePath: /packages/ok-accessory/ok-upload-image/ok-upload-image.ts
  */
 
@@ -38,7 +38,7 @@ import { classMap } from 'lit-html/directives/class-map.js'
 import { defineComponent, html, PropType } from 'ok-lit'
 
 import CDN_PATH from '../../path.config'
-import okUploadImgCss from '../style/ok-upload-image.less'
+// import okUploadImgCss from '../style/ok-upload-image.less'
 import { UploadProps } from '../upload.props'
 import useImageHandle from './upload-image-hook'
 defineComponent(
@@ -135,9 +135,6 @@ defineComponent(
     }
 
     return () => html`
-      <style>
-        ${okUploadImgCss}
-      </style>
       <link rel="stylesheet" .href="${CDN_PATH}common.css" />
       <ok-file-image
         class="ok-file-image-list"

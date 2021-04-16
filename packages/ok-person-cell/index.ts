@@ -1,6 +1,7 @@
 import { setPopover } from '@c/utils'
 import { defineComponent, html, onMounted, ref } from 'ok-lit'
 
+import CDN_PATH from '../path.config'
 import { apiInit } from '../services/api'
 // import { personInfo } from '../mock'
 /**
@@ -55,7 +56,8 @@ defineComponent(
       )
     })
     return () => html`
-      <span ref="ok-person-trigger" class="ok-person-cell">
+      <link rel="stylesheet" .href="${CDN_PATH}common.css" />
+      <span ref="ok-person-trigger" class="ok-person-cell ok-person-cell-root">
         <slot>
           <ok-avatar
             .personInfo=${props.personInfo}

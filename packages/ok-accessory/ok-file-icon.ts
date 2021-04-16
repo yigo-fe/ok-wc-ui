@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-10 14:22:53
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-24 15:47:33
+ * @LastEditTime: 2021-04-16 20:37:25
  * @FilePath: /packages/ok-accessory/ok-file-icon.ts
  */
 import { computed, defineComponent, html, onMounted, PropType } from 'ok-lit'
@@ -35,7 +35,8 @@ import unknow from '../assets/file-icon/icon_file-unknow_colorful.svg'
 import video from '../assets/file-icon/icon_file-video_colorful.svg'
 import word from '../assets/file-icon/icon_file-word_colorful.svg'
 import zip from '../assets/file-icon/icon_file-zip_colorful.svg'
-import okFileIconCss from './style/ok-file-icon.less'
+// import okFileIconCss from './style/ok-file-icon.less'
+import CDN_PATH from '../path.config'
 defineComponent(
   'ok-file-icon',
   {
@@ -61,10 +62,11 @@ defineComponent(
               case 'apk':
                 icon = android
                 break
-              case 'rmvb':
-              case 'flv':
-              case 'mp4':
-              case 'avi':
+              case 'ac3':
+              case 'au':
+              case 'mp2':
+              case 'mp3':
+              case 'ogg':
                 icon = audio
                 break
               case 'bi':
@@ -82,11 +84,19 @@ defineComponent(
               case 'key':
                 icon = keynote
                 break
-              case 'png':
-              case 'jpg':
+              case 'dwg':
+              case 'gif':
+              case 'dxf':
+              case 'jp2':
+              case 'jpe':
               case 'jpeg':
-              case 'svg':
+              case 'jpg':
+              case 'svf':
+              case 'tif':
+              case 'tiff':
+              case 'png':
               case 'bmp':
+              case 'svg':
                 icon = img
                 break
               case 'doc':
@@ -125,7 +135,12 @@ defineComponent(
               case 'numbers':
                 icon = numbers
                 break
-              case 'video':
+              case '3gpp':
+              case 'mp4':
+              case 'mpeg':
+              case 'mpg':
+              case 'mov':
+              case 'asf':
                 icon = video
                 break
               case 'csv':
@@ -153,10 +168,8 @@ defineComponent(
     })
 
     return () => html`
-      <style>
-        ${okFileIconCss}
-      </style>
-      <span ref="showFileIcon" class="ok-file-icon"></div>
+      <link rel="stylesheet" .href="${CDN_PATH}common.css" />
+      <span ref="showFileIcon" class="ok-file-icon ok-file-icon-root"></div>
     `
   }
 )

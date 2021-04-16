@@ -49,7 +49,7 @@ defineComponent(
           left: 0;
           top: 0;
           height: 100%;
-          background-color: #5283f7;
+          background-color: #4c78fc;
           text-align: right;
           border-radius: 100px;
           line-height: 1;

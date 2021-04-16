@@ -114,11 +114,11 @@ const UploadProps = {
   },
   iconColor: {
     type: (String as unknown) as PropType<string>,
-    default: '#5283F7',
+    default: '#4c78fc',
   },
   btnColor: {
     type: (String as unknown) as PropType<string>,
-    default: '#5283F7',
+    default: '#4c78fc',
   },
   operation: {
     type: (Array as unknown) as PropType<string[]>,

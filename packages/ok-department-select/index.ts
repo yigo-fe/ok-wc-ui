@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:01:15
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-08 21:00:38
+ * @LastEditTime: 2021-04-16 21:03:10
  * @FilePath: /packages/ok-department-select/index.ts
  */
 import './ok-department-modal'
@@ -24,7 +24,7 @@ import { createApp, ref } from 'vue'
 import CDN_PATH from '../path.config'
 import { propsOptions } from './department-props'
 import useDepartmentSelect from './hook'
-import okDepartmentInputCss from './style/ok-department-input.less'
+// import okDepartmentInputCss from './style/ok-department-input.less'
 defineComponent(
   'ok-department-select',
   { ...propsOptions },
@@ -189,11 +189,11 @@ defineComponent(
     })
     return () => html`
       <link rel="stylesheet" .href="${CDN_PATH}antd.min.css" />
-      <style>
-        ${okDepartmentInputCss}
-      </style>
-
-      <div ref="showDepartmentTree" class="ok-department-select-wraper"></div>
+      <link rel="stylesheet" .href="${CDN_PATH}common.css" />
+      <div
+        ref="showDepartmentTree"
+        class="ok-department-select-wraper ok-department-select-root"
+      ></div>
     `
   }
 )

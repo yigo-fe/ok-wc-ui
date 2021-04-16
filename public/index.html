@@ -67,7 +67,7 @@
       <!-- 人员卡片 -->
       <ok-person-cell class="person-cell"></ok-person-cell>
       <!-- 多人员list -->
-      <!-- <ok-person-group ></ok-person-group> -->
+      <ok-person-group ></ok-person-group>
 
       <!-- <ok-person-card></ok-person-card> -->
  
@@ -98,7 +98,7 @@
         <!-- <ok-attachment-drag></ok-attachment-drag>  -->
 
         <h3>图片上传</h3>
-        <ok-upload-image style="width: 500px;"></ok-upload-image>
+        <ok-upload-image style="width: 500px; display: block;"></ok-upload-image>
 
 
         <!-- <h3>图片上传 slot</h3> -->
@@ -158,6 +158,33 @@
     }
 
 
+    const personList =[{
+      avatar_url: "https://wework.qpic.cn/bizmail/cMLFZrYGchIibX5icVTGibh7b2oELMc9MsJYDiaCNNmTYREjGVRjlsq3mA/0",
+      department_id: "30",
+      department_name: "前端部",
+      email: "fujing@byteluck.com",
+      employee_card: "工号",
+      employee_en_name: "付静",
+      employee_id: "FuJing",
+      employee_name: "付静",
+      gender: 2,
+      msg_relation_type: "WX",
+      tenant_id: "test"
+    }, {
+      avatar_url: "https://wework.qpic.cn/bizmail/cMLFZrYGchIibX5icVTGibh7b2oELMc9MsJYDiaCNNmTYREjGVRjlsq3mA/0",
+      department_id: "30",
+      department_name: "前端部",
+      email: "fujing@byteluck.com",
+      employee_card: "工号",
+      employee_en_name: "付静",
+      employee_id: "FuJing1",
+      employee_name: "付静",
+      gender: 2,
+      msg_relation_type: "WX",
+      tenant_id: "test"
+    }] 
+
+
 
 
     window.onload = ()=>{
@@ -174,7 +201,7 @@
       // okUpload.operation = ['preview']
       // okUpload.hideUploader = true
       // okUpload.disabled = true
-      okUpload.limit = 3
+      // okUpload.limit = 3
       okUpload.onExceed = ()=>{
         console.log('附件超出了')
       }
@@ -227,7 +254,7 @@
       const okUploadImg = document.querySelector('ok-upload-image')
       // okUploadImg.action = actionImg
       okUploadImg.multiple = true
-      okUploadImg.limit = 3
+      // okUploadImg.limit = 3
       okUploadImg.noBorder = true
       okUploadImg.onExceed = ()=>{
         console.log('图片超出了')
@@ -245,8 +272,8 @@
       // okAttachmentDrag.action = action
       // okAttachmentDrag.data = uploadData
 
-      // const okPersonGroup = document.querySelector('ok-person-group')
-      // okPersonGroup.personList = personList
+      const okPersonGroup = document.querySelector('ok-person-group')
+      okPersonGroup.personList = personList
 
       // const okPersonCell = document.querySelector('ok-person-cell')
       // okPersonCell.personInfo = personInfo

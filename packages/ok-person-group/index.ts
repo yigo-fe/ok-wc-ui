@@ -1,9 +1,8 @@
 import { SIZE_TYPE } from '@c/enum'
-import { Person } from '@c/ok-wc-ui.d'
 import { setPopover } from '@c/utils'
-import { computed, defineComponent, html, onMounted, PropType } from 'ok-lit'
+import { computed, defineComponent, effect, html, PropType } from 'ok-lit'
 
-import okPersonGroupCss from './style/ok-person-group.less'
+import CDN_PATH from '../path.config'
 
 /**
  * @props persons: {Array<Person>} 用户信息组
@@ -13,8 +12,10 @@ defineComponent(
   'ok-person-group',
   {
     personList: {
-      type: (Object as unknown) as PropType<Array<Person>>,
-      required: true,
+      type: (Array as unknown) as PropType<any[]>,
+      default: () => {
+        return []
+      },
     },
     size: {
       type: (String as unknown) as SIZE_TYPE,
@@ -48,18 +49,37 @@ defineComponent(
       return props.personList?.slice(0, 3)
     })
 
-    onMounted(() => {
-      if (props.personList.length > 1) {
-        setPopover(
-          contxt.$refs['showMore'] as HTMLElement,
-          contxt.$refs['personGroupPopper'] as HTMLElement,
-          {
-            appendTo: document.body,
-            popperOptions: {
-              strategy: 'fixed',
-            },
-          }
-        )
+    const setPopup = () => {
+      setPopover(
+        contxt.$refs['showMore'] as HTMLElement,
+        contxt.$refs['personGroupPopper'] as HTMLElement,
+        {
+          appendTo: document.body,
+          popperOptions: {
+            strategy: 'fixed',
+          },
+        }
+      )
+    }
+
+    // onMounted(() => {
+    //   if (props.personList.length > 1) {
+    //     setPopover(
+    //       contxt.$refs['showMore'] as HTMLElement,
+    //       contxt.$refs['personGroupPopper'] as HTMLElement,
+    //       {
+    //         appendTo: document.body,
+    //         popperOptions: {
+    //           strategy: 'fixed',
+    //         },
+    //       }
+    //     )
+    //   }
+    // })
+
+    effect(() => {
+      if (props.personList?.length) {
+        setPopup()
       }
     })
 
@@ -108,12 +128,14 @@ defineComponent(
       `
     }
 
+    // ${avatarRender()} ${props.personList.length > 1 ? popperRender() : ''}
+
     return () => html`
-      <style>
-        ${okPersonGroupCss}
-      </style>
-      <div class="ok-person-group">
-        ${avatarRender()} ${props.personList.length > 1 ? popperRender() : ''}
+      <link rel="stylesheet" .href="${CDN_PATH}common.css" />
+      <div class="ok-person-group ok-person-group-root">
+        <div class="ok-person-group-wrap">
+          ${avatarRender()} ${popperRender()}
+        </div>
       </div>
     `
   }
