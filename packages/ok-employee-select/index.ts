@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-16 22:23:16
+ * @LastEditTime: 2021-04-19 16:06:09
  * @FilePath: /packages/ok-employee-select/index.ts
  */
 
@@ -23,104 +23,25 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
       setup() {
         const okEmployeeInput: any = ref(null)
 
-        const {
-          testVal,
-          api,
-          value,
-          options,
-          placeholder,
-          disabled,
-          multiple,
-          range,
-          remote,
-          closeIcon,
-          searchIcon,
-          borderless,
-          isOpen,
-          isMouseenter,
-          maxTagCount,
-          exceedList,
-          infoMap,
-          selectedList,
-          secrecy,
-          visible,
-          loading,
-          mode,
-          hideMenuOnMultiple,
-          getExceed,
-          handleInputClick,
-          closeOpen,
-          mouseenter,
-          mouseleave,
-          searchUser,
-          getItemByIds,
-          clearSelected,
-          handleDelete,
-          maxTagPlaceholder,
-          dropdownVisibleChange,
-          filterOption,
-          searchByKey,
-          handleModalChange,
-          handleCloseModal,
-          handleOpenModal,
-          collectMap,
-        } = useEmployeeSelect(props, context)
+        const params = useEmployeeSelect(props, context)
 
         // 模拟单选
         const handleSelect = val => {
           // 配置了自动收起下拉框
-          if (hideMenuOnMultiple.value) {
+          if (params.hideMenuOnMultiple.value) {
             okEmployeeInput.value?.blur()
           }
-          if (multiple.value) return
+          if (params.multiple.value) return
           // 单选时处理value
-          value.value = [val]
+          params.value.value = [val]
           // 单选收起下拉框
           okEmployeeInput.value?.blur()
         }
 
         return {
-          testVal,
-          api,
-          value,
-          options,
-          placeholder,
-          disabled,
-          multiple,
-          range,
-          remote,
-          closeIcon,
-          searchIcon,
-          borderless,
-          isOpen,
-          isMouseenter,
-          maxTagCount,
-          exceedList,
-          infoMap,
-          selectedList,
-          secrecy,
-          visible,
-          loading,
-          mode,
+          ...params,
           okEmployeeInput,
-          getExceed,
-          handleInputClick,
-          closeOpen,
-          mouseenter,
-          mouseleave,
-          searchUser,
-          getItemByIds,
-          clearSelected,
-          handleDelete,
-          maxTagPlaceholder,
-          dropdownVisibleChange,
-          filterOption,
-          searchByKey,
           handleSelect,
-          handleModalChange,
-          handleCloseModal,
-          handleOpenModal,
-          collectMap,
         }
       },
       template: `

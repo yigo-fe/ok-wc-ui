@@ -3,11 +3,11 @@
  * @Author: 付静
  * @Date: 2021-04-08 15:16:57
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-16 22:23:09
+ * @LastEditTime: 2021-04-19 16:10:09
  * @FilePath: /packages/ok-employee-select/hook.ts
  */
 import { debounce } from 'lodash'
-import { effect, onMounted } from 'ok-lit'
+import { effect } from 'ok-lit'
 import { computed, h, nextTick, ref, watch } from 'vue'
 
 import close from '../assets/images/closed.svg'
@@ -165,10 +165,8 @@ export default function (props: any, context: any) {
     !exceedList.value.length && getExceed()
   }
 
-  onMounted(() => {
-    nextTick(() => {
-      maxTagCountComput()
-    })
+  nextTick(() => {
+    maxTagCountComput()
   })
 
   // 打开下拉框
