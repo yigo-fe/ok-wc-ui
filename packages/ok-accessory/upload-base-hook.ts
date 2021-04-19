@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-27 16:42:26
+ * @LastEditTime: 2021-04-19 21:23:31
  * @FilePath: /packages/ok-accessory/upload-base-hook.ts
  */
 
@@ -34,9 +34,11 @@
  *
  */
 
+import { Modal } from 'ant-design-vue'
 import { computed } from 'ok-lit'
-import { reactive, ref, watch } from 'vue'
+import { h, reactive, ref, watch } from 'vue'
 
+import confirmIcon from '../assets/images/maybe.svg'
 import { isSameArray } from '../utils/index'
 import type { OkFile, UploadStatus } from './upload.type'
 
@@ -239,15 +241,56 @@ export default function (props, context, config) {
       return
     }
     let file = fileLists.value[idx]
-    // 处理beforeRemove
-    if (
-      !props.beforeRemove ||
-      (props.beforeRemove &&
-        props.beforeRemove({ file, fileLists: fileLists.value }))
-    ) {
-      // 组件内部接口删除
-      config.remove({ file, index: idx, fileLists: fileLists.value })
-    }
+
+    Modal.confirm({
+      content: h(
+        'div',
+        {
+          style: {
+            display: 'flex',
+            alignItems: 'center',
+            fontSize: '16px',
+            lineHeight: '22px',
+            color: '#1F2329',
+          },
+        },
+        [
+          h('img', {
+            src: confirmIcon,
+            style: {
+              with: '20px',
+              height: '20px',
+              verticalAlign: 'middle',
+              marginRight: '8px',
+            },
+          }),
+          h(
+            'div',
+            {
+              class: '',
+            },
+            `确定删除该${config.type === 'image' ? '图片' : '文件'}?`
+          ),
+        ]
+      ),
+      class: 'file-delete-confirm',
+      okText: '确定',
+      cancelText: '取消',
+      onOk: () => {
+        // 处理beforeRemove
+        if (
+          !props.beforeRemove ||
+          (props.beforeRemove &&
+            props.beforeRemove({ file, fileLists: fileLists.value }))
+        ) {
+          // 组件内部接口删除
+          config.remove({ file, index: idx, fileLists: fileLists.value })
+        }
+      },
+      onCancel() {
+        Modal.destroyAll()
+      },
+    })
   }
   /**
    * 下载

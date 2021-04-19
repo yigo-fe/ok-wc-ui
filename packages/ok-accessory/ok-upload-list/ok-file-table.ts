@@ -11,7 +11,7 @@ import { Button, Table } from 'ant-design-vue'
 import { computed, defineComponent, html, onMounted, PropType } from 'ok-lit'
 import { createApp, ref } from 'vue'
 
-import CDN_PATH from '../../path.config'
+import { CDN_PATH } from '../../path.config'
 import okFileTableCss from '../style/ok-file-table.less'
 import type { ListType, UploadFile } from '../upload.type'
 defineComponent(

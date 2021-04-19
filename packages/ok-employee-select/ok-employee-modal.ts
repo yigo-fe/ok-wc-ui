@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:56:38
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-16 22:08:22
+ * @LastEditTime: 2021-04-19 20:17:57
  * @FilePath: /packages/ok-employee-select/ok-employee-modal.ts
  */
 
@@ -11,7 +11,7 @@ import { Breadcrumb, Button, Input, Modal } from 'ant-design-vue'
 import { defineComponent, html, onMounted, PropType } from 'ok-lit'
 import { createApp } from 'vue'
 
-import CDN_PATH from '../path.config'
+import { CDN_PATH, COMMON_CSS_PATH } from '../path.config'
 import useModalHandle from './hook-modal'
 defineComponent(
   'ok-employee-modal',
@@ -229,7 +229,7 @@ defineComponent(
 
     return () => html`
       <link rel="stylesheet" .href="${CDN_PATH}antd.min.css" />
-      <link rel="stylesheet" .href="${CDN_PATH}common.css" />
+      <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
       <div ref="showEmployeeModal" class="ok-employee-modal"></div>
     `
   }

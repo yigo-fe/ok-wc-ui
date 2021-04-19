@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-19 01:13:31
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-27 17:22:10
+ * @LastEditTime: 2021-04-19 21:21:26
  * @FilePath: /packages/ok-accessory/ok-upload-image/upload-image-hook.ts
  */
 
@@ -61,6 +61,7 @@ export default function (props, context) {
   // getDefaultFileList(a)
 
   const config = {
+    type: 'image',
     action: '/v1/private/attachment/uploadImages',
     remove: remove,
     getDefaultFileList: getDefaultFileList,

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-02-20 19:58:14
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-12 17:09:05
+ * @LastEditTime: 2021-04-19 20:08:05
  * @FilePath: /packages/path.config.ts
  */
 const CDN_PATH =
@@ -11,4 +11,6 @@ const CDN_PATH =
     ? './'
     : 'https://ego-fe.oss-cn-beijing.aliyuncs.com/lib/ok-wc-ui/'
 
-export default CDN_PATH
+const COMMON_CSS_PATH = `${CDN_PATH}common.css`
+
+export { CDN_PATH, COMMON_CSS_PATH }

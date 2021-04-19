@@ -3,14 +3,14 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:03:32
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-16 22:07:17
+ * @LastEditTime: 2021-04-19 20:10:03
  * @FilePath: /packages/ok-department-select/ok-department-modal.ts
  */
 import { Button, Checkbox, Input, Modal, Tree } from 'ant-design-vue'
 import { defineComponent, html, onMounted, PropType } from 'ok-lit'
 import { createApp } from 'vue'
 
-import CDN_PATH from '../path.config'
+import { CDN_PATH } from '../path.config'
 import useDepartmentModal from './hook-modal'
 import okDepartmentInputCss from './style/ok-department-input.less'
 defineComponent(

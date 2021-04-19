@@ -350,6 +350,30 @@ h3{
 }
 
 
+/* 文件删除， 二次确认 */
+.file-delete-confirm.ant-modal-confirm .ant-modal-content {
+  border-radius: 4px;
+}
+.file-delete-confirm.ant-modal-confirm .ant-modal-confirm-btns button+button {
+  margin-left: 12px;
+}
+.file-delete-confirm.ant-modal-confirm .ant-modal-confirm-btns .ant-btn:first-child {
+  border: 1px solid #CCCCCC;
+}
+.file-delete-confirm.ant-modal-confirm .ant-modal-confirm-btns .ant-btn:first-child:hover {
+  color: #618FFD;
+  border-color: #618FFD;
+}
+
+.file-delete-confirm.ant-modal-confirm .ant-modal-confirm-btns .ant-btn-primary {
+  background: #4C78FC;
+  border-color: #4c78fc;
+} 
+.file-delete-confirm.ant-modal-confirm .ant-modal-confirm-btns .ant-btn-primary:hover {
+  background: #618FFD;
+}
+
+
 /* 人员选择modal样式 */
 .ok-employee-tree-modal .ant-modal-header {
   padding: 14px 24px;

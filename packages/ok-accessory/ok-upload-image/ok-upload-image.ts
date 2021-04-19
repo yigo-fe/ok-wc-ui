@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-16 20:45:28
+ * @LastEditTime: 2021-04-19 20:15:57
  * @FilePath: /packages/ok-accessory/ok-upload-image/ok-upload-image.ts
  */
 
@@ -35,9 +35,10 @@
  */
 
 import { classMap } from 'lit-html/directives/class-map.js'
+import { styleMap } from 'lit-html/directives/style-map'
 import { defineComponent, html, PropType } from 'ok-lit'
 
-import CDN_PATH from '../../path.config'
+import { COMMON_CSS_PATH } from '../../path.config'
 // import okUploadImgCss from '../style/ok-upload-image.less'
 import { UploadProps } from '../upload.props'
 import useImageHandle from './upload-image-hook'
@@ -52,6 +53,9 @@ defineComponent(
     limit: {
       type: (Number as unknown) as PropType<number>,
       default: 10,
+    },
+    imageStyle: {
+      type: (Object as unknown) as PropType<{}>,
     },
   },
   (props, context) => {
@@ -135,7 +139,7 @@ defineComponent(
     }
 
     return () => html`
-      <link rel="stylesheet" .href="${CDN_PATH}common.css" />
+      <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
       <ok-file-image
         class="ok-file-image-list"
         @preview=${handlePreview}
@@ -143,6 +147,7 @@ defineComponent(
         @download=${handleDownload}
         @abort=${handleAbort}
         @remove=${handleRemoveFileList}
+        style=${styleMap(props.imageStyle)}
         .fileList=${fileLists.value}
         .listType=${props.listType}
         .showPreview=${showPreview.value}

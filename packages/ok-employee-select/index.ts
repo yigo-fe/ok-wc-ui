@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-19 16:06:09
+ * @LastEditTime: 2021-04-19 20:17:43
  * @FilePath: /packages/ok-employee-select/index.ts
  */
 
@@ -14,7 +14,7 @@ import { Select } from 'ant-design-vue'
 import { defineComponent, html, onMounted } from 'ok-lit'
 import { createApp, ref } from 'vue'
 
-import CDN_PATH from '../path.config'
+import { CDN_PATH, COMMON_CSS_PATH } from '../path.config'
 import { propsOptions } from './employee-props'
 import useEmployeeSelect from './hook'
 defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
@@ -138,7 +138,7 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
 
   return () => html`
     <link rel="stylesheet" .href="${CDN_PATH}antd.min.css" />
-    <link rel="stylesheet" .href="${CDN_PATH}common.css" />
+    <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
 
     <div ref="showEmployeeSelect" class="ok-employee-select-wraper"></div>
   `

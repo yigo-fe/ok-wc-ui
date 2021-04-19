@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-10 14:22:53
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-16 20:37:25
+ * @LastEditTime: 2021-04-19 20:14:31
  * @FilePath: /packages/ok-accessory/ok-file-icon.ts
  */
 import { computed, defineComponent, html, onMounted, PropType } from 'ok-lit'
@@ -36,7 +36,7 @@ import video from '../assets/file-icon/icon_file-video_colorful.svg'
 import word from '../assets/file-icon/icon_file-word_colorful.svg'
 import zip from '../assets/file-icon/icon_file-zip_colorful.svg'
 // import okFileIconCss from './style/ok-file-icon.less'
-import CDN_PATH from '../path.config'
+import { COMMON_CSS_PATH } from '../path.config'
 defineComponent(
   'ok-file-icon',
   {
@@ -168,7 +168,7 @@ defineComponent(
     })
 
     return () => html`
-      <link rel="stylesheet" .href="${CDN_PATH}common.css" />
+      <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
       <span ref="showFileIcon" class="ok-file-icon ok-file-icon-root"></div>
     `
   }

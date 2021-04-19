@@ -3,14 +3,14 @@
  * @Author: 付静
  * @Date: 2021-02-18 16:01:20
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-16 18:56:13
+ * @LastEditTime: 2021-04-19 20:13:34
  * @FilePath: /packages/ok-avatar/index.ts
  */
 
 import { defineComponent, html, onMounted } from 'ok-lit'
 import { createApp } from 'vue'
 
-import CDN_PATH from '../path.config'
+import { COMMON_CSS_PATH } from '../path.config'
 import useAvatarHandler from './hook'
 import props from './props'
 defineComponent(
@@ -43,7 +43,7 @@ defineComponent(
     })
 
     return () => html`
-      <link rel="stylesheet" .href="${CDN_PATH}common.css" />
+      <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
       <div ref="showUser" class="ok-avatar ok-avatar-root"></div>
     `
   }

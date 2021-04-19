@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-19 01:13:31
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-16 21:03:25
+ * @LastEditTime: 2021-04-19 21:20:59
  * @FilePath: /packages/ok-accessory/ok-upload-drag/upload-attachment-hook.ts
  */
 
@@ -60,6 +60,7 @@ export default function (props, context) {
   // getDefaultFileList(a)
 
   const config = {
+    type: 'attachment',
     action: '/v1/private/attachment/uploadAttachments',
     remove: remove,
     getDefaultFileList: getDefaultFileList,

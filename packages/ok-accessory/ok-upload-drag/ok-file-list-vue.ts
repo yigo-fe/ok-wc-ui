@@ -3,14 +3,14 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-09 10:59:23
+ * @LastEditTime: 2021-04-19 20:14:47
  * @FilePath: /packages/ok-accessory/ok-upload-drag/ok-file-list-vue.ts
  */
 
 import { computed, defineComponent, html, onMounted, PropType } from 'ok-lit'
 import { createApp } from 'vue'
 
-import CDN_PATH from '../../path.config'
+import { COMMON_CSS_PATH } from '../../path.config'
 import fileIcon from '../assets/images/file.svg'
 import type { ListType, UploadFile } from '../upload.type'
 import okUploadListCss from './style/ok-file-list.less'
@@ -161,7 +161,7 @@ defineComponent(
       <style>
         ${okUploadListCss}
       </style>
-      <link rel="stylesheet" .href="${CDN_PATH}common.css" />
+      <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
       <ul
         ref="okFileList"
         class="ok-file-list ok-file-list--${props.listType} ${props.disabled

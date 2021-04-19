@@ -11,7 +11,7 @@ import { computed, defineComponent, html, onMounted, PropType } from 'ok-lit'
 import { createApp } from 'vue'
 
 import close from '../assets/images/closed.svg'
-import CDN_PATH from '../path.config'
+import { CDN_PATH } from '../path.config'
 defineComponent(
   'ok-department-more',
   {

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-12 12:05:40
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-16 22:17:21
+ * @LastEditTime: 2021-04-19 20:10:21
  * @FilePath: /packages/ok-employee-select/ok-employee-more.ts
  */
 import { Popover } from 'ant-design-vue'
@@ -11,7 +11,7 @@ import { computed, defineComponent, html, onMounted, PropType } from 'ok-lit'
 import { createApp } from 'vue'
 
 import close from '../assets/images/closed.svg'
-import CDN_PATH from '../path.config'
+import { CDN_PATH } from '../path.config'
 defineComponent(
   'ok-employee-more',
   {

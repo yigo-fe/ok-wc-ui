@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-09 11:10:25
+ * @LastEditTime: 2021-04-19 20:15:34
  * @FilePath: /packages/ok-accessory/ok-upload-drag/ok-upload-drag.ts
  */
 
@@ -40,7 +40,7 @@ import { defineComponent, html } from 'ok-lit'
 import { ref } from 'vue'
 
 import { okPrimaryColor, okUploadColor } from '../../assets/theme'
-import CDN_PATH from '../../path.config'
+import { COMMON_CSS_PATH } from '../../path.config'
 import okUploadCss from '../style/upload.less'
 import { UploadProps } from '../upload.props'
 import useAttachmentHandle from './upload-attachment-hook'
@@ -179,7 +179,7 @@ defineComponent(
       <style>
         ${okUploadCss}
       </style>
-      <link rel="stylesheet" .href="${CDN_PATH}common.css" />
+      <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
       ${renderUploader()}
       <ok-file-list
         @preview=${handlePreview}

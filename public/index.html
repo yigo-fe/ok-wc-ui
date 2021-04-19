@@ -257,7 +257,7 @@
       const okUploadImg = document.querySelector('ok-upload-image')
       // okUploadImg.action = actionImg
       okUploadImg.multiple = true
-      // okUploadImg.limit = 3
+      okUploadImg.limit = 3
       okUploadImg.noBorder = true
       okUploadImg.onExceed = ()=>{
         console.log('图片超出了')
@@ -267,6 +267,13 @@
         width: '150px',
         height: '150px'
       }
+
+      okUploadImg.imageStyle = {
+        display: 'block'
+      }
+
+      
+
       // okUploadImg.disabled = true
       // okUploadImg.operation = ['remove']
       // okUploadImg.hideUploader = true

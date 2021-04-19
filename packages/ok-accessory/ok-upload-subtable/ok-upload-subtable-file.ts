@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-09 11:24:03
+ * @LastEditTime: 2021-04-19 20:16:21
  * @FilePath: /packages/ok-accessory/ok-upload-subtable/ok-upload-subtable-file.ts
  */
 
@@ -37,7 +37,7 @@
 import { classMap } from 'lit-html/directives/class-map.js'
 import { defineComponent, html, PropType } from 'ok-lit'
 
-import CDN_PATH from '../../path.config'
+import { COMMON_CSS_PATH } from '../../path.config'
 import useAttachmentHandle from '../ok-upload-drag/upload-attachment-hook'
 import okUploadCss from '../style/upload.less'
 import { UploadProps } from '../upload.props'
@@ -138,7 +138,7 @@ defineComponent(
       <style>
         ${okUploadCss}
       </style>
-      <link rel="stylesheet" .href="${CDN_PATH}common.css" />
+      <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
       <ok-file-list
         @preview=${handlePreview}
         @delete=${handleDetele}
@@ -151,6 +151,7 @@ defineComponent(
         .showDownload=${showDownload.value}
         .showRemove=${showRemove.value}
         .maxHeight=${props.maxHeight}
+        .subtable=${true}
       ></ok-file-list>
       ${renderUploader()}
     `

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-02-25 23:50:52
  * @LastEditors: 付静
- * @LastEditTime: 2021-02-26 10:24:27
+ * @LastEditTime: 2021-04-19 20:14:16
  * @FilePath: /document.md
 -->
 # ok-wc-ui开发手册
@@ -59,7 +59,7 @@ packages/index.ts
 
     ```
 
-    import CDN_PATH from '../path.config'
+    import { COMMON_CSS_PATH } from '../path.config'
 
     import { defineComponent, html, PropType } from 'ok-lit'
 
@@ -72,7 +72,7 @@ packages/index.ts
       },
       props => {
         return () => html`
-          <link rel="stylesheet" .href="${CDN_PATH}common.css" />
+          <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
 
           <div class="test-common">${props.msg}</div>
 

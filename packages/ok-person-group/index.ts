@@ -2,7 +2,7 @@ import { SIZE_TYPE } from '@c/enum'
 import { setPopover } from '@c/utils'
 import { computed, defineComponent, effect, html, PropType } from 'ok-lit'
 
-import CDN_PATH from '../path.config'
+import { COMMON_CSS_PATH } from '../path.config'
 
 /**
  * @props persons: {Array<Person>} 用户信息组
@@ -131,7 +131,7 @@ defineComponent(
     // ${avatarRender()} ${props.personList.length > 1 ? popperRender() : ''}
 
     return () => html`
-      <link rel="stylesheet" .href="${CDN_PATH}common.css" />
+      <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
       <div class="ok-person-group ok-person-group-root">
         <div class="ok-person-group-wrap">
           ${avatarRender()} ${popperRender()}
