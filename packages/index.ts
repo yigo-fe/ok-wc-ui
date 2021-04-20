@@ -22,5 +22,7 @@ import './ok-accessory/ok-file-icon'
 import './ok-employee-select'
 // 部门选择
 import './ok-department-select'
+// 模态窗
+import './ok-drawer'
 
 // import './ok-tooltip'

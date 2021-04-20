@@ -238,11 +238,11 @@ h3{
 }
 .ok-file-image-list {
   font-size: 0;
-  vertical-align: middle;
+  vertical-align: top;
 }
 .ok-upload-image {
   display: inline-block;
-  vertical-align: middle;
+  vertical-align: top;
 }
 .ok-upload-image .ok-upload-image-inner {
   width: 100px;
@@ -705,3 +705,32 @@ h3{
     max-height: 400px;
     overflow: auto;
   }
+
+  /* drawer */
+  .ok-drawer-wrap.ant-drawer .ant-drawer-mask {
+    background-color: rgba(0,0,0,.6);
+  }
+  .ok-drawer-wrap.ant-drawer .ant-drawer-content {
+    overflow: visible;
+    background-color: transparent;
+  }
+  .ok-drawer-wrap.ant-drawer .ant-drawer-wrapper-body {
+    border-radius: 10px 10px 0 0;
+    background-color: #fff;
+  }
+  .ok-drawer-wrap.ant-drawer .ant-drawer-body{
+    height: 100%;
+    padding: 0;
+    
+  }
+  .ok-drawer-wrap.ant-drawer .ok-drawer-content {
+    height: 100%;
+  }
+
+  .ok-drawer-wrap.ant-drawer .drawer-close-icon {
+    position: absolute;
+    top: -31px;
+    right: 24px;
+    cursor: pointer;
+  }
+

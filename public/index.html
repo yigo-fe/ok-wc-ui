@@ -41,7 +41,10 @@
       <div class="divider">
         <button onclick="testClick()">test</button>
         <button onclick="testClick2()">test2</button>
+        <button onclick="testClick3()">drawer</button>
       </div>
+
+      
 
       <h3>部门选择 input </h3>
       <ok-department-select class="divider ok-department-input" placeholder="请选择部门" style="width: 200px;display: block;"></ok-department-select>
@@ -122,7 +125,10 @@
       <!-- <h3>button</h3> -->
       <!-- <ok-button></ok-button> -->
 
-      
+      <!-- <ok-drawer>这里是drawer的slot啊</ok-drawer> -->
+      <ok-drawer>
+        <iframe src="https://check.baiteda.com/apps/desktop/approval/app_lssw3n21jb/c0c41772-5f5b-404f-b2dc-05dd4dd067e5" frameborder="0" width="100%" height="100%"></iframe>
+      </ok-drawer>
     </main>
   </div>
   <!-- <script type="module" src="../dist/ok-wc-ui.umd.js"></script> -->
@@ -257,20 +263,20 @@
       const okUploadImg = document.querySelector('ok-upload-image')
       // okUploadImg.action = actionImg
       okUploadImg.multiple = true
-      okUploadImg.limit = 3
+      // okUploadImg.limit = 3
       okUploadImg.noBorder = true
       okUploadImg.onExceed = ()=>{
         console.log('图片超出了')
       }
       // okUploadImg.disabled = true
-      okUploadImg.thumbStyle = {
-        width: '150px',
-        height: '150px'
-      }
+      // okUploadImg.thumbStyle = {
+      //   width: '150px',
+      //   height: '150px'
+      // }
 
-      okUploadImg.imageStyle = {
-        display: 'block'
-      }
+      // okUploadImg.imageStyle = {
+      //   display: 'block'
+      // }
 
       
 
@@ -364,6 +370,10 @@
       // }, 1000)
 
 
+      const okDrawer = document.querySelector('ok-drawer')
+      // okDrawer.destroyOnClose = true
+
+
     }
 
     function testClick (){
@@ -406,6 +416,16 @@
 
       const okDeptInput = document.querySelector('.ok-department-input')
       okDeptInput.value = []
+
+    }
+
+
+    function testClick3 (){
+      const okDrawer = document.querySelector('ok-drawer')
+      okDrawer.visible = true
+      okDrawer.close = ()=>{
+        okDrawer.visible = false
+      }
 
     }
 
