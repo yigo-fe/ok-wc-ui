@@ -243,6 +243,7 @@ h3{
 .ok-upload-image {
   display: inline-block;
   vertical-align: top;
+  margin-top: 8px;
 }
 .ok-upload-image .ok-upload-image-inner {
   width: 100px;
@@ -298,7 +299,7 @@ h3{
   color: #666;
   position: relative;
   margin-right: 8px;
-  margin-bottom: 8px;
+  margin-top: 8px;
 }
 .ok-upload-list-image .ok-upload-list__item-thumbnail {
   width: 100%;
