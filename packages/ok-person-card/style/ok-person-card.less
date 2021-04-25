@@ -91,6 +91,9 @@ overflow: hidden;
 white-space: nowrap;
 text-overflow: ellipsis;
 }
+.person-card-name.isTerminated {
+  max-width: calc(100% - 74px);
+}
 
 .user-name-wraper {
   position: absolute;
@@ -108,6 +111,15 @@ text-overflow: ellipsis;
   display: flex;
   align-items: center;
   height: 24px;
+}
+.terminated-text {
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: normal;
+  padding: 3px;
+  border-radius: 4px;
+  background-color:  rgba(14, 14, 14, 0.5);
+  margin-left: auto;
 }
 
 .gender-icon {
@@ -152,8 +164,11 @@ text-overflow: ellipsis;
   color: #8F959E;
 }
 .item-row>.item-content{
+  display: inline-block;
   color: #1F2329;
-  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 p {
   margin: 0;

@@ -1,3 +1,4 @@
+import dingtalk from '../assets/images/dingtalk.svg'
 import kim from '../assets/images/kim.svg'
 import wechat from '../assets/images/wechat.svg'
 const setLang = function (i18n = 'zh', msgRelationType = 'NONE') {
@@ -19,7 +20,7 @@ const setLang = function (i18n = 'zh', msgRelationType = 'NONE') {
       zh: '钉钉',
       en: 'DingTalk',
       ja: 'DingTalk',
-      icon: '',
+      icon: dingtalk,
     },
     JD: {
       zh: 'ME',

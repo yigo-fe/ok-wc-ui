@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-03 17:28:13
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-08 14:57:32
+ * @LastEditTime: 2021-04-25 17:22:06
  * @FilePath: /packages/ok-person-card/hook.ts
  */
 import { computed, effect } from 'ok-lit'
@@ -12,7 +12,7 @@ import { ref } from 'vue'
 import setLang from './lang'
 
 export default function (props) {
-  const personInfoCom = ref({})
+  const personInfoCom: any = ref({})
   const relationType = computed(
     () => props.personInfo?.msg_relation_type || props.msgRelationType
   )
@@ -25,6 +25,21 @@ export default function (props) {
   // 是否展示发送消息按钮
   const showSendBtn = computed(() => {
     return !props.hideLark && validMsgType.value && props.isAwaken
+  })
+
+  const deptText = computed(() => {
+    if (props.deptList?.length) {
+      return props.deptList.map(
+        (v: any) =>
+          `${v.dept_name_path.replace(/@/g, '/')}${
+            v.main_dept_flag === '1' ? ' (主)' : ''
+          }`
+      )
+    } else {
+      return props.personInfo.department_name
+        ? [props.personInfo.department_name]
+        : ''
+    }
   })
 
   const langPack = ref({
@@ -49,6 +64,7 @@ export default function (props) {
       case 'JD':
         break
       case 'DD':
+        location.href = `dingtalk://www.dingtalk.com`
         break
       case 'LARK':
         location.href = `lark://applink.feishu.cn/client/chat/open?openId=${props.toOpenId}`
@@ -100,6 +116,7 @@ export default function (props) {
       leaderEid: obj.leader_eid,
       terminated: obj.terminated,
       gender: obj.gender,
+      status_type: obj.status_type,
     }
   }
 
@@ -122,6 +139,7 @@ export default function (props) {
 
   return {
     textStyle,
+    deptText,
     openApp,
     showTeam,
     validMsgType,

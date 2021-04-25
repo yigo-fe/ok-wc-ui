@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 11:33:25
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-08 13:46:45
+ * @LastEditTime: 2021-04-25 17:06:48
  * @FilePath: /packages/ok-person-card/props.ts
  */
 const props = {
@@ -76,6 +76,9 @@ const props = {
   },
   isAwaken: {
     type: Boolean,
+  },
+  deptList: {
+    type: Array,
   },
 }
 

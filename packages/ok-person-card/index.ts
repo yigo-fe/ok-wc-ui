@@ -1,5 +1,6 @@
 // import { Person } from '@c/ok-wc-ui.d'
 
+import { Tooltip } from 'ant-design-vue'
 import { defineComponent, html, onMounted } from 'ok-lit'
 import { createApp, ref } from 'vue'
 
@@ -24,9 +25,11 @@ defineComponent('ok-person-card', { ...props }, (props, context) => {
           langPack,
           personInfoCom,
           showSendBtn,
+          deptText,
         } = usePersonCardHandle(props)
 
         return {
+          deptText,
           personInfoCom,
           textStyle,
           openApp,
@@ -52,9 +55,10 @@ defineComponent('ok-person-card', { ...props }, (props, context) => {
               showMask
             ></ok-avatar>
             <span class="user-name-wraper">
-              <span class="person-card-name">{{personInfoCom['name'][i18n]}}</span>
+              <span class="person-card-name" :class="{'isTerminated': personInfoCom.status_type === '0'}">{{personInfoCom['name'][i18n]}}</span>
               <img v-if="personInfoCom.gender ==2" :src="femaleIcon" class="gender-icon" />
               <img v-else :src="maleIcon" class="gender-icon" />
+              <span v-if="personInfoCom.status_type === '0'" class="terminated-text">已停用</span>
             </span>
           </header>
 
@@ -62,11 +66,26 @@ defineComponent('ok-person-card', { ...props }, (props, context) => {
             <div class="content-wraper">
               <div v-if="!personInfoCom.terminated && showTeam" class="item-row">
                   <span class="item-label">{{langPack.team}}：</span>
-                  <p class="item-content">{{ personInfoCom.department_name || '--'}}</p>
+                  <p v-if="!deptText?.length" class="item-content"> -- </p>
+                  <a-tooltip v-else :overlayStyle="{'z-index': 9999}">
+                    <template #title>
+                      <ul>
+                        <li style='font-size: 12px; line-height:18px;' v-for="dept in deptText"> {{dept}}</li>              
+                      </ul>
+                    </template>
+                    <p class="item-content">{{ deptText.join(' ') || '--'}}</p>
+                  </a-tooltip>
+                  
               </div>
               <div class="item-row">
                   <span class="item-label">{{langPack.email}}：</span>
-                  <p class="item-content">{{ personInfoCom.email || '--'}}</p>
+                  <p v-if="!personInfoCom.email" class="item-content"> -- </p>
+                  <a-tooltip v-else :overlayStyle="{'z-index': 9999}">
+                    <template #title>
+                      <span style='font-size: 12px; line-height:18px;'>{{personInfoCom.email}}</span>
+                    </template>
+                    <p class="item-content">{{ personInfoCom.email || '--'}}</p>
+                  </a-tooltip>
               </div>
             </div>
             <slot name="footer-button">
@@ -82,6 +101,7 @@ defineComponent('ok-person-card', { ...props }, (props, context) => {
         `,
     }
     const app = createApp(options)
+    app.use(Tooltip)
     app.mount(context.$refs.showPersonCard as HTMLElement)
   })
 
