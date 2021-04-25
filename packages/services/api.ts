@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 16:58:26
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-23 17:34:42
+ * @LastEditTime: 2021-04-21 10:01:41
  * @FilePath: /packages/services/api.ts
  */
 
@@ -19,6 +19,9 @@ declare global {
       apiPath: string
       sourceHost: string
       basePath: string
+      options?: {
+        preview?: boolean
+      }
     }
   }
 }

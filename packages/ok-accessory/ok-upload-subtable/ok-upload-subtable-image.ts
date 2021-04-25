@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-19 20:16:35
+ * @LastEditTime: 2021-04-23 11:40:35
  * @FilePath: /packages/ok-accessory/ok-upload-subtable/ok-upload-subtable-image.ts
  */
 
@@ -70,6 +70,7 @@ defineComponent(
       handleDetele,
       handleDownload,
       handleAbort,
+      handleRemoveFileList,
     } = useImageHandle(props, context)
 
     /**
@@ -147,6 +148,7 @@ defineComponent(
         @delete=${handleDetele}
         @download=${handleDownload}
         @abort=${handleAbort}
+        @remove=${handleRemoveFileList}
         .fileList=${fileLists.value}
         .listType=${props.listType}
         .showPreview=${showPreview.value}

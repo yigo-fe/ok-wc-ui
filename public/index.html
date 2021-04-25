@@ -41,7 +41,7 @@
       <div class="divider">
         <button onclick="testClick()">test</button>
         <button onclick="testClick2()">test2</button>
-        <button onclick="testClick3()">drawer</button>
+        <!-- <button onclick="testClick3()">drawer</button> -->
       </div>
 
       
@@ -126,9 +126,9 @@
       <!-- <ok-button></ok-button> -->
 
       <!-- <ok-drawer>这里是drawer的slot啊</ok-drawer> -->
-      <ok-drawer>
+      <!-- <ok-drawer>
         <iframe src="https://check.baiteda.com/apps/desktop/approval/app_lssw3n21jb/c0c41772-5f5b-404f-b2dc-05dd4dd067e5" frameborder="0" width="100%" height="100%"></iframe>
-      </ok-drawer>
+      </ok-drawer> -->
     </main>
   </div>
   <!-- <script type="module" src="../dist/ok-wc-ui.umd.js"></script> -->
@@ -197,6 +197,8 @@
 
 
     window.onload = ()=>{
+
+      // window.okuiConfig.options.preview = true
       const okAvatar = document.querySelector('ok-avatar')
       okAvatar.personInfo = personInfo
 
@@ -229,20 +231,24 @@
       // okUploadSubtable.data = uploadData
       okUploadSubtable.multiple = true
       // okUploadSubtable.disabled = true
-      // okUploadSubtable.operation = ['download']
-      // okUploadSubtable.hideUploader = true
+      okUploadSubtable.operation = []
+      okUploadSubtable.hideUploader = true
+      okUploadSubtable.fileList = ['4f48e4389ae229fa5e8eb88dd1efee7b', '5cb3d50074108e6263d97df9007c9853']
       okUploadSubtable.update = (data)=>{
         console.log('file', data)
       }
 
       const okUploadSubtableImage = document.querySelector('.ok-upload-subtable-image')
-      // okUploadSubtable.action = action
-      // okUploadSubtable.data = uploadData
+      // okUploadSubtableImage.action = action
+      // okUploadSubtableImage.data = uploadData
       okUploadSubtableImage.multiple = true
       okUploadSubtableImage.type = 'image'
-      // okUploadSubtable.disabled = true
-      // okUploadSubtable.operation = ['download']
-      // okUploadSubtable.hideUploader = true
+      okUploadSubtableImage.disabled = true
+      // okUploadSubtableImage.operation = []
+      okUploadSubtableImage.hideUploader = true
+      okUploadSubtableImage.fileList = ['4f48e4389ae229fa5e8eb88dd1efee7b', '5cb3d50074108e6263d97df9007c9853']
+      // 4f48e4389ae229fa5e8eb88dd1efee7b
+      // 5cb3d50074108e6263d97df9007c9853
       okUploadSubtableImage.update = (data)=>{
         console.log('image', data)
       }
@@ -370,7 +376,7 @@
       // }, 1000)
 
 
-      const okDrawer = document.querySelector('ok-drawer')
+      // const okDrawer = document.querySelector('ok-drawer')
       // okDrawer.destroyOnClose = true
 
 
@@ -421,11 +427,11 @@
 
 
     function testClick3 (){
-      const okDrawer = document.querySelector('ok-drawer')
-      okDrawer.visible = true
-      okDrawer.close = ()=>{
-        okDrawer.visible = false
-      }
+      // const okDrawer = document.querySelector('ok-drawer')
+      // okDrawer.visible = true
+      // okDrawer.close = ()=>{
+      //   okDrawer.visible = false
+      // }
 
     }
 

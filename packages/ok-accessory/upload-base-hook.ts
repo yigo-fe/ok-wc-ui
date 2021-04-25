@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-19 21:23:31
+ * @LastEditTime: 2021-04-23 11:40:48
  * @FilePath: /packages/ok-accessory/upload-base-hook.ts
  */
 
@@ -34,7 +34,7 @@
  *
  */
 
-import { Modal } from 'ant-design-vue'
+import { message, Modal } from 'ant-design-vue'
 import { computed } from 'ok-lit'
 import { h, reactive, ref, watch } from 'vue'
 
@@ -70,6 +70,11 @@ export default function (props, context, config) {
    * @param files 本次要上传的文件
    */
   const uploadFiles = (files: FileList) => {
+    // 特殊处理：预览时不调上传接口
+    if (window.okuiConfig?.options?.preview) {
+      message.error('预览状态下，无法上传')
+      return
+    }
     if (
       props.limit &&
       Number(fileLists.value.length + files.length) > Number(props.limit)
