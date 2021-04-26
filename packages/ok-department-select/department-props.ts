@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:02:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-30 11:36:46
+ * @LastEditTime: 2021-04-26 16:09:29
  * @FilePath: /packages/ok-department-select/department-props.ts
  */
 import { PropType } from 'ok-lit'
@@ -40,6 +40,15 @@ const propsOptions = {
   level: {
     type: (String as unknown) as PropType<string>,
     default: '1',
+  },
+  dropdownstyle: {
+    type: (Object as unknown) as PropType<object>,
+  },
+  getPopupContainer: {
+    type: (Function as unknown) as PropType<
+      // eslint-disable-next-line no-unused-vars
+      (triggerNode: any) => void
+    >,
   },
   update: {
     type: (Function as unknown) as PropType<

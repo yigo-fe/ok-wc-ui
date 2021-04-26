@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 20:15:04
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-08 21:24:15
+ * @LastEditTime: 2021-04-26 16:09:58
  * @FilePath: /packages/ok-department-select/hook.ts
  */
 import { debounce } from 'lodash'
@@ -32,6 +32,12 @@ export default function (props: any, context: any) {
   const displayLevel = computed(() => props.level)
   // 无边框
   const borderless = computed(() => props.borderless)
+  // dropdownStyle
+  const dropdownstyle = computed(() => props.dropdownstyle)
+  // 下拉框append元素
+  const getPopupContainer = computed(
+    () => props.getPopupContainer || (() => document.body)
+  )
 
   // 最多展示的tag数量
   const maxTagCount = ref(1)
@@ -339,6 +345,8 @@ export default function (props: any, context: any) {
     visible,
     loading,
     mode,
+    dropdownstyle,
+    getPopupContainer,
     getExceed,
     setOpen,
     closeOpen,

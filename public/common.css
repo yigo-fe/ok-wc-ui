@@ -216,6 +216,12 @@ h3{
 .ok-department-select-root .ok-department-select {
   width: 100%;
 }
+
+.ok-department-select-root .ok-department-select .ant-select-selection-item-content {
+  font-size: 14px;
+  font-weight: 400;
+  color: #1F2329;
+}
 .ok-department-select-root .head-search-icon,
 .ok-department-select-root .head-clear-icon {
   width: 16px;
@@ -534,7 +540,9 @@ h3{
 
 /* poper 样式 */
 /* .ok-employee */
-
+.ok-employee-more .ant-popover {
+  z-index: 6000;
+}
 .ok-employee-more .more-content {
   display: flex;
   flex-wrap: wrap;
@@ -581,7 +589,9 @@ h3{
 
 
 /* dropdown 样式 */
-
+.userSelectDropdown .ant-select-dropdown {
+  z-index: 5500;
+}
 .userSelectDropdown	.selected-head {
 		display: none;
 }
@@ -636,7 +646,7 @@ h3{
   .ant-select-selection-item .selected-option{display:none}
   .ant-select-selection-item .selected-head{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}
   .ant-select-selection-item .user-img__avatar__head{width:20px;height:20px;font-size:0}
-  .ant-select-selection-item .selected-head-name-head{display:inline-block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;max-width:50px;margin-left:6px;font-size:12px;font-weight:400}
+  .ant-select-selection-item .selected-head-name-head{display:inline-block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;max-width:50px;margin-left:6px;font-size:14px;font-weight:400; color: #1F2329}
   .head-clear-icon,.head-search-icon{width:16px;height:16px}
   .ok-employee-select .ant-select-arrow{pointer-events:auto;top:44%;right:14px}
   .ok-employee-select.ant-select-focused:not(.ant-select-disabled).ant-select-multiple .ant-select-selector{border-color:#4c78fc;-webkit-box-shadow:none;box-shadow:none}

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 15:16:57
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-19 16:10:09
+ * @LastEditTime: 2021-04-26 16:09:04
  * @FilePath: /packages/ok-employee-select/hook.ts
  */
 import { debounce } from 'lodash'
@@ -39,6 +39,12 @@ export default function (props: any, context: any) {
   const mode = computed(() => props.mode)
   // 多选时选中某项是否收起下拉菜单
   const hideMenuOnMultiple = computed(() => props.hideMenuOnMultiple)
+  // 下拉框样式
+  const dropdownstyle = computed(() => props.dropdownstyle)
+  // 下拉框append元素
+  const getPopupContainer = computed(
+    () => props.getPopupContainer || (() => document.body)
+  )
 
   // modal 展示与否
   const visible = ref(false)
@@ -360,6 +366,8 @@ export default function (props: any, context: any) {
     loading,
     mode,
     hideMenuOnMultiple,
+    dropdownstyle,
+    getPopupContainer,
     getExceed,
     handleInputClick,
     closeOpen,

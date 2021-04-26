@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-20 14:56:24
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-08 18:30:05
+ * @LastEditTime: 2021-04-26 15:52:53
  * @FilePath: /packages/ok-employee-select/employee-props.ts
  */
 
@@ -44,6 +44,15 @@ const propsOptions = {
   hideMenuOnMultiple: {
     type: (Boolean as unknown) as PropType<boolean>,
     default: false,
+  },
+  dropdownstyle: {
+    type: (Object as unknown) as PropType<object>,
+  },
+  getPopupContainer: {
+    type: (Function as unknown) as PropType<
+      // eslint-disable-next-line no-unused-vars
+      (triggerNode: any) => void
+    >,
   },
   update: {
     type: (Function as unknown) as PropType<

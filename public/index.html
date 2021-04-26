@@ -344,8 +344,13 @@
 
 
       const okEmployeeInput = document.querySelector('.ok-employee-input')
-      okEmployeeInput.value = ["FuJing"]
+      okEmployeeInput.value = ["LiTao"]
       // okEmployeeInput.value = []
+      okEmployeeInput.dropdownstyle = {'z-index': 6000}
+      okEmployeeInput.getPopupContainer = (triggerNode)=>{
+        console.log('getPopupContainer', triggerNode)
+        return triggerNode.parentNode
+      }
       // okEmployeeInput.multiple = true
       // okEmployeeInput.borderless = true
       // okEmployeeInput.disabled = true
@@ -354,6 +359,8 @@
         console.log('update-index',val,list)
         // okEmployeeInput.value = val
       }
+
+
 
       // const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
       // // okEmployeeInput2.value = ["FanShuai"]

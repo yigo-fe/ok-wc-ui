@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:01:15
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-19 20:17:24
+ * @LastEditTime: 2021-04-26 16:10:20
  * @FilePath: /packages/ok-department-select/index.ts
  */
 import './ok-department-modal'
@@ -32,91 +32,21 @@ defineComponent(
     onMounted(() => {
       const options = {
         setup() {
-          const {
-            testVal,
-            value,
-            options,
-            placeholder,
-            disabled,
-            multiple,
-            displayLevel,
-            closeIcon,
-            searchIcon,
-            borderless,
-            isOpen,
-            isMouseenter,
-            maxTagCount,
-            exceedList,
-            infoMap,
-            visible,
-            loading,
-            mode,
-            getExceed,
-            setOpen,
-            closeOpen,
-            mouseenter,
-            mouseleave,
-            searchDept,
-            getDepartmentsByIds,
-            collectMap,
-            clearSelected,
-            handleDelete,
-            maxTagPlaceholder,
-            handleOpenModal,
-            handleCloseModal,
-            handleInputClick,
-            dropdownVisibleChange,
-            searchByKey,
-            handleModalChange,
-          } = useDepartmentSelect(props, context)
+          const params = useDepartmentSelect(props, context)
 
           const okDepartmentSelect: any = ref(null)
           // 模拟单选
           const handleSelect = val => {
-            if (multiple.value) return
+            if (params.multiple.value) return
             // 单选时处理value
-            value.value = [val]
+            params.value.value = [val]
             // 单选收起下拉框
             okDepartmentSelect.value?.blur()
           }
           return {
             okDepartmentSelect,
-            testVal,
-            value,
-            options,
-            placeholder,
-            disabled,
-            multiple,
-            displayLevel,
-            closeIcon,
-            searchIcon,
-            borderless,
-            isOpen,
-            isMouseenter,
-            maxTagCount,
-            exceedList,
-            infoMap,
-            visible,
-            loading,
-            mode,
-            getExceed,
-            setOpen,
-            closeOpen,
-            mouseenter,
-            mouseleave,
-            searchDept,
-            getDepartmentsByIds,
-            collectMap,
-            clearSelected,
-            handleDelete,
-            maxTagPlaceholder,
-            handleOpenModal,
-            handleCloseModal,
-            handleInputClick,
-            dropdownVisibleChange,
-            searchByKey,
-            handleModalChange,
             handleSelect,
+            ...params,
           }
         },
         template: `
@@ -135,6 +65,8 @@ defineComponent(
           v-model:value="value"
           :maxTagCount="maxTagCount"
 					:maxTagPlaceholder="maxTagPlaceholder"
+          :dropdownStyle="dropdownstyle"
+          :getPopupContainer="getPopupContainer"
           @select="handleSelect"
           @search="searchByKey"
           @click="handleInputClick"

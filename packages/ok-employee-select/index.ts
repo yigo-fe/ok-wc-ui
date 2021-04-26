@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-19 20:17:43
+ * @LastEditTime: 2021-04-26 16:11:33
  * @FilePath: /packages/ok-employee-select/index.ts
  */
 
@@ -60,9 +60,11 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
             showArrow
             showSearch
             dropdownClassName="userSelectDropdown"
+            :dropdownStyle="dropdownstyle"
             style="width: 100%"
             class="ok-employee-select"
-            :class="{'no-border': borderless}"
+            :class="{'no-border': borderless}"  
+            :getPopupContainer="getPopupContainer"         
             @search="searchByKey"
             @select="handleSelect"
             @click="handleInputClick"
