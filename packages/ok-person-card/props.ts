@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 11:33:25
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-25 17:06:48
+ * @LastEditTime: 2021-04-26 18:22:45
  * @FilePath: /packages/ok-person-card/props.ts
  */
 const props = {
@@ -79,6 +79,9 @@ const props = {
   },
   deptList: {
     type: Array,
+  },
+  statusType: {
+    type: String,
   },
 }
 

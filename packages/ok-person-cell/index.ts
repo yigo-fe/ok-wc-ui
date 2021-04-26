@@ -18,9 +18,10 @@ defineComponent(
   },
   (props, contxt) => {
     const api = apiInit()
-    const toOpenId = ref('')
+    const toOpenId: any = ref('')
     const isAwaken = ref(false)
     const deptList: any = ref([])
+    const statusType: any = ref('')
 
     const checkLardShow = async (id: string) => {
       const result = await api.default.GetInfoByEmpId({ emp_id: id })
@@ -30,6 +31,7 @@ defineComponent(
         toOpenId.value = result.data.to_open_id
         isAwaken.value = Boolean(fromOpenId && toOpenId.value)
         deptList.value = result.data.dept_resp_vo_list
+        statusType.value = result.data.status_type
       }
     }
 
@@ -75,6 +77,7 @@ defineComponent(
         .toOpenId=${toOpenId.value}
         .isAwaken=${isAwaken.value}
         .deptList=${deptList.value}
+        .statusType=${statusType.value}
       ></ok-person-card>
     `
   }

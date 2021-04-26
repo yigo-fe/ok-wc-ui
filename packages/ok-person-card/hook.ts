@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-03 17:28:13
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-25 17:22:06
+ * @LastEditTime: 2021-04-26 18:24:35
  * @FilePath: /packages/ok-person-card/hook.ts
  */
 import { computed, effect } from 'ok-lit'
@@ -26,6 +26,8 @@ export default function (props) {
   const showSendBtn = computed(() => {
     return !props.hideLark && validMsgType.value && props.isAwaken
   })
+
+  const statusType = computed(() => props.statusType)
 
   const deptText = computed(() => {
     if (props.deptList?.length) {
@@ -116,7 +118,6 @@ export default function (props) {
       leaderEid: obj.leader_eid,
       terminated: obj.terminated,
       gender: obj.gender,
-      status_type: obj.status_type,
     }
   }
 
@@ -146,5 +147,6 @@ export default function (props) {
     langPack,
     personInfoCom,
     showSendBtn,
+    statusType,
   }
 }
