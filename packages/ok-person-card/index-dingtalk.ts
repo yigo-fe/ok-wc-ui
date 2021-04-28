@@ -68,11 +68,28 @@ defineComponent('ok-person-card', { ...props }, (props, context) => {
             <div class="content-wraper">
               <div v-if="!personInfoCom.terminated && showTeam" class="item-row">
                   <span class="item-label">{{langPack.team}}：</span>
-                  <p class="item-content">{{ personInfoCom.department_name || '--'}}</p>                 
+                  <p v-if="!deptText?.length" class="item-content"> -- </p>
+                  <a-tooltip v-else :overlayStyle="{'z-index': 9999}">
+                    <template #title>
+                      <ul>
+                        <li style='font-size: 12px; line-height:18px;' v-for="dept in deptText"> {{dept}}</li>              
+                      </ul>
+                    </template>
+                    <!-- 添加空div 解决Safari自动添加title的问题 -->
+                    <p class="item-content"><div></div>{{ deptText.join(' ') || '--'}}</p>
+                  </a-tooltip>
+                  
               </div>
               <div class="item-row">
                   <span class="item-label">{{langPack.email}}：</span>
-                  <p class="item-content">{{ personInfoCom.email || '--'}}</p>
+                  <p v-if="!personInfoCom.email" class="item-content"> -- </p>
+                  <a-tooltip v-else :overlayStyle="{'z-index': 9999}">
+                    <template #title>
+                      <span style='font-size: 12px; line-height:18px;'>{{personInfoCom.email}}</span>
+                    </template>
+                    <!-- 添加空div 解决Safari自动添加title的问题 -->
+                    <p class="item-content"><div></div>{{ personInfoCom.email || '--'}}</p>
+                  </a-tooltip>
               </div>
             </div>
             <slot name="footer-button">

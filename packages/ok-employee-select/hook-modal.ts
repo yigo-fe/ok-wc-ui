@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 15:19:21
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-16 22:05:32
+ * @LastEditTime: 2021-04-28 12:23:43
  * @FilePath: /packages/ok-employee-select/hook-modal.ts
  */
 import { debounce } from 'lodash'
@@ -184,15 +184,12 @@ export default function (props: any) {
    * 2. 区分单选和多选
    */
   const handleEmployeeSelect = (id: string) => {
-    console.log(id)
     // 区分单选和多选
     isSelected(id)
       ? cancelSelect(id)
       : multiple.value
       ? tempSelected.value.push(id)
       : (tempSelected.value = [id])
-
-    console.log(tempSelected.value)
   }
 
   // 非远程模式下，获取指定范围人员信息
