@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:03:32
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-19 20:10:03
+ * @LastEditTime: 2021-04-27 11:03:46
  * @FilePath: /packages/ok-department-select/ok-department-modal.ts
  */
 import { Button, Checkbox, Input, Modal, Tree } from 'ant-design-vue'
@@ -70,14 +70,14 @@ defineComponent(
         },
         template: `
         <a-modal 
-          class="ok-employee-tree-modal"
+          class="ok-tree-modal ok-dept-tree-modal"
           :visible="visible" 
           title="部门选择" 
           width="824px" 
           height="660px" 
           destroyOnClose>
           <template #closeIcon></template>
-          <div class="employee-tree-content-wraper">
+          <div class="tree-content-wraper dept-tree-content-wraper">
 
             <div class="tree-wraper">
               <div class="tree-search">
@@ -86,7 +86,7 @@ defineComponent(
                   v-model:value="queryKey"
                   @change="searchByKey">
                   <template #prefix>
-                    <img :src="searchIcon" class="dept-icon" />  
+                    <img :src="searchIcon" class="tree-search-icon" />  
                   </template>
                 </a-input>                    
               </div>
@@ -117,7 +117,7 @@ defineComponent(
                         :src="deptIcon"
                         alt=""
                       />
-                      <span>{{ department_name }}</span>
+                      <span class="ellipsis1">{{ department_name }}</span>
                     </span>
                   </template>
                 </a-tree>
@@ -143,7 +143,7 @@ defineComponent(
                       :src="deptIcon"
                       alt=""
                     />
-                    <span class="item-display-value">{{
+                    <span class="ellipsis1 mr10">{{
                       item.display_value
                     }}</span>
                   </li>
@@ -175,7 +175,7 @@ defineComponent(
                     :src="deptIcon"
                     alt=""
                   />
-                  <span class="item-display-value">{{
+                  <span class="ellipsis1 mr10">{{
                     item.display_value
                   }}</span>
 

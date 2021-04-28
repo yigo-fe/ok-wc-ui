@@ -90,6 +90,16 @@ h3{
   color: coral;
 }
 
+.ellipsis1 {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mr10{
+  margin-right: 10px;
+}
+
 /* personGroup Popper  */
 .popper-wraper {
   list-style: none;
@@ -381,54 +391,57 @@ h3{
 
 
 /* 人员选择modal样式 */
-.ok-employee-tree-modal .ant-modal-header {
+.ok-tree-modal .ant-modal-header {
   padding: 14px 24px;
   background-color: #4c78fc;
   border: 0;
 }
 
-.ok-employee-tree-modal .ant-modal-title {
+.ok-tree-modal .ant-modal-title {
   font-weight: 500;
   font-size: 16px;
   line-height: 18px;
   color: #fff;
 }
-.ok-employee-tree-modal .ant-modal-close {
+.ok-tree-modal .ant-modal-close {
   display: none;
 }
 
-.ok-employee-tree-modal .ant-modal-content {
+.ok-tree-modal .ant-modal-content {
   border-radius: 8px;
 }
-.ok-employee-tree-modal .employee-tree-content-wraper {
+.ok-tree-modal .tree-content-wraper {
   display: flex;
   min-height: 400px;
   border: 1px solid #dee0e3;
   border-radius: 4px;
 }
 
-.ok-employee-tree-modal .tree-wraper {
+.ok-tree-modal .tree-wraper {
   width: 50%;
   border-right: 1px solid #dee0e3;
   overflow-x: auto;
 }
 
-.tree-search {
+.ok-tree-modal .tree-search {
   padding: 16px 20px 12px 20px;
 }
-.tree-search .ant-input-affix-wrapper {
+.ok-tree-modal .tree-search .ant-input-affix-wrapper {
   border: 0;
   background:#EFF0F1;
   border-radius: 4px;
 }
-.tree-search .ant-input-affix-wrapper:focus {
+.ok-tree-modal .tree-search .ant-input-affix-wrapper:focus {
   box-shadow:none;
   border-color: #4c78fc;
 }
 
-.tree-search .ant-input-affix-wrapper input {
+.ok-tree-modal .tree-search .ant-input-affix-wrapper input {
   background:#EFF0F1;
 }
+
+  /* 人员选择-树 */
+.ok-employee-tree-modal .breadcrumb-separator{color:#646a73}
 
 .ok-employee-tree-modal .ant-breadcrumb {
   padding: 0 20px;
@@ -459,11 +472,17 @@ h3{
   margin:0 8px;
   font-size: 14px;
   color: #1F2329;
+  flex-shrink: 0;
 }
 
 .ok-employee-tree-modal  .email {
   font-size: 12px;
   color: #646A73;
+  margin-right: 10px;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .ok-employee-tree-modal .dept-icon {
@@ -472,13 +491,19 @@ h3{
   margin-right: 5px;
 }
 
-.close-icon,
-.checked-icon {
+.ok-tree-modal .tree-search-icon {
+  width: 18px;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.ok-tree-modal .close-icon,
+.ok-tree-modal .checked-icon {
   width:16px;
   vertical-align: middle;
   margin-left: auto;
 }
-.close-icon {
+.ok-tree-modal .close-icon {
   cursor: pointer;
 }
 
@@ -500,39 +525,39 @@ h3{
 
 
 /* selected */
-.ok-employee-tree-modal .selected-wraper{
+.ok-tree-modal .selected-wraper{
   width: 50%;
 }
 
-.ok-employee-tree-modal .selected-header {
+.ok-tree-modal .selected-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 20px 20px 15px 20px;
 }
 
-.selected-msg {
+.ok-tree-modal .selected-msg {
   font-size: 14px;
   line-height: 22px;
   color: #646A73;
 }
-.clear-btn {
+.ok-tree-modal .clear-btn {
   color: #3370FF;
   cursor: pointer;
 }
 
 /* modal footer */
-.ok-employee-tree-modal .ant-modal-footer {
+.ok-tree-modal .ant-modal-footer {
   border: 0;
   padding: 0 24px 24px;
 }
-.ok-employee-tree-modal .ant-modal-footer button {
+.ok-tree-modal .ant-modal-footer button {
   border-radius: 4px;
 }
-.ok-employee-tree-modal .ant-modal-footer .btn-ok {
+.ok-tree-modal .ant-modal-footer .btn-ok {
   background: #4c78fc;
 }
-.ok-employee-tree-modal .ant-modal-footer button+button {
+.ok-tree-modal .ant-modal-footer button+button {
   margin-left: 12px;
 }
 
@@ -650,20 +675,17 @@ h3{
   .ok-employee-select .ant-select-arrow{pointer-events:auto;top:44%;right:14px}
   .ok-employee-select.ant-select-focused:not(.ant-select-disabled).ant-select-multiple .ant-select-selector{border-color:#4c78fc;-webkit-box-shadow:none;box-shadow:none}
 
-  /* 人员选择-树 */
-  .breadcrumb-separator{color:#646a73}
-  .ok-employee-tree-wraper{width:100%}
+
 
   /* 部门选择 */
-
-  .employee-tree-content-wraper .tree-item-icon {
+  .dept-tree-content-wraper .tree-item-icon {
     width: 18px;
     height: 18px;
     margin: 0 5px 0 8px;
   }
 
   /* 修改checkbox样式 */
-  .employee-tree-content-wraper .ant-checkbox-inner {
+  .dept-tree-content-wraper .ant-checkbox-inner {
     position: relative;
     top: 0;
     left: 0;
@@ -676,42 +698,50 @@ h3{
     border-collapse: separate;
     transition: all 0.3s;
   }
-  .employee-tree-content-wraper .ant-checkbox-checked .ant-checkbox-inner {
+  .dept-tree-content-wraper .ant-checkbox-checked .ant-checkbox-inner {
     background-color: #4c78fc;
     border-color: #4c78fc;
   }
 
    /* 修改item样式 */
-  .employee-tree-content-wraper .department-tree-item {
+  .dept-tree-content-wraper .department-tree-item {
     display: flex;
     align-items: center;
   }
-  .employee-tree-content-wraper .search-result-item,
-  .employee-tree-content-wraper .selected-department-item {
+  .dept-tree-content-wraper .search-result-item,
+  .dept-tree-content-wraper .selected-department-item {
     display: flex;
     align-items: center;
     padding: 0 20px;
     height: 40px;
   }
+  .dept-tree-content-wraper .search-result-item:hover,
+  .dept-tree-content-wraper .selected-department-item:hover {
+    background-color: #f5f5f5;
+  }
 
 
-  .employee-tree-content-wraper .ant-tree li {
+  .dept-tree-content-wraper .ant-tree li {
     padding: 0;
   }
-  .employee-tree-content-wraper .ant-tree li .ant-tree-node-content-wrapper {
+  .dept-tree-content-wraper .ant-tree li .ant-tree-node-content-wrapper {
     height: 40px;
     line-height: 40px;
+    width: calc(100% - 24px);
+  }
+  .dept-tree-content-wraper .ant-tree-title {
+    display: block;
   }
 
-  .employee-tree-content-wraper .ant-tree li span.ant-tree-switcher {
+  .dept-tree-content-wraper .ant-tree li span.ant-tree-switcher {
     top: 8px;
   }
 
-  .employee-tree-content-wraper .tree-content {
+  .dept-tree-content-wraper .tree-content {
     padding: 0 20px 0 15px;
   }
 
-  .employee-tree-content-wraper .tree-content.department {
+  .dept-tree-content-wraper .tree-content.department {
     max-height: 400px;
     overflow: auto;
   }

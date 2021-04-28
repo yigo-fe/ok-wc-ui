@@ -66,11 +66,11 @@
       <!-- <ok-ant-department-search></ok-ant-department-search> -->
 
       <!-- 人员图像 -->
-      <ok-avatar></ok-avatar>
+      <!-- <ok-avatar></ok-avatar> -->
       <!-- 人员卡片 -->
-      <ok-person-cell class="person-cell"></ok-person-cell>
+      <!-- <ok-person-cell class="person-cell"></ok-person-cell> -->
       <!-- 多人员list -->
-      <ok-person-group ></ok-person-group>
+      <!-- <ok-person-group ></ok-person-group> -->
 
       <!-- <ok-person-card></ok-person-card> -->
  
@@ -199,11 +199,21 @@
     window.onload = ()=>{
 
       // window.okuiConfig.options.preview = true
-      const okAvatar = document.querySelector('ok-avatar')
-      okAvatar.personInfo = personInfo
+      // const okAvatar = document.querySelector('ok-avatar')
+      // okAvatar.personInfo = personInfo
 
-      const okPersonCell = document.querySelector('ok-person-cell')
-      okPersonCell.personInfo = personInfo
+      // const okPersonCell = document.querySelector('ok-person-cell')
+      // okPersonCell.personInfo = personInfo
+
+
+      // const okPersonGroup = document.querySelector('ok-person-group')
+      // okPersonGroup.personList = personList
+
+      // const okPersonCell = document.querySelector('ok-person-cell')
+      // okPersonCell.personInfo = personInfo
+
+      // const okPersonCard = document.querySelector('ok-person-card')
+      // okPersonCard.personInfo = personInfo
 
       const okUpload = document.querySelector('ok-upload-drag')
       okUpload.multiple = true
@@ -294,14 +304,7 @@
       // okAttachmentDrag.action = action
       // okAttachmentDrag.data = uploadData
 
-      const okPersonGroup = document.querySelector('ok-person-group')
-      okPersonGroup.personList = personList
 
-      // const okPersonCell = document.querySelector('ok-person-cell')
-      // okPersonCell.personInfo = personInfo
-
-      // const okPersonCard = document.querySelector('ok-person-card')
-      // okPersonCard.personInfo = personInfo
 
       okUploadImg.update = (data)=>{
         const fileIds = data.fileLists
@@ -333,7 +336,7 @@
 
 
       const okEmployeeTree = document.querySelector('.ok-employee-tree')
-      okEmployeeTree.value = ['LiTao']
+      // okEmployeeTree.value = ['LiTao']
       // okEmployeeTree.disabled = true
       okEmployeeTree.multiple = true
       // okEmployeeTree.range = ['FuJing',"FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing', 'WangChao', 'WangYiJie']

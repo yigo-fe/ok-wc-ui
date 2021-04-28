@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:56:38
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-19 20:17:57
+ * @LastEditTime: 2021-04-27 11:03:55
  * @FilePath: /packages/ok-employee-select/ok-employee-modal.ts
  */
 
@@ -119,13 +119,13 @@ defineComponent(
         },
         template: `
           <a-modal 
-            class="ok-employee-tree-modal"
+            class="ok-tree-modal ok-employee-tree-modal"
             :visible="visible" 
             title="人员选择" 
             width="824px" 
             height="660px">
             <template #closeIcon></template>
-            <div class="employee-tree-content-wraper">
+            <div class="tree-content-wraper employee-tree-content-wraper">
 
               <div class="tree-wraper">
                 <div class="tree-search">
@@ -134,7 +134,7 @@ defineComponent(
                     v-model:value="queryKey"
                     @change="searchByKey">
                     <template #prefix>
-                      <img :src="searchIcon" class="dept-icon" />  
+                      <img :src="searchIcon" class="tree-search-icon" />  
                     </template>
                   </a-input>                    
                 </div>

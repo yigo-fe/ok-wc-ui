@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-26 16:11:33
+ * @LastEditTime: 2021-04-28 11:48:22
  * @FilePath: /packages/ok-employee-select/index.ts
  */
 
@@ -75,8 +75,8 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
             @dropdownVisibleChange="dropdownVisibleChange">
 
             <template #suffixIcon>
-              <img v-if="isMouseenter && !disabled && value.length" :src="closeIcon" class="head-clear-icon" @click="clearSelected" />
-              <img v-else :src="searchIcon" class="head-search-icon"/>
+              <img v-if="isMouseenter && !disabled && value.length" :src="closeIcon" style="height:16px; width: 16px;" class="head-clear-icon" @click="clearSelected" />
+              <img v-else :src="searchIcon" style="height:16px; width: 16px;" class="head-search-icon"/>
             </template>
             <template #notFoundContent>
               <span v-if="loading">加载中</span>
@@ -93,8 +93,8 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
                     <ok-person-cell
                       class="user-img__avatar__head"
                       :personInfo="employee"
-                      width="20"
-                      height="20"
+                      width="20px"
+                      height="20px"
                     ></ok-person-cell>
                     <span class="selected-head-name-head">{{ employee.employee_name }}</span>
                   </div>
@@ -102,8 +102,8 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
                     <ok-person-cell
                       class="user-img__avatar"
                       :personInfo="employee"
-                      width="40"
-                      height="40"
+                      width="40px"
+                      height="40px"
                     ></ok-person-cell>
 
                     <div class="user-img__content">

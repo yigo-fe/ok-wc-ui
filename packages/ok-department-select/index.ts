@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:01:15
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-26 16:10:20
+ * @LastEditTime: 2021-04-28 10:28:50
  * @FilePath: /packages/ok-department-select/index.ts
  */
 import './ok-department-modal'
@@ -78,8 +78,8 @@ defineComponent(
         >
 
           <template #suffixIcon>
-            <img v-if="isMouseenter && !disabled && value.length" :src="closeIcon" class="head-clear-icon" @click="clearSelected" />
-            <img v-else :src="searchIcon" class="head-search-icon"/>
+            <img v-if="isMouseenter && !disabled && value.length" :src="closeIcon" style="height:16px; width: 16px;" class="head-clear-icon" @click="clearSelected" />
+            <img v-else :src="searchIcon" style="height:16px; width: 16px;" class="head-search-icon"/>
           </template>
 
           <template #notFoundContent>
