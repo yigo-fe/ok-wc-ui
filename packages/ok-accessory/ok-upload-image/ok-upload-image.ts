@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-19 20:15:57
+ * @LastEditTime: 2021-04-29 18:28:00
  * @FilePath: /packages/ok-accessory/ok-upload-image/ok-upload-image.ts
  */
 
@@ -36,7 +36,8 @@
 
 import { classMap } from 'lit-html/directives/class-map.js'
 import { styleMap } from 'lit-html/directives/style-map'
-import { defineComponent, html, PropType } from 'ok-lit'
+import { defineComponent, html, onMounted, PropType } from 'ok-lit'
+import { ref } from 'vue'
 
 import { COMMON_CSS_PATH } from '../../path.config'
 // import okUploadImgCss from '../style/ok-upload-image.less'
@@ -52,7 +53,6 @@ defineComponent(
     },
     limit: {
       type: (Number as unknown) as PropType<number>,
-      default: 10,
     },
     imageStyle: {
       type: (Object as unknown) as PropType<{}>,
@@ -72,6 +72,21 @@ defineComponent(
       handleAbort,
       handleRemoveFileList,
     } = useImageHandle(props, context)
+
+    const maxTagCount = ref(1)
+
+    // 处理最多能展示多少个tag
+    const maxTagCountComput = () => {
+      const el = context.$refs.showUploadImage as HTMLElement
+      const elWith = el?.offsetWidth
+      if (!elWith) return
+
+      maxTagCount.value = Math.floor((elWith + 8) / 108)
+    }
+
+    onMounted(() => {
+      maxTagCountComput()
+    })
 
     /**
      * 列表上传，点击选择文件
@@ -101,6 +116,9 @@ defineComponent(
               'ok-upload': true,
               'ok-upload-image': true,
               disabled: props.disabled,
+              'has-margin':
+                fileLists.value.length &&
+                fileLists.value.length % maxTagCount.value === 0,
             })}
             @click=${handleClick}
           >
@@ -140,22 +158,25 @@ defineComponent(
 
     return () => html`
       <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
-      <ok-file-image
-        class="ok-file-image-list"
-        @preview=${handlePreview}
-        @delete=${handleDetele}
-        @download=${handleDownload}
-        @abort=${handleAbort}
-        @remove=${handleRemoveFileList}
-        style=${styleMap(props.imageStyle)}
-        .fileList=${fileLists.value}
-        .listType=${props.listType}
-        .showPreview=${showPreview.value}
-        .showDownload=${showDownload.value}
-        .showRemove=${showRemove.value}
-        .thumbStyle=${props.thumbStyle}
-      ></ok-file-image>
-      ${renderUploader()}
+      <div class="ok-upload-imge-root" ref="showUploadImage">
+        <ok-file-image
+          class="ok-file-image-list"
+          @preview=${handlePreview}
+          @delete=${handleDetele}
+          @download=${handleDownload}
+          @abort=${handleAbort}
+          @remove=${handleRemoveFileList}
+          style=${styleMap(props.imageStyle)}
+          .fileList=${fileLists.value}
+          .listType=${props.listType}
+          .showPreview=${showPreview.value}
+          .showDownload=${showDownload.value}
+          .showRemove=${showRemove.value}
+          .thumbStyle=${props.thumbStyle}
+          .rowNumber=${maxTagCount.value}
+        ></ok-file-image>
+        ${renderUploader()}
+      </div>
     `
   }
 )

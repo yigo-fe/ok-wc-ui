@@ -260,6 +260,9 @@ h3{
   vertical-align: top;
   margin-top: 8px;
 }
+.ok-upload-image.has-margin {
+  margin-right: 8px;
+}
 .ok-upload-image .ok-upload-image-inner {
   width: 100px;
   height: 100px;
@@ -316,9 +319,15 @@ h3{
   margin-right: 8px;
   margin-top: 8px;
 }
+
+.ok-upload-list-image .ok-upload-list__item.last {
+  margin-right: 0;
+}
 .ok-upload-list-image .ok-upload-list__item-thumbnail {
   width: 100%;
   height: 100%;
+  position: absolute;
+  top: 0;
 }
 .ok-upload-list-image .ok-upload-list__item-actions {
   display: flex;

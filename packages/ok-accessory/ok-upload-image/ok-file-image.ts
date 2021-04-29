@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-19 20:15:45
+ * @LastEditTime: 2021-04-29 18:47:41
  * @FilePath: /packages/ok-accessory/ok-upload-image/ok-file-image.ts
  */
 
@@ -41,6 +41,9 @@ defineComponent(
     thumbStyle: {
       type: (Object as unknown) as PropType<object>,
     },
+    rowNumber: {
+      type: (Number as unknown) as PropType<number>,
+    },
   },
   (props, context) => {
     onMounted(() => {
@@ -51,6 +54,7 @@ defineComponent(
           const showDownload = computed(() => props.showDownload)
           const showRemove = computed(() => props.showRemove)
           const thumbStyle = computed(() => props.thumbStyle)
+          const rowNumber = computed(() => props.rowNumber)
           /**
            * 点击删除文件
            * @param file 要删除的文件
@@ -80,6 +84,7 @@ defineComponent(
             showDownload,
             showRemove,
             thumbStyle,
+            rowNumber,
             handleDelete,
             handlePreview,
             handleDownload,
@@ -87,7 +92,7 @@ defineComponent(
           }
         },
         template: `
-          <li v-for="file in fileList" :key="file.id" :class="['ok-upload-list__item', 'is-' + file.status]" :style="thumbStyle">
+          <li v-for="(file, index) in fileList" :key="file.id" :class="['ok-upload-list__item', 'is-' + file.status, (index+1)%rowNumber === 0 ? 'last': '' ]" :style="thumbStyle">
             <div v-if="file.status === 'uploading' || file.status === 'fail'" class="ok-process-wraper" >
               <div class="image-process-wraper">
                 <ok-progress class="image-progress" :percentage="file.percentage" :status="file.status" ></ok-progress>

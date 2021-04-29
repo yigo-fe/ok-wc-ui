@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-23 11:40:48
+ * @LastEditTime: 2021-04-29 19:07:20
  * @FilePath: /packages/ok-accessory/upload-base-hook.ts
  */
 
@@ -130,7 +130,9 @@ export default function (props, context, config) {
   const upload = (rawFile: OkFile) => {
     let inputRef = context.$refs.inputRef as HTMLInputElement
     inputRef.value = ''
-
+    // 更新上传状态
+    updateStatus({ status: 'uploading' }, rawFile)
+    // 调接口， 上传
     post(rawFile)
   }
 
@@ -149,14 +151,15 @@ export default function (props, context, config) {
       onSuccess: (res: any) => {
         if (res.code === '000000') {
           handleSuccess(res, rawFile)
+          delete reqs.value[uid]
         } else {
           handleError(res, rawFile)
         }
-        delete reqs.value[uid]
+        // delete reqs.value[uid]
       },
       onError: (err: any) => {
         handleError(err, rawFile)
-        delete reqs.value[uid]
+        // delete reqs.value[uid]
       },
     }
     const req = props.httpRequest(options)
@@ -195,7 +198,7 @@ export default function (props, context, config) {
   }
 
   const handleProgress = (e: any, file: OkFile) => {
-    updateStatus({ status: 'uploading', percentage: e.percent }, file)
+    updateStatus({ percentage: e.percent }, file)
     // 处理用户自定义事件
     props.onProgress &&
       props.onProgress({ e, file, fileLists: fileLists.value })
