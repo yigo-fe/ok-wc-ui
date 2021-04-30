@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-03 17:28:13
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-26 18:24:35
+ * @LastEditTime: 2021-04-30 14:14:51
  * @FilePath: /packages/ok-person-card/hook.ts
  */
 import { computed, effect } from 'ok-lit'
@@ -66,7 +66,7 @@ export default function (props) {
       case 'JD':
         break
       case 'DD':
-        location.href = `dingtalk://www.dingtalk.com`
+        location.href = `dingtalk://dingtalkclient/page/link`
         break
       case 'LARK':
         location.href = `lark://applink.feishu.cn/client/chat/open?openId=${props.toOpenId}`
