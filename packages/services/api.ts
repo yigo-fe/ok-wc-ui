@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 16:58:26
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-25 17:03:12
+ * @LastEditTime: 2021-04-30 10:05:16
  * @FilePath: /packages/services/api.ts
  */
 
@@ -27,11 +27,11 @@ declare global {
 }
 
 // console.log('window', window)
+// 'https://test.yigowork.com/apps/api'
 
 const baseURL =
   process.env.NODE_ENV === 'development'
-    ? // ? 'https://check.baiteda.com/apps/api'
-      'https://test.yigowork.com/apps/api'
+    ? 'https://check.baiteda.com/apps/api'
     : window.okuiConfig.apiPath
 
 // 文件上传

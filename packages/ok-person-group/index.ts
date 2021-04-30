@@ -1,9 +1,10 @@
 import { SIZE_TYPE } from '@c/enum'
 import { setPopover } from '@c/utils'
+import { styleMap } from 'lit-html/directives/style-map'
 import { computed, defineComponent, effect, html, PropType } from 'ok-lit'
 
+import close from '../assets/images/closed.svg'
 import { COMMON_CSS_PATH } from '../path.config'
-
 /**
  * @props persons: {Array<Person>} 用户信息组
  */
@@ -18,36 +19,54 @@ defineComponent(
       },
     },
     size: {
-      type: (String as unknown) as SIZE_TYPE,
+      type: (String as unknown) as PropType<SIZE_TYPE>,
       default: SIZE_TYPE.SMALL,
     },
     width: {
-      type: (String as unknown) as String,
+      type: (String as unknown) as PropType<string>,
     },
     height: {
-      type: (String as unknown) as String,
+      type: (String as unknown) as PropType<string>,
     },
     showDelete: {
-      type: (Boolean as unknown) as Boolean,
-      default: true,
+      type: (Boolean as unknown) as PropType<boolean>,
+      default: false,
+    },
+    showAll: {
+      type: (Boolean as unknown) as PropType<boolean>,
+      default: false,
     },
     detailSize: {
-      type: (String as unknown) as String,
+      type: (String as unknown) as PropType<string>,
       default: 'mini',
     },
     detailWidth: {
-      type: (String as unknown) as String,
-      default: '',
+      type: (String as unknown) as PropType<string>,
     },
     detailHeight: {
-      type: (String as unknown) as String,
-      default: '',
+      type: (String as unknown) as PropType<string>,
+    },
+    contentStyle: {
+      type: (Object as unknown) as PropType<{}>,
+    },
+    itemStyle: {
+      type: (Object as unknown) as PropType<{}>,
+    },
+    deleteItem: {
+      // eslint-disable-next-line no-unused-vars
+      type: (Function as unknown) as PropType<(item: any) => void>,
     },
   },
   (props, contxt) => {
     const showList = computed(() => {
       return props.personList?.slice(0, 3)
     })
+
+    const popperList = computed(() => {
+      return props.showAll ? props.personList : props.personList?.slice(3)
+    })
+
+    const closeIcon = close
 
     const setPopup = () => {
       setPopover(
@@ -58,30 +77,20 @@ defineComponent(
           popperOptions: {
             strategy: 'fixed',
           },
+          theme: 'ok-person-group',
         }
       )
     }
-
-    // onMounted(() => {
-    //   if (props.personList.length > 1) {
-    //     setPopover(
-    //       contxt.$refs['showMore'] as HTMLElement,
-    //       contxt.$refs['personGroupPopper'] as HTMLElement,
-    //       {
-    //         appendTo: document.body,
-    //         popperOptions: {
-    //           strategy: 'fixed',
-    //         },
-    //       }
-    //     )
-    //   }
-    // })
 
     effect(() => {
       if (props.personList?.length) {
         setPopup()
       }
     })
+
+    const deleteItem = (item: any) => {
+      props.deleteItem && props.deleteItem(item)
+    }
 
     const avatarRender = () => {
       return html`
@@ -98,19 +107,27 @@ defineComponent(
           ? html`<span class="single-user-name"
               >${showList.value[0].employee_name}</span
             >`
-          : html`<span ref="showMore" class="more"
-              >...${showList.value.length}</span
-            >`}
+          : html`
+              <span ref="showMore" class="more"
+                >${popperList.value.length
+                  ? `...${popperList.value.length}`
+                  : ''}</span
+              >
+            `}
       `
     }
 
     const popperRender = () => {
       return html`
-        <ul ref="personGroupPopper" class="popper-wraper">
-          ${props.personList.map(
+        <ul
+          ref="personGroupPopper"
+          class="ok-person-group-popper popper-wraper"
+          style=${styleMap(props.contentStyle)}
+        >
+          ${popperList.value.map(
             item =>
               html`
-                <li class="popper-item">
+                <li style=${styleMap(props.itemStyle)} class="popper-item">
                   <ok-person-cell
                     class="popper-item-avatar"
                     .personInfo=${item}
@@ -120,7 +137,13 @@ defineComponent(
                   ></ok-person-cell>
                   <span class="popper-item-name">${item.employee_name}</span>
                   ${props.showDelete &&
-                  html`<span class="popper-item-operate">x</span>`}
+                  html`<img
+                    .src="${closeIcon}"
+                    class="person-item-close-icon"
+                    @click="${() => {
+                      deleteItem(item)
+                    }}"
+                  />`}
                 </li>
               `
           )}
