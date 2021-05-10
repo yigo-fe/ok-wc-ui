@@ -341,9 +341,9 @@
 
 
       const okPersonGroup = document.querySelector('ok-person-group')
-      // okPersonGroup.personList = personList
-      okPersonGroup.personList = personList2
-      okPersonGroup.showAll = true
+      okPersonGroup.personList = personList
+      // okPersonGroup.personList = personList2
+      // okPersonGroup.showAll = true
       okPersonGroup.placement = 'top'
       // okPersonGroup.contentStyle = {
       //   color: 'red'
@@ -474,6 +474,18 @@
         console.log('dept-input-update-index',val, list)
         // okDeptInput.value = val
       }
+      // okDeptInput.onBlur = ()=>{
+      //   console.log('onBlur')
+      // }
+      // okDeptInput.onFocus = ()=>{
+      //   console.log('onFocus')
+      // }
+      // okDeptInput.onRemove = (item)=>{
+      //   console.log('onRemove', item)
+      // }
+      // okDeptInput.onClear = ()=>{
+      //   console.log('onClear')
+      // }
 
       const okDeptTree = document.querySelector('.ok-department-tree')
       okDeptTree.value = ['13','14', '17', '18', '19']
@@ -579,6 +591,7 @@
       const okDeptInput = document.querySelector('.ok-department-input')
       // okDeptInput.value = ['13','14', '17', '18', '19']
       okDeptInput.value = ['18']
+
       
     }
 

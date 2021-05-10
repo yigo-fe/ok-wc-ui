@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:02:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-26 16:09:29
+ * @LastEditTime: 2021-05-10 14:42:13
  * @FilePath: /packages/ok-department-select/department-props.ts
  */
 import { PropType } from 'ok-lit'
@@ -55,6 +55,21 @@ const propsOptions = {
       // eslint-disable-next-line no-unused-vars
       (ids: string[], options: []) => void
     >,
+  },
+  onFocus: {
+    type: (Function as unknown) as PropType<() => void>,
+  },
+  onBlur: {
+    type: (Function as unknown) as PropType<() => void>,
+  },
+  onRemove: {
+    type: (Function as unknown) as PropType<
+      // eslint-disable-next-line no-unused-vars
+      (item: any) => void
+    >,
+  },
+  onClear: {
+    type: (Function as unknown) as PropType<() => void>,
   },
 }
 

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 20:15:04
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-26 16:09:58
+ * @LastEditTime: 2021-05-10 14:46:53
  * @FilePath: /packages/ok-department-select/hook.ts
  */
 import { debounce } from 'lodash'
@@ -163,6 +163,7 @@ export default function (props: any, context: any) {
   }
   const closeOpen = () => {
     isOpen.value = false
+    props.onBlur && props.onBlur()
   }
 
   // 打开modal
@@ -200,11 +201,13 @@ export default function (props: any, context: any) {
   // 清除， 删除全部
   const clearSelected = () => {
     value.value = []
+    props.onClear && props.onClear()
   }
 
   // 删除单个部门
   const handleDelete = (department_id: string) => {
     value.value = value.value.filter(v => v !== department_id)
+    props.onRemove && props.onRemove(infoMap.value[department_id])
   }
 
   const exceedDelete = (e: CustomEvent) => {
@@ -224,6 +227,11 @@ export default function (props: any, context: any) {
     if (!value.value.length) {
       options.value = []
     }
+  }
+
+  // focus
+  const handleFocus = () => {
+    props.onFocus && props.onFocus()
   }
 
   // 判断propsValue 是否和value一样
@@ -364,5 +372,6 @@ export default function (props: any, context: any) {
     dropdownVisibleChange,
     searchByKey,
     handleModalChange,
+    handleFocus,
   }
 }

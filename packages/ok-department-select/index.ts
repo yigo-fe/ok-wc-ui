@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:01:15
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-28 10:28:50
+ * @LastEditTime: 2021-05-10 14:47:00
  * @FilePath: /packages/ok-department-select/index.ts
  */
 import './ok-department-modal'
@@ -70,6 +70,7 @@ defineComponent(
           @select="handleSelect"
           @search="searchByKey"
           @click="handleInputClick"
+          @focus="handleFocus"
           @blur="closeOpen"
           @deselect="handleDelete" 
           @mouseenter="mouseenter" 
