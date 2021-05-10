@@ -1,5 +1,7 @@
 import { SIZE_TYPE } from '@c/enum'
+import { POPOVER_PLACEMENT } from '@c/ok-wc-ui'
 import { setPopover } from '@c/utils'
+import { nextTick } from '@vue/runtime-core'
 import { styleMap } from 'lit-html/directives/style-map'
 import { computed, defineComponent, effect, html, PropType } from 'ok-lit'
 
@@ -52,6 +54,10 @@ defineComponent(
     itemStyle: {
       type: (Object as unknown) as PropType<{}>,
     },
+    placement: {
+      type: (String as unknown) as PropType<string>,
+      default: 'top',
+    },
     deleteItem: {
       // eslint-disable-next-line no-unused-vars
       type: (Function as unknown) as PropType<(item: any) => void>,
@@ -62,6 +68,9 @@ defineComponent(
     },
   },
   (props, contxt) => {
+    const placement = computed(() => {
+      return props.placement
+    })
     const showList = computed(() => {
       return props.personList?.slice(0, 3)
     })
@@ -82,13 +91,16 @@ defineComponent(
             strategy: 'fixed',
           },
           theme: 'ok-person-group',
+          placement: placement.value as POPOVER_PLACEMENT,
         }
       )
     }
 
     effect(() => {
       if (props.personList?.length) {
-        setPopup()
+        nextTick(() => {
+          contxt.$refs['showMore'] && setPopup()
+        })
       }
     })
 
@@ -107,15 +119,13 @@ defineComponent(
             .height=${props.height}
           ></ok-person-cell>`
         )}
-        ${showList.value.length === 1
+        ${!popperList.value.length
           ? html`<span class="single-user-name"
-              >${showList.value[0].employee_name}</span
+              >${showList.value?.[0]?.employee_name}</span
             >`
           : html`
               <span ref="showMore" class="more"
-                >${popperList.value.length
-                  ? `...${popperList.value.length}`
-                  : ''}</span
+                >...${popperList.value.length}</span
               >
             `}
       `
@@ -169,7 +179,7 @@ defineComponent(
       <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
       <div class="ok-person-group ok-person-group-root">
         <div class="ok-person-group-wrap">
-          ${avatarRender()} ${popperRender()}
+          ${avatarRender()} ${popperList.value.length ? popperRender() : ''}
         </div>
       </div>
     `

@@ -77,7 +77,7 @@
       <!-- 人员图像 -->
       <!-- <ok-avatar></ok-avatar> -->
       <!-- 人员卡片 -->
-      <!-- <ok-person-cell class="person-cell"></ok-person-cell> -->
+      <ok-person-cell class="person-cell"></ok-person-cell>
       <!-- 多人员list -->
       <!-- <ok-person-group ></ok-person-group> -->
 
@@ -311,7 +311,21 @@
 
   ] 
 
-
+    const personList2 = [
+    {
+      avatar_url: "https://wework.qpic.cn/bizmail/cMLFZrYGchIibX5icVTGibh7b2oELMc9MsJYDiaCNNmTYREjGVRjlsq3mA/0",
+      department_id: "30",
+      department_name: "前端部",
+      email: "fujing@byteluck.com",
+      employee_card: "工号",
+      employee_en_name: "付静",
+      employee_id: "FuJing",
+      employee_name: "付静",
+      gender: 2,
+      msg_relation_type: "WX",
+      tenant_id: "test"
+    }
+    ]
 
 
     window.onload = ()=>{
@@ -320,25 +334,30 @@
       // const okAvatar = document.querySelector('ok-avatar')
       // okAvatar.personInfo = personInfo
 
-      // const okPersonCell = document.querySelector('ok-person-cell')
-      // okPersonCell.personInfo = personInfo
+      const okPersonCell = document.querySelector('ok-person-cell')
+      okPersonCell.personInfo = personInfo
+      okPersonCell.width = '30px'
+      okPersonCell.height = '30px'
 
 
       const okPersonGroup = document.querySelector('ok-person-group')
-      okPersonGroup.personList = personList
-      okPersonGroup.contentStyle = {
-        color: 'red'
-      }
-      okPersonGroup.itemStyle = {
-        color: 'blue'
-      }
+      // okPersonGroup.personList = personList
+      okPersonGroup.personList = personList2
+      okPersonGroup.showAll = true
+      okPersonGroup.placement = 'top'
+      // okPersonGroup.contentStyle = {
+      //   color: 'red'
+      // }
+      // okPersonGroup.itemStyle = {
+      //   color: 'blue'
+      // }
 
-      const el = '<div>lallall</div>'
-      okPersonGroup.subtitleRender = (item) => {
-      const dom = document.createElement('div')
-      dom.innerHTML = el
-      return dom
-    }
+    //   const el = '<div>lallall</div>'
+    //   okPersonGroup.subtitleRender = (item) => {
+    //   const dom = document.createElement('div')
+    //   dom.innerHTML = el
+    //   return dom
+    // }
 
       // const okPersonCell = document.querySelector('ok-person-cell')
       // okPersonCell.personInfo = personInfo
