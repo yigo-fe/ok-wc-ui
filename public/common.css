@@ -183,8 +183,6 @@ h3{
 }
 .ok-person-group-root .avatar-list {
   float: left;
-  width: 24px;
-  height: 24px;
 }
 .ok-person-group-root .avatar-list + .avatar-list {
   margin-left: -6px;

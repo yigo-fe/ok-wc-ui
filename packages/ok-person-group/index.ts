@@ -113,6 +113,7 @@ defineComponent(
         ${showList.value.map(
           item => html`<ok-person-cell
             class="avatar-list"
+            style="width: auto; height: auto;"
             .personInfo=${item}
             .size=${props.size}
             .width=${props.width}
@@ -165,6 +166,7 @@ defineComponent(
                     .size=${props.detailSize}
                     .width=${props.detailWidth}
                     .height=${props.detailHeight}
+                    .hidePopper=${false}
                   ></ok-person-cell>
                   <span class="popper-item-name">${item.employee_name}</span>
                   ${iconRender(item)}

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-04 13:47:46
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-08 11:59:02
+ * @LastEditTime: 2021-05-10 18:40:25
  * @FilePath: /packages/ok-person-cell/props.ts
  */
 
@@ -75,6 +75,11 @@ const props = {
     default() {
       return {}
     },
+  },
+  // 是否隐藏之前的popper,默认隐藏。 person-group的Popper中不需要
+  hidePopper: {
+    type: (Boolean as unknown) as PropType<boolean>,
+    default: true,
   },
 }
 

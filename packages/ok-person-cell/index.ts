@@ -1,5 +1,6 @@
 import { setPopover } from '@c/utils'
 import { defineComponent, html, onMounted, ref } from 'ok-lit'
+import { hideAll } from 'tippy.js'
 
 import { COMMON_CSS_PATH } from '../path.config'
 import { apiInit } from '../services/api'
@@ -45,6 +46,12 @@ defineComponent(
         personInfo.employee_number
 
       id && checkLardShow(id)
+      // 隐藏之前的Popper，解决person-group中可能同时出现两个Popper的问题
+      props.hidePopper &&
+        hideAll({
+          exclude: contxt.$refs['ok-person-trigger'] as HTMLElement,
+          duration: 0,
+        })
     }
     onMounted(() => {
       setPopover(

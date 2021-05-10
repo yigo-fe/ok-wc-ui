@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="./antd.min.css">
   <link rel="stylesheet" href="./iconfont/iconfont.css">
   <link rel="stylesheet" href="./common.css">
+  <!-- <link rel="stylesheet" href="./tippy.css"> -->
   <title>ok-wc-ui</title>
   <style>
     #app {
@@ -76,13 +77,16 @@
 
       <!-- 人员图像 -->
       <!-- <ok-avatar></ok-avatar> -->
+      <div class="divider"></div>
       <!-- 人员卡片 -->
       <ok-person-cell class="person-cell"></ok-person-cell>
       <!-- 多人员list -->
       <!-- <ok-person-group ></ok-person-group> -->
 
       <!-- <ok-person-card></ok-person-card> -->
- 
+
+
+      <ok-button style="display:block; margin: 50px 0;"></ok-button>
 
       <section  class="divider upload-demo">
         <h3>列表上传</h3>
@@ -354,9 +358,11 @@
 
 
       const okPersonGroup = document.querySelector('ok-person-group')
-      // okPersonGroup.personList = personList
-      okPersonGroup.personList = personList2
+      okPersonGroup.personList = personList
+      // okPersonGroup.personList = personList2
       // okPersonGroup.showAll = true
+      okPersonGroup.width = '34px'
+      okPersonGroup.height = '34px'
       // okPersonGroup.contentStyle = {
       //   color: 'red'
       // }
