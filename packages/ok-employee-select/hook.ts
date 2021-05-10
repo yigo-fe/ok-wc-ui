@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 15:16:57
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-26 16:09:04
+ * @LastEditTime: 2021-05-10 10:38:06
  * @FilePath: /packages/ok-employee-select/hook.ts
  */
 import { debounce } from 'lodash'
@@ -181,6 +181,7 @@ export default function (props: any, context: any) {
     isOpen.value = true
   }
   const closeOpen = () => {
+    props.onBlur && props.onBlur()
     isOpen.value = false
   }
 
@@ -219,11 +220,13 @@ export default function (props: any, context: any) {
   // 清除， 删除全部
   const clearSelected = () => {
     value.value = []
+    props.onClear && props.onClear()
   }
 
   // 删除单个
-  const handleDelete = (department_id: string) => {
-    value.value = value.value.filter(v => v !== department_id)
+  const handleDelete = (id: string) => {
+    value.value = value.value.filter(v => v !== id)
+    props.onRemove && props.onRemove(infoMap.value[id])
   }
 
   // ‘更过’ 弹窗中的删除
@@ -237,6 +240,11 @@ export default function (props: any, context: any) {
       exceedList: exceedList.value,
       onDelete: exceedDelete,
     })
+  }
+
+  // focus
+  const handleFocus = () => {
+    props.onFocus && props.onFocus()
   }
 
   // init回显：根据ids查询信息: 1. 默认值回显; 2. 收集
@@ -385,5 +393,6 @@ export default function (props: any, context: any) {
     handleCloseModal,
     handleOpenModal,
     collectMap,
+    handleFocus,
   }
 }

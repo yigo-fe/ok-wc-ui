@@ -56,6 +56,10 @@ defineComponent(
       // eslint-disable-next-line no-unused-vars
       type: (Function as unknown) as PropType<(item: any) => void>,
     },
+    subtitleRender: {
+      // eslint-disable-next-line no-unused-vars
+      type: (Function as unknown) as PropType<(item: any) => void>,
+    },
   },
   (props, contxt) => {
     const showList = computed(() => {
@@ -117,6 +121,21 @@ defineComponent(
       `
     }
 
+    const iconRender = (item: any) => {
+      return html`
+        ${props.subtitleRender
+          ? props.subtitleRender(item)
+          : props.showDelete &&
+            html` <img
+              .src="${closeIcon}"
+              class="person-item-close-icon"
+              @click="${() => {
+                deleteItem(item)
+              }}"
+            />`}
+      `
+    }
+
     const popperRender = () => {
       return html`
         <ul
@@ -136,14 +155,7 @@ defineComponent(
                     .height=${props.detailHeight}
                   ></ok-person-cell>
                   <span class="popper-item-name">${item.employee_name}</span>
-                  ${props.showDelete &&
-                  html`<img
-                    .src="${closeIcon}"
-                    class="person-item-close-icon"
-                    @click="${() => {
-                      deleteItem(item)
-                    }}"
-                  />`}
+                  ${iconRender(item)}
                 </li>
               `
           )}

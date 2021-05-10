@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-28 11:48:22
+ * @LastEditTime: 2021-05-10 10:23:31
  * @FilePath: /packages/ok-employee-select/index.ts
  */
 
@@ -69,6 +69,7 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
             @select="handleSelect"
             @click="handleInputClick"
             @blur="closeOpen" 
+            @focus="handleFocus"
             @deselect="handleDelete" 
             @mouseenter="mouseenter" 
             @mouseleave="mouseleave" 

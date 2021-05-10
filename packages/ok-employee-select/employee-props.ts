@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-20 14:56:24
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-26 15:52:53
+ * @LastEditTime: 2021-05-10 10:38:31
  * @FilePath: /packages/ok-employee-select/employee-props.ts
  */
 
@@ -59,6 +59,21 @@ const propsOptions = {
       // eslint-disable-next-line no-unused-vars
       (ids: string[], options: []) => void
     >,
+  },
+  onFocus: {
+    type: (Function as unknown) as PropType<() => void>,
+  },
+  onBlur: {
+    type: (Function as unknown) as PropType<() => void>,
+  },
+  onRemove: {
+    type: (Function as unknown) as PropType<
+      // eslint-disable-next-line no-unused-vars
+      (item: any) => void
+    >,
+  },
+  onClear: {
+    type: (Function as unknown) as PropType<() => void>,
   },
 }
 

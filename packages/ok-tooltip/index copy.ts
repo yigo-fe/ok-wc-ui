@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-28 19:07:13
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-30 18:56:43
+ * @LastEditTime: 2021-04-30 15:26:06
  * @FilePath: /packages/ok-tooltip/index.ts
  */
 
@@ -44,6 +44,9 @@ defineComponent(
       type: (String as unknown) as PropType<tipType>,
       default: 'auto',
     },
+    showSuffix: {
+      type: (Boolean as unknown) as PropType<boolean>,
+    },
     title: {
       type: (String as unknown) as PropType<string>,
     },
@@ -64,47 +67,72 @@ defineComponent(
     onMounted(() => {
       const options = {
         setup() {
-          // 展示
-          const tipType = computed(() => props.tipType)
-          // tooltip 位置
+          const tipType = ref(props.tipType)
+          const showSuffix = ref(props.showSuffix)
+          const isShowTips = ref(false)
           const placement = computed(() => props.placement)
-
+          const cuttingNum = ref(props.cuttingNum)
+          const nameStart = ref('')
+          const nameEnd = ref('')
           const innerHTML = ref(context.innerHTML)
           const titleSlot = ref()
-          // 计算溢出多少行后截断
+
           const contentStyle = computed(() => {
-            return { webkitLineClamp: props.cuttingNum }
+            return { webkitLineClamp: cuttingNum.value }
           })
           // 展示内容：插槽处理
           const contentText = computed(() => {
             // 没有content 默认展示title内容
             if (!innerHTML.value) {
-              return props.title
+              return title.value
             }
             // todo 去掉 title slot
-
-            // const parent: any = innerHTML.value
-
-            // document.querySelector
-
             return innerHTML.value || ''
           })
-          // tooltip 的title
-          // const title = computed(() => props.title || contentText.value)
 
-          // 控制是否展示popover
-          const isShowTips = ref(false)
+          const title = computed(() => props.title || contentText.value)
+
+          // tip 内容
+          // const tipContent = computed(() => {
+          //   console.log('tipContent', context.children)
+          //   // 处理title slot
+          //   // if (!title.value) {
+          //   //   return context.slots.default ? context.slots.default[0].text : ''
+          //   // }
+          //   let tipSlot = Array.from(context.children).find(
+          //     (v: any) => v.slot === 'title'
+          //   )
+          //   console.log('tipSlot', tipSlot)
+          //   if (tipSlot) {
+          //     console.log(1, tipSlot)
+          //     titleSlot.value = tipSlot
+          //   }
+
+          //   return title.value
+          // })
 
           // 处理title内容
           const handleTitleContent = () => {
             let tipSlot = Array.from(context.children).find(
               (v: any) => v.slot === 'title'
             )
-            titleSlot.value = tipSlot || props.title || contentText.value
-
-            console.log('titleSlot.value', titleSlot.value)
+            if (tipSlot) {
+              titleSlot.value = tipSlot.toString()
+              // console.log(123, titleSlot.value)
+            }
           }
           handleTitleContent()
+
+          // 处理文件后缀
+          // TODO 嵌套标签
+          // const handleSuffix = (fileName: string) => {
+          //   let idx = fileName.lastIndexOf('.')
+          //   nameStart.value = fileName.substr(0, idx - 2)
+          //   if (nameStart.value.length > 2) {
+          //     nameEnd.value = fileName.substr(idx - 2)
+          //   }
+          // }
+          // showSuffix.value && handleSuffix(innerHTML.value)
 
           // 添加隐藏元素，根据高度对比，计算是否需要展示tooltip
           const mouseenter = () => {
@@ -128,53 +156,63 @@ defineComponent(
 
           return {
             tipType,
+            showSuffix,
             isShowTips,
             contentText,
             contentStyle,
             mouseenter,
+            title,
+            nameStart,
+            nameEnd,
             titleSlot,
             placement,
-            innerHTML,
           }
         },
         template: `
-          <!-- 始终展示tooltip -->
-          <div class="ok-drawer-content2" v-html="contentText"></div>
-          <div class="ok-drawer-content3" v-html="titleSlot"></div>
           <a-tooltip 
             v-if="tipType==='always'"
             ref="Tooltip"
             :placement="placement"      
-            >
-            <template #title>
-              <div v-html="titleSlot"></div>
-            </template> 
+            :title="title">
             <div class="content" :style="contentStyle" v-html="contentText">
             </div>
           </a-tooltip>
           
-          <!-- 溢出时展示tooltip 溢出 -->
           <a-tooltip 
             v-else-if="isShowTips"
             ref="Tooltip"  
             :placement="placement"       
-            >
+            :title="title">
             <template #title>
               <div v-html="titleSlot"></div>
-            </template>           
-            <div class="content" :style="contentStyle" v-html="contentText">
+            </template>
+            
+            <div v-if="!showSuffix" class="content" :style="contentStyle" v-html="contentText">
             </div>
+
+            <p v-else class="file-name-wrap inner">
+              <span class="name-start">
+              {{nameStart}}</span
+              ><span class="name-end">{{nameEnd}}</span>
+            </p>
           </a-tooltip>
 
-          <!-- 溢出时展示tooltip 未溢出 -->
           <div
-            v-else
+            v-else-if="!showSuffix"
             :style="contentStyle"
             @mouseenter="mouseenter"
             v-html="contentText"
             >
           </div>
-        
+          
+          <p 
+            v-else
+            @mouseenter="mouseenter"
+            class="file-name-wrap outer">
+            <span class="name-start">
+            {{nameStart}}</span
+            ><span class="name-end">{{nameEnd}}</span>
+          </p>
       `,
       }
       const app = createApp(options)
@@ -198,6 +236,22 @@ defineComponent(
           display: -webkit-box;
           text-overflow: ellipsis;
           -webkit-box-orient: vertical;
+        }
+
+        .file-name-wrap {
+          display: flex;
+          align-items: center;
+          max-width: 100%;
+          color: #1f2329;
+        }
+        .name-end {
+          flex-shrink: 0;
+        }
+        .name-start {
+          display: inline-block;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
       </style>
       <!-- <link rel="stylesheet" href="./antd.min.css" /> -->

@@ -65,7 +65,7 @@ class PopoverOptions {
     this.delay = props?.delay ?? 0
     this.trigger = props?.trigger ?? undefined
     this.hideOnClick = props?.hideOnClick ?? false
-    this.offset = props?.offset ?? [0, 10]
+    this.offset = props?.offset ?? [0, 8]
     this.interactive = props?.interactive ?? true
     this.popperOptions = props?.popperOptions
     this.onTrigger = props?.onTrigger

@@ -5,8 +5,6 @@
   <link rel="icon" href="/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./antd.min.css">
-  <!-- <link rel="stylesheet" href="./ok-ant-department-search.css"> -->
-  <!-- <link rel="stylesheet" href="./ok-ant-person-select.css"> -->
   <link rel="stylesheet" href="./iconfont/iconfont.css">
   <link rel="stylesheet" href="./common.css">
   <title>ok-wc-ui</title>
@@ -41,6 +39,19 @@
         <button onclick="testClick2()">test2</button>
         <!-- <button onclick="testClick3()">drawer</button> -->
       </div>
+
+      <div style="width: 100px;">
+        <ok-tooltip class="divider">
+          <div slot="title"><span >这里是title的slot</span></div>
+          
+          
+          测试tooltip测试tooltip测试tooltip测试tooltip
+        </ok-tooltip>
+
+        <ok-tooltip>测试tooltip测试</ok-tooltip>
+      </div>
+
+      
 
       
 
@@ -322,6 +333,13 @@
         color: 'blue'
       }
 
+      const el = '<div>lallall</div>'
+      okPersonGroup.subtitleRender = (item) => {
+      const dom = document.createElement('div')
+      dom.innerHTML = el
+      return dom
+    }
+
       // const okPersonCell = document.querySelector('ok-person-cell')
       // okPersonCell.personInfo = personInfo
 
@@ -464,7 +482,7 @@
       // okEmployeeInput.value = []
       okEmployeeInput.dropdownstyle = {'z-index': 6000}
       okEmployeeInput.getPopupContainer = (triggerNode)=>{
-        console.log('getPopupContainer', triggerNode)
+        // console.log('getPopupContainer', triggerNode)
         return triggerNode.parentNode
       }
       // okEmployeeInput.multiple = true
@@ -474,6 +492,19 @@
       okEmployeeInput.update = (val, list)=>{
         console.log('update-index',val,list)
         // okEmployeeInput.value = val
+      }
+
+      okEmployeeInput.onFocus = ()=>{
+        console.log('focus')
+      }
+      okEmployeeInput.onBlur = ()=>{
+        console.log('onBlur')
+      }
+      okEmployeeInput.onRemove = (item)=>{
+        console.log('onRemove', item)
+      }
+      okEmployeeInput.onClear = ()=>{
+        console.log('onClear')
       }
 
 

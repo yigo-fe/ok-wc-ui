@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 16:58:26
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-30 10:05:16
+ * @LastEditTime: 2021-05-10 10:09:44
  * @FilePath: /packages/services/api.ts
  */
 
@@ -17,7 +17,7 @@ declare global {
     okuiConfig: {
       env: 'PRD'
       apiPath: string
-      sourceHost: string
+      sourceHost?: string
       basePath: string
       options?: {
         preview?: boolean
