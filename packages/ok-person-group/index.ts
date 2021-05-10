@@ -119,13 +119,15 @@ defineComponent(
             .height=${props.height}
           ></ok-person-cell>`
         )}
-        ${!popperList.value.length
+        ${showList.value?.length === 1
           ? html`<span class="single-user-name"
               >${showList.value?.[0]?.employee_name}</span
             >`
           : html`
               <span ref="showMore" class="more"
-                >...${popperList.value.length}</span
+                >${popperList.value.length
+                  ? `...${popperList.value.length}`
+                  : ''}</span
               >
             `}
       `
@@ -179,7 +181,7 @@ defineComponent(
       <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
       <div class="ok-person-group ok-person-group-root">
         <div class="ok-person-group-wrap">
-          ${avatarRender()} ${popperList.value.length ? popperRender() : ''}
+          ${avatarRender()} ${props.personList.length > 1 ? popperRender() : ''}
         </div>
       </div>
     `
