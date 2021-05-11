@@ -3,12 +3,13 @@
  * @Author: 付静
  * @Date: 2021-03-15 16:58:26
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-10 10:09:44
+ * @LastEditTime: 2021-05-11 16:28:29
  * @FilePath: /packages/services/api.ts
  */
 
 import { HttpClient } from './axios'
 import Service from './services'
+import ServicePersoncard from './services-personcard'
 
 declare global {
   // eslint-disable-next-line no-unused-vars
@@ -18,7 +19,8 @@ declare global {
       env: 'PRD'
       apiPath: string
       sourceHost?: string
-      basePath: string
+      basePath?: string
+      cardPath?: string
       options?: {
         preview?: boolean
       }
@@ -31,13 +33,18 @@ declare global {
 
 const baseURL =
   process.env.NODE_ENV === 'development'
-    ? 'https://check.baiteda.com/apps/api'
+    ? 'https://test.baiteda.com/apps/api'
     : window.okuiConfig.apiPath
+// 人员卡片接口地址
+const personcardURL =
+  process.env.NODE_ENV === 'development'
+    ? 'https://test.baiteda.com/apps/api'
+    : window.okuiConfig.cardPath || window.okuiConfig.apiPath
 
 // 文件上传
 const sourceHost =
   process.env.NODE_ENV === 'development'
-    ? 'https://check.baiteda.com/'
+    ? 'https://test.baiteda.com/'
     : window.okuiConfig.sourceHost
 
 // console.log(baseURL, sourceHost)
@@ -45,6 +52,15 @@ const sourceHost =
 export function apiInit() {
   const httpClient = new HttpClient(baseURL)
   const serviceAuto = new Service(httpClient)
+
+  return {
+    default: serviceAuto,
+  }
+}
+
+export function apiInitPersoncard() {
+  const httpClient = new HttpClient(personcardURL)
+  const serviceAuto = new ServicePersoncard(httpClient)
 
   return {
     default: serviceAuto,

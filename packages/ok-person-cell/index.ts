@@ -3,7 +3,7 @@ import { defineComponent, html, onMounted, ref } from 'ok-lit'
 import { hideAll } from 'tippy.js'
 
 import { COMMON_CSS_PATH } from '../path.config'
-import { apiInit } from '../services/api'
+import { apiInitPersoncard } from '../services/api'
 // import { personInfo } from '../mock'
 /**
  * person: {Person} 用户信息
@@ -18,7 +18,7 @@ defineComponent(
     ...props,
   },
   (props, contxt) => {
-    const api = apiInit()
+    const api = apiInitPersoncard()
     const toOpenId: any = ref('')
     const isAwaken = ref(false)
     const deptList: any = ref([])
