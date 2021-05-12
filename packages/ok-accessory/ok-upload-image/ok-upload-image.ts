@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-29 18:28:00
+ * @LastEditTime: 2021-05-12 15:32:54
  * @FilePath: /packages/ok-accessory/ok-upload-image/ok-upload-image.ts
  */
 
@@ -48,14 +48,13 @@ defineComponent(
   {
     ...UploadProps,
     accept: {
-      type: (String as unknown) as PropType<string>,
-      default: '.jpg,.jpeg,.gif,.tif,.tiff,.bmp,.png,.svg',
+      type: String as unknown as PropType<string>,
     },
     limit: {
-      type: (Number as unknown) as PropType<number>,
+      type: Number as unknown as PropType<number>,
     },
     imageStyle: {
-      type: (Object as unknown) as PropType<{}>,
+      type: Object as unknown as PropType<{}>,
     },
   },
   (props, context) => {

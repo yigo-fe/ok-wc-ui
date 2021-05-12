@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { SIZE_TYPE } from './enum'
 import { Person, POPOVER_PLACEMENT } from './ok-wc-ui'
 
@@ -29,6 +30,21 @@ declare global {
     }
     interface OkPersonDetailAttributes {
       person: Person
+    }
+  }
+
+  interface Window {
+    // ok-wc-ui 配置
+    okuiConfig: {
+      env: 'PRD'
+      apiPath: string // 接口地址
+      sourceHost?: string
+      basePath?: string
+      cardPath?: string
+      options?: {
+        preview?: boolean
+      }
+      locale?: string
     }
   }
 }

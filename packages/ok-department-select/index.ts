@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:01:15
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-11 18:09:54
+ * @LastEditTime: 2021-05-12 16:29:07
  * @FilePath: /packages/ok-department-select/index.ts
  */
 import './ok-department-modal'
@@ -21,6 +21,7 @@ import {
 import { defineComponent, html, onMounted } from 'ok-lit'
 import { createApp, ref } from 'vue'
 
+import { i18n } from '../locales'
 import { CDN_PATH, COMMON_CSS_PATH } from '../path.config'
 import { propsOptions } from './department-props'
 import useDepartmentSelect from './hook'
@@ -47,6 +48,7 @@ defineComponent(
             okDepartmentSelect,
             handleSelect,
             ...params,
+            i18n,
           }
         },
         template: `
@@ -85,8 +87,8 @@ defineComponent(
           </template>
 
           <template #notFoundContent>
-            <span v-if="loading">加载中</span>
-            <span v-else>暂无数据</span>
+            <span v-if="loading">{{i18n.$t('common.loading', '加载中')}}</span>
+            <span v-else>{{i18n.$t('common.noData', '暂无数据')}}</span>
           </template>
           
           <a-select-option

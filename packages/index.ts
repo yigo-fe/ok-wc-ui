@@ -1,6 +1,5 @@
 // @ts-ignore
 import 'vue/dist/vue.cjs.prod.js'
-import './lang'
 import './jsx'
 // 人员卡片
 import './ok-avatar'

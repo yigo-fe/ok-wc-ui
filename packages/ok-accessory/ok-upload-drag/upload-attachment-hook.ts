@@ -3,12 +3,13 @@
  * @Author: 付静
  * @Date: 2021-03-19 01:13:31
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-19 21:20:59
+ * @LastEditTime: 2021-05-12 15:39:06
  * @FilePath: /packages/ok-accessory/ok-upload-drag/upload-attachment-hook.ts
  */
 
 import { message } from 'ant-design-vue'
 
+import { i18n } from '../../locales'
 import { apiInit } from '../../services/api'
 import useUploadHandler from '../upload-base-hook'
 export default function (props, context) {
@@ -43,7 +44,9 @@ export default function (props, context) {
     if (fileDetail?.support_online_view) {
       window.open(fileDetail.online_view_url, '_blank')
     } else {
-      message.error('当前文件暂不支持预览')
+      message.error(
+        i18n.$t('control.attachmentUpload.previewMsg', '当前文件暂不支持预览')
+      )
     }
     // 处理用户自定义事件
     props.onPreview && props.onPreview(file)

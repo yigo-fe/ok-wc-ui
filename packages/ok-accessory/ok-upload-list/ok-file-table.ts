@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-09 11:08:08
+ * @LastEditTime: 2021-05-12 15:31:53
  * @FilePath: /packages/ok-accessory/ok-upload-list/ok-file-table.ts
  */
 
@@ -11,6 +11,7 @@ import { Button, Table } from 'ant-design-vue'
 import { computed, defineComponent, html, onMounted, PropType } from 'ok-lit'
 import { createApp, ref } from 'vue'
 
+import { i18n } from '../../locales'
 import { CDN_PATH } from '../../path.config'
 import okFileTableCss from '../style/ok-file-table.less'
 import type { ListType, UploadFile } from '../upload.type'
@@ -18,27 +19,27 @@ defineComponent(
   'ok-file-table',
   {
     fileList: {
-      type: (Array as unknown) as PropType<UploadFile[]>,
+      type: Array as unknown as PropType<UploadFile[]>,
       default: () => [] as UploadFile[],
     },
     listType: {
-      type: (String as unknown) as PropType<ListType>,
+      type: String as unknown as PropType<ListType>,
       default: 'text',
     },
     disabled: {
-      type: (Boolean as unknown) as PropType<boolean>,
+      type: Boolean as unknown as PropType<boolean>,
     },
     showProgress: {
-      type: (Boolean as unknown) as PropType<boolean>,
+      type: Boolean as unknown as PropType<boolean>,
     },
     showPreview: {
-      type: (Boolean as unknown) as PropType<boolean>,
+      type: Boolean as unknown as PropType<boolean>,
     },
     showDownload: {
-      type: (Boolean as unknown) as PropType<boolean>,
+      type: Boolean as unknown as PropType<boolean>,
     },
     showRemove: {
-      type: (Boolean as unknown) as PropType<boolean>,
+      type: Boolean as unknown as PropType<boolean>,
     },
   },
   (props, context) => {
@@ -58,21 +59,33 @@ defineComponent(
 
           const columns = ref([
             {
-              title: '附件名称',
+              title: i18n.$t(
+                'control.attachmentUpload.uploadTable.fileName',
+                '附件名称'
+              ),
               dataIndex: 'name',
               key: 'file_name',
             },
             {
-              title: '附件类型',
+              title: i18n.$t(
+                'control.attachmentUpload.uploadTable.fileType',
+                '附件类型'
+              ),
               dataIndex: 'type',
               slots: { customRender: 'type' },
             },
             {
-              title: '上传时间',
+              title: i18n.$t(
+                'control.attachmentUpload.uploadTable.createTime',
+                '上传时间'
+              ),
               dataIndex: 'uploadTime',
             },
             {
-              title: '操作',
+              title: i18n.$t(
+                'control.attachmentUpload.uploadTable.operation',
+                '操作'
+              ),
               dataIndex: 'action',
               slots: { customRender: 'action' },
             },

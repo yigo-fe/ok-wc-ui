@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-03 17:28:13
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-30 14:14:51
+ * @LastEditTime: 2021-05-12 13:56:08
  * @FilePath: /packages/ok-person-card/hook.ts
  */
 import { computed, effect } from 'ok-lit'
@@ -48,9 +48,6 @@ export default function (props) {
     terminated: '',
     team: '',
     email: '',
-    manager: '',
-    more: '',
-    seeMore: '',
     sendLark: '',
     sendIcon: '',
   })
@@ -129,7 +126,7 @@ export default function (props) {
   const initData = () => {
     if (!props.personInfo) return
     initPersonInfo()
-    langPack.value = setLang(props.i18n, relationType.value)[props.i18n]
+    langPack.value = setLang(relationType.value)
     if (!relationType.value) {
       console.warn('请传入平台字段msgRelationType')
     }

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-29 19:07:20
+ * @LastEditTime: 2021-05-12 16:29:25
  * @FilePath: /packages/ok-accessory/upload-base-hook.ts
  */
 
@@ -39,9 +39,9 @@ import { computed } from 'ok-lit'
 import { h, reactive, ref, watch } from 'vue'
 
 import confirmIcon from '../assets/images/maybe.svg'
+import { i18n } from '../locales'
 import { isSameArray } from '../utils/index'
 import type { OkFile, UploadStatus } from './upload.type'
-
 type UpdateFile = {
   percentage?: number
   status?: UploadStatus
@@ -72,7 +72,10 @@ export default function (props, context, config) {
   const uploadFiles = (files: FileList) => {
     // 特殊处理：预览时不调上传接口
     if (window.okuiConfig?.options?.preview) {
-      message.error('预览状态下，无法上传')
+      // message.error('预览状态下无法上传')
+      message.error(
+        i18n.$t('control.attachmentUpload.unpreviewMsg', '预览状态不支持上传')
+      )
       return
     }
     if (
@@ -173,7 +176,7 @@ export default function (props, context, config) {
   const removeFileList = file => {
     let idx = fileLists.value.findIndex(v => v.uid === file.uid)
     if (idx === -1) {
-      console.warn('文件不存在')
+      // console.warn('文件不存在')
       return
     }
     fileLists.value.splice(idx, 1)
@@ -238,6 +241,12 @@ export default function (props, context, config) {
   const handleOnChange = file => {
     props.onChange && props.onChange({ file, fileLists: fileLists.value })
   }
+
+  const confirmMsg = () => {
+    return config.type === 'image'
+      ? i18n.$t('control.imageUpload.deleteTip', '确认删除该图片?')
+      : i18n.$t('control.attachmentUpload.deleteTip', '确认删除该文件?')
+  }
   /**
    * 删除文件
    * @param data emit事件
@@ -245,7 +254,7 @@ export default function (props, context, config) {
   const handleDetele = data => {
     let idx = fileLists.value.findIndex(v => v.uid === data.detail.uid)
     if (idx === -1) {
-      console.warn('文件不存在')
+      // console.warn('文件不存在')
       return
     }
     let file = fileLists.value[idx]
@@ -277,13 +286,13 @@ export default function (props, context, config) {
             {
               class: '',
             },
-            `确定删除该${config.type === 'image' ? '图片' : '文件'}?`
+            confirmMsg
           ),
         ]
       ),
       class: 'file-delete-confirm',
-      okText: '确定',
-      cancelText: '取消',
+      okText: i18n.$t('common.confirm', '确定'),
+      cancelText: i18n.$t('common.cancel', '取消'),
       onOk: () => {
         // 处理beforeRemove
         if (
