@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-12 16:29:25
+ * @LastEditTime: 2021-05-12 21:23:32
  * @FilePath: /packages/ok-accessory/upload-base-hook.ts
  */
 
@@ -286,7 +286,7 @@ export default function (props, context, config) {
             {
               class: '',
             },
-            confirmMsg
+            confirmMsg()
           ),
         ]
       ),

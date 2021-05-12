@@ -11,28 +11,28 @@
       "dingtalk": "DingTalk"
     },
     "imageUpload": {
-      "deleteTip": "确认删除该图片?",
-      "uploadBtnText":"上传图片"
+      "deleteTip": "Are you sure to delete this picture?",
+      "uploadBtnText":"Upload picture"
     },
     "attachmentUpload": {
-      "unpreviewMsg": "预览状态不支持上传",
-      "previewMsg": "当前文件暂不支持预览",
-      "deleteTip": "确认删除该文件?",
-      "uploadBtnText":"上传附件", 
-      "uploadBtnTable": "点击上传", 
+      "unpreviewMsg": "Preview page is not supported to upload",
+      "previewMsg": "The file does not support preview",
+      "deleteTip": "Are you sure to delete this file?",
+      "uploadBtnText":"Upload file", 
+      "uploadBtnTable": "Upload file", 
       "uploadTable": {        
-        "fileName": "附件名称",
-        "fileType": "附件类型",
-        "createTime": "上传时间",
-        "operation": "操作"
+        "fileName": "File name",
+        "fileType": "File type",
+        "createTime": "Upload time",
+        "operation": "Operation"
       },
-      "dragTip": "将文件拖到此处或"
+      "dragTip": "Drag file to this area or"
     },
     "employeeSelect": {
-      "title": "人员选择"
+      "title": "Select employee"
     },
     "departmentSelect": {
-      "title": "部门选择"  
+      "title": "Select department"  
     }
   },
   "common": {
@@ -44,7 +44,7 @@
     "clear": "Clear"
   },
   "placeholder": {
-    "employeePlaceholder": "请输入姓名、邮箱前缀、工号",
-    "deptPlaceholder": "请输入部门名称"
+    "employeePlaceholder": "Enter the name, email address prefix, and employee no.",
+    "deptPlaceholder": "Please enter the department name"
   }
 }
