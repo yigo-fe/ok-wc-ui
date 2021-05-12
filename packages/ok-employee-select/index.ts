@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-10 10:23:31
+ * @LastEditTime: 2021-05-11 18:03:37
  * @FilePath: /packages/ok-employee-select/index.ts
  */
 
@@ -61,7 +61,7 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
             showSearch
             dropdownClassName="userSelectDropdown"
             :dropdownStyle="dropdownstyle"
-            style="width: 100%"
+            style="width: 100%; height: 100%;"
             class="ok-employee-select"
             :class="{'no-border': borderless}"  
             :getPopupContainer="getPopupContainer"         
@@ -143,6 +143,10 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
     <link rel="stylesheet" .href="${CDN_PATH}antd.min.css" />
     <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
 
-    <div ref="showEmployeeSelect" class="ok-employee-select-wraper"></div>
+    <div
+      ref="showEmployeeSelect"
+      class="ok-employee-select-wraper"
+      style="height: 100%"
+    ></div>
   `
 })

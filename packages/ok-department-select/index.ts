@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:01:15
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-10 14:47:00
+ * @LastEditTime: 2021-05-11 18:09:54
  * @FilePath: /packages/ok-department-select/index.ts
  */
 import './ok-department-modal'
@@ -55,7 +55,8 @@ defineComponent(
           class="ok-department-select"
           show-search
           showArrow
-          mode="multiple"        
+          mode="multiple"
+          style="width: 100%; height: 100%;"    
           :vip="testVal"
           :open="isOpen"          
           :placeholder="placeholder"

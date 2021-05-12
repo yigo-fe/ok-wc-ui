@@ -58,16 +58,16 @@
 
       <h3>部门选择 input </h3>
       <ok-department-select class="divider ok-department-input" placeholder="请选择部门" style="width: 200px;display: block;"></ok-department-select>
-      <ok-department-select mode="tree" class="divider ok-department-tree" placeholder="请选择部门" style="width: 200px;display: block;"></ok-department-select>
+      <ok-department-select mode="tree" class="divider ok-department-tree" placeholder="请选择部门" style="width: 200px;height:40px;display: block;"></ok-department-select>
 
 
       <h3>人员选择select-antd</h3>
-      <ok-employee-select class="divider ok-employee-input" placeholder="请选择1" style="width: 200px;display: block;"></ok-employee-select>
+      <ok-employee-select class="divider ok-employee-input" placeholder="请选择1" style="width: 200px; height:60px;display: block;"></ok-employee-select>
 
       <!-- <ok-employee-select class="divider ok-employee-input2" placeholder="请选择2" style="width: 200px;display: block;"></ok-employee-select> -->
 
       <h3>人员选择tree</h3>
-      <ok-employee-select class="divider ok-employee-tree" mode="tree" placeholder="请选择3" style="width: 300px;display: block;"></ok-employee-select>
+      <ok-employee-select class="divider ok-employee-tree" mode="tree" placeholder="请选择3" style="width: 300px;height:40px;display: block;"></ok-employee-select>
 
       <ok-ant-person-select></ok-ant-person-select>
       <!-- <ok-person-detail></ok-person-detail> -->
@@ -178,6 +178,31 @@
       msg_relation_type: "WX",
       tenant_id: "test"
     }
+    const personInfo1 = {
+  "msg_relation_type": "WX",
+  "id": "SuJieFeng",
+  "name_en": "苏杰锋",
+  "name_zh": "苏杰锋",
+  "name_ja": "苏杰锋",
+  "name": {
+    "en": "苏杰锋",
+    "zh": "苏杰锋",
+    "ja": "苏杰锋"
+  },
+  "email": "sujiefeng@byteluck.com",
+  "org_name": "测试部",
+  "external": "https://wework.qpic.cn/bizmail/5MicbcvDmINtCeG1TpOc2BMRsl4iaaHcxibWVAeVRRaQIbgsZjvZj1icNQ/0",
+  "org_name_en": "测试部",
+  "org_name_zh": "测试部",
+  "org_name_ja": "测试部",
+  "org_name_mult_lang": {
+    "en": "测试部",
+    "zh": "测试部",
+    "ja": "测试部"
+  },
+  "avatar": "https://wework.qpic.cn/bizmail/5MicbcvDmINtCeG1TpOc2BMRsl4iaaHcxibWVAeVRRaQIbgsZjvZj1icNQ/0",
+  "terminated": false
+}
 
 
     const personList =[{
@@ -352,7 +377,7 @@
       // okAvatar.personInfo = personInfo
 
       const okPersonCell = document.querySelector('ok-person-cell')
-      okPersonCell.personInfo = personInfo
+      okPersonCell.personInfo = personInfo1
       okPersonCell.width = '30px'
       okPersonCell.height = '30px'
 

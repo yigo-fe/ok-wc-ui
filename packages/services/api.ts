@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 16:58:26
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-11 16:28:29
+ * @LastEditTime: 2021-05-11 17:45:25
  * @FilePath: /packages/services/api.ts
  */
 
@@ -17,7 +17,7 @@ declare global {
     // ok-wc-ui 配置
     okuiConfig: {
       env: 'PRD'
-      apiPath: string
+      apiPath: string // 接口地址
       sourceHost?: string
       basePath?: string
       cardPath?: string
