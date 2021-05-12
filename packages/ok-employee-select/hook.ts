@@ -97,7 +97,11 @@ export default function (props: any, context: any) {
 
   // 搜索
   const searchUser = async (query: string) => {
-    return await api.default.SearchUserInfo({ param: query })
+    if (props.remoteMethod) {
+      return await props.remoteMethod(query)
+    } else {
+      return await api.default.SearchUserInfo({ param: query })
+    }
   }
 
   // 远程模式下, 如果未选中， 清除options缓存
