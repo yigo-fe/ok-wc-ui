@@ -122,6 +122,7 @@ defineComponent(
             .size=${props.size}
             .width=${props.width}
             .height=${props.height}
+            .propsGetInfoByEmpId=${props.propsGetInfoByEmpId}
           ></ok-person-cell>`
         )}
         ${showList.value?.length === 1

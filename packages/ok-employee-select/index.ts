@@ -38,13 +38,11 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
           // 单选收起下拉框
           okEmployeeInput.value?.blur()
         }
-
         return {
           ...params,
           okEmployeeInput,
           handleSelect,
           i18n,
-          propsGetInfoByEmpId: props.propsGetInfoByEmpId,
         }
       },
       template: `

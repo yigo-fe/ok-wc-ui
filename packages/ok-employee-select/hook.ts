@@ -46,6 +46,8 @@ export default function (props: any, context: any) {
     () => props.getPopupContainer || (() => document.body)
   )
 
+  const propsGetInfoByEmpId = computed(() => props.propsGetInfoByEmpId)
+
   // modal 展示与否
   const visible = ref(false)
 
@@ -398,5 +400,6 @@ export default function (props: any, context: any) {
     handleOpenModal,
     collectMap,
     handleFocus,
+    propsGetInfoByEmpId,
   }
 }
