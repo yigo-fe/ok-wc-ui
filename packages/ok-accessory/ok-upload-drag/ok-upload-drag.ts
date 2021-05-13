@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-19 20:15:34
+ * @LastEditTime: 2021-05-12 15:37:16
  * @FilePath: /packages/ok-accessory/ok-upload-drag/ok-upload-drag.ts
  */
 
@@ -40,6 +40,7 @@ import { defineComponent, html } from 'ok-lit'
 import { ref } from 'vue'
 
 import { okPrimaryColor, okUploadColor } from '../../assets/theme'
+import { i18n } from '../../locales'
 import { COMMON_CSS_PATH } from '../../path.config'
 import okUploadCss from '../style/upload.less'
 import { UploadProps } from '../upload.props'
@@ -147,7 +148,10 @@ defineComponent(
                 </svg>
 
                 <p class="upload-inner-text">
-                  将文件拖到此处或
+                  ${i18n.$t(
+                    'control.attachmentUpload.dragTip',
+                    '将文件拖到此处或'
+                  )}
                   <span
                     class="upload-btn"
                     style=${styleMap({
@@ -155,7 +159,11 @@ defineComponent(
                         props.disabled ? okUploadColor : okPrimaryColor
                       }`,
                     })}
-                    >点击上传</span
+                  >
+                    ${i18n.$t(
+                      'control.attachmentUpload.uploadBtnTable',
+                      '点击上传'
+                    )}</span
                   >
                 </p>
               </div>

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-09 11:23:31
+ * @LastEditTime: 2021-05-12 15:37:02
  * @FilePath: /packages/ok-accessory/ok-upload-list/ok-upload-list.ts
  */
 
@@ -36,6 +36,7 @@
 import { classMap } from 'lit-html/directives/class-map.js'
 import { defineComponent, html } from 'ok-lit'
 
+import { i18n } from '../../locales'
 import useAttachmentHandle from '../ok-upload-drag/upload-attachment-hook'
 import okUploadCss from '../style/upload.less'
 import { UploadProps } from '../upload.props'
@@ -111,7 +112,12 @@ defineComponent(
                     p-id="27172"
                   ></path>
                 </svg>
-                <span class="btn-text">点击上传</span>
+                <span class="btn-text"
+                  >${i18n.$t(
+                    'control.attachmentUpload.uploadBtnTable',
+                    '点击上传'
+                  )}</span
+                >
               </div>
             </slot>
             <input

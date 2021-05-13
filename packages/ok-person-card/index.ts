@@ -60,7 +60,7 @@ defineComponent('ok-person-card', { ...props }, (props, context) => {
               <span class="person-card-name" :class="{'isTerminated': statusType === '0'}">{{personInfoCom['name'][i18n]}}</span>
               <img v-if="personInfoCom.gender ==2" :src="femaleIcon" class="gender-icon" />
               <img v-else :src="maleIcon" class="gender-icon" />
-              <div v-if="statusType === '0'" class="terminated-text">已停用</div>
+              <div v-if="statusType === '0'" class="terminated-text">{{langPack.terminated}}</div>
             </span>
           </header>
 

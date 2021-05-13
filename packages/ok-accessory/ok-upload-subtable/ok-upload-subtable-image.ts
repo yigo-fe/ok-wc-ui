@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-23 11:40:35
+ * @LastEditTime: 2021-05-12 15:23:16
  * @FilePath: /packages/ok-accessory/ok-upload-subtable/ok-upload-subtable-image.ts
  */
 
@@ -37,6 +37,7 @@
 import { classMap } from 'lit-html/directives/class-map.js'
 import { defineComponent, html, PropType } from 'ok-lit'
 
+import { i18n } from '../../locales'
 import { COMMON_CSS_PATH } from '../../path.config'
 import useImageHandle from '../ok-upload-image/upload-image-hook'
 import okUploadCss from '../style/upload.less'
@@ -46,15 +47,14 @@ defineComponent(
   {
     ...UploadProps,
     maxHeight: {
-      type: (String as unknown) as PropType<string>,
+      type: String as unknown as PropType<string>,
       default: '180px',
     },
     type: {
-      type: (String as unknown) as PropType<string>,
+      type: String as unknown as PropType<string>,
     },
     accept: {
-      type: (String as unknown) as PropType<string>,
-      default: '.jpg,.jpeg,.gif,.tif,.tiff,.bmp,.png',
+      type: String as unknown as PropType<string>,
     },
   },
   (props, context) => {
@@ -120,7 +120,12 @@ defineComponent(
                     p-id="27172"
                   ></path>
                 </svg>
-                <span class="upload-text">上传图片</span>
+                <span class="upload-text"
+                  >${i18n.$t(
+                    'control.imageUpload.uploadBtnText',
+                    '上传图片'
+                  )}</span
+                >
               </div>
             </slot>
 

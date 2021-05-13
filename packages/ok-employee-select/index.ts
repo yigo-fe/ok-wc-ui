@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-11 18:03:37
+ * @LastEditTime: 2021-05-12 16:29:58
  * @FilePath: /packages/ok-employee-select/index.ts
  */
 
@@ -14,6 +14,7 @@ import { Select } from 'ant-design-vue'
 import { defineComponent, html, onMounted } from 'ok-lit'
 import { createApp, ref } from 'vue'
 
+import { i18n } from '../locales'
 import { CDN_PATH, COMMON_CSS_PATH } from '../path.config'
 import { propsOptions } from './employee-props'
 import useEmployeeSelect from './hook'
@@ -42,6 +43,7 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
           ...params,
           okEmployeeInput,
           handleSelect,
+          i18n,
           propsGetInfoByEmpId: props.propsGetInfoByEmpId,
         }
       },
@@ -81,8 +83,8 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
               <img v-else :src="searchIcon" style="height:16px; width: 16px;" class="head-search-icon"/>
             </template>
             <template #notFoundContent>
-              <span v-if="loading">加载中</span>
-              <span v-else>暂无数据</span>
+              <span v-if="loading">{{i18n.$t('common.loading', '加载中')}}</span>
+              <span v-else>{{i18n.$t('common.noData', '暂无数据')}}</span>
             </template>
             <a-select-option
               v-for="employee in options"

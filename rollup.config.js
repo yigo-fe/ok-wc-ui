@@ -1,11 +1,12 @@
 import cjs from '@rollup/plugin-commonjs'
 import image from '@rollup/plugin-image'
+import rollupjson from '@rollup/plugin-json'
 import autoprefixer from 'autoprefixer'
 import rimraf from 'rimraf'
 import alias from 'rollup-plugin-alias'
 import copy from 'rollup-plugin-copy'
 import filesize from 'rollup-plugin-filesize'
-import json from 'rollup-plugin-json'
+// import json from 'rollup-plugin-json'
 import livereload from 'rollup-plugin-livereload'
 import postcss from 'rollup-plugin-postcss'
 import replace from 'rollup-plugin-replace'
@@ -35,7 +36,8 @@ const createConfig = format => {
   const plugins = [
     alias(),
     nodeResolve(),
-    json(),
+    rollupjson(),
+    // json(),
     postcss({
       extract: false,
       inject: false,

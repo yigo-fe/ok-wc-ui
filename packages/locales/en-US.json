@@ -1,0 +1,50 @@
+{
+  "control": {
+    "personCard": {
+      "terminated": "Discontinued",
+      "department": "Team",
+      "email": "Email",
+      "sendLark":"Send {title} Message",
+      "wechat": "WeChat Work",
+      "ME": "ME",
+      "lark": "Lark",
+      "dingtalk": "DingTalk"
+    },
+    "imageUpload": {
+      "deleteTip": "Are you sure to delete this picture?",
+      "uploadBtnText":"Upload picture"
+    },
+    "attachmentUpload": {
+      "unpreviewMsg": "Preview page is not supported to upload",
+      "previewMsg": "The file does not support preview",
+      "deleteTip": "Are you sure to delete this file?",
+      "uploadBtnText":"Upload file", 
+      "uploadBtnTable": "Upload file", 
+      "uploadTable": {        
+        "fileName": "File name",
+        "fileType": "File type",
+        "createTime": "Upload time",
+        "operation": "Operation"
+      },
+      "dragTip": "Drag file to this area or"
+    },
+    "employeeSelect": {
+      "title": "Select employee"
+    },
+    "departmentSelect": {
+      "title": "Select department"  
+    }
+  },
+  "common": {
+    "noData": "No data",
+    "selected": "Selected",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "loading": "Loading",
+    "clear": "Clear"
+  },
+  "placeholder": {
+    "employeePlaceholder": "Enter the name, email address prefix, and employee no.",
+    "deptPlaceholder": "Please enter the department name"
+  }
+}

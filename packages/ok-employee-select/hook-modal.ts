@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 15:19:21
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-28 12:23:43
+ * @LastEditTime: 2021-05-12 16:47:46
  * @FilePath: /packages/ok-employee-select/hook-modal.ts
  */
 import { debounce } from 'lodash'
@@ -47,9 +47,7 @@ export default function (props: any) {
   const tempSelected = ref<any>([])
 
   // 组织架构面包屑
-  const breadcrumbList = ref<any[]>([
-    { department_id: '1', department_name: '根目录' },
-  ])
+  const breadcrumbList = ref<any[]>([])
 
   // 查询参数 - 当前部门id
   let department_id = ref('1')
@@ -76,6 +74,17 @@ export default function (props: any) {
       infoMapInner.value[v.employee_id] = v
     })
   }
+
+  let rootDept: any = {}
+  // 部门树获取根 节点
+  const getDeptGetRootDept = async () => {
+    const result = await api.default.GetRootDeptDeptPrivateV1POST({})
+    if (result.code === '000000') {
+      rootDept = result.data
+      breadcrumbList.value.push(result.data)
+    }
+  }
+  getDeptGetRootDept()
 
   // 设置面包屑
   const setBreadcrumb = (department: any) => {
@@ -162,7 +171,7 @@ export default function (props: any) {
   // 点击面包屑的根节点
   const handleRootClick = () => {
     breadcrumbList.value = []
-    department_id.value = '1'
+    department_id.value = rootDept.department_id
     queryKey.value = ''
     getDeptAndEmployee()
   }
@@ -201,8 +210,8 @@ export default function (props: any) {
 
   // 打开modal
   const handleOpenModal = () => {
-    breadcrumbList.value = [{ department_id: '1', department_name: '根目录' }]
-    department_id.value = '1'
+    breadcrumbList.value = [rootDept]
+    department_id.value = rootDept.department_id
     queryKey.value = ''
     tempSelected.value = [...propsValue.value]
     // 初始化树左侧数据

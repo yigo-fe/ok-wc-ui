@@ -1,0 +1,50 @@
+{
+  "control": {
+    "personCard": {
+      "terminated": "使用停止",
+      "department": "部署",
+      "email": "メール",
+      "sendLark":"{title}メッセージを送る",
+      "wechat": "WeChat Work",
+      "ME": "ME",
+      "lark": "Lark",
+      "dingtalk": "DingTalk"
+    },
+    "imageUpload": {
+      "deleteTip": "确认删除该图片?",
+      "uploadBtnText":"上传图片"
+    },
+    "attachmentUpload": {
+      "unpreviewMsg": "预览状态不支持上传",
+      "previewMsg": "当前文件暂不支持预览",
+      "deleteTip": "确认删除该文件?",
+      "uploadBtnText":"上传附件", 
+      "uploadBtnTable": "点击上传", 
+      "uploadTable": {        
+        "fileName": "附件名称",
+        "fileType": "附件类型",
+        "createTime": "上传时间",
+        "operation": "操作"
+      },
+      "dragTip": "将文件拖到此处或"
+    },
+    "employeeSelect": {
+      "title": "人员选择"
+    },
+    "departmentSelect": {
+      "title": "部门选择"  
+    }
+  },
+  "common": {
+    "noData": "No data",
+    "selected": "Selected",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "loading": "Loading",
+    "clear": "Clear"
+  },
+  "placeholder": {
+    "employeePlaceholder": "请输入姓名、邮箱前缀、工号",
+    "deptPlaceholder": "请输入部门名称"
+  }
+}
