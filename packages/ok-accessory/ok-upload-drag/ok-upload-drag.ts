@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-12 15:37:16
+ * @LastEditTime: 2021-05-13 15:27:15
  * @FilePath: /packages/ok-accessory/ok-upload-drag/ok-upload-drag.ts
  */
 
@@ -161,7 +161,7 @@ defineComponent(
                     })}
                   >
                     ${i18n.$t(
-                      'control.attachmentUpload.uploadBtnTable',
+                      'control.attachmentUpload.uploadBtndDrag',
                       '点击上传'
                     )}</span
                   >

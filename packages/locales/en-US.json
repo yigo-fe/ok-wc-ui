@@ -2,7 +2,7 @@
   "control": {
     "personCard": {
       "terminated": "Discontinued",
-      "department": "Team",
+      "department": "Department",
       "email": "Email",
       "sendLark":"Send {title} Message",
       "wechat": "WeChat Work",
@@ -12,14 +12,15 @@
     },
     "imageUpload": {
       "deleteTip": "Are you sure to delete this picture?",
-      "uploadBtnText":"Upload picture"
+      "uploadBtnText":"Upload Image"
     },
     "attachmentUpload": {
-      "unpreviewMsg": "Preview page is not supported to upload",
-      "previewMsg": "The file does not support preview",
+      "unpreviewMsg": "Preview status does not support upload",
+      "previewMsg": "This file does not support preview",
       "deleteTip": "Are you sure to delete this file?",
-      "uploadBtnText":"Upload file", 
-      "uploadBtnTable": "Upload file", 
+      "uploadBtnText":"Upload File", 
+      "uploadBtnTable": "Click to Upload", 
+      "uploadBtndDrag": "click to upload", 
       "uploadTable": {        
         "fileName": "File name",
         "fileType": "File type",
@@ -29,10 +30,10 @@
       "dragTip": "Drag file to this area or"
     },
     "employeeSelect": {
-      "title": "Select employee"
+      "title": "Personnel selection"
     },
     "departmentSelect": {
-      "title": "Select department"  
+      "title": "Department selection"  
     }
   },
   "common": {
