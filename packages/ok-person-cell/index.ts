@@ -25,7 +25,12 @@ defineComponent(
     const statusType: any = ref('')
 
     const checkLardShow = async (id: string) => {
-      const result = await api.default.GetInfoByEmpId({ emp_id: id })
+      let result: any = null
+      if (props.propsGetInfoByEmpId) {
+        result = await props.propsGetInfoByEmpId(id)
+      } else {
+        result = await api.default.GetInfoByEmpId({ emp_id: id })
+      }
 
       if (result.code === '000000') {
         const fromOpenId = result.data.from_open_id

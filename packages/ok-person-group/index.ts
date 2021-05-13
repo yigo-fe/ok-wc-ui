@@ -15,56 +15,60 @@ defineComponent(
   'ok-person-group',
   {
     personList: {
-      type: (Array as unknown) as PropType<any[]>,
+      type: Array as unknown as PropType<any[]>,
       default: () => {
         return []
       },
     },
     size: {
-      type: (String as unknown) as PropType<SIZE_TYPE>,
+      type: String as unknown as PropType<SIZE_TYPE>,
       default: SIZE_TYPE.SMALL,
     },
     width: {
-      type: (String as unknown) as PropType<string>,
+      type: String as unknown as PropType<string>,
     },
     height: {
-      type: (String as unknown) as PropType<string>,
+      type: String as unknown as PropType<string>,
     },
     showDelete: {
-      type: (Boolean as unknown) as PropType<boolean>,
+      type: Boolean as unknown as PropType<boolean>,
       default: false,
     },
     showAll: {
-      type: (Boolean as unknown) as PropType<boolean>,
+      type: Boolean as unknown as PropType<boolean>,
       default: false,
     },
     detailSize: {
-      type: (String as unknown) as PropType<string>,
+      type: String as unknown as PropType<string>,
       default: 'mini',
     },
     detailWidth: {
-      type: (String as unknown) as PropType<string>,
+      type: String as unknown as PropType<string>,
     },
     detailHeight: {
-      type: (String as unknown) as PropType<string>,
+      type: String as unknown as PropType<string>,
     },
     contentStyle: {
-      type: (Object as unknown) as PropType<{}>,
+      type: Object as unknown as PropType<{}>,
     },
     itemStyle: {
-      type: (Object as unknown) as PropType<{}>,
+      type: Object as unknown as PropType<{}>,
     },
     placement: {
-      type: (String as unknown) as PropType<string>,
+      type: String as unknown as PropType<string>,
       default: 'top',
     },
     deleteItem: {
       // eslint-disable-next-line no-unused-vars
-      type: (Function as unknown) as PropType<(item: any) => void>,
+      type: Function as unknown as PropType<(item: any) => void>,
     },
     subtitleRender: {
       // eslint-disable-next-line no-unused-vars
-      type: (Function as unknown) as PropType<(item: any) => void>,
+      type: Function as unknown as PropType<(item: any) => void>,
+    },
+    // 审批组件传入，卡片请求数据方法
+    propsGetInfoByEmpId: {
+      type: Function,
     },
   },
   (props, contxt) => {
@@ -167,6 +171,7 @@ defineComponent(
                     .width=${props.detailWidth}
                     .height=${props.detailHeight}
                     .hidePopper=${false}
+                    .propsGetInfoByEmpId=${props.propsGetInfoByEmpId}
                   ></ok-person-cell>
                   <span class="popper-item-name">${item.employee_name}</span>
                   ${iconRender(item)}

@@ -104,6 +104,10 @@ const propsOptions = {
   remoteMethod: {
     type: Function,
   },
+  // 审批组件传入，卡片请求数据方法
+  propsGetInfoByEmpId: {
+    type: Function,
+  },
 }
 
 export { propsOptions }

@@ -42,11 +42,12 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
           ...params,
           okEmployeeInput,
           handleSelect,
+          propsGetInfoByEmpId: props.propsGetInfoByEmpId,
         }
       },
       template: `
 			    <a-select
-            ref="okEmployeeInput"			
+            ref="okEmployeeInput"
             v-model:value="value"
             :a="testVal"
             mode="multiple"
@@ -63,16 +64,16 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
             :dropdownStyle="dropdownstyle"
             style="width: 100%; height: 100%;"
             class="ok-employee-select"
-            :class="{'no-border': borderless}"  
-            :getPopupContainer="getPopupContainer"         
+            :class="{'no-border': borderless}"
+            :getPopupContainer="getPopupContainer"
             @search="searchByKey"
             @select="handleSelect"
             @click="handleInputClick"
-            @blur="closeOpen" 
+            @blur="closeOpen"
             @focus="handleFocus"
-            @deselect="handleDelete" 
-            @mouseenter="mouseenter" 
-            @mouseleave="mouseleave" 
+            @deselect="handleDelete"
+            @mouseenter="mouseenter"
+            @mouseleave="mouseleave"
             @dropdownVisibleChange="dropdownVisibleChange">
 
             <template #suffixIcon>
@@ -95,12 +96,14 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
                       class="user-img__avatar__head"
                       :personInfo="employee"
                       width="20px"
+                      :propsGetInfoByEmpId="propsGetInfoByEmpId"
                       height="20px"
                     ></ok-person-cell>
                     <span class="selected-head-name-head">{{ employee.employee_name }}</span>
                   </div>
                   <div class="selected-option">
                     <ok-person-cell
+                      :propsGetInfoByEmpId="propsGetInfoByEmpId"
                       class="user-img__avatar"
                       :personInfo="employee"
                       width="40px"
@@ -121,16 +124,16 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
           </a-select>
           <ok-employee-modal
             v-if="mode==='tree'"
-            :visible="visible" 
+            :visible="visible"
             :inputValue="value"
             :multiple="multiple"
             :range="range"
             :secrecy="secrecy"
-            :infoMap="infoMap"           
+            :infoMap="infoMap"
             :collect="collectMap"
             :change="handleModalChange"
-            :close="handleCloseModal"           
-            ></ok-employee-modal>  
+            :close="handleCloseModal"
+            ></ok-employee-modal>
       	`,
     }
 
