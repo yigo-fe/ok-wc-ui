@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 20:15:04
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-14 16:34:05
+ * @LastEditTime: 2021-05-14 17:03:34
  * @FilePath: /packages/ok-department-select/hook.ts
  */
 import { debounce } from 'lodash'
@@ -283,7 +283,7 @@ export default function (props: any, context: any) {
     ])
     tempPromiseResolve = null
 
-    if (result.code === '000000') {
+    if (result?.code === '000000') {
       const data: any = result.data
       options.value = data
       // 收集map
