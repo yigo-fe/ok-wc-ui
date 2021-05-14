@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 20:15:04
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-10 14:46:53
+ * @LastEditTime: 2021-05-14 16:34:05
  * @FilePath: /packages/ok-department-select/hook.ts
  */
 import { debounce } from 'lodash'
@@ -269,11 +269,20 @@ export default function (props: any, context: any) {
       deep: true,
     }
   )
-
+  let tempPromiseResolve: any = null
   // init回显：部门id根据查询指定部门信息: 1. 默认值回显; 2. 收集
   let initDisplay = async (ids: string[]) => {
     if (!ids?.length) options.value = []
-    const result = await getDepartmentsByIds(ids)
+
+    const tempPromise = new Promise(resolve => {
+      tempPromiseResolve = resolve
+    })
+    const result: any = await Promise.race([
+      getDepartmentsByIds(ids),
+      tempPromise,
+    ])
+    tempPromiseResolve = null
+
     if (result.code === '000000') {
       const data: any = result.data
       options.value = data
@@ -288,6 +297,10 @@ export default function (props: any, context: any) {
 
   // propsValue 变化时处理：
   const handlePropsValChange = () => {
+    // 如果上次人员信息请求还没结束, 则终止请求
+    if (tempPromiseResolve) {
+      tempPromiseResolve({})
+    }
     const val = propsValue.value
     if ((!val?.length && !value.value.length) || propsValEqulValue()) return
     // 更新初始值
@@ -304,7 +317,6 @@ export default function (props: any, context: any) {
   watch(
     () => propsValue.value,
     (val, oldVal) => {
-      // console.log('watch - propsValue.value', val, oldVal)
       // 有时val和oldValue一样也会触发，具体原因待排查
       if (isSameArray(val, oldVal)) return
       handlePropsValChange()
@@ -315,13 +327,6 @@ export default function (props: any, context: any) {
   )
 
   // 处理多选变单选时value
-  // effect(() => {
-  //   const val = multiple.value
-  //   if (!val && value.value?.length > 1) {
-  //     value.value = value.value.slice(0, 1)
-  //   }
-  // })
-
   watch(
     () => multiple.value,
     val => {

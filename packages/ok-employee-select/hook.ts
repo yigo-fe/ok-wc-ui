@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 15:16:57
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-10 10:38:06
+ * @LastEditTime: 2021-05-14 16:37:39
  * @FilePath: /packages/ok-employee-select/hook.ts
  */
 import { debounce } from 'lodash'
@@ -253,23 +253,38 @@ export default function (props: any, context: any) {
     props.onFocus && props.onFocus()
   }
 
-  // init回显：根据ids查询信息: 1. 默认值回显; 2. 收集
-  let initDisplay = async (ids: string[], flag?: string) => {
-    // 如果是本地
-    const params = remote ? ids : props.range
-    if (!params?.length) options.value = []
-    const result = await getItemByIds(params)
-    if (result.code === '000000') {
+  // init回显：根据ids查询信息: 1. 默认值回显; 2. 收集options
+
+  let tempPromiseResolve: any = null
+  let initDisplay = async (ids: string[]) => {
+    // 传入的只为空时，直接更新value， options为空
+    if (!ids?.length) {
+      // 更新value；注意处理单选
+      value.value = multiple.value ? ids : ids.slice(0, 1)
+      // 清空options（有range时不需要处理）
+      if (!props.range?.length) {
+        options.value = []
+      }
+      return
+    }
+    // id 不为空， 根据人员ID， 请求人员信息
+    const tempPromise = new Promise(resolve => {
+      tempPromiseResolve = resolve
+    })
+    const result: any = await Promise.race([getItemByIds(ids), tempPromise])
+    tempPromiseResolve = null
+    if (result?.code === '000000') {
       const data: any = result.data
-      options.value = data
+      // 有range时不需要更新options
+      if (!props.range?.length) {
+        options.value = data
+      }
       // 收集map
       collectMap(options.value)
       // 处理溢出
       getExceed()
-      if (!flag) {
-        // 更新value；获取detail,回显信息; 注意处理单选
-        value.value = multiple.value ? ids : ids.slice(0, 1)
-      }
+      // 更新value；注意处理单选
+      value.value = multiple.value ? ids : ids.slice(0, 1)
     }
   }
 
@@ -311,9 +326,14 @@ export default function (props: any, context: any) {
 
   // propsValue 变化时处理：
   const handlePropsValChange = () => {
+    // 如果上次人员信息请求还没结束, 则终止请求
+    if (tempPromiseResolve) {
+      tempPromiseResolve({})
+    }
     const val = propsValue.value
     if ((!val?.length && !value.value.length) || propsValEqulValue()) return
     // 更新初始值
+
     if (val?.length) {
       // 回显: 更新options
       initDisplay(val)
@@ -327,13 +347,13 @@ export default function (props: any, context: any) {
   watch(
     () => propsValue.value,
     (val, oldVal) => {
-      // console.log('watch - propsValue.value', val, oldVal)
       // 有时val和oldValue一样也会触发，具体原因待排查
       if (isSameArray(val, oldVal)) return
       handlePropsValChange()
     },
     {
       immediate: true,
+      deep: true,
     }
   )
 
@@ -350,9 +370,32 @@ export default function (props: any, context: any) {
     }
   )
 
+  // 初始化range options
+  let tempRangePromiseResolve: any = null
+  const initRange = async () => {
+    const tempPromise = new Promise(resolve => {
+      tempRangePromiseResolve = resolve
+    })
+    const result: any = await Promise.race([
+      getItemByIds(props.range),
+      tempPromise,
+    ])
+    tempRangePromiseResolve = null
+    if (result?.code === '000000') {
+      const data: any = result.data
+      options.value = data
+      // 收集map
+      collectMap(options.value)
+    }
+  }
+
   effect(() => {
     if (props.range?.length) {
-      initDisplay(props.range, 'range')
+      // 如果上次人员信息请求还没结束, 则终止请求
+      if (tempRangePromiseResolve) {
+        tempRangePromiseResolve({})
+      }
+      initRange()
     }
   })
 
