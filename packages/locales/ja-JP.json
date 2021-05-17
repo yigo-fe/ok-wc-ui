@@ -18,7 +18,7 @@
       "unpreviewMsg": "一時閲覧の状態でアップロードは不可",
       "previewMsg": "ファイルはサポートしていません。",
       "deleteTip": "ファイルは消去しますか？",
-      "uploadBtnText":"Upload File", 
+      "uploadBtnText":"添付アップロード", 
       "uploadBtnTable": "クリックしてアップロード", 
       "uploadBtndDrag": "クリックしてアップロード", 
       "uploadTable": {        
