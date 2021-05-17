@@ -3,8 +3,8 @@
 
 @charset "UTF-8";
 body {
-  font-family: 'PingFang SC', -apple-system,  'Microsoft YaHei', '微软雅黑', sans-serif, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue',  'Hiragino Sans GB', 'Heiti SC';
+  /* font-family: 'PingFang SC', -apple-system,  'Microsoft YaHei', '微软雅黑', sans-serif, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue',  'Hiragino Sans GB', 'Heiti SC'; */
   font-weight: 400;
   font-size: 14px;
   color: #000;
