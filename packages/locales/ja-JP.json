@@ -11,41 +11,41 @@
       "dingtalk": "DingTalk"
     },
     "imageUpload": {
-      "deleteTip": "Are you sure to delete this picture?",
-      "uploadBtnText":"Upload Image"
+      "deleteTip": "この画像を消去しますか？",
+      "uploadBtnText":"画像アップロード"
     },
     "attachmentUpload": {
-      "unpreviewMsg": "Preview status does not support upload",
-      "previewMsg": "This file does not support preview",
-      "deleteTip": "Are you sure to delete this file?",
+      "unpreviewMsg": "一時閲覧の状態でアップロードは不可",
+      "previewMsg": "ファイルはサポートしていません。",
+      "deleteTip": "ファイルは消去しますか？",
       "uploadBtnText":"Upload File", 
-      "uploadBtnTable": "Click to Upload", 
-      "uploadBtndDrag": "click to upload", 
+      "uploadBtnTable": "クリックしてアップロード", 
+      "uploadBtndDrag": "クリックしてアップロード", 
       "uploadTable": {        
-        "fileName": "File name",
-        "fileType": "File type",
-        "createTime": "Upload time",
-        "operation": "Operation"
+        "fileName": "添付ファイル名",
+        "fileType": "添付ファイル種類",
+        "createTime": "アップロード日付",
+        "operation": "操作"
       },
-      "dragTip": "Drag file to this area or"
+      "dragTip": "ここにドロップまたは"
     },
     "employeeSelect": {
-      "title": "Personnel selection"
+      "title": "メンバー選択"
     },
     "departmentSelect": {
-      "title": "Department selection"  
+      "title": "部署選択"  
     }
   },
   "common": {
-    "noData": "No data",
-    "selected": "Selected",
-    "confirm": "Confirm",
-    "cancel": "Cancel",
-    "loading": "Loading",
-    "clear": "Clear"
+    "noData": "データ無",
+    "selected": "選択済",
+    "confirm": "はい",
+    "cancel": "いいえ",
+    "loading": "取組中",
+    "clear": "リセット"
   },
   "placeholder": {
-    "employeePlaceholder": "Enter the name, email address prefix, and employee no.",
-    "deptPlaceholder": "Please enter the department name"
+    "employeePlaceholder": "お名前、メールアドレス、社員番号を入力して下さい",
+    "deptPlaceholder": "部署名を入力して下さい"
   }
 }

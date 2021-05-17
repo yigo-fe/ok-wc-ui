@@ -11,20 +11,20 @@
       "dingtalk": "DingTalk"
     },
     "imageUpload": {
-      "deleteTip": "Are you sure to delete this picture?",
+      "deleteTip": "Are you sure you want to delete this picture?",
       "uploadBtnText":"Upload Image"
     },
     "attachmentUpload": {
       "unpreviewMsg": "Preview status does not support upload",
-      "previewMsg": "This file does not support preview",
+      "previewMsg": "Preview is not supported for the current file",
       "deleteTip": "Are you sure to delete this file?",
       "uploadBtnText":"Upload File", 
       "uploadBtnTable": "Click to Upload", 
       "uploadBtndDrag": "click to upload", 
       "uploadTable": {        
-        "fileName": "File name",
-        "fileType": "File type",
-        "createTime": "Upload time",
+        "fileName": "Name of attachment",
+        "fileType": "Attachment type",
+        "createTiime": "Upload time",
         "operation": "Operation"
       },
       "dragTip": "Drag file to this area or"
@@ -37,7 +37,7 @@
     }
   },
   "common": {
-    "noData": "No data",
+    "noData": "No data available",
     "selected": "Selected",
     "confirm": "Confirm",
     "cancel": "Cancel",
