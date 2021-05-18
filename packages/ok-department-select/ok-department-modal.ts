@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:03:32
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-12 16:34:32
+ * @LastEditTime: 2021-05-18 13:32:30
  * @FilePath: /packages/ok-department-select/ok-department-modal.ts
  */
 import { Button, Checkbox, Input, Modal, Tree } from 'ant-design-vue'
@@ -37,6 +37,12 @@ defineComponent(
       default: () => {
         return []
       },
+    },
+    modalZIndex: {
+      type: Number as unknown as PropType<number>,
+    },
+    getContainerModal: {
+      type: Function as unknown as PropType<() => void>,
     },
     infoMap: {
       type: Object as unknown as PropType<object>,
@@ -79,11 +85,14 @@ defineComponent(
         },
         template: `
         <a-modal 
+          wrapClassName="ok-dept-modal-wrap"
           class="ok-tree-modal ok-dept-tree-modal"
           :visible="visible" 
-          :title="title" 
+          :title="title"
           width="824px" 
-          height="660px" 
+          height="660px"
+          :zIndex="modalZIndex"
+          :getContainer='getContainerModal'
           destroyOnClose>
           <template #closeIcon></template>
           <div class="tree-content-wraper dept-tree-content-wraper">

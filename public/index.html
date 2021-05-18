@@ -512,7 +512,7 @@
       const okDeptInput = document.querySelector('.ok-department-input')
       okDeptInput.value = ['13','14', '17', '18', '19']
       okDeptInput.multiple = true
-      // okDeptInput.disabled = true
+      okDeptInput.disabled = true
       okDeptInput.update = (val, list)=>{
         console.log('dept-input-update-index',val, list)
         // okDeptInput.value = val
@@ -541,9 +541,12 @@
 
 
       const okEmployeeTree = document.querySelector('.ok-employee-tree')
-      // okEmployeeTree.value = ['LiTao']
-      // okEmployeeTree.disabled = true
+      okEmployeeTree.value = ['LiTao', 'FuJing', 'WangChao', 'WangYiJie']
+      okEmployeeTree.disabled = true
       okEmployeeTree.multiple = true
+      // okEmployeeTree.dialogStyle = {'z-index': 7000}
+      okEmployeeTree.modalZIndex = 5000
+      // okEmployeeTree.maskStyle = {'z-index': 7000}
       // okEmployeeTree.range = ['FuJing',"FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing', 'WangChao', 'WangYiJie']
       okEmployeeTree.update = (val, list)=>{
         console.log('employee-tree-update-index',val, list)

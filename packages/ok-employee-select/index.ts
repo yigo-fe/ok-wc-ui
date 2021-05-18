@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-12 16:29:58
+ * @LastEditTime: 2021-05-18 11:30:00
  * @FilePath: /packages/ok-employee-select/index.ts
  */
 
@@ -129,6 +129,8 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
             :multiple="multiple"
             :range="range"
             :secrecy="secrecy"
+            :getContainerModal="getContainerModal"
+            :modalZIndex="modalZIndex"
             :infoMap="infoMap"
             :collect="collectMap"
             :change="handleModalChange"

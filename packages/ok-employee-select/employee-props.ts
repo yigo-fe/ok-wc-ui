@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-20 14:56:24
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-11 11:33:17
+ * @LastEditTime: 2021-05-18 11:31:56
  * @FilePath: /packages/ok-employee-select/employee-props.ts
  */
 
@@ -56,6 +56,14 @@ const propsOptions = {
   // dropdownstyle, 同Ant Design Vue 中select的dropdownstyle属性
   dropdownstyle: {
     type: Object as unknown as PropType<object>,
+  },
+  // modal的z-index
+  modalZIndex: {
+    type: Number as unknown as PropType<number>,
+  },
+  // modal的container
+  getContainerModal: {
+    type: Function as unknown as PropType<() => void>,
   },
   // getPopupContainer, 同Ant Design Vue 中select的getPopupContainer属性
   getPopupContainer: {

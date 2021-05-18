@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:56:38
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-12 16:31:12
+ * @LastEditTime: 2021-05-18 12:02:48
  * @FilePath: /packages/ok-employee-select/ok-employee-modal.ts
  */
 
@@ -38,6 +38,12 @@ defineComponent(
         return []
       },
     },
+    modalZIndex: {
+      type: Number as unknown as PropType<number>,
+    },
+    getContainerModal: {
+      type: Function as unknown as PropType<() => void>,
+    },
     infoMap: {
       type: Object as unknown as PropType<object>,
       default: () => {
@@ -71,7 +77,6 @@ defineComponent(
             'placeholder.employeePlaceholder',
             '请输入姓名、邮箱前缀、工号'
           )
-
           return {
             ...params,
             i18n,
@@ -81,11 +86,15 @@ defineComponent(
         },
         template: `
           <a-modal 
+            wrapClassName="ok-employee-modal-wrap"
             class="ok-tree-modal ok-employee-tree-modal"
-            :visible="visible" 
-            :title="title" 
             width="824px" 
-            height="660px">
+            height="660px"
+            :visible="visible" 
+            :title="title"
+            :zIndex="modalZIndex"
+            :getContainer='getContainerModal'
+            >
             <template #closeIcon></template>
             <div class="tree-content-wraper employee-tree-content-wraper">
 

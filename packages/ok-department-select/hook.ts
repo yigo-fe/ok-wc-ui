@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 20:15:04
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-14 17:03:34
+ * @LastEditTime: 2021-05-18 15:51:38
  * @FilePath: /packages/ok-department-select/hook.ts
  */
 import { debounce } from 'lodash'
@@ -34,6 +34,12 @@ export default function (props: any, context: any) {
   const borderless = computed(() => props.borderless)
   // dropdownStyle
   const dropdownstyle = computed(() => props.dropdownstyle)
+  // modal的z-index
+  const modalZIndex = computed(() => props.modalZIndex)
+  // modal的Container
+  const getContainerModal = computed(
+    () => props.getContainerModal || (() => document.body)
+  )
   // 下拉框append元素
   const getPopupContainer = computed(
     () => props.getPopupContainer || (() => document.body)
@@ -217,6 +223,7 @@ export default function (props: any, context: any) {
   const maxTagPlaceholder = () => {
     return h('ok-department-more', {
       exceedList: exceedList.value,
+      disabled: disabled.value,
       onDelete: exceedDelete,
     })
   }
@@ -360,6 +367,8 @@ export default function (props: any, context: any) {
     mode,
     dropdownstyle,
     getPopupContainer,
+    modalZIndex,
+    getContainerModal,
     getExceed,
     setOpen,
     closeOpen,

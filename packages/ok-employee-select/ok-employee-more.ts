@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-12 12:05:40
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-29 17:00:57
+ * @LastEditTime: 2021-05-18 15:57:40
  * @FilePath: /packages/ok-employee-select/ok-employee-more.ts
  */
 import { Popover } from 'ant-design-vue'
@@ -16,7 +16,10 @@ defineComponent(
   'ok-employee-more',
   {
     exceedList: {
-      type: (Array as unknown) as PropType<[]>,
+      type: Array as unknown as PropType<[]>,
+    },
+    disabled: {
+      type: Boolean as unknown as PropType<boolean>,
     },
     test: {
       type: String,
@@ -27,6 +30,7 @@ defineComponent(
       const options = {
         setup() {
           const exceedList = computed(() => props.exceedList)
+          const disabled = computed(() => props.disabled)
 
           const closeIcon = close
 
@@ -44,6 +48,7 @@ defineComponent(
 
           return {
             exceedList,
+            disabled,
             closeIcon,
             visible,
             deleteSelected,
@@ -56,7 +61,7 @@ defineComponent(
                 <p class="more-item" v-for="employee in exceedList" :key="employee.employee_id">
                   <ok-person-cell class="employee-avatar" size="mini" :personInfo="employee"></ok-person-cell>               
                   <span class="employee-name">{{employee.employee_name}}</span>
-                  <img :src="closeIcon" class="head-close-icon" @click="deleteSelected(employee.employee_id)" />
+                  <img v-if="!disabled" :src="closeIcon" class="head-close-icon" @click="deleteSelected(employee.employee_id)" />
                 </p>
               </div>
             </template>

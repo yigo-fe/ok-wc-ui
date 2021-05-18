@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 18:41:06
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-16 21:15:42
+ * @LastEditTime: 2021-05-18 13:33:18
  * @FilePath: /packages/ok-department-select/hook-modal.ts
  */
 import { debounce } from 'lodash'
@@ -28,6 +28,10 @@ export default function (props: any) {
   const infoMapInner = computed(() => props.infoMap)
   // modal是否可见
   const visible = computed(() => props.visible)
+
+  // modal 样式
+  const modalZIndex = computed(() => props.modalZIndex)
+  const getContainerModal = computed(() => props.getContainerModal)
 
   // 组件外部传入的初始value
   const propsValue = computed(() => {
@@ -212,6 +216,8 @@ export default function (props: any) {
     treeData,
     secrecy,
     expandedKeys,
+    modalZIndex,
+    getContainerModal,
     cancelSelect,
     clearSelected,
     handleSelect,

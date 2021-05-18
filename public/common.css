@@ -24,7 +24,7 @@ a:hover {
   color: #63a3ff;
 }
 a:active {
-  color: #367ee6;
+  color: #4c78fc;
 }
 h1,
 h2,
@@ -92,6 +92,12 @@ ul {
 .mr10{
   margin-right: 10px;
 }
+/* 修改antd样式 */
+
+.ant-select-multiple .ant-select-selector {
+  border-radius: 4px;
+}
+.ant-select-multiple:not(.ant-select-disabled) .ant-select-selector:hover{border-color:#4c78fc}
 
 /* personGroup Popper  */
 .tippy-box[data-theme='ok-person-group'] .tippy-content{
@@ -403,7 +409,7 @@ ul {
 }
 
 .file-delete-confirm.ant-modal-confirm .ant-modal-confirm-btns .ant-btn-primary {
-  background: #4C78FC;
+  background: #4c78fc;
   border-color: #4c78fc;
 } 
 .file-delete-confirm.ant-modal-confirm .ant-modal-confirm-btns .ant-btn-primary:hover {
@@ -563,7 +569,7 @@ ul {
   color: #646A73;
 }
 .ok-tree-modal .clear-btn {
-  color: #3370FF;
+  color: #4c78fc;
   cursor: pointer;
 }
 
@@ -687,8 +693,6 @@ ul {
   .ok-employee-select-wraper .ant-select.ok-employee-select {line-height: initial;}
   .ok-employee-select .ant-select-selector {height: 100%;}
   .ok-employee-select.ant-select-multiple .ant-select-selector{border-color:#dee0e3}
-  .ok-employee-select.ant-select-multiple .ant-select-selector:hover{border-color:#4c78fc}
-  .ok-employee-select.ant-select-multiple.ant-select-disabled .ant-select-selector:hover{border-color:#dee0e3}
   .ok-employee-select.ant-select-multiple.no-border .ant-select-selector{border:0}
   .ant-select-selection-item .selected-option{display:none}
   .ant-select-selection-item .selected-head{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}
@@ -697,7 +701,11 @@ ul {
   .head-clear-icon,.head-search-icon{width:16px;height:16px}
   .ok-employee-select .ant-select-arrow{pointer-events:auto;top:44%;right:14px}
   .ok-employee-select.ant-select-focused:not(.ant-select-disabled).ant-select-multiple .ant-select-selector{border-color:#4c78fc;-webkit-box-shadow:none;box-shadow:none}
-
+  .ok-employee-select .ant-select-selection-item-content {
+    font-size: 14px;
+    font-weight: 400;
+    color: #1F2329;
+  }
 
   /* 部门选择 */
   .dept-tree-content-wraper .tree-item-icon {

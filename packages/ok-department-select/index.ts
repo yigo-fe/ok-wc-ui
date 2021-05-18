@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:01:15
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-12 16:29:07
+ * @LastEditTime: 2021-05-18 13:33:44
  * @FilePath: /packages/ok-department-select/index.ts
  */
 import './ok-department-modal'
@@ -105,6 +105,8 @@ defineComponent(
           :multiple="multiple"
           :displayLevel="displayLevel"
           :secrecy="secrecy"
+          :getContainerModal="getContainerModal"
+          :modalZIndex="modalZIndex"
           :infoMap="infoMap"           
           :collect="collectMap"
           :change="handleModalChange"

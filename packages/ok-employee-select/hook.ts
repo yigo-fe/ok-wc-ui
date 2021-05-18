@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 15:16:57
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-14 16:37:39
+ * @LastEditTime: 2021-05-18 15:51:14
  * @FilePath: /packages/ok-employee-select/hook.ts
  */
 import { debounce } from 'lodash'
@@ -41,6 +41,12 @@ export default function (props: any, context: any) {
   const hideMenuOnMultiple = computed(() => props.hideMenuOnMultiple)
   // 下拉框样式
   const dropdownstyle = computed(() => props.dropdownstyle)
+  // modal的z-index
+  const modalZIndex = computed(() => props.modalZIndex)
+  // modal的Container
+  const getContainerModal = computed(
+    () => props.getContainerModal || (() => document.body)
+  )
   // 下拉框append元素
   const getPopupContainer = computed(
     () => props.getPopupContainer || (() => document.body)
@@ -244,6 +250,7 @@ export default function (props: any, context: any) {
   const maxTagPlaceholder = () => {
     return h('ok-employee-more', {
       exceedList: exceedList.value,
+      disabled: disabled.value,
       onDelete: exceedDelete,
     })
   }
@@ -425,6 +432,8 @@ export default function (props: any, context: any) {
     hideMenuOnMultiple,
     dropdownstyle,
     getPopupContainer,
+    getContainerModal,
+    modalZIndex,
     getExceed,
     handleInputClick,
     closeOpen,

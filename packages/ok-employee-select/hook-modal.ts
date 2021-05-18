@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 15:19:21
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-12 16:47:46
+ * @LastEditTime: 2021-05-18 11:26:57
  * @FilePath: /packages/ok-employee-select/hook-modal.ts
  */
 import { debounce } from 'lodash'
@@ -28,6 +28,9 @@ export default function (props: any) {
   const infoMapInner = computed(() => props.infoMap)
   // modal是否可见
   const visible = computed(() => props.visible)
+  // modal 样式
+  const modalZIndex = computed(() => props.modalZIndex)
+  const getContainerModal = computed(() => props.getContainerModal)
 
   const closeIcon = close
   const searchIcon = search
@@ -263,6 +266,8 @@ export default function (props: any) {
     breadcrumbList,
     selectedList,
     queryKey,
+    modalZIndex,
+    getContainerModal,
     handleDeptClick,
     handleEmployeeSelect,
     cancelHandle,
