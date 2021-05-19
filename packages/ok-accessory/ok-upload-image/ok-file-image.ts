@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-29 18:47:41
+ * @LastEditTime: 2021-05-18 18:45:01
  * @FilePath: /packages/ok-accessory/ok-upload-image/ok-file-image.ts
  */
 
@@ -16,33 +16,33 @@ defineComponent(
   'ok-file-image',
   {
     fileList: {
-      type: (Array as unknown) as PropType<UploadFile[]>,
+      type: Array as unknown as PropType<UploadFile[]>,
       default: () => [] as UploadFile[],
     },
     listType: {
-      type: (String as unknown) as PropType<ListType>,
+      type: String as unknown as PropType<ListType>,
       default: 'text',
     },
     disabled: {
-      type: (Boolean as unknown) as PropType<boolean>,
+      type: Boolean as unknown as PropType<boolean>,
     },
     showProgress: {
-      type: (Boolean as unknown) as PropType<boolean>,
+      type: Boolean as unknown as PropType<boolean>,
     },
     showPreview: {
-      type: (Boolean as unknown) as PropType<boolean>,
+      type: Boolean as unknown as PropType<boolean>,
     },
     showDownload: {
-      type: (Boolean as unknown) as PropType<boolean>,
+      type: Boolean as unknown as PropType<boolean>,
     },
     showRemove: {
-      type: (Boolean as unknown) as PropType<boolean>,
+      type: Boolean as unknown as PropType<boolean>,
     },
     thumbStyle: {
-      type: (Object as unknown) as PropType<object>,
+      type: Object as unknown as PropType<object>,
     },
     rowNumber: {
-      type: (Number as unknown) as PropType<number>,
+      type: Number as unknown as PropType<number>,
     },
   },
   (props, context) => {
@@ -93,7 +93,7 @@ defineComponent(
         },
         template: `
           <li v-for="(file, index) in fileList" :key="file.id" :class="['ok-upload-list__item', 'is-' + file.status, (index+1)%rowNumber === 0 ? 'last': '' ]" :style="thumbStyle">
-            <div v-if="file.status === 'uploading' || file.status === 'fail'" class="ok-process-wraper" >
+            <div v-if="file.status === 'uploading' || file.status === 'fail'" class="ok-process-wraper" style="position: absolute; top:0;" >
               <div class="image-process-wraper">
                 <ok-progress class="image-progress" :percentage="file.percentage" :status="file.status" ></ok-progress>
                 <span class="image-close-btn" @click="handleCloseClick(file, file.status)">

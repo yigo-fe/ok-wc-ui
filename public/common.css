@@ -100,8 +100,6 @@ ul {
 .ant-select-multiple:not(.ant-select-disabled) .ant-select-selector:hover{border-color:#4c78fc}
 
 /* personGroup Popper  */
-.tippy-box[data-theme='ok-person-group'] .tippy-content{
-}
 .ok-person-group-popper.popper-wraper {
   list-style: none;
   margin: 0;
@@ -380,6 +378,8 @@ ul {
   margin-bottom: 10px;
 }
 .ok-process-wraper {
+  position: absolute;
+  top: 0;
   width: 100%;
   height: 100%;
   display: flex;

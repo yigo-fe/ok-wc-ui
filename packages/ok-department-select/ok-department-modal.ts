@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:03:32
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-18 13:32:30
+ * @LastEditTime: 2021-05-18 18:06:37
  * @FilePath: /packages/ok-department-select/ok-department-modal.ts
  */
 import { Button, Checkbox, Input, Modal, Tree } from 'ant-design-vue'
@@ -220,7 +220,7 @@ defineComponent(
       app.use(Input)
       app.use(Modal)
       app.use(Tree)
-      app.mount(context.$refs.showDepartmentTree as HTMLElement)
+      app.mount(context.$refs.showDeptTreeModal as HTMLElement)
     })
     return () => html`
       <link rel="stylesheet" .href="${CDN_PATH}antd.min.css" />
@@ -228,7 +228,7 @@ defineComponent(
         ${okDepartmentInputCss}
       </style>
 
-      <div ref="showDepartmentTree" class="ok-department-select-wraper"></div>
+      <div ref="showDeptTreeModal" class="ok-department-select-wraper"></div>
     `
   }
 )
