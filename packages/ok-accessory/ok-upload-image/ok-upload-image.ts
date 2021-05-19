@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-12 15:32:54
+ * @LastEditTime: 2021-05-18 18:01:34
  * @FilePath: /packages/ok-accessory/ok-upload-image/ok-upload-image.ts
  */
 
@@ -36,7 +36,8 @@
 
 import { classMap } from 'lit-html/directives/class-map.js'
 import { styleMap } from 'lit-html/directives/style-map'
-import { defineComponent, html, onMounted, PropType } from 'ok-lit'
+import { debounce } from 'lodash'
+import { defineComponent, html, onMounted, onUnmounted, PropType } from 'ok-lit'
 import { ref } from 'vue'
 
 import { COMMON_CSS_PATH } from '../../path.config'
@@ -72,19 +73,24 @@ defineComponent(
       handleRemoveFileList,
     } = useImageHandle(props, context)
 
-    const maxTagCount = ref(1)
+    const maxImgCount = ref(1)
 
     // 处理最多能展示多少个tag
-    const maxTagCountComput = () => {
+    const maxImgCountComput = debounce(() => {
       const el = context.$refs.showUploadImage as HTMLElement
       const elWith = el?.offsetWidth
       if (!elWith) return
 
-      maxTagCount.value = Math.floor((elWith + 8) / 108)
-    }
+      maxImgCount.value = Math.floor((elWith + 8) / 108)
+    }, 300)
 
     onMounted(() => {
-      maxTagCountComput()
+      maxImgCountComput()
+      window.addEventListener('resize', () => maxImgCountComput(), false)
+    })
+
+    onUnmounted(() => {
+      window.removeEventListener('resize', () => maxImgCountComput(), false)
     })
 
     /**
@@ -117,7 +123,7 @@ defineComponent(
               disabled: props.disabled,
               'has-margin':
                 fileLists.value.length &&
-                fileLists.value.length % maxTagCount.value === 0,
+                fileLists.value.length % maxImgCount.value === 0,
             })}
             @click=${handleClick}
           >
@@ -172,7 +178,7 @@ defineComponent(
           .showDownload=${showDownload.value}
           .showRemove=${showRemove.value}
           .thumbStyle=${props.thumbStyle}
-          .rowNumber=${maxTagCount.value}
+          .rowNumber=${maxImgCount.value}
         ></ok-file-image>
         ${renderUploader()}
       </div>

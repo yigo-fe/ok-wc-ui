@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:01:15
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-18 13:33:44
+ * @LastEditTime: 2021-05-18 18:06:57
  * @FilePath: /packages/ok-department-select/index.ts
  */
 import './ok-department-modal'
@@ -35,17 +35,17 @@ defineComponent(
         setup() {
           const params = useDepartmentSelect(props, context)
 
-          const okDepartmentSelect: any = ref(null)
+          const okDepartmentInput: any = ref(null)
           // 模拟单选
           const handleSelect = val => {
             if (params.multiple.value) return
             // 单选时处理value
             params.value.value = [val]
             // 单选收起下拉框
-            okDepartmentSelect.value?.blur()
+            okDepartmentInput.value?.blur()
           }
           return {
-            okDepartmentSelect,
+            okDepartmentInput,
             handleSelect,
             ...params,
             i18n,
@@ -53,7 +53,7 @@ defineComponent(
         },
         template: `
         <a-select
-          ref="okDepartmentSelect"
+          ref="okDepartmentInput"
           class="ok-department-select"
           show-search
           showArrow
@@ -123,13 +123,13 @@ defineComponent(
       app.use(Input)
       app.use(Modal)
       app.use(Tree)
-      app.mount(context.$refs.showDepartmentTree as HTMLElement)
+      app.mount(context.$refs.showDeptSelect as HTMLElement)
     })
     return () => html`
       <link rel="stylesheet" .href="${CDN_PATH}antd.min.css" />
       <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
       <div
-        ref="showDepartmentTree"
+        ref="showDeptSelect"
         class="ok-department-select-wraper ok-department-select-root"
       ></div>
     `

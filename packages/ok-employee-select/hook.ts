@@ -3,12 +3,12 @@
  * @Author: 付静
  * @Date: 2021-04-08 15:16:57
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-18 15:51:14
+ * @LastEditTime: 2021-05-18 18:46:02
  * @FilePath: /packages/ok-employee-select/hook.ts
  */
 import { debounce } from 'lodash'
 import { effect } from 'ok-lit'
-import { computed, h, nextTick, ref, watch } from 'vue'
+import { computed, h, onMounted, onUnmounted, ref, watch } from 'vue'
 
 import close from '../assets/images/closed.svg'
 import search from '../assets/images/search.svg'
@@ -173,18 +173,25 @@ export default function (props: any, context: any) {
     }
   }
   // 处理最多能展示多少个tag
-  const maxTagCountComput = () => {
+  const maxTagCountComput = debounce(() => {
     const el = context.$refs.showEmployeeSelect as HTMLElement
     const elWith = el?.offsetWidth
     if (!elWith) return
 
     maxTagCount.value = elWith > 185 ? Math.floor((elWith - 75) / 108) : 1
     // 首次计算溢出部门
-    !exceedList.value.length && getExceed()
-  }
+    // !exceedList.value.length && getExceed()
+    // 计算溢出
+    getExceed()
+  }, 300)
 
-  nextTick(() => {
+  onMounted(() => {
     maxTagCountComput()
+    window.addEventListener('resize', () => maxTagCountComput(), false)
+  })
+
+  onUnmounted(() => {
+    window.removeEventListener('resize', () => maxTagCountComput(), false)
   })
 
   // 打开下拉框
