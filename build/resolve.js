@@ -1,4 +1,9 @@
 import nodeResolve from '@rollup/plugin-node-resolve'
 
 export default () =>
-  nodeResolve({ extensions: ['.js', '.jsx', '.tsx', '.ts'] })
+  nodeResolve({
+    extensions: ['.js', '.jsx', '.tsx', '.ts'],
+    browser: true,
+    jsnext: true,
+    preferBuiltins: true,
+  })
