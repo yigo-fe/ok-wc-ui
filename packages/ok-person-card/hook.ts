@@ -3,12 +3,13 @@
  * @Author: 付静
  * @Date: 2021-03-03 17:28:13
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-12 13:56:08
+ * @LastEditTime: 2021-05-19 15:58:41
  * @FilePath: /packages/ok-person-card/hook.ts
  */
 import { computed, effect } from 'ok-lit'
 import { ref } from 'vue'
 
+import { isBroswerAllowed } from './broswer'
 import setLang from './lang'
 
 export default function (props) {
@@ -24,7 +25,13 @@ export default function (props) {
   })
   // 是否展示发送消息按钮
   const showSendBtn = computed(() => {
-    return !props.hideLark && validMsgType.value && props.isAwaken
+    // 1.是否设置了隐藏、2.属于支持类型、3.浏览器(飞书，钉钉，企微浏览器不展示按钮)、4.接口数据
+    return (
+      !props.hideLark &&
+      validMsgType.value &&
+      isBroswerAllowed() &&
+      props.isAwaken
+    )
   })
 
   const statusType = computed(() => props.statusType)
