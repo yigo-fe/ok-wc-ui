@@ -45,10 +45,12 @@ const createConfig = format => {
       minimize: true,
       plugins: [autoprefixer],
     }),
-    cjs(),
     ts(),
     image(),
     babelPlugin,
+    cjs({
+      browser: true,
+    }),
     filesize({ showBrotliSize: true }),
     replace({
       'process.env.NODE_ENV': JSON.stringify(
