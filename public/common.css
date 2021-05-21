@@ -159,6 +159,23 @@ ul {
 }
 
 /* ok-person-cell */
+.ok-person-cell-popover .ant-popover-inner-content {
+  padding: 0;
+}
+.ok-person-cell-popover .ant-popover-inner {
+  background-color: transparent;
+  background-clip: padding-box;
+  box-shadow: none;
+}
+.ok-person-cell-popover.ant-popover-placement-left,
+.ok-person-cell-popover.ant-popover-placement-leftBottom,
+.ok-person-cell-popover.ant-popover-placement-leftTop {
+  padding-right: 6px;
+}
+
+.ok-person-cell-popover .ant-popover-arrow {
+  display: none;
+}
 .ok-person-cell-root,
 .ok-person-cell-root ok-avatar {
   display: inline-block;
@@ -166,6 +183,14 @@ ul {
   line-height: 1;
 }
 /* ok-person-group */
+.ok-person-group-more .ant-popover-inner-content {
+  padding: 0;
+}
+.ok-person-group-more .ant-popover-inner {
+  background-color: transparent;
+  background-clip: padding-box;
+  box-shadow: none;
+}
 .ok-person-group-root {
   display: inline-block;
   vertical-align: middle;

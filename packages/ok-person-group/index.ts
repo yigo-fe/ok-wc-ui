@@ -7,6 +7,7 @@ import { computed, defineComponent, effect, html, PropType } from 'ok-lit'
 
 import close from '../assets/images/closed.svg'
 import { COMMON_CSS_PATH } from '../path.config'
+import './more-list'
 /**
  * @props persons: {Array<Person>} 用户信息组
  */
@@ -85,28 +86,28 @@ defineComponent(
 
     const closeIcon = close
 
-    const setPopup = () => {
-      setPopover(
-        contxt.$refs['showMore'] as HTMLElement,
-        contxt.$refs['personGroupPopper'] as HTMLElement,
-        {
-          appendTo: document.body,
-          popperOptions: {
-            strategy: 'fixed',
-          },
-          theme: 'ok-person-group',
-          placement: placement.value as POPOVER_PLACEMENT,
-        }
-      )
-    }
+    // const setPopup = () => {
+    //   setPopover(
+    //     contxt.$refs['showMore'] as HTMLElement,
+    //     contxt.$refs['personGroupPopper'] as HTMLElement,
+    //     {
+    //       appendTo: document.body,
+    //       popperOptions: {
+    //         strategy: 'fixed',
+    //       },
+    //       theme: 'ok-person-group',
+    //       placement: placement.value as POPOVER_PLACEMENT,
+    //     }
+    //   )
+    // }
 
-    effect(() => {
-      if (props.personList?.length) {
-        nextTick(() => {
-          contxt.$refs['showMore'] && setPopup()
-        })
-      }
-    })
+    // effect(() => {
+    //   if (props.personList?.length) {
+    //     nextTick(() => {
+    //       contxt.$refs['showMore'] && setPopup()
+    //     })
+    //   }
+    // })
 
     const deleteItem = (item: any) => {
       props.deleteItem && props.deleteItem(item)
@@ -132,7 +133,15 @@ defineComponent(
           : html`
               <span ref="showMore" class="more"
                 >${popperList.value.length
-                  ? `...${popperList.value.length}`
+                  ? html`<ok-person-group-more
+                      .popperList=${popperList.value}
+                      .detailSize=${props.detailSize}
+                      .detailWidth=${props.detailWidth}
+                      .detailHeight=${props.detailHeight}
+                      .itemStyle=${props.itemStyle}
+                      .contentStyle=${props.contentStyle}
+                      .propsGetInfoByEmpId=${props.propsGetInfoByEmpId}
+                    ></ok-person-group-more>`
                   : ''}</span
               >
             `}
@@ -188,9 +197,7 @@ defineComponent(
     return () => html`
       <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
       <div class="ok-person-group ok-person-group-root">
-        <div class="ok-person-group-wrap">
-          ${avatarRender()} ${props.personList.length > 1 ? popperRender() : ''}
-        </div>
+        <div class="ok-person-group-wrap">${avatarRender()}</div>
       </div>
     `
   }

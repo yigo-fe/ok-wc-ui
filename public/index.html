@@ -44,17 +44,17 @@
       <div style="width: 100px;">
         <ok-tooltip class="divider">
           <div slot="title"><span >这里是title的slot</span></div>
-          
-          
+
+
           测试tooltip测试tooltip测试tooltip测试tooltip
         </ok-tooltip>
 
         <ok-tooltip>测试tooltip测试</ok-tooltip>
       </div>
 
-      
 
-      
+
+
 
       <h3>部门选择 input </h3>
       <ok-department-select class="divider ok-department-input" placeholder="请选择部门" style="width: 200px;display: block;"></ok-department-select>
@@ -76,10 +76,12 @@
       <!-- <ok-ant-department-search></ok-ant-department-search> -->
 
       <!-- 人员图像 -->
-      <!-- <ok-avatar></ok-avatar> -->
+      123
+<!--       <ok-avatar></ok-avatar>-->
       <div class="divider"></div>
       <!-- 人员卡片 -->
-      <ok-person-cell class="person-cell"></ok-person-cell>
+      456
+      <ok-person-cell class="person-cell"><ok-avatar></ok-avatar></ok-person-cell>
       <!-- 多人员list -->
       <!-- <ok-person-group ></ok-person-group> -->
 
@@ -104,12 +106,12 @@
         <!-- <ok-upload-list style="width: 500px; display: block; font-size: 0;">
           <div style="width: 100%;height: 150px; font-size: 14px;display: block; border: 1px solid red;">这里是slot</div>
         </ok-upload-list> -->
-        
+
         <!-- <h3>拖拽上传 slot</h3>
-        <ok-upload-drag style="width: 500px; display: block; font-size: 0;"> 
+        <ok-upload-drag style="width: 500px; display: block; font-size: 0;">
           <div style="width: 100%;height: 150px; font-size: 14px;display: block; border: 1px solid red;">这里是slot</div>
         </ok-upload-drag> -->
-        
+
         <h3>拖拽上传</h3>
         <ok-upload-drag style="width: 500px; display: block; font-size: 0;"></ok-upload-drag>
 
@@ -338,7 +340,7 @@
       msg_relation_type: "WX",
     },
 
-  ] 
+  ]
 
     const personList2 = [
     {
@@ -373,8 +375,8 @@
     window.onload = ()=>{
 
       // window.okuiConfig.options.preview = true
-      // const okAvatar = document.querySelector('ok-avatar')
-      // okAvatar.personInfo = personInfo
+      const okAvatar = document.querySelector('ok-avatar')
+      okAvatar.personInfo = personInfo
 
       const okPersonCell = document.querySelector('ok-person-cell')
       okPersonCell.personInfo = personInfo1
@@ -458,7 +460,7 @@
 
 
 
-      
+
 
       const okUploadList = document.querySelector('ok-upload-list')
       // okUploadList.action = action
@@ -487,7 +489,7 @@
       //   display: 'block'
       // }
 
-      
+
 
       // okUploadImg.disabled = true
       // okUploadImg.operation = ['remove']
@@ -616,41 +618,41 @@
     function testClick (){
       setTimeout(()=>{
         const okEmployeeInput = document.querySelector('.ok-employee-input')
-        okEmployeeInput.value = undefined 
+        okEmployeeInput.value = undefined
 
         // const okEmployeeTree = document.querySelector('.ok-employee-tree')
-        // okEmployeeTree.multiple = true 
+        // okEmployeeTree.multiple = true
 
       }, 500)
 
       //   const okEmployeeInput = document.querySelector('.ok-employee-input')
-      // okEmployeeInput.value = ['FengHaiLi'] 
-  
+      // okEmployeeInput.value = ['FengHaiLi']
+
       // const okEmployeeTree = document.querySelector('.ok-employee-tree')
-      // okEmployeeTree.value = ['FuJing'] 
+      // okEmployeeTree.value = ['FuJing']
 
 
 
       // const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
-      // okEmployeeInput2.value = ['FuJing'] 
+      // okEmployeeInput2.value = ['FuJing']
 
       const okDeptInput = document.querySelector('.ok-department-input')
       // okDeptInput.value = ['13','14', '17', '18', '19']
       okDeptInput.value = ['18']
 
-      
+
     }
 
     function testClick2 (){
       const okEmployeeInput = document.querySelector('.ok-employee-input')
-      okEmployeeInput.value = ['FuJing'] 
+      okEmployeeInput.value = ['FuJing']
 
       // const okEmployeeTree = document.querySelector('.ok-employee-tree')
-      // okEmployeeTree.value = [] 
+      // okEmployeeTree.value = []
 
 
       // const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
-      // okEmployeeInput2.value = [] 
+      // okEmployeeInput2.value = []
 
       // const okDeptInput = document.querySelector('.ok-department-input')
       // okDeptInput.value = []
