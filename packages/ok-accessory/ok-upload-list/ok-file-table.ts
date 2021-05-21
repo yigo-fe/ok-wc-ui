@@ -108,7 +108,7 @@ defineComponent(
           }
 
           const getCreatTime = (item: any) => {
-            return item.response?.data[0]?.create_time
+            return item?.response?.data[0].create_time
           }
 
           return {
@@ -124,11 +124,11 @@ defineComponent(
           }
         },
         template: `
-          <a-table 
-            v-if="fileList.length" 
+          <a-table
+            v-if="fileList.length"
             class="ok-upload-list-table"
-            :dataSource="fileList" 
-            :columns="columns" 
+            :dataSource="fileList"
+            :columns="columns"
             :pagination="false">
             <template #type="{ record }">
               <span>
@@ -141,7 +141,7 @@ defineComponent(
             </template>
             <template #time="{ record }">
               <span>
-               {{record.response?.data[0]?.create_time}}
+               {{record.response.data[0].create_time}}
               </span>
             </template>
             <template #action="{ record }">
@@ -164,7 +164,7 @@ defineComponent(
                   </svg>
                 </i>
 
-                <a class="file-icon-operate" v-if="showDownload"  
+                <a class="file-icon-operate" v-if="showDownload"
                   :href="record.response && record.response.data ? record.response.data[0].download_url : ''"
                   download
                   @click="handleDownload(record)">
@@ -200,7 +200,7 @@ defineComponent(
                       d="M235.63571416 340.55v532.41428584h552.53571417V340.55h66.66428583v535.75714248a64.28571416 64.28571416 0 0 1-64.28571416 64.28571504H233.45a64.28571416 64.28571416 0 0 1-64.28571416-64.28571504V340.55H235.57142832z m225.9 85.75714248V769.14285752H394.87142832V426.30714248h66.66428584z m164.63571416 0V769.14285752H564.07142832V426.30714248h62.16428584zM640.57142832 83.40714248v85.75714336h257.14285752V238.78571416H126.28571416V169.16428584h257.14285752V83.40714248h257.14285665z"
                       p-id="24469"
                     ></path>
-                  </svg> 
+                  </svg>
                 </i>
               </span>
             </template>

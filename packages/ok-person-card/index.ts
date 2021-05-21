@@ -52,7 +52,7 @@ defineComponent('ok-person-card', { ...props }, (props, context) => {
               width="240px"
               height="170px"
               :round="false"
-              :personInfo="JSON.stringify(personInfoCom)"          
+              :personInfo="JSON.stringify(personInfoCom)"
               :textStyle="JSON.stringify(textStyle)"
               showMask
             ></ok-avatar>
@@ -68,16 +68,16 @@ defineComponent('ok-person-card', { ...props }, (props, context) => {
             <div class="content-wraper">
               <div v-if="!personInfoCom.terminated && showTeam" class="item-row">
                   <span class="item-label">{{langPack.team}}：</span>
-                  <p v-if="!deptText?.length"> -- </p>
+                  <p v-if="!deptText || !deptText.length"> -- </p>
                   <a-tooltip v-else :overlayStyle="{'z-index': 9999}">
                     <template #title>
                       <ul>
-                        <li style='font-size: 12px; line-height:18px;' v-for="dept in deptText"> {{dept}}</li>              
+                        <li style='font-size: 12px; line-height:18px;' v-for="dept in deptText" :key="dept"> {{dept}}</li>
                       </ul>
                     </template>
                     <!-- 添加空div 解决Safari自动添加title的问题 -->
-                    <p class="item-content"><div></div>{{ deptText.join(' ') || '--'}}</p>
-                  </a-tooltip>               
+                    <div class="item-content"><div></div>{{deptText.join(' ')}}</div>
+                  </a-tooltip>
               </div>
               <div class="item-row">
                   <span class="item-label">{{langPack.email}}：</span>
@@ -87,7 +87,7 @@ defineComponent('ok-person-card', { ...props }, (props, context) => {
                       <span style='font-size: 12px; line-height:18px;'>{{personInfoCom.email}}</span>
                     </template>
                     <!-- 添加空div 解决Safari自动添加title的问题 -->
-                    <p class="item-content"><div></div>{{ personInfoCom.email || '--'}}</p>
+                    <div class="item-content"><div></div>{{ personInfoCom.email || '--'}}</div>
                   </a-tooltip>
               </div>
             </div>
