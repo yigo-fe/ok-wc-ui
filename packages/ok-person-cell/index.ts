@@ -1,4 +1,4 @@
-import { defineComponent, html, onMounted } from 'ok-lit'
+import { defineComponent, html, onMounted, effect } from 'ok-lit'
 
 import { apiInitPersoncard } from '../services/api'
 import { Popover } from 'ant-design-vue'
@@ -26,6 +26,7 @@ defineComponent(
           const isAwaken = ref(false)
           const deptList: any = ref([])
           const statusType: any = ref('')
+          const contentSlot = ref('')
 
           const checkLardShow = async (id: string) => {
             let result: any = null
@@ -60,8 +61,11 @@ defineComponent(
           const width = computed(() => props.width)
           const height = computed(() => props.height)
 
-          console.log(contxt.innerHTML)
-          const avatarSlot = ref(contxt.innerHTML)
+          const avatarSlot = computed(() => {
+            return contxt.$refs.contentSlot.innerHTML
+          })
+
+          const isAvatarSolt = computed(() => !!contxt.innerText)
 
           return {
             personInfo,
@@ -74,11 +78,14 @@ defineComponent(
             statusType,
             onTrigger,
             avatarSlot,
+            contentSlot,
+            getPopupContainer,
+            isAvatarSolt,
           }
         },
         template: `
           <div>
-            <a-popover placement="left" @visibleChange="onTrigger" overlayClassName="ok-person-cell-popover">
+            <a-popover placement="left" @visibleChange="onTrigger"  overlayClassName="ok-person-cell-popover">
               <template #content>
                 <ok-person-card
                   :personInfo="personInfo"
@@ -88,16 +95,16 @@ defineComponent(
                   :statusType="statusType"
                 ></ok-person-card>
               </template>
-              <div v-if="avatarSlot" v-html="avatarSlot"></div>
-              <span v-else class="ok-person-cell ok-person-cell-root">
+              <span class="ok-person-cell ok-person-cell-root">
+                <div v-if="isAvatarSolt" v-html="avatarSlot"></div>
                 <ok-avatar
+                  v-else
                   :personInfo="personInfo"
                   :size="size"
                   :width="width"
                   :height="height"
                 ></ok-avatar>
               </span>
-
             </a-popover>
           </div>
       `,
@@ -111,6 +118,7 @@ defineComponent(
       <link rel="stylesheet" .href="${CDN_PATH}antd.min.css" />
       <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
       <span ref="showPersonCell"></span>
+      <span ref="contentSlot"><slot></slot></span>
     `
   }
 )
