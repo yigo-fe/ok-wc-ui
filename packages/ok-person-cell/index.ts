@@ -79,7 +79,6 @@ defineComponent(
             onTrigger,
             avatarSlot,
             contentSlot,
-            getPopupContainer,
             isAvatarSolt,
           }
         },
