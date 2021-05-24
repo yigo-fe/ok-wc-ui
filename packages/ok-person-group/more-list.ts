@@ -1,9 +1,9 @@
-import { defineComponent, html, onMounted, PropType } from 'ok-lit'
-
 import { Popover } from 'ant-design-vue'
+import { defineComponent, html, onMounted, PropType } from 'ok-lit'
+import { computed, createApp } from 'vue'
 
+import close from '../assets/images/closed.svg'
 import { CDN_PATH, COMMON_CSS_PATH } from '../path.config'
-import { createApp, computed } from 'vue'
 defineComponent(
   'ok-person-group-more',
   {
@@ -26,6 +26,14 @@ defineComponent(
     itemStyle: {
       type: Object as unknown as PropType<{}>,
     },
+    showDelete: {
+      type: Boolean as unknown as PropType<boolean>,
+      default: false,
+    },
+    placement: {
+      type: String as unknown as PropType<string>,
+      default: 'top',
+    },
     // 审批组件传入，卡片请求数据方法
     propsGetInfoByEmpId: {
       type: Function,
@@ -41,7 +49,14 @@ defineComponent(
           const detailHeight = computed(() => props.detailHeight)
           const itemStyle = computed(() => props.itemStyle)
           const contentStyle = computed(() => props.contentStyle)
+          const showDelete = computed(() => props.showDelete)
+          const placement = computed(() => props.placement)
           const propsGetInfoByEmpId = computed(() => props.propsGetInfoByEmpId)
+          const closeIcon = close
+
+          const deleteItem = (item: any) => {
+            contxt.emit('delete-item', item)
+          }
 
           return {
             popperList,
@@ -51,11 +66,15 @@ defineComponent(
             itemStyle,
             contentStyle,
             propsGetInfoByEmpId,
+            closeIcon,
+            showDelete,
+            placement,
+            deleteItem,
           }
         },
         template: `
           <div>
-            <a-popover placement="top" overlayClassName="ok-person-group-more">
+            <a-popover :placement="placement" overlayClassName="ok-person-group-more">
               <template #content>
                 <ul
                     class="ok-person-group-popper popper-wraper"
@@ -72,6 +91,7 @@ defineComponent(
                       :propsGetInfoByEmpId="propsGetInfoByEmpId"
                     ></ok-person-cell>
                     <span class="popper-item-name">{{item.employee_name}}</span>
+                    <img v-if="showDelete" :src="closeIcon" class="person-item-close-icon" @click="deleteItem(item)" />
                   </li>
                 </ul>
               </template>

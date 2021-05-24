@@ -3,14 +3,14 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-18 18:45:01
+ * @LastEditTime: 2021-05-24 10:57:06
  * @FilePath: /packages/ok-accessory/ok-upload-image/ok-file-image.ts
  */
 
+import { classMap } from 'lit-html/directives/class-map.js'
+import { StyleInfo, styleMap } from 'lit-html/directives/style-map'
 import { defineComponent, html, PropType } from 'ok-lit'
 
-import { styleMap, StyleInfo } from 'lit-html/directives/style-map'
-import { classMap } from 'lit-html/directives/class-map.js'
 import { COMMON_CSS_PATH } from '../../path.config'
 import type { ListType, UploadFile, UploadStatus } from '../upload.type'
 defineComponent(

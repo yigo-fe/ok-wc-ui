@@ -1,13 +1,9 @@
-import { SIZE_TYPE } from '@c/enum'
-import { POPOVER_PLACEMENT } from '@c/ok-wc-ui'
-import { setPopover } from '@c/utils'
-import { nextTick } from '@vue/runtime-core'
-import { styleMap } from 'lit-html/directives/style-map'
-import { computed, defineComponent, effect, html, PropType } from 'ok-lit'
-
-import close from '../assets/images/closed.svg'
-import { COMMON_CSS_PATH } from '../path.config'
 import './more-list'
+
+import { SIZE_TYPE } from '@c/enum'
+import { computed, defineComponent, html, PropType } from 'ok-lit'
+
+import { COMMON_CSS_PATH } from '../path.config'
 /**
  * @props persons: {Array<Person>} 用户信息组
  */
@@ -57,7 +53,6 @@ defineComponent(
     },
     placement: {
       type: String as unknown as PropType<string>,
-      default: 'top',
     },
     deleteItem: {
       // eslint-disable-next-line no-unused-vars
@@ -72,7 +67,7 @@ defineComponent(
       type: Function,
     },
   },
-  (props, contxt) => {
+  props => {
     const placement = computed(() => {
       return props.placement
     })
@@ -84,36 +79,12 @@ defineComponent(
       return props.showAll ? props.personList : props.personList?.slice(3)
     })
 
-    const closeIcon = close
-
-    // const setPopup = () => {
-    //   setPopover(
-    //     contxt.$refs['showMore'] as HTMLElement,
-    //     contxt.$refs['personGroupPopper'] as HTMLElement,
-    //     {
-    //       appendTo: document.body,
-    //       popperOptions: {
-    //         strategy: 'fixed',
-    //       },
-    //       theme: 'ok-person-group',
-    //       placement: placement.value as POPOVER_PLACEMENT,
-    //     }
-    //   )
-    // }
-
-    // effect(() => {
-    //   if (props.personList?.length) {
-    //     nextTick(() => {
-    //       contxt.$refs['showMore'] && setPopup()
-    //     })
-    //   }
-    // })
-
-    const deleteItem = (item: any) => {
-      props.deleteItem && props.deleteItem(item)
+    const deleteItem = (item: CustomEvent) => {
+      props.deleteItem && props.deleteItem(item.detail)
     }
 
     const avatarRender = () => {
+      if (!showList.value?.length) return ''
       return html`
         ${showList.value.map(
           item => html`<ok-person-cell
@@ -126,9 +97,9 @@ defineComponent(
             .propsGetInfoByEmpId=${props.propsGetInfoByEmpId}
           ></ok-person-cell>`
         )}
-        ${showList.value?.length === 1
+        ${showList.value.length === 1
           ? html`<span class="single-user-name"
-              >${showList.value?.[0]?.employee_name}</span
+              >${showList.value[0].employee_name}</span
             >`
           : html`
               <span ref="showMore" class="more"
@@ -140,55 +111,14 @@ defineComponent(
                       .detailHeight=${props.detailHeight}
                       .itemStyle=${props.itemStyle}
                       .contentStyle=${props.contentStyle}
+                      .showDelete=${props.showDelete}
+                      .placement=${placement.value}
                       .propsGetInfoByEmpId=${props.propsGetInfoByEmpId}
+                      @deleteItem=${deleteItem}
                     ></ok-person-group-more>`
                   : ''}</span
               >
             `}
-      `
-    }
-
-    const iconRender = (item: any) => {
-      return html`
-        ${props.subtitleRender
-          ? props.subtitleRender(item)
-          : props.showDelete &&
-            html` <img
-              .src="${closeIcon}"
-              class="person-item-close-icon"
-              @click="${() => {
-                deleteItem(item)
-              }}"
-            />`}
-      `
-    }
-
-    const popperRender = () => {
-      return html`
-        <ul
-          ref="personGroupPopper"
-          class="ok-person-group-popper popper-wraper"
-          style=${styleMap(props.contentStyle)}
-        >
-          ${popperList.value.map(
-            item =>
-              html`
-                <li style=${styleMap(props.itemStyle)} class="popper-item">
-                  <ok-person-cell
-                    class="popper-item-avatar"
-                    .personInfo=${item}
-                    .size=${props.detailSize}
-                    .width=${props.detailWidth}
-                    .height=${props.detailHeight}
-                    .hidePopper=${false}
-                    .propsGetInfoByEmpId=${props.propsGetInfoByEmpId}
-                  ></ok-person-cell>
-                  <span class="popper-item-name">${item.employee_name}</span>
-                  ${iconRender(item)}
-                </li>
-              `
-          )}
-        </ul>
       `
     }
 

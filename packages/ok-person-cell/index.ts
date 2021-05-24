@@ -1,7 +1,9 @@
-import { defineComponent, html, onMounted, effect } from 'ok-lit'
-
-import { apiInitPersoncard } from '../services/api'
 import { Popover } from 'ant-design-vue'
+import { defineComponent, html, onMounted } from 'ok-lit'
+import { computed, createApp, ref } from 'vue'
+
+import { CDN_PATH, COMMON_CSS_PATH } from '../path.config'
+import { apiInitPersoncard } from '../services/api'
 // import { personInfo } from '../mock'
 /**
  * person: {Person} 用户信息
@@ -10,8 +12,6 @@ import { Popover } from 'ant-design-vue'
  * 文字头像：背景色自定义
  */
 import props from './props'
-import { CDN_PATH, COMMON_CSS_PATH } from '../path.config'
-import { createApp, computed, ref } from 'vue'
 defineComponent(
   'ok-person-cell',
   {
@@ -62,7 +62,8 @@ defineComponent(
           const height = computed(() => props.height)
 
           const avatarSlot = computed(() => {
-            return contxt.$refs.contentSlot.innerHTML
+            const contentSlot: any = contxt.$refs.contentSlot
+            return contentSlot?.innerHTML
           })
 
           const isAvatarSolt = computed(() => !!contxt.innerText)
@@ -117,7 +118,7 @@ defineComponent(
       <link rel="stylesheet" .href="${CDN_PATH}antd.min.css" />
       <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
       <span ref="showPersonCell"></span>
-      <span ref="contentSlot"><slot></slot></span>
+      <span ref="contentSlot" style="display: none;"><slot></slot></span>
     `
   }
 )
