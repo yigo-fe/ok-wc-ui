@@ -118,7 +118,7 @@ defineComponent(
       <link rel="stylesheet" .href="${CDN_PATH}antd.min.css" />
       <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
       <span ref="showPersonCell"></span>
-      <span ref="contentSlot" style="display: none;"><slot></slot></span>
+      <span ref="contentSlot"><slot></slot></span>
     `
   }
 )

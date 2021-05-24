@@ -56,6 +56,7 @@ const createConfig = format => {
       'process.env.NODE_ENV': JSON.stringify(
         isPrd ? 'production' : 'development'
       ),
+      'process.env.PACKAGE_VERSION': pkg.version,
     }),
     // copy 静态资源
     copy({

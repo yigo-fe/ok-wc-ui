@@ -5,9 +5,11 @@
   <link rel="icon" href="/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./antd.min.css">
-  <link rel="stylesheet" href="./iconfont/iconfont.css">
   <link rel="stylesheet" href="./common.css">
   <!-- <link rel="stylesheet" href="./tippy.css"> -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.9.0/viewer.css" integrity="sha512-HHYZlJVYgHVdz/pMWo63/ya7zc22sdXeqtNzv4Oz76V3gh7R+xPqbjNUp/NRmf0R85J++Yg6R0Kkmz+TGYHz8g==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+  <!-- <script src="https://unpkg.com/jquery@3/dist/jquery.slim.min.js" crossorigin="anonymous"></script> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.9.0/viewer.min.js" integrity="sha512-0goo56vbVLOJt9J6TMouBm2uE+iPssyO+70sdrT+J5Xbb5LsdYs31Mvj4+LntfPuV+VlK0jcvcinWQG5Hs3pOg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
   <title>ok-wc-ui</title>
   <style>
     #app {
@@ -75,6 +77,16 @@
       <!-- <ok-ant-person-select></ok-ant-person-select> -->
       <!-- <ok-ant-department-search></ok-ant-department-search> -->
 
+      <h3>image preview</h3>
+      <!-- <ok-image-preview></ok-image-preview> -->
+
+      <div>
+        <ul id="images">
+          <li><img src="picture-1.jpg" alt="Picture 1"></li>
+          <li><img src="picture-2.jpg" alt="Picture 2"></li>
+          <li><img src="picture-3.jpg" alt="Picture 3"></li>
+        </ul>
+      </div>
       <!-- 人员图像 -->
 <!--       <ok-avatar></ok-avatar>-->
       <div class="divider"></div>
@@ -145,7 +157,7 @@
       </ok-drawer> -->
     </main>
   </div>
-  <!-- <script type="module" src="../dist/ok-wc-ui.umd.js"></script> -->
+  <script type="module" src="../dist/ok-wc-ui.umd.js"></script>
   <script>
     // success
 	// cv3vj7pldi1gxo65
@@ -153,6 +165,20 @@
   // 'app_id': 'app_imvtxorkbj',
   //     'form_key': 'form_0wdfaktbsv',
   //     'element_id': 'c8k95352g4qmvurx'
+
+
+  window.addEventListener('DOMContentLoaded', function () {
+    const gallery = new Viewer(document.getElementById('images'));
+        var viewer = new Viewer(document.getElementById('images'), {
+          hidden: function () {
+            viewer.destroy();
+          },
+        });
+
+        // image.click();
+        viewer.show();
+
+    });
 
     var action = 'https://huawei.yigowork.com/apps/api/v1/private/attachment/uploadAttachments'
     var actionImg = 'https://huawei.yigowork.com/apps/api/v1/private/attachment/uploadImages'
@@ -372,6 +398,8 @@
 
 
     window.onload = ()=>{
+
+  
 
       // window.okuiConfig.options.preview = true
       const okAvatar = document.querySelector('ok-avatar')
@@ -615,14 +643,16 @@
     }
 
     function testClick (){
-      setTimeout(()=>{
-        const okEmployeeInput = document.querySelector('.ok-employee-input')
-        okEmployeeInput.value = undefined
 
-        // const okEmployeeTree = document.querySelector('.ok-employee-tree')
-        // okEmployeeTree.multiple = true
+      gallery.show()
+      // setTimeout(()=>{
+      //   const okEmployeeInput = document.querySelector('.ok-employee-input')
+      //   okEmployeeInput.value = undefined
 
-      }, 500)
+      //   const okEmployeeTree = document.querySelector('.ok-employee-tree')
+      //   okEmployeeTree.multiple = true
+
+      // }, 500)
 
       //   const okEmployeeInput = document.querySelector('.ok-employee-input')
       // okEmployeeInput.value = ['FengHaiLi']
@@ -635,9 +665,9 @@
       // const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
       // okEmployeeInput2.value = ['FuJing']
 
-      const okDeptInput = document.querySelector('.ok-department-input')
+      // const okDeptInput = document.querySelector('.ok-department-input')
       // okDeptInput.value = ['13','14', '17', '18', '19']
-      okDeptInput.value = ['18']
+      // okDeptInput.value = ['18']
 
 
     }
