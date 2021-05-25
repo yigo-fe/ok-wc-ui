@@ -167,18 +167,18 @@
   //     'element_id': 'c8k95352g4qmvurx'
 
 
-  window.addEventListener('DOMContentLoaded', function () {
-    const gallery = new Viewer(document.getElementById('images'));
-        var viewer = new Viewer(document.getElementById('images'), {
-          hidden: function () {
-            viewer.destroy();
-          },
-        });
+  // window.addEventListener('DOMContentLoaded', function () {
+  //   const gallery = new Viewer(document.getElementById('images'));
+  //       var viewer = new Viewer(document.getElementById('images'), {
+  //         hidden: function () {
+  //           viewer.destroy();
+  //         },
+  //       });
 
-        // image.click();
-        viewer.show();
+  //       // image.click();
+  //       viewer.show();
 
-    });
+  //   });
 
     var action = 'https://huawei.yigowork.com/apps/api/v1/private/attachment/uploadAttachments'
     var actionImg = 'https://huawei.yigowork.com/apps/api/v1/private/attachment/uploadImages'
@@ -539,11 +539,11 @@
 
 
       const okDeptInput = document.querySelector('.ok-department-input')
-      okDeptInput.value = ['13','14', '17', '18', '19']
+      okDeptInput.value = ['13','14', '18', '19']
       okDeptInput.multiple = true
       okDeptInput.disabled = true
       okDeptInput.update = (val, list)=>{
-        console.log('dept-input-update-index',val, list)
+        console.log('okDeptInput-update-index',val, list)
         // okDeptInput.value = val
       }
       // okDeptInput.onBlur = ()=>{
@@ -560,19 +560,20 @@
       // }
 
       const okDeptTree = document.querySelector('.ok-department-tree')
-      okDeptTree.value = ['13','14', '17', '18', '19']
+      okDeptTree.value = ['13','14', '20', '18', '19']
       okDeptTree.multiple = true
       // okDeptTree.hasBorderRadius = false
       // okDeptTree.bordered = false
       // okDeptTree.disabled = true
       okDeptTree.update = (val, list)=>{
-        console.log('dept-tree-update-index',val, list)
+        console.log('okDeptTree-update-index',val, list)
         // okDeptTree.value = val
       }
 
 
       const okEmployeeTree = document.querySelector('.ok-employee-tree')
-      okEmployeeTree.value = ['LiTao', 'FuJing', 'WangChao', 'WangYiJie']
+      okEmployeeTree.value = ['LiTao', 'FuJing', 'ssssss', 'WangYiJie']
+      // okEmployeeTree.value = ['ssssss']
       okEmployeeTree.disabled = true
       okEmployeeTree.multiple = true
       // okEmployeeTree.dialogStyle = {'z-index': 7000}
@@ -580,13 +581,13 @@
       // okEmployeeTree.maskStyle = {'z-index': 7000}
       // okEmployeeTree.range = ['FuJing',"FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing', 'WangChao', 'WangYiJie']
       okEmployeeTree.update = (val, list)=>{
-        console.log('employee-tree-update-index',val, list)
+        console.log('okEmployeeTree-update-index',val, list)
         okEmployeeTree.value = val
       }
 
 
       const okEmployeeInput = document.querySelector('.ok-employee-input')
-      okEmployeeInput.value = ["LiTao"]
+      okEmployeeInput.value = ['1234']
       okEmployeeInput.hasBorderRadius = false
       // okEmployeeInput.bordered = false
       // okEmployeeInput.value = []
@@ -595,12 +596,12 @@
         // console.log('getPopupContainer', triggerNode)
         return triggerNode.parentNode
       }
-      // okEmployeeInput.multiple = true
+      okEmployeeInput.multiple = true
       // okEmployeeInput.borderless = true
       // okEmployeeInput.disabled = true
-      // okEmployeeInput.range = ['FuJing',"FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing', 'WangChao', 'WangYiJie']
+      okEmployeeInput.range = ['FuJing',"FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing', 'WangChao', 'WangYiJie']
       okEmployeeInput.update = (val, list)=>{
-        console.log('update-index',val,list)
+        console.log('okEmployeeInput-update-index',val,list)
         // okEmployeeInput.value = val
       }
 

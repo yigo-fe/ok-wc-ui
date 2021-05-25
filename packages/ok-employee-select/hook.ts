@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 15:16:57
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-25 17:15:55
+ * @LastEditTime: 2021-05-25 18:18:08
  * @FilePath: /packages/ok-employee-select/hook.ts
  */
 import { debounce } from 'lodash'
@@ -298,7 +298,15 @@ export default function (props: any, context: any) {
       // 处理溢出
       getExceed()
       // 更新value；注意处理单选
-      value.value = multiple.value ? ids : ids.slice(0, 1)
+      // 注意处理脏数据
+      const vaildData = ids.filter((v: string) =>
+        options.value.find((item: any) => item.employee_id === v)
+      )
+      value.value = multiple.value ? vaildData : vaildData.slice(0, 1)
+      // 特殊处理：过滤后没有正常数据的，手动update
+      if (!vaildData.length) {
+        props.update && props.update(value.value, selectedList.value)
+      }
     }
   }
 
@@ -317,9 +325,8 @@ export default function (props: any, context: any) {
 
   // 组件内部value变化时处理：1. 触发组件update，同步外部数据; 2. 计算溢出标签，展示'更多'组件
   const handleValueChange = () => {
-    const val = value.value
     // 更新组件外部value
-    props.update && props.update(val, selectedList.value)
+    props.update && props.update(value.value, selectedList.value)
     // value 变化， 计算溢出人员
     getExceed()
   }
