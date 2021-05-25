@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 15:16:57
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-18 18:46:02
+ * @LastEditTime: 2021-05-25 17:15:55
  * @FilePath: /packages/ok-employee-select/hook.ts
  */
 import { debounce } from 'lodash'
@@ -26,8 +26,8 @@ export default function (props: any, context: any) {
   const disabled = computed(() => props.disabled)
   // multiple
   const multiple = computed(() => props.multiple)
-  // 无边框
-  const borderless = computed(() => props.borderless)
+  // 边框
+  const bordered = computed(() => props.bordered)
   // 限定范围
   const range = computed(() => props.range)
   // 指定范围，本地搜索， 非远程
@@ -425,7 +425,7 @@ export default function (props: any, context: any) {
     remote,
     closeIcon,
     searchIcon,
-    borderless,
+    bordered,
     isOpen,
     isMouseenter,
     maxTagCount,

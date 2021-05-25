@@ -562,6 +562,8 @@
       const okDeptTree = document.querySelector('.ok-department-tree')
       okDeptTree.value = ['13','14', '17', '18', '19']
       okDeptTree.multiple = true
+      // okDeptTree.hasBorderRadius = false
+      // okDeptTree.bordered = false
       // okDeptTree.disabled = true
       okDeptTree.update = (val, list)=>{
         console.log('dept-tree-update-index',val, list)
@@ -585,6 +587,8 @@
 
       const okEmployeeInput = document.querySelector('.ok-employee-input')
       okEmployeeInput.value = ["LiTao"]
+      okEmployeeInput.hasBorderRadius = false
+      // okEmployeeInput.bordered = false
       // okEmployeeInput.value = []
       okEmployeeInput.dropdownstyle = {'z-index': 6000}
       okEmployeeInput.getPopupContainer = (triggerNode)=>{

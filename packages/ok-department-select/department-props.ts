@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:02:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-18 13:35:06
+ * @LastEditTime: 2021-05-25 17:31:50
  * @FilePath: /packages/ok-department-select/department-props.ts
  */
 import { PropType } from 'ok-lit'
@@ -21,9 +21,15 @@ const propsOptions = {
     type: Boolean as unknown as PropType<boolean>,
     default: false,
   },
-  borderless: {
+  // 展示input的边框
+  bordered: {
     type: Boolean as unknown as PropType<boolean>,
-    default: false,
+    default: true,
+  },
+  // 展示border-radius
+  hasBorderRadius: {
+    type: Boolean as unknown as PropType<boolean>,
+    default: true,
   },
   multiple: {
     type: Boolean as unknown as PropType<boolean>,

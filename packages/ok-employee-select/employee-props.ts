@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-20 14:56:24
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-18 11:31:56
+ * @LastEditTime: 2021-05-25 17:31:35
  * @FilePath: /packages/ok-employee-select/employee-props.ts
  */
 
@@ -29,10 +29,15 @@ const propsOptions = {
     type: Boolean as unknown as PropType<boolean>,
     default: false,
   },
-  // 不展示input的边框
-  borderless: {
+  // 展示input的边框
+  bordered: {
     type: Boolean as unknown as PropType<boolean>,
-    default: false,
+    default: true,
+  },
+  // 展示border-radius
+  hasBorderRadius: {
+    type: Boolean as unknown as PropType<boolean>,
+    default: true,
   },
   multiple: {
     type: Boolean as unknown as PropType<boolean>,

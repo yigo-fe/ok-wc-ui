@@ -98,6 +98,12 @@ ul {
   border-radius: 4px;
 }
 .ant-select-multiple:not(.ant-select-disabled) .ant-select-selector:hover{border-color:#4c78fc}
+/* 修改人员和部门选择placeholder宽度 */
+.ant-select.ant-select-multiple.ant-select-show-search .ant-select-selection-placeholder {
+  right: 30px;
+}
+/* 人员和部门选择没有border-radius */
+.no-border-radius .ant-select .ant-select-selector {border-radius:0}
 
 /* personGroup Popper  */
 .ok-person-group-popper.popper-wraper {

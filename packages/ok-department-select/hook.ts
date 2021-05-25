@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 20:15:04
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-18 18:07:07
+ * @LastEditTime: 2021-05-25 17:32:19
  * @FilePath: /packages/ok-department-select/hook.ts
  */
 import { debounce } from 'lodash'
@@ -30,8 +30,8 @@ export default function (props: any, context: any) {
   const multiple = computed(() => props.multiple)
   // 显示层级
   const displayLevel = computed(() => props.level)
-  // 无边框
-  const borderless = computed(() => props.borderless)
+  // 边框
+  const bordered = computed(() => props.bordered)
   // dropdownStyle
   const dropdownstyle = computed(() => props.dropdownstyle)
   // modal的z-index
@@ -378,7 +378,7 @@ export default function (props: any, context: any) {
     displayLevel,
     closeIcon,
     searchIcon,
-    borderless,
+    bordered,
     isOpen,
     isMouseenter,
     maxTagCount,

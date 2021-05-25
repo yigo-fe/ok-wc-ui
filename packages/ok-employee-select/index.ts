@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-18 11:30:00
+ * @LastEditTime: 2021-05-25 17:33:32
  * @FilePath: /packages/ok-employee-select/index.ts
  */
 
@@ -11,6 +11,7 @@ import './ok-employee-more'
 import './ok-employee-modal'
 
 import { Select } from 'ant-design-vue'
+import { classMap } from 'lit-html/directives/class-map.js'
 import { defineComponent, html, onMounted } from 'ok-lit'
 import { createApp, ref } from 'vue'
 
@@ -64,8 +65,8 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
             :dropdownStyle="dropdownstyle"
             style="width: 100%; height: 100%;"
             class="ok-employee-select"
-            :class="{'no-border': borderless}"
             :getPopupContainer="getPopupContainer"
+            :bordered="bordered"
             @search="searchByKey"
             @select="handleSelect"
             @click="handleInputClick"
@@ -150,7 +151,10 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
 
     <div
       ref="showEmployeeSelect"
-      class="ok-employee-select-wraper"
+      class=${classMap({
+        'ok-employee-select-wraper': true,
+        'no-border-radius': !props.hasBorderRadius,
+      })}
       style="height: 100%"
     ></div>
   `

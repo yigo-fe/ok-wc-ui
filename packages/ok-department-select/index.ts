@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:01:15
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-18 18:06:57
+ * @LastEditTime: 2021-05-25 17:34:02
  * @FilePath: /packages/ok-department-select/index.ts
  */
 import './ok-department-modal'
@@ -18,6 +18,7 @@ import {
   Select,
   Tree,
 } from 'ant-design-vue'
+import { classMap } from 'lit-html/directives/class-map.js'
 import { defineComponent, html, onMounted } from 'ok-lit'
 import { createApp, ref } from 'vue'
 
@@ -70,6 +71,7 @@ defineComponent(
 					:maxTagPlaceholder="maxTagPlaceholder"
           :dropdownStyle="dropdownstyle"
           :getPopupContainer="getPopupContainer"
+          :bordered="bordered"
           @select="handleSelect"
           @search="searchByKey"
           @click="handleInputClick"
@@ -130,7 +132,11 @@ defineComponent(
       <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
       <div
         ref="showDeptSelect"
-        class="ok-department-select-wraper ok-department-select-root"
+        class=${classMap({
+          'ok-department-select-wraper': true,
+          'ok-department-select-root': true,
+          'no-border-radius': !props.hasBorderRadius,
+        })}
       ></div>
     `
   }
