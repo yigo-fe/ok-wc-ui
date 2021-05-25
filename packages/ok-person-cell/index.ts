@@ -23,6 +23,7 @@ defineComponent(
         setup() {
           const api = apiInitPersoncard()
           const toOpenId: any = ref('')
+          const isSelf = ref(false)
           const isAwaken = ref(false)
           const deptList: any = ref([])
           const statusType: any = ref('')
@@ -37,6 +38,9 @@ defineComponent(
             }
 
             if (result.code === '000000') {
+              // 记录打开的是否为自己的卡片。判断依据：没有to_open_id字段则为自己
+              isSelf.value =
+                Object.keys(result.data).indexOf('to_open_id') === -1
               const fromOpenId = result.data.from_open_id
               toOpenId.value = result.data.to_open_id
               isAwaken.value = Boolean(fromOpenId && toOpenId.value)
@@ -45,8 +49,8 @@ defineComponent(
             }
           }
 
-          const onTrigger = () => {
-            if (toOpenId.value) return
+          const onTrigger = (visible: boolean) => {
+            if (!visible || toOpenId.value || isSelf.value) return
             const personInfo: any = props.personInfo
             const id =
               personInfo.employee_id ||
