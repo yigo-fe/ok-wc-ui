@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 20:15:04
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-25 18:17:49
+ * @LastEditTime: 2021-05-26 10:55:22
  * @FilePath: /packages/ok-department-select/hook.ts
  */
 import { debounce } from 'lodash'
@@ -145,44 +145,27 @@ export default function (props: any, context: any) {
       exceedList.value = exceedIds.map(v => infoMap.value[v]).filter(v => v)
     }
   }
-  // 处理最多能展示多少个tag
-  // const maxTagCountComput = () => {
-  //   const el = context.$refs.showEmployeeSelect as HTMLElement
+
+  // 部门暂时固定展示1个
+  // // 处理最多能展示多少个tag
+  // const maxTagCountComput = debounce(() => {
+  //   const el = context.$refs.showDeptSelect as HTMLElement
   //   const elWith = el?.offsetWidth
   //   if (!elWith) return
 
   //   maxTagCount.value = elWith > 185 ? Math.floor((elWith - 75) / 108) : 1
-  //   // 首次计算溢出部门
-  //   !exceedList.value.length && getExceed()
-  // }
+  //   // 计算溢出
+  //   getExceed()
+  // }, 300)
 
-  // nextTick(() => {
-  //   setTimeout(() => {
-  //     maxTagCountComput()
-  //   }, 500)
+  // onMounted(() => {
+  //   maxTagCountComput()
+  //   window.addEventListener('resize', () => maxTagCountComput(), false)
   // })
 
-  // 处理最多能展示多少个tag
-  const maxTagCountComput = debounce(() => {
-    const el = context.$refs.showDeptSelect as HTMLElement
-    const elWith = el?.offsetWidth
-    if (!elWith) return
-
-    maxTagCount.value = elWith > 185 ? Math.floor((elWith - 75) / 108) : 1
-    // 首次计算溢出部门
-    // !exceedList.value.length && getExceed()
-    // 计算溢出
-    getExceed()
-  }, 300)
-
-  onMounted(() => {
-    maxTagCountComput()
-    window.addEventListener('resize', () => maxTagCountComput(), false)
-  })
-
-  onUnmounted(() => {
-    window.removeEventListener('resize', () => maxTagCountComput(), false)
-  })
+  // onUnmounted(() => {
+  //   window.removeEventListener('resize', () => maxTagCountComput(), false)
+  // })
 
   // 打开下拉框
   const isOpen = ref(false)

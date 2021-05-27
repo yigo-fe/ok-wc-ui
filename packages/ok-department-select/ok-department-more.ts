@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-30 16:02:36
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-18 15:56:22
+ * @LastEditTime: 2021-05-26 10:53:22
  * @FilePath: /packages/ok-department-select/ok-department-more.ts
  */
 import { Popover } from 'ant-design-vue'
@@ -59,7 +59,7 @@ defineComponent(
             <template #content>
               <div class="more-content">
                 <p class="more-item" v-for="item in exceedList" :key="item.department_id">
-                  <span class="item-name">{{item.department_name}}</span>
+                  <span class="item-name">{{item.display_value}}</span>
                   <img v-if="!disabled" :src="closeIcon" class="head-close-icon" @click="deleteSelected(item.department_id)" />
                 </p>
               </div>

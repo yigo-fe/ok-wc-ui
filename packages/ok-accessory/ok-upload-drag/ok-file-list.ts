@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-19 20:15:13
+ * @LastEditTime: 2021-05-26 10:14:30
  * @FilePath: /packages/ok-accessory/ok-upload-drag/ok-file-list.ts
  */
 
@@ -18,33 +18,33 @@ defineComponent(
   'ok-file-list',
   {
     fileList: {
-      type: (Array as unknown) as PropType<UploadFile[]>,
+      type: Array as unknown as PropType<UploadFile[]>,
       default: () => [] as UploadFile[],
     },
     listType: {
-      type: (String as unknown) as PropType<ListType>,
+      type: String as unknown as PropType<ListType>,
       default: 'text',
     },
     disabled: {
-      type: (Boolean as unknown) as PropType<boolean>,
+      type: Boolean as unknown as PropType<boolean>,
     },
     showProgress: {
-      type: (Boolean as unknown) as PropType<boolean>,
+      type: Boolean as unknown as PropType<boolean>,
     },
     showPreview: {
-      type: (Boolean as unknown) as PropType<boolean>,
+      type: Boolean as unknown as PropType<boolean>,
     },
     showDownload: {
-      type: (Boolean as unknown) as PropType<boolean>,
+      type: Boolean as unknown as PropType<boolean>,
     },
     showRemove: {
-      type: (Boolean as unknown) as PropType<boolean>,
+      type: Boolean as unknown as PropType<boolean>,
     },
     maxHeight: {
-      type: (String as unknown) as PropType<string>,
+      type: String as unknown as PropType<string>,
     },
     subtable: {
-      type: (Boolean as unknown) as PropType<boolean>,
+      type: Boolean as unknown as PropType<boolean>,
     },
   },
   (props, context) => {
@@ -239,7 +239,6 @@ defineComponent(
       return html`
         <div class="item-detail">
           <ok-file-icon .type=${suffix}></ok-file-icon>
-
           <div class="ok-file-list__item_name">
             <div class="file_name_wraper">
               <span class="ok-file-list__item_file_name">${item.name}</span>

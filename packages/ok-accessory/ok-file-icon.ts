@@ -3,11 +3,11 @@
  * @Author: 付静
  * @Date: 2021-03-10 14:22:53
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-19 20:14:31
+ * @LastEditTime: 2021-05-26 10:15:45
  * @FilePath: /packages/ok-accessory/ok-file-icon.ts
  */
-import { computed, defineComponent, html, onMounted, PropType } from 'ok-lit'
-import { createApp, ref } from 'vue'
+import { defineComponent, html, onMounted, PropType } from 'ok-lit'
+import { computed, createApp } from 'vue'
 
 import ae from '../assets/file-icon/icon_file-ae_colorful.svg'
 import ai from '../assets/file-icon/icon_file-ai_colorful.svg'
@@ -41,18 +41,18 @@ defineComponent(
   'ok-file-icon',
   {
     type: {
-      type: (String as unknown) as PropType<string>,
+      type: String as unknown as PropType<string>,
     },
   },
   (props, context) => {
     onMounted(() => {
       const options = {
         setup() {
-          const type = ref(props.type)
+          const suffix = computed(() => props.type)
 
           const fileIcon = computed(() => {
             let icon = ''
-            switch (type.value) {
+            switch (suffix.value) {
               case 'ae':
                 icon = ae
                 break
