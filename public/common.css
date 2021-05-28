@@ -182,6 +182,9 @@ ul {
 .ok-person-cell-popover.ant-popover .ant-popover-arrow {
   display: none;
 }
+.ok-person-cell-popover.ant-popover {
+  z-index: 9999;
+}
 .ok-person-cell-root,
 .ok-person-cell-root ok-avatar {
   display: inline-block;

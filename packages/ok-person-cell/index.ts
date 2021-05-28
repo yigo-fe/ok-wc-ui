@@ -1,5 +1,5 @@
 import { Popover } from 'ant-design-vue'
-import { defineComponent, html, onMounted } from 'ok-lit'
+import { defineComponent, html, onMounted, effect } from 'ok-lit'
 import { computed, createApp, ref } from 'vue'
 
 import { CDN_PATH, COMMON_CSS_PATH } from '../path.config'
@@ -18,6 +18,7 @@ defineComponent(
     ...props,
   },
   (props, contxt) => {
+    let isInit = false
     onMounted(() => {
       const options = {
         setup() {
@@ -100,9 +101,9 @@ defineComponent(
                 ></ok-person-card>
               </template>
               <span class="ok-person-cell ok-person-cell-root">
-                <div v-if="isAvatarSolt" v-html="avatarSlot"></div>
+                <div v-show="isAvatarSolt" v-html="avatarSlot"></div>
                 <ok-avatar
-                  v-else
+                  v-if="!isAvatarSolt"
                   :personInfo="personInfo"
                   :size="size"
                   :width="width"
@@ -113,10 +114,14 @@ defineComponent(
           </div>
       `,
       }
-      const app = createApp(options)
-      app.use(Popover)
-
-      app.mount(contxt.$refs.showPersonCell as HTMLElement)
+      effect(() => {
+        if (!isInit && props.personInfo) {
+          const app = createApp(options)
+          app.use(Popover)
+          app.mount(contxt.$refs.showPersonCell as HTMLElement)
+          isInit = true
+        }
+      })
     })
     return () => html`
       <link rel="stylesheet" .href="${CDN_PATH}antd.min.css" />
