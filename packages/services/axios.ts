@@ -1,13 +1,23 @@
+/* eslint-disable no-unused-vars */
 /*
  * @Descripttion:
  * @Author: 付静
  * @Date: 2021-03-15 16:53:55
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-15 17:38:12
+ * @LastEditTime: 2021-05-31 17:45:19
  * @FilePath: /packages/services/axios.ts
  */
 import axios, { Method } from 'axios'
 import qs from 'qs'
+
+document.cookie = 'local=zh-CN'
+document.cookie = 'tenant_id=test'
+document.cookie = 'egoToken=cb4e3556-631e-4d54-8619-d97f77e93d80'
+document.cookie = 'designertoken=c71bbce5-38ca-42c2-9243-62aca1a55842'
+document.cookie = 'Hm_lpvt_6aa3bb5bcd9f8bea50e5944c4a3eb80c=1622166976'
+document.cookie =
+  'Hm_lvt_6aa3bb5bcd9f8bea50e5944c4a3eb80c=1622166695,1622166762,1622166958,1622166976'
+
 interface FetchRequest {
   method: Method
   url: string
@@ -47,7 +57,7 @@ function getInstance(serverPath: string) {
     (res: any) => {
       // 判断是否有权限
       if (res.data && res.data.code === '502106') {
-        window.location.replace('https://www.byteluck.com')
+        // window.location.replace('https://www.byteluck.com')
       }
       if (res.data instanceof Blob) {
         return res
@@ -59,8 +69,8 @@ function getInstance(serverPath: string) {
     },
     (error: any) => {
       if (error.response && `${error.response.status}` === '401') {
-        const url = 'https://www.byteluck.com'
-        window.location.replace(url)
+        // const url = 'https://www.byteluck.com'
+        // window.location.replace(url)
       } else {
         return Promise.reject(error)
       }

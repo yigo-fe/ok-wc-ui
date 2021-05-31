@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./antd.min.css">
   <link rel="stylesheet" href="./common.css">
+  <!-- <link rel="stylesheet" href="./green.css"> -->
+  <!-- <link rel="stylesheet" href="./common-origin.css"> -->
   <!-- <link rel="stylesheet" href="./tippy.css"> -->
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.9.0/viewer.css" integrity="sha512-HHYZlJVYgHVdz/pMWo63/ya7zc22sdXeqtNzv4Oz76V3gh7R+xPqbjNUp/NRmf0R85J++Yg6R0Kkmz+TGYHz8g==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
   <!-- <script src="https://unpkg.com/jquery@3/dist/jquery.slim.min.js" crossorigin="anonymous"></script> -->
@@ -103,7 +105,7 @@
 
       <section  class="divider upload-demo">
         <h3>列表上传</h3>
-        <ok-upload-list></ok-upload-list>
+        <ok-upload-table></ok-upload-table>
 
         <h3>明细字表上传</h3>
         <div style="display:block;">
@@ -114,9 +116,9 @@
         <ok-upload-subtable-image style="display:block;width: 300px;" class="ok-upload-subtable-image"></ok-upload-subtable-image>
 
         <h3>列表上传 slot </h3>
-        <!-- <ok-upload-list style="width: 500px; display: block; font-size: 0;">
+        <!-- <ok-upload-table style="width: 500px; display: block; font-size: 0;">
           <div style="width: 100%;height: 150px; font-size: 14px;display: block; border: 1px solid red;">这里是slot</div>
-        </ok-upload-list> -->
+        </ok-upload-table> -->
 
         <!-- <h3>拖拽上传 slot</h3>
         <ok-upload-drag style="width: 500px; display: block; font-size: 0;">
@@ -463,8 +465,8 @@
       // okUploadSubtable.data = uploadData
       okUploadSubtable.multiple = true
       // okUploadSubtable.disabled = true
-      okUploadSubtable.operation = []
-      okUploadSubtable.hideUploader = true
+      // okUploadSubtable.operation = []
+      // okUploadSubtable.hideUploader = true
       okUploadSubtable.fileList = ['4f48e4389ae229fa5e8eb88dd1efee7b', '5cb3d50074108e6263d97df9007c9853']
       okUploadSubtable.update = (data)=>{
         console.log('file', data)
@@ -475,9 +477,9 @@
       // okUploadSubtableImage.data = uploadData
       okUploadSubtableImage.multiple = true
       okUploadSubtableImage.type = 'image'
-      okUploadSubtableImage.disabled = true
+      // okUploadSubtableImage.disabled = true
       // okUploadSubtableImage.operation = []
-      okUploadSubtableImage.hideUploader = true
+      // okUploadSubtableImage.hideUploader = true
       okUploadSubtableImage.fileList = ['4f48e4389ae229fa5e8eb88dd1efee7b', '5cb3d50074108e6263d97df9007c9853']
       // 4f48e4389ae229fa5e8eb88dd1efee7b
       // 5cb3d50074108e6263d97df9007c9853
@@ -489,12 +491,12 @@
 
 
 
-      const okUploadList = document.querySelector('ok-upload-list')
+      const okUploadList = document.querySelector('ok-upload-table')
       // okUploadList.action = action
       // okUploadList.data = uploadData
       okUploadList.multiple = true
       // okUploadList.disabled = true
-      okUploadList.operation = ['download']
+      // okUploadList.operation = ['download']
       // okUploadList.hideUploader = true
 
 
@@ -541,7 +543,7 @@
       const okDeptInput = document.querySelector('.ok-department-input')
       okDeptInput.value = ['13','14', '18', '19']
       okDeptInput.multiple = true
-      okDeptInput.disabled = true
+      // okDeptInput.disabled = true
       okDeptInput.update = (val, list)=>{
         console.log('okDeptInput-update-index',val, list)
         // okDeptInput.value = val
@@ -574,7 +576,7 @@
       const okEmployeeTree = document.querySelector('.ok-employee-tree')
       okEmployeeTree.value = ['LiTao', 'FuJing', 'ssssss', 'WangYiJie']
       // okEmployeeTree.value = ['ssssss']
-      okEmployeeTree.disabled = true
+      // okEmployeeTree.disabled = true 
       okEmployeeTree.multiple = true
       // okEmployeeTree.dialogStyle = {'z-index': 7000}
       okEmployeeTree.modalZIndex = 5000

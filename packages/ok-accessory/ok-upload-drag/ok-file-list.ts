@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-26 10:14:30
+ * @LastEditTime: 2021-05-28 14:23:54
  * @FilePath: /packages/ok-accessory/ok-upload-drag/ok-file-list.ts
  */
 
@@ -11,7 +11,6 @@ import { styleMap } from 'lit-html/directives/style-map'
 import { defineComponent, html, PropType } from 'ok-lit'
 
 import { COMMON_CSS_PATH } from '../../path.config'
-import okUploadListCss from '../style/ok-file-list.less'
 import type { ListType, UploadFile } from '../upload.type'
 import { getFileType } from '../utils'
 defineComponent(
@@ -251,12 +250,9 @@ defineComponent(
     }
 
     return () => html`
-      <style>
-        ${okUploadListCss}
-      </style>
       <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
       <ul
-        class="ok-file-list 111 ok-file-list--${props.listType} ${props.disabled
+        class="ok-file-list-box ${props.disabled
           ? 'is-disabled'
           : ''} ${props.subtable ? 'is-subtable' : ''}"
         style=${styleMap({

@@ -3,12 +3,15 @@
  * @Author: 付静
  * @Date: 2021-02-18 16:33:37
  * @LastEditors: 付静
- * @LastEditTime: 2021-02-23 15:28:18
+ * @LastEditTime: 2021-05-28 22:25:52
  * @FilePath: /webpack.base.config.js
  */
 const path = require('path')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const webpack = require('webpack')
+const pkg = require('./package.json')
 module.exports = {
   entry: './packages/index.ts',
   resolve: {
@@ -24,7 +27,12 @@ module.exports = {
       },
       {
         test: /\.less$/i,
-        use: ['css-loader', 'less-loader', 'postcss-loader'],
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'less-loader',
+          'postcss-loader',
+        ],
       },
       {
         test: /\.(png|jpe?g|gif|svg)$/i,
@@ -56,6 +64,14 @@ module.exports = {
     new htmlWebpackPlugin({
       template: path.resolve(__dirname, 'public/index.html'),
       filename: 'index.html',
+    }),
+    new webpack.DefinePlugin({
+      ENV: JSON.stringify('production'),
+      'process.env.PACKAGE_VERSION': JSON.stringify(pkg.version),
+      'process.env.TEST_IE': JSON.stringify(''),
+    }),
+    new MiniCssExtractPlugin({
+      filename: './theme/[name].css', //输出的文件名字
     }),
   ],
 }

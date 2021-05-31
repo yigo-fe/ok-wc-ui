@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:03:32
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-18 18:06:37
+ * @LastEditTime: 2021-05-31 15:51:27
  * @FilePath: /packages/ok-department-select/ok-department-modal.ts
  */
 import { Button, Checkbox, Input, Modal, Tree } from 'ant-design-vue'
@@ -11,9 +11,8 @@ import { defineComponent, html, onMounted, PropType } from 'ok-lit'
 import { createApp } from 'vue'
 
 import { i18n } from '../locales'
-import { CDN_PATH } from '../path.config'
+import { ANTD_VUE_CDN, COMMON_CSS_PATH } from '../path.config'
 import useDepartmentModal from './hook-modal'
-import okDepartmentInputCss from './style/ok-department-input.less'
 defineComponent(
   'ok-department-modal',
   {
@@ -93,6 +92,7 @@ defineComponent(
           height="660px"
           :zIndex="modalZIndex"
           :getContainer='getContainerModal'
+          :closable="false"
           destroyOnClose>
           <template #closeIcon></template>
           <div class="tree-content-wraper dept-tree-content-wraper">
@@ -223,11 +223,8 @@ defineComponent(
       app.mount(context.$refs.showDeptTreeModal as HTMLElement)
     })
     return () => html`
-      <link rel="stylesheet" .href="${CDN_PATH}antd.min.css" />
-      <style>
-        ${okDepartmentInputCss}
-      </style>
-
+      <link rel="stylesheet" .href="${ANTD_VUE_CDN}" />
+      <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
       <div ref="showDeptTreeModal" class="ok-department-select-wraper"></div>
     `
   }

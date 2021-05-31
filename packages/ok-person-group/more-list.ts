@@ -3,7 +3,7 @@ import { defineComponent, html, onMounted, PropType } from 'ok-lit'
 import { computed, createApp } from 'vue'
 
 import close from '../assets/images/closed.svg'
-import { CDN_PATH, COMMON_CSS_PATH } from '../path.config'
+import { ANTD_VUE_CDN, COMMON_CSS_PATH } from '../path.config'
 defineComponent(
   'ok-person-group-more',
   {
@@ -90,7 +90,7 @@ defineComponent(
                       :hidePopper=false
                       :propsGetInfoByEmpId="propsGetInfoByEmpId"
                     ></ok-person-cell>
-                    <span class="popper-item-name">{{item.employee_name}}</span>
+                    <span class="popper-item-name ellipsis1">{{item.employee_name}}</span>
                     <img v-if="showDelete" :src="closeIcon" class="person-item-close-icon" @click="deleteItem(item)" />
                   </li>
                 </ul>
@@ -108,7 +108,7 @@ defineComponent(
       app.mount(contxt.$refs.showPersonGroupMore as HTMLElement)
     })
     return () => html`
-      <link rel="stylesheet" .href="${CDN_PATH}antd.min.css" />
+      <link rel="stylesheet" .href="${ANTD_VUE_CDN}" />
       <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
       <span ref="showPersonGroupMore"></span>
     `

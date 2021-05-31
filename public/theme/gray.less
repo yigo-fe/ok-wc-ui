@@ -1,0 +1,17 @@
+@import url('../common.less');
+@base: #d0102c;
+@border-color: #d0102c;
+@text-color: #d0102c;
+@light-bg-color: #f2f2f2;
+
+input.ant-select-selection-search-input {
+  caret-color: @text-color;
+}
+.ant-select-multiple:not(.ant-select-disabled) .ant-select-selector:hover{border-color:@border-color;}
+.ok-department-select-root .ant-select-focused:not(.ant-select-disabled).ant-select-multiple .ant-select-selector,
+.ok-employee-select.ant-select-focused:not(.ant-select-disabled).ant-select-multiple .ant-select-selector{border-color:@border-color;}
+.userSelectDropdown .ant-select-item-option-selected .anticon-check svg,
+.ok-dept-select-dropdown .ant-select-item-option-selected .anticon-check svg { fill: @text-color;}
+
+.ok-person-detail .person-detail-button{background:@light-bg-color;}
+.ok-person-detail .person-detail-footer .person-detail-button {color: @text-color}

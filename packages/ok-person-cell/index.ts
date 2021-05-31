@@ -2,7 +2,7 @@ import { Popover } from 'ant-design-vue'
 import { defineComponent, html, onMounted } from 'ok-lit'
 import { computed, createApp, ref } from 'vue'
 
-import { CDN_PATH, COMMON_CSS_PATH } from '../path.config'
+import { ANTD_VUE_CDN, COMMON_CSS_PATH } from '../path.config'
 import { apiInitPersoncard } from '../services/api'
 // import { personInfo } from '../mock'
 /**
@@ -119,7 +119,7 @@ defineComponent(
       app.mount(contxt.$refs.showPersonCell as HTMLElement)
     })
     return () => html`
-      <link rel="stylesheet" .href="${CDN_PATH}antd.min.css" />
+      <link rel="stylesheet" .href="${ANTD_VUE_CDN}" />
       <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
       <span ref="showPersonCell"></span>
       <span ref="contentSlot"><slot></slot></span>

@@ -3,8 +3,8 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-12 15:31:53
- * @FilePath: /packages/ok-accessory/ok-upload-list/ok-file-table.ts
+ * @LastEditTime: 2021-05-31 15:49:41
+ * @FilePath: /packages/ok-accessory/ok-upload-table/ok-file-table.ts
  */
 
 import { Button, Table } from 'ant-design-vue'
@@ -12,8 +12,7 @@ import { computed, defineComponent, html, onMounted, PropType } from 'ok-lit'
 import { createApp, ref } from 'vue'
 
 import { i18n } from '../../locales'
-import { CDN_PATH } from '../../path.config'
-import okFileTableCss from '../style/ok-file-table.less'
+import { ANTD_VUE_CDN, COMMON_CSS_PATH } from '../../path.config'
 import type { ListType, UploadFile } from '../upload.type'
 defineComponent(
   'ok-file-table',
@@ -111,6 +110,12 @@ defineComponent(
             return item?.response?.data[0].create_time
           }
 
+          const getRowKey = (record: any) => {
+            return record.response
+              ? record.response.data[0].file_id
+              : record.uid
+          }
+
           return {
             columns,
             fileList,
@@ -121,12 +126,14 @@ defineComponent(
             handlePreview,
             handleDownload,
             getCreatTime,
+            getRowKey,
           }
         },
         template: `
           <a-table
             v-if="fileList.length"
             class="ok-upload-list-table"
+            :row-key="getRowKey"
             :dataSource="fileList"
             :columns="columns"
             :pagination="false">
@@ -214,10 +221,8 @@ defineComponent(
     })
 
     return () => html`
-      <style>
-        ${okFileTableCss}
-      </style>
-      <link rel="stylesheet" .href="${CDN_PATH}antd.min.css" />
+      <link rel="stylesheet" .href="${ANTD_VUE_CDN}" />
+      <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
       <div ref="okProcess" class="ok-file-table"></div>
     `
   }

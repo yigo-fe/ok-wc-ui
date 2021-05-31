@@ -6,6 +6,7 @@ import { createApp, ref } from 'vue'
 
 import femaleIcon from '../assets/images/female.svg'
 import maleIcon from '../assets/images/male.svg'
+import { COMMON_CSS_PATH } from '../path.config'
 import usePersonCardHandle from './hook'
 /**
  * 人员卡片
@@ -13,7 +14,6 @@ import usePersonCardHandle from './hook'
  * @slot footer-button 按钮位置自定义
  */
 import props from './props'
-import okPersonCardCss from './style/ok-person-card.less'
 defineComponent('ok-person-card', { ...props }, (props, context) => {
   onMounted(() => {
     const options = {
@@ -108,11 +108,7 @@ defineComponent('ok-person-card', { ...props }, (props, context) => {
     app.mount(context.$refs.showPersonCard as HTMLElement)
   })
 
-  return () => html`
-    <style>
-      ${okPersonCardCss}
-    </style>
-
-    <div ref="showPersonCard" class="ok-person-detail"></div>
-  `
+  return () =>
+    html`<link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
+      <div ref="showPersonCard" class="ok-person-detail"></div> `
 })

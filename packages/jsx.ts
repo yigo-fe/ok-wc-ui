@@ -45,6 +45,7 @@ declare global {
         preview?: boolean
       }
       locale?: string
+      theme?: string
     }
   }
 }

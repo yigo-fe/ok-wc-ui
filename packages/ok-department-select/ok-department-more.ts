@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-30 16:02:36
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-26 10:53:22
+ * @LastEditTime: 2021-05-31 15:51:38
  * @FilePath: /packages/ok-department-select/ok-department-more.ts
  */
 import { Popover } from 'ant-design-vue'
@@ -11,7 +11,7 @@ import { computed, defineComponent, html, onMounted, PropType } from 'ok-lit'
 import { createApp, ref } from 'vue'
 
 import close from '../assets/images/closed.svg'
-import { CDN_PATH } from '../path.config'
+import { ANTD_VUE_CDN } from '../path.config'
 defineComponent(
   'ok-department-more',
   {
@@ -74,7 +74,7 @@ defineComponent(
     })
 
     return () => html`
-      <link rel="stylesheet" .href="${CDN_PATH}antd.min.css" />
+      <link rel="stylesheet" .href="${ANTD_VUE_CDN}" />
       <div ref="showDeptMore" class="ok-dept-more"></div>
     `
   }

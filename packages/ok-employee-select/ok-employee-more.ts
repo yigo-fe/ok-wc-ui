@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-12 12:05:40
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-18 15:57:40
+ * @LastEditTime: 2021-05-31 15:52:24
  * @FilePath: /packages/ok-employee-select/ok-employee-more.ts
  */
 import { Popover } from 'ant-design-vue'
@@ -11,7 +11,7 @@ import { computed, defineComponent, html, onMounted, PropType } from 'ok-lit'
 import { createApp, ref } from 'vue'
 
 import close from '../assets/images/closed.svg'
-import { CDN_PATH } from '../path.config'
+import { ANTD_VUE_CDN } from '../path.config'
 defineComponent(
   'ok-employee-more',
   {
@@ -60,7 +60,7 @@ defineComponent(
               <div class="more-content">
                 <p class="more-item" v-for="employee in exceedList" :key="employee.employee_id">
                   <ok-person-cell class="employee-avatar" size="mini" :personInfo="employee"></ok-person-cell>               
-                  <span class="employee-name">{{employee.employee_name}}</span>
+                  <span class="employee-name ellipsis1">{{employee.employee_name}}</span>
                   <img v-if="!disabled" :src="closeIcon" class="head-close-icon" @click="deleteSelected(employee.employee_id)" />
                 </p>
               </div>
@@ -75,7 +75,7 @@ defineComponent(
     })
 
     return () => html`
-      <link rel="stylesheet" .href="${CDN_PATH}antd.min.css" />
+      <link rel="stylesheet" .href="${ANTD_VUE_CDN}" />
 
       <div ref="showEmployeeMore" class="ok-ant-button"></div>
     `

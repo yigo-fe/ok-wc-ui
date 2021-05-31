@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:01:15
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-25 17:34:02
+ * @LastEditTime: 2021-05-31 15:51:12
  * @FilePath: /packages/ok-department-select/index.ts
  */
 import './ok-department-modal'
@@ -23,10 +23,9 @@ import { defineComponent, html, onMounted } from 'ok-lit'
 import { createApp, ref } from 'vue'
 
 import { i18n } from '../locales'
-import { CDN_PATH, COMMON_CSS_PATH } from '../path.config'
+import { ANTD_VUE_CDN, COMMON_CSS_PATH } from '../path.config'
 import { propsOptions } from './department-props'
 import useDepartmentSelect from './hook'
-// import okDepartmentInputCss from './style/ok-department-input.less'
 defineComponent(
   'ok-department-select',
   { ...propsOptions },
@@ -72,6 +71,7 @@ defineComponent(
           :dropdownStyle="dropdownstyle"
           :getPopupContainer="getPopupContainer"
           :bordered="bordered"
+          dropdownClassName="ok-dept-select-dropdown"
           @select="handleSelect"
           @search="searchByKey"
           @click="handleInputClick"
@@ -128,7 +128,7 @@ defineComponent(
       app.mount(context.$refs.showDeptSelect as HTMLElement)
     })
     return () => html`
-      <link rel="stylesheet" .href="${CDN_PATH}antd.min.css" />
+      <link rel="stylesheet" .href="${ANTD_VUE_CDN}" />
       <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
       <div
         ref="showDeptSelect"

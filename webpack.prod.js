@@ -3,21 +3,32 @@
  * @Author: 付静
  * @Date: 2021-02-18 16:33:37
  * @LastEditors: 付静
- * @LastEditTime: 2021-02-25 18:46:53
+ * @LastEditTime: 2021-05-31 16:36:04
  * @FilePath: /webpack.prod.js
  */
 const path = require('path')
-const webpack = require('webpack')
+
 const { merge } = require('webpack-merge')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
-const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
-// const TerserJSPlugin = require('terser-webpack-plugin')
+// 删除以less文件为入口时多余生成的js文件
+const FixStyleOnlyEntriesPlugin = require('webpack-fix-style-only-entries')
+
 const webpackBaseConf = require('./webpack.base.config.js')
+
 module.exports = merge(webpackBaseConf, {
   mode: 'production',
+  entry: {
+    'ok-wc-ui.umd': './packages/index.ts',
+    orange: './public/theme/orange.less',
+    blue: './public/theme/blue.less',
+    deepBlue: './public/theme/deepBlue.less',
+    green: './public/theme/green.less',
+    gray: './public/theme/gray.less',
+  },
   output: {
-    filename: 'ok-wc-ui.esm.js',
+    filename: '[name].js',
+    libraryTarget: 'umd',
     path: path.resolve(__dirname, 'dist'),
   },
   module: {
@@ -26,29 +37,16 @@ module.exports = merge(webpackBaseConf, {
 
   plugins: [
     new CleanWebpackPlugin(), // 会默认清空 output.path 文件夹
-    new webpack.DefinePlugin({
-      ENV: JSON.stringify('production'),
-    }),
     new CopyPlugin({
       patterns: [
         {
           from: 'public/common.css',
         },
+        {
+          from: 'public/antd.min.css',
+        },
       ],
     }),
-    new ParallelUglifyPlugin({
-      include: /packages/,
-      uglifyJS: {
-        output: {
-          beautify: false,
-          comments: false,
-        },
-        compress: {
-          drop_console: false,
-          collapse_vars: true,
-          reduce_vars: true,
-        },
-      },
-    }),
+    new FixStyleOnlyEntriesPlugin(),
   ],
 })

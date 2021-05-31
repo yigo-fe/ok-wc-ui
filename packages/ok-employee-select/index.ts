@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-25 17:33:32
+ * @LastEditTime: 2021-05-31 15:51:54
  * @FilePath: /packages/ok-employee-select/index.ts
  */
 
@@ -16,7 +16,7 @@ import { defineComponent, html, onMounted } from 'ok-lit'
 import { createApp, ref } from 'vue'
 
 import { i18n } from '../locales'
-import { CDN_PATH, COMMON_CSS_PATH } from '../path.config'
+import { ANTD_VUE_CDN, COMMON_CSS_PATH } from '../path.config'
 import { propsOptions } from './employee-props'
 import useEmployeeSelect from './hook'
 defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
@@ -146,7 +146,7 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
   })
 
   return () => html`
-    <link rel="stylesheet" .href="${CDN_PATH}antd.min.css" />
+    <link rel="stylesheet" .href="${ANTD_VUE_CDN}" />
     <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
 
     <div

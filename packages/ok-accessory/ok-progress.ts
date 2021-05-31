@@ -3,66 +3,74 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:09:30
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-24 18:51:17
- * @FilePath: /packages/ok-accessory/ok-progress.ts
+ * @LastEditTime: 2021-05-28 14:29:09
+ * @FilePath: /packages/ok-accessory/ok-progress-vue.ts
  */
 
-import { styleMap } from 'lit-html/directives/style-map'
-import { computed, defineComponent, html, PropType } from 'ok-lit'
+import {
+  computed,
+  defineComponent,
+  effect,
+  html,
+  onMounted,
+  PropType,
+} from 'ok-lit'
+import { createApp, ref } from 'vue'
+
+import { COMMON_CSS_PATH } from '../path.config'
+import type { UploadStatus } from './upload.type'
 
 defineComponent(
   'ok-progress',
   {
     percentage: {
-      type: (Number as unknown) as PropType<number>,
+      type: Number as unknown as PropType<number>,
       default: 0,
       required: true,
       validator: (val: number | unknown): boolean =>
         (val as Number) >= 0 && (val as Number) <= 100,
     },
+    status: {
+      type: String as unknown as PropType<UploadStatus>,
+    },
   },
-  props => {
-    const percentageFormate = computed(() => {
-      let p = props.percentage || 0
-      return parseInt(p.toFixed(), 10)
+  (props, context) => {
+    onMounted(() => {
+      const options = {
+        setup() {
+          const percentage = ref('')
+          effect(() => {
+            let p = props.percentage || 0
+            percentage.value = `${parseInt(p.toFixed(), 10)}%`
+          })
+
+          const status = computed(() => props.status)
+
+          // 展示上传进度数值， 暂时不要
+          // <span>{{percentage}}</span>
+
+          return {
+            percentage,
+            status,
+          }
+        },
+        template: `
+          <div class="ok-progress-bar__outer" style="width: 100%">
+            <div
+              class="ok-progress-bar__inner"
+              :class="{fail: status ==='fail'}"
+              :style="{ width: percentage}"
+            ></div>
+          </div>
+        `,
+      }
+      const app = createApp(options)
+      app.mount(context.$refs.okProcess as HTMLElement)
     })
 
-    // const content = computed(() => {
-    //   return `${percentageFormate.value}%`
-    // })
-    // <span>${content.value}</span>
-    const width = computed(() => {
-      return `${percentageFormate.value}%`
-    })
     return () => html`
-      <style>
-        .ok-progress-bar__outer {
-          height: 2px;
-          border-radius: 100px;
-          background-color: #e7edf4;
-          overflow: hidden;
-          position: relative;
-          vertical-align: middle;
-        }
-        .ok-progress-bar__inner {
-          position: absolute;
-          left: 0;
-          top: 0;
-          height: 100%;
-          background-color: #4c78fc;
-          text-align: right;
-          border-radius: 100px;
-          line-height: 1;
-          white-space: nowrap;
-          transition: width 0.6s ease;
-        }
-      </style>
-      <div class="ok-progress-bar__outer" style="width: 100%">
-        <div
-          class="ok-progress-bar__inner"
-          style=${styleMap({ width: `${width.value}` })}
-        ></div>
-      </div>
+      <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
+      <div ref="okProcess" class="ok-process-warp"></div>
     `
   }
 )

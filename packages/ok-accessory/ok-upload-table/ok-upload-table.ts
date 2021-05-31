@@ -3,45 +3,19 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-13 15:36:53
- * @FilePath: /packages/ok-accessory/ok-upload-list/ok-upload-list.ts
+ * @LastEditTime: 2021-05-28 14:19:52
+ * @FilePath: /packages/ok-accessory/ok-upload-list/ok-upload-table.ts
  */
 
-/**
- * drag
- * listType: text / picture
- * disabled
- * accept
- * limit
- * filelist
- * multiple
- * action
- * data
- *
- * on-exceed
- * before-upload
- * on-change
- * on-success
- *
- * file-list 相关操作：
- * download： show ?
- * preview
- * delete：showdelete(目前默认readonly状态不能delete) ？ before-delete ？
- *
- * readonly ? (涉及file-list操作通用功能)
- *
- * 上传成功之后展示filelist的数据格式
- *
- */
 import { classMap } from 'lit-html/directives/class-map.js'
 import { defineComponent, html } from 'ok-lit'
 
 import { i18n } from '../../locales'
+import { COMMON_CSS_PATH } from '../../path.config'
 import useAttachmentHandle from '../ok-upload-drag/upload-attachment-hook'
-import okUploadCss from '../style/upload.less'
 import { UploadProps } from '../upload.props'
 defineComponent(
-  'ok-upload-list',
+  'ok-upload-table',
   {
     ...UploadProps,
   },
@@ -138,22 +112,23 @@ defineComponent(
     }
 
     return () => html`
-      <style>
-        ${okUploadCss}
-      </style>
-
+      <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
       ${renderUploader()}
-      <ok-file-table
-        class="ok-file-table-wraper"
-        @preview=${handlePreview}
-        @delete=${handleDetele}
-        @download=${handleDownload}
-        .fileList=${fileLists.value}
-        .listType=${props.listType}
-        .showPreview=${showPreview.value}
-        .showDownload=${showDownload.value}
-        .showRemove=${showRemove.value}
-      ></ok-file-table>
+      ${fileLists.value.length
+        ? html`
+            <ok-file-table
+              class="ok-file-table-wraper"
+              @preview=${handlePreview}
+              @delete=${handleDetele}
+              @download=${handleDownload}
+              .fileList=${fileLists.value}
+              .listType=${props.listType}
+              .showPreview=${showPreview.value}
+              .showDownload=${showDownload.value}
+              .showRemove=${showRemove.value}
+            ></ok-file-table>
+          `
+        : ''}
     `
   }
 )

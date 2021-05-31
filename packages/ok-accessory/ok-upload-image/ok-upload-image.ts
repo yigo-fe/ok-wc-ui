@@ -3,35 +3,8 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-18 18:01:34
+ * @LastEditTime: 2021-05-28 13:51:06
  * @FilePath: /packages/ok-accessory/ok-upload-image/ok-upload-image.ts
- */
-
-/**
- * drag
- * listType: text / picture
- * disabled
- * accept
- * limit
- * filelist
- * multiple
- * action
- * data
- *
- * on-exceed
- * before-upload
- * on-change
- * on-success
- *
- * file-list 相关操作：
- * download： show ?
- * preview
- * delete：showdelete(目前默认readonly状态不能delete) ？ before-delete ？
- *
- * readonly ? (涉及file-list操作通用功能)
- *
- * 上传成功之后展示filelist的数据格式
- *
  */
 
 import { classMap } from 'lit-html/directives/class-map.js'
@@ -41,7 +14,6 @@ import { defineComponent, html, onMounted, onUnmounted, PropType } from 'ok-lit'
 import { ref } from 'vue'
 
 import { COMMON_CSS_PATH } from '../../path.config'
-// import okUploadImgCss from '../style/ok-upload-image.less'
 import { UploadProps } from '../upload.props'
 import useImageHandle from './upload-image-hook'
 defineComponent(

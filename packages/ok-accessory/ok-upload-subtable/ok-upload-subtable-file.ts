@@ -3,35 +3,8 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-12 15:21:28
+ * @LastEditTime: 2021-05-28 14:31:22
  * @FilePath: /packages/ok-accessory/ok-upload-subtable/ok-upload-subtable-file.ts
- */
-
-/**
- * drag
- * listType: text / picture
- * disabled
- * accept
- * limit
- * filelist
- * multiple
- * action
- * data
- *
- * on-exceed
- * before-upload
- * on-change
- * on-success
- *
- * file-list 相关操作：
- * download： show ?
- * preview
- * delete：showdelete(目前默认readonly状态不能delete) ？ before-delete ？
- *
- * readonly ? (涉及file-list操作通用功能)
- *
- * 上传成功之后展示filelist的数据格式
- *
  */
 
 import { classMap } from 'lit-html/directives/class-map.js'
@@ -40,7 +13,6 @@ import { defineComponent, html, PropType } from 'ok-lit'
 import { i18n } from '../../locales'
 import { COMMON_CSS_PATH } from '../../path.config'
 import useAttachmentHandle from '../ok-upload-drag/upload-attachment-hook'
-import okUploadCss from '../style/upload.less'
 import { UploadProps } from '../upload.props'
 defineComponent(
   'ok-upload-subtable-file',
@@ -141,9 +113,6 @@ defineComponent(
     }
 
     return () => html`
-      <style>
-        ${okUploadCss}
-      </style>
       <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
       <ok-file-list
         @preview=${handlePreview}

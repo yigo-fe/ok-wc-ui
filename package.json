@@ -1,6 +1,6 @@
 {
   "name": "ok-wc-ui",
-  "version": "0.3.42",
+  "version": "0.3.46",
   "types": "dist/types/index.d.ts",
   "main": "dist/ok-wc-ui.cjs.js",
   "module": "dist/ok-wc-ui.esm.js",
@@ -8,7 +8,8 @@
   "homepage": "https://github.com/yigo-fe/ok-wc-ui",
   "scripts": {
     "serve": "webpack serve --mode development --env development --config webpack.dev.js",
-    "build": "cross-env NODE_ENV=production rollup -c",
+    "buildRollup": "cross-env NODE_ENV=production rollup -c",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.prod.js",
     "prepublish": "npm run build",
     "postpublish": "node ./cdn-upload.js",
     "docs:dev": "vitepress dev docs",
@@ -73,11 +74,14 @@
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-prettier": "^3.3.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
+    "extract-css-chunks-webpack-plugin": "^4.9.0",
+    "extract-text-webpack-plugin": "^3.0.2",
     "html-webpack-plugin": "^5.1.0",
     "husky": "^4.3.6",
     "less": "^4.1.1",
     "less-loader": "^8.0.0",
     "lint-staged": "^10.5.3",
+    "mini-css-extract-plugin": "^1.6.0",
     "postcss": "^8.2.6",
     "postcss-loader": "^5.0.0",
     "prettier": "^2.2.1",
@@ -110,6 +114,8 @@
     "vitepress": "^0.11.2",
     "webpack": "^5.22.0",
     "webpack-cli": "^4.5.0",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^3.11.2",
+    "webpack-fix-style-only-entries": "^0.6.1",
+    "webpack-multiple-themes-compile": "^2.0.0"
   }
 }

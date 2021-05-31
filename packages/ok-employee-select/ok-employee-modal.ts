@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:56:38
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-18 12:02:48
+ * @LastEditTime: 2021-05-31 15:52:12
  * @FilePath: /packages/ok-employee-select/ok-employee-modal.ts
  */
 
@@ -12,7 +12,7 @@ import { defineComponent, html, onMounted, PropType } from 'ok-lit'
 import { createApp } from 'vue'
 
 import { i18n } from '../locales'
-import { CDN_PATH, COMMON_CSS_PATH } from '../path.config'
+import { ANTD_VUE_CDN, COMMON_CSS_PATH } from '../path.config'
 import useModalHandle from './hook-modal'
 defineComponent(
   'ok-employee-modal',
@@ -94,6 +94,7 @@ defineComponent(
             :title="title"
             :zIndex="modalZIndex"
             :getContainer='getContainerModal'
+            :closable="false"
             >
             <template #closeIcon></template>
             <div class="tree-content-wraper employee-tree-content-wraper">
@@ -135,7 +136,7 @@ defineComponent(
                       @click="handleEmployeeSelect(employee.employee_id)">
                       <ok-person-cell :personInfo="employee"></ok-person-cell>               
                       <span class="employee-name">{{employee.employee_name}}</span>
-                      <span class="email">{{employee.email}}</span>   
+                      <span class="email ellipsis1">{{employee.email}}</span>   
                       <img v-if="isSelected(employee.employee_id)" :src="checkedIcon" class="checked-icon" /> 
                     </p>
                   </div>
@@ -153,7 +154,7 @@ defineComponent(
                     @click="handleEmployeeSelect(employee.employee_id)">
                     <ok-person-cell :personInfo="employee"></ok-person-cell>               
                     <span class="employee-name">{{employee.employee_name}}</span>
-                    <span class="email">{{employee.email}}</span>
+                    <span class="email ellipsis1">{{employee.email}}</span>
                     <img v-if="isSelected(employee.employee_id)" :src="checkedIcon" class="checked-icon" />                 
                   </p>
                   <p v-show="!searchResultList.length" class="empty-text">{{i18n.$t('common.noData', '暂无数据')}}</p>
@@ -173,8 +174,8 @@ defineComponent(
                     :key="employee.employee_id"  
                     >
                     <ok-person-cell :personInfo="employee"></ok-person-cell>               
-                    <span class="employee-name">{{employee.employee_name}}</span>
-                    <span class="email">{{employee.email}}</span>    
+                    <span class="employee-name ellipsis1">{{employee.employee_name}}</span>
+                    <span class="email ellipsis1">{{employee.email}}</span>    
                     <img @click="cancelSelect(employee.employee_id)" :src="closeIcon" class="close-icon" />               
                   </p>
                 </div>            
@@ -199,7 +200,7 @@ defineComponent(
     })
 
     return () => html`
-      <link rel="stylesheet" .href="${CDN_PATH}antd.min.css" />
+      <link rel="stylesheet" .href="${ANTD_VUE_CDN}" />
       <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
       <div ref="showEmployeeModal" class="ok-employee-modal"></div>
     `
