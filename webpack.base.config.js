@@ -71,7 +71,7 @@ module.exports = {
       'process.env.TEST_IE': JSON.stringify(''),
     }),
     new MiniCssExtractPlugin({
-      filename: './theme/[name].css', //输出的文件名字
+      filename: './ok-theme/[name].css', //输出的文件名字
     }),
   ],
 }

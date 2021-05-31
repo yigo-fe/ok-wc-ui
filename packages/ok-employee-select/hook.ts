@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 15:16:57
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-25 18:18:08
+ * @LastEditTime: 2021-05-31 20:33:24
  * @FilePath: /packages/ok-employee-select/hook.ts
  */
 import { debounce } from 'lodash'
@@ -67,7 +67,7 @@ export default function (props: any, context: any) {
     if (!props.value) {
       return []
     } else {
-      return Array.isArray(props.value) ? props.value : [props.value]
+      return Array.isArray(props.value) ? props.value : props.value.split(',')
     }
   })
 

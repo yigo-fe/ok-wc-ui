@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-02-18 16:33:37
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-31 19:55:32
+ * @LastEditTime: 2021-05-31 19:57:13
  * @FilePath: /webpack.prod.js
  */
 const path = require('path')
@@ -20,11 +20,11 @@ module.exports = merge(webpackBaseConf, {
   mode: 'production',
   entry: {
     'ok-wc-ui.umd': './packages/index.ts',
-    orange: './public/theme/orange.less',
-    blue: './public/theme/blue.less',
-    deepBlue: './public/theme/deepBlue.less',
-    green: './public/theme/green.less',
-    gray: './public/theme/gray.less',
+    orange: './public/ok-theme/orange.less',
+    blue: './public/ok-theme/blue.less',
+    deepBlue: './public/ok-theme/deepBlue.less',
+    green: './public/ok-theme/green.less',
+    gray: './public/ok-theme/gray.less',
   },
   output: {
     filename: '[name].js',

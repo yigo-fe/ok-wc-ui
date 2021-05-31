@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 15:19:21
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-18 11:26:57
+ * @LastEditTime: 2021-05-31 20:33:11
  * @FilePath: /packages/ok-employee-select/hook-modal.ts
  */
 import { debounce } from 'lodash'
@@ -42,7 +42,7 @@ export default function (props: any) {
     } else {
       return Array.isArray(props.inputValue)
         ? props.inputValue
-        : [props.inputValue]
+        : props.inputValue.split(',')
     }
   })
 

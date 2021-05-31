@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-02-20 19:58:14
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-31 17:41:13
+ * @LastEditTime: 2021-05-31 19:58:13
  * @FilePath: /packages/path.config.ts
  */
 
@@ -19,7 +19,7 @@ const CDN_PATH =
 // 注：process.env.PACKAGE_VERSION 会在build时被替换成package.json中的version
 
 const THEME_PATH = window.okuiConfig?.theme
-  ? `${window.okuiConfig.theme}`
+  ? `ok-theme/${window.okuiConfig.theme}`
   : 'common'
 
 const COMMON_CSS_PATH = `${CDN_PATH}${THEME_PATH}.css`
