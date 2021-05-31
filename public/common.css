@@ -223,6 +223,9 @@ input.ant-select-selection-search-input {
   color: #4c78fc;
   font-weight: 500;
 }
+.upload-inner .upload-btn.disabled {
+  color: #bbbfc4;
+}
 .upload-inner .ok-upload-drag-icon {
   font-size: 40px;
   color: #4c78fc;

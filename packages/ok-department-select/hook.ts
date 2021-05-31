@@ -3,18 +3,18 @@
  * @Author: 付静
  * @Date: 2021-04-08 20:15:04
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-26 10:55:22
+ * @LastEditTime: 2021-05-31 18:29:12
  * @FilePath: /packages/ok-department-select/hook.ts
  */
 import { debounce } from 'lodash'
 import { effect } from 'ok-lit'
-import { computed, h, onMounted, onUnmounted, ref, watch } from 'vue'
+import { computed, h, ref, watch } from 'vue'
 
 import close from '../assets/images/closed.svg'
 import search from '../assets/images/search.svg'
 import { apiInit } from '../services/api'
 import { isSameArray } from '../utils/index'
-export default function (props: any, context: any) {
+export default function (props: any) {
   const testVal = ref([])
   effect(() => {
     testVal.value = props.value
@@ -45,8 +45,11 @@ export default function (props: any, context: any) {
     () => props.getPopupContainer || (() => document.body)
   )
 
+  // 最多展示的tag数量。 默认展示一个，或者平铺
+  const maxTagCount = computed(() => (props.flat ? null : 1))
   // 最多展示的tag数量
-  const maxTagCount = ref(1)
+  // const maxTagCount = ref(1)
+
   // 溢出列表（more list）
   const exceedList = ref(<any>[])
   // 弹窗是否可见

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:02:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-25 17:31:50
+ * @LastEditTime: 2021-05-31 18:09:44
  * @FilePath: /packages/ok-department-select/department-props.ts
  */
 import { PropType } from 'ok-lit'
@@ -84,6 +84,11 @@ const propsOptions = {
   },
   onClear: {
     type: Function as unknown as PropType<() => void>,
+  },
+  // 平铺展示
+  flat: {
+    type: Boolean as unknown as PropType<boolean>,
+    default: false,
   },
 }
 

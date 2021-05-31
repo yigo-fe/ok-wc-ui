@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-28 13:50:07
+ * @LastEditTime: 2021-05-31 18:22:30
  * @FilePath: /packages/ok-accessory/ok-upload-drag/ok-upload-drag.ts
  */
 
@@ -35,11 +35,9 @@
  */
 
 import { classMap } from 'lit-html/directives/class-map.js'
-import { styleMap } from 'lit-html/directives/style-map'
 import { defineComponent, html } from 'ok-lit'
 import { ref } from 'vue'
 
-import { okPrimaryColor, okUploadColor } from '../../assets/theme'
 import { i18n } from '../../locales'
 import { COMMON_CSS_PATH } from '../../path.config'
 import { UploadProps } from '../upload.props'
@@ -154,10 +152,9 @@ defineComponent(
                   )}
                   <span
                     class="upload-btn"
-                    style=${styleMap({
-                      color: `${
-                        props.disabled ? okUploadColor : okPrimaryColor
-                      }`,
+                    class=${classMap({
+                      'upload-btn': true,
+                      disabled: props.disabled,
                     })}
                   >
                     ${i18n.$t(
