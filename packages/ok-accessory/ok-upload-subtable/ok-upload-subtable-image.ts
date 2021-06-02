@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-28 14:17:05
+ * @LastEditTime: 2021-06-02 12:11:23
  * @FilePath: /packages/ok-accessory/ok-upload-subtable/ok-upload-subtable-image.ts
  */
 
@@ -13,7 +13,6 @@ import { defineComponent, html, PropType } from 'ok-lit'
 import { i18n } from '../../locales'
 import { COMMON_CSS_PATH } from '../../path.config'
 import useImageHandle from '../ok-upload-image/upload-image-hook'
-import okUploadCss from '../style/upload.less'
 import { UploadProps } from '../upload.props'
 defineComponent(
   'ok-upload-subtable-image',
@@ -71,34 +70,36 @@ defineComponent(
         return html`
           <div class="ok-upload ok-upload--subtable" @click=${handleClick}>
             <slot>
-              <div
-                class=${classMap({
-                  'upload-subtable-inner': true,
-                  disabled: props.disabled,
-                  'has-file': fileLists.value,
-                })}
-              >
-                <svg
-                  t="1616578828719"
-                  class="icon upload-icon"
-                  viewBox="0 0 1024 1024"
-                  version="1.1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  p-id="27171"
-                  width="16"
-                  height="16"
+              <div class="upload-btn-box-subtable">
+                <div
+                  class=${classMap({
+                    'upload-subtable-inner': true,
+                    disabled: props.disabled,
+                    'has-file': fileLists.value,
+                  })}
                 >
-                  <path
-                    d="M917.333333 682.666667v213.333333a42.666667 42.666667 0 0 1-42.666666 42.666667H149.333333a42.666667 42.666667 0 0 1-42.666666-42.666667V682.666667h85.333333v170.666666h640v-170.666666h85.333333zM554.666667 243.498667l203.861333 203.882666 60.352-60.352L517.184 85.333333 215.466667 387.029333l60.330666 60.352L469.333333 253.866667v503.168h85.333334V243.498667z"
-                    p-id="27172"
-                  ></path>
-                </svg>
-                <span class="upload-text"
-                  >${i18n.$t(
-                    'control.imageUpload.uploadBtnText',
-                    '上传图片'
-                  )}</span
-                >
+                  <svg
+                    t="1616578828719"
+                    class="icon upload-icon"
+                    viewBox="0 0 1024 1024"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    p-id="27171"
+                    width="16"
+                    height="16"
+                  >
+                    <path
+                      d="M917.333333 682.666667v213.333333a42.666667 42.666667 0 0 1-42.666666 42.666667H149.333333a42.666667 42.666667 0 0 1-42.666666-42.666667V682.666667h85.333333v170.666666h640v-170.666666h85.333333zM554.666667 243.498667l203.861333 203.882666 60.352-60.352L517.184 85.333333 215.466667 387.029333l60.330666 60.352L469.333333 253.866667v503.168h85.333334V243.498667z"
+                      p-id="27172"
+                    ></path>
+                  </svg>
+                  <span class="upload-text"
+                    >${i18n.$t(
+                      'control.imageUpload.uploadBtnText',
+                      '上传图片'
+                    )}</span
+                  >
+                </div>
               </div>
             </slot>
 

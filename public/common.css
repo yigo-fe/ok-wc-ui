@@ -284,7 +284,7 @@ input.ant-select-selection-search-input {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  max-width: calc(100% - 60px);
+  max-width: calc(100% - 96px);
   line-height: 16px;
 }
 .ok-file-list-box .uploading-info {
@@ -305,6 +305,24 @@ input.ant-select-selection-search-input {
 .ok-file-list-box .file-list-progress {
   display: block;
   margin-top: 6px;
+}
+.ok-file-list-box.is-subtable .item-detail {
+  padding: 0 12px;
+  border-radius: 0;
+  background-color: #fff;
+}
+.ok-file-list-box.is-subtable .item-detail:hover {
+  background-color: #eff0f1;
+}
+.ok-file-list-box.is-subtable .ok-file-list__item + .ok-file-list__item {
+  margin-top: 2px;
+}
+.ok-file-list-box.is-subtable .ok-file-list__item_name {
+  margin-left: 4px;
+}
+.ok-file-list-box.is-subtable .ok-file-list__item_file_name {
+  color: #1f2329;
+  line-height: 20px;
 }
 .item-operation {
   display: flex;
@@ -389,12 +407,6 @@ input.ant-select-selection-search-input {
   display: flex;
   align-items: center;
 }
-.file-icon-operate svg path {
-  fill: #4c78fc;
-}
-.file-icon-operate + .file-icon-operate {
-  margin-left: 12px;
-}
 .ok-progress-bar__outer {
   height: 2px;
   border-radius: 100px;
@@ -429,9 +441,10 @@ input.ant-select-selection-search-input {
   display: flex;
 }
 .ok-file-icon-root .ok-file-icon-img {
-  height: 22px;
-  margin-right: 6px;
-  vertical-align: middle;
+  transition: transform 0.2s;
+}
+.ok-file-icon-root .ok-file-icon-img.hover-bigger:hover {
+  transform: scale(1.3);
 }
 /* ok-image */
 .ant-form-item-control.has-error .ok-upload-image-box {
@@ -558,6 +571,10 @@ input.ant-select-selection-search-input {
 .ok-upload-list-image .abort-icon path {
   fill: #4c78fc;
 }
+.upload-btn-box-subtable {
+  box-sizing: border-box;
+  padding: 0 12px;
+}
 .upload-subtable-inner {
   display: flex;
   align-items: center;
@@ -585,7 +602,7 @@ input.ant-select-selection-search-input {
   fill: #fff;
 }
 .upload-subtable-inner.has-file {
-  margin-top: 10px;
+  margin-top: 9px;
 }
 /* 文件删除， 二次确认 */
 .file-delete-confirm.ant-modal-confirm .ant-modal-content {

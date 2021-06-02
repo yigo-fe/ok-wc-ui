@@ -61,6 +61,9 @@
 @more-bg:#eff0f1;
 @modal-search-bg: #eff0f1;
 
+@attachment-hover-color: #eff0f1;
+@subtable-list-color: #1f2329;
+
 // reset
 
 ul {
@@ -366,7 +369,7 @@ input.ant-select-selection-search-input {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    max-width: calc(100% - 60px);
+    max-width: calc(100% - 96px);
     line-height: 16px;
   }
   .uploading-info {
@@ -390,6 +393,27 @@ input.ant-select-selection-search-input {
     margin-top: 6px;
   }
 
+}
+// 明细字表中的file-list
+.ok-file-list-box.is-subtable {
+  .item-detail {
+    padding: 0 12px;
+    border-radius: 0;
+    background-color: #fff;
+    &:hover {
+      background-color: @attachment-hover-color;
+    }
+  }
+  .ok-file-list__item + .ok-file-list__item {
+    margin-top: 2px;
+  }
+  .ok-file-list__item_name {
+    margin-left: 4px;
+  }
+  .ok-file-list__item_file_name {
+    color: @subtable-list-color;
+    line-height: 20px;
+  }
 }
 
 // operation
@@ -486,15 +510,6 @@ input.ant-select-selection-search-input {
   }
 }
 
-.file-icon-operate {
-  svg path {
-    fill: @ok-primary-color;
-  }
-  +.file-icon-operate {
-    margin-left: 12px;
-  }
-}
-
 // ok-progress
 .ok-progress-bar__outer {
   height: 2px;
@@ -525,7 +540,8 @@ input.ant-select-selection-search-input {
 
 /* ok-file-icon */
 .ok-file-icon-root{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex}
-.ok-file-icon-root .ok-file-icon-img{height:22px;margin-right:6px;vertical-align:middle}
+.ok-file-icon-root .ok-file-icon-img{transition: transform 0.2s;}
+.ok-file-icon-root .ok-file-icon-img.hover-bigger:hover{transform: scale(1.3); }
 
 /* ok-image */
 .ant-form-item-control.has-error .ok-upload-image-box {
@@ -657,6 +673,10 @@ input.ant-select-selection-search-input {
 
 
 // 明细子表
+.upload-btn-box-subtable {
+  box-sizing: border-box;
+  padding: 0 12px;
+}
 .upload-subtable-inner {
   display: flex;
   align-items: center;
@@ -685,7 +705,7 @@ input.ant-select-selection-search-input {
     
   }
   &.has-file {
-    margin-top: 10px;
+    margin-top: 9px;
   }
 
 }

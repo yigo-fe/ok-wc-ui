@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-10 14:22:53
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-26 10:15:45
+ * @LastEditTime: 2021-06-02 13:56:39
  * @FilePath: /packages/ok-accessory/ok-file-icon.ts
  */
 import { defineComponent, html, onMounted, PropType } from 'ok-lit'
@@ -43,12 +43,20 @@ defineComponent(
     type: {
       type: String as unknown as PropType<string>,
     },
+    hoverBigger: {
+      type: Boolean as unknown as PropType<boolean>,
+    },
+    height: {
+      type: String as unknown as PropType<string>,
+    },
   },
   (props, context) => {
     onMounted(() => {
       const options = {
         setup() {
           const suffix = computed(() => props.type)
+          const hoverBigger = computed(() => props.hoverBigger)
+          const height = computed(() => props.height || '22px')
 
           const fileIcon = computed(() => {
             let icon = ''
@@ -157,10 +165,12 @@ defineComponent(
 
           return {
             fileIcon,
+            hoverBigger,
+            height,
           }
         },
         template: `
-          <img :src='fileIcon' class="ok-file-icon-img" />
+          <img :src='fileIcon' :style="{height: height, width: 'auto', 'vertical-align':'middle'}" class="ok-file-icon-img" :class="{'hover-bigger': hoverBigger}" />
         `,
       }
       const app = createApp(options)

@@ -3,12 +3,12 @@
  * @Author: 付静
  * @Date: 2021-04-08 15:16:57
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-31 20:33:24
+ * @LastEditTime: 2021-06-02 10:41:50
  * @FilePath: /packages/ok-employee-select/hook.ts
  */
 import { debounce } from 'lodash'
 import { effect } from 'ok-lit'
-import { computed, h, onMounted, onUnmounted, ref, watch } from 'vue'
+import { computed, h, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 
 import close from '../assets/images/closed.svg'
 import search from '../assets/images/search.svg'
@@ -186,7 +186,9 @@ export default function (props: any, context: any) {
   }, 300)
 
   onMounted(() => {
-    maxTagCountComput()
+    nextTick(() => {
+      maxTagCountComput()
+    })
     window.addEventListener('resize', () => maxTagCountComput(), false)
   })
 
