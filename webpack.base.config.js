@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-02-18 16:33:37
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-31 19:55:39
+ * @LastEditTime: 2021-06-03 19:47:38
  * @FilePath: /webpack.base.config.js
  */
 const path = require('path')
@@ -46,9 +46,6 @@ module.exports = {
           'babel-loader',
           {
             loader: 'ts-loader',
-            options: {
-              appendTsSuffixTo: [/\.vue$/],
-            },
           },
         ],
       },
@@ -56,11 +53,6 @@ module.exports = {
         test: /\.(js|jsx)$/,
         use: {
           loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-            plugins: ['@babel/plugin-proposal-object-rest-spread'],
-            cacheDirectory: true,
-          },
         },
       },
     ],
