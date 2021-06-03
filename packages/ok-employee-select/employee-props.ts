@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-20 14:56:24
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-25 17:31:35
+ * @LastEditTime: 2021-06-02 16:34:05
  * @FilePath: /packages/ok-employee-select/employee-props.ts
  */
 
@@ -65,6 +65,9 @@ const propsOptions = {
   // modal的z-index
   modalZIndex: {
     type: Number as unknown as PropType<number>,
+  },
+  width: {
+    type: String as unknown as PropType<ModeType>,
   },
   // modal的container
   getContainerModal: {

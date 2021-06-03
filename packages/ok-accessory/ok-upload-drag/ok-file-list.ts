@@ -3,10 +3,11 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-02 14:04:56
+ * @LastEditTime: 2021-06-03 10:56:25
  * @FilePath: /packages/ok-accessory/ok-upload-drag/ok-file-list.ts
  */
 
+import { classMap } from 'lit-html/directives/class-map'
 import { styleMap } from 'lit-html/directives/style-map'
 import { defineComponent, html, PropType } from 'ok-lit'
 
@@ -73,6 +74,11 @@ defineComponent(
       context.emit('remove', file)
     }
 
+    // 重新上传
+    const reupload = (file: UploadFile) => {
+      context.emit('reupload', file.raw)
+    }
+
     // 上传中： 展示上传进度百分比及终止上传按钮
     const renderUploading = (item: UploadFile) => {
       if (item.status === 'uploading') {
@@ -102,23 +108,49 @@ defineComponent(
         `
       } else if (item.status === 'fail') {
         return html`
-          <span class="abort-btn" @click=${() => removeFileList(item)}>
-            <svg
-              t="1616573273136"
-              class="icon abort-icon"
-              viewBox="0 0 1024 1024"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              p-id="27041"
-              width="12"
-              height="12"
-            >
-              <path
-                d="M512 451.669333L813.696 149.952l60.352 60.352L572.330667 512l301.717333 301.696-60.352 60.352L512 572.330667 210.304 874.048l-60.352-60.352L451.669333 512 149.952 210.304l60.352-60.352L512 451.669333z"
-                p-id="27042"
-              ></path>
-            </svg>
-          </span>
+          <div>
+            <span class="fail-text">上传失败</span>
+            <span class="reupload-btn" @click=${() => reupload(item)}>
+              <svg
+                t="1622688547794"
+                class="icon"
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                p-id="40154"
+                width="12"
+                height="12"
+              >
+                <path
+                  d="M512.3 878.8c-201.6 0-365.5-164-365.5-365.5 0-24.7 20-44.6 44.6-44.6s44.6 20 44.6 44.6c0 152.3 123.9 276.3 276.3 276.3 86.7 0 166.7-39.5 219.4-108.4 15-19.6 43-23.3 62.6-8.3s23.3 43 8.3 62.6c-69.8 91-175.7 143.3-290.3 143.3zM833.2 557.9c-24.7 0-44.6-20-44.6-44.6 0-152.4-123.9-276.3-276.3-276.3-86.3 0-166 39.2-218.8 107.6-15.1 19.5-43.1 23.1-62.6 8-19.5-15.1-23.1-43.1-8.1-62.6 69.8-90.5 175.4-142.3 289.5-142.3 201.6 0 365.6 164 365.6 365.6-0.1 24.6-20 44.6-44.7 44.6z"
+                  fill="#333333"
+                  p-id="40155"
+                ></path>
+                <path
+                  d="M833.2 599.6c-11.4 0-22.8-4.4-31.6-13.1l-80.8-80.8c-12.8-12.8-16.6-32-9.7-48.6 6.9-16.7 23.2-27.6 41.2-27.6H914c18.1 0 34.3 10.9 41.2 27.6 6.9 16.7 3.1 35.9-9.7 48.6l-80.8 80.8c-8.7 8.7-20.1 13.1-31.5 13.1zM272.2 598.3H110.5c-18.1 0-34.3-10.9-41.2-27.6-6.9-16.7-3.1-35.9 9.7-48.6l80.8-80.8c8.4-8.4 19.7-13.1 31.6-13.1 11.8 0 23.2 4.7 31.6 13.1l80.8 80.8c12.8 12.8 16.6 32 9.7 48.6s-23.2 27.6-41.3 27.6z"
+                  fill="#333333"
+                  p-id="40156"
+                ></path>
+              </svg>
+            </span>
+            <span class="abort-btn" @click=${() => removeFileList(item)}>
+              <svg
+                t="1616573273136"
+                class="icon abort-icon"
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                p-id="27041"
+                width="12"
+                height="12"
+              >
+                <path
+                  d="M512 451.669333L813.696 149.952l60.352 60.352L572.330667 512l301.717333 301.696-60.352 60.352L512 572.330667 210.304 874.048l-60.352-60.352L451.669333 512 149.952 210.304l60.352-60.352L512 451.669333z"
+                  p-id="27042"
+                ></path>
+              </svg>
+            </span>
+          </div>
         `
       }
     }
@@ -236,7 +268,12 @@ defineComponent(
     const renderListItem = (item: UploadFile) => {
       const suffix = getFileType(item.name)
       return html`
-        <div class="item-detail">
+        <div
+          class=${classMap({
+            'item-detail': true,
+            failed: item.status === 'fail',
+          })}
+        >
           <ok-file-icon .type=${suffix}></ok-file-icon>
           <div class="ok-file-list__item_name">
             <div class="file_name_wraper">

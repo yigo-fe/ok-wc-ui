@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 15:16:57
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-02 10:41:50
+ * @LastEditTime: 2021-06-02 16:39:07
  * @FilePath: /packages/ok-employee-select/hook.ts
  */
 import { debounce } from 'lodash'
@@ -175,7 +175,8 @@ export default function (props: any, context: any) {
   // 处理最多能展示多少个tag
   const maxTagCountComput = debounce(() => {
     const el = context.$refs.showEmployeeSelect as HTMLElement
-    const elWith = el?.offsetWidth
+    // 注意父元素是display = none时，获取不到子元素的width
+    const elWith = el?.offsetWidth || Number(el?.style.width.replace('px', ''))
     if (!elWith) return
 
     maxTagCount.value = elWith > 185 ? Math.floor((elWith - 75) / 108) : 1

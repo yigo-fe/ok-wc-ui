@@ -30,6 +30,9 @@
     .divider {
       margin-bottom: 20px;
     }
+    .test-display {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -66,12 +69,14 @@
 
 
       <h3>人员选择select-antd</h3>
-      <ok-employee-select class="divider ok-employee-input" placeholder="请选择1" style="width: 200px; height:60px;display: block;"></ok-employee-select>
+      <div id="test" class="test-display">
+        <ok-employee-select class="divider ok-employee-input" placeholder="请选择1" style="width: 200px;display: block;"></ok-employee-select>
+      </div>
 
       <!-- <ok-employee-select class="divider ok-employee-input2" placeholder="请选择2" style="width: 200px;display: block;"></ok-employee-select> -->
 
       <h3>人员选择tree</h3>
-      <ok-employee-select class="divider ok-employee-tree" mode="tree" placeholder="请选择3" style="width: 300px;height:40px;display: block;"></ok-employee-select>
+      <!-- <ok-employee-select class="divider ok-employee-tree" mode="tree" placeholder="请选择3" style="width: 300px;height:40px;display: block;"></ok-employee-select> -->
 
       <ok-ant-person-select></ok-ant-person-select>
       <!-- <ok-person-detail></ok-person-detail> -->
@@ -573,7 +578,8 @@
       }
 
 
-      const okEmployeeTree = document.querySelector('.ok-employee-tree')
+      // const okEmployeeTree = document.querySelector('.ok-employee-tree')
+      const okEmployeeTree = {}
       okEmployeeTree.value = ['LiTao', 'FuJing', 'ssssss', 'WangYiJie']
       // okEmployeeTree.value = ['ssssss']
       // okEmployeeTree.disabled = true 
@@ -591,6 +597,7 @@
       const okEmployeeInput = document.querySelector('.ok-employee-input')
       okEmployeeInput.value = ['1234']
       okEmployeeInput.hasBorderRadius = false
+      okEmployeeInput.width = '180px'
       // okEmployeeInput.bordered = false
       // okEmployeeInput.value = []
       okEmployeeInput.dropdownstyle = {'z-index': 6000}
@@ -650,8 +657,10 @@
     }
 
     function testClick (){
+      const el = document.getElementById('test');
+      el.style.display = 'block'
 
-      gallery.show()
+      // gallery.show()
       // setTimeout(()=>{
       //   const okEmployeeInput = document.querySelector('.ok-employee-input')
       //   okEmployeeInput.value = undefined

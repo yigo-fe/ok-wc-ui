@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-12 21:23:32
+ * @LastEditTime: 2021-06-02 21:08:57
  * @FilePath: /packages/ok-accessory/upload-base-hook.ts
  */
 
@@ -133,6 +133,13 @@ export default function (props, context, config) {
   const upload = (rawFile: OkFile) => {
     let inputRef = context.$refs.inputRef as HTMLInputElement
     inputRef.value = ''
+    // 更新上传状态
+    updateStatus({ status: 'uploading' }, rawFile)
+    // 调接口， 上传
+    post(rawFile)
+  }
+
+  const reupload = (rawFile: OkFile) => {
     // 更新上传状态
     updateStatus({ status: 'uploading' }, rawFile)
     // 调接口， 上传
@@ -416,5 +423,6 @@ export default function (props, context, config) {
     handleDownload,
     handleAbort,
     handleRemoveFileList,
+    reupload,
   }
 }

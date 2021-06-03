@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-19 01:13:31
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-12 15:39:06
+ * @LastEditTime: 2021-06-03 14:30:28
  * @FilePath: /packages/ok-accessory/ok-upload-drag/upload-attachment-hook.ts
  */
 
@@ -51,6 +51,10 @@ export default function (props, context) {
     // 处理用户自定义事件
     props.onPreview && props.onPreview(file)
   }
+  // 重新上传
+  const handleReupload = (data: CustomEvent) => {
+    reupload(data.detail)
+  }
 
   // 获取默认值
   const getDefaultFileList = async (ids: string[]) => {
@@ -82,6 +86,7 @@ export default function (props, context) {
     handleDownload,
     handleAbort,
     handleRemoveFileList,
+    reupload,
   } = useUploadHandler(props, context, config)
 
   return {
@@ -98,5 +103,6 @@ export default function (props, context) {
     handleDownload,
     handleAbort,
     handleRemoveFileList,
+    handleReupload,
   }
 }

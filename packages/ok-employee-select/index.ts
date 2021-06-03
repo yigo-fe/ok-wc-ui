@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-31 15:51:54
+ * @LastEditTime: 2021-06-03 10:38:41
  * @FilePath: /packages/ok-employee-select/index.ts
  */
 
@@ -12,6 +12,7 @@ import './ok-employee-modal'
 
 import { Select } from 'ant-design-vue'
 import { classMap } from 'lit-html/directives/class-map.js'
+import { styleMap } from 'lit-html/directives/style-map.js'
 import { defineComponent, html, onMounted } from 'ok-lit'
 import { createApp, ref } from 'vue'
 
@@ -78,8 +79,8 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
             @dropdownVisibleChange="dropdownVisibleChange">
 
             <template #suffixIcon>
-              <img v-if="isMouseenter && !disabled && value.length" :src="closeIcon" style="height:16px; width: 16px;" class="head-clear-icon" @click="clearSelected" />
-              <img v-else :src="searchIcon" style="height:16px; width: 16px;" class="head-search-icon"/>
+              <img v-if="isMouseenter && !disabled && value.length" :src="closeIcon" style="height:14px; width: 14px;" class="head-clear-icon" @click="clearSelected" />
+              <img v-else :src="searchIcon" style="height:14px; width: 14px;" class="head-search-icon"/>
             </template>
             <template #notFoundContent>
               <span v-if="loading">{{i18n.$t('common.loading', '加载中')}}</span>
@@ -155,7 +156,10 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
         'ok-employee-select-wraper': true,
         'no-border-radius': !props.hasBorderRadius,
       })}
-      style="height: 100%"
+      style=${styleMap({
+        height: '100%',
+        width: `${props.width && props.width}`,
+      })}
     ></div>
   `
 })

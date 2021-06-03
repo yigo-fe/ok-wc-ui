@@ -8,11 +8,12 @@
 // 基础border颜色
 @ok-border-color-base: #dee0e3;
 @ok-border-color-hover: #4c78fc;
+@ok-secondery-color: #ebf1ff;
 
 // 警告色
 @ok-warning-color: #ff5b4c;
 // 错误色
-@ok-error-color: #f54a45;
+@ok-error-color: #ff6459;
 // 基础白色
 @ok-white-color: #fff;
 // 基础字体大小
@@ -25,7 +26,7 @@
 @ok-font-size-title: 16px;
 
 // 基础border-radius
-@ok-border-radius-base: 2px;
+@ok-border-radius-base: 4px;
 @ok-border-radius-big: 4px;
 
 // 基础字重
@@ -42,13 +43,13 @@
 @ok-drag-disabled: #bbbfc4;
 
 // 文件列表背景色
-@ok-file-list-bg-color: #f8f9fc;
-@ok-file-list-bg-color-hover: #f5f5f5;
+@ok-file-list-bg-color: #f2f4f7;
+@ok-file-list-bg-color-hover: #eff0f1;
 
 // 文件列表文字颜色
 @ok-file-list-color: #606266;
-
 @ok-list-bg-color-hover: #f5f5f5;
+@ok-upload-fail-text: #ff5046;
 
 
 // 上传进度条
@@ -60,7 +61,7 @@
 
 @more-bg:#eff0f1;
 @modal-search-bg: #eff0f1;
-
+@attachment-failed-bg: #fff0ef;
 @attachment-hover-color: #eff0f1;
 @subtable-list-color: #1f2329;
 
@@ -104,7 +105,7 @@ input.ant-select-selection-search-input {
 
 /* 修改ant-select的border-radius */
 .ant-select-multiple .ant-select-selector {
-  border-radius: 4px;
+  border-radius: @ok-border-radius-base;
 }
 /* 修改人员和部门选择placeholder宽度 */
 .ant-select.ant-select-multiple.ant-select-show-search .ant-select-selection-placeholder {
@@ -210,7 +211,7 @@ input.ant-select-selection-search-input {
 .ok-person-group-popper.popper-wraper {
   list-style: none;
   margin: 0;
-  border-radius: 4px;
+  border-radius: @ok-border-radius-base;
   box-shadow: 0 0 9px 0 rgb(0 0 0 / 8%);
   background-color: @ok-white-color;
   padding: 8px;
@@ -270,7 +271,8 @@ input.ant-select-selection-search-input {
   justify-content: center;
   align-items: center;
   height: 100%;
-  padding: 30px;
+  min-height: 160px;
+  padding: 34px 40px;
   box-sizing: border-box;
   background-color: @ok-base-bg-color;
   color:@ok-text-color;
@@ -281,8 +283,8 @@ input.ant-select-selection-search-input {
     border-color: @ok-primary-color;
   }
   &.dragover {
-    background-color: rgba(32, 159, 255, 0.06);
-    border: 2px dashed @ok-primary-color;
+    background-color: @ok-secondery-color;
+    border: 1px dashed @ok-primary-color;
   }
   svg path {
     fill: @ok-primary-color;
@@ -310,8 +312,8 @@ input.ant-select-selection-search-input {
   }
 
   .upload-inner-text {
-    line-height: 1;
-    margin: 20px 0 0;
+    line-height: 20px;
+    margin: 10px 0 0;
   }
 }
 
@@ -329,8 +331,9 @@ input.ant-select-selection-search-input {
     line-height: 1;
     position: relative;
     box-sizing: border-box;
-    border-radius: 4px;
+    border-radius: @ok-border-radius-base;
     width: 100%;
+
   }
   .ok-file-list__item + .ok-file-list__item  {
     margin-top: 14px;
@@ -347,14 +350,22 @@ input.ant-select-selection-search-input {
     line-height: 36px;
     max-width: 100%;
     border-radius: 4px;
+    &.failed {
+      background: @attachment-failed-bg;
+      .ok-file-list__item_file_name {
+        max-width: calc(100% - 127px)
+      }
+    }
     &:hover {
       background-color: @ok-file-list-bg-color-hover;
     }
+
   }
 
   .ok-file-list__item_name {
     flex: 1;
     width: calc(100% - 40px);
+    margin-left: 4px;
   }
   
   .file_name_wraper {
@@ -372,6 +383,7 @@ input.ant-select-selection-search-input {
     max-width: calc(100% - 96px);
     line-height: 16px;
   }
+
   .uploading-info {
     display: flex;
     align-items: center;
@@ -381,9 +393,21 @@ input.ant-select-selection-search-input {
     color: #8F959E;
     margin-right: 12px;
   }
-  .abort-btn {
+  .fail-text {
+    font-size: 12px;
+    font-weight: normal;
+    color: @ok-upload-fail-text;
+    margin-right: 12px;
+  }
+  .reupload-btn {
+    margin-right: 12px;
+  }
+  .abort-btn,
+  .reupload-btn {
     cursor: pointer;
   }
+
+  .reupload-btn path,
   .abort-icon path {
     fill: @ok-primary-color;
   }
@@ -392,7 +416,6 @@ input.ant-select-selection-search-input {
     display: block;
     margin-top: 6px;
   }
-
 }
 // 明细字表中的file-list
 .ok-file-list-box.is-subtable {
@@ -406,9 +429,6 @@ input.ant-select-selection-search-input {
   }
   .ok-file-list__item + .ok-file-list__item {
     margin-top: 2px;
-  }
-  .ok-file-list__item_name {
-    margin-left: 4px;
   }
   .ok-file-list__item_file_name {
     color: @subtable-list-color;
@@ -569,11 +589,14 @@ input.ant-select-selection-search-input {
   vertical-align: top;
   background-color: @ok-white-color;
   border: 1px solid @ok-border-color-base;
-  border-radius: 2px;
+  border-radius: @ok-border-radius-base;
   cursor: pointer;
 }
 .ok-upload-image-box .ok-upload-image-inner:hover {
   border-color: @ok-primary-color;
+  .upload-img-icon path {
+    fill: @ok-primary-color;
+  }
 }
 .ok-upload-image-box.disabled .ok-upload-image-inner {
   cursor: not-allowed;
@@ -683,7 +706,7 @@ input.ant-select-selection-search-input {
   justify-content: center;
   border: 1px solid @ok-primary-color;
   box-sizing: border-box;
-  border-radius: 4px;
+  border-radius: @ok-border-radius-base;
   height: 32px;
   .upload-icon path {
     fill: @ok-primary-color;
@@ -713,7 +736,7 @@ input.ant-select-selection-search-input {
 
 /* 文件删除， 二次确认 */
 .file-delete-confirm.ant-modal-confirm .ant-modal-content {
-  border-radius: 4px;
+  border-radius: @ok-border-radius-base;
 }
 .file-delete-confirm.ant-modal-confirm .ant-modal-confirm-btns button+button {
   margin-left: 12px;
@@ -757,7 +780,7 @@ input.ant-select-selection-search-input {
   display: flex;
   min-height: 400px;
   border: 1px solid @ok-border-color-base;
-  border-radius: 4px;
+  border-radius: @ok-border-radius-base;
 }
 
 .ok-tree-modal .tree-wraper {
@@ -772,7 +795,7 @@ input.ant-select-selection-search-input {
 .ok-tree-modal .tree-search .ant-input-affix-wrapper {
   border: 0;
   background:@modal-search-bg;
-  border-radius: 4px;
+  border-radius: @ok-border-radius-base;
 }
 .ok-tree-modal .tree-search .ant-input-affix-wrapper:focus {
   box-shadow:none;
@@ -830,7 +853,7 @@ input.ant-select-selection-search-input {
   padding: 0 24px 24px;
 }
 .ok-tree-modal .ant-modal-footer button {
-  border-radius: 4px;
+  border-radius: @ok-border-radius-base;
 }
 .ok-tree-modal .ant-modal-footer button+button {
   margin-left: 12px;
@@ -1056,7 +1079,7 @@ input.ant-select-selection-search-input {
   height: 16px;
   background-color: @ok-white-color;
   border: 1px solid @ok-border-color-base;
-  border-radius: 4px;
+  border-radius: @ok-border-radius-base;
   border-collapse: separate;
   transition: all 0.3s;
 }
