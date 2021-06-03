@@ -10,7 +10,7 @@
 const ANTD_VUE_CDN =
   process.env.NODE_ENV === 'development'
     ? './antd.min.css'
-    : `https://ego-fe.oss-cn-beijing.aliyuncs.com/lib/ok-wc-ui/antd.min.css`
+    : `https://fe-resource.baiteda.com/libs/antdv-2.1.2/antd.min.css`
 
 const CDN_PATH =
   process.env.NODE_ENV === 'development'
