@@ -41,8 +41,19 @@ module.exports = {
         },
       },
       {
+        test: /\.ts$/,
+        use: [
+          'babel-loader',
+          {
+            loader: 'ts-loader',
+            options: {
+              appendTsSuffixTo: [/\.vue$/],
+            },
+          },
+        ],
+      },
+      {
         test: /\.(js|jsx)$/,
-        exclude: /(node_modules|bower_components)/,
         use: {
           loader: 'babel-loader',
           options: {
@@ -51,11 +62,6 @@ module.exports = {
             cacheDirectory: true,
           },
         },
-      },
-      {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/,
       },
     ],
   },
