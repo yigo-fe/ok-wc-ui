@@ -55,6 +55,21 @@ input.ant-select-selection-search-input {
 .ok-dept-select-dropdown .ant-select-item-option-selected .anticon-check svg {
   fill: #4c78fc;
 }
+.ant-select.ok-employee-select.ant-select-multiple .ant-select-selection-item,
+.ant-select.ok-department-select.ant-select-multiple .ant-select-selection-item {
+  border-color: #eff0f1;
+  background: #eff0f1;
+}
+.ant-select.ok-employee-select.ant-select-disabled.ant-select-multiple .ant-select-selector,
+.ant-select.ok-department-select.ant-select-disabled.ant-select-multiple .ant-select-selector {
+  background: #f5f6f7;
+}
+.ant-select.ok-employee-select.ant-select-disabled.ant-select-multiple .ant-select-selection-item,
+.ant-select.ok-department-select.ant-select-disabled.ant-select-multiple .ant-select-selection-item {
+  color: #646a73;
+  background: #fff;
+  border-color: #fff;
+}
 /* ok-avatar */
 .ok-avatar-root {
   display: inline-block;
@@ -915,7 +930,7 @@ input.ant-select-selection-search-input {
   margin-left: 6px;
   font-size: 14px;
   font-weight: 400;
-  color: #1f2329;
+  color: #646a73;
 }
 .head-clear-icon,
 .head-search-icon {
@@ -947,7 +962,7 @@ input.ant-select-selection-search-input {
 .ok-department-select-root .ok-department-select .ant-select-selection-item-content {
   font-size: 14px;
   font-weight: 400;
-  color: #1f2329;
+  color: #646a73;
 }
 .ok-department-select-root .head-search-icon,
 .ok-department-select-root .head-clear-icon {
@@ -1153,14 +1168,6 @@ input.ant-select-selection-search-input {
   background-color: rgba(14, 14, 14, 0.5);
   margin-left: auto;
   vertical-align: middle;
-}
-.ok-person-detail .gender-icon {
-  width: 16px;
-  height: 16px;
-}
-.ok-person-detail .btnIcon {
-  width: 14px;
-  height: 14px;
 }
 .ok-person-detail .person-detail-button {
   background: #ecf2ff;

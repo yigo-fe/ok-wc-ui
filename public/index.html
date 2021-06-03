@@ -69,9 +69,9 @@
 
 
       <h3>人员选择select-antd</h3>
-      <div id="test" class="test-display">
+
         <ok-employee-select class="divider ok-employee-input" placeholder="请选择1" style="width: 200px;display: block;"></ok-employee-select>
-      </div>
+
 
       <!-- <ok-employee-select class="divider ok-employee-input2" placeholder="请选择2" style="width: 200px;display: block;"></ok-employee-select> -->
 
@@ -548,7 +548,7 @@
       const okDeptInput = document.querySelector('.ok-department-input')
       okDeptInput.value = ['13','14', '18', '19']
       okDeptInput.multiple = true
-      // okDeptInput.disabled = true
+      okDeptInput.disabled = true
       okDeptInput.update = (val, list)=>{
         console.log('okDeptInput-update-index',val, list)
         // okDeptInput.value = val
@@ -595,9 +595,10 @@
 
 
       const okEmployeeInput = document.querySelector('.ok-employee-input')
-      okEmployeeInput.value = ['1234']
+      okEmployeeInput.value = ['WangChao']
       okEmployeeInput.hasBorderRadius = false
       okEmployeeInput.width = '180px'
+      okEmployeeInput.disabled = true
       // okEmployeeInput.bordered = false
       // okEmployeeInput.value = []
       okEmployeeInput.dropdownstyle = {'z-index': 6000}

@@ -58,8 +58,8 @@ defineComponent('ok-person-card', { ...props }, (props, context) => {
             ></ok-avatar>
             <span class="user-name-wraper">
               <span class="person-card-name" :class="{'isTerminated': statusType === '0'}">{{personInfoCom['name'][i18n]}}</span>
-              <img v-if="personInfoCom.gender ==2" :src="femaleIcon" class="gender-icon" />
-              <img v-else :src="maleIcon" class="gender-icon" />
+              <img v-if="personInfoCom.gender ==2" :src="femaleIcon" style="width: 16px; height: 16px;" />
+              <img v-else :src="maleIcon" style="width: 16px; height: 16px;" />
               <div v-if="statusType === '0'" class="terminated-text">{{langPack.terminated}}</div>
             </span>
           </header>
@@ -94,7 +94,7 @@ defineComponent('ok-person-card', { ...props }, (props, context) => {
             <slot name="footer-button">
               <div class="btn-wraper" v-if="showSendBtn">
                 <div @click="openApp" class="person-detail-button">
-                <img :src='langPack.sendIcon' class="btnIcon" />
+                <img :src='langPack.sendIcon' style="width:14px;height:14px;" />
                 {{langPack.sendLark}}
                 </div>
               </div>
