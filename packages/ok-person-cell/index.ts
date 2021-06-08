@@ -19,6 +19,7 @@ defineComponent(
   },
   (props, contxt) => {
     let isInit = false
+    let isSlot = false
     onMounted(() => {
       const options = {
         setup() {
@@ -71,7 +72,18 @@ defineComponent(
             return contentSlot?.innerHTML
           })
 
-          const isAvatarSolt = computed(() => !!contxt.innerText)
+          const isAvatarSolt = computed(() => {
+            return isSlot
+          })
+
+          // 企业微信调试使用
+          const devtoolsLog = computed(() => {
+            return JSON.stringify({
+              contextinnerText: contxt.innerText,
+              isAvatarSolt: isAvatarSolt.value,
+              avatarSlot: avatarSlot.value,
+            })
+          })
 
           return {
             personInfo,
@@ -86,6 +98,7 @@ defineComponent(
             avatarSlot,
             contentSlot,
             isAvatarSolt,
+            devtoolsLog,
           }
         },
         template: `
@@ -101,7 +114,8 @@ defineComponent(
                 ></ok-person-card>
               </template>
               <span class="ok-person-cell ok-person-cell-root">
-                <div v-show="isAvatarSolt" v-html="avatarSlot"></div>
+                <p style="display: none" class="dev-log">{{devtoolsLog}}</p>
+                <div v-show="isAvatarSolt" v-html="avatarSlot" class="slot-content"></div>
                 <ok-avatar
                   v-if="!isAvatarSolt"
                   :personInfo="personInfo"
@@ -116,6 +130,11 @@ defineComponent(
       }
       effect(() => {
         if (!isInit && props.personInfo) {
+          //@ts-ignore
+          const slots = contxt.shadowRoot.querySelectorAll('slot') || []
+          if (slots.length && slots[0].assignedNodes().length) {
+            isSlot = true
+          }
           const app = createApp(options)
           app.use(Popover)
           app.mount(contxt.$refs.showPersonCell as HTMLElement)
