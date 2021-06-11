@@ -3,18 +3,18 @@
  * @Author: 付静
  * @Date: 2021-04-08 20:15:04
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-31 20:32:49
+ * @LastEditTime: 2021-06-11 15:09:48
  * @FilePath: /packages/ok-department-select/hook.ts
  */
 import { debounce } from 'lodash'
 import { effect } from 'ok-lit'
-import { computed, h, ref, watch } from 'vue'
+import { computed, h, nextTick, ref, watch } from 'vue'
 
 import close from '../assets/images/closed.svg'
 import search from '../assets/images/search.svg'
 import { apiInit } from '../services/api'
 import { isSameArray } from '../utils/index'
-export default function (props: any) {
+export default function (props: any, okDepartmentInput: any) {
   const testVal = ref([])
   effect(() => {
     testVal.value = props.value
@@ -41,9 +41,7 @@ export default function (props: any) {
     () => props.getContainerModal || (() => document.body)
   )
   // 下拉框append元素
-  const getPopupContainer = computed(
-    () => props.getPopupContainer || (() => document.body)
-  )
+  const getPopupContainer = computed(() => props.getPopupContainer)
 
   // 最多展示的tag数量。 默认展示一个，或者平铺
   const maxTagCount = computed(() => (props.flat ? null : 1))
@@ -242,6 +240,21 @@ export default function (props: any) {
     if (!value.value.length) {
       options.value = []
     }
+
+    // 处理 getPopupContainer 属性时，dropdown在上面，dropdown定位不更新的问题
+    if (!getPopupContainer.value) return
+    nextTick(() => {
+      setTimeout(() => {
+        const el: any = okDepartmentInput.value.$el.querySelector(
+          '.ant-select-dropdown'
+        )
+        const isTop = el.className.indexOf('placement-top') > -1
+        if (isTop) {
+          el.style.bottom = '4px'
+          el.style.top = 'auto'
+        }
+      }, 500)
+    })
   }
 
   // focus

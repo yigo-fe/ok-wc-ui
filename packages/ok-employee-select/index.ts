@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-03 10:38:41
+ * @LastEditTime: 2021-06-11 00:04:07
  * @FilePath: /packages/ok-employee-select/index.ts
  */
 
@@ -26,7 +26,7 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
       setup() {
         const okEmployeeInput: any = ref(null)
 
-        const params = useEmployeeSelect(props, context)
+        const params = useEmployeeSelect(props, context, okEmployeeInput)
 
         // 模拟单选
         const handleSelect = val => {
@@ -40,11 +40,16 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
           // 单选收起下拉框
           okEmployeeInput.value?.blur()
         }
+
+        const loadingText = i18n.$t('common.loading', '加载中')
+        const noData = i18n.$t('common.noData', '暂无数据')
+
         return {
           ...params,
           okEmployeeInput,
           handleSelect,
-          i18n,
+          loadingText,
+          noData,
         }
       },
       template: `
@@ -83,8 +88,8 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
               <img v-else :src="searchIcon" style="height:14px; width: 14px;" class="head-search-icon"/>
             </template>
             <template #notFoundContent>
-              <span v-if="loading">{{i18n.$t('common.loading', '加载中')}}</span>
-              <span v-else>{{i18n.$t('common.noData', '暂无数据')}}</span>
+              <span v-if="loading">{{loadingText}}</span>
+              <span v-else>{{noData}}</span>
             </template>
             <a-select-option
               v-for="employee in options"

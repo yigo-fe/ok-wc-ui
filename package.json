@@ -9,7 +9,7 @@
   "scripts": {
     "serve": "webpack serve --mode development --env development --config webpack.dev.js",
     "buildRollup": "cross-env NODE_ENV=production rollup -c",
-    "build": "cross-env NODE_ENV=production webpack --config webpack.prod.js",
+    "build": "rm -rf ./dist && cross-env NODE_ENV=production webpack --config webpack.prod.js",
     "prepublish": "npm run build",
     "postpublish": "node ./cdn-upload.js",
     "docs:dev": "vitepress dev docs",

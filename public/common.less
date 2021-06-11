@@ -147,6 +147,10 @@ input.ant-select-selection-search-input {
   border-color: #fff;
 }
 
+.ant-select .rc-virtual-list-holder-inner .ant-select-item-option:last-child .option-list-item {
+  border:0
+}
+
 
 /* ok-avatar */
 .ok-avatar-root {
@@ -472,6 +476,10 @@ input.ant-select-selection-search-input {
   align-items: center;
   line-height: 1;
   cursor: pointer;
+  text-decoration: none;
+  color: @ok-primary-color;
+  &:focus,
+  &:active,
   &:hover {
     color: @ok-primary-color;
   }

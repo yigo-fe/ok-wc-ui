@@ -70,13 +70,12 @@
 
       <h3>人员选择select-antd</h3>
 
-        <ok-employee-select class="divider ok-employee-input" placeholder="请选择1" style="width: 200px;display: block;"></ok-employee-select>
 
 
       <!-- <ok-employee-select class="divider ok-employee-input2" placeholder="请选择2" style="width: 200px;display: block;"></ok-employee-select> -->
 
       <h3>人员选择tree</h3>
-      <!-- <ok-employee-select class="divider ok-employee-tree" mode="tree" placeholder="请选择3" style="width: 300px;height:40px;display: block;"></ok-employee-select> -->
+      <ok-employee-select class="divider ok-employee-tree" mode="tree" placeholder="请选择3" style="width: 300px;height:40px;display: block;"></ok-employee-select>
 
       <ok-ant-person-select></ok-ant-person-select>
       <!-- <ok-person-detail></ok-person-detail> -->
@@ -112,6 +111,8 @@
         <h3>列表上传</h3>
         <ok-upload-table></ok-upload-table>
 
+
+
         <h3>明细字表上传</h3>
         <div style="display:block;">
           <ok-upload-subtable-file style="display:block; width: 300px;"></ok-upload-subtable-file>
@@ -136,6 +137,7 @@
         <h3>antd</h3>
         <!-- <ok-attachment-drag></ok-attachment-drag>  -->
 
+
         <h3>图片上传</h3>
         <ok-upload-image style="width: 420px; display: block;"></ok-upload-image>
 
@@ -145,6 +147,9 @@
           <div style="width: 200px;height: 200px; font-size: 14px;display: block; border: 1px solid red;">这里是slot</div>
 
         </ok-upload-image> -->
+
+        <ok-employee-select class="divider ok-employee-input" placeholder="请选择1" style="width: 200px;display: block;"></ok-employee-select>
+
 
       </section>
 
@@ -595,10 +600,10 @@
 
 
       const okEmployeeInput = document.querySelector('.ok-employee-input')
-      okEmployeeInput.value = ['WangChao']
-      okEmployeeInput.hasBorderRadius = false
+      // okEmployeeInput.value = ['WangChao']
+      // okEmployeeInput.hasBorderRadius = false
       okEmployeeInput.width = '180px'
-      okEmployeeInput.disabled = true
+      // okEmployeeInput.disabled = true
       // okEmployeeInput.bordered = false
       // okEmployeeInput.value = []
       okEmployeeInput.dropdownstyle = {'z-index': 6000}
@@ -609,7 +614,7 @@
       okEmployeeInput.multiple = true
       // okEmployeeInput.borderless = true
       // okEmployeeInput.disabled = true
-      okEmployeeInput.range = ['FuJing',"FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing', 'WangChao', 'WangYiJie']
+      // okEmployeeInput.range = ['FuJing',"FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing', 'WangChao', 'WangYiJie']
       okEmployeeInput.update = (val, list)=>{
         console.log('okEmployeeInput-update-index',val,list)
         // okEmployeeInput.value = val

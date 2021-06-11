@@ -1,5 +1,5 @@
 import { Popover } from 'ant-design-vue'
-import { defineComponent, html, onMounted, effect } from 'ok-lit'
+import { defineComponent, effect, html, onMounted } from 'ok-lit'
 import { computed, createApp, ref } from 'vue'
 
 import { ANTD_VUE_CDN, COMMON_CSS_PATH } from '../path.config'
@@ -103,7 +103,7 @@ defineComponent(
         },
         template: `
           <div>
-            <a-popover placement="left" @visibleChange="onTrigger"  overlayClassName="ok-person-cell-popover">
+            <a-popover placement="left" @visibleChange="onTrigger" :overlayStyle="{'z-index': 9999}"  overlayClassName="ok-person-cell-popover">
               <template #content>
                 <ok-person-card
                   :personInfo="personInfo"

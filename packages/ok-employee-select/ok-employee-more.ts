@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-12 12:05:40
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-31 15:52:24
+ * @LastEditTime: 2021-06-10 22:38:53
  * @FilePath: /packages/ok-employee-select/ok-employee-more.ts
  */
 import { Popover } from 'ant-design-vue'
@@ -55,7 +55,7 @@ defineComponent(
           }
         },
         template: `
-          <a-popover overlayClassName="ok-employee-more" v-model:visible="visible">
+          <a-popover :overlayStyle="{'z-index': 9998}" overlayClassName="ok-employee-more" v-model:visible="visible">
             <template #content>
               <div class="more-content">
                 <p class="more-item" v-for="employee in exceedList" :key="employee.employee_id">

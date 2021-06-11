@@ -110,5 +110,9 @@ defineComponent('ok-person-card', { ...props }, (props, context) => {
 
   return () =>
     html`<link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
-      <div ref="showPersonCard" class="ok-person-detail"></div> `
+      <div
+        ref="showPersonCard"
+        class="ok-person-detail"
+        style="width: 240px;background: #fff;border-radius:14px;"
+      ></div> `
 })

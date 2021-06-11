@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 15:16:57
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-02 16:39:07
+ * @LastEditTime: 2021-06-11 15:03:24
  * @FilePath: /packages/ok-employee-select/hook.ts
  */
 import { debounce } from 'lodash'
@@ -14,7 +14,7 @@ import close from '../assets/images/closed.svg'
 import search from '../assets/images/search.svg'
 import { apiInit } from '../services/api'
 import { isSameArray } from '../utils/index'
-export default function (props: any, context: any) {
+export default function (props: any, context: any, okEmployeeInput: any) {
   const testVal = ref([])
   effect(() => {
     testVal.value = props.value
@@ -48,9 +48,7 @@ export default function (props: any, context: any) {
     () => props.getContainerModal || (() => document.body)
   )
   // 下拉框append元素
-  const getPopupContainer = computed(
-    () => props.getPopupContainer || (() => document.body)
-  )
+  const getPopupContainer = computed(() => props.getPopupContainer)
 
   const propsGetInfoByEmpId = computed(() => props.propsGetInfoByEmpId)
 
@@ -118,6 +116,21 @@ export default function (props: any, context: any) {
     if (remote.value && !value.value.length) {
       options.value = []
     }
+
+    // 处理 getPopupContainer 属性时，dropdown在上面，dropdown定位不更新的问题
+    if (!getPopupContainer.value) return
+    nextTick(() => {
+      setTimeout(() => {
+        const el: any = okEmployeeInput.value.$el.querySelector(
+          '.ant-select-dropdown'
+        )
+        const isTop = el.className.indexOf('placement-top') > -1
+        if (isTop) {
+          el.style.bottom = '4px'
+          el.style.top = 'auto'
+        }
+      }, 500)
+    })
   }
 
   // 搜索loading
@@ -141,6 +154,7 @@ export default function (props: any, context: any) {
     // 本地模式不需要远程搜索
     if (!remote.value) return
     if (!query) return
+    options.value = []
     loading.value = true
     const result = await searchUser(query)
     loading.value = false

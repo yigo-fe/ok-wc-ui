@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:01:15
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-03 10:39:05
+ * @LastEditTime: 2021-06-11 15:08:21
  * @FilePath: /packages/ok-department-select/index.ts
  */
 import './ok-department-modal'
@@ -33,7 +33,7 @@ defineComponent(
     onMounted(() => {
       const options = {
         setup() {
-          const params = useDepartmentSelect(props)
+          const params = useDepartmentSelect(props, okDepartmentInput)
 
           const okDepartmentInput: any = ref(null)
           // 模拟单选

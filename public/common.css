@@ -70,6 +70,9 @@ input.ant-select-selection-search-input {
   background: #fff;
   border-color: #fff;
 }
+.ant-select .rc-virtual-list-holder-inner .ant-select-item-option:last-child .option-list-item {
+  border: 0;
+}
 /* ok-avatar */
 .ok-avatar-root {
   display: inline-block;
@@ -366,7 +369,11 @@ input.ant-select-selection-search-input {
   align-items: center;
   line-height: 1;
   cursor: pointer;
+  text-decoration: none;
+  color: #4c78fc;
 }
+.file-icon-operate:focus,
+.file-icon-operate:active,
 .file-icon-operate:hover {
   color: #4c78fc;
 }
