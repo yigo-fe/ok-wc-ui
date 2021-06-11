@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./antd.min.css">
   <link rel="stylesheet" href="./common.css">
+  <script src="https://fe-resource.baiteda.com/libs/webcomponentsjs-2.5.0/webcomponents-bundle.js"></script>
+
   <!-- <link rel="stylesheet" href="./green.css"> -->
   <!-- <link rel="stylesheet" href="./common-origin.css"> -->
   <!-- <link rel="stylesheet" href="./tippy.css"> -->
@@ -65,16 +67,13 @@
 
       <h3>部门选择 input </h3>
       <ok-department-select class="divider ok-department-input" placeholder="请选择部门" style="width: 200px;display: block;"></ok-department-select>
-      <ok-department-select mode="tree" class="divider ok-department-tree" placeholder="请选择部门" style="width: 200px;height:40px;display: block;"></ok-department-select>
+      <ok-department-select mode="tree" class="divider ok-department-tree" placeholder="请选择部门" style="width: 200px;height:60px;display: block;"></ok-department-select>
 
 
-      <h3>人员选择select-antd</h3>
+      <h3>人员选择-input</h3>
+      <ok-employee-select class="divider ok-employee-input" placeholder="请选择1" style="width: 200px;display: block;"></ok-employee-select>
 
-
-
-      <!-- <ok-employee-select class="divider ok-employee-input2" placeholder="请选择2" style="width: 200px;display: block;"></ok-employee-select> -->
-
-      <h3>人员选择tree</h3>
+      <h3>人员选择-tree</h3>
       <ok-employee-select class="divider ok-employee-tree" mode="tree" placeholder="请选择3" style="width: 300px;height:40px;display: block;"></ok-employee-select>
 
       <ok-ant-person-select></ok-ant-person-select>
@@ -83,18 +82,18 @@
       <!-- <ok-ant-person-select></ok-ant-person-select> -->
       <!-- <ok-ant-department-search></ok-ant-department-search> -->
 
-      <h3>image preview</h3>
+      <!-- <h3>image preview</h3> -->
       <!-- <ok-image-preview></ok-image-preview> -->
 
-      <div>
+      <!-- <div>
         <ul id="images">
           <li><img src="picture-1.jpg" alt="Picture 1"></li>
           <li><img src="picture-2.jpg" alt="Picture 2"></li>
           <li><img src="picture-3.jpg" alt="Picture 3"></li>
         </ul>
-      </div>
-      <!-- 人员图像 -->
-<!--       <ok-avatar></ok-avatar>-->
+      </div> -->
+      <h3>人员图像</h3>
+      <ok-avatar></ok-avatar>
       <div class="divider"></div>
       <!-- 人员卡片 -->
       <h3>人员卡片</h3>
@@ -148,7 +147,6 @@
 
         </ok-upload-image> -->
 
-        <ok-employee-select class="divider ok-employee-input" placeholder="请选择1" style="width: 200px;display: block;"></ok-employee-select>
 
 
       </section>
@@ -583,8 +581,7 @@
       }
 
 
-      // const okEmployeeTree = document.querySelector('.ok-employee-tree')
-      const okEmployeeTree = {}
+      const okEmployeeTree = document.querySelector('.ok-employee-tree')
       okEmployeeTree.value = ['LiTao', 'FuJing', 'ssssss', 'WangYiJie']
       // okEmployeeTree.value = ['ssssss']
       // okEmployeeTree.disabled = true 
@@ -600,10 +597,10 @@
 
 
       const okEmployeeInput = document.querySelector('.ok-employee-input')
-      // okEmployeeInput.value = ['WangChao']
+      okEmployeeInput.value = ['WangChao', 'LiuFei']
       // okEmployeeInput.hasBorderRadius = false
-      okEmployeeInput.width = '180px'
-      // okEmployeeInput.disabled = true
+      okEmployeeInput.width = '200px'
+      okEmployeeInput.disabled = true
       // okEmployeeInput.bordered = false
       // okEmployeeInput.value = []
       okEmployeeInput.dropdownstyle = {'z-index': 6000}
