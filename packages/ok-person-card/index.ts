@@ -14,6 +14,8 @@ import usePersonCardHandle from './hook'
  * @slot footer-button 按钮位置自定义
  */
 import props from './props'
+import okPersonCardCss from './style/person-card.css'
+
 defineComponent('ok-person-card', { ...props }, (props, context) => {
   onMounted(() => {
     const options = {
@@ -109,10 +111,15 @@ defineComponent('ok-person-card', { ...props }, (props, context) => {
   })
 
   return () =>
-    html`<link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
+    html`
+      <style lang="less">
+        ${okPersonCardCss}
+      </style>
+      <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
       <div
         ref="showPersonCard"
         class="ok-person-detail"
         style="width: 240px;background: #fff;border-radius:14px;"
-      ></div> `
+      ></div>
+    `
 })

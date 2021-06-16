@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-11 17:11:05
+ * @LastEditTime: 2021-06-16 11:00:03
  * @FilePath: /packages/ok-employee-select/index.ts
  */
 
@@ -323,15 +323,6 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
       .ant-select-multiple .ant-select-selection-search-input {
         width: 100%;
         min-width: 4.1px;
-      }
-
-      .ant-select-multiple .ant-select-selection-search-input,
-      .ant-select-multiple .ant-select-selection-search-mirror {
-        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-          Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji,
-          Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
-        line-height: 1.5715;
-        transition: all 0.3s;
       }
 
       .ant-select-multiple .ant-select-selection-search-mirror {

@@ -30,6 +30,7 @@ defineComponent(
           const deptList: any = ref([])
           const statusType: any = ref('')
           const contentSlot = ref('')
+          const cardDisplay = ref('none')
 
           const checkLardShow = async (id: string) => {
             let result: any = null
@@ -49,6 +50,7 @@ defineComponent(
               deptList.value = result.data.dept_resp_vo_list
               statusType.value = result.data.status_type
             }
+            cardDisplay.value = 'block'
           }
 
           const onTrigger = (visible: boolean) => {
@@ -99,13 +101,15 @@ defineComponent(
             contentSlot,
             isAvatarSolt,
             devtoolsLog,
+            cardDisplay,
           }
         },
         template: `
           <div>
-            <a-popover placement="left" @visibleChange="onTrigger" :overlayStyle="{'z-index': 9999}"  overlayClassName="ok-person-cell-popover">
+            <a-popover :mouseEnterDelay="0.3" placement="left" @visibleChange="onTrigger" :overlayStyle="{'z-index': 9999}"  overlayClassName="ok-person-cell-popover">
               <template #content>
                 <ok-person-card
+                  :style="{display: cardDisplay}"
                   :personInfo="personInfo"
                   :toOpenId="toOpenId"
                   :isAwaken="isAwaken"

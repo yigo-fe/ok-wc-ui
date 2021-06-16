@@ -28,7 +28,7 @@ input.ant-select-selection-search-input {
   caret-color: #4c78fc;
 }
 /* 修改ant-select的border-radius */
-.ant-select-multiple .ant-select-selector {
+.ant-select.ant-select-multiple .ant-select-selector {
   border-radius: 4px;
 }
 /* 修改人员和部门选择placeholder宽度 */
