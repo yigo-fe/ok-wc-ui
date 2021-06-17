@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 15:19:21
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-31 20:33:11
+ * @LastEditTime: 2021-06-17 15:18:55
  * @FilePath: /packages/ok-employee-select/hook-modal.ts
  */
 import { debounce } from 'lodash'
@@ -174,7 +174,7 @@ export default function (props: any) {
   // 点击面包屑的根节点
   const handleRootClick = () => {
     breadcrumbList.value = []
-    department_id.value = rootDept.department_id
+    department_id.value = rootDept?.department_id
     queryKey.value = ''
     getDeptAndEmployee()
   }
@@ -213,8 +213,8 @@ export default function (props: any) {
 
   // 打开modal
   const handleOpenModal = () => {
-    breadcrumbList.value = [rootDept]
-    department_id.value = rootDept.department_id
+    breadcrumbList.value = rootDept ? [rootDept] : []
+    department_id.value = rootDept?.department_id
     queryKey.value = ''
     tempSelected.value = [...propsValue.value]
     // 初始化树左侧数据

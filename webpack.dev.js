@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-02-07 11:11:51
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-16 10:03:12
+ * @LastEditTime: 2021-06-17 15:14:31
  * @FilePath: /webpack.dev.js
  */
 const webpackBaseConf = require('./webpack.base.config.js')
@@ -31,7 +31,7 @@ module.exports = merge(webpackBaseConf, {
         target: 'https://test.baiteda.com/',
         headers: {
           Cookie:
-            'egoToken=9ec3cfbb-1ee9-4eeb-8227-b7642b16f870; designertoken=dceaa094-0637-4c16-9831-685b7c5ed57c; tenant_id=test; local=zh-CN',
+            'designertoken=31fb3fa6-8cce-4d16-ac21-66d627b5ac07; egoToken=bc764888-993e-4d50-bf9e-bf05bab0842d; local=zh-CN; tenant_id=test',
         },
       },
     },

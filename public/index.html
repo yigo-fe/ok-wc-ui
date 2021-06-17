@@ -50,7 +50,7 @@
         <!-- <button onclick="testClick3()">drawer</button> -->
       </div>
 
-      <div style="width: 100px;">
+      <!-- <div style="width: 100px;">
         <ok-tooltip class="divider">
           <div slot="title"><span >这里是title的slot</span></div>
 
@@ -59,7 +59,7 @@
         </ok-tooltip>
 
         <ok-tooltip>测试tooltip测试</ok-tooltip>
-      </div>
+      </div> -->
 
 
 
@@ -78,7 +78,7 @@
 
       <ok-ant-person-select></ok-ant-person-select>
       <!-- <ok-person-detail></ok-person-detail> -->
-      <ok-person-group></ok-person-group>
+      
       <!-- <ok-ant-person-select></ok-ant-person-select> -->
       <!-- <ok-ant-department-search></ok-ant-department-search> -->
 
@@ -97,7 +97,11 @@
       <div class="divider"></div>
       <!-- 人员卡片 -->
       <h3>人员卡片</h3>
-      <ok-person-cell class="person-cell"><ok-avatar></ok-avatar></ok-person-cell>
+      <ok-person-cell class="ok-person-cell1"></ok-person-cell>
+      <h3>人员卡片 -slot </h3>
+      <ok-person-cell class="ok-person-cell2"><ok-avatar class="ok-person-cell-slot"></ok-avatar></ok-person-cell>
+      <h3>person-group </h3>
+      <ok-person-group></ok-person-group>
       <!-- 多人员list -->
       <!-- <ok-person-group ></ok-person-group> -->
 
@@ -254,19 +258,7 @@
       gender: 2,
       msg_relation_type: "WX",
       tenant_id: "test"
-    }, {
-      avatar_url: "https://wework.qpic.cn/bizmail/cMLFZrYGchIibX5icVTGibh7b2oELMc9MsJYDiaCNNmTYREjGVRjlsq3mA/0",
-      department_id: "30",
-      department_name: "前端部",
-      email: "fujing@byteluck.com",
-      employee_card: "工号",
-      employee_en_name: "付静",
-      employee_id: "FuJing1",
-      employee_name: "付静",
-      gender: 2,
-      msg_relation_type: "WX",
-      tenant_id: "test"
-    },
+    }, 
     {
       employee_id: "100005",
       employee_name: "Angel",
@@ -409,16 +401,38 @@
 
     window.onload = ()=>{
 
-  
+      setTimeout(()=>{
+        console.log('setItem')
+        window.localStorage.setItem('locale', 'en-US')
+
+        const setItemEvent = new Event('setItemEvent')
+				setItemEvent.locale = 'en-US'
+				window.dispatchEvent(setItemEvent)
+      },3000)
+
+      window.addEventListener('setItemEvent', (e) => {
+      
+            console.log(2, e)
+     
+      })
 
       // window.okuiConfig.options.preview = true
       const okAvatar = document.querySelector('ok-avatar')
       okAvatar.personInfo = personInfo
 
-      const okPersonCell = document.querySelector('ok-person-cell')
+      const okPersonCell = document.querySelector('.ok-person-cell1')
       okPersonCell.personInfo = personInfo1
       okPersonCell.width = '30px'
       okPersonCell.height = '30px'
+
+      // personcell slot
+      const okPersonCell2 = document.querySelector('.ok-person-cell2')
+      okPersonCell2.personInfo = personInfo1
+      const okPersonCellSlot = document.querySelector('.ok-person-cell-slot')
+      okPersonCellSlot.personInfo = personInfo
+      okPersonCellSlot.width = '30px'
+      okPersonCellSlot.height = '30px'
+      
 
 
       const okPersonGroup = document.querySelector('ok-person-group')
@@ -600,7 +614,7 @@
       okEmployeeInput.value = ['WangChao', 'LiuFei']
       // okEmployeeInput.hasBorderRadius = false
       okEmployeeInput.width = '200px'
-      okEmployeeInput.disabled = true
+      // okEmployeeInput.disabled = true
       // okEmployeeInput.bordered = false
       // okEmployeeInput.value = []
       okEmployeeInput.dropdownstyle = {'z-index': 6000}
