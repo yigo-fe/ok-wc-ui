@@ -36,7 +36,7 @@ declare global {
   interface Window {
     // ok-wc-ui 配置
     okuiConfig: {
-      env: 'PRD'
+      env?: string // 环境配置 DEV PRD
       apiPath: string // 接口地址
       sourceHost?: string
       basePath?: string

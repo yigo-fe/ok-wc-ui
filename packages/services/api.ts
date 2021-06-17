@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 16:58:26
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-28 10:13:20
+ * @LastEditTime: 2021-06-17 18:10:02
  * @FilePath: /packages/services/api.ts
  */
 
@@ -16,19 +16,19 @@ import ServicePersoncard from './services-personcard'
 
 const baseURL =
   process.env.NODE_ENV === 'development'
-    ? 'http://172.16.1.53:7000/apps/api'
+    ? 'https://test.baiteda.com/apps/api'
     : window.okuiConfig?.apiPath
 // 人员卡片接口地址
 const personcardURL =
   process.env.NODE_ENV === 'development'
-    ? 'http://172.16.1.53:7000/apps/api'
+    ? 'https://test.baiteda.com/apps/api'
     : window.okuiConfig?.cardPath || window.okuiConfig?.apiPath
 
-// 文件上传
+// 图片预览
 const sourceHost =
-  process.env.NODE_ENV === 'development'
-    ? 'http://172.16.1.53:7000/'
-    : window.okuiConfig?.sourceHost
+  process.env.NODE_ENV === 'development' || window.okuiConfig.env === 'DEV'
+    ? 'https://test.baiteda.com'
+    : window.okuiConfig?.sourceHost || window.location.origin
 
 // console.log(baseURL, sourceHost)
 
