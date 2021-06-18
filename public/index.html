@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="./antd.min.css">
   <link rel="stylesheet" href="./common.css">
   <script src="https://fe-resource.baiteda.com/libs/webcomponentsjs-2.5.0/webcomponents-bundle.js"></script>
+  <script src="https://fe-resource.baiteda.com/lib/byteluck/byteluck.theme.load.js"></script>
 
   <!-- <link rel="stylesheet" href="./green.css"> -->
   <!-- <link rel="stylesheet" href="./common-origin.css"> -->
@@ -35,6 +36,9 @@
     .test-display {
       display: none;
     }
+    .test-css {
+      color: var(--bl-brand-c);
+    }
   </style>
 </head>
 <body>
@@ -49,6 +53,8 @@
         <button onclick="testClick2()">test2</button>
         <!-- <button onclick="testClick3()">drawer</button> -->
       </div>
+
+      <h3 class="test-css">测试css变量</h3>
 
       <!-- <div style="width: 100px;">
         <ok-tooltip class="divider">
@@ -113,8 +119,6 @@
       <section  class="divider upload-demo">
         <h3>列表上传</h3>
         <ok-upload-table></ok-upload-table>
-
-
 
         <h3>明细字表上传</h3>
         <div style="display:block;">
@@ -400,22 +404,8 @@
 
 
     window.onload = ()=>{
-
-      setTimeout(()=>{
-        console.log('setItem')
-        window.localStorage.setItem('locale', 'en-US')
-
-        const setItemEvent = new Event('setItemEvent')
-				setItemEvent.locale = 'en-US'
-				window.dispatchEvent(setItemEvent)
-      },3000)
-
-      window.addEventListener('setItemEvent', (e) => {
-      
-            console.log(2, e)
-     
-      })
-
+      // bl.closeLoading()
+      bl.appendTheme('blue', ['ant'])
       // window.okuiConfig.options.preview = true
       const okAvatar = document.querySelector('ok-avatar')
       okAvatar.personInfo = personInfo

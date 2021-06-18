@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-16 11:00:03
+ * @LastEditTime: 2021-06-18 18:25:31
  * @FilePath: /packages/ok-employee-select/index.ts
  */
 
@@ -172,7 +172,7 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
       .ant-select-multiple .ant-select-selector {
         position: relative;
         background-color: #fff;
-        border: 1px solid #dee0e3;
+        border: 1px solid var(--bl-n300-c);
         transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
         display: flex;
         flex-wrap: wrap;
@@ -239,8 +239,8 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
         margin-bottom: 2px;
         padding: 0 4px 0 8px;
         line-height: 22px;
-        background: #eff0f1;
-        border: 1px solid #eff0f1;
+        background: var(--bl-n200-c);
+        border: 1px solid var(--bl-n200-c);
         border-radius: 2px;
         cursor: default;
         transition: font-size 0.3s, line-height 0.3s, height 0.3s;
@@ -258,7 +258,7 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
         text-overflow: ellipsis;
         font-size: 14px;
         font-weight: 400;
-        color: #1f2329;
+        color: var(--bl-n900-c);
       }
 
       .ant-select-multiple .ant-select-selection-item-remove {
@@ -277,7 +277,6 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
         cursor: pointer;
         display: inline-block;
         font-size: 12px;
-        font-size: 10px9;
         transform: scale(0.83333333) rotate(0deg);
       }
 

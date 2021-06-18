@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:01:15
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-16 11:15:13
+ * @LastEditTime: 2021-06-18 15:27:44
  * @FilePath: /packages/ok-department-select/index.ts
  */
 import './ok-department-modal'
@@ -148,7 +148,7 @@ defineComponent(
         .ant-select-multiple .ant-select-selector {
           position: relative;
           background-color: #fff;
-          border: 1px solid #dee0e3;
+          border: 1px solid var(--bl-n300-c);
           transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
           display: flex;
           flex-wrap: wrap;
@@ -215,8 +215,8 @@ defineComponent(
           margin-bottom: 2px;
           padding: 0 4px 0 8px;
           line-height: 22px;
-          background: #eff0f1;
-          border: 1px solid #eff0f1;
+          background: var(--bl-n200-c);
+          border: 1px solid var(--bl-n200-c);
           border-radius: 2px;
           cursor: default;
           transition: font-size 0.3s, line-height 0.3s, height 0.3s;
@@ -234,7 +234,7 @@ defineComponent(
           text-overflow: ellipsis;
           font-size: 14px;
           font-weight: 400;
-          color: #1f2329;
+          color: var(--bl-n900-c);
         }
 
         .ant-select-multiple .ant-select-selection-item-remove {
@@ -253,7 +253,6 @@ defineComponent(
           cursor: pointer;
           display: inline-block;
           font-size: 12px;
-          font-size: 10px9;
           transform: scale(0.83333333) rotate(0deg);
         }
 
