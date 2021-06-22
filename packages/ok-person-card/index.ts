@@ -68,7 +68,7 @@ defineComponent('ok-person-card', { ...props }, (props, context) => {
 
           <footer class="person-detail-footer">
             <div class="content-wraper">
-              <div v-if="!personInfoCom.terminated && showTeam" class="item-row">
+              <div class="item-row">
                   <span class="item-label">{{langPack.team}}：</span>
                   <p v-if="!deptText || !deptText.length"> -- </p>
                   <a-tooltip v-else :overlayStyle="{'z-index': 9999}">

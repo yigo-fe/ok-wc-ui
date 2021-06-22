@@ -1,53 +1,4 @@
-
-// 品牌色
-@bl-brand-c: var(--bl-brand-c, #4C78FC);
-@bl-brand-hover: var(--bl-brand-hover, #658BFC);
-@bl-brand-active: var(--bl-brand-active, #4770ea);
-@bl-brand-disable: var(--bl-brand-disable, #bfcefe);
-@bl-brand-label: var(--bl-brand-label, rgba(76,120,252,0.1));
-
-// 辅助色
-@bl-n900: var(--bl-n900-c, #1F2329);
-@bl-n800: var(--bl-n800-c, #2B2F36);
-@bl-n600: var(--bl-n600-c, #646A73);
-@bl-n500: var(--bl-n500-c, #8F959E);
-@bl-n400: var(--bl-n400-c, #BBBFC4);
-@bl-n300: var(--bl-n300-c, #DEE0E3);
-@bl-n250: var(--bl-n250-c, #E8EAED);
-@bl-n200: var(--bl-n200-c, #EFF0F1);
-@bl-n150: var(--bl-n150-c, #F2F4F7);
-@bl-n100: var(--bl-n100-c, #FAFBFC);
-
-// 功能色
-@bl-success: var(--bl-success-c, #5ABB3C);
-@bl-warning: var(--bl-warning-c, #FF9801);
-@bl-danger: var(--bl-danger-c, #FF6459);
-@bl-success-light: var(--bl-success-light-c, #E9FAE5);
-@bl-warning-light: var(--bl-warning-light-c, #FFF6E5);
-@bl-danger-light: var(--bl-danger-light-c, #FFF0EF);
-
-// 其他固定色
-@bl-disable: var(--bl-disable, #f5f6f7);
-
-// 基础白色
-@ok-white-color: #fff;
-
-
-// 基础字体大小
-@ok-font-size-base: 14px;
-// 小字体大小
-@ok-font-size-small: 12px;
-// 大字体大小
-@ok-font-size-big: 18px;
-// 标题字体
-@ok-font-size-title: 16px;
-
-// 基础border-radius
-@ok-border-radius-base: 4px;
-@ok-border-radius-big: 4px;
-
-// 基础字重
-@ok-font-weight-bold: 500;
+@import url('./variable.less');
 
 // reset
 
@@ -83,52 +34,68 @@ a:active {
 
 /* 修改antd样式 */
 
-input.ant-select-selection-search-input {
-  caret-color: @bl-brand-c;
-}
+/* 修改ant-select样式 */
+.ok-employee-select-wraper,
+.ok-department-select-wraper {
+  /*  修改光标颜色 */
+  input.ant-select-selection-search-input {
+    caret-color: @bl-brand-c;
+  }
+  .ant-select {
+    /* 修改ant-select的border-radius */
+    .ant-select-selector {
+      border-radius: @ok-border-radius-base;
+    }
 
-/* 修改ant-select的border-radius */
-.ant-select.ant-select-multiple .ant-select-selector {
-  border-radius: @ok-border-radius-base;
-}
-/* 修改人员和部门选择placeholder宽度 */
-.ant-select.ant-select-multiple.ant-select-show-search .ant-select-selection-placeholder {
-  right: 30px;
-}
-/* 修改人员和部门focus样式 */
-.ok-department-select-root .ant-select-focused:not(.ant-select-disabled).ant-select-multiple .ant-select-selector,
-.ok-employee-select.ant-select-focused:not(.ant-select-disabled).ant-select-multiple .ant-select-selector{border-color:@bl-brand-c;-webkit-box-shadow:none;box-shadow:none}
+    /* 修改人员和部门选择placeholder宽度 */
+    .ant-select-selection-placeholder {
+      right: 30px;
+    }
 
-/* select hover样式 */
-.ant-select-multiple:not(.ant-select-disabled) .ant-select-selector:hover{border-color:@bl-brand-c;}
+    /* 已选tag样式 */
+    .ant-select-selection-item {
+      border-color: @bl-n200;
+      background: @bl-n200;
+    }
+
+    /* 修改人员和部门focus样式 */
+    &.ant-select-focused:not(.ant-select-disabled).ant-select-multiple .ant-select-selector {
+      border-color:@bl-brand-c;-webkit-box-shadow:none;box-shadow:none
+    }
+
+    /* 修改hover时border样式 */
+    &:not(.ant-select-disabled) .ant-select-selector:hover{border-color:@bl-brand-c;} 
+
+    /* disable时 selector的背景色 */
+    &.ant-select-disabled.ant-select-multiple .ant-select-selector {
+      background: @bl-disable;
+    }
+    /* disable时 tag的背景色 */
+    &.ant-select-disabled.ant-select-selection-item {
+      color: @bl-n600;
+      background: @ok-white-color;
+      border-color: @ok-white-color;
+    }
+
+    /* dropdown 最后一个选项，去掉下边框 */
+    .rc-virtual-list-holder-inner .ant-select-item-option:last-child .option-list-item {
+      border:0
+    }
+
+    /* dropdown 已选icon颜色 */
+    .ant-select-item-option-selected .anticon-check svg { fill: @bl-brand-c;}
+
+    /* 调整右侧搜索icon的位置 */
+    .ant-select-show-arrow .ant-select-arrow {pointer-events:auto;top:calc(50% - 7px);right:14px}
+  }
+}
 
 /* 人员和部门选择没有border-radius */
 .no-border-radius .ant-select .ant-select-selector {border-radius:0}
 
-/* 人员和部门选择 对勾颜色 */
-.userSelectDropdown .ant-select-item-option-selected .anticon-check svg,
-.ok-dept-select-dropdown .ant-select-item-option-selected .anticon-check svg { fill: @bl-brand-c;}
-
-.ant-select.ok-employee-select.ant-select-multiple .ant-select-selection-item,
-.ant-select.ok-department-select.ant-select-multiple .ant-select-selection-item {
-  border-color: @bl-n200;
-  background: @bl-n200;
-}
-
-.ant-select.ok-employee-select.ant-select-disabled.ant-select-multiple .ant-select-selector,
-.ant-select.ok-department-select.ant-select-disabled.ant-select-multiple .ant-select-selector {
-  background: @bl-disable;
-}
-
-.ant-select.ok-employee-select.ant-select-disabled.ant-select-multiple .ant-select-selection-item,
-.ant-select.ok-department-select.ant-select-disabled.ant-select-multiple .ant-select-selection-item {
-  color: @bl-n600;
-  background: @ok-white-color;
-  border-color: @ok-white-color;
-}
-
-.ant-select .rc-virtual-list-holder-inner .ant-select-item-option:last-child .option-list-item {
-  border:0
+/* 修改部门选择modal中，树父级与子集的间距 */
+.ok-tree-modal .ant-tree-child-tree > li:first-child {
+  padding-top: 0;
 }
 
 
@@ -356,7 +323,7 @@ input.ant-select-selection-search-input {
     height: 36px;
     line-height: 36px;
     max-width: 100%;
-    border-radius: 4px;
+    border-radius: @ok-border-radius-base;
     &.failed {
       background: @bl-danger-light;
       .ok-file-list__item_file_name {
@@ -545,33 +512,37 @@ input.ant-select-selection-search-input {
   }
 }
 
+
 // ok-progress
-.ok-progress-bar__outer {
-  height: 2px;
-  border-radius: 100px;
-  background-color: @bl-n250;
-  overflow: hidden;
-  position: relative;
-  vertical-align: middle;
-}
-.ok-progress-bar__inner {
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  background-color: @bl-brand-c;
-  text-align: right;
-  border-radius: 100px;
-  line-height: 1;
-  white-space: nowrap;
-  transition: width 0.6s ease;
-  &.success {
-    background-color: @bl-success;
+.ok-process-warp {
+
+  .ok-progress-bar__outer {
+    height: 2px;
+    border-radius: 100px;
+    background-color: @bl-n250;
+    overflow: hidden;
+    position: relative;
+    vertical-align: middle;
   }
-  &.fail {
+  .ok-progress-bar__inner {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background-color: @bl-brand-c;
+    text-align: right;
+    border-radius: 100px;
+    line-height: 1;
+    white-space: nowrap;
+    transition: width 0.6s ease;
+  }
+
+  &.fail .ok-progress-bar__inner{
     background-color: @bl-danger;
   }
+
 }
+
 
 /* ok-file-icon */
 .ok-file-icon-root{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex}
@@ -582,51 +553,55 @@ input.ant-select-selection-search-input {
 .ant-form-item-control.has-error .ok-upload-image-box {
   border-color: @bl-danger;
 }
-.ok-file-image-list {
-  font-size: 0;
-  vertical-align: top;
-}
+
 .ok-upload-image-box {
   display: inline-block;
   width: auto;
   margin-top: 8px;
   vertical-align: top;
-}
-.ok-upload-image-box.has-margin {
-  margin-right: 8px;
-}
-.ok-upload-image-box .ok-upload-image-inner {
-  box-sizing: border-box;
-  display: inline-block;
-  width: 100px;
-  height: 100px;
-  line-height: 98px;
-  vertical-align: top;
-  background-color: @bl-n150;
-  border: 1px solid @bl-n300;
-  border-radius: @ok-border-radius-base;
-  cursor: pointer;
-}
-.ok-upload-image-box .ok-upload-image-inner:hover {
-  border-color: @bl-brand-c;
-  .upload-img-icon path {
-    fill: @bl-brand-c;
+  &.has-margin {
+    margin-right: 8px;
   }
+
+  .ok-upload-image-inner {
+    box-sizing: border-box;
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    line-height: 98px;
+    vertical-align: top;
+    background-color: @bl-n150;
+    border: 1px solid @bl-n300;
+    border-radius: @ok-border-radius-base;
+    cursor: pointer;
+    &:hover {
+      border-color: @bl-brand-c;
+    }
+  
+  }
+
+  .upload-img-icon {
+    display: block;
+    text-align: center;
+    font-size: 40px;
+    height: 100%;
+    margin: 0 auto;
+    path {
+      fill: @bl-brand-c;
+    }
+  }
+
+  &.disabled .ok-upload-image-inner {
+    cursor: not-allowed;
+    background-color: @bl-n150;
+    border-color: @bl-n300;
+  }
+
 }
-.ok-upload-image-box.disabled .ok-upload-image-inner {
-  cursor: not-allowed;
-  background-color: @bl-n150;
-  border-color: @bl-n300;
-}
-.ok-upload-image-box .upload-img-icon {
-  display: block;
-  text-align: center;
-  font-size: 40px;
-  height: 100%;
-  margin: 0 auto;
-}
-.ok-upload-image-box .upload-img-icon path {
-  fill: @bl-n300;
+
+.ok-file-image-list {
+  font-size: 0;
+  vertical-align: top;
 }
 
 .ok-upload-list-image {
@@ -665,7 +640,7 @@ input.ant-select-selection-search-input {
 .ok-upload-list-image .ok-upload-list__item-actions {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -676,8 +651,11 @@ input.ant-select-selection-search-input {
   color: @ok-white-color;
   opacity: 0;
   font-size: 20px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
   transition: opacity 0.3s;
+  .operation-icon + .operation-icon {
+    margin-left: 12px;
+  }
 }
 .ok-upload-list-image .ok-upload-list__item-actions:hover {
   opacity: 1;
@@ -688,11 +666,12 @@ input.ant-select-selection-search-input {
 .ok-upload-list-image .image-process-wraper {
   width: 100%;
   text-align: center;
+  padding: 0 10px;
 }
 .ok-upload-list-image .image-progress {
   display: block;
   width: 100%;
-  margin-bottom: 10px;
+  margin-top: 10px;
 }
 .ok-upload-list-image .ok-process-wraper {
   position: absolute;
@@ -703,11 +682,27 @@ input.ant-select-selection-search-input {
   align-items: center;
 }
 .ok-upload-list-image .image-close-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
   cursor: pointer;
+  opacity: 0;
+}
+
+.ok-image-uploading:hover .image-close-btn {
+  opacity: 1;
 }
 .ok-upload-list-image .abort-icon path {
   fill: @bl-brand-c;
 }
+
+.ok-upload-list-image .ok-image-process-msg {
+  color: @bl-n500;
+  &.fail {
+    color: @bl-danger;
+  }
+}
+
 
 
 // 明细子表
@@ -789,7 +784,7 @@ input.ant-select-selection-search-input {
 }
 // modal content
 .ok-tree-modal .ant-modal-content {
-  border-radius: 8px;
+  border-radius: @ok-border-radius-big;
 }
 .ok-tree-modal .tree-content-wraper {
   display: flex;
@@ -1050,7 +1045,6 @@ input.ant-select-selection-search-input {
 .ant-select-selection-item .user-img__avatar__head{width:20px;height:20px;font-size:0}
 .ant-select-selection-item .selected-head-name-head{display:inline-block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;max-width:50px;margin-left:6px;font-size:14px;font-weight:400; color: @bl-n600;}
 .head-clear-icon,.head-search-icon{width:16px;height:16px}
-.ok-employee-select .ant-select-arrow{pointer-events:auto;top:44%;right:14px}
 .ok-employee-select .ant-select-selection-item-content {
   font-size: 14px;
   font-weight: 400;
@@ -1079,11 +1073,6 @@ input.ant-select-selection-search-input {
 .ok-department-select-root .head-clear-icon {
   width: 16px;
   height: 16px;
-}
-.ok-department-select-root .ok-department-select .ant-select-arrow {
-  pointer-events: auto;
-  top: 44%;
-  right: 14px;
 }
 
 // department modal

@@ -42,7 +42,8 @@
     "confirm": "はい",
     "cancel": "いいえ",
     "loading": "取組中",
-    "clear": "リセット"
+    "clear": "リセット",
+    "uploadFail": "アップデート失敗"
   },
   "placeholder": {
     "employeePlaceholder": "お名前、メールアドレス、社員番号を入力して下さい",

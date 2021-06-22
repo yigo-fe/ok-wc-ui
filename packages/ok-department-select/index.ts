@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:01:15
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-18 15:27:44
+ * @LastEditTime: 2021-06-22 15:03:58
  * @FilePath: /packages/ok-department-select/index.ts
  */
 import './ok-department-modal'
@@ -148,7 +148,7 @@ defineComponent(
         .ant-select-multiple .ant-select-selector {
           position: relative;
           background-color: #fff;
-          border: 1px solid var(--bl-n300-c);
+          border: 1px solid var(--bl-n300-c, #dee0e3);
           transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
           display: flex;
           flex-wrap: wrap;
@@ -157,12 +157,10 @@ defineComponent(
           border-radius: 4px;
           min-height: 28px;
         }
-
         .ant-select-multiple .ant-select-selection-search {
           position: relative;
           margin-left: 0.5px;
         }
-
         .ant-select-multiple .ant-select-selection-placeholder {
           position: absolute;
           top: 50%;
@@ -171,7 +169,6 @@ defineComponent(
           transform: translateY(-50%);
           transition: all 0.3s;
         }
-
         .ant-select-selection-placeholder {
           flex: 1;
           overflow: hidden;
@@ -179,8 +176,7 @@ defineComponent(
           white-space: nowrap;
           text-overflow: ellipsis;
         }
-
-        .ok-department-select-root .ok-department-select .ant-select-arrow {
+        .ant-select .ant-select-arrow {
           display: inline-block;
           color: inherit;
           font-style: normal;
@@ -202,7 +198,6 @@ defineComponent(
           top: calc(50% - 7px);
           right: 14px;
         }
-
         .ant-select-multiple .ant-select-selection-item {
           position: relative;
           display: flex;
@@ -215,8 +210,8 @@ defineComponent(
           margin-bottom: 2px;
           padding: 0 4px 0 8px;
           line-height: 22px;
-          background: var(--bl-n200-c);
-          border: 1px solid var(--bl-n200-c);
+          background: var(--bl-n200-c, #f5f7f7);
+          border: 1px solid var(--bl-n200-c, #f5f7f7);
           border-radius: 2px;
           cursor: default;
           transition: font-size 0.3s, line-height 0.3s, height 0.3s;
@@ -225,7 +220,6 @@ defineComponent(
           -ms-user-select: none;
           user-select: none;
         }
-
         .ant-select-multiple .ant-select-selection-item-content {
           display: inline-block;
           margin-right: 4px;
@@ -234,9 +228,8 @@ defineComponent(
           text-overflow: ellipsis;
           font-size: 14px;
           font-weight: 400;
-          color: var(--bl-n900-c);
+          color: var(--bl-n900-c, #1f2329);
         }
-
         .ant-select-multiple .ant-select-selection-item-remove {
           color: inherit;
           font-style: normal;
@@ -255,11 +248,9 @@ defineComponent(
           font-size: 12px;
           transform: scale(0.83333333) rotate(0deg);
         }
-
         .ant-select-disabled .ant-select-selection-item-remove {
           display: none;
         }
-
         .anticon {
           display: inline-block;
           color: inherit;
@@ -275,11 +266,9 @@ defineComponent(
         .ant-select-multiple .ant-select-selection-item-remove > .anticon {
           vertical-align: -0.2em;
         }
-
         .ant-select-multiple .ant-select-selection-item-remove > * {
           line-height: 1;
         }
-
         .ant-select-disabled.ant-select-multiple .ant-select-selector input {
           cursor: not-allowed;
         }
@@ -299,7 +288,6 @@ defineComponent(
           width: 100%;
           min-width: 4.1px;
         }
-
         .ant-select-multiple .ant-select-selection-search-mirror {
           position: absolute;
           top: 0;

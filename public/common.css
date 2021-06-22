@@ -24,54 +24,82 @@ a:active {
   margin-right: 10px;
 }
 /* 修改antd样式 */
-input.ant-select-selection-search-input {
+/* 修改ant-select样式 */
+.ok-employee-select-wraper,
+.ok-department-select-wraper {
+  /*  修改光标颜色 */
+}
+.ok-employee-select-wraper input.ant-select-selection-search-input,
+.ok-department-select-wraper input.ant-select-selection-search-input {
   caret-color: var(--bl-brand-c, #4C78FC);
 }
-/* 修改ant-select的border-radius */
-.ant-select.ant-select-multiple .ant-select-selector {
+.ok-employee-select-wraper .ant-select,
+.ok-department-select-wraper .ant-select {
+  /* 修改ant-select的border-radius */
+  /* 修改人员和部门选择placeholder宽度 */
+  /* 已选tag样式 */
+  /* 修改人员和部门focus样式 */
+  /* 修改hover时border样式 */
+  /* disable时 selector的背景色 */
+  /* disable时 tag的背景色 */
+  /* dropdown 最后一个选项，去掉下边框 */
+  /* dropdown 已选icon颜色 */
+  /* 调整右侧搜索icon的位置 */
+}
+.ok-employee-select-wraper .ant-select .ant-select-selector,
+.ok-department-select-wraper .ant-select .ant-select-selector {
   border-radius: 4px;
 }
-/* 修改人员和部门选择placeholder宽度 */
-.ant-select.ant-select-multiple.ant-select-show-search .ant-select-selection-placeholder {
+.ok-employee-select-wraper .ant-select .ant-select-selection-placeholder,
+.ok-department-select-wraper .ant-select .ant-select-selection-placeholder {
   right: 30px;
 }
-/* 修改人员和部门focus样式 */
-.ok-department-select-root .ant-select-focused:not(.ant-select-disabled).ant-select-multiple .ant-select-selector,
-.ok-employee-select.ant-select-focused:not(.ant-select-disabled).ant-select-multiple .ant-select-selector {
+.ok-employee-select-wraper .ant-select .ant-select-selection-item,
+.ok-department-select-wraper .ant-select .ant-select-selection-item {
+  border-color: var(--bl-n200-c, #EFF0F1);
+  background: var(--bl-n200-c, #EFF0F1);
+}
+.ok-employee-select-wraper .ant-select.ant-select-focused:not(.ant-select-disabled).ant-select-multiple .ant-select-selector,
+.ok-department-select-wraper .ant-select.ant-select-focused:not(.ant-select-disabled).ant-select-multiple .ant-select-selector {
   border-color: var(--bl-brand-c, #4C78FC);
   -webkit-box-shadow: none;
   box-shadow: none;
 }
-/* select hover样式 */
-.ant-select-multiple:not(.ant-select-disabled) .ant-select-selector:hover {
+.ok-employee-select-wraper .ant-select:not(.ant-select-disabled) .ant-select-selector:hover,
+.ok-department-select-wraper .ant-select:not(.ant-select-disabled) .ant-select-selector:hover {
   border-color: var(--bl-brand-c, #4C78FC);
+}
+.ok-employee-select-wraper .ant-select.ant-select-disabled.ant-select-multiple .ant-select-selector,
+.ok-department-select-wraper .ant-select.ant-select-disabled.ant-select-multiple .ant-select-selector {
+  background: var(--bl-disable-c, #f5f6f7);
+}
+.ok-employee-select-wraper .ant-select.ant-select-disabled.ant-select-selection-item,
+.ok-department-select-wraper .ant-select.ant-select-disabled.ant-select-selection-item {
+  color: var(--bl-n600-c, #646A73);
+  background: #fff;
+  border-color: #fff;
+}
+.ok-employee-select-wraper .ant-select .rc-virtual-list-holder-inner .ant-select-item-option:last-child .option-list-item,
+.ok-department-select-wraper .ant-select .rc-virtual-list-holder-inner .ant-select-item-option:last-child .option-list-item {
+  border: 0;
+}
+.ok-employee-select-wraper .ant-select .ant-select-item-option-selected .anticon-check svg,
+.ok-department-select-wraper .ant-select .ant-select-item-option-selected .anticon-check svg {
+  fill: var(--bl-brand-c, #4C78FC);
+}
+.ok-employee-select-wraper .ant-select .ant-select-show-arrow .ant-select-arrow,
+.ok-department-select-wraper .ant-select .ant-select-show-arrow .ant-select-arrow {
+  pointer-events: auto;
+  top: calc(50% - 7px);
+  right: 14px;
 }
 /* 人员和部门选择没有border-radius */
 .no-border-radius .ant-select .ant-select-selector {
   border-radius: 0;
 }
-/* 人员和部门选择 对勾颜色 */
-.userSelectDropdown .ant-select-item-option-selected .anticon-check svg,
-.ok-dept-select-dropdown .ant-select-item-option-selected .anticon-check svg {
-  fill: var(--bl-brand-c, #4C78FC);
-}
-.ant-select.ok-employee-select.ant-select-multiple .ant-select-selection-item,
-.ant-select.ok-department-select.ant-select-multiple .ant-select-selection-item {
-  border-color: var(--bl-n200-c, #EFF0F1);
-  background: var(--bl-n200-c, #EFF0F1);
-}
-.ant-select.ok-employee-select.ant-select-disabled.ant-select-multiple .ant-select-selector,
-.ant-select.ok-department-select.ant-select-disabled.ant-select-multiple .ant-select-selector {
-  background: var(--bl-disable, #f5f6f7);
-}
-.ant-select.ok-employee-select.ant-select-disabled.ant-select-multiple .ant-select-selection-item,
-.ant-select.ok-department-select.ant-select-disabled.ant-select-multiple .ant-select-selection-item {
-  color: var(--bl-n600-c, #646A73);
-  background: #fff;
-  border-color: #fff;
-}
-.ant-select .rc-virtual-list-holder-inner .ant-select-item-option:last-child .option-list-item {
-  border: 0;
+/* 修改部门选择modal中，树父级与子集的间距 */
+.ok-tree-modal .ant-tree-child-tree > li:first-child {
+  padding-top: 0;
 }
 /* ok-avatar */
 .ok-avatar-root {
@@ -449,7 +477,7 @@ input.ant-select-selection-search-input {
   display: flex;
   align-items: center;
 }
-.ok-progress-bar__outer {
+.ok-process-warp .ok-progress-bar__outer {
   height: 2px;
   border-radius: 100px;
   background-color: var(--bl-n250-c, #E8EAED);
@@ -457,7 +485,7 @@ input.ant-select-selection-search-input {
   position: relative;
   vertical-align: middle;
 }
-.ok-progress-bar__inner {
+.ok-process-warp .ok-progress-bar__inner {
   position: absolute;
   left: 0;
   top: 0;
@@ -469,10 +497,7 @@ input.ant-select-selection-search-input {
   white-space: nowrap;
   transition: width 0.6s ease;
 }
-.ok-progress-bar__inner.success {
-  background-color: var(--bl-success-c, #5ABB3C);
-}
-.ok-progress-bar__inner.fail {
+.ok-process-warp.fail .ok-progress-bar__inner {
   background-color: var(--bl-danger-c, #FF6459);
 }
 /* ok-file-icon */
@@ -491,10 +516,6 @@ input.ant-select-selection-search-input {
 /* ok-image */
 .ant-form-item-control.has-error .ok-upload-image-box {
   border-color: var(--bl-danger-c, #FF6459);
-}
-.ok-file-image-list {
-  font-size: 0;
-  vertical-align: top;
 }
 .ok-upload-image-box {
   display: inline-block;
@@ -520,14 +541,6 @@ input.ant-select-selection-search-input {
 .ok-upload-image-box .ok-upload-image-inner:hover {
   border-color: var(--bl-brand-c, #4C78FC);
 }
-.ok-upload-image-box .ok-upload-image-inner:hover .upload-img-icon path {
-  fill: var(--bl-brand-c, #4C78FC);
-}
-.ok-upload-image-box.disabled .ok-upload-image-inner {
-  cursor: not-allowed;
-  background-color: var(--bl-n150-c, #F2F4F7);
-  border-color: var(--bl-n300-c, #DEE0E3);
-}
 .ok-upload-image-box .upload-img-icon {
   display: block;
   text-align: center;
@@ -536,7 +549,16 @@ input.ant-select-selection-search-input {
   margin: 0 auto;
 }
 .ok-upload-image-box .upload-img-icon path {
-  fill: var(--bl-n300-c, #DEE0E3);
+  fill: var(--bl-brand-c, #4C78FC);
+}
+.ok-upload-image-box.disabled .ok-upload-image-inner {
+  cursor: not-allowed;
+  background-color: var(--bl-n150-c, #F2F4F7);
+  border-color: var(--bl-n300-c, #DEE0E3);
+}
+.ok-file-image-list {
+  font-size: 0;
+  vertical-align: top;
 }
 .ok-upload-list-image {
   display: inline;
@@ -573,7 +595,7 @@ input.ant-select-selection-search-input {
 .ok-upload-list-image .ok-upload-list__item-actions {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -584,8 +606,11 @@ input.ant-select-selection-search-input {
   color: #fff;
   opacity: 0;
   font-size: 20px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
   transition: opacity 0.3s;
+}
+.ok-upload-list-image .ok-upload-list__item-actions .operation-icon + .operation-icon {
+  margin-left: 12px;
 }
 .ok-upload-list-image .ok-upload-list__item-actions:hover {
   opacity: 1;
@@ -596,11 +621,12 @@ input.ant-select-selection-search-input {
 .ok-upload-list-image .image-process-wraper {
   width: 100%;
   text-align: center;
+  padding: 0 10px;
 }
 .ok-upload-list-image .image-progress {
   display: block;
   width: 100%;
-  margin-bottom: 10px;
+  margin-top: 10px;
 }
 .ok-upload-list-image .ok-process-wraper {
   position: absolute;
@@ -611,10 +637,23 @@ input.ant-select-selection-search-input {
   align-items: center;
 }
 .ok-upload-list-image .image-close-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
   cursor: pointer;
+  opacity: 0;
+}
+.ok-image-uploading:hover .image-close-btn {
+  opacity: 1;
 }
 .ok-upload-list-image .abort-icon path {
   fill: var(--bl-brand-c, #4C78FC);
+}
+.ok-upload-list-image .ok-image-process-msg {
+  color: var(--bl-n500-c, #8F959E);
+}
+.ok-upload-list-image .ok-image-process-msg.fail {
+  color: var(--bl-danger-c, #FF6459);
 }
 .upload-btn-box-subtable {
   box-sizing: border-box;
@@ -955,11 +994,6 @@ input.ant-select-selection-search-input {
   width: 16px;
   height: 16px;
 }
-.ok-employee-select .ant-select-arrow {
-  pointer-events: auto;
-  top: 44%;
-  right: 14px;
-}
 .ok-employee-select .ant-select-selection-item-content {
   font-size: 14px;
   font-weight: 400;
@@ -986,11 +1020,6 @@ input.ant-select-selection-search-input {
 .ok-department-select-root .head-clear-icon {
   width: 16px;
   height: 16px;
-}
-.ok-department-select-root .ok-department-select .ant-select-arrow {
-  pointer-events: auto;
-  top: 44%;
-  right: 14px;
 }
 .dept-tree-content-wraper .tree-item-icon {
   width: 18px;

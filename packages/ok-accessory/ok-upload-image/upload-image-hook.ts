@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-19 01:13:31
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-19 21:21:26
+ * @LastEditTime: 2021-06-22 14:49:23
  * @FilePath: /packages/ok-accessory/ok-upload-image/upload-image-hook.ts
  */
 
@@ -80,7 +80,13 @@ export default function (props, context) {
     handleDownload,
     handleAbort,
     handleRemoveFileList,
+    reupload,
   } = useUploadHandler(props, context, config)
+
+  // 重新上传
+  const handleReupload = (e: CustomEvent) => {
+    reupload(e.detail)
+  }
 
   return {
     showPreview,
@@ -96,5 +102,6 @@ export default function (props, context) {
     handleDownload,
     handleAbort,
     handleRemoveFileList,
+    handleReupload,
   }
 }

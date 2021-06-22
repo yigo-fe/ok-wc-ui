@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-03 10:56:25
+ * @LastEditTime: 2021-06-18 19:06:41
  * @FilePath: /packages/ok-accessory/ok-upload-drag/ok-file-list.ts
  */
 
@@ -11,6 +11,7 @@ import { classMap } from 'lit-html/directives/class-map'
 import { styleMap } from 'lit-html/directives/style-map'
 import { defineComponent, html, PropType } from 'ok-lit'
 
+import { i18n } from '../../locales'
 import { COMMON_CSS_PATH } from '../../path.config'
 import type { ListType, UploadFile } from '../upload.type'
 import { getFileType } from '../utils'
@@ -79,6 +80,8 @@ defineComponent(
       context.emit('reupload', file.raw)
     }
 
+    const uploadFailText = i18n.$t('common.uploadFail', '上传失败')
+
     // 上传中： 展示上传进度百分比及终止上传按钮
     const renderUploading = (item: UploadFile) => {
       if (item.status === 'uploading') {
@@ -109,7 +112,7 @@ defineComponent(
       } else if (item.status === 'fail') {
         return html`
           <div>
-            <span class="fail-text">上传失败</span>
+            <span class="fail-text">${uploadFailText}</span>
             <span class="reupload-btn" @click=${() => reupload(item)}>
               <svg
                 t="1622688547794"

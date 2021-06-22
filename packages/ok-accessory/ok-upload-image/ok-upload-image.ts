@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-28 13:51:06
+ * @LastEditTime: 2021-06-21 16:52:13
  * @FilePath: /packages/ok-accessory/ok-upload-image/ok-upload-image.ts
  */
 
@@ -43,6 +43,7 @@ defineComponent(
       handleDownload,
       handleAbort,
       handleRemoveFileList,
+      handleReupload,
     } = useImageHandle(props, context)
 
     const maxImgCount = ref(1)
@@ -146,6 +147,7 @@ defineComponent(
           @download=${handleDownload}
           @abort=${handleAbort}
           @remove=${handleRemoveFileList}
+          @reupload=${handleReupload}
           style=${styleMap(props.imageStyle)}
           .fileList=${fileLists.value}
           .listType=${props.listType}
