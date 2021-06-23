@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 16:58:26
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-17 18:10:02
+ * @LastEditTime: 2021-06-23 14:50:08
  * @FilePath: /packages/services/api.ts
  */
 
@@ -26,7 +26,7 @@ const personcardURL =
 
 // 图片预览
 const sourceHost =
-  process.env.NODE_ENV === 'development' || window.okuiConfig.env === 'DEV'
+  process.env.NODE_ENV === 'development' || window.okuiConfig?.env === 'DEV'
     ? 'https://test.baiteda.com'
     : window.okuiConfig?.sourceHost || window.location.origin
 

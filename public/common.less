@@ -93,10 +93,24 @@ a:active {
 /* 人员和部门选择没有border-radius */
 .no-border-radius .ant-select .ant-select-selector {border-radius:0}
 
-/* 修改部门选择modal中，树父级与子集的间距 */
-.ok-tree-modal .ant-tree-child-tree > li:first-child {
-  padding-top: 0;
+.ok-tree-modal {
+  
+  .ant-modal-close-x {
+    width: 50px;
+    height: 50px;
+    padding: 15px 24px 0 0;
+    line-height: 1;
+    text-align: right;
+  }
+
+  /* 修改部门选择modal中，树父级与子集的间距 */
+  .ant-tree-child-tree > li:first-child {
+    padding-top: 0;
+  }
+
 }
+
+
 
 
 /* ok-avatar */
@@ -771,9 +785,10 @@ a:active {
 /* 人员选择modal, 人员选择modal样式 公用样式 */
 // modal header
 .ok-tree-modal .ant-modal-header {
-  padding: 14px 24px;
+  padding: 16px 24px;
   background-color: @bl-brand-c;
   border: 0;
+  border-radius: 8px 8px 0 0;
 }
 // modal title
 .ok-tree-modal .ant-modal-title {
@@ -1167,3 +1182,6 @@ a:active {
 .ok-person-detail .item-row>.item-label{-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;margin-right:6px;color:@bl-n500}
 .ok-person-detail .item-row>.item-content{display:inline-block;color:@bl-n900;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}p{margin:0;padding:0}
 .ok-person-detail .btn-wraper{padding:0 14px 14px}
+
+// tippy animation
+.tippy-box[data-animation=scale][data-placement^=top]{transform-origin:bottom}.tippy-box[data-animation=scale][data-placement^=bottom]{transform-origin:top}.tippy-box[data-animation=scale][data-placement^=left]{transform-origin:right}.tippy-box[data-animation=scale][data-placement^=right]{transform-origin:left}.tippy-box[data-animation=scale][data-state=hidden]{transform:scale(.5);opacity:0}

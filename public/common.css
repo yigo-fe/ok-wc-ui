@@ -56,8 +56,8 @@ a:active {
 }
 .ok-employee-select-wraper .ant-select .ant-select-selection-item,
 .ok-department-select-wraper .ant-select .ant-select-selection-item {
-  border-color: var(--bl-n200-c, #EFF0F1);
-  background: var(--bl-n200-c, #EFF0F1);
+  border-color: var(--bl-n200-c, #F5F7F7);
+  background: var(--bl-n200-c, #F5F7F7);
 }
 .ok-employee-select-wraper .ant-select.ant-select-focused:not(.ant-select-disabled).ant-select-multiple .ant-select-selector,
 .ok-department-select-wraper .ant-select.ant-select-focused:not(.ant-select-disabled).ant-select-multiple .ant-select-selector {
@@ -97,7 +97,16 @@ a:active {
 .no-border-radius .ant-select .ant-select-selector {
   border-radius: 0;
 }
-/* 修改部门选择modal中，树父级与子集的间距 */
+.ok-tree-modal {
+  /* 修改部门选择modal中，树父级与子集的间距 */
+}
+.ok-tree-modal .ant-modal-close-x {
+  width: 50px;
+  height: 50px;
+  padding: 15px 24px 0 0;
+  line-height: 1;
+  text-align: right;
+}
 .ok-tree-modal .ant-tree-child-tree > li:first-child {
   padding-top: 0;
 }
@@ -304,7 +313,7 @@ a:active {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: var(--bl-n200-c, #EFF0F1);
+  background: var(--bl-n200-c, #F5F7F7);
   padding-left: 8px;
   padding-right: 8px;
   height: 36px;
@@ -377,7 +386,7 @@ a:active {
   background-color: #fff;
 }
 .ok-file-list-box.is-subtable .item-detail:hover {
-  background-color: var(--bl-n200-c, #EFF0F1);
+  background-color: var(--bl-n200-c, #F5F7F7);
 }
 .ok-file-list-box.is-subtable .ok-file-list__item + .ok-file-list__item {
   margin-top: 2px;
@@ -711,9 +720,10 @@ a:active {
 }
 /* 人员选择modal, 人员选择modal样式 公用样式 */
 .ok-tree-modal .ant-modal-header {
-  padding: 14px 24px;
+  padding: 16px 24px;
   background-color: var(--bl-brand-c, #4C78FC);
   border: 0;
+  border-radius: 8px 8px 0 0;
 }
 .ok-tree-modal .ant-modal-title {
   font-weight: 500;
@@ -740,7 +750,7 @@ a:active {
 }
 .ok-tree-modal .tree-search .ant-input-affix-wrapper {
   border: 0;
-  background: var(--bl-n200-c, #EFF0F1);
+  background: var(--bl-n200-c, #F5F7F7);
   border-radius: 4px;
 }
 .ok-tree-modal .tree-search .ant-input-affix-wrapper:focus {
@@ -748,7 +758,7 @@ a:active {
   border-color: var(--bl-brand-c, #4C78FC);
 }
 .ok-tree-modal .tree-search .ant-input-affix-wrapper input {
-  background: var(--bl-n200-c, #EFF0F1);
+  background: var(--bl-n200-c, #F5F7F7);
 }
 .ok-tree-modal .tree-search-icon {
   width: 18px;
@@ -874,7 +884,7 @@ a:active {
 .ok-employee-more .more-item {
   display: flex;
   align-items: center;
-  background: var(--bl-n200-c, #EFF0F1);
+  background: var(--bl-n200-c, #F5F7F7);
   margin: 3px 4px 3px 0;
   flex-shrink: 0;
   padding: 0 8px 0 2px;
@@ -1268,4 +1278,20 @@ p {
 }
 .ok-person-detail .btn-wraper {
   padding: 0 14px 14px;
+}
+.tippy-box[data-animation=scale][data-placement^=top] {
+  transform-origin: bottom;
+}
+.tippy-box[data-animation=scale][data-placement^=bottom] {
+  transform-origin: top;
+}
+.tippy-box[data-animation=scale][data-placement^=left] {
+  transform-origin: right;
+}
+.tippy-box[data-animation=scale][data-placement^=right] {
+  transform-origin: left;
+}
+.tippy-box[data-animation=scale][data-state=hidden] {
+  transform: scale(0.5);
+  opacity: 0;
 }
