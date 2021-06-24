@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-24 20:58:01
+ * @LastEditTime: 2021-06-24 21:55:23
  * @FilePath: /packages/ok-accessory/upload-base-hook.ts
  */
 
@@ -71,6 +71,8 @@ export default function (props, context, config) {
   const showRemove = computed(() => props.operation.includes('remove'))
   const hideUploader = computed(() => props.hideUploader)
   const disabled = computed(() => props.disabled)
+
+  const isUploading = ref(false)
 
   // 所有已上传文件 file_id 和 file 的map
   const fileMap = reactive({})
@@ -157,6 +159,7 @@ export default function (props, context, config) {
   }
 
   const post = (rawFile: OkFile) => {
+    isUploading.value = true
     const { uid } = rawFile
     const options = {
       headers: props.headers,
@@ -237,6 +240,12 @@ export default function (props, context, config) {
       props.onSuccess({ response: res, file, fileLists: fileLists.value })
     // 更新value
     props.update && props.update({ file, fileLists: fileLists.value })
+
+    // 判断是否全部上传完毕
+    const idx = fileLists.value.findIndex(
+      (v: any) => v.status !== 'success' && v.status !== 'fail'
+    )
+    isUploading.value = idx > -1
   }
 
   const handleError = (err, file: OkFile) => {
@@ -372,6 +381,7 @@ export default function (props, context, config) {
         response: { data: [file] },
       })
       fileId++
+
       // 存储文件信息
       fileMap[file_id] = file
     })
@@ -404,6 +414,8 @@ export default function (props, context, config) {
   watch(
     () => propsValue.value,
     (val, oldVal) => {
+      // 如果正在上传，不处理
+      if (isUploading.value) return
       // 有时val和oldValue一样也会触发，具体原因待排查
       if (isSameArray(val, oldVal)) return
 
