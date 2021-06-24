@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-24 20:06:16
+ * @LastEditTime: 2021-06-24 20:58:01
  * @FilePath: /packages/ok-accessory/upload-base-hook.ts
  */
 
@@ -54,7 +54,17 @@ export default function (props, context, config) {
   const reqs = ref({})
   let fileId = 0
   const fileLists = ref([] as any)
-  const propsValue = computed(() => props.fileList)
+  // const propsValue = computed(() => props.fileList)
+  // 兼容字符串和数组类型数据
+  const propsValue = computed(() => {
+    if (!props.fileList) {
+      return []
+    } else {
+      return Array.isArray(props.fileList)
+        ? props.fileList
+        : props.fileList.split(',')
+    }
+  })
 
   const showPreview = computed(() => props.operation.includes('preview'))
   const showDownload = computed(() => props.operation.includes('download'))
@@ -368,7 +378,7 @@ export default function (props, context, config) {
   }
 
   // 获取默认列表
-  const handleDefaultlist = async (ids: string) => {
+  const handleDefaultlist = async (ids: string[]) => {
     const result = await config.getDefaultFileList(ids)
     if (result.code === '000000') {
       displayFileList(result.data)
@@ -399,13 +409,10 @@ export default function (props, context, config) {
 
       // 如果propsValue 和fileList 一样， 不做处理
       if (propsValEqulValue()) return
-
-      const ids = props.fileList
-
-      // ids.length ? handleDefaultlist(ids) : (fileLists.value = [])
-
+      // 清空之前的数据
       fileLists.value = []
-      ids.length && handleDefaultlist(ids)
+      // 判断是否需要有id, 如果有， 请求详细信息
+      propsValue.value.length && handleDefaultlist(propsValue.value)
     },
     {
       immediate: true,
