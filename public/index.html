@@ -452,6 +452,8 @@
       // okPersonCard.personInfo = personInfo
 
       const okUpload = document.querySelector('ok-upload-drag')
+      okUpload.fileList = ['06f57061e26e9602aea9b2cd75c43fb6', '59a76191dd3615f76b3d8886974c2977','f40aa3c1d31d71360e4a8b999f61bf18']
+
       okUpload.multiple = true
       okUpload.noBorder = true
       // okUpload.data = uploadData
@@ -479,7 +481,7 @@
       // okUploadSubtable.disabled = true
       // okUploadSubtable.operation = []
       // okUploadSubtable.hideUploader = true
-      okUploadSubtable.fileList = ['4f48e4389ae229fa5e8eb88dd1efee7b', '5cb3d50074108e6263d97df9007c9853']
+      // okUploadSubtable.fileList = ['4f48e4389ae229fa5e8eb88dd1efee7b', '5cb3d50074108e6263d97df9007c9853']
       okUploadSubtable.update = (data)=>{
         console.log('file', data)
       }
@@ -492,7 +494,7 @@
       // okUploadSubtableImage.disabled = true
       // okUploadSubtableImage.operation = []
       // okUploadSubtableImage.hideUploader = true
-      okUploadSubtableImage.fileList = ['4f48e4389ae229fa5e8eb88dd1efee7b', '5cb3d50074108e6263d97df9007c9853']
+      // okUploadSubtableImage.fileList = ['4f48e4389ae229fa5e8eb88dd1efee7b', '5cb3d50074108e6263d97df9007c9853']
       // 4f48e4389ae229fa5e8eb88dd1efee7b
       // 5cb3d50074108e6263d97df9007c9853
       okUploadSubtableImage.update = (data)=>{
@@ -513,6 +515,8 @@
 
 
       const okUploadImg = document.querySelector('ok-upload-image')
+            okUploadImg.fileList = ['26c9539a561c07b97be33d98b6192612', '3d6115453d70478c771ff08a0a9a6eb5','dc703ce0060b2e264c7032b5852f5a1e']
+
       // okUploadImg.action = actionImg
       okUploadImg.multiple = true
       // okUploadImg.limit = 3
@@ -664,8 +668,12 @@
     }
 
     function testClick (){
-      const el = document.getElementById('test');
-      el.style.display = 'block'
+      const okUploadImg = document.querySelector('ok-upload-image')
+            okUploadImg.fileList = ['3d6115453d70478c771ff08a0a9a6eb5']
+
+
+      // const el = document.getElementById('test');
+      // el.style.display = 'block'
 
       // gallery.show()
       // setTimeout(()=>{
@@ -696,8 +704,13 @@
     }
 
     function testClick2 (){
-      const okEmployeeInput = document.querySelector('.ok-employee-input')
-      okEmployeeInput.value = ['FuJing']
+      const okUpload = document.querySelector('ok-upload-drag')
+      okUpload.fileList = ['06f57061e26e9602aea9b2cd75c43fb6', 'f40aa3c1d31d71360e4a8b999f61bf18']
+
+
+
+      // const okEmployeeInput = document.querySelector('.ok-employee-input')
+      // okEmployeeInput.value = ['FuJing']
 
       // const okEmployeeTree = document.querySelector('.ok-employee-tree')
       // okEmployeeTree.value = []
@@ -709,14 +722,18 @@
       // const okDeptInput = document.querySelector('.ok-department-input')
       // okDeptInput.value = []
 
-      personList.push({
 
-      })
 
     }
 
 
     function testClick3 (){
+
+ 
+
+
+
+
       // const okDrawer = document.querySelector('ok-drawer')
       // okDrawer.visible = true
       // okDrawer.close = ()=>{

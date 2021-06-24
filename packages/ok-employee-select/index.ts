@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-22 15:03:41
+ * @LastEditTime: 2021-06-24 20:05:01
  * @FilePath: /packages/ok-employee-select/index.ts
  */
 
@@ -330,6 +330,7 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
       })}
       style=${styleMap({
         height: '100%',
+        'line-height': '1',
         width: `${props.width && props.width}`,
       })}
     ></div>

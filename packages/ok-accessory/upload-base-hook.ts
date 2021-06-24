@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-02 21:08:57
+ * @LastEditTime: 2021-06-24 20:06:16
  * @FilePath: /packages/ok-accessory/upload-base-hook.ts
  */
 
@@ -351,19 +351,18 @@ export default function (props, context, config) {
   const displayFileList = (defaultFileList: any) => {
     defaultFileList.forEach(file => {
       const file_id = file.file_id
-      // 判断文件是否已在fileList中
-      if (!fileMap[file_id]) {
-        fileLists.value.push({
-          name: file.file_name,
-          percentage: 100,
-          status: 'success',
-          size: file.size,
-          uid: fileId,
-          raw: file,
-          response: { data: [file] },
-        })
-        fileId++
-      }
+      // 更新fileList展示
+      fileLists.value.push({
+        name: file.file_name,
+        percentage: 100,
+        status: 'success',
+        size: file.size,
+        uid: fileId,
+        raw: file,
+        response: { data: [file] },
+      })
+      fileId++
+      // 存储文件信息
       fileMap[file_id] = file
     })
   }
@@ -402,7 +401,11 @@ export default function (props, context, config) {
       if (propsValEqulValue()) return
 
       const ids = props.fileList
-      ids.length ? handleDefaultlist(ids) : (fileLists.value = [])
+
+      // ids.length ? handleDefaultlist(ids) : (fileLists.value = [])
+
+      fileLists.value = []
+      ids.length && handleDefaultlist(ids)
     },
     {
       immediate: true,
