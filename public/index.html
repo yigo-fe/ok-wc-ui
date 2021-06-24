@@ -463,11 +463,11 @@
         console.log('附件超出了')
       }
       okUpload.update = (data)=>{
-        const fileIds = data.fileLists
-                              .map((v) => v.response?.data?.[0]?.file_id)
-                              .filter((v) => v)
-        console.log('okUpload - update', fileIds)
-        okUpload.fileList = fileIds
+        // const fileIds = data.fileLists
+        //                       .map((v) => v.response?.data?.[0]?.file_id)
+        //                       .filter((v) => v)
+        // console.log('okUpload - update', fileIds)
+        // okUpload.fileList = fileIds
 
       }
 
@@ -543,11 +543,11 @@
 
 
       okUploadImg.update = (data)=>{
-        const fileIds = data.fileLists
-                          .map((v) => v.response?.data?.[0]?.file_id)
-                          .filter((v) => v)
-        console.log('okUploadImg - update', fileIds)
-        okUploadImg.fileList = fileIds
+        // const fileIds = data.fileLists
+        //                   .map((v) => v.response?.data?.[0]?.file_id)
+        //                   .filter((v) => v)
+        // console.log('okUploadImg - update', fileIds)
+        // okUploadImg.fileList = fileIds
 
       }
 
