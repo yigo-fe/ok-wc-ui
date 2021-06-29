@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:02:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-31 18:09:44
+ * @LastEditTime: 2021-06-29 17:32:26
  * @FilePath: /packages/ok-department-select/department-props.ts
  */
 import { PropType } from 'ok-lit'
@@ -30,6 +30,11 @@ const propsOptions = {
   hasBorderRadius: {
     type: Boolean as unknown as PropType<boolean>,
     default: true,
+  },
+  // 设置border-radius， 默认all, 可设置 left, right, none
+  borderRadius: {
+    type: String as unknown as PropType<string>,
+    default: 'all',
   },
   multiple: {
     type: Boolean as unknown as PropType<boolean>,

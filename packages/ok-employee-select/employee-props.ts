@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-20 14:56:24
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-02 16:34:05
+ * @LastEditTime: 2021-06-29 17:27:55
  * @FilePath: /packages/ok-employee-select/employee-props.ts
  */
 
@@ -38,6 +38,11 @@ const propsOptions = {
   hasBorderRadius: {
     type: Boolean as unknown as PropType<boolean>,
     default: true,
+  },
+  // 设置border-radius， 默认all, 可设置 left, right, none
+  borderRadius: {
+    type: String as unknown as PropType<string>,
+    default: 'all',
   },
   multiple: {
     type: Boolean as unknown as PropType<boolean>,

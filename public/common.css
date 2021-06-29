@@ -97,6 +97,15 @@ a:active {
 .no-border-radius .ant-select .ant-select-selector {
   border-radius: 0;
 }
+.border-radius-left .ant-select .ant-select-selector {
+  border-radius: 4px 0 0 4px;
+}
+.border-radius-right .ant-select .ant-select-selector {
+  border-radius: 0 4px 4px 0;
+}
+.border-radius-none .ant-select .ant-select-selector {
+  border-radius: 0;
+}
 .ok-tree-modal {
   /* 修改部门选择modal中，树父级与子集的间距 */
 }
@@ -249,7 +258,7 @@ a:active {
   min-height: 160px;
   padding: 34px 40px;
   box-sizing: border-box;
-  background-color: var(--bl-n150-c, #F2F4F7);
+  background-color: var(--bl-n100-c, #FAFBFC);
   color: var(--bl-n900-c, #1F2329);
   font-size: 14px;
   border: 1px solid var(--bl-n300-c, #DEE0E3);
@@ -257,9 +266,10 @@ a:active {
 }
 .upload-inner:hover {
   border-color: var(--bl-brand-c, #4C78FC);
+  background-color: var(--bl-n200-c, #F5F7F7);
 }
 .upload-inner.dragover {
-  background-color: var(--bl-brand-label, rgba(76, 120, 252, 0.1));
+  background-color: var(--bl-brand-label, #EBF1FF);
   border: 1px dashed var(--bl-brand-c, #4C78FC);
 }
 .upload-inner svg path {
@@ -313,7 +323,7 @@ a:active {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: var(--bl-n200-c, #F5F7F7);
+  background: var(--bl-n150-c, #F2F4F7);
   padding-left: 8px;
   padding-right: 8px;
   height: 36px;
@@ -542,13 +552,14 @@ a:active {
   height: 100px;
   line-height: 98px;
   vertical-align: top;
-  background-color: var(--bl-n150-c, #F2F4F7);
+  background-color: var(--bl-n100-c, #FAFBFC);
   border: 1px solid var(--bl-n300-c, #DEE0E3);
   border-radius: 4px;
   cursor: pointer;
 }
 .ok-upload-image-box .ok-upload-image-inner:hover {
   border-color: var(--bl-brand-c, #4C78FC);
+  background-color: var(--bl-n200-c, #F5F7F7);
 }
 .ok-upload-image-box .upload-img-icon {
   display: block;
@@ -1227,7 +1238,7 @@ a:active {
   vertical-align: middle;
 }
 .ok-person-detail .person-detail-button {
-  background: var(--bl-brand-label, rgba(76, 120, 252, 0.1));
+  background: var(--bl-brand-label, #EBF1FF);
   border-radius: 4px;
   border: none;
   padding: 3px 2px;

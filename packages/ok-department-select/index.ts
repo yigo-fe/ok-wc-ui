@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:01:15
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-22 15:03:58
+ * @LastEditTime: 2021-06-29 17:37:16
  * @FilePath: /packages/ok-department-select/index.ts
  */
 import './ok-department-modal'
@@ -303,6 +303,9 @@ defineComponent(
           'ok-department-select-wraper': true,
           'ok-department-select-root': true,
           'no-border-radius': !props.hasBorderRadius,
+          'border-radius-left': props.borderRadius === 'left',
+          'border-radius-right': props.borderRadius === 'right',
+          'border-radius-none': props.borderRadius === 'none',
         })}
       ></div>
     `
