@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 15:16:57
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-11 15:03:24
+ * @LastEditTime: 2021-06-25 18:07:02
  * @FilePath: /packages/ok-employee-select/hook.ts
  */
 import { debounce } from 'lodash'
@@ -59,6 +59,8 @@ export default function (props: any, context: any, okEmployeeInput: any) {
   const maxTagCount = ref(1)
   // 溢出列表（more list）
   const exceedList = ref<any>([])
+  // range请求是否已完成
+  const isRangeComplete = ref(true)
 
   // 组件外部传入的初始value
   const propsValue = computed(() => {
@@ -307,7 +309,8 @@ export default function (props: any, context: any, okEmployeeInput: any) {
     if (result?.code === '000000') {
       const data: any = result.data
       // 有range时不需要更新options
-      if (!props.range?.length) {
+      // isRangeComplete 注意判断，有props.range，但是请求range的接口可能未完成，此时options仍为空
+      if (!props.range?.length || !isRangeComplete.value) {
         options.value = data
       }
       // 收集map
@@ -411,6 +414,7 @@ export default function (props: any, context: any, okEmployeeInput: any) {
   // 初始化range options
   let tempRangePromiseResolve: any = null
   const initRange = async () => {
+    isRangeComplete.value = false
     const tempPromise = new Promise(resolve => {
       tempRangePromiseResolve = resolve
     })
@@ -422,6 +426,7 @@ export default function (props: any, context: any, okEmployeeInput: any) {
     if (result?.code === '000000') {
       const data: any = result.data
       options.value = data
+      isRangeComplete.value = true
       // 收集map
       collectMap(options.value)
     }
