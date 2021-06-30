@@ -22,8 +22,8 @@
       "uploadBtnTable": "Click to Upload", 
       "uploadBtndDrag": "click to upload", 
       "uploadTable": {        
-        "fileName": "Name of attachment",
-        "fileType": "Attachment type",
+        "fileName": "File name",
+        "fileType": "File type",
         "createTiime": "Upload time",
         "operation": "Operation"
       },
@@ -37,6 +37,7 @@
     }
   },
   "common": {
+    "index": "Index",
     "noData": "No data available",
     "selected": "Selected",
     "confirm": "Confirm",

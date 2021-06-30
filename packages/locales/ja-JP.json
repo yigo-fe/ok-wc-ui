@@ -22,8 +22,8 @@
       "uploadBtnTable": "クリックしてアップロード", 
       "uploadBtndDrag": "クリックしてアップロード", 
       "uploadTable": {        
-        "fileName": "添付ファイル名",
-        "fileType": "添付ファイル種類",
+        "fileName": "ファイル名",
+        "fileType": "ファイル種類",
         "createTime": "アップロード日付",
         "operation": "操作"
       },
@@ -37,6 +37,7 @@
     }
   },
   "common": {
+    "index": "番号",
     "noData": "データ無",
     "selected": "選択済",
     "confirm": "はい",
