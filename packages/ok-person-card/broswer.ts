@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-05-19 15:48:50
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-20 10:04:25
+ * @LastEditTime: 2021-06-30 14:06:07
  * @FilePath: /packages/ok-person-card/broswer.ts
  */
 const isBroswerAllowed = () => {
@@ -16,4 +16,9 @@ const isBroswerAllowed = () => {
   }
 }
 
-export { isBroswerAllowed }
+const isWindowsWxchat = () => {
+  const uAgent = window.navigator.userAgent
+  return /WindowsWechat/.test(uAgent)
+}
+
+export { isBroswerAllowed, isWindowsWxchat }

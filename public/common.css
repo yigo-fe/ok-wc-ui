@@ -338,7 +338,7 @@ a:active {
   max-width: calc(100% - 127px);
 }
 .ok-file-list-box .item-detail:hover {
-  background-color: var(--bl-n150-c, #F2F4F7);
+  background-color: var(--bl-n200-c, #F5F7F7);
 }
 .ok-file-list-box .ok-file-list__item_name {
   flex: 1;
@@ -484,13 +484,16 @@ a:active {
 .ok-upload-list-table .ant-table-tbody > tr > td,
 .ok-upload-list-table .ant-table-thead > tr > th {
   padding: 0 11px;
-  height: 44px;
-  line-height: 44px;
+  height: 40px;
+  line-height: 1;
+  color: var(--bl-n900-c, #1F2329);
 }
 .ok-upload-list-table .ant-table-thead > tr > th {
   color: var(--bl-n900-c, #1F2329);
   background-color: var(--bl-n100-c, #FAFBFC);
-  border: 0;
+}
+.ok-upload-list-table .file-name-box.fail .file-name {
+  color: var(--bl-danger-c, #FF6459);
 }
 .ok-upload-list-table .ok-upload-list__item-actions {
   display: flex;

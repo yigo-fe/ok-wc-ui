@@ -127,7 +127,12 @@ defineComponent(
     return () => html`
       <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
       <div class="ok-person-group ok-person-group-root">
-        <div class="ok-person-group-wrap">${avatarRender()}</div>
+        <div
+          class="ok-person-group-wrap"
+          style="display: flex; align-items:center; "
+        >
+          ${avatarRender()}
+        </div>
       </div>
     `
   }

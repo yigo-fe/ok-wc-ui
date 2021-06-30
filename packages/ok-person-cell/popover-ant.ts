@@ -1,3 +1,11 @@
+/*
+ * @Descripttion:
+ * @Author: 付静
+ * @Date: 2021-06-30 10:33:52
+ * @LastEditors: 付静
+ * @LastEditTime: 2021-06-30 14:12:53
+ * @FilePath: /packages/ok-person-cell/popover-ant.ts
+ */
 import { Popover } from 'ant-design-vue'
 import { defineComponent, effect, html, onMounted } from 'ok-lit'
 import { computed, createApp, ref } from 'vue'
@@ -13,7 +21,7 @@ import { apiInitPersoncard } from '../services/api'
  */
 import props from './props'
 defineComponent(
-  'ok-person-cell',
+  'ok-person-ant',
   {
     ...props,
   },
@@ -30,7 +38,7 @@ defineComponent(
           const deptList: any = ref([])
           const statusType: any = ref('')
           const contentSlot = ref('')
-          const cardDisplay = ref('none')
+          const cardDisplay = ref(false)
 
           const checkLardShow = async (id: string) => {
             let result: any = null
@@ -50,7 +58,7 @@ defineComponent(
               deptList.value = result.data.dept_resp_vo_list
               statusType.value = result.data.status_type
             }
-            cardDisplay.value = 'block'
+            cardDisplay.value = true
           }
 
           const onTrigger = (visible: boolean) => {
@@ -106,16 +114,16 @@ defineComponent(
         },
         template: `
           <div>
-            <a-popover :mouseEnterDelay="0.3" placement="left" @visibleChange="onTrigger" :overlayStyle="{'z-index': 9999}"  overlayClassName="ok-person-cell-popover">
+            <a-popover placement="left" @visibleChange="onTrigger" :overlayStyle="{'z-index': 9999}"  overlayClassName="ok-person-cell-popover">
               <template #content>
                 <ok-person-card
-                  :style="{display: cardDisplay}"
+                  v-if="cardDisplay"                 
                   :personInfo="personInfo"
                   :toOpenId="toOpenId"
                   :isAwaken="isAwaken"
                   :deptList="deptList"
                   :statusType="statusType"
-                ></ok-person-card>
+                ></ok-person-card>        
               </template>
               <span class="ok-person-cell ok-person-cell-root">
                 <p style="display: none" class="dev-log">{{devtoolsLog}}</p>

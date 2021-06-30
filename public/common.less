@@ -349,7 +349,7 @@ a:active {
       }
     }
     &:hover {
-      background-color: @bl-n150;
+      background-color: @bl-n200;
     }
 
   }
@@ -516,18 +516,26 @@ a:active {
   .ant-table-tbody>tr>td,
   .ant-table-thead>tr>th {
     padding: 0 11px;
-    height: 44px;
-    line-height: 44px;
+    height: 40px;
+    line-height: 1;
+    color: @bl-n900
   }
   .ant-table-thead>tr>th {
     color: @bl-n900;
     background-color: @bl-n100;
-    border: 0;
   }
+
+  .file-name-box.fail {
+    .file-name {
+      color: @bl-danger;
+    }
+  }
+
   .ok-upload-list__item-actions {
     display: flex;
     align-items: center;
   }
+
 }
 
 

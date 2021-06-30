@@ -3,8 +3,8 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-28 14:19:52
- * @FilePath: /packages/ok-accessory/ok-upload-list/ok-upload-table.ts
+ * @LastEditTime: 2021-06-30 16:57:00
+ * @FilePath: /packages/ok-accessory/ok-upload-table/ok-upload-table.ts
  */
 
 import { classMap } from 'lit-html/directives/class-map.js'
@@ -30,6 +30,9 @@ defineComponent(
       handlePreview,
       handleDetele,
       handleDownload,
+      handleAbort,
+      handleRemoveFileList,
+      handleReupload,
     } = useAttachmentHandle(props, context)
 
     /**
@@ -121,6 +124,9 @@ defineComponent(
               @preview=${handlePreview}
               @delete=${handleDetele}
               @download=${handleDownload}
+              @abort=${handleAbort}
+              @remove=${handleRemoveFileList}
+              @reupload=${handleReupload}
               .fileList=${fileLists.value}
               .listType=${props.listType}
               .showPreview=${showPreview.value}

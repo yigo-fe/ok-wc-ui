@@ -104,6 +104,11 @@
       <!-- 人员卡片 -->
       <h3>人员卡片</h3>
       <ok-person-cell class="ok-person-cell1"></ok-person-cell>
+      <h3>人员卡片12</h3>
+      <div style="width: 50px; height: 50px;overflow: hidden;">
+        <ok-person-cell class="ok-person-cell3"></ok-person-cell>
+      </div>
+      
       <h3>人员卡片 -slot </h3>
       <ok-person-cell class="ok-person-cell2"><ok-avatar class="ok-person-cell-slot"></ok-avatar></ok-person-cell>
       <h3>person-group </h3>
@@ -118,7 +123,10 @@
 
       <section  class="divider upload-demo">
         <h3>列表上传</h3>
-        <ok-upload-table></ok-upload-table>
+        <div style="width:900px">
+          <ok-upload-table></ok-upload-table>
+        </div>
+        
 
         <h3>明细字表上传</h3>
         <div style="display:block;">
@@ -415,6 +423,12 @@
       okPersonCell.width = '30px'
       okPersonCell.height = '30px'
 
+
+      const okPersonCell3 = document.querySelector('.ok-person-cell3')
+      okPersonCell3.personInfo = personInfo
+      okPersonCell3.width = '30px'
+      okPersonCell3.height = '30px'
+
       // personcell slot
       const okPersonCell2 = document.querySelector('.ok-person-cell2')
       okPersonCell2.personInfo = personInfo1
@@ -452,7 +466,7 @@
       // okPersonCard.personInfo = personInfo
 
       const okUpload = document.querySelector('ok-upload-drag')
-      okUpload.fileList = ['06f57061e26e9602aea9b2cd75c43fb6', '59a76191dd3615f76b3d8886974c2977','f40aa3c1d31d71360e4a8b999f61bf18']
+      okUpload.fileList = ["660ece2ca6616a55e00796a43bf57281", "3440cdcbaa4d011abc19e474d0ecd993", "13e7f0f8567e02b8e32db59179708a7d"]
 
       okUpload.multiple = true
       okUpload.noBorder = true
@@ -558,6 +572,7 @@
 
       const okDeptInput = document.querySelector('.ok-department-input')
       okDeptInput.value = ['13','14', '18', '19']
+      // okDeptInput.borderRadius = 'none'
       okDeptInput.multiple = true
       okDeptInput.disabled = true
       okDeptInput.update = (val, list)=>{
@@ -606,6 +621,7 @@
 
       const okEmployeeInput = document.querySelector('.ok-employee-input')
       okEmployeeInput.value = ['WangChao', 'LiuFei']
+      // okEmployeeInput.borderRadius = 'none'
       // okEmployeeInput.hasBorderRadius = false
       okEmployeeInput.width = '200px'
       // okEmployeeInput.disabled = true
@@ -705,7 +721,7 @@
 
     function testClick2 (){
       const okUpload = document.querySelector('ok-upload-drag')
-      okUpload.fileList = ['06f57061e26e9602aea9b2cd75c43fb6', 'f40aa3c1d31d71360e4a8b999f61bf18']
+      okUpload.fileList = ["660ece2ca6616a55e00796a43bf57281", "13e7f0f8567e02b8e32db59179708a7d"]
 
 
 

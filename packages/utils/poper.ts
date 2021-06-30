@@ -26,7 +26,8 @@ class PopoverOptions {
   public placement?: POPOVER_PLACEMENT
   // public delayShow: number
   public popperOptions?: {
-    strategy: 'fixed'
+    strategy?: 'fixed'
+    modifiers?: any
   }
   public arrow?: boolean
   public trigger?: 'click' | 'focus' | undefined
