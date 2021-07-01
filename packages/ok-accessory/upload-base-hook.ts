@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-24 21:55:23
+ * @LastEditTime: 2021-07-01 11:01:11
  * @FilePath: /packages/ok-accessory/upload-base-hook.ts
  */
 
@@ -38,7 +38,7 @@ import { message, Modal } from 'ant-design-vue'
 import { computed } from 'ok-lit'
 import { h, reactive, ref, watch } from 'vue'
 
-import confirmIcon from '../assets/images/maybe.svg'
+import confirmIcon from '../assets/images/confirm.svg'
 import { i18n } from '../locales'
 import { isSameArray } from '../utils/index'
 import type { OkFile, UploadStatus } from './upload.type'
@@ -301,8 +301,8 @@ export default function (props, context, config) {
           h('img', {
             src: confirmIcon,
             style: {
-              with: '20px',
-              height: '20px',
+              with: '22px',
+              height: '22px',
               verticalAlign: 'middle',
               marginRight: '8px',
             },
@@ -319,6 +319,7 @@ export default function (props, context, config) {
       class: 'file-delete-confirm',
       okText: i18n.$t('common.confirm', '确定'),
       cancelText: i18n.$t('common.cancel', '取消'),
+      width: 450,
       onOk: () => {
         // 处理beforeRemove
         if (

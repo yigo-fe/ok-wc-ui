@@ -119,6 +119,12 @@ a:active {
 .ok-tree-modal .ant-tree-child-tree > li:first-child {
   padding-top: 0;
 }
+.file-delete-confirm .ant-modal-confirm-body .ant-modal-confirm-content {
+  margin-top: 0;
+}
+.file-delete-confirm .ant-modal-confirm-btns .ant-btn {
+  border-radius: 4px;
+}
 /* ok-avatar */
 .ok-avatar-root {
   display: inline-block;
@@ -430,6 +436,9 @@ a:active {
 .file-icon-operate svg path {
   fill: var(--bl-brand-c, #4C78FC);
 }
+.file-icon-operate:hover svg path {
+  fill: var(--bl-brand-hover, #658BFC);
+}
 .ok-upload--text {
   width: auto;
 }
@@ -483,7 +492,7 @@ a:active {
 }
 .ok-upload-list-table .ant-table-tbody > tr > td,
 .ok-upload-list-table .ant-table-thead > tr > th {
-  padding: 0 11px;
+  padding: 0 16px;
   height: 40px;
   line-height: 1;
   color: var(--bl-n900-c, #1F2329);
@@ -634,6 +643,12 @@ a:active {
 }
 .ok-upload-list-image .ok-upload-list__item-actions .operation-icon + .operation-icon {
   margin-left: 12px;
+}
+.ok-upload-list-image .ok-upload-list__item-actions .operation-icon svg path {
+  fill: #fff;
+}
+.ok-upload-list-image .ok-upload-list__item-actions .operation-icon:hover svg path {
+  fill: var(--bl-brand-hover, #658BFC);
 }
 .ok-upload-list-image .ok-upload-list__item-actions:hover {
   opacity: 1;

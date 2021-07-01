@@ -113,6 +113,17 @@ a:active {
 
 }
 
+// 修改‘确认弹窗’ content上边距
+.file-delete-confirm {
+  .ant-modal-confirm-body .ant-modal-confirm-content {
+    margin-top: 0;
+  }
+  .ant-modal-confirm-btns .ant-btn {
+    border-radius: 4px;
+  }
+} 
+
+
 
 
 
@@ -451,9 +462,16 @@ a:active {
   & +.file-icon-operate {
     margin-left: 12px;
   }
+
   svg path {
     fill: @bl-brand-c;
   }
+  &:hover {
+    svg path {
+      fill: @bl-brand-hover;
+    }
+  }
+
 }
 
 
@@ -515,7 +533,7 @@ a:active {
 .ok-upload-list-table {
   .ant-table-tbody>tr>td,
   .ant-table-thead>tr>th {
-    padding: 0 11px;
+    padding: 0 16px;
     height: 40px;
     line-height: 1;
     color: @bl-n900
@@ -682,6 +700,16 @@ a:active {
   transition: opacity 0.3s;
   .operation-icon + .operation-icon {
     margin-left: 12px;
+  }
+  .operation-icon {
+    svg path {
+      fill: #fff;
+    }
+    &:hover {
+      svg path {
+        fill: @bl-brand-hover;
+      }
+    }
   }
 }
 .ok-upload-list-image .ok-upload-list__item-actions:hover {

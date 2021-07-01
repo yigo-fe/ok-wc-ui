@@ -32,7 +32,14 @@ defineComponent(
             .hidePopper=${props.hidePopper}
             .propsGetInfoByEmpId=${props.propsGetInfoByEmpId}
           >
-            <slot></slot>
+            <slot>
+              <ok-avatar
+                .personInfo=${props.personInfo}
+                .size=${props.size}
+                .width=${props.width}
+                .height=${props.height}
+              ></ok-avatar
+            ></slot>
           </ok-person-ant>
         `
       } else {

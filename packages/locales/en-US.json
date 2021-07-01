@@ -23,7 +23,7 @@
       "uploadBtndDrag": "click to upload", 
       "uploadTable": {        
         "fileName": "File name",
-        "fileType": "File type",
+        "creator": "Creator",
         "createTiime": "Upload time",
         "operation": "Operation"
       },

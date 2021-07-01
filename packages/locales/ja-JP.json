@@ -23,7 +23,7 @@
       "uploadBtndDrag": "クリックしてアップロード", 
       "uploadTable": {        
         "fileName": "ファイル名",
-        "fileType": "ファイル種類",
+        "creator": "作成者",
         "createTime": "アップロード日付",
         "operation": "操作"
       },
