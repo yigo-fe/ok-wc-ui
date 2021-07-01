@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 20:15:04
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-11 15:09:48
+ * @LastEditTime: 2021-07-01 17:53:20
  * @FilePath: /packages/ok-department-select/hook.ts
  */
 import { debounce } from 'lodash'
@@ -259,6 +259,13 @@ export default function (props: any, okDepartmentInput: any) {
 
   // focus
   const handleFocus = () => {
+    // 解决Safari偶尔获取不到焦点，且不能输入的问题
+    const el: any = okDepartmentInput.value.$el.querySelector(
+      '.ant-select-selection-search-input'
+    )
+    el.removeAttribute('readonly')
+    el.removeAttribute('unselectable')
+    el.removeAttribute('style')
     props.onFocus && props.onFocus()
   }
 

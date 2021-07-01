@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 15:16:57
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-25 18:07:02
+ * @LastEditTime: 2021-07-01 16:52:00
  * @FilePath: /packages/ok-employee-select/hook.ts
  */
 import { debounce } from 'lodash'
@@ -283,6 +283,17 @@ export default function (props: any, context: any, okEmployeeInput: any) {
 
   // focus
   const handleFocus = () => {
+    // 解决Safari偶尔获取不到焦点，且不能输入的问题
+    const el: any = okEmployeeInput.value.$el.querySelector(
+      '.ant-select-selection-search-input'
+    )
+    el.removeAttribute('readonly')
+    el.removeAttribute('unselectable')
+    el.removeAttribute('style')
+    // setTimeout(() => {
+    //   el.focus()
+    // }, 50)
+
     props.onFocus && props.onFocus()
   }
 
