@@ -3,11 +3,11 @@
  * @Author: 付静
  * @Date: 2021-06-30 10:34:30
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-30 10:43:28
+ * @LastEditTime: 2021-07-01 17:50:36
  * @FilePath: /packages/ok-person-cell/popover-tippy.ts
  */
 import { setPopover } from '@c/utils'
-import { defineComponent, html, onMounted, ref } from 'ok-lit'
+import { defineComponent, html, onMounted, onUnmounted, ref } from 'ok-lit'
 import { hideAll } from 'tippy.js'
 
 import { COMMON_CSS_PATH } from '../path.config'
@@ -32,6 +32,7 @@ defineComponent(
     const deptList: any = ref([])
     const statusType: any = ref('')
     const isSelf = ref(false)
+    const isMounted = ref(false)
 
     const checkLardShow = async (id: string) => {
       let result: any = null
@@ -64,15 +65,24 @@ defineComponent(
       id && checkLardShow(id)
     }
 
-    // 隐藏之前的Popper，解决person-group中可能同时出现两个Popper的问题
+    // SHOW 之前的钩子
     const onShow = () => {
+      // 解决popover没有渲染完成，组件已被卸载，造成定位到左上角的问题
+      if (!isMounted.value) return false
+      // 隐藏之前的Popper，解决person-group中可能同时出现两个Popper的问题
       props.hidePopper &&
         hideAll({
           exclude: contxt.$refs['ok-person-trigger'] as HTMLElement,
           duration: 0,
         })
     }
+
+    onUnmounted(() => {
+      isMounted.value = false
+    })
+
     onMounted(() => {
+      isMounted.value = true
       setPopover(
         contxt.$refs['ok-person-trigger'] as HTMLElement,
         contxt.$refs['person-card'] as HTMLElement,
