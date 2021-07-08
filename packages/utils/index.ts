@@ -1,9 +1,3 @@
-/**
- * 处理图片,兜底默认值
- * person: {人员信息}
- * definition: 清晰度，默认不开起
- */
-
 export * from './poper'
 
 const isSameArray = (arr1: any, arr2: any) => {

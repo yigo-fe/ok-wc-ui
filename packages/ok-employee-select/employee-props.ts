@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-20 14:56:24
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-29 17:27:55
+ * @LastEditTime: 2021-07-08 16:31:22
  * @FilePath: /packages/ok-employee-select/employee-props.ts
  */
 
@@ -128,6 +128,11 @@ const propsOptions = {
   // 审批组件传入，卡片请求数据方法
   propsGetInfoByEmpId: {
     type: Function,
+  },
+  // 校验失败
+  isError: {
+    type: Boolean,
+    default: false,
   },
 }
 

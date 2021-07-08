@@ -59,7 +59,7 @@ a:active {
     }
 
     /* 修改人员和部门focus样式 */
-    &.ant-select-focused:not(.ant-select-disabled).ant-select-multiple .ant-select-selector {
+    &.ant-select-focused:not(.ant-select-disabled) .ant-select-selector {
       border-color:@bl-brand-c;-webkit-box-shadow:none;box-shadow:none
     }
 
@@ -87,6 +87,10 @@ a:active {
 
     /* 调整右侧搜索icon的位置 */
     .ant-select-show-arrow .ant-select-arrow {pointer-events:auto;top:calc(50% - 7px);right:14px}
+  }
+  // 添加校验失败样式
+  &.is-error .ant-select:not(.ant-select-borderless) .ant-select-selector {
+    border-color: @bl-danger;
   }
 }
 

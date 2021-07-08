@@ -59,8 +59,8 @@ a:active {
   border-color: var(--bl-n200-c, #F5F7F7);
   background: var(--bl-n200-c, #F5F7F7);
 }
-.ok-employee-select-wraper .ant-select.ant-select-focused:not(.ant-select-disabled).ant-select-multiple .ant-select-selector,
-.ok-department-select-wraper .ant-select.ant-select-focused:not(.ant-select-disabled).ant-select-multiple .ant-select-selector {
+.ok-employee-select-wraper .ant-select.ant-select-focused:not(.ant-select-disabled) .ant-select-selector,
+.ok-department-select-wraper .ant-select.ant-select-focused:not(.ant-select-disabled) .ant-select-selector {
   border-color: var(--bl-brand-c, #4C78FC);
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -92,6 +92,10 @@ a:active {
   pointer-events: auto;
   top: calc(50% - 7px);
   right: 14px;
+}
+.ok-employee-select-wraper.is-error .ant-select:not(.ant-select-borderless) .ant-select-selector,
+.ok-department-select-wraper.is-error .ant-select:not(.ant-select-borderless) .ant-select-selector {
+  border-color: var(--bl-danger-c, #FF6459);
 }
 /* 人员和部门选择没有border-radius */
 .no-border-radius .ant-select .ant-select-selector {

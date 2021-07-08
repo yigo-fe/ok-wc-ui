@@ -3,14 +3,14 @@
  * @Author: 付静
  * @Date: 2021-02-20 19:58:14
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-31 19:58:13
+ * @LastEditTime: 2021-07-02 16:50:04
  * @FilePath: /packages/path.config.ts
  */
 
 const ANTD_VUE_CDN =
   process.env.NODE_ENV === 'development'
     ? './antd.min.css'
-    : `https://fe-resource.baiteda.com/libs/antdv-2.1.2/antd.min.css`
+    : `https://fe-resource.baiteda.com/libs/antdv-2.1.6/antd.min.css`
 
 const CDN_PATH =
   process.env.NODE_ENV === 'development'

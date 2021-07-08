@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-29 17:29:38
+ * @LastEditTime: 2021-07-08 16:53:30
  * @FilePath: /packages/ok-employee-select/index.ts
  */
 
@@ -330,6 +330,7 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
         'border-radius-left': props.borderRadius === 'left',
         'border-radius-right': props.borderRadius === 'right',
         'border-radius-none': props.borderRadius === 'none',
+        'is-error': !!props.isError,
       })}
       style=${styleMap({
         height: '100%',

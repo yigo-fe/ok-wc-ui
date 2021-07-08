@@ -576,6 +576,7 @@
       // okDeptInput.borderRadius = 'none'
       okDeptInput.multiple = true
       okDeptInput.disabled = true
+      okDeptInput.isError = true
       okDeptInput.update = (val, list)=>{
         console.log('okDeptInput-update-index',val, list)
         // okDeptInput.value = val
@@ -624,6 +625,7 @@
       okEmployeeInput.value = ['WangChao', 'LiuFei']
       // okEmployeeInput.borderRadius = 'none'
       // okEmployeeInput.hasBorderRadius = false
+      // okEmployeeInput.isError = true
       okEmployeeInput.width = '200px'
       // okEmployeeInput.disabled = true
       // okEmployeeInput.bordered = false
@@ -685,8 +687,8 @@
     }
 
     function testClick (){
-      const okUploadImg = document.querySelector('ok-upload-image')
-            okUploadImg.fileList = ['3d6115453d70478c771ff08a0a9a6eb5']
+      // const okUploadImg = document.querySelector('ok-upload-image')
+      //       okUploadImg.fileList = ['3d6115453d70478c771ff08a0a9a6eb5']
 
 
       // const el = document.getElementById('test');
@@ -702,8 +704,8 @@
 
       // }, 500)
 
-      //   const okEmployeeInput = document.querySelector('.ok-employee-input')
-      // okEmployeeInput.value = ['FengHaiLi']
+        const okEmployeeInput = document.querySelector('.ok-employee-input')
+      okEmployeeInput.value = ['FengHaiLi']
 
       // const okEmployeeTree = document.querySelector('.ok-employee-tree')
       // okEmployeeTree.value = ['FuJing']
@@ -721,13 +723,13 @@
     }
 
     function testClick2 (){
-      const okUpload = document.querySelector('ok-upload-drag')
-      okUpload.fileList = ["660ece2ca6616a55e00796a43bf57281", "13e7f0f8567e02b8e32db59179708a7d"]
+      // const okUpload = document.querySelector('ok-upload-drag')
+      // okUpload.fileList = ["660ece2ca6616a55e00796a43bf57281", "13e7f0f8567e02b8e32db59179708a7d"]
 
 
 
-      // const okEmployeeInput = document.querySelector('.ok-employee-input')
-      // okEmployeeInput.value = ['FuJing']
+      const okEmployeeInput = document.querySelector('.ok-employee-input')
+      okEmployeeInput.value = []
 
       // const okEmployeeTree = document.querySelector('.ok-employee-tree')
       // okEmployeeTree.value = []

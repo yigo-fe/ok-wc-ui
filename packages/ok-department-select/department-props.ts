@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:02:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-29 17:32:26
+ * @LastEditTime: 2021-07-08 16:49:41
  * @FilePath: /packages/ok-department-select/department-props.ts
  */
 import { PropType } from 'ok-lit'
@@ -93,6 +93,11 @@ const propsOptions = {
   // 平铺展示
   flat: {
     type: Boolean as unknown as PropType<boolean>,
+    default: false,
+  },
+  // 校验失败
+  isError: {
+    type: Boolean,
     default: false,
   },
 }
