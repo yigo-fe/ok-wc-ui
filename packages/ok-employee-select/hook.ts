@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 15:16:57
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-08 16:53:10
+ * @LastEditTime: 2021-07-08 18:29:45
  * @FilePath: /packages/ok-employee-select/hook.ts
  */
 import { debounce } from 'lodash'
@@ -19,9 +19,8 @@ export default function (props: any, context: any, okEmployeeInput: any) {
   effect(() => {
     testVal.value = props.value
   })
-
-  // let hasInitValue = !!props.value?.length
-  // console.log('props.value------', props.value)
+  // 7.8 修改: 进去就有值时，首次不触发update
+  let hasInitValue = !!props.value?.length
 
   const api = apiInit()
   // placeholder
@@ -340,7 +339,7 @@ export default function (props: any, context: any, okEmployeeInput: any) {
       value.value = multiple.value ? vaildData : vaildData.slice(0, 1)
       // 特殊处理：过滤后没有正常数据的，不会触发value更新，需要手动update
       if (!vaildData.length) {
-        props.update && props.update(value.value, selectedList.value)
+        updateValue()
       }
     }
   }
@@ -358,11 +357,19 @@ export default function (props: any, context: any, okEmployeeInput: any) {
     return same
   }
 
+  const updateValue = () => {
+    // 更新组件外部value
+    !hasInitValue &&
+      props.update &&
+      props.update(value.value, selectedList.value)
+    // todo 测试
+    hasInitValue = false
+  }
+
   // 组件内部value变化时处理：1. 触发组件update，同步外部数据; 2. 计算溢出标签，展示'更多'组件
   const handleValueChange = () => {
     // 更新组件外部value
-    // todo 测试有propsvalue不update
-    props.update && props.update(value.value, selectedList.value)
+    updateValue()
     // value 变化， 计算溢出人员
     getExceed()
   }
@@ -407,8 +414,6 @@ export default function (props: any, context: any, okEmployeeInput: any) {
     (val, oldVal) => {
       // 有时val和oldValue一样也会触发，具体原因待排查
       if (isSameArray(val, oldVal)) return
-      // todo 测试
-      // hasInitValue = false
       handlePropsValChange()
     },
     {
