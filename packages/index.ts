@@ -18,6 +18,8 @@ import './ok-accessory/ok-progress'
 import './ok-accessory/ok-upload-image/ok-file-image'
 import './ok-accessory/ok-upload-image/ok-upload-image'
 import './ok-accessory/ok-file-icon'
+// 图片预览
+import './ok-accessory/ok-image-preview'
 // 人员选择
 import './ok-employee-select'
 // 部门选择

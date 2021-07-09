@@ -121,7 +121,16 @@
 
       <ok-button style="display:block; margin: 50px 0;"></ok-button>
 
+
+
+
       <section  class="divider upload-demo">
+        <h3>图片预览</h3>
+        <ok-image-preview class="ok-image-preview1"></ok-image-preview>
+        <div style="margin-bottom: 20px;"></div>
+        <ok-image-preview class="ok-image-preview2"></ok-image-preview>
+
+
         <h3>列表上传</h3>
         <div style="width:900px">
           <ok-upload-table></ok-upload-table>
@@ -412,6 +421,27 @@
 
 
     window.onload = ()=>{
+      const okImagePreview1 = document.querySelector('.ok-image-preview1')
+      okImagePreview1.imgList = [{src:'https://test.baiteda.com/attach/image/20210624/13e7f0f8567e02b8e32db59179708a7d/1234567890.png'}]
+
+      const okImagePreview2 = document.querySelector('.ok-image-preview2')
+      okImagePreview2.imgList = [{
+        src:'https://test.baiteda.com/attach/image/20210624/3440cdcbaa4d011abc19e474d0ecd993/1111111111.png'
+      },
+      {
+        src: 'https://test.baiteda.com/attach/image/20210624/26c9539a561c07b97be33d98b6192612/1.png'
+      },
+      {
+        src: 'https://test.baiteda.com/attach/image/20210709/4f8d0630d0adfc440c0d6c25a42aec7b/小红花.png'
+      },
+    ]
+    okImagePreview2.close=()=>{
+      okImagePreview2.index= -1
+    }
+
+
+
+
       // bl.closeLoading()
       // bl.appendTheme('blue', ['ant'])
       // window.okuiConfig.options.preview = true
@@ -420,8 +450,8 @@
 
       const okPersonCell = document.querySelector('.ok-person-cell1')
       okPersonCell.personInfo = personInfo1
-      okPersonCell.width = '30px'
-      okPersonCell.height = '30px'
+      // okPersonCell.width = '30px'
+      // okPersonCell.height = '30px'
 
 
       const okPersonCell3 = document.querySelector('.ok-person-cell3')
@@ -530,7 +560,7 @@
 
 
       const okUploadImg = document.querySelector('ok-upload-image')
-            okUploadImg.fileList = ['26c9539a561c07b97be33d98b6192612', '3d6115453d70478c771ff08a0a9a6eb5','dc703ce0060b2e264c7032b5852f5a1e']
+            okUploadImg.fileList = ['26c9539a561c07b97be33d98b6192612', '3d6115453d70478c771ff08a0a9a6eb5','0f37c3b8a497fa21409cd2a737bdc12e']
 
       // okUploadImg.action = actionImg
       okUploadImg.multiple = true
@@ -687,6 +717,11 @@
     }
 
     function testClick (){
+      const okImagePreview2 = document.querySelector('.ok-image-preview2')
+      okImagePreview2.index = 2
+      // setTimeout(()=>{
+      //   okImagePreview2.index = -1
+      // },200)
       // const okUploadImg = document.querySelector('ok-upload-image')
       //       okUploadImg.fileList = ['3d6115453d70478c771ff08a0a9a6eb5']
 
@@ -704,8 +739,8 @@
 
       // }, 500)
 
-        const okEmployeeInput = document.querySelector('.ok-employee-input')
-      okEmployeeInput.value = ['FengHaiLi']
+      //   const okEmployeeInput = document.querySelector('.ok-employee-input')
+      // okEmployeeInput.value = ['FengHaiLi']
 
       // const okEmployeeTree = document.querySelector('.ok-employee-tree')
       // okEmployeeTree.value = ['FuJing']

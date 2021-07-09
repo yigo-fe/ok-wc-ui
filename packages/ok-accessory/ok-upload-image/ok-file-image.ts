@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-01 11:07:01
+ * @LastEditTime: 2021-07-09 17:25:23
  * @FilePath: /packages/ok-accessory/ok-upload-image/ok-file-image.ts
  */
 
@@ -57,8 +57,8 @@ defineComponent(
     //   context.emit('delete', file)
     // }
 
-    const handlePreview = (file: UploadFile) => {
-      context.emit('preview', file)
+    const handlePreview = (file: UploadFile, index: number) => {
+      context.emit('preview', { file, index })
     }
 
     const handleDownload = (file: UploadFile) => {
@@ -226,10 +226,10 @@ defineComponent(
       `
     }
 
-    const renderPrveiew = (item: UploadFile) => {
+    const renderPrveiew = (item: UploadFile, index: number) => {
       if (props.showPreview)
         return html`
-          <i class="operation-icon" @click=${() => handlePreview(item)}>
+          <i class="operation-icon" @click=${() => handlePreview(item, index)}>
             <svg
               t="1625108551730"
               viewBox="0 0 1024 1024"
@@ -345,7 +345,7 @@ defineComponent(
       </i>`
     }
 
-    const renderOperation = (file: any) => {
+    const renderOperation = (file: any, index: number) => {
       if (file.status === 'fail') {
         return html`
           <span class="ok-upload-list__item-actions">
@@ -358,15 +358,17 @@ defineComponent(
             class="ok-upload-list__item-actions"
             v-show="file.response.data[0].thumb_url"
           >
-            ${renderPrveiew(file)} ${renderDownload(file)} ${renderRemove(file)}
+            ${renderPrveiew(file, index)} ${renderDownload(file)}
+            ${renderRemove(file)}
           </span>
         `
       }
     }
 
-    const renderListItem = (item: any) => {
+    const renderListItem = (item: any, index: number) => {
       return html`
-        ${renderProgress(item)} ${renderImage(item)} ${renderOperation(item)}
+        ${renderProgress(item)} ${renderImage(item)}
+        ${renderOperation(item, index)}
       `
     }
 
@@ -385,7 +387,7 @@ defineComponent(
             })}
             style=${styleMap(props.thumbStyle)}
           >
-            ${renderListItem(item)}
+            ${renderListItem(item, index)}
           </li>`
         )}
       </ul>

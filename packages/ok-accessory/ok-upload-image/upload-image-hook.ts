@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-19 01:13:31
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-22 14:49:23
+ * @LastEditTime: 2021-07-09 17:44:31
  * @FilePath: /packages/ok-accessory/ok-upload-image/upload-image-hook.ts
  */
 
@@ -32,7 +32,7 @@ export default function (props, context) {
    * @param data
    */
   const handlePreview = data => {
-    let file = fileLists.value.find(v => v.uid === data.detail.uid)
+    let file = fileLists.value.find(v => v.uid === data.detail.file.uid)
     if (file) {
       const path = file?.response?.data?.[0].file_path
       // todo 兼容

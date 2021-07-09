@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-21 16:52:13
+ * @LastEditTime: 2021-07-09 17:51:04
  * @FilePath: /packages/ok-accessory/ok-upload-image/ok-upload-image.ts
  */
 
@@ -86,6 +86,15 @@ defineComponent(
       uploadFiles(files)
     }
 
+    // 预览：打开当前窗口
+    const previewIdx = ref(-1)
+    // const handlePreview = (e: CustomEvent) => {
+    //   previewIdx.value = e.detail.index
+    //   setTimeout(() => {
+    //     previewIdx.value = -1
+    //   }, 200)
+    // }
+
     const renderUploader = () => {
       if (hideUploader.value) return
       const hasMargin =
@@ -136,6 +145,12 @@ defineComponent(
         </div>
       `
     }
+
+    // todo 当前窗口打开
+    //   <ok-image-preview
+    //   .index=${previewIdx.value}
+    //   .imgList=${fileLists.value}
+    // ></ok-image-preview>
 
     return () => html`
       <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
