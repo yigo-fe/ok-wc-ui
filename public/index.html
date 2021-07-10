@@ -194,6 +194,8 @@
   </div>
   <!-- <script type="module" src="../dist/ok-wc-ui.umd.js"></script> -->
   <script>
+
+
     // success
 	// cv3vj7pldi1gxo65
 
@@ -496,10 +498,20 @@
       // okPersonCard.personInfo = personInfo
 
       const okUpload = document.querySelector('ok-upload-drag')
-      okUpload.fileList = ["660ece2ca6616a55e00796a43bf57281", "3440cdcbaa4d011abc19e474d0ecd993", "13e7f0f8567e02b8e32db59179708a7d"]
+      // 测试自定义接口
+      // okUpload.action = 'https://test.baiteda.com/ego_api/client/v1/taskfile/upload?taskInstanceId=1a7eedf6-c4a5-4f1f-ad01-47376bb4743c'
+      // okUpload.action = '/ego_api/client/v1/taskfile/upload?taskInstanceId=1a7eedf6-c4a5-4f1f-ad01-47376bb4743c'
+      // okUpload.headers = {
+      //   auth: '417c381769e54c878ab96fc74815c6a9'
+      // }
+      
+      
+      
+      
+      // okUpload.fileList = ["660ece2ca6616a55e00796a43bf57281", "3440cdcbaa4d011abc19e474d0ecd993", "13e7f0f8567e02b8e32db59179708a7d"]
 
-      okUpload.multiple = true
-      okUpload.noBorder = true
+      // okUpload.multiple = true
+      // okUpload.noBorder = true
       // okUpload.data = uploadData
       // okUpload.operation = ['preview']
       // okUpload.hideUploader = true

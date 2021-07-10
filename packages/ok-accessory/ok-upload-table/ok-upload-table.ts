@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-30 16:57:00
+ * @LastEditTime: 2021-07-10 11:29:36
  * @FilePath: /packages/ok-accessory/ok-upload-table/ok-upload-table.ts
  */
 
@@ -12,7 +12,7 @@ import { defineComponent, html } from 'ok-lit'
 
 import { i18n } from '../../locales'
 import { COMMON_CSS_PATH } from '../../path.config'
-import useAttachmentHandle from '../ok-upload-drag/upload-attachment-hook'
+import useAttachmentHandle from '../attachment.common.hook'
 import { UploadProps } from '../upload.props'
 defineComponent(
   'ok-upload-table',

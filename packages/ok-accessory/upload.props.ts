@@ -4,7 +4,7 @@
  * @Author: 付静
  * @Date: 2021-02-05 19:42:22
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-30 16:57:18
+ * @LastEditTime: 2021-07-09 18:40:58
  * @FilePath: /packages/ok-accessory/upload.props.ts
  */
 
@@ -140,6 +140,18 @@ const UploadProps = {
       // eslint-disable-next-line no-unused-vars
       (ids: string[], lists: []) => void
     >,
+  },
+  // 自定义删除
+  customRemovePromise: {
+    type: Function as unknown as PropType<(file: File) => Promise<unknown>>,
+  },
+  // 自定义预览
+  customPreview: {
+    type: Function as unknown as PropType<AjaxEventListener>,
+  },
+  // 自定义下载
+  customDownload: {
+    type: Function as unknown as PropType<AjaxEventListener>,
   },
 }
 

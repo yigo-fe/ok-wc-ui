@@ -1,22 +1,27 @@
 /*
- * @Descripttion:
+ * @Descripttion: 图片上传公用逻辑处理
  * @Author: 付静
- * @Date: 2021-03-19 01:13:31
+ * @Date: 2021-07-10 11:16:00
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-09 17:44:31
- * @FilePath: /packages/ok-accessory/ok-upload-image/upload-image-hook.ts
+ * @LastEditTime: 2021-07-10 11:56:53
+ * @FilePath: /packages/ok-accessory/image.common.hook.ts
  */
-
-import { apiInit, sourceHost } from '../../services/api'
-import useUploadHandler from '../upload-base-hook'
+import { apiInit, sourceHost } from '../services/api'
+import useUploadHandler from './upload.base.hook'
 export default function (props, context) {
   const api = apiInit()
   // 删除文件
   const remove = async ({ file, fileLists, index }) => {
     const fileId = file.response?.data[0].file_id
-    const result = await api.default.DelAttachmentPrivateV1GET({
-      query: { fileId },
-    })
+    let result: any
+    // 如果传入了自定义删除
+    if (props.customRemove) {
+      result = await props.customRemovePromise(file)
+    } else {
+      result = await api.default.DelAttachmentPrivateV1GET({
+        query: { fileId },
+      })
+    }
     if (result.code === '000000') {
       // 删除显示的上传列表
       fileLists.splice(index, 1)
@@ -33,6 +38,11 @@ export default function (props, context) {
    */
   const handlePreview = data => {
     let file = fileLists.value.find(v => v.uid === data.detail.file.uid)
+    // 自定义预览
+    if (props.customPreview) {
+      props.customPreview(file)
+      return
+    }
     if (file) {
       const path = file?.response?.data?.[0].file_path
       // todo 兼容
@@ -48,6 +58,13 @@ export default function (props, context) {
       props.onPreview && props.onPreview(file)
     }
   }
+  // 预览方案二：当前窗口打开
+  // const handlePreview = (e: CustomEvent) => {
+  //   previewIdx.value = e.detail.index
+  //   setTimeout(() => {
+  //     previewIdx.value = -1
+  //   }, 200)
+  // }
 
   // 获取默认值
   const getDefaultFileList = async (ids: string[]) => {

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-09 17:51:04
+ * @LastEditTime: 2021-07-10 11:30:06
  * @FilePath: /packages/ok-accessory/ok-upload-image/ok-upload-image.ts
  */
 
@@ -14,8 +14,8 @@ import { defineComponent, html, onMounted, onUnmounted, PropType } from 'ok-lit'
 import { ref } from 'vue'
 
 import { COMMON_CSS_PATH } from '../../path.config'
+import useImageHandle from '../image.common.hook'
 import { UploadProps } from '../upload.props'
-import useImageHandle from './upload-image-hook'
 defineComponent(
   'ok-upload-image',
   {
@@ -113,7 +113,7 @@ defineComponent(
           @click=${handleClick}
         >
           <slot>
-            <div class="ok-upload-image-inner test123">
+            <div class="ok-upload-image-inner">
               <svg
                 t="1615189238946"
                 class="upload-img-icon"

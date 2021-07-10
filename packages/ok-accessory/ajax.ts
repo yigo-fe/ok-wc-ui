@@ -3,10 +3,9 @@
  * @Author: 付静
  * @Date: 2021-01-25 15:49:29
  * @LastEditors: 付静
- * @LastEditTime: 2021-03-19 02:31:59
+ * @LastEditTime: 2021-07-10 10:58:48
  * @FilePath: /packages/ok-accessory/ajax.ts
  */
-import { baseURL } from '../services/api'
 import type {
   OkUploadAjaxError,
   OkUploadProgressEvent,
@@ -60,9 +59,7 @@ export default function upload(option: OkUploadRequestOptions) {
   }
 
   const xhr = new XMLHttpRequest()
-  // const action = option.action
-  const action = `${baseURL}${option.action}`
-
+  const action = option.action
   if (xhr.upload) {
     xhr.upload.onprogress = function progress(e) {
       if (e.total > 0) {
@@ -100,13 +97,14 @@ export default function upload(option: OkUploadRequestOptions) {
     xhr.withCredentials = true
   }
 
-  // const headers = option.headers || {}
+  const headers = option.headers || {}
 
-  // for (const item in headers) {
-  //   if (headers.hasOwnProperty(item) && headers[item] !== null) {
-  //     xhr.setRequestHeader(item, headers[item])
-  //   }
-  // }
+  for (const item in headers) {
+    // eslint-disable-next-line no-prototype-builtins
+    if (headers.hasOwnProperty(item) && headers[item] !== null) {
+      xhr.setRequestHeader(item, headers[item])
+    }
+  }
   xhr.send(formData)
   return xhr
 }

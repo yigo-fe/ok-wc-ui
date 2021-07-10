@@ -128,6 +128,67 @@ a:active {
 } 
 
 
+// ant-reset
+// confirm-modal
+.ok-simple-modal {
+	padding-bottom: 0;
+	.ant-modal-content {
+		border-radius: 8px;
+	}
+	.ant-modal-confirm-body {
+		display: flex;
+		align-items: center;
+	}
+	.icon-first {
+		font-size: 22px;
+		font-weight: normal;
+		color: @bl-brand-c;
+		margin-right: 8px;
+		line-height: 22px;
+	}
+	.ant-modal-confirm-body .ant-modal-confirm-content {
+		margin-top: 0;
+		font-weight: normal;
+		font-size: 16px;
+		line-height: 22px;
+		color: @bl-n900;
+	}
+
+	// confirm 按钮边距
+	.ant-modal-confirm-btns {
+		.ant-btn + .ant-btn {
+			margin-left: 12px;
+		}
+	}
+}
+
+// buttons
+[class*='ok-simple-modal'] {
+	.ant-btn {
+		border-radius: 4px;
+		&:hover,
+		&:focus {
+			color: @bl-brand-hover;
+			border-color: @bl-brand-hover;
+		}
+	}
+	.ant-btn-primary {
+		background-color: @bl-brand-c;
+		border-color: @bl-brand-c;
+		&:hover,
+		&:focus {
+			color: #fff;
+			background-color: @bl-brand-hover;
+			border-color: @bl-brand-hover;
+		}
+	}
+  .ant-btn-link {
+    color: @bl-n900;
+    border: none;
+  }
+}
+
+
 
 
 

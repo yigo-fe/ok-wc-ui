@@ -3,8 +3,8 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-01 11:01:11
- * @FilePath: /packages/ok-accessory/upload-base-hook.ts
+ * @LastEditTime: 2021-07-10 11:57:17
+ * @FilePath: /packages/ok-accessory/upload.base.hook.ts
  */
 
 /**
@@ -34,14 +34,16 @@
  *
  */
 
-import { message, Modal } from 'ant-design-vue'
+import { message } from 'ant-design-vue'
 import { computed } from 'ok-lit'
-import { h, reactive, ref, watch } from 'vue'
+import { reactive, ref, watch } from 'vue'
 
-import confirmIcon from '../assets/images/confirm.svg'
 import { i18n } from '../locales'
+import { baseURL } from '../services/api'
 import { isSameArray } from '../utils/index'
+import { confirmModal } from '../utils/utils.modal'
 import type { OkFile, UploadStatus } from './upload.type'
+import { download } from './utils'
 type UpdateFile = {
   percentage?: number
   status?: UploadStatus
@@ -167,7 +169,7 @@ export default function (props, context, config) {
       file: rawFile,
       data: props.data,
       filename: props.name,
-      action: config.action,
+      action: props.action || `${baseURL}${config.action}`,
       onProgress: (e: ProgressEvent) => {
         handleProgress(e, rawFile)
       },
@@ -285,41 +287,11 @@ export default function (props, context, config) {
     }
     let file = fileLists.value[idx]
 
-    Modal.confirm({
-      content: h(
-        'div',
-        {
-          style: {
-            display: 'flex',
-            alignItems: 'center',
-            fontSize: '16px',
-            lineHeight: '22px',
-            color: '#1F2329',
-          },
-        },
-        [
-          h('img', {
-            src: confirmIcon,
-            style: {
-              with: '22px',
-              height: '22px',
-              verticalAlign: 'middle',
-              marginRight: '8px',
-            },
-          }),
-          h(
-            'div',
-            {
-              class: '',
-            },
-            confirmMsg()
-          ),
-        ]
-      ),
-      class: 'file-delete-confirm',
+    // 二次确认弹窗
+    const options = {
+      content: confirmMsg(),
       okText: i18n.$t('common.confirm', '确定'),
       cancelText: i18n.$t('common.cancel', '取消'),
-      width: 450,
       onOk: () => {
         // 处理beforeRemove
         if (
@@ -331,10 +303,9 @@ export default function (props, context, config) {
           config.remove({ file, index: idx, fileLists: fileLists.value })
         }
       },
-      onCancel() {
-        Modal.destroyAll()
-      },
-    })
+    }
+
+    confirmModal(options)
   }
   /**
    * 下载
@@ -342,8 +313,13 @@ export default function (props, context, config) {
    */
   const handleDownload = data => {
     let file = fileLists.value.find(v => v.uid === data.detail.uid)
+    // 自定义下载
+    if (props.customDownload) {
+      props.customDownload(file)
+      return
+    }
     if (file) {
-      // window.open(file.response.data[0].download_url, '_blank')
+      download(file.response?.data?.[0]?.download_url)
       // 处理用户自定义事件
       props.onDownload && props.onDownload(file)
     }

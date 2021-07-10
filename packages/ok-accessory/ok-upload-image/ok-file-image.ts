@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-09 17:25:23
+ * @LastEditTime: 2021-07-10 11:04:41
  * @FilePath: /packages/ok-accessory/ok-upload-image/ok-file-image.ts
  */
 
@@ -254,16 +254,8 @@ defineComponent(
 
     const renderDownload = (item: UploadFile) => {
       if (props.showDownload) {
-        const response: any = item.response
-        const download_url =
-          response && response.data ? response.data[0].download_url : ''
         return html`
-          <a
-            class="operation-icon"
-            @click=${() => handleDownload(item)}
-            .href=${download_url}
-            download
-          >
+          <i class="operation-icon" @click=${() => handleDownload(item)}>
             <svg
               t="1625034930890"
               viewBox="0 0 1024 1024"
@@ -284,7 +276,7 @@ defineComponent(
                 fill="#fff"
               ></path>
             </svg>
-          </a>
+          </i>
         `
       }
     }

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-01 11:04:02
+ * @LastEditTime: 2021-07-10 11:50:43
  * @FilePath: /packages/ok-accessory/ok-upload-drag/ok-file-list.ts
  */
 
@@ -57,8 +57,8 @@ defineComponent(
       context.emit('delete', file)
     }
 
-    const handlePreview = (file: UploadFile) => {
-      context.emit('preview', file)
+    const handlePreview = (file: UploadFile, index: number) => {
+      context.emit('preview', { file, index })
     }
 
     const handleDownload = (file: UploadFile) => {
@@ -174,10 +174,13 @@ defineComponent(
       }
     }
 
-    const renderPrveiew = (item: UploadFile) => {
+    const renderPrveiew = (item: UploadFile, index: number) => {
       if (props.showPreview)
         return html`
-          <i class="file-icon-operate" @click=${() => handlePreview(item)}>
+          <i
+            class="file-icon-operate"
+            @click=${() => handlePreview(item, index)}
+          >
             <svg
               t="1625108551730"
               viewBox="0 0 1024 1024"
@@ -202,15 +205,10 @@ defineComponent(
 
     const renderDownload = (item: UploadFile) => {
       if (props.showDownload) {
-        const response: any = item.response
-        const download_url =
-          response && response.data ? response.data[0].download_url : ''
         return html`
-          <a
+          <i
             @click=${() => handleDownload(item)}
             class="file-icon-operate"
-            .href=${download_url}
-            download
             class="el-upload-list__item-download"
           >
             <svg
@@ -231,7 +229,7 @@ defineComponent(
                 p-id="47057"
               ></path>
             </svg>
-          </a>
+          </i>
         `
       }
     }
@@ -267,17 +265,18 @@ defineComponent(
      * 根据上传状态判断是否展示删除按钮
      * @param item 当前文件
      */
-    const renderOperations = (item: UploadFile) => {
+    const renderOperations = (item: UploadFile, index: number) => {
       if (item.status === 'success') {
         return html`
           <div class="item-operation">
-            ${renderPrveiew(item)} ${renderDownload(item)} ${renderRemove(item)}
+            ${renderPrveiew(item, index)} ${renderDownload(item)}
+            ${renderRemove(item)}
           </div>
         `
       }
     }
 
-    const renderListItem = (item: UploadFile) => {
+    const renderListItem = (item: UploadFile, index: number) => {
       const suffix = getFileType(item.name)
       return html`
         <div
@@ -290,7 +289,7 @@ defineComponent(
           <div class="ok-file-list__item_name">
             <div class="file_name_wraper">
               <span class="ok-file-list__item_file_name">${item.name}</span>
-              ${renderUploading(item)} ${renderOperations(item)}
+              ${renderUploading(item)} ${renderOperations(item, index)}
             </div>
             ${renderProgress(item)}
           </div>
@@ -310,8 +309,8 @@ defineComponent(
         })}
       >
         ${props.fileList.map(
-          item => html` <li class="ok-file-list__item">
-            ${renderListItem(item)}
+          (item, index) => html` <li class="ok-file-list__item">
+            ${renderListItem(item, index)}
           </li>`
         )}
       </ul>

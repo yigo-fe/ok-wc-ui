@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-03 14:30:43
+ * @LastEditTime: 2021-07-10 11:28:58
  * @FilePath: /packages/ok-accessory/ok-upload-drag/ok-upload-drag.ts
  */
 
@@ -40,8 +40,8 @@ import { ref } from 'vue'
 
 import { i18n } from '../../locales'
 import { COMMON_CSS_PATH } from '../../path.config'
+import useAttachmentHandle from '../attachment.common.hook'
 import { UploadProps } from '../upload.props'
-import useAttachmentHandle from './upload-attachment-hook'
 defineComponent(
   'ok-upload-drag',
   {

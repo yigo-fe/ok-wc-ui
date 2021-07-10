@@ -129,6 +129,55 @@ a:active {
 .file-delete-confirm .ant-modal-confirm-btns .ant-btn {
   border-radius: 4px;
 }
+.ok-simple-modal {
+  padding-bottom: 0;
+}
+.ok-simple-modal .ant-modal-content {
+  border-radius: 8px;
+}
+.ok-simple-modal .ant-modal-confirm-body {
+  display: flex;
+  align-items: center;
+}
+.ok-simple-modal .icon-first {
+  font-size: 22px;
+  font-weight: normal;
+  color: var(--bl-brand-c, #4C78FC);
+  margin-right: 8px;
+  line-height: 22px;
+}
+.ok-simple-modal .ant-modal-confirm-body .ant-modal-confirm-content {
+  margin-top: 0;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+  color: var(--bl-n900-c, #1F2329);
+}
+.ok-simple-modal .ant-modal-confirm-btns .ant-btn + .ant-btn {
+  margin-left: 12px;
+}
+[class*='ok-simple-modal'] .ant-btn {
+  border-radius: 4px;
+}
+[class*='ok-simple-modal'] .ant-btn:hover,
+[class*='ok-simple-modal'] .ant-btn:focus {
+  color: var(--bl-brand-hover, #658BFC);
+  border-color: var(--bl-brand-hover, #658BFC);
+}
+[class*='ok-simple-modal'] .ant-btn-primary {
+  background-color: var(--bl-brand-c, #4C78FC);
+  border-color: var(--bl-brand-c, #4C78FC);
+}
+[class*='ok-simple-modal'] .ant-btn-primary:hover,
+[class*='ok-simple-modal'] .ant-btn-primary:focus {
+  color: #fff;
+  background-color: var(--bl-brand-hover, #658BFC);
+  border-color: var(--bl-brand-hover, #658BFC);
+}
+[class*='ok-simple-modal'] .ant-btn-link {
+  color: var(--bl-n900-c, #1F2329);
+  border: none;
+}
 /* ok-avatar */
 .ok-avatar-root {
   display: inline-block;

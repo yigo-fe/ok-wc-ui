@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-02 12:11:23
+ * @LastEditTime: 2021-07-10 11:30:18
  * @FilePath: /packages/ok-accessory/ok-upload-subtable/ok-upload-subtable-image.ts
  */
 
@@ -12,7 +12,7 @@ import { defineComponent, html, PropType } from 'ok-lit'
 
 import { i18n } from '../../locales'
 import { COMMON_CSS_PATH } from '../../path.config'
-import useImageHandle from '../ok-upload-image/upload-image-hook'
+import useImageHandle from '../image.common.hook'
 import { UploadProps } from '../upload.props'
 defineComponent(
   'ok-upload-subtable-image',

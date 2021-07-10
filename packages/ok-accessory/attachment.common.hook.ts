@@ -1,25 +1,33 @@
 /*
- * @Descripttion:
+ * @Descripttion: 文件上传公用逻辑处理
  * @Author: 付静
- * @Date: 2021-03-19 01:13:31
+ * @Date: 2021-07-10 11:15:37
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-03 14:30:28
- * @FilePath: /packages/ok-accessory/ok-upload-drag/upload-attachment-hook.ts
+ * @LastEditTime: 2021-07-10 11:17:16
+ * @FilePath: /packages/ok-accessory/attachment.common.hook.ts
  */
-
 import { message } from 'ant-design-vue'
 
-import { i18n } from '../../locales'
-import { apiInit } from '../../services/api'
-import useUploadHandler from '../upload-base-hook'
+import { i18n } from '../locales'
+import { apiInit } from '../services/api'
+import useUploadHandler from './upload.base.hook'
+
 export default function (props, context) {
   const api = apiInit()
   // 删除文件
   const remove = async ({ file, fileLists, index }) => {
     const fileId = file.response?.data[0].file_id
-    const result = await api.default.DelAttachmentPrivateV1GET({
-      query: { fileId },
-    })
+
+    let result: any
+    // 如果传入了自定义删除
+    if (props.customRemove) {
+      result = await props.customRemovePromise(file)
+    } else {
+      result = await api.default.DelAttachmentPrivateV1GET({
+        query: { fileId },
+      })
+    }
+
     if (result.code === '000000') {
       // 删除显示的上传列表
       fileLists.splice(index, 1)
@@ -36,7 +44,12 @@ export default function (props, context) {
    * @param data
    */
   const handlePreview = data => {
-    let file = fileLists.value.find(v => v.uid === data.detail.uid)
+    let file = fileLists.value.find(v => v.uid === data.detail.file.uid)
+    // 自定义预览
+    if (props.customPreview) {
+      props.customPreview(file)
+      return
+    }
     if (!file) return
     // 图片、PDF、word、PPT、excel
     // const suffix = getFileType(file.response?.data?.[0]?.file_name)
