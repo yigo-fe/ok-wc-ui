@@ -3,12 +3,12 @@
  * @Author: 付静
  * @Date: 2021-07-09 14:58:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-09 17:47:14
+ * @LastEditTime: 2021-07-10 13:46:19
  * @FilePath: /packages/ok-accessory/ok-image-preview/index.ts
  */
 import { Image } from 'ant-design-vue'
 import { defineComponent, html, onMounted, PropType } from 'ok-lit'
-import { computed, createApp, ref, watch } from 'vue'
+import { computed, createApp, ref } from 'vue'
 
 import { ANTD_VUE_CDN, COMMON_CSS_PATH } from '../../path.config'
 import { sourceHost } from '../../services/api'
@@ -18,20 +18,8 @@ defineComponent(
     imgList: {
       type: Array as unknown as PropType<[]>,
     },
-    index: {
-      type: Number,
-      default: -1,
-    },
-    preview: {
-      // eslint-disable-next-line no-unused-vars
-      type: Function as unknown as PropType<(index: number) => void>,
-    },
-    close: {
-      // eslint-disable-next-line no-unused-vars
-      type: Function as unknown as PropType<(index: number) => void>,
-    },
   },
-  (props, context) => {
+  (props, context: any) => {
     onMounted(() => {
       const options = {
         setup() {
@@ -63,39 +51,20 @@ defineComponent(
             })
           }
 
+          // 暴露预览方法
           const imgPreviewBox: any = ref(null)
-
-          // 监听index变化，模拟点击
-          watch(
-            () => props.index,
-            () => {
-              const idx = +props.index
-              if (idx > -1) {
-                const el: any =
-                  imgPreviewBox.value?.querySelectorAll('.ant-image')
-                el?.[idx]?.click()
-                props.preview && props.preview(idx)
-              }
-            },
-            {
-              immediate: true,
+          const preview = (index: number) => {
+            if (index > -1) {
+              const el: any =
+                imgPreviewBox.value?.querySelectorAll('.ant-image')
+              el?.[index]?.click()
             }
-          )
-
-          const previewType = {
-            visible: true,
-            onVisibleChange: (visible: boolean) => {
-              console.log('visible', visible)
-              // if (!visible) {
-              //   props.close && props.close()
-              // }
-            },
           }
+          context.expose({ preview })
 
           return {
             list,
             imgPreviewBox,
-            previewType,
           }
         },
         template: `

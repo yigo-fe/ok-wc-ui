@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-10 11:30:06
+ * @LastEditTime: 2021-07-10 13:51:10
  * @FilePath: /packages/ok-accessory/ok-upload-image/ok-upload-image.ts
  */
 
@@ -86,13 +86,10 @@ defineComponent(
       uploadFiles(files)
     }
 
-    // 预览：打开当前窗口
-    const previewIdx = ref(-1)
+    // 预览方案二：打开当前窗口
     // const handlePreview = (e: CustomEvent) => {
-    //   previewIdx.value = e.detail.index
-    //   setTimeout(() => {
-    //     previewIdx.value = -1
-    //   }, 200)
+    //   const el: any = context.$refs.imagePreviewRef
+    //   el.preview(e.detail.index)
     // }
 
     const renderUploader = () => {
@@ -148,7 +145,7 @@ defineComponent(
 
     // todo 当前窗口打开
     //   <ok-image-preview
-    //   .index=${previewIdx.value}
+    //   ref="imagePreviewRef"
     //   .imgList=${fileLists.value}
     // ></ok-image-preview>
 

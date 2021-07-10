@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-10 11:04:41
+ * @LastEditTime: 2021-07-10 14:12:30
  * @FilePath: /packages/ok-accessory/ok-upload-image/ok-file-image.ts
  */
 
@@ -53,10 +53,6 @@ defineComponent(
      * 点击删除文件
      * @param file 要删除的文件
      */
-    // const handleDelete = (file: UploadFile) => {
-    //   context.emit('delete', file)
-    // }
-
     const handlePreview = (file: UploadFile, index: number) => {
       context.emit('preview', { file, index })
     }
@@ -83,77 +79,12 @@ defineComponent(
     }
 
     const renderProgress = (file: any) => {
-      // if (file.status === 'uploading') {
-      //   return renderUploading(file)
-      // } else if (file.status === 'fail') {
-      //   return renderUploadFail(file)
-      // }
-
       if (file.status === 'uploading' || file.status === 'fail') {
         return renderUpload(file)
       }
     }
 
     const uploadFailText = i18n.$t('common.uploadFail', '上传失败')
-
-    // /**
-    //  * 根据上传状态判断是否展示进度条
-    //  * @param item 当前文件
-    //  */
-    // const renderUploading = (file: any) => {
-    //   let p = file.percentage || 0
-    //   const percentage = `${parseInt(p.toFixed(), 10)}%`
-    //   return html`
-    //     <div class="ok-process-wraper ok-image-uploading" style="position: absolute; top:0;">
-    //       <span
-    //         class="image-close-btn"
-    //         @click=${() => handleCloseClick(file, file.status)}">
-    //         <svg
-    //           t="1616573273136"
-    //           class="icon abort-icon"
-    //           viewBox="0 0 1024 1024"
-    //           version="1.1"
-    //           xmlns="http://www.w3.org/2000/svg"
-    //           p-id="27041"
-    //           width="12"
-    //           height="12"
-    //         >
-    //           <path
-    //             d="M512 451.669333L813.696 149.952l60.352 60.352L572.330667 512l301.717333 301.696-60.352 60.352L512 572.330667 210.304 874.048l-60.352-60.352L451.669333 512 149.952 210.304l60.352-60.352L512 451.669333z"
-    //             p-id="27042"
-    //           ></path>
-    //         </svg>
-    //       </span>
-    //       <div class="image-process-wraper">
-    //         <span class="percentage-text">${percentage}</span>
-    //         <ok-progress
-    //           class="image-progress"
-    //           .percentage=${file.percentage}
-    //           .status=${file.status}
-    //         ></ok-progress>
-    //       </div>
-    //     </div>
-    //   `
-    // }
-
-    // 上传失败
-    // const renderUploadFail = (file: any) => {
-    //   return html`
-    //     <div
-    //       class="ok-process-wraper ok-image-fail"
-    //       style="position: absolute; top:0;"
-    //     >
-    //       <div class="image-process-wraper">
-    //         <span class="upload-fail-text">${uploadFailText}</span>
-    //         <ok-progress
-    //           class="image-progress"
-    //           .percentage=${file.percentage}
-    //           .status=${file.status}
-    //         ></ok-progress>
-    //       </div>
-    //     </div>
-    //   `
-    // }
 
     const renderCloseBtn = (file: any) => {
       return html`
