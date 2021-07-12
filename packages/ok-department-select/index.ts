@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:01:15
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-08 16:49:54
+ * @LastEditTime: 2021-07-12 20:16:48
  * @FilePath: /packages/ok-department-select/index.ts
  */
 import './ok-department-modal'
@@ -113,6 +113,9 @@ defineComponent(
           :collect="collectMap"
           :change="handleModalChange"
           :close="handleCloseModal" 
+          :remoteMethod="remoteMethod"
+          :getRootDept="getRootDept"
+          :getSubDept="getSubDept"         
           ></ok-department-modal>
       `,
       }

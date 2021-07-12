@@ -617,8 +617,14 @@
       okDeptInput.value = ['13','14', '18', '19']
       // okDeptInput.borderRadius = 'none'
       okDeptInput.multiple = true
-      okDeptInput.disabled = true
-      okDeptInput.isError = true
+      // okDeptInput.disabled = true
+      // okDeptInput.isError = true
+    //   remoteMethod,
+    // getRootDept,
+    // getSubDept,
+      okDeptInput.remoteMethod = (query, level)=>{
+        console.log('remoteMethod-dept')
+      }
       okDeptInput.update = (val, list)=>{
         console.log('okDeptInput-update-index',val, list)
         // okDeptInput.value = val

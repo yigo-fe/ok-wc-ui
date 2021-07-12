@@ -1,9 +1,10 @@
+/* eslint-disable no-unused-vars */
 /*
  * @Descripttion:
  * @Author: 付静
  * @Date: 2021-03-23 21:02:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-08 16:49:41
+ * @LastEditTime: 2021-07-12 20:07:04
  * @FilePath: /packages/ok-department-select/department-props.ts
  */
 import { PropType } from 'ok-lit'
@@ -99,6 +100,28 @@ const propsOptions = {
   isError: {
     type: Boolean,
     default: false,
+  },
+  // 自定义根据id查信息
+  getInfoById: {
+    type: Function as unknown as PropType<
+      (department_ids: string[], display_level: number) => Promise<unknown>
+    >,
+  },
+  // 自定义搜索
+  remoteMethod: {
+    type: Function as unknown as PropType<
+      (query: string, display_level: number) => Promise<unknown>
+    >,
+  },
+  // 自定义组织架构根节点
+  getRootDept: {
+    type: Function as unknown as PropType<() => Promise<unknown>>,
+  },
+  // 查询子部门节点
+  getSubDept: {
+    type: Function as unknown as PropType<
+      (parent_dept_id: string, display_level: number) => Promise<unknown>
+    >,
   },
 }
 

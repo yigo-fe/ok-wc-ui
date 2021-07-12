@@ -4,7 +4,7 @@
  * @Author: 付静
  * @Date: 2021-02-05 19:42:22
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-09 18:40:58
+ * @LastEditTime: 2021-07-10 17:25:19
  * @FilePath: /packages/ok-accessory/upload.props.ts
  */
 
@@ -152,6 +152,10 @@ const UploadProps = {
   // 自定义下载
   customDownload: {
     type: Function as unknown as PropType<AjaxEventListener>,
+  },
+  // 处理上传成功后的数据（字段映射）
+  formatUploadData: {
+    type: Function as unknown as PropType<(res: any) => void>,
   },
 }
 

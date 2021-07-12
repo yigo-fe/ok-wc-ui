@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 15:19:21
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-17 15:18:55
+ * @LastEditTime: 2021-07-12 18:53:15
  * @FilePath: /packages/ok-employee-select/hook-modal.ts
  */
 import { debounce } from 'lodash'
@@ -81,7 +81,10 @@ export default function (props: any) {
   let rootDept: any = {}
   // 部门树获取根 节点
   const getDeptGetRootDept = async () => {
-    const result = await api.default.GetRootDeptDeptPrivateV1POST({})
+    // 处理自定义接口
+    const result = props.getRootDept
+      ? await props.getRootDept()
+      : await api.default.GetRootDeptDeptPrivateV1POST({})
     if (result.code === '000000') {
       rootDept = result.data
       breadcrumbList.value.push(result.data)
@@ -106,10 +109,13 @@ export default function (props: any) {
   }
   // 根据部门ID查询子集部门
   const searchDeptById = async (department_id: string = '1') => {
-    const result = await api.default.SelectDeptList({
-      display_level: 1,
-      parent_dept_id: department_id,
-    })
+    // 处理自定义接口
+    const result = props.getSubDept
+      ? await props.getSubDept(department_id)
+      : await api.default.SelectDeptList({
+          display_level: 1,
+          parent_dept_id: department_id,
+        })
 
     if (result.code === '000000') {
       deptList.value = result.data
@@ -118,10 +124,13 @@ export default function (props: any) {
 
   //查询部门下的人员
   const searchEmployeeById = async () => {
-    const result = await api.default.SearchDeptUserInfo({
-      department_id: department_id.value,
-      param: queryKey.value,
-    })
+    // 处理自定义接口
+    const result = props.queryDeptUser
+      ? await props.queryDeptUser(department_id.value, queryKey.value)
+      : await api.default.SearchDeptUserInfo({
+          department_id: department_id.value,
+          param: queryKey.value,
+        })
     if (result.code === '000000') {
       employeeList.value = result.data?.rows
       // 收集信息
@@ -139,7 +148,10 @@ export default function (props: any) {
   // 根据关键字查询人员信息
   const searchEmployeeByKey = async () => {
     if (!queryKey.value) return
-    const result = await api.default.SearchUserInfo({ param: queryKey.value })
+    // 处理自定义接口
+    const result = props.queryDeptUser
+      ? await props.remoteMethod(queryKey.value)
+      : await api.default.SearchUserInfo({ param: queryKey.value })
     if (result.code === '000000') {
       const data: any = result.data?.rows
       searchResultList.value = data

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 18:41:06
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-31 20:32:34
+ * @LastEditTime: 2021-07-12 20:36:11
  * @FilePath: /packages/ok-department-select/hook-modal.ts
  */
 import { debounce } from 'lodash'
@@ -67,7 +67,9 @@ export default function (props: any) {
 
   // 入口： 获取根目录
   const getRootTree = async () => {
-    const result = await api.default.GetRootDeptDeptPrivateV1POST({})
+    const result = props.getRootDept
+      ? await props.getRootDept()
+      : await api.default.GetRootDeptDeptPrivateV1POST({})
     if (result.code === '000000') {
       const data: any = result.data
       data.scopedSlots = scopedSlots
@@ -78,36 +80,73 @@ export default function (props: any) {
     }
   }
 
-  // 懒加载获取数据
-  const loadData = (treeNode: any) => {
-    return new Promise((resolve: any) => {
-      if (treeNode.dataRef.children) {
-        resolve()
-        return
-      }
-      api.default
-        .SelectDeptListDeptPrivateV1POST({
+  // 处理懒加载请求数据
+  const handleDataAfterRequest = (res: any, treeNode: any, resolve: any) => {
+    if (res.code === '000000') {
+      res.data.forEach((item: any) => {
+        item.scopedSlots = scopedSlots
+        item.isLeaf = !item.has_child
+      })
+      treeNode.dataRef.children = res.data
+      expandedKeys.value.push(treeNode.dataRef.department_id)
+    }
+    // 收集信息
+    props.collect && props.collect(res.data)
+    nextTick(() => {
+      treeData.value = [...treeData.value]
+      resolve()
+    })
+  }
+
+  // 树懒加载
+  const handleLoadData = async (treeNode: any, resolve: any) => {
+    const result = props.getSubDept
+      ? await props.getSubDept(
+          treeNode.dataRef.department_id,
+          displayLevel.value
+        )
+      : await api.default.SelectDeptListDeptPrivateV1POST({
           payload: {
             display_level: displayLevel.value,
             parent_dept_id: treeNode.dataRef.department_id,
           },
         })
-        .then((res: any) => {
-          if (res.code === '000000') {
-            res.data.forEach((item: any) => {
-              item.scopedSlots = scopedSlots
-              item.isLeaf = !item.has_child
-            })
-            treeNode.dataRef.children = res.data
-            expandedKeys.value.push(treeNode.dataRef.department_id)
-          }
-          // 收集信息
-          props.collect && props.collect(res.data)
-          nextTick(() => {
-            treeData.value = [...treeData.value]
-            resolve()
-          })
-        })
+
+    handleDataAfterRequest(result, treeNode, resolve)
+  }
+
+  // 懒加载获取数据
+  const loadData = async (treeNode: any) => {
+    return new Promise((resolve: any) => {
+      if (treeNode.dataRef.children) {
+        resolve()
+        return
+      }
+
+      handleLoadData(treeNode, resolve)
+      // api.default
+      //   .SelectDeptListDeptPrivateV1POST({
+      //     payload: {
+      //       display_level: displayLevel.value,
+      //       parent_dept_id: treeNode.dataRef.department_id,
+      //     },
+      //   })
+      //   .then((res: any) => {
+      //     if (res.code === '000000') {
+      //       res.data.forEach((item: any) => {
+      //         item.scopedSlots = scopedSlots
+      //         item.isLeaf = !item.has_child
+      //       })
+      //       treeNode.dataRef.children = res.data
+      //       expandedKeys.value.push(treeNode.dataRef.department_id)
+      //     }
+      //     // 收集信息
+      //     props.collect && props.collect(res.data)
+      //     nextTick(() => {
+      //       treeData.value = [...treeData.value]
+      //       resolve()
+      //     })
+      //   })
     })
   }
 
@@ -119,12 +158,14 @@ export default function (props: any) {
   const onFetch = async () => {
     if (!queryKey.value) return
     loading.value = true
-    const result = await api.default.SearchDeptPrivateV1POST({
-      payload: {
-        param: queryKey.value,
-        display_level: displayLevel.value,
-      },
-    })
+    const result = props.remoteMethod
+      ? await props.remoteMethod(queryKey.value, displayLevel.value)
+      : await api.default.SearchDeptPrivateV1POST({
+          payload: {
+            param: queryKey.value,
+            display_level: displayLevel.value,
+          },
+        })
     loading.value = false
     if (result.code === '000000') {
       const data: any = result.data

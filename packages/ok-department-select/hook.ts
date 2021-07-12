@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 20:15:04
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-08 18:30:43
+ * @LastEditTime: 2021-07-12 20:37:31
  * @FilePath: /packages/ok-department-select/hook.ts
  */
 import { debounce } from 'lodash'
@@ -46,6 +46,13 @@ export default function (props: any, okDepartmentInput: any) {
   )
   // 下拉框append元素
   const getPopupContainer = computed(() => props.getPopupContainer)
+
+  // 人员搜搜自定义接口
+  const remoteMethod = computed(() => props.remoteMethod)
+  // 获取组织架构根节点
+  const getRootDept = computed(() => props.getRootDept)
+  // 获取部门子节点
+  const getSubDept = computed(() => props.getSubDept)
 
   // 最多展示的tag数量。 默认展示一个，或者平铺
   const maxTagCount = computed(() => (props.flat ? null : 1))
@@ -91,22 +98,26 @@ export default function (props: any, okDepartmentInput: any) {
 
   // 根据部门ID， 查询部门信息
   const getDepartmentsByIds = async (ids: string[]) => {
-    return await api.default.GetDepartmentsByIdsDeptPrivateV1POST({
-      payload: {
-        department_ids: ids,
-        display_level: displayLevel.value,
-      },
-    })
+    return props.getInfoById
+      ? await props.getInfoById(ids, displayLevel.value)
+      : await api.default.GetDepartmentsByIdsDeptPrivateV1POST({
+          payload: {
+            department_ids: ids,
+            display_level: displayLevel.value,
+          },
+        })
   }
 
   // 搜索
   const searchDept = async (query: string) => {
-    return await api.default.SearchDeptPrivateV1POST({
-      payload: {
-        param: query,
-        display_level: displayLevel.value,
-      },
-    })
+    return props.remoteMethod
+      ? await props.remoteMethod(query, displayLevel.value)
+      : await api.default.SearchDeptPrivateV1POST({
+          payload: {
+            param: query,
+            display_level: displayLevel.value,
+          },
+        })
   }
 
   // 搜索loading
@@ -435,5 +446,8 @@ export default function (props: any, okDepartmentInput: any) {
     searchByKey,
     handleModalChange,
     handleFocus,
+    remoteMethod,
+    getRootDept,
+    getSubDept,
   }
 }

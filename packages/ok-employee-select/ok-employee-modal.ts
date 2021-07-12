@@ -1,9 +1,10 @@
+/* eslint-disable no-unused-vars */
 /*
  * @Descripttion:
  * @Author: 付静
  * @Date: 2021-03-15 17:56:38
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-22 16:08:14
+ * @LastEditTime: 2021-07-12 18:59:19
  * @FilePath: /packages/ok-employee-select/ok-employee-modal.ts
  */
 
@@ -64,6 +65,28 @@ defineComponent(
     },
     close: {
       type: Function as unknown as PropType<() => void>,
+    },
+    // 自定义搜索
+    remoteMethod: {
+      type: Function as unknown as PropType<
+        (query: string) => Promise<unknown>
+      >,
+    },
+    // 自定义组织架构根节点
+    getRootDept: {
+      type: Function as unknown as PropType<() => Promise<unknown>>,
+    },
+    // 查询子部门节点
+    getSubDept: {
+      type: Function as unknown as PropType<
+        (parent_dept_id: string) => Promise<unknown>
+      >,
+    },
+    // 查询部门下的人员
+    queryDeptUser: {
+      type: Function as unknown as PropType<
+        (department_id: string, param: string) => Promise<unknown>
+      >,
     },
   },
   (props, context) => {

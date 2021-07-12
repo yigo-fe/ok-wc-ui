@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-10 11:57:17
+ * @LastEditTime: 2021-07-10 17:23:34
  * @FilePath: /packages/ok-accessory/upload.base.hook.ts
  */
 
@@ -175,6 +175,9 @@ export default function (props, context, config) {
       },
       onSuccess: (res: any) => {
         if (res.code === '000000') {
+          // 处理自定义接口上传后的数据
+          props.formatUploadData && props.formatUploadData(res)
+          // 处理上传成功数据
           handleSuccess(res, rawFile)
           delete reqs.value[uid]
         } else {

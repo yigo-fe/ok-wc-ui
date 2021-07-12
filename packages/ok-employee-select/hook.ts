@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 15:16:57
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-08 18:29:45
+ * @LastEditTime: 2021-07-12 20:15:50
  * @FilePath: /packages/ok-employee-select/hook.ts
  */
 import { debounce } from 'lodash'
@@ -53,7 +53,16 @@ export default function (props: any, context: any, okEmployeeInput: any) {
   // 下拉框append元素
   const getPopupContainer = computed(() => props.getPopupContainer)
 
+  // 人员卡片自定义接口
   const propsGetInfoByEmpId = computed(() => props.propsGetInfoByEmpId)
+  // 人员搜搜自定义接口
+  const remoteMethod = computed(() => props.remoteMethod)
+  // 获取组织架构根节点
+  const getRootDept = computed(() => props.getRootDept)
+  // 获取部门子节点
+  const getSubDept = computed(() => props.getSubDept)
+  // 查询部门下直属人员
+  const queryDeptUser = computed(() => props.queryDeptUser)
 
   // modal 展示与否
   const visible = ref(false)
@@ -97,13 +106,16 @@ export default function (props: any, context: any, okEmployeeInput: any) {
     })
   }
 
-  // 根据部门ID， 查询部门信息
+  // 根据ID， 查询信息
   const getItemByIds = async (ids: string[]) => {
-    return await api.default.ListUserInfoByIdsUserPrivateV1POST({
-      payload: {
-        user_ids: ids,
-      },
-    })
+    // props.getInfoById 自定义查询
+    return props.getInfoById
+      ? await props.getInfoById(ids)
+      : await api.default.ListUserInfoByIdsUserPrivateV1POST({
+          payload: {
+            user_ids: ids,
+          },
+        })
   }
 
   // 搜索
@@ -513,5 +525,9 @@ export default function (props: any, context: any, okEmployeeInput: any) {
     collectMap,
     handleFocus,
     propsGetInfoByEmpId,
+    remoteMethod,
+    getRootDept,
+    getSubDept,
+    queryDeptUser,
   }
 }

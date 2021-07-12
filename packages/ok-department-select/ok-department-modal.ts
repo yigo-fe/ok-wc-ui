@@ -1,9 +1,10 @@
+/* eslint-disable no-unused-vars */
 /*
  * @Descripttion:
  * @Author: 付静
  * @Date: 2021-03-23 21:03:32
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-23 18:50:33
+ * @LastEditTime: 2021-07-12 20:40:07
  * @FilePath: /packages/ok-department-select/ok-department-modal.ts
  */
 import { Button, Checkbox, Input, Modal, Tree } from 'ant-design-vue'
@@ -63,6 +64,22 @@ defineComponent(
     },
     close: {
       type: Function as unknown as PropType<() => void>,
+    },
+    // 自定义搜索
+    remoteMethod: {
+      type: Function as unknown as PropType<
+        (query: string) => Promise<unknown>
+      >,
+    },
+    // 自定义组织架构根节点
+    getRootDept: {
+      type: Function as unknown as PropType<() => Promise<unknown>>,
+    },
+    // 查询子部门节点
+    getSubDept: {
+      type: Function as unknown as PropType<
+        (parent_dept_id: string) => Promise<unknown>
+      >,
     },
   },
   (props, context) => {

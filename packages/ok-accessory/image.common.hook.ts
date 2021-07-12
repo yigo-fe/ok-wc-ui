@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-07-10 11:16:00
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-10 11:56:53
+ * @LastEditTime: 2021-07-10 17:28:48
  * @FilePath: /packages/ok-accessory/image.common.hook.ts
  */
 import { apiInit, sourceHost } from '../services/api'
@@ -15,7 +15,7 @@ export default function (props, context) {
     const fileId = file.response?.data[0].file_id
     let result: any
     // 如果传入了自定义删除
-    if (props.customRemove) {
+    if (props.customRemovePromise) {
       result = await props.customRemovePromise(file)
     } else {
       result = await api.default.DelAttachmentPrivateV1GET({

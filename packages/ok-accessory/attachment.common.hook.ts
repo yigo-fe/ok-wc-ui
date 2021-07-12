@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-07-10 11:15:37
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-10 11:17:16
+ * @LastEditTime: 2021-07-10 17:28:32
  * @FilePath: /packages/ok-accessory/attachment.common.hook.ts
  */
 import { message } from 'ant-design-vue'
@@ -20,7 +20,7 @@ export default function (props, context) {
 
     let result: any
     // 如果传入了自定义删除
-    if (props.customRemove) {
+    if (props.customRemovePromise) {
       result = await props.customRemovePromise(file)
     } else {
       result = await api.default.DelAttachmentPrivateV1GET({
