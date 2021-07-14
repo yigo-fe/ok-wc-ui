@@ -4,7 +4,7 @@
  * @Author: 付静
  * @Date: 2021-02-05 19:42:22
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-10 17:25:19
+ * @LastEditTime: 2021-07-14 16:05:13
  * @FilePath: /packages/ok-accessory/upload.props.ts
  */
 
@@ -139,6 +139,12 @@ const UploadProps = {
     type: Function as unknown as PropType<
       // eslint-disable-next-line no-unused-vars
       (ids: string[], lists: []) => void
+    >,
+  },
+  // 自定义回显
+  customDisplayList: {
+    type: Function as unknown as PropType<
+      (file_ids: string[]) => Promise<unknown>
     >,
   },
   // 自定义删除

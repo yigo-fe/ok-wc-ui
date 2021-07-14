@@ -4,7 +4,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:02:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-12 20:07:04
+ * @LastEditTime: 2021-07-12 20:53:20
  * @FilePath: /packages/ok-department-select/department-props.ts
  */
 import { PropType } from 'ok-lit'
@@ -101,7 +101,7 @@ const propsOptions = {
     type: Boolean,
     default: false,
   },
-  // 自定义根据id查信息
+  // 自定义接口：根据id查信息
   getInfoById: {
     type: Function as unknown as PropType<
       (department_ids: string[], display_level: number) => Promise<unknown>
@@ -113,7 +113,7 @@ const propsOptions = {
       (query: string, display_level: number) => Promise<unknown>
     >,
   },
-  // 自定义组织架构根节点
+  // 查询组织架构根节点
   getRootDept: {
     type: Function as unknown as PropType<() => Promise<unknown>>,
   },

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-07-10 11:15:37
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-10 17:28:32
+ * @LastEditTime: 2021-07-14 16:06:56
  * @FilePath: /packages/ok-accessory/attachment.common.hook.ts
  */
 import { message } from 'ant-design-vue'
@@ -71,9 +71,12 @@ export default function (props, context) {
 
   // 获取默认值
   const getDefaultFileList = async (ids: string[]) => {
-    return await api.default.GetAttachmentListAttachmentPrivateV1POST({
-      file_id_list: ids,
-    })
+    // 处理自定义回显接口
+    return props.customDisplayList
+      ? await props.customDisplayList(ids)
+      : await api.default.GetAttachmentListAttachmentPrivateV1POST({
+          file_id_list: ids,
+        })
   }
   // test:
   // const a = ['ab22a2cfdc310739fff09a08607f5534']
