@@ -500,7 +500,7 @@
 
       const okUpload = document.querySelector('ok-upload-drag')
       // 测试自定义接口
-      // okUpload.action = 'https://test.baiteda.com/ego_api/client/v1/taskfile/upload?taskInstanceId=1a7eedf6-c4a5-4f1f-ad01-47376bb4743c'
+      okUpload.action = 'https://test.baiteda.com/ego_api/client/v1/taskfile/upload?taskInstanceId=1a7eedf6-c4a5-4f1f-ad01-47376bb4743c'
       // okUpload.action = '/ego_api/client/v1/taskfile/upload?taskInstanceId=1a7eedf6-c4a5-4f1f-ad01-47376bb4743c'
       // okUpload.headers = {
       //   auth: '417c381769e54c878ab96fc74815c6a9'
@@ -520,6 +520,9 @@
       // okUpload.limit = 3
       okUpload.onExceed = ()=>{
         console.log('附件超出了')
+      }
+      okUpload.onError = ()=>{
+        console.log('出错了')
       }
       okUpload.update = (data)=>{
         // const fileIds = data.fileLists

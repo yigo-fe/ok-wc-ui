@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-03 15:31:09
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-19 17:46:16
+ * @LastEditTime: 2021-07-20 20:01:17
  * @FilePath: /packages/ok-avatar/hook.ts
  */
 import { computed, effect, ref } from 'ok-lit'
@@ -18,6 +18,7 @@ export default function (props) {
     height: '32px',
     display: 'inline-block',
     'vertical-align': 'middle',
+    cursor: 'default',
   })
   // 人员图像样式
   const avatarStyleAll = ref({

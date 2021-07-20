@@ -4,14 +4,14 @@
  * @Author: 付静
  * @Date: 2021-02-05 19:42:22
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-14 16:05:13
+ * @LastEditTime: 2021-07-20 14:40:52
  * @FilePath: /packages/ok-accessory/upload.props.ts
  */
 
 import { PropType } from 'ok-lit'
 
 import ajax from './ajax'
-import type { FileHandler, ListType, OkFile } from './upload.type'
+import type { ListType, OkFile } from './upload.type'
 
 type AjaxEventListener = (
   e: ProgressEvent,
@@ -19,7 +19,6 @@ type AjaxEventListener = (
   FileList?: []
 ) => unknown
 type Nullable<T> = T | null
-type PFileHandler<T> = PropType<FileHandler<T>>
 
 const UploadProps = {
   type: {
@@ -83,10 +82,14 @@ const UploadProps = {
     type: Function as unknown as PropType<AjaxEventListener>,
   },
   onSuccess: {
-    type: Function as unknown as PropType<AjaxEventListener>,
+    type: Function as unknown as PropType<
+      (response: any, file: any, fileLists: any) => void
+    >,
   },
   onError: {
-    type: Function as unknown as PropType<AjaxEventListener>,
+    type: Function as unknown as PropType<
+      (error: any, file: any, fileLists: any) => void
+    >,
   },
   httpRequest: {
     type: Function as unknown as
@@ -95,16 +98,13 @@ const UploadProps = {
     default: ajax,
   },
   onChange: {
-    type: Function as unknown as PFileHandler<void>,
+    type: Function as unknown as PropType<(file: any, fileLists: any) => void>,
   },
   beforeRemove: {
-    type: Function as unknown as PFileHandler<boolean>,
-  },
-  onRemove: {
-    type: Function as unknown as PFileHandler<void>,
+    type: Function as unknown as PropType<(file: any, fileLists: any) => void>,
   },
   onExceed: {
-    type: Function,
+    type: Function as unknown as PropType<(file: any, fileLists: any) => void>,
   },
   onPreview: {
     type: Function as unknown as PropType<(file: File) => void>,
@@ -136,10 +136,7 @@ const UploadProps = {
     default: false,
   },
   update: {
-    type: Function as unknown as PropType<
-      // eslint-disable-next-line no-unused-vars
-      (ids: string[], lists: []) => void
-    >,
+    type: Function as unknown as PropType<(ids: string[], lists: []) => void>,
   },
   // 自定义回显
   customDisplayList: {
