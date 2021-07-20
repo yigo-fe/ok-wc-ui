@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-06-30 10:34:30
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-01 17:50:36
+ * @LastEditTime: 2021-07-16 16:52:56
  * @FilePath: /packages/ok-person-cell/popover-tippy.ts
  */
 import { setPopover } from '@c/utils'
@@ -114,6 +114,7 @@ defineComponent(
             .size=${props.size}
             .width=${props.width}
             .height=${props.height}
+            .avatarStyle=${props.avatarStyle}
           ></ok-avatar>
         </slot>
       </span>

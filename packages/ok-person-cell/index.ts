@@ -64,6 +64,7 @@ defineComponent(
                 .size=${props.size}
                 .width=${props.width}
                 .height=${props.height}
+                .avatarStyle=${props.avatarStyle}
               ></ok-avatar></slot
           ></ok-person-tippy>
         `

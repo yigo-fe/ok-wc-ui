@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-02-18 16:01:20
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-19 20:13:34
+ * @LastEditTime: 2021-07-19 10:09:21
  * @FilePath: /packages/ok-avatar/index.ts
  */
 
@@ -31,7 +31,8 @@ defineComponent(
         template: `
         <div class="avatar-wapper" :style="avatarWapperAll">
           <div :class="[avatarClass, round && 'round']" class="tagAavtar" :style="avatarStyleAll" >
-            <div v-if="!hasAvatar" class="name-text" :style="avatarTextStyle">{{showName}}</div>
+            <div v-if="count" class="name-text" :style="avatarTextStyle">{{count>9 ? '9+' : count}}</div>
+            <div v-else-if="!hasAvatar" class="name-text" :style="avatarTextStyle">{{showName}}</div>
           </div>
         </div>
       `,

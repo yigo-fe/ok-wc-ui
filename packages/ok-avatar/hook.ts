@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-03 15:31:09
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-16 16:49:28
+ * @LastEditTime: 2021-07-19 17:46:16
  * @FilePath: /packages/ok-avatar/hook.ts
  */
 import { computed, effect, ref } from 'ok-lit'
@@ -30,8 +30,8 @@ export default function (props) {
     display: 'flex',
     'align-items': 'center',
     'justify-content': 'center',
-    width: '32px',
-    height: '32px',
+    width: '100%',
+    height: '100%',
     color: '#fff',
     'font-size': '12px',
     'font-weight': '500',
@@ -44,6 +44,10 @@ export default function (props) {
     if (!data) return
     return typeof data === 'object' ? data[props.i18n] : data
   })
+
+  const count = computed(() => props.count)
+
+  const mask = ' linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),'
 
   // 获取用户图像
   const getAvatarStyle = () => {
@@ -107,9 +111,19 @@ export default function (props) {
     checkImgURL(url).then(
       () => {
         hasAvatar.value = true
-        avatarStyleAll.value[
-          'background'
-        ] = `url(${url}) no-repeat center center / cover`
+        const bg_url = `url(${url}) no-repeat center center / cover`
+        avatarStyleAll.value['background'] = count.value
+          ? `${mask}${bg_url}`
+          : `${bg_url}`
+
+        if (count.value) {
+          // 处理文字样式
+          avatarTextStyle.value['font-size'] = '12px'
+          avatarTextStyle.value = {
+            ...avatarTextStyle.value,
+            ...props.textStyle,
+          }
+        }
       },
       () => {
         handleTextAvatar()
@@ -121,10 +135,14 @@ export default function (props) {
     hasAvatar.value = false
     showName.value = getShowName()
     // 背景色区分男女
-    avatarStyleAll.value['background'] =
+    const bg_url =
       props.personInfo?.gender == 2
         ? props.background?.female
         : props.background?.male
+    // persongroup中最后一个人员特殊处理
+    avatarStyleAll.value['background'] = count.value
+      ? `${mask}${bg_url}`
+      : `${bg_url}`
     // 处理文字样式
     avatarTextStyle.value['font-size'] = isEn.value ? '16px' : '12px'
     avatarTextStyle.value = { ...avatarTextStyle.value, ...props.textStyle }
@@ -174,5 +192,6 @@ export default function (props) {
     hasAvatar,
     avatarTextStyle,
     showName,
+    count,
   }
 }

@@ -41,6 +41,9 @@ a:active {
   input.ant-select-selection-search-input {
     caret-color: @bl-brand-c;
   }
+  .ant-input-affix-wrapper-focused {
+    box-shadow: none;
+  }
   .ant-select {
     /* 修改ant-select的border-radius */
     .ant-select-selector {
@@ -113,6 +116,10 @@ a:active {
   /* 修改部门选择modal中，树父级与子集的间距 */
   .ant-tree-child-tree > li:first-child {
     padding-top: 0;
+  }
+
+  .ant-input-affix-wrapper-focused {
+    box-shadow: none;
   }
 
 }
@@ -240,11 +247,16 @@ a:active {
   overflow: hidden;
   font-size: 14px;
 }
-.ok-person-group-root .avatar-list {
+.ok-person-group-wrap .avatar-list {
   float: left;
 }
-.ok-person-group-root .avatar-list + .avatar-list {
-  margin-left: -6px;
+.ok-person-group-wrap .avatar-list + .avatar-list {
+  margin-left: -8px;
+}
+
+.ok-person-group-root .person-group-single-wrap {
+  display: flex;
+  align-items: center;
 }
 .ok-person-group-root .single-user-name {
   font-size: 14px;
@@ -281,16 +293,16 @@ a:active {
   border-radius: @ok-border-radius-base;
   box-shadow: 0 0 9px 0 rgb(0 0 0 / 8%);
   background-color: @ok-white-color;
-  padding: 8px;
-  max-height: 140px;
-  width: 110px;
+  padding: 18px 12px;
+  max-height: 200px;
+  width: 120px;
   overflow: auto;
 }
 .ok-person-group-popper .popper-item {
   position: relative;
   display: flex;
   align-items: center;
-  margin-bottom: 7px;
+  margin-bottom: 12px;
   font-size: 0;
 }
 .ok-person-group-popper .popper-item:last-child {
@@ -329,6 +341,9 @@ a:active {
   outline: none;
   &:focus{
     outline: none;
+  }
+  &.has-slot {
+    width: auto;
   }
 }
 // ok-upload-drag

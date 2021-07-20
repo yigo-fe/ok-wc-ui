@@ -156,7 +156,7 @@
         </ok-upload-drag> -->
 
         <h3>拖拽上传</h3>
-        <ok-upload-drag style="width: 500px; display: block; font-size: 0;"></ok-upload-drag>
+        <ok-upload-drag style="width: 500px; display: block; "></ok-upload-drag>
 
         <h3>antd</h3>
         <!-- <ok-attachment-drag></ok-attachment-drag>  -->
@@ -230,14 +230,14 @@
 
 
     const personInfo = {
-      avatar_url: "https://wework.qpic.cn/bizmail/cMLFZrYGchIibX5icVTGibh7b2oELMc9MsJYDiaCNNmTYREjGVRjlsq3mA/0",
+      // avatar_url: "https://wework.qpic.cn/bizmail/cMLFZrYGchIibX5icVTGibh7b2oELMc9MsJYDiaCNNmTYREjGVRjlsq3mA/0",
       department_id: "30",
       department_name: "前端部",
       email: "fujing@byteluck.com",
       employee_card: "工号",
       employee_en_name: "付静",
       employee_id: "FuJing",
-      employee_name: "付静",
+      employee_name: "Any",
       gender: 2,
       msg_relation_type: "WX",
       tenant_id: "test"
@@ -458,8 +458,8 @@
 
       const okPersonCell3 = document.querySelector('.ok-person-cell3')
       okPersonCell3.personInfo = personInfo
-      okPersonCell3.width = '30px'
-      okPersonCell3.height = '30px'
+      // okPersonCell3.width = '30px'
+      // okPersonCell3.height = '30px'
 
       // personcell slot
       const okPersonCell2 = document.querySelector('.ok-person-cell2')
@@ -472,11 +472,12 @@
 
 
       const okPersonGroup = document.querySelector('ok-person-group')
-      okPersonGroup.personList = personList
+      // okPersonGroup.personList = personList
+      okPersonGroup.personList = personList.slice(0,1)
       // okPersonGroup.personList = personList2
       // okPersonGroup.showAll = true
-      okPersonGroup.width = '34px'
-      okPersonGroup.height = '34px'
+      // okPersonGroup.width = '34px'
+      // okPersonGroup.height = '34px'
       // okPersonGroup.contentStyle = {
       //   color: 'red'
       // }
@@ -645,6 +646,7 @@
       const okDeptTree = document.querySelector('.ok-department-tree')
       okDeptTree.value = ['13','14', '20', '18', '19']
       okDeptTree.multiple = true
+      okDeptTree.level = 4
       // okDeptTree.hasBorderRadius = false
       // okDeptTree.bordered = false
       // okDeptTree.disabled = true
@@ -671,6 +673,9 @@
 
       const okEmployeeInput = document.querySelector('.ok-employee-input')
       okEmployeeInput.value = ['WangChao', 'LiuFei']
+      // okEmployeeInput.getInfoById = (ids)=>{
+      //   console.log('getInfoById',ids)
+      // }
       // okEmployeeInput.borderRadius = 'none'
       // okEmployeeInput.hasBorderRadius = false
       // okEmployeeInput.isError = true

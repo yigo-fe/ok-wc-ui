@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-06-30 10:33:52
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-30 14:12:53
+ * @LastEditTime: 2021-07-20 11:01:19
  * @FilePath: /packages/ok-person-cell/popover-ant.ts
  */
 import { Popover } from 'ant-design-vue'
@@ -76,6 +76,7 @@ defineComponent(
           const size = computed(() => props.size)
           const width = computed(() => props.width)
           const height = computed(() => props.height)
+          const avatarStyle = computed(() => props.avatarStyle)
 
           const avatarSlot = computed(() => {
             const contentSlot: any = contxt.$refs.contentSlot
@@ -110,6 +111,7 @@ defineComponent(
             isAvatarSolt,
             devtoolsLog,
             cardDisplay,
+            avatarStyle,
           }
         },
         template: `
@@ -134,6 +136,7 @@ defineComponent(
                   :size="size"
                   :width="width"
                   :height="height"
+                  :avatarStyle="avatarStyle"
                 ></ok-avatar>
               </span>
             </a-popover>

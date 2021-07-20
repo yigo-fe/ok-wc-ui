@@ -33,6 +33,10 @@ a:active {
 .ok-department-select-wraper input.ant-select-selection-search-input {
   caret-color: var(--bl-brand-c, #4C78FC);
 }
+.ok-employee-select-wraper .ant-input-affix-wrapper-focused,
+.ok-department-select-wraper .ant-input-affix-wrapper-focused {
+  box-shadow: none;
+}
 .ok-employee-select-wraper .ant-select,
 .ok-department-select-wraper .ant-select {
   /* 修改ant-select的border-radius */
@@ -122,6 +126,9 @@ a:active {
 }
 .ok-tree-modal .ant-tree-child-tree > li:first-child {
   padding-top: 0;
+}
+.ok-tree-modal .ant-input-affix-wrapper-focused {
+  box-shadow: none;
 }
 .file-delete-confirm .ant-modal-confirm-body .ant-modal-confirm-content {
   margin-top: 0;
@@ -223,11 +230,15 @@ a:active {
   overflow: hidden;
   font-size: 14px;
 }
-.ok-person-group-root .avatar-list {
+.ok-person-group-wrap .avatar-list {
   float: left;
 }
-.ok-person-group-root .avatar-list + .avatar-list {
-  margin-left: -6px;
+.ok-person-group-wrap .avatar-list + .avatar-list {
+  margin-left: -8px;
+}
+.ok-person-group-root .person-group-single-wrap {
+  display: flex;
+  align-items: center;
 }
 .ok-person-group-root .single-user-name {
   font-size: 14px;
@@ -263,16 +274,16 @@ a:active {
   border-radius: 4px;
   box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.08);
   background-color: #fff;
-  padding: 8px;
-  max-height: 140px;
-  width: 110px;
+  padding: 18px 12px;
+  max-height: 200px;
+  width: 120px;
   overflow: auto;
 }
 .ok-person-group-popper .popper-item {
   position: relative;
   display: flex;
   align-items: center;
-  margin-bottom: 7px;
+  margin-bottom: 12px;
   font-size: 0;
 }
 .ok-person-group-popper .popper-item:last-child {
@@ -307,6 +318,9 @@ a:active {
 }
 .ok-upload:focus {
   outline: none;
+}
+.ok-upload.has-slot {
+  width: auto;
 }
 .upload-inner {
   display: flex;

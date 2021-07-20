@@ -7,6 +7,7 @@ import './ok-avatar'
 import './ok-person-card'
 import './ok-person-cell'
 import './ok-person-group'
+import './ok-person-group/ok-avatar-group'
 // 上传
 import './ok-accessory/ok-upload-drag/ok-upload-drag'
 import './ok-accessory/ok-upload-table/ok-upload-table'
