@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-10 11:28:58
+ * @LastEditTime: 2021-07-20 11:03:26
  * @FilePath: /packages/ok-accessory/ok-upload-drag/ok-upload-drag.ts
  */
 
@@ -35,7 +35,7 @@
  */
 
 import { classMap } from 'lit-html/directives/class-map.js'
-import { defineComponent, html } from 'ok-lit'
+import { defineComponent, html, onMounted } from 'ok-lit'
 import { ref } from 'vue'
 
 import { i18n } from '../../locales'
@@ -110,11 +110,25 @@ defineComponent(
       dragover.value = false
     }
 
+    const hasSlot = ref(false)
+    onMounted(() => {
+      const root: any = context.shadowRoot
+      const slots = root?.querySelectorAll('slot') || []
+      if (slots.length && slots[0].assignedNodes().length) {
+        hasSlot.value = true
+      }
+    })
+
     const renderUploader = () => {
       if (!hideUploader.value)
         return html`
           <div
-            class="ok-upload ok-upload--drag"
+            class=${classMap({
+              'ok-upload': true,
+              'ok-upload--drag': true,
+              'ok-upload--drag1': true,
+              'has-slot': hasSlot.value,
+            })}
             @drop=${onDrop}
             @dragover=${onDragover}
             @dragleave=${onDragleave}
