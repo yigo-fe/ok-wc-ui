@@ -4,10 +4,18 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:03:32
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-12 20:40:07
+ * @LastEditTime: 2021-07-19 17:22:28
  * @FilePath: /packages/ok-department-select/ok-department-modal.ts
  */
-import { Button, Checkbox, Input, Modal, Tree } from 'ant-design-vue'
+import {
+  Button,
+  Checkbox,
+  ConfigProvider,
+  Input,
+  Modal,
+  Tooltip,
+  Tree,
+} from 'ant-design-vue'
 import { defineComponent, html, onMounted, PropType } from 'ok-lit'
 import { createApp } from 'vue'
 
@@ -100,6 +108,7 @@ defineComponent(
           }
         },
         template: `
+        <a-config-provider :autoInsertSpaceInButton="false">
         <a-modal 
           wrapClassName="ok-dept-modal-wrap"
           class="ok-tree-modal ok-dept-tree-modal"
@@ -136,7 +145,6 @@ defineComponent(
                   :replaceFields="{ key: 'department_id' }"
                   :tree-data="treeData"
                   :load-data="loadData"
-                  :expandedKeys="expandedKeys"
                 >
                   <template v-slot:title="{ department_name, department_id }">
                     <span
@@ -153,7 +161,10 @@ defineComponent(
                         :src="deptIcon"
                         alt=""
                       />
-                      <span class="ellipsis1">{{ department_name }}</span>
+                      <a-tooltip :overlayStyle="{'z-index': 9999}" :title="department_name">
+                        <!-- 添加空div 解决Safari自动添加title的问题 -->
+                        <div class="ellipsis1"><div></div>{{department_name}}</div>
+                      </a-tooltip>
                     </span>
                   </template>
                 </a-tree>
@@ -179,9 +190,10 @@ defineComponent(
                       :src="deptIcon"
                       alt=""
                     />
-                    <span class="ellipsis1 mr10">{{
-                      item.display_value
-                    }}</span>
+                    <a-tooltip :overlayStyle="{'z-index': 9999}" :title="item.display_value">
+                      <!-- 添加空div 解决Safari自动添加title的问题 -->
+                      <div class="ellipsis1 mr10"><div></div>{{item.display_value}}</div>
+                    </a-tooltip>
                   </li>
                 </ul>
 					
@@ -211,9 +223,12 @@ defineComponent(
                     :src="deptIcon"
                     alt=""
                   />
-                  <span class="ellipsis1 mr10">{{
-                    item.display_value
-                  }}</span>
+                  <a-tooltip :overlayStyle="{'z-index': 9999}" :title="item.display_value">
+                    <!-- 添加空div 解决Safari自动添加title的问题 -->
+                    <div class="ellipsis1 mr10"><div></div>{{
+                      item.display_value
+                    }}</div>
+                  </a-tooltip>
 
                   <span class="close-icon" @click="cancelSelect(item.department_id)">
                     <svg t="1624011089668" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1335" width="14" height="14"><path d="M892.8531595 213.99728987L214.1267437 892.8531595c-22.65441975 22.65441975-59.5487605 22.65441975-82.33263407 0-22.65441975-22.65441975-22.65441975-59.5487605 0-82.33263407l678.7264158-678.7264158c22.65441975-22.65441975 59.5487605-22.65441975 82.33263407 0s22.78387358 59.5487605 0 82.20318024z" p-id="1336" fill="#8F959E"></path><path d="M892.8531595 892.8531595c-22.65441975 22.65441975-59.5487605 22.65441975-82.33263407 0L131.79410963 213.99728987c-22.65441975-22.65441975-22.65441975-59.5487605 0-82.33263406s59.5487605-22.65441975 82.33263407 0l678.7264158 678.7264158c22.78387358 22.91332741 22.78387358 59.67821431 0 82.46208789z" p-id="1337" fill="#8F959E"></path></svg>
@@ -232,6 +247,7 @@ defineComponent(
             </div>
           </template>
         </a-modal>
+        </a-config-provider>
       `,
       }
 
@@ -241,6 +257,8 @@ defineComponent(
       app.use(Input)
       app.use(Modal)
       app.use(Tree)
+      app.use(Tooltip)
+      app.use(ConfigProvider)
       app.mount(context.$refs.showDeptTreeModal as HTMLElement)
     })
     return () => html`

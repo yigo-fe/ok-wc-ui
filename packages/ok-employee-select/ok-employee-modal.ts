@@ -4,11 +4,18 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:56:38
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-12 18:59:19
+ * @LastEditTime: 2021-07-19 17:27:03
  * @FilePath: /packages/ok-employee-select/ok-employee-modal.ts
  */
 
-import { Breadcrumb, Button, Input, Modal } from 'ant-design-vue'
+import {
+  Breadcrumb,
+  Button,
+  ConfigProvider,
+  Input,
+  Modal,
+  Tooltip,
+} from 'ant-design-vue'
 import { defineComponent, html, onMounted, PropType } from 'ok-lit'
 import { createApp } from 'vue'
 
@@ -108,6 +115,7 @@ defineComponent(
           }
         },
         template: `
+        <a-config-provider :autoInsertSpaceInButton="false">
           <a-modal 
             wrapClassName="ok-employee-modal-wrap"
             class="ok-tree-modal ok-employee-tree-modal"
@@ -151,7 +159,10 @@ defineComponent(
                       class="item-detail dept" 
                       @click="handleDeptClick(dept)">
                       <img :src="deptIcon" class="dept-icon" />
-                      <span>{{dept.department_name}}</span>
+                      <a-tooltip :overlayStyle="{'z-index': 9999}" :title="dept.department_name">
+                      <!-- 添加空div 解决Safari自动添加title的问题 -->
+                      <div class="ellipsis1"><div></div>{{dept.department_name}}</div>
+                    </a-tooltip>
                     </p>
                     <p class="item-detail employee" 
                       v-for="employee in employeeList" 
@@ -214,6 +225,7 @@ defineComponent(
               </div>
             </template>
           </a-modal>
+        </a-config-provider>
         `,
       }
       const app = createApp(options)
@@ -221,6 +233,8 @@ defineComponent(
       app.use(Button)
       app.use(Input)
       app.use(Breadcrumb)
+      app.use(Tooltip)
+      app.use(ConfigProvider)
       app.mount(context.$refs.showEmployeeModal as HTMLElement)
     })
 
