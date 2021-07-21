@@ -1313,6 +1313,7 @@ a:active {
   height: 24px;
 }
 .ok-person-detail .terminated-text {
+  flex-shrink: 0;
   font-size: 12px;
   line-height: 12px;
   font-weight: 400;

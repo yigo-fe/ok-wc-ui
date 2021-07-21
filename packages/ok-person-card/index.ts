@@ -57,11 +57,11 @@ defineComponent('ok-person-card', { ...props }, (props, context) => {
               :personInfo="JSON.stringify(personInfoCom)"
               :textStyle="JSON.stringify(textStyle)"
               showMask
-            ></ok-avatar>
+            ></ok-avatar>           
             <span class="user-name-wraper">
               <span class="person-card-name" :class="{'isTerminated': statusType === '0'}">{{personInfoCom['name'][i18n]}}</span>
-              <img v-if="personInfoCom.gender ==2" :src="femaleIcon" style="width: 16px; height: 16px;" />
-              <img v-else :src="maleIcon" style="width: 16px; height: 16px;" />
+              <img v-if="personInfoCom.gender ==2" :src="femaleIcon" style="width: 16px; height: 16px; margin-right:12px;" />
+              <img v-else :src="maleIcon" style="width: 16px; height: 16px;margin-right:12px;" />
               <div v-if="statusType === '0'" class="terminated-text">{{langPack.terminated}}</div>
             </span>
           </header>
