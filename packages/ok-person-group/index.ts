@@ -1,138 +1,142 @@
-import { Popover } from 'ant-design-vue'
-import { defineComponent, effect, html, onMounted } from 'ok-lit'
-import { computed, createApp } from 'vue'
+/*
+ * @Descripttion:
+ * @Author: 付静
+ * @Date: 2021-07-22 14:20:37
+ * @LastEditors: 付静
+ * @LastEditTime: 2021-07-22 14:20:38
+ * @FilePath: /packages/ok-person-group-old/index.ts
+ */
+import './more-list'
 
-import { ANTD_VUE_CDN, COMMON_CSS_PATH } from '../path.config'
-import props from './props'
+import { SIZE_TYPE } from '@c/enum'
+import { computed, defineComponent, html, PropType } from 'ok-lit'
+
+import { COMMON_CSS_PATH } from '../path.config'
+/**
+ * @props persons: {Array<Person>} 用户信息组
+ */
+
 defineComponent(
   'ok-person-group',
   {
-    ...props,
+    personList: {
+      type: Array as unknown as PropType<any[]>,
+      default: () => {
+        return []
+      },
+    },
+    size: {
+      type: String as unknown as PropType<SIZE_TYPE>,
+      default: SIZE_TYPE.SMALL,
+    },
+    width: {
+      type: String as unknown as PropType<string>,
+    },
+    height: {
+      type: String as unknown as PropType<string>,
+    },
+    showDelete: {
+      type: Boolean as unknown as PropType<boolean>,
+      default: false,
+    },
+    showAll: {
+      type: Boolean as unknown as PropType<boolean>,
+      default: false,
+    },
+    detailSize: {
+      type: String as unknown as PropType<string>,
+      default: 'mini',
+    },
+    detailWidth: {
+      type: String as unknown as PropType<string>,
+    },
+    detailHeight: {
+      type: String as unknown as PropType<string>,
+    },
+    contentStyle: {
+      type: Object as unknown as PropType<{}>,
+    },
+    itemStyle: {
+      type: Object as unknown as PropType<{}>,
+    },
+    placement: {
+      type: String as unknown as PropType<string>,
+    },
+    deleteItem: {
+      // eslint-disable-next-line no-unused-vars
+      type: Function as unknown as PropType<(item: any) => void>,
+    },
+    subtitleRender: {
+      // eslint-disable-next-line no-unused-vars
+      type: Function as unknown as PropType<(item: any) => void>,
+    },
+    // 审批组件传入，卡片请求数据方法
+    propsGetInfoByEmpId: {
+      type: Function,
+    },
   },
-  (props, contxt) => {
-    let app: any = null
-
-    onMounted(() => {
-      const options = {
-        setup() {
-          const detailSize = computed(() => props.detailSize)
-          const size = computed(() => props.size)
-          const height = computed(() => props.height)
-          const width = computed(() => props.width)
-          const detailWidth = computed(() => props.detailWidth)
-          const detailHeight = computed(() => props.detailHeight)
-          const itemStyle = computed(() => props.itemStyle)
-          const contentStyle = computed(() => props.contentStyle)
-          const showDelete = computed(() => props.showDelete)
-          const propsGetInfoByEmpId = computed(() => props.propsGetInfoByEmpId)
-          const closeIcon = close
-
-          const personList = computed(() => {
-            return props.personList
-          })
-          const count = computed(() => {
-            return Array.isArray(props.personList) ? props.personList.length : 0
-          })
-          const placement = computed(() => {
-            return props.placement
-          })
-          const showList = computed(() => {
-            return props.personList?.slice(0, 4)
-          })
-
-          const avatarStyle = {
-            'box-sizing': 'border-box',
-            border: '1px solid #fff',
-          }
-
-          const avatarStyleDetail = {
-            'box-sizing': 'border-box',
-            border: '1px solid #EFF0F1',
-          }
-
-          const deleteItem = (item: CustomEvent) => {
-            props.deleteItem && props.deleteItem(item.detail)
-          }
-
-          return {
-            placement,
-            showList,
-            avatarStyle,
-            size,
-            height,
-            width,
-
-            detailSize,
-            detailWidth,
-            detailHeight,
-            itemStyle,
-            contentStyle,
-            propsGetInfoByEmpId,
-            closeIcon,
-            showDelete,
-            deleteItem,
-            count,
-            personList,
-            avatarStyleDetail,
-          }
-        },
-        template: `
-            <div v-if="showList.length===1" class="person-group-single-wrap">
-              <ok-person-cell 
-                :personInfo="showList[0]"
-                :size="detailSize"
-                :width="detailWidth"
-                :height="detailHeight"
-                :propsGetInfoByEmpId="propsGetInfoByEmpId"
-                :avatarStyle="avatarStyle"
-              ></ok-person-cell>
-              <span class="single-user-name">{{showList[0].employee_name}}</span>
-            </div>
-            <a-popover v-else :placement="placement" overlayClassName="ok-person-group-more">
-              <template #content>
-                <ul
-                    class="ok-person-group-popper popper-wraper"
-                    :style="contentStyle"
-                  >
-                  <li v-for="item in personList" :key="item.employee_id" :style="itemStyle" class="popper-item">
-                    <ok-person-cell
-                      class="popper-item-avatar"
-                      :personInfo="item"
-                      :size="detailSize"
-                      :width="detailWidth"
-                      :height="detailHeight"
-                      :hidePopper=false
-                      :avatarStyle="avatarStyleDetail"
-                      :propsGetInfoByEmpId="propsGetInfoByEmpId"
-                    ></ok-person-cell>
-                    <span class="popper-item-name ellipsis1">{{item.employee_name}}</span>
-                    <img v-if="showDelete" :src="closeIcon" class="person-item-close-icon" @click="deleteItem(item)" />
-                  </li>
-                </ul>
-              </template>
-
-              <ok-avatar-group  
-              :size="size"
-              :width="width"
-              :height="height"
-              :personList="personList"></ok-avatar-group>
-            </a-popover>
-      `,
-      }
-
-      effect(() => {
-        if (app) return
-        if (props.personList?.length) {
-          app = createApp(options).use(Popover)
-          app.mount(contxt.$refs.showPersonGroup as HTMLElement)
-        }
-      })
+  props => {
+    const placement = computed(() => {
+      return props.placement
+    })
+    const showList = computed(() => {
+      return props.personList?.slice(0, 3)
     })
 
+    const popperList = computed(() => {
+      return props.showAll ? props.personList : props.personList?.slice(3)
+    })
+
+    const deleteItem = (item: CustomEvent) => {
+      props.deleteItem && props.deleteItem(item.detail)
+    }
+
+    const avatarRender = () => {
+      if (!showList.value?.length) return ''
+      return html`
+        ${showList.value.map(
+          item => html`<ok-person-cell
+            class="avatar-list"
+            style="width: auto; height: auto;"
+            .personInfo=${item}
+            .size=${props.size}
+            .width=${props.width}
+            .height=${props.height}
+            .propsGetInfoByEmpId=${props.propsGetInfoByEmpId}
+          ></ok-person-cell>`
+        )}
+        ${showList.value.length === 1
+          ? html`<span class="single-user-name"
+              >${showList.value[0].employee_name}</span
+            >`
+          : html`
+              <span ref="showMore" class="more"
+                >${popperList.value.length
+                  ? html`<ok-person-group-more
+                      .popperList=${popperList.value}
+                      .detailSize=${props.detailSize}
+                      .detailWidth=${props.detailWidth}
+                      .detailHeight=${props.detailHeight}
+                      .itemStyle=${props.itemStyle}
+                      .contentStyle=${props.contentStyle}
+                      .showDelete=${props.showDelete}
+                      .placement=${placement.value}
+                      .propsGetInfoByEmpId=${props.propsGetInfoByEmpId}
+                      @deleteItem=${deleteItem}
+                    ></ok-person-group-more>`
+                  : ''}</span
+              >
+            `}
+      `
+    }
+
+    // ${avatarRender()} ${props.personList.length > 1 ? popperRender() : ''}
+
     return () => html`
-      <link rel="stylesheet" .href="${ANTD_VUE_CDN}" />
       <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
-      <div ref="showPersonGroup" class="ok-person-group-root"></div>
+      <div class="ok-person-group ok-person-group-root">
+        <div class="ok-person-group-wrap">${avatarRender()}</div>
+      </div>
     `
   }
 )
