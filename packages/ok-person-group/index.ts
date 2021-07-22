@@ -3,8 +3,8 @@
  * @Author: 付静
  * @Date: 2021-07-22 14:20:37
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-22 14:20:38
- * @FilePath: /packages/ok-person-group-old/index.ts
+ * @LastEditTime: 2021-07-22 15:28:45
+ * @FilePath: /packages/ok-person-group/index.ts
  */
 import './more-list'
 
@@ -135,7 +135,12 @@ defineComponent(
     return () => html`
       <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
       <div class="ok-person-group ok-person-group-root">
-        <div class="ok-person-group-wrap">${avatarRender()}</div>
+        <div
+          class="ok-person-group-wrap"
+          style="display: flex; align-items:center; "
+        >
+          ${avatarRender()}
+        </div>
       </div>
     `
   }
