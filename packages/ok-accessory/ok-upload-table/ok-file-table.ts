@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-10 11:49:19
+ * @LastEditTime: 2021-07-22 21:28:37
  * @FilePath: /packages/ok-accessory/ok-upload-table/ok-file-table.ts
  */
 
@@ -75,6 +75,13 @@ defineComponent(
               dataIndex: 'name',
               key: 'file_name',
               slots: { customRender: 'name' },
+              customCell: () => {
+                return {
+                  style: {
+                    'min-width': '180px',
+                  },
+                }
+              },
             },
             {
               title: i18n.$t(
@@ -257,7 +264,7 @@ defineComponent(
     return () => html`
       <link rel="stylesheet" .href="${ANTD_VUE_CDN}" />
       <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
-      <div ref="okProcess" class="ok-file-table"></div>
+      <div ref="okProcess" class="ok-file-table" style="overflow: auto"></div>
     `
   }
 )
