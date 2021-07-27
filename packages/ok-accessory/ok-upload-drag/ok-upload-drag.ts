@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-20 11:03:26
+ * @LastEditTime: 2021-07-22 18:14:43
  * @FilePath: /packages/ok-accessory/ok-upload-drag/ok-upload-drag.ts
  */
 
@@ -74,6 +74,8 @@ defineComponent(
         inputRef.click()
       }
     }
+
+    context.expose({ handleClick })
     /**
      * 点击上传选中文件
      * @param e 选中的文件
