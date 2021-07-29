@@ -113,6 +113,7 @@
       <ok-person-cell class="ok-person-cell2"><ok-avatar class="ok-person-cell-slot"></ok-avatar></ok-person-cell>
       <h3>person-group </h3>
       <ok-person-group></ok-person-group>
+      <ok-person-group-new></ok-person-group-new>
       <!-- 多人员list -->
       <!-- <ok-person-group ></ok-person-group> -->
 
@@ -132,7 +133,7 @@
 
 
         <h3>列表上传</h3>
-        <div style="width:900px">
+        <div style="width:500px">
           <ok-upload-table></ok-upload-table>
         </div>
         
@@ -227,8 +228,6 @@
     }
 
 
-
-
     const personInfo = {
       // avatar_url: "https://wework.qpic.cn/bizmail/cMLFZrYGchIibX5icVTGibh7b2oELMc9MsJYDiaCNNmTYREjGVRjlsq3mA/0",
       department_id: "30",
@@ -237,7 +236,7 @@
       employee_card: "工号",
       employee_en_name: "付静",
       employee_id: "FuJing",
-      employee_name: "Any",
+      employee_name: "付静静付静静付静静付静静付静静付静静付静静付静静付静静付静静",
       gender: 2,
       msg_relation_type: "WX",
       tenant_id: "test"
@@ -312,7 +311,7 @@
       email: "dongguangyao@byteluck.com",
       employee_en_name: "董光耀",
       employee_id: "DongGuangYao",
-      employee_name: "董光耀",
+      employee_name: "董光耀董光耀董光耀董光耀董光耀董光耀董光耀董光耀董光耀董光耀董光耀",
       external_user: false,
       gender: 1,
       msg_relation_type: "WX",
@@ -473,6 +472,9 @@
 
       const okPersonGroup = document.querySelector('ok-person-group')
       okPersonGroup.personList = personList
+
+      const okPersonGroupNew = document.querySelector('ok-person-group-new')
+      okPersonGroupNew.personList = personList
       // okPersonGroup.personList = personList.slice(0,1)
       // okPersonGroup.personList = personList2
       // okPersonGroup.showAll = true
@@ -500,7 +502,7 @@
 
       const okUpload = document.querySelector('ok-upload-drag')
       // 测试自定义接口
-      okUpload.action = 'https://test.baiteda.com/ego_api/client/v1/taskfile/upload?taskInstanceId=1a7eedf6-c4a5-4f1f-ad01-47376bb4743c'
+      // okUpload.action = 'https://test.baiteda.com/ego_api/client/v1/taskfile/upload?taskInstanceId=1a7eedf6-c4a5-4f1f-ad01-47376bb4743c'
       // okUpload.action = '/ego_api/client/v1/taskfile/upload?taskInstanceId=1a7eedf6-c4a5-4f1f-ad01-47376bb4743c'
       // okUpload.headers = {
       //   auth: '417c381769e54c878ab96fc74815c6a9'
@@ -626,9 +628,9 @@
     //   remoteMethod,
     // getRootDept,
     // getSubDept,
-      okDeptInput.remoteMethod = (query, level)=>{
-        console.log('remoteMethod-dept')
-      }
+      // okDeptInput.remoteMethod = (query, level)=>{
+      //   console.log('remoteMethod-dept')
+      // }
       okDeptInput.update = (val, list)=>{
         console.log('okDeptInput-update-index',val, list)
         // okDeptInput.value = val
@@ -675,9 +677,9 @@
 
 
       const okEmployeeInput = document.querySelector('.ok-employee-input')
-      okEmployeeInput.value = ['WangChao', 'LiuFei']
-      // okEmployeeInput.getInfoById = (ids)=>{
-      //   console.log('getInfoById',ids)
+      // okEmployeeInput.value = ['WangChao', 'LiuFei']
+      // okEmployeeInput.remoteMethod = (ids)=>{
+      //   console.log('remoteMethod',ids)
       // }
       // okEmployeeInput.borderRadius = 'none'
       // okEmployeeInput.hasBorderRadius = false
@@ -687,10 +689,10 @@
       // okEmployeeInput.bordered = false
       // okEmployeeInput.value = []
       okEmployeeInput.dropdownstyle = {'z-index': 6000}
-      okEmployeeInput.getPopupContainer = (triggerNode)=>{
-        // console.log('getPopupContainer', triggerNode)
-        return triggerNode.parentNode
-      }
+      // okEmployeeInput.getPopupContainer = (triggerNode)=>{
+      //   // console.log('getPopupContainer', triggerNode)
+      //   return triggerNode.parentNode
+      // }
       okEmployeeInput.multiple = true
       // okEmployeeInput.borderless = true
       // okEmployeeInput.disabled = true
@@ -701,16 +703,16 @@
       }
 
       okEmployeeInput.onFocus = ()=>{
-        console.log('focus')
+        // console.log('focus')
       }
       okEmployeeInput.onBlur = ()=>{
-        console.log('onBlur')
+        // console.log('onBlur')
       }
       okEmployeeInput.onRemove = (item)=>{
-        console.log('onRemove', item)
+        // console.log('onRemove', item)
       }
       okEmployeeInput.onClear = ()=>{
-        console.log('onClear')
+        // console.log('onClear')
       }
 
 
@@ -743,8 +745,8 @@
     }
 
     function testClick (){
-      const okImagePreview2 = document.querySelector('.ok-image-preview2')
-      okImagePreview2.index = 2
+      // const okImagePreview2 = document.querySelector('.ok-image-preview2')
+      // okImagePreview2.index = 2
       // setTimeout(()=>{
       //   okImagePreview2.index = -1
       // },200)
@@ -765,8 +767,9 @@
 
       // }, 500)
 
-      //   const okEmployeeInput = document.querySelector('.ok-employee-input')
-      // okEmployeeInput.value = ['FengHaiLi']
+        const okEmployeeInput = document.querySelector('.ok-employee-input')
+      // okEmployeeInput.value = ''
+      okEmployeeInput.clear()
 
       // const okEmployeeTree = document.querySelector('.ok-employee-tree')
       // okEmployeeTree.value = ['FuJing']

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 20:15:04
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-12 20:37:31
+ * @LastEditTime: 2021-07-29 19:56:08
  * @FilePath: /packages/ok-department-select/hook.ts
  */
 import { debounce } from 'lodash'
@@ -188,9 +188,9 @@ export default function (props: any, okDepartmentInput: any) {
   const setOpen = () => {
     isOpen.value = true
   }
-  const closeOpen = () => {
+  const closeOpen = (e: FocusEvent) => {
     isOpen.value = false
-    props.onBlur && props.onBlur()
+    props.onBlur && props.onBlur(e)
   }
 
   // 打开modal
@@ -273,7 +273,7 @@ export default function (props: any, okDepartmentInput: any) {
   }
 
   // focus
-  const handleFocus = () => {
+  const handleFocus = (e: FocusEvent) => {
     // 解决Safari偶尔获取不到焦点，且不能输入的问题
     const el: any = okDepartmentInput.value.$el.querySelector(
       '.ant-select-selection-search-input'
@@ -281,7 +281,7 @@ export default function (props: any, okDepartmentInput: any) {
     el.removeAttribute('readonly')
     el.removeAttribute('unselectable')
     el.removeAttribute('style')
-    props.onFocus && props.onFocus()
+    props.onFocus && props.onFocus(e)
   }
 
   // 判断propsValue 是否和value一样

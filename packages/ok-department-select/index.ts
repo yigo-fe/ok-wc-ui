@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:01:15
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-12 20:16:48
+ * @LastEditTime: 2021-07-29 19:55:12
  * @FilePath: /packages/ok-department-select/index.ts
  */
 import './ok-department-modal'
@@ -44,6 +44,17 @@ defineComponent(
             // 单选收起下拉框
             okDepartmentInput.value?.blur()
           }
+
+          // 暴露方法
+          context.expose({
+            clear: params.clearSelected,
+            focus: () => {
+              okDepartmentInput.value?.focus()
+            },
+            blur: () => {
+              okDepartmentInput.value?.blur()
+            },
+          })
           return {
             okDepartmentInput,
             handleSelect,

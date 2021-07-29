@@ -4,7 +4,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:02:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-12 20:53:20
+ * @LastEditTime: 2021-07-29 19:56:24
  * @FilePath: /packages/ok-department-select/department-props.ts
  */
 import { PropType } from 'ok-lit'
@@ -77,10 +77,10 @@ const propsOptions = {
     >,
   },
   onFocus: {
-    type: Function as unknown as PropType<() => void>,
+    type: Function as unknown as PropType<(e: FocusEvent) => void>,
   },
   onBlur: {
-    type: Function as unknown as PropType<() => void>,
+    type: Function as unknown as PropType<(e: FocusEvent) => void>,
   },
   onRemove: {
     type: Function as unknown as PropType<
