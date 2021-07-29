@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-10 14:22:53
  * @LastEditors: 付静
- * @LastEditTime: 2021-06-02 13:56:39
+ * @LastEditTime: 2021-07-28 16:09:09
  * @FilePath: /packages/ok-accessory/ok-file-icon.ts
  */
 import { defineComponent, html, onMounted, PropType } from 'ok-lit'
@@ -155,6 +155,7 @@ defineComponent(
                 icon = csv
                 break
               case 'zip':
+              case 'rar':
                 icon = zip
                 break
               default:

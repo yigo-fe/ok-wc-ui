@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-10 11:50:43
+ * @LastEditTime: 2021-07-28 10:18:13
  * @FilePath: /packages/ok-accessory/ok-upload-drag/ok-file-list.ts
  */
 
@@ -288,7 +288,9 @@ defineComponent(
           <ok-file-icon .type=${suffix}></ok-file-icon>
           <div class="ok-file-list__item_name">
             <div class="file_name_wraper">
-              <span class="ok-file-list__item_file_name">${item.name}</span>
+              <span class="ellipsis1 ok-file-list__item_file_name"
+                >${item.name}</span
+              >
               ${renderUploading(item)} ${renderOperations(item, index)}
             </div>
             ${renderProgress(item)}
