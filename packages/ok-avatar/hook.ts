@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-03 15:31:09
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-20 20:01:17
+ * @LastEditTime: 2021-07-27 20:21:00
  * @FilePath: /packages/ok-avatar/hook.ts
  */
 import { computed, effect, ref } from 'ok-lit'
@@ -165,10 +165,16 @@ export default function (props) {
     })
   }
   // 处理展示名称
+  // 匹配emoji
+  const emojiReg =
+    /[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF][\u200D|\uFE0F]|[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF]|[0-9|*|#]\uFE0F\u20E3|[0-9|#]\u20E3|[\u203C-\u3299]\uFE0F\u200D|[\u203C-\u3299]\uFE0F|[\u2122-\u2B55]|\u303D|[\A9|\AE]\u3030|\uA9|\uAE|\u3030/gi
+
   const getShowName = () => {
     let originName = uName.value || ''
 
     if (!originName) return ''
+    // 过滤emoji
+    originName = originName.replace(emojiReg, '')
     // 引文展示大写的首字母
     let firstStr = originName.substr(0, 1)
     if (/^[a-zA-Z]/.test(firstStr)) {
