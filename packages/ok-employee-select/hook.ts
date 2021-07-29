@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 15:16:57
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-12 20:15:50
+ * @LastEditTime: 2021-07-29 17:12:22
  * @FilePath: /packages/ok-employee-select/hook.ts
  */
 import { debounce } from 'lodash'
@@ -233,8 +233,8 @@ export default function (props: any, context: any, okEmployeeInput: any) {
   const setOpen = () => {
     isOpen.value = true
   }
-  const closeOpen = () => {
-    props.onBlur && props.onBlur()
+  const closeOpen = (e: any) => {
+    props.onBlur && props.onBlur(e)
     isOpen.value = false
   }
 
@@ -297,7 +297,7 @@ export default function (props: any, context: any, okEmployeeInput: any) {
   }
 
   // focus
-  const handleFocus = () => {
+  const handleFocus = (e: FocusEvent) => {
     // 解决Safari偶尔获取不到焦点，且不能输入的问题
     const el: any = okEmployeeInput.value.$el.querySelector(
       '.ant-select-selection-search-input'
@@ -309,7 +309,7 @@ export default function (props: any, context: any, okEmployeeInput: any) {
     //   el.focus()
     // }, 50)
 
-    props.onFocus && props.onFocus()
+    props.onFocus && props.onFocus(e)
   }
 
   // init回显：根据ids查询信息: 1. 默认值回显; 2. 收集options

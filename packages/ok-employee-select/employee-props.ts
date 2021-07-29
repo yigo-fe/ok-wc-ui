@@ -4,7 +4,7 @@
  * @Author: 付静
  * @Date: 2021-03-20 14:56:24
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-12 18:48:14
+ * @LastEditTime: 2021-07-29 17:12:46
  * @FilePath: /packages/ok-employee-select/employee-props.ts
  */
 
@@ -101,13 +101,13 @@ const propsOptions = {
    * 回调函数。focus
    */
   onFocus: {
-    type: Function as unknown as PropType<() => void>,
+    type: Function as unknown as PropType<(e: FocusEvent) => void>,
   },
   /**
    * 回调函数。blur
    */
   onBlur: {
-    type: Function as unknown as PropType<() => void>,
+    type: Function as unknown as PropType<(e: FocusEvent) => void>,
   },
   /**
    * 回调函数。删除单个人员
