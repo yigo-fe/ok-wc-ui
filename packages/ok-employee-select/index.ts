@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-12 18:58:36
+ * @LastEditTime: 2021-07-29 17:24:39
  * @FilePath: /packages/ok-employee-select/index.ts
  */
 
@@ -44,6 +44,16 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
         const loadingText = i18n.$t('common.loading', '加载中')
         const noData = i18n.$t('common.noData', '暂无数据')
 
+        // 暴露方法
+        context.expose({
+          clear: params.clearSelected,
+          focus: () => {
+            okEmployeeInput.value?.focus()
+          },
+          blur: () => {
+            okEmployeeInput.value?.blur()
+          },
+        })
         return {
           ...params,
           okEmployeeInput,
@@ -106,7 +116,7 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
                       :propsGetInfoByEmpId="propsGetInfoByEmpId"
                       height="20px"
                     ></ok-person-cell>
-                    <span class="selected-head-name-head">{{ employee.employee_name }}</span>
+                    <span class="selected-head-name-head ellipsis1">{{ employee.employee_name }}</span>
                   </div>
                   <div class="selected-option">
                     <ok-person-cell
@@ -118,11 +128,11 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
                     ></ok-person-cell>
 
                     <div class="user-img__content">
-                      <p>
-                        <span class="user-img__name">{{ employee.employee_name }}</span>
-                        <span class="user-img__email">{{ employee.email }}</span>
+                      <p style="display: flex;">
+                        <span class="user-img__name ellipsis1 ">{{ employee.employee_name }}</span>
+                        <span class="user-img__email ellipsis1">{{ employee.email }}</span>
                       </p>
-                      <p class="user-img__d">{{ employee.department_name }}</p>
+                      <p class="user-img__d ellipsis1">{{ employee.department_name }}</p>
                     </div>
                   </div>
                 </div>
@@ -323,6 +333,15 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
         z-index: 999;
         white-space: nowrap;
         visibility: hidden;
+      }
+      .user-img__name {
+        max-width: 35%;
+      }
+      .user-img__email {
+        flex: 1;
+      }
+      .user-img__d {
+        max-width: 100%;
       }
     </style>
 

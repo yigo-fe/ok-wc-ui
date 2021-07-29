@@ -20,6 +20,8 @@ a:active {
   color: @bl-brand-active;
 }
 
+p{margin:0;padding:0}
+
 
 // common
 .ellipsis1 {
@@ -27,12 +29,52 @@ a:active {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  vertical-align: middle;
+  &::after {
+    content: '';
+    display: block;
+  }
+}
+.ellipsis2 {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+  &::after {
+    content: '';
+    display: block;
+  }
 }
 .mr10{
   margin-right: 10px;
 }
 
 /* 修改antd样式 */
+
+// 解决Safari中自动添加title的问题
+.ant-tooltip-open::after {
+  content: '';
+  display: block;
+}
+
+// 修改人员和部门dropdown样式
+.ok-dept-select-dropdown,
+.userSelectDropdown {
+  .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+    background-color: #fff;
+    color: @bl-brand-c;
+    font-weight: 400;
+  }
+
+  .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+    background-color: @bl-n200
+  }
+
+}
+
+
+
 
 /* 修改ant-select样式 */
 .ok-employee-select-wraper,
@@ -459,10 +501,6 @@ a:active {
   }
   .ok-file-list__item_file_name {
     color: @bl-n900;
-    display: block;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     max-width: calc(100% - 96px);
     line-height: 16px;
   }
@@ -1130,7 +1168,7 @@ a:active {
 }
 .userSelectDropdown	.option-list-item {
   padding: 10px 40px 8px 18px;
-  border-bottom: 2px solid #eee;
+  border-bottom: 1px solid @bl-n250;
   font-weight: normal;
 }
 .userSelectDropdown	.ant-select-item {
@@ -1149,6 +1187,10 @@ a:active {
 
 .userSelectDropdown	.user-img__name {
   margin-right: 10px;
+  max-width: 35%;
+}
+.userSelectDropdown	.user-img__email {
+  flex: 1;
 }
 .userSelectDropdown	.user-img__content {
   width: calc(100% - 50px);
@@ -1159,6 +1201,7 @@ a:active {
 .userSelectDropdown	.user-img__content>p {
   line-height: 18px;
   margin: 0;
+  max-width: 100%;
 }
 
 .userSelectDropdown .more {
@@ -1167,7 +1210,9 @@ a:active {
 
 .userSelectDropdown.ant-select-dropdown .ant-select-dropdown-content .ant-select-item-option-state {
   line-height: 60px;
-  padding-right: 8px;
+  padding-right: 12px;
+  position: absolute;
+  right: 0;
 }
 
 /* 人员选择样式 */
@@ -1179,7 +1224,7 @@ a:active {
 .ant-select-selection-item .selected-option{display:none}
 .ant-select-selection-item .selected-head{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}
 .ant-select-selection-item .user-img__avatar__head{width:20px;height:20px;font-size:0}
-.ant-select-selection-item .selected-head-name-head{display:inline-block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;max-width:50px;margin-left:6px;font-size:14px;font-weight:400; color: @bl-n600;}
+.ant-select-selection-item .selected-head-name-head{max-width:50px;margin-left:6px;font-size:14px;font-weight:400; color: @bl-n600;}
 .head-clear-icon,.head-search-icon{width:16px;height:16px}
 .ok-employee-select .ant-select-selection-item-content {
   font-size: 14px;
@@ -1292,16 +1337,16 @@ a:active {
 .ok-person-detail .person-detail-footer .person-detail-button{-webkit-box-sizing:border-box;box-sizing:border-box;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;height:32px;font-size:12px;line-height:22px;color:@bl-brand-c;cursor:pointer;border-radius:4px}
 .ok-person-detail .person-detail-footer .person-detail-button img{margin-right:6px}
 .ok-person-detail .headCover{position:absolute;top:0;width:100%;height:170px;background:-webkit-gradient(linear,left top, left bottom,from(rgba(0,0,0,.0001)),color-stop(99.42%, rgba(0,0,0,.6)));background:linear-gradient(180deg,rgba(0,0,0,.0001),rgba(0,0,0,.6) 99.42%);opacity:.6}
-.ok-person-detail .person-card-name{margin-right:6px;max-width:calc(100% - 22px);display:inline-block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-.ok-person-detail .person-card-name.isTerminated{max-width:calc(100% - 74px)}
-.ok-person-detail .user-name-wraper{position:absolute;bottom:250px;font-size:16px;font-weight:700;color:@ok-white-color;word-break:break-word;white-space:normal;-webkit-transition:bottom .1s ease-in-out;transition:bottom .1s ease-in-out;top:132px;width:calc(100% - 28px);line-height:24px;left:14px;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;height:24px}
+.ok-person-detail .person-card-name{margin-right:6px;max-width:calc(100% - 22px)}
+.ok-person-detail .person-card-name.isTerminated{max-width:calc(100% - 77px)}
+.ok-person-detail .user-name-wraper{position:absolute;bottom:14px;font-size:16px;font-weight:500;color:@ok-white-color;word-break:break-word;white-space:normal;-webkit-transition:bottom .1s ease-in-out;transition:bottom .1s ease-in-out;width:calc(100% - 28px);line-height:22px;left:14px;display:flex;}
 .ok-person-detail .terminated-text{flex-shrink: 0;font-size:12px;line-height:12px;font-weight:400;padding:3px;border-radius:4px;background-color:rgba(14,14,14,.5);margin-left:auto;vertical-align:middle}
 .ok-person-detail .person-detail-button{background:@bl-brand-label;border-radius:4px;border:none;padding:3px 2px}
 .ok-person-detail .content-wraper{padding:14px;height:auto;font-size:12px;line-height:22px;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column}
 .ok-person-detail .item-row{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;margin:0;line-height:18px}
 .ok-person-detail .item-row+.item-row{margin-top:12px}
 .ok-person-detail .item-row>.item-label{-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;margin-right:6px;color:@bl-n500}
-.ok-person-detail .item-row>.item-content{display:inline-block;color:@bl-n900;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}p{margin:0;padding:0}
+.ok-person-detail .item-row>.item-content{color:@bl-n900;}
 .ok-person-detail .btn-wraper{padding:0 14px 14px}
 
 // tippy animation

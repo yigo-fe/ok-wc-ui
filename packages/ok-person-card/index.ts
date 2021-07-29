@@ -31,6 +31,8 @@ defineComponent('ok-person-card', { ...props }, (props, context) => {
           statusType,
         } = usePersonCardHandle(props)
 
+        // const statusType = ref('1')
+
         return {
           statusType,
           deptText,
@@ -59,10 +61,10 @@ defineComponent('ok-person-card', { ...props }, (props, context) => {
               showMask
             ></ok-avatar>           
             <span class="user-name-wraper">
-              <span class="person-card-name" :class="{'isTerminated': statusType === '0'}">{{personInfoCom['name'][i18n]}}</span>
-              <img v-if="personInfoCom.gender ==2" :src="femaleIcon" style="width: 16px; height: 16px; margin-right:12px;" />
-              <img v-else :src="maleIcon" style="width: 16px; height: 16px;margin-right:12px;" />
-              <div v-if="statusType === '0'" class="terminated-text">{{langPack.terminated}}</div>
+              <span class="person-card-name ellipsis2" :class="{'isTerminated': statusType === '0'}">{{personInfoCom['name'][i18n]}}</span>
+              <img v-if="personInfoCom.gender ==2" :src="femaleIcon" style="width: 16px; height: 16px; margin-top:3px;" />
+              <img v-else :src="maleIcon" style="width: 16px; height: 16px;margin-top:3px;" />
+              <div v-if="statusType === '0'" style="margin-left: auto; font-size: 0;" > <span class="terminated-text" style="margin-left:12px;">{{langPack.terminated}}</span> </div>
             </span>
           </header>
 
@@ -77,8 +79,7 @@ defineComponent('ok-person-card', { ...props }, (props, context) => {
                         <li style='font-size: 12px; line-height:18px;' v-for="dept in deptText" :key="dept"> {{dept}}</li>
                       </ul>
                     </template>
-                    <!-- 添加空div 解决Safari自动添加title的问题 -->
-                    <div class="item-content"><div></div>{{deptText.join(' ')}}</div>
+                    <div class="item-content ellipsis1">{{deptText.join(' ')}}</div>
                   </a-tooltip>
               </div>
               <div class="item-row">
@@ -88,8 +89,7 @@ defineComponent('ok-person-card', { ...props }, (props, context) => {
                     <template #title>
                       <span style='font-size: 12px; line-height:18px;'>{{personInfoCom.email}}</span>
                     </template>
-                    <!-- 添加空div 解决Safari自动添加title的问题 -->
-                    <div class="item-content"><div></div>{{ personInfoCom.email || '--'}}</div>
+                    <div class="item-content ellipsis1">{{ personInfoCom.email || '--'}}</div>
                   </a-tooltip>
               </div>
             </div>
