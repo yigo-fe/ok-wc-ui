@@ -1322,9 +1322,10 @@ p {
 .ok-person-detail .person-card-name {
   margin-right: 6px;
   max-width: calc(100% - 22px);
+  line-height: 22px;
 }
 .ok-person-detail .person-card-name.isTerminated {
-  max-width: calc(100% - 77px);
+  max-width: calc(100% - 90px);
 }
 .ok-person-detail .user-name-wraper {
   position: absolute;
@@ -1332,12 +1333,9 @@ p {
   font-size: 16px;
   font-weight: 500;
   color: #fff;
-  word-break: break-word;
-  white-space: normal;
   -webkit-transition: bottom 0.1s ease-in-out;
   transition: bottom 0.1s ease-in-out;
   width: calc(100% - 28px);
-  line-height: 22px;
   left: 14px;
   display: flex;
 }

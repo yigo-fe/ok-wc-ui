@@ -31,7 +31,7 @@ defineComponent('ok-person-card', { ...props }, (props, context) => {
           statusType,
         } = usePersonCardHandle(props)
 
-        // const statusType = ref('1')
+        // const statusType = ref('0')
 
         return {
           statusType,
@@ -64,7 +64,7 @@ defineComponent('ok-person-card', { ...props }, (props, context) => {
               <span class="person-card-name ellipsis2" :class="{'isTerminated': statusType === '0'}">{{personInfoCom['name'][i18n]}}</span>
               <img v-if="personInfoCom.gender ==2" :src="femaleIcon" style="width: 16px; height: 16px; margin-top:3px;" />
               <img v-else :src="maleIcon" style="width: 16px; height: 16px;margin-top:3px;" />
-              <div v-if="statusType === '0'" style="margin-left: auto; font-size: 0;" > <span class="terminated-text" style="margin-left:12px;">{{langPack.terminated}}</span> </div>
+              <div v-if="statusType === '0'" style="margin-left: auto; font-size: 0; margin-top: 2px;" > <div class="terminated-text" style="margin-left:12px;height:18px;line-height:18px;padding: 0 3px;">{{langPack.terminated}}</div> </div>
             </span>
           </header>
 
