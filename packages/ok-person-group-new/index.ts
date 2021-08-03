@@ -86,7 +86,7 @@ defineComponent(
                 :propsGetInfoByEmpId="propsGetInfoByEmpId"
                 :avatarStyle="avatarStyle"
               ></ok-person-cell>
-              <span class="single-user-name">{{showList[0].employee_name}}</span>
+              <span class="single-user-name ellipsis1">{{showList[0].employee_name}}</span>
             </div>
             <a-popover v-else :placement="placement" overlayClassName="ok-person-group-more">
               <template #content>
@@ -132,7 +132,11 @@ defineComponent(
     return () => html`
       <link rel="stylesheet" .href="${ANTD_VUE_CDN}" />
       <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
-      <div ref="showPersonGroup" class="ok-person-group-root"></div>
+      <div
+        ref="showPersonGroup"
+        class="ok-person-group-root"
+        style="max-width: 100%;"
+      ></div>
     `
   }
 )

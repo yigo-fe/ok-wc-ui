@@ -73,6 +73,10 @@ p{margin:0;padding:0}
 
 }
 
+.ant-select-selection-item {
+  user-select: auto !important;
+}
+
 
 
 
@@ -136,6 +140,12 @@ p{margin:0;padding:0}
   // 添加校验失败样式
   &.is-error .ant-select:not(.ant-select-borderless) .ant-select-selector {
     border-color: @bl-danger;
+  }
+
+  .ant-select-multiple.ant-select-disabled .ant-select-selection-item {
+    background: #fff;
+    border-color: #fff;
+    color: @bl-n600;
   }
 }
 

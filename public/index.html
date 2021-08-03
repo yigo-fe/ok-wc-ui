@@ -77,7 +77,7 @@
 
 
       <h3>人员选择-input</h3>
-      <ok-employee-select class="divider ok-employee-input" placeholder="请选择1" style="width: 200px;display: block;"></ok-employee-select>
+      <ok-employee-select class="divider ok-employee-input" placeholder="请选择请选择请选择请选择请选择请选择请选择请选择请选择请选择请选择请选择请选择1" style="width: 200px;display: block;"></ok-employee-select>
 
       <h3>人员选择-tree</h3>
       <ok-employee-select class="divider ok-employee-tree" mode="tree" placeholder="请选择3" style="width: 300px;height:40px;display: block;"></ok-employee-select>
@@ -276,7 +276,7 @@
       employee_card: "工号",
       employee_en_name: "付静",
       employee_id: "FuJing",
-      employee_name: "付静",
+      employee_name: "付静付静付静付静付静付静付静付静付静付静付静付静付静",
       gender: 2,
       msg_relation_type: "WX",
       tenant_id: "test"
@@ -471,7 +471,7 @@
 
 
       const okPersonGroup = document.querySelector('ok-person-group')
-      okPersonGroup.personList = personList
+      okPersonGroup.personList = personList.slice(0,1)
 
       const okPersonGroupNew = document.querySelector('ok-person-group-new')
       okPersonGroupNew.personList = personList
@@ -677,18 +677,19 @@
 
 
       const okEmployeeInput = document.querySelector('.ok-employee-input')
-      // okEmployeeInput.value = ['WangChao', 'LiuFei']
+      okEmployeeInput.value = ['WangChao', 'LiuFei']
+      // okEmployeeInput.disabled = true
       // okEmployeeInput.remoteMethod = (ids)=>{
       //   console.log('remoteMethod',ids)
       // }
       // okEmployeeInput.borderRadius = 'none'
       // okEmployeeInput.hasBorderRadius = false
       // okEmployeeInput.isError = true
-      okEmployeeInput.width = '200px'
+      okEmployeeInput.width = '300px'
       // okEmployeeInput.disabled = true
       // okEmployeeInput.bordered = false
       // okEmployeeInput.value = []
-      okEmployeeInput.dropdownstyle = {'z-index': 6000}
+      // okEmployeeInput.dropdownstyle = {'z-index': 6000}
       // okEmployeeInput.getPopupContainer = (triggerNode)=>{
       //   // console.log('getPopupContainer', triggerNode)
       //   return triggerNode.parentNode

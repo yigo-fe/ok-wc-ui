@@ -58,6 +58,9 @@ p {
 .userSelectDropdown .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
   background-color: var(--bl-n200-c, #F5F7F7);
 }
+.ant-select-selection-item {
+  user-select: auto !important;
+}
 /* 修改ant-select样式 */
 .ok-employee-select-wraper,
 .ok-department-select-wraper {
@@ -134,6 +137,12 @@ p {
 .ok-employee-select-wraper.is-error .ant-select:not(.ant-select-borderless) .ant-select-selector,
 .ok-department-select-wraper.is-error .ant-select:not(.ant-select-borderless) .ant-select-selector {
   border-color: var(--bl-danger-c, #FF6459);
+}
+.ok-employee-select-wraper .ant-select-multiple.ant-select-disabled .ant-select-selection-item,
+.ok-department-select-wraper .ant-select-multiple.ant-select-disabled .ant-select-selection-item {
+  background: #fff;
+  border-color: #fff;
+  color: var(--bl-n600-c, #646A73);
 }
 /* 人员和部门选择没有border-radius */
 .no-border-radius .ant-select .ant-select-selector {
