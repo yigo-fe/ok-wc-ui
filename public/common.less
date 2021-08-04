@@ -141,11 +141,15 @@ p{margin:0;padding:0}
   &.is-error .ant-select:not(.ant-select-borderless) .ant-select-selector {
     border-color: @bl-danger;
   }
-
+  // disabled 
   .ant-select-multiple.ant-select-disabled .ant-select-selection-item {
     background: #fff;
     border-color: #fff;
     color: @bl-n600;
+  }
+  // 修改tag 的maxWidth
+  .ant-select-multiple .ant-select-selection-item {
+    max-width: calc(100% - 80px);
   }
 }
 

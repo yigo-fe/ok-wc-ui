@@ -144,6 +144,10 @@ p {
   border-color: #fff;
   color: var(--bl-n600-c, #646A73);
 }
+.ok-employee-select-wraper .ant-select-multiple .ant-select-selection-item,
+.ok-department-select-wraper .ant-select-multiple .ant-select-selection-item {
+  max-width: calc(100% - 80px);
+}
 /* 人员和部门选择没有border-radius */
 .no-border-radius .ant-select .ant-select-selector {
   border-radius: 0;
