@@ -33,7 +33,7 @@
   "dependencies": {
     "@babel/runtime": "^7.14.0",
     "@popperjs/core": "^2.6.0",
-    "ant-design-vue": "^2.1.6",
+    "ant-design-vue": "2.1.6",
     "axios": "^0.21.1",
     "core-js": "^3.13.1",
     "dotenv": "^8.2.0",
