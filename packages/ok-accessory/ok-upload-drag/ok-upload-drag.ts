@@ -75,16 +75,14 @@ defineComponent(
       }
     }
 
-    context.expose({ handleClick })
-
     /**
      * 清空附件列表
      */
-    const removeAllFileList = () => {
+    const handleRemoveAllFileList = () => {
       fileLists.value = []
     }
 
-    context.expose({ removeAllFileList })
+    context.expose({ handleClick, handleRemoveAllFileList })
 
     /**
      * 点击上传选中文件
