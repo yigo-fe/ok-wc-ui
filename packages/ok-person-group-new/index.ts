@@ -5,7 +5,7 @@ import { computed, createApp } from 'vue'
 import { ANTD_VUE_CDN, COMMON_CSS_PATH } from '../path.config'
 import props from './props'
 defineComponent(
-  'ok-person-group-new',
+  'ok-person-group',
   {
     ...props,
   },
@@ -61,7 +61,6 @@ defineComponent(
             size,
             height,
             width,
-
             detailSize,
             detailWidth,
             detailHeight,

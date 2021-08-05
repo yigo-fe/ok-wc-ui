@@ -56,6 +56,8 @@
 
       <h3 class="test-css">测试css变量</h3>
 
+      <ok-tooltip title="zheli shi titlw aa">123</ok-tooltip>
+
       <!-- <div style="width: 100px;">
         <ok-tooltip class="divider">
           <div slot="title"><span >这里是title的slot</span></div>
@@ -471,7 +473,8 @@
 
 
       const okPersonGroup = document.querySelector('ok-person-group')
-      okPersonGroup.personList = personList.slice(0,1)
+      // okPersonGroup.personList = personList.slice(0,1)
+      okPersonGroup.personList = personList
 
       const okPersonGroupNew = document.querySelector('ok-person-group-new')
       okPersonGroupNew.personList = personList

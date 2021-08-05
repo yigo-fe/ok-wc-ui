@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-28 19:07:13
  * @LastEditors: 付静
- * @LastEditTime: 2021-04-30 18:56:43
+ * @LastEditTime: 2021-08-05 17:11:05
  * @FilePath: /packages/ok-tooltip/index.ts
  */
 
@@ -31,9 +31,8 @@
  */
 
 import { Tooltip } from 'ant-design-vue'
-import { Button } from 'ant-design-vue'
 import { defineComponent, html, onMounted, PropType } from 'ok-lit'
-import { computed, createApp, ref } from 'vue'
+import { computed, createApp, ref, unref } from 'vue'
 
 type tipType = 'auto' | 'aways' | 'none'
 
@@ -41,145 +40,63 @@ defineComponent(
   'ok-tooltip',
   {
     tipType: {
-      type: (String as unknown) as PropType<tipType>,
+      type: String as unknown as PropType<tipType>,
       default: 'auto',
     },
     title: {
-      type: (String as unknown) as PropType<string>,
+      type: String as unknown as PropType<string>,
     },
     placement: {
-      type: (String as unknown) as PropType<string>,
+      type: String as unknown as PropType<string>,
     },
     overlayClassName: {
-      type: (String as unknown) as PropType<string>,
+      type: String as unknown as PropType<string>,
       default: 'ok-tooltip-overlay',
     },
     cuttingNum: {
       // 显示几行后裁切
-      type: (Number as unknown) as PropType<number>,
+      type: Number as unknown as PropType<number>,
       default: 1,
     },
   },
   (props, context) => {
     onMounted(() => {
       const options = {
+        components: { Tooltip },
         setup() {
-          // 展示
-          const tipType = computed(() => props.tipType)
-          // tooltip 位置
-          const placement = computed(() => props.placement)
+          const title = computed(() => props.title)
+          const visible = ref(false)
+          const contentRef = ref(null)
 
-          const innerHTML = ref(context.innerHTML)
-          const titleSlot = ref()
-          // 计算溢出多少行后截断
-          const contentStyle = computed(() => {
-            return { webkitLineClamp: props.cuttingNum }
-          })
-          // 展示内容：插槽处理
-          const contentText = computed(() => {
-            // 没有content 默认展示title内容
-            if (!innerHTML.value) {
-              return props.title
+          const handleChangeVisible = (value: boolean) => {
+            const contentEl = unref(contentRef)
+            if (contentEl && value) {
+              const contentClientWidth = unref(contentRef as any)?.clientWidth
+              const contentScrollWidth = unref(contentRef as any)?.scrollWidth
+
+              if (
+                contentClientWidth &&
+                contentScrollWidth &&
+                contentScrollWidth <= contentClientWidth
+              ) {
+                visible.value = false
+                return
+              }
             }
-            // todo 去掉 title slot
 
-            // const parent: any = innerHTML.value
-
-            // document.querySelector
-
-            return innerHTML.value || ''
-          })
-          // tooltip 的title
-          // const title = computed(() => props.title || contentText.value)
-
-          // 控制是否展示popover
-          const isShowTips = ref(false)
-
-          // 处理title内容
-          const handleTitleContent = () => {
-            let tipSlot = Array.from(context.children).find(
-              (v: any) => v.slot === 'title'
-            )
-            titleSlot.value = tipSlot || props.title || contentText.value
-
-            console.log('titleSlot.value', titleSlot.value)
+            visible.value = value
           }
-          handleTitleContent()
-
-          // 添加隐藏元素，根据高度对比，计算是否需要展示tooltip
-          const mouseenter = () => {
-            const showTips = context.$refs.showTips as HTMLElement
-            const offsetWidth = showTips.offsetWidth
-            const offsetHeight = showTips.offsetHeight
-            const textDiv = document.createElement('div')
-            const curStyle = window.getComputedStyle(showTips)
-            textDiv.style.cssText = `
-                    word-break: break-word;
-                    width:${offsetWidth}px;
-                    font-size: ${curStyle.fontSize || '14px'};
-                    font-weight: ${curStyle.fontWeight || 'normal'};
-                    line-height: ${curStyle.lineHeight || '22px'};
-                `
-            document.body.appendChild(textDiv)
-            textDiv.innerHTML = contentText.value.toString()
-            textDiv.offsetHeight > offsetHeight && (isShowTips.value = true)
-            document.body.removeChild(textDiv)
-          }
-
           return {
-            tipType,
-            isShowTips,
-            contentText,
-            contentStyle,
-            mouseenter,
-            titleSlot,
-            placement,
-            innerHTML,
+            visible,
+            title,
+            handleChangeVisible,
           }
         },
-        template: `
-          <!-- 始终展示tooltip -->
-          <div class="ok-drawer-content2" v-html="contentText"></div>
-          <div class="ok-drawer-content3" v-html="titleSlot"></div>
-          <a-tooltip 
-            v-if="tipType==='always'"
-            ref="Tooltip"
-            :placement="placement"      
-            >
-            <template #title>
-              <div v-html="titleSlot"></div>
-            </template> 
-            <div class="content" :style="contentStyle" v-html="contentText">
-            </div>
-          </a-tooltip>
-          
-          <!-- 溢出时展示tooltip 溢出 -->
-          <a-tooltip 
-            v-else-if="isShowTips"
-            ref="Tooltip"  
-            :placement="placement"       
-            >
-            <template #title>
-              <div v-html="titleSlot"></div>
-            </template>           
-            <div class="content" :style="contentStyle" v-html="contentText">
-            </div>
-          </a-tooltip>
-
-          <!-- 溢出时展示tooltip 未溢出 -->
-          <div
-            v-else
-            :style="contentStyle"
-            @mouseenter="mouseenter"
-            v-html="contentText"
-            >
-          </div>
-        
-      `,
+        render: function (createElement) {
+          return createElement('Tooltip', [props], createElement.$slots)
+        },
       }
       const app = createApp(options)
-      app.use(Tooltip)
-      app.use(Button)
       app.mount(context.$refs.showTips as HTMLElement)
     })
 
