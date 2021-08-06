@@ -6,7 +6,7 @@ import './jsx'
 import './ok-avatar'
 import './ok-person-card'
 import './ok-person-cell'
-import './ok-person-group'
+// import './ok-person-group'
 import './ok-person-group-new'
 import './ok-person-group-new/ok-avatar-group'
 // 上传
