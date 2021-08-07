@@ -205,6 +205,8 @@ export default function (props, context, config) {
       return
     }
     fileLists.value.splice(idx, 1)
+    // 通知变化
+    handleOnChange(file)
   }
   // 终止上传
   const handleAbort = data => {
