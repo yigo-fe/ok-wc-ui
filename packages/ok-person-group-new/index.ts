@@ -89,28 +89,31 @@ defineComponent(
             </div>
             <a-popover v-else :placement="placement" overlayClassName="ok-person-group-more">
               <template #content>
-                <ul
+                <div class="ok-person-group-list-box">
+                  <ul
                     class="ok-person-group-popper popper-wraper"
                     :style="contentStyle"
                   >
-                  <li v-for="item in personList" :key="item.employee_id" :style="itemStyle" class="popper-item">
-                    <ok-person-cell
-                      class="popper-item-avatar"
-                      :personInfo="item"
-                      :size="detailSize"
-                      :width="detailWidth"
-                      :height="detailHeight"
-                      :hidePopper=false
-                      :avatarStyle="avatarStyleDetail"
-                      :propsGetInfoByEmpId="propsGetInfoByEmpId"
-                    ></ok-person-cell>
-                    <span class="popper-item-name ellipsis1">{{item.employee_name}}</span>
-                    <img v-if="showDelete" :src="closeIcon" class="person-item-close-icon" @click="deleteItem(item)" />
-                  </li>
-                </ul>
+                    <li v-for="item in personList" :key="item.employee_id" :style="itemStyle" class="popper-item">
+                      <ok-person-cell
+                        class="popper-item-avatar"
+                        :personInfo="item"
+                        :size="detailSize"
+                        :width="detailWidth"
+                        :height="detailHeight"
+                        :hidePopper=false
+                        :avatarStyle="avatarStyleDetail"
+                        :propsGetInfoByEmpId="propsGetInfoByEmpId"
+                      ></ok-person-cell>
+                      <span class="popper-item-name ellipsis1">{{item.employee_name}}</span>
+                      <img v-if="showDelete" :src="closeIcon" class="person-item-close-icon" @click="deleteItem(item)" />
+                    </li>
+                  </ul>
+                </div>
               </template>
 
-              <ok-avatar-group  
+              <ok-avatar-group
+              style="display: inline-block; font-size: 0; vertical-align:middle;"
               :size="size"
               :width="width"
               :height="height"

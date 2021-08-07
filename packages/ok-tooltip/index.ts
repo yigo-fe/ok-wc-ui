@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-28 19:07:13
  * @LastEditors: 付静
- * @LastEditTime: 2021-08-05 17:11:05
+ * @LastEditTime: 2021-08-07 20:23:32
  * @FilePath: /packages/ok-tooltip/index.ts
  */
 
@@ -29,10 +29,11 @@
  * 6、调试不方便
  *
  */
-
 import { Tooltip } from 'ant-design-vue'
 import { defineComponent, html, onMounted, PropType } from 'ok-lit'
 import { computed, createApp, ref, unref } from 'vue'
+
+import { ANTD_VUE_CDN } from '../path.config'
 
 type tipType = 'auto' | 'aways' | 'none'
 
@@ -57,6 +58,9 @@ defineComponent(
       // 显示几行后裁切
       type: Number as unknown as PropType<number>,
       default: 1,
+    },
+    textStyle: {
+      type: Object as unknown as PropType<object>,
     },
   },
   (props, context) => {
@@ -86,39 +90,74 @@ defineComponent(
 
             visible.value = value
           }
+
+          const triggerSlot = computed(() => {
+            return context.innerHTML
+          })
+          const textStyle = computed(() => props.textStyle)
           return {
+            contentRef,
             visible,
             title,
+            triggerSlot,
+            textStyle,
             handleChangeVisible,
           }
         },
-        render: function (createElement) {
-          return createElement('Tooltip', [props], createElement.$slots)
-        },
+        template: `
+          <Tooltip
+            :title="title"
+            :visible="visible"
+            :onVisibleChange="handleChangeVisible"
+          >
+            <div v-if="triggerSlot" ref="contentRef" style="max-width: 100%" class="ellipsis1" v-html="triggerSlot" ></div>
+            <div v-else ref="contentRef" :style="textStyle" class="tooltip-content ellipsis1" >
+              {{title}}
+            </div>
+          </Tooltip>
+        `,
       }
       const app = createApp(options)
+      app.use(Tooltip)
       app.mount(context.$refs.showTips as HTMLElement)
     })
 
     return () => html`
       <style>
-        .ok-tooltip-overlay .ant-tooltip-inner {
-          background-color: #fff;
-          color: #666666;
+        :host {
+          display: inline-block;
         }
-        .ok-tooltip-overlay .ant-tooltip-arrow::before {
-          background-color: #fff;
+        .tooltip-content {
+          font-size: 14px;
+          color: var(--bl-n900-c, #1f2329);
+          max-width: 100%;
         }
-        .ok-ant-tooltip div {
-          display: block;
+        .ellipsis1 {
+          display: inline-block;
           overflow: hidden;
-          display: -webkit-box;
           text-overflow: ellipsis;
+          white-space: nowrap;
+          vertical-align: middle;
+        }
+        .ellipsis2 {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
         }
+        .ellipsis2::after,
+        .ellipsis1::after {
+          content: '';
+          display: block;
+        }
       </style>
-      <!-- <link rel="stylesheet" href="./antd.min.css" /> -->
-      <div ref="showTips" class="ok-ant-tooltip"></div>
+      <link rel="stylesheet" .href="${ANTD_VUE_CDN}" />
+      <div
+        ref="showTips"
+        class="ok-ant-tooltip"
+        style="display: inline-block; vertical-align: middle; max-width: 100%; "
+      ></div>
     `
   }
 )

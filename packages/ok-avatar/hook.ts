@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-03 15:31:09
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-27 20:21:00
+ * @LastEditTime: 2021-08-06 18:41:24
  * @FilePath: /packages/ok-avatar/hook.ts
  */
 import { computed, effect, ref } from 'ok-lit'
@@ -45,10 +45,10 @@ export default function (props) {
     if (!data) return
     return typeof data === 'object' ? data[props.i18n] : data
   })
-
+  // person-group组 更多数字样式
   const count = computed(() => props.count)
 
-  const mask = ' linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),'
+  const mask = 'var(--bl-n250-c, #E8EAED)'
 
   // 获取用户图像
   const getAvatarStyle = () => {
@@ -114,7 +114,7 @@ export default function (props) {
         hasAvatar.value = true
         const bg_url = `url(${url}) no-repeat center center / cover`
         avatarStyleAll.value['background'] = count.value
-          ? `${mask}${bg_url}`
+          ? `${mask}`
           : `${bg_url}`
 
         if (count.value) {
@@ -141,9 +141,7 @@ export default function (props) {
         ? props.background?.female
         : props.background?.male
     // persongroup中最后一个人员特殊处理
-    avatarStyleAll.value['background'] = count.value
-      ? `${mask}${bg_url}`
-      : `${bg_url}`
+    avatarStyleAll.value['background'] = count.value ? `${mask}` : `${bg_url}`
     // 处理文字样式
     avatarTextStyle.value['font-size'] = isEn.value ? '16px' : '12px'
     avatarTextStyle.value = { ...avatarTextStyle.value, ...props.textStyle }

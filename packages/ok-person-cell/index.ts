@@ -1,6 +1,3 @@
-import './popover-ant'
-import './popover-tippy'
-
 import { defineComponent, html } from 'ok-lit'
 
 import { isWindowsWxchat } from '../ok-person-card/broswer'

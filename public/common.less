@@ -41,6 +41,7 @@ p{margin:0;padding:0}
 	display: -webkit-box;
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
+  word-break: break-word;
   &::after {
     content: '';
     display: block;
@@ -252,9 +253,6 @@ p{margin:0;padding:0}
 }
 
 
-
-
-
 /* ok-avatar */
 .ok-avatar-root {
   display: inline-block;
@@ -326,10 +324,7 @@ p{margin:0;padding:0}
   cursor: pointer;
 }
 /* ok-person-group-more */
-.ok-person-group-more.ant-popover {
-  min-width: 110px;
-  width: 110px;
-}
+
 .ok-person-group-more.ant-popover  .ant-popover-inner-content {
   padding: 0;
 }
@@ -343,16 +338,17 @@ p{margin:0;padding:0}
 }
 
 /* ok-person-group-more  content  */
-.ok-person-group-popper.popper-wraper {
-  list-style: none;
-  margin: 0;
+.ok-person-group-list-box {
   border-radius: @ok-border-radius-base;
   box-shadow: 0 0 9px 0 rgb(0 0 0 / 8%);
   background-color: @ok-white-color;
-  padding: 18px 12px;
-  max-height: 200px;
-  width: 120px;
+}
+.ok-person-group-popper {
+  list-style: none;
+  margin: 0;
+  max-height: 222px;
   overflow: auto;
+  padding: 18px 1px 18px 12px;
 }
 .ok-person-group-popper .popper-item {
   position: relative;
@@ -360,6 +356,7 @@ p{margin:0;padding:0}
   align-items: center;
   margin-bottom: 12px;
   font-size: 0;
+  padding-right: 10px;
 }
 .ok-person-group-popper .popper-item:last-child {
   margin-bottom: 0;
@@ -368,8 +365,11 @@ p{margin:0;padding:0}
 .ok-person-group-popper .popper-item-name {
   margin-left: 6px;
   font-weight: normal;
-  font-size: 12px;
+  font-size: 14px;
   color: @bl-n900;
+  max-width: 109px;
+  min-width: 69px;
+  line-height: 20px;
 }
 
 .ok-person-group-popper .popper-item-operate {

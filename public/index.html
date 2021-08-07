@@ -39,6 +39,9 @@
     .test-css {
       color: var(--bl-brand-c);
     }
+    .test-tooltip {
+      color: red;
+    }
   </style>
 </head>
 <body>
@@ -56,7 +59,9 @@
 
       <h3 class="test-css">测试css变量</h3>
 
-      <ok-tooltip title="zheli shi titlw aa">123</ok-tooltip>
+      <ok-tooltip title="zheli shi titlw aa">
+        <span class="test-tooltip">这里是trigger</span>
+      </ok-tooltip>
 
       <!-- <div style="width: 100px;">
         <ok-tooltip class="divider">
@@ -159,7 +164,7 @@
         </ok-upload-drag> -->
 
         <h3>拖拽上传</h3>
-        <ok-upload-drag style="width: 500px; display: block; "></ok-upload-drag>
+        <ok-upload-drag style="width: 260px; display: block; "></ok-upload-drag>
 
         <h3>antd</h3>
         <!-- <ok-attachment-drag></ok-attachment-drag>  -->
@@ -238,7 +243,7 @@
       employee_card: "工号",
       employee_en_name: "付静",
       employee_id: "FuJing",
-      employee_name: "付静静付静静付静静付静静付静静付静静付静静付静静付静静付静静",
+      employee_name: "🤡宋浩铭宋浩铭宋浩铭宋浩铭宋浩铭🤡",
       gender: 2,
       msg_relation_type: "WX",
       tenant_id: "test"
@@ -278,7 +283,7 @@
       employee_card: "工号",
       employee_en_name: "付静",
       employee_id: "FuJing",
-      employee_name: "付静付静付静付静付静付静付静付静付静付静付静付静付静",
+      employee_name: "🤡宋浩铭宋浩铭宋浩铭宋浩铭宋浩铭🤡",
       gender: 2,
       msg_relation_type: "WX",
       tenant_id: "test"
@@ -313,7 +318,7 @@
       email: "dongguangyao@byteluck.com",
       employee_en_name: "董光耀",
       employee_id: "DongGuangYao",
-      employee_name: "董光耀董光耀董光耀董光耀董光耀董光耀董光耀董光耀董光耀董光耀董光耀",
+      employee_name: "董光耀",
       external_user: false,
       gender: 1,
       msg_relation_type: "WX",
@@ -473,8 +478,8 @@
 
 
       const okPersonGroup = document.querySelector('ok-person-group')
-      // okPersonGroup.personList = personList.slice(0,1)
-      okPersonGroup.personList = personList
+      okPersonGroup.personList = personList.slice(0,1)
+      // okPersonGroup.personList = personList
 
       const okPersonGroupNew = document.querySelector('ok-person-group-new')
       okPersonGroupNew.personList = personList

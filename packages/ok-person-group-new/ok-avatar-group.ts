@@ -3,8 +3,8 @@
  * @Author: 付静
  * @Date: 2021-07-16 17:01:09
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-16 17:10:09
- * @FilePath: /packages/ok-person-group/ok-avatar-group.ts
+ * @LastEditTime: 2021-08-06 18:38:55
+ * @FilePath: /packages/ok-person-group-new/ok-avatar-group.ts
  */
 
 import { defineComponent, effect, html, onMounted, PropType } from 'ok-lit'
@@ -58,6 +58,11 @@ defineComponent(
             'box-sizing': 'border-box',
             border: '1px solid #fff',
           }
+          const textStyle = {
+            color: 'var(--bl-brand-c, #4C78FC)',
+            'font-family': 'PingFang SC',
+            'font-size': '16px',
+          }
 
           return {
             showList,
@@ -66,6 +71,7 @@ defineComponent(
             height,
             width,
             count,
+            textStyle,
           }
         },
         template: `
@@ -80,6 +86,7 @@ defineComponent(
             :width="width"
             :height="height"
             :count="index===3 ? count : 0"
+            :textStyle="index===3 ? textStyle : {}"
           ></ok-avatar>
       `,
       }
