@@ -111,7 +111,7 @@ export default function (props, context, config) {
       // 文件格式及大小都在组件外部判断
       if (
         !props.beforeUpload ||
-        (props.beforeUpload && props.beforeUpload(file))
+        (props.beforeUpload && props.beforeUpload(file, postFiles))
       ) {
         file.uid = fileId
         fileId++
