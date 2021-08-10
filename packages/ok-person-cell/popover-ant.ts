@@ -3,11 +3,11 @@
  * @Author: 付静
  * @Date: 2021-06-30 10:33:52
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-20 11:01:19
+ * @LastEditTime: 2021-08-10 14:26:30
  * @FilePath: /packages/ok-person-cell/popover-ant.ts
  */
 import { Popover } from 'ant-design-vue'
-import { defineComponent, effect, html, onMounted } from 'ok-lit'
+import { defineComponent, effect, html, onMounted, watch } from 'ok-lit'
 import { computed, createApp, ref } from 'vue'
 
 import { ANTD_VUE_CDN, COMMON_CSS_PATH } from '../path.config'
@@ -39,6 +39,21 @@ defineComponent(
           const statusType: any = ref('')
           const contentSlot = ref('')
           const cardDisplay = ref(false)
+
+          watch(
+            () => props.personInfo,
+            () => {
+              toOpenId.value = ''
+              isAwaken.value = false
+              deptList.value = []
+              statusType.value = ''
+              isSelf.value = false
+            },
+            {
+              deep: true,
+              immediate: true,
+            }
+          )
 
           const checkLardShow = async (id: string) => {
             let result: any = null

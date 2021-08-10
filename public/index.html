@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <link rel="icon" href="/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./antd.min.css">
+  <!-- <link rel="stylesheet" href="./antd.min.css"> -->
   <link rel="stylesheet" href="./common.css">
   <script src="https://fe-resource.baiteda.com/libs/webcomponentsjs-2.5.0/webcomponents-bundle.js"></script>
   <!-- <script src="https://fe-resource.baiteda.com/lib/byteluck/byteluck.theme.load.js"></script> -->
@@ -283,7 +283,7 @@
       employee_card: "工号",
       employee_en_name: "付静",
       employee_id: "FuJing",
-      employee_name: "🤡宋浩铭宋浩铭宋浩铭宋浩铭宋浩铭🤡",
+      employee_name: "aaaaaaa222222",
       gender: 2,
       msg_relation_type: "WX",
       tenant_id: "test"
@@ -479,6 +479,8 @@
 
       const okPersonGroup = document.querySelector('ok-person-group')
       okPersonGroup.personList = personList.slice(0,1)
+      okPersonGroup.width = '40px'
+      okPersonGroup.height = '40px'
       // okPersonGroup.personList = personList
 
       const okPersonGroupNew = document.querySelector('ok-person-group-new')

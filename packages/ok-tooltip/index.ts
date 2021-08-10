@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-28 19:07:13
  * @LastEditors: 付静
- * @LastEditTime: 2021-08-07 20:23:32
+ * @LastEditTime: 2021-08-10 11:01:08
  * @FilePath: /packages/ok-tooltip/index.ts
  */
 
@@ -30,7 +30,7 @@
  *
  */
 import { Tooltip } from 'ant-design-vue'
-import { defineComponent, html, onMounted, PropType } from 'ok-lit'
+import { defineComponent, effect, html, onMounted, PropType } from 'ok-lit'
 import { computed, createApp, ref, unref } from 'vue'
 
 import { ANTD_VUE_CDN } from '../path.config'
@@ -65,6 +65,8 @@ defineComponent(
   },
   (props, context) => {
     onMounted(() => {
+      const isInit = ref(false)
+      const isSlot = ref(false)
       const options = {
         components: { Tooltip },
         setup() {
@@ -92,7 +94,8 @@ defineComponent(
           }
 
           const triggerSlot = computed(() => {
-            return context.innerHTML
+            const el: any = context.$refs.triggerSlot
+            return el?.innerHTML
           })
           const textStyle = computed(() => props.textStyle)
           return {
@@ -100,6 +103,7 @@ defineComponent(
             visible,
             title,
             triggerSlot,
+            isSlot,
             textStyle,
             handleChangeVisible,
           }
@@ -110,16 +114,27 @@ defineComponent(
             :visible="visible"
             :onVisibleChange="handleChangeVisible"
           >
-            <div v-if="triggerSlot" ref="contentRef" style="max-width: 100%" class="ellipsis1" v-html="triggerSlot" ></div>
+            <div v-if="triggerSlot && isSlot" ref="contentRef" style="max-width: 100%" class="ellipsis1" v-html="triggerSlot" ></div>
             <div v-else ref="contentRef" :style="textStyle" class="tooltip-content ellipsis1" >
               {{title}}
             </div>
           </Tooltip>
         `,
       }
-      const app = createApp(options)
-      app.use(Tooltip)
-      app.mount(context.$refs.showTips as HTMLElement)
+
+      effect(() => {
+        if (!isInit.value) {
+          //@ts-ignore
+          const slots = context.shadowRoot.querySelectorAll('slot') || []
+          if (slots.length && slots[0].assignedNodes().length) {
+            isSlot.value = true
+          }
+          const app = createApp(options)
+          app.use(Tooltip)
+          app.mount(context.$refs.showTips as HTMLElement)
+          isInit.value = true
+        }
+      })
     })
 
     return () => html`
@@ -158,6 +173,7 @@ defineComponent(
         class="ok-ant-tooltip"
         style="display: inline-block; vertical-align: middle; max-width: 100%; "
       ></div>
+      <span ref="triggerSlot"><slot></slot></span>
     `
   }
 )

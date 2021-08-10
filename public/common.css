@@ -293,6 +293,7 @@ p {
   font-weight: normal;
   color: var(--bl-n900-c, #1F2329);
   margin-left: 6px;
+  line-height: 22px;
 }
 .ok-person-group-root .more {
   margin-left: 8px;

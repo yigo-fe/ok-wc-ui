@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-07-16 17:01:09
  * @LastEditors: 付静
- * @LastEditTime: 2021-08-06 18:38:55
+ * @LastEditTime: 2021-08-10 20:10:23
  * @FilePath: /packages/ok-person-group-new/ok-avatar-group.ts
  */
 
@@ -59,7 +59,7 @@ defineComponent(
             border: '1px solid #fff',
           }
           const textStyle = {
-            color: 'var(--bl-brand-c, #4C78FC)',
+            color: 'var(--bl-n900-c, #1F2329)',
             'font-family': 'PingFang SC',
             'font-size': '16px',
           }

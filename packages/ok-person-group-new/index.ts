@@ -79,9 +79,9 @@ defineComponent(
             <div v-if="showList.length===1" class="person-group-single-wrap">
               <ok-person-cell 
                 :personInfo="showList[0]"
-                :size="detailSize"
-                :width="detailWidth"
-                :height="detailHeight"
+                :size="size"
+                :width="width"
+                :height="height"
                 :propsGetInfoByEmpId="propsGetInfoByEmpId"
                 :avatarStyle="avatarStyle"
               ></ok-person-cell>

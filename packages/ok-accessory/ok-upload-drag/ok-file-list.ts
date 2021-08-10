@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-08-07 20:24:29
+ * @LastEditTime: 2021-08-10 11:00:09
  * @FilePath: /packages/ok-accessory/ok-upload-drag/ok-file-list.ts
  */
 
@@ -290,7 +290,7 @@ defineComponent(
             <div class="file_name_wraper">
               <ok-tooltip
                 .textStyle=${{ 'line-height': '18px' }}
-                style="max-width: calc(100% - 80px)"
+                style="max-width: calc(100% - 127px)"
                 .title=${item.name}
               ></ok-tooltip>
 

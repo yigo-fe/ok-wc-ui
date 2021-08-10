@@ -3,11 +3,18 @@
  * @Author: 付静
  * @Date: 2021-06-30 10:34:30
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-16 16:52:56
+ * @LastEditTime: 2021-08-10 20:09:59
  * @FilePath: /packages/ok-person-cell/popover-tippy.ts
  */
 import { setPopover } from '@c/utils'
-import { defineComponent, html, onMounted, onUnmounted, ref } from 'ok-lit'
+import {
+  defineComponent,
+  html,
+  onMounted,
+  onUnmounted,
+  ref,
+  watch,
+} from 'ok-lit'
 import { hideAll } from 'tippy.js'
 
 import { COMMON_CSS_PATH } from '../path.config'
@@ -33,6 +40,21 @@ defineComponent(
     const statusType: any = ref('')
     const isSelf = ref(false)
     const isMounted = ref(false)
+
+    watch(
+      () => props.personInfo,
+      () => {
+        toOpenId.value = ''
+        isAwaken.value = false
+        deptList.value = []
+        statusType.value = ''
+        isSelf.value = false
+      },
+      {
+        deep: true,
+        immediate: true,
+      }
+    )
 
     const checkLardShow = async (id: string) => {
       let result: any = null
