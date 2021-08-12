@@ -24,6 +24,7 @@ defineComponent(
           const itemStyle = computed(() => props.itemStyle)
           const contentStyle = computed(() => props.contentStyle)
           const showDelete = computed(() => props.showDelete)
+          const singleBordered = computed(() => props.singleBordered)
           const propsGetInfoByEmpId = computed(() => props.propsGetInfoByEmpId)
           const closeIcon = close
 
@@ -40,10 +41,12 @@ defineComponent(
             return props.personList?.slice(0, 4)
           })
 
-          const avatarStyle = {
-            'box-sizing': 'border-box',
-            border: '1px solid #fff',
-          }
+          const avatarStyle = singleBordered.value
+            ? {
+                'box-sizing': 'border-box',
+                border: '1px solid #FAFAFA',
+              }
+            : {}
 
           const avatarStyleDetail = {
             'box-sizing': 'border-box',

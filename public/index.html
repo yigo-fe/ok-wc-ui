@@ -5,6 +5,7 @@
   <link rel="icon" href="/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- <link rel="stylesheet" href="./antd.min.css"> -->
+  <link rel="stylesheet" href="https://fe-resource.baiteda.com/lib/byteluck-theme/0.1.3/byteluck.theme.blue.ant.css" />
   <link rel="stylesheet" href="./common.css">
   <script src="https://fe-resource.baiteda.com/libs/webcomponentsjs-2.5.0/webcomponents-bundle.js"></script>
   <!-- <script src="https://fe-resource.baiteda.com/lib/byteluck/byteluck.theme.load.js"></script> -->
@@ -270,20 +271,23 @@
     "zh": "测试部",
     "ja": "测试部"
   },
-  "avatar": "https://wework.qpic.cn/bizmail/5MicbcvDmINtCeG1TpOc2BMRsl4iaaHcxibWVAeVRRaQIbgsZjvZj1icNQ/0",
+  // "avatar": "https://wework.qpic.cn/bizmail/5MicbcvDmINtCeG1TpOc2BMRsl4iaaHcxibWVAeVRRaQIbgsZjvZj1icNQ/0",
+  "avatar": "",
   "terminated": false
 }
 
 
     const personList =[{
-      avatar_url: "https://wework.qpic.cn/bizmail/cMLFZrYGchIibX5icVTGibh7b2oELMc9MsJYDiaCNNmTYREjGVRjlsq3mA/0",
+      // avatar_url: "https://wework.qpic.cn/bizmail/cMLFZrYGchIibX5icVTGibh7b2oELMc9MsJYDiaCNNmTYREjGVRjlsq3mA/0",
+      avatar_url: "http://wework.qpic.cn/bizmail/4Pe7duia8uxNLHJudBX20fvias4eed76CHzUruEM7zLia8nlBHDicyfbibA/0",
+      // avatar_url: "",
       department_id: "30",
       department_name: "前端部",
       email: "fujing@byteluck.com",
       employee_card: "工号",
       employee_en_name: "付静",
       employee_id: "FuJing",
-      employee_name: "aaaaaaa222222",
+      employee_name: "A付静",
       gender: 2,
       msg_relation_type: "WX",
       tenant_id: "test"
@@ -458,8 +462,8 @@
 
       const okPersonCell = document.querySelector('.ok-person-cell1')
       okPersonCell.personInfo = personInfo1
-      // okPersonCell.width = '30px'
-      // okPersonCell.height = '30px'
+      okPersonCell.width = '20px'
+      okPersonCell.height = '20px'
 
 
       const okPersonCell3 = document.querySelector('.ok-person-cell3')
@@ -478,9 +482,9 @@
 
 
       const okPersonGroup = document.querySelector('ok-person-group')
-      okPersonGroup.personList = personList.slice(0,1)
-      okPersonGroup.width = '40px'
-      okPersonGroup.height = '40px'
+      okPersonGroup.personList = personList.slice(0,3)
+      okPersonGroup.width = '24px'
+      okPersonGroup.height = '24px'
       // okPersonGroup.personList = personList
 
       const okPersonGroupNew = document.querySelector('ok-person-group-new')

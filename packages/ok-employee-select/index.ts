@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-29 17:24:39
+ * @LastEditTime: 2021-08-12 10:49:18
  * @FilePath: /packages/ok-employee-select/index.ts
  */
 
@@ -248,8 +248,8 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
         margin-bottom: 2px;
         padding: 0 4px 0 8px;
         line-height: 22px;
-        background: var(--bl-n200-c, #f5f7f7);
-        border: 1px solid var(--bl-n200-c, #f5f7f7);
+        background: var(--bl-n200-c, #f5f6f7);
+        border: 1px solid var(--bl-n200-c, #f5f6f7);
         border-radius: 2px;
         cursor: default;
         transition: font-size 0.3s, line-height 0.3s, height 0.3s;

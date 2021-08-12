@@ -3,8 +3,8 @@
  * @Author: 付静
  * @Date: 2021-07-16 10:35:15
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-16 16:46:31
- * @FilePath: /packages/ok-person-group/props.ts
+ * @LastEditTime: 2021-08-11 16:30:18
+ * @FilePath: /packages/ok-person-group-new/props.ts
  */
 
 import { SIZE_TYPE } from '@c/enum'
@@ -53,6 +53,10 @@ const props = {
   },
   placement: {
     type: String as unknown as PropType<string>,
+  },
+  singleBordered: {
+    // 单个人员是否有边框
+    type: Boolean as unknown as PropType<boolean>,
   },
   deleteItem: {
     // eslint-disable-next-line no-unused-vars

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-06-30 10:34:30
  * @LastEditors: 付静
- * @LastEditTime: 2021-08-10 20:09:59
+ * @LastEditTime: 2021-08-11 16:33:32
  * @FilePath: /packages/ok-person-cell/popover-tippy.ts
  */
 import { setPopover } from '@c/utils'
@@ -101,6 +101,8 @@ defineComponent(
 
     onUnmounted(() => {
       isMounted.value = false
+      // 关闭所有卡片
+      hideAll()
     })
 
     onMounted(() => {

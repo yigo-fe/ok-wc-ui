@@ -4,7 +4,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:56:38
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-19 17:27:03
+ * @LastEditTime: 2021-08-11 11:36:15
  * @FilePath: /packages/ok-employee-select/ok-employee-modal.ts
  */
 
@@ -117,6 +117,7 @@ defineComponent(
         template: `
         <a-config-provider :autoInsertSpaceInButton="false">
           <a-modal 
+            destroyOnClose
             wrapClassName="ok-employee-modal-wrap"
             class="ok-tree-modal ok-employee-tree-modal"
             width="824px" 

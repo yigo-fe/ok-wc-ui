@@ -325,17 +325,19 @@ p{margin:0;padding:0}
   cursor: pointer;
 }
 /* ok-person-group-more */
-
-.ok-person-group-more.ant-popover  .ant-popover-inner-content {
-  padding: 0;
-}
-.ok-person-group-more.ant-popover  .ant-popover-inner {
-  background-color: transparent;
-  background-clip: padding-box;
-  box-shadow: none;
-}
-.ok-person-group-more.ant-popover .ant-popover-arrow {
-  display: none;
+.ok-person-group-more.ant-popover {
+  min-width: unset;
+  .ant-popover-inner-content {
+    padding: 0;
+  }
+  .ant-popover-inner {
+    background-color: transparent;
+    background-clip: padding-box;
+    box-shadow: none;
+  }
+  .ant-popover-arrow {
+    display: none;
+  }
 }
 
 /* ok-person-group-more  content  */

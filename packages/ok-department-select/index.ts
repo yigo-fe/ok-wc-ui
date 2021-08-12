@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:01:15
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-29 19:55:12
+ * @LastEditTime: 2021-08-12 10:49:09
  * @FilePath: /packages/ok-department-select/index.ts
  */
 import './ok-department-modal'
@@ -224,8 +224,8 @@ defineComponent(
           margin-bottom: 2px;
           padding: 0 4px 0 8px;
           line-height: 22px;
-          background: var(--bl-n200-c, #f5f7f7);
-          border: 1px solid var(--bl-n200-c, #f5f7f7);
+          background: var(--bl-n200-c, #f5f6f7);
+          border: 1px solid var(--bl-n200-c, #f5f6f7);
           border-radius: 2px;
           cursor: default;
           transition: font-size 0.3s, line-height 0.3s, height 0.3s;
