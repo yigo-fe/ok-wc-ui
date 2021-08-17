@@ -460,6 +460,89 @@ declare namespace typing {
 
     timestamp?: string
   }
+  interface EmployeeQuery {
+    /**
+     * 部门ID
+     */
+    department_id?: string
+
+    /**
+     * 查询参数
+     */
+    emp_id?: string
+
+    /**
+     * 查询参数
+     */
+    param?: string
+  }
+  interface PageResult$UserDto$ {
+    /**
+     * 状态码
+     */
+    code?: string
+
+    /**
+     * 数据
+     */
+    data?: RowsResp$UserDto$
+
+    /**
+     * 返回结果描述
+     */
+    message?: string
+
+    state?: 'SUCCESS' | 'FAIL' | 'ERROR'
+
+    timestamp?: string
+  }
+  interface RowsResp$UserDto$ {
+    page?: PageResponse
+
+    rows?: Array<UserDto>
+  }
+  interface PageResponse {
+    /**
+     * 当前页码
+     */
+    page_index?: number
+
+    /**
+     * 每页条数
+     */
+    page_size?: number
+
+    /**
+     * 总数量
+     */
+    total?: number
+  }
+  interface FileQueryBo {
+    /**
+     * 附件ID集合
+     */
+    file_id_list?: Array<string>
+  }
+  interface PlainResult$Map$ {
+    /**
+     * 状态码
+     */
+    code?: string
+
+    /**
+     * 返回结果对象
+     */
+    data?: unknown
+
+    /**
+     * 返回结果描述
+     */
+    message?: string
+
+    state?: 'SUCCESS' | 'FAIL' | 'ERROR'
+
+    timestamp?: string
+  }
 }
 
 export type { typing }

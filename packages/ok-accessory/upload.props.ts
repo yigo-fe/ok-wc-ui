@@ -4,7 +4,7 @@
  * @Author: 付静
  * @Date: 2021-02-05 19:42:22
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-20 14:40:52
+ * @LastEditTime: 2021-08-17 15:37:19
  * @FilePath: /packages/ok-accessory/upload.props.ts
  */
 
@@ -19,6 +19,21 @@ type AjaxEventListener = (
   FileList?: []
 ) => unknown
 type Nullable<T> = T | null
+
+interface CallBackParam {
+  file: File
+  fileLists: Array<any>
+}
+interface CallBackParamSuccess {
+  response: any
+  file: File
+  fileLists: Array<any>
+}
+interface CallBackParamError {
+  error: any
+  file: File
+  fileLists: Array<any>
+}
 
 const UploadProps = {
   type: {
@@ -83,13 +98,11 @@ const UploadProps = {
   },
   onSuccess: {
     type: Function as unknown as PropType<
-      (response: any, file: any, fileLists: any) => void
+      (param: CallBackParamSuccess) => void
     >,
   },
   onError: {
-    type: Function as unknown as PropType<
-      (error: any, file: any, fileLists: any) => void
-    >,
+    type: Function as unknown as PropType<(param: CallBackParamError) => void>,
   },
   httpRequest: {
     type: Function as unknown as
@@ -98,27 +111,19 @@ const UploadProps = {
     default: ajax,
   },
   onChange: {
-    type: Function as unknown as PropType<(file: any, fileLists: any) => void>,
+    type: Function as unknown as PropType<(param: CallBackParam) => void>,
   },
   beforeRemove: {
-    type: Function as unknown as PropType<(file: any, fileLists: any) => void>,
+    type: Function as unknown as PropType<(param: CallBackParam) => void>,
   },
   onExceed: {
-    type: Function as unknown as PropType<(file: any, fileLists: any) => void>,
+    type: Function as unknown as PropType<(param: CallBackParam) => void>,
   },
   onPreview: {
     type: Function as unknown as PropType<(file: File) => void>,
   },
   onDownload: {
     type: Function as unknown as PropType<(file: File) => void>,
-  },
-  iconColor: {
-    type: String as unknown as PropType<string>,
-    default: '#4c78fc',
-  },
-  btnColor: {
-    type: String as unknown as PropType<string>,
-    default: '#4c78fc',
   },
   operation: {
     type: Array as unknown as PropType<string[]>,
@@ -136,7 +141,7 @@ const UploadProps = {
     default: false,
   },
   update: {
-    type: Function as unknown as PropType<(ids: string[], lists: []) => void>,
+    type: Function as unknown as PropType<(param: CallBackParam) => void>,
   },
   // 自定义回显
   customDisplayList: {

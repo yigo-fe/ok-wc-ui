@@ -29,16 +29,13 @@ defineComponent(
           const closeIcon = close
 
           const personList = computed(() => {
-            return props.personList
+            return props.personList || []
           })
           const count = computed(() => {
             return Array.isArray(props.personList) ? props.personList.length : 0
           })
           const placement = computed(() => {
             return props.placement
-          })
-          const showList = computed(() => {
-            return props.personList?.slice(0, 4)
           })
 
           const avatarStyle = singleBordered.value
@@ -59,7 +56,6 @@ defineComponent(
 
           return {
             placement,
-            showList,
             avatarStyle,
             size,
             height,
@@ -79,16 +75,16 @@ defineComponent(
           }
         },
         template: `
-            <div v-if="showList.length===1" class="person-group-single-wrap">
+            <div v-if="personList.length===1" class="person-group-single-wrap">
               <ok-person-cell 
-                :personInfo="showList[0]"
+                :personInfo="personList[0]"
                 :size="size"
                 :width="width"
                 :height="height"
                 :propsGetInfoByEmpId="propsGetInfoByEmpId"
                 :avatarStyle="avatarStyle"
               ></ok-person-cell>
-              <span class="single-user-name ellipsis1">{{showList[0].employee_name}}</span>
+              <span class="single-user-name ellipsis1">{{personList[0].employee_name}}</span>
             </div>
             <a-popover v-else :placement="placement" overlayClassName="ok-person-group-more">
               <template #content>
@@ -120,7 +116,7 @@ defineComponent(
               :size="size"
               :width="width"
               :height="height"
-              :personList="personList"></ok-avatar-group>
+              :personList="JSON.stringify(personList)"></ok-avatar-group>
             </a-popover>
       `,
       }

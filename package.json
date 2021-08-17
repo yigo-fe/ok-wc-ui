@@ -1,6 +1,6 @@
 {
   "name": "ok-wc-ui",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "types": "dist/types/index.d.ts",
   "main": "dist/ok-wc-ui.cjs.js",
   "module": "dist/ok-wc-ui.esm.js",

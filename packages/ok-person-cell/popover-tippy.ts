@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-06-30 10:34:30
  * @LastEditors: 付静
- * @LastEditTime: 2021-08-11 16:33:32
+ * @LastEditTime: 2021-08-17 11:00:42
  * @FilePath: /packages/ok-person-cell/popover-tippy.ts
  */
 import { setPopover } from '@c/utils'
@@ -61,7 +61,9 @@ defineComponent(
       if (props.propsGetInfoByEmpId) {
         result = await props.propsGetInfoByEmpId(id)
       } else {
-        result = await api.default.GetInfoByEmpId({ emp_id: id })
+        result = await api.default.GetInfoByEmpIdUserPrivateV1POST({
+          payload: { emp_id: id },
+        })
       }
 
       if (result.code === '000000') {

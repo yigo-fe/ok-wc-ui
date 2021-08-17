@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 18:41:06
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-12 20:36:11
+ * @LastEditTime: 2021-08-16 14:52:19
  * @FilePath: /packages/ok-department-select/hook-modal.ts
  */
 import { debounce } from 'lodash'
@@ -124,29 +124,6 @@ export default function (props: any) {
       }
 
       handleLoadData(treeNode, resolve)
-      // api.default
-      //   .SelectDeptListDeptPrivateV1POST({
-      //     payload: {
-      //       display_level: displayLevel.value,
-      //       parent_dept_id: treeNode.dataRef.department_id,
-      //     },
-      //   })
-      //   .then((res: any) => {
-      //     if (res.code === '000000') {
-      //       res.data.forEach((item: any) => {
-      //         item.scopedSlots = scopedSlots
-      //         item.isLeaf = !item.has_child
-      //       })
-      //       treeNode.dataRef.children = res.data
-      //       expandedKeys.value.push(treeNode.dataRef.department_id)
-      //     }
-      //     // 收集信息
-      //     props.collect && props.collect(res.data)
-      //     nextTick(() => {
-      //       treeData.value = [...treeData.value]
-      //       resolve()
-      //     })
-      //   })
     })
   }
 

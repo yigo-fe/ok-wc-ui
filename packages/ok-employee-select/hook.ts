@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 15:16:57
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-29 17:12:22
+ * @LastEditTime: 2021-08-16 15:04:59
  * @FilePath: /packages/ok-employee-select/hook.ts
  */
 import { debounce } from 'lodash'
@@ -123,7 +123,11 @@ export default function (props: any, context: any, okEmployeeInput: any) {
     if (props.remoteMethod) {
       return await props.remoteMethod(query)
     } else {
-      return await api.default.SearchUserInfo({ param: query })
+      return await api.default.SearchUserInfoUserPrivateV1POST({
+        payload: {
+          param: query,
+        },
+      })
     }
   }
 
@@ -156,6 +160,11 @@ export default function (props: any, context: any, okEmployeeInput: any) {
   // 本地搜索
   const filterOption = (inputValue: string, option: any) => {
     const optionDetail = infoMap.value[option.value]
+    // 自定义本地搜索
+    if (props.filterOption && typeof props.filterOption === 'function') {
+      return props.filterOption(inputValue, optionDetail)
+    }
+
     const query = inputValue?.toLowerCase()
     const employeeId = optionDetail?.employee_id?.toLowerCase()
     const email = optionDetail?.email?.split('@')[0].toLowerCase()

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-07-10 11:16:00
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-14 16:06:41
+ * @LastEditTime: 2021-08-16 15:09:56
  * @FilePath: /packages/ok-accessory/image.common.hook.ts
  */
 import { apiInit, sourceHost } from '../services/api'
@@ -72,7 +72,9 @@ export default function (props, context) {
     return props.customDisplayList
       ? await props.customDisplayList(ids)
       : await api.default.GetImageListAttachmentPrivateV1POST({
-          file_id_list: ids,
+          payload: {
+            file_id_list: ids,
+          },
         })
   }
 

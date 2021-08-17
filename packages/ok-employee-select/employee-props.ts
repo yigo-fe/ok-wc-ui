@@ -4,7 +4,7 @@
  * @Author: 付静
  * @Date: 2021-03-20 14:56:24
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-29 17:12:46
+ * @LastEditTime: 2021-08-17 16:19:45
  * @FilePath: /packages/ok-employee-select/employee-props.ts
  */
 
@@ -132,7 +132,13 @@ const propsOptions = {
     type: Boolean,
     default: false,
   },
-  // 自定义搜索
+  // 自定义本地搜索
+  filterOption: {
+    type: Function as unknown as PropType<
+      (query: string, option: any) => Boolean
+    >,
+  },
+  // 自定义远程搜索
   remoteMethod: {
     type: Function as unknown as PropType<(query: string) => Promise<unknown>>,
   },

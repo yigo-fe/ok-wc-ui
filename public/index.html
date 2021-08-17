@@ -287,7 +287,7 @@
       employee_card: "工号",
       employee_en_name: "付静",
       employee_id: "FuJing",
-      employee_name: "A付静",
+      employee_name: "付静付静付静付静付静付静付静付静付静付静",
       gender: 2,
       msg_relation_type: "WX",
       tenant_id: "test"
@@ -482,7 +482,7 @@
 
 
       const okPersonGroup = document.querySelector('ok-person-group')
-      okPersonGroup.personList = personList.slice(0,3)
+      okPersonGroup.personList = personList.slice(0,7)
       okPersonGroup.width = '24px'
       okPersonGroup.height = '24px'
       // okPersonGroup.personList = personList
@@ -692,15 +692,15 @@
 
 
       const okEmployeeInput = document.querySelector('.ok-employee-input')
-      okEmployeeInput.value = ['WangChao', 'LiuFei']
-      // okEmployeeInput.disabled = true
+      okEmployeeInput.value = ['WangChao']
+      okEmployeeInput.disabled = true
       // okEmployeeInput.remoteMethod = (ids)=>{
       //   console.log('remoteMethod',ids)
       // }
       // okEmployeeInput.borderRadius = 'none'
       // okEmployeeInput.hasBorderRadius = false
       // okEmployeeInput.isError = true
-      okEmployeeInput.width = '300px'
+      // okEmployeeInput.width = '300px'
       // okEmployeeInput.disabled = true
       // okEmployeeInput.bordered = false
       // okEmployeeInput.value = []
@@ -709,14 +709,18 @@
       //   // console.log('getPopupContainer', triggerNode)
       //   return triggerNode.parentNode
       // }
-      okEmployeeInput.multiple = true
+      // okEmployeeInput.multiple = true
       // okEmployeeInput.borderless = true
       // okEmployeeInput.disabled = true
-      // okEmployeeInput.range = ['FuJing',"FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing', 'WangChao', 'WangYiJie']
+      okEmployeeInput.range = ['FuJing',"FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing', 'WangChao', 'WangYiJie']
       okEmployeeInput.update = (val, list)=>{
         console.log('okEmployeeInput-update-index',val,list)
         // okEmployeeInput.value = val
       }
+
+      // okEmployeeInput.filterOption=(query, option)=>{
+      //   return option.employee_id.toLowerCase().indexOf(query)>-1
+      // }
 
       okEmployeeInput.onFocus = ()=>{
         // console.log('focus')

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-08-12 10:49:18
+ * @LastEditTime: 2021-08-16 14:57:32
  * @FilePath: /packages/ok-employee-select/index.ts
  */
 
@@ -107,7 +107,7 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
               :value="employee.employee_id"
             >
               <slot :item="employee">
-                <div class="option-list-item" :class="{'isDropdown': open}">
+                <div class="option-list-item" :class="{'isDropdown': isOpen}">
                   <div class="selected-head">
                     <ok-person-cell
                       class="user-img__avatar__head"

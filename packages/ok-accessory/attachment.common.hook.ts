@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-07-10 11:15:37
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-14 16:06:56
+ * @LastEditTime: 2021-08-16 15:08:56
  * @FilePath: /packages/ok-accessory/attachment.common.hook.ts
  */
 import { message } from 'ant-design-vue'
@@ -75,7 +75,9 @@ export default function (props, context) {
     return props.customDisplayList
       ? await props.customDisplayList(ids)
       : await api.default.GetAttachmentListAttachmentPrivateV1POST({
-          file_id_list: ids,
+          payload: {
+            file_id_list: ids,
+          },
         })
   }
   // test:

@@ -4,7 +4,7 @@
  * @Author: 付静
  * @Date: 2021-03-15 17:25:18
  * @LastEditors: 付静
- * @LastEditTime: 2021-05-11 16:35:39
+ * @LastEditTime: 2021-08-16 17:54:19
  * @FilePath: /packages/services/services.ts
  */
 import { FetchService } from './axios'
@@ -45,29 +45,29 @@ export default class {
   }
 
   /**
-   * 根据关键字模糊搜索用户消息
+   * 根据员工编号或姓名邮箱获取员工信息
    * @method
+   * @name #SearchUserInfoUserPrivateV1POST
+   * @param {} param - param
    */
-  public async SearchUserInfo(data: any) {
-    const result = await this.http.post(`/v1/private/user/searchUserInfo`, data)
-    return result
-  }
+  public async SearchUserInfoUserPrivateV1POST(params: {
+    payload?: typing.EmployeeQuery
+  }): Promise<typing.PageResult$UserDto$> {
+    let path = ''
+    path = '/v1/private/user/searchUserInfo'
+    let body: any
+    const queryParameters: any = {}
 
-  /**
-   * 根据dept_id 获取子部门
-   * @method
-   */
-  public async SelectDeptList(data: any) {
-    const result = await this.http.post(`/v1/private/dept/selectDeptList`, data)
-    return result
-  }
+    if (params.payload !== undefined) {
+      body = params.payload
+    }
 
-  /**
-   * 根据dept_id 查询部门下所属人员
-   * @method
-   */
-  public async SearchDeptUserInfo(data: any) {
-    const result = await this.http.post(`/v1/private/user/searchUserInfo`, data)
+    const result: typing.PageResult$UserDto$ = await this.http.request({
+      method: 'POST',
+      url: path,
+      params: queryParameters,
+      payload: body,
+    })
     return result
   }
 
@@ -105,24 +105,54 @@ export default class {
   /**
    * 批量获取附件信息
    * @method
+   * @name #GetAttachmentListAttachmentPrivateV1POST
+   * @param {} queryBo - queryBo
    */
-  public async GetAttachmentListAttachmentPrivateV1POST(data: any) {
-    const result = await this.http.post(
-      `/v1/private/attachment/getAttachmentList`,
-      data
-    )
+  public async GetAttachmentListAttachmentPrivateV1POST(params: {
+    payload?: typing.FileQueryBo
+  }): Promise<typing.ListResult$AttachmentDto$> {
+    let path = ''
+    path = '/v1/private/attachment/getAttachmentList'
+    let body: any
+    const queryParameters: any = {}
+
+    if (params.payload !== undefined) {
+      body = params.payload
+    }
+
+    const result: typing.ListResult$AttachmentDto$ = await this.http.request({
+      method: 'POST',
+      url: path,
+      params: queryParameters,
+      payload: body,
+    })
     return result
   }
 
   /**
    * 批量获取图片信息
    * @method
+   * @name #GetImageListAttachmentPrivateV1POST
+   * @param {} queryBo - queryBo
    */
-  public async GetImageListAttachmentPrivateV1POST(data: any) {
-    const result = await this.http.post(
-      `/v1/private/attachment/getImageList`,
-      data
-    )
+  public async GetImageListAttachmentPrivateV1POST(params: {
+    payload?: typing.FileQueryBo
+  }): Promise<typing.ListResult$ImageDto$> {
+    let path = ''
+    path = '/v1/private/attachment/getImageList'
+    let body: any
+    const queryParameters: any = {}
+
+    if (params.payload !== undefined) {
+      body = params.payload
+    }
+
+    const result: typing.ListResult$ImageDto$ = await this.http.request({
+      method: 'POST',
+      url: path,
+      params: queryParameters,
+      payload: body,
+    })
     return result
   }
 
@@ -187,9 +217,7 @@ export default class {
    */
   public async SearchDeptPrivateV1POST(params: {
     payload?: typing.ParamBo
-    query?: {}
-    path?: {}
-  }): Promise<typing.PlainResult> {
+  }): Promise<typing.ListResult$DepartmentDto$> {
     let path = ''
     path = '/v1/private/dept/search'
     let body: any
@@ -199,7 +227,7 @@ export default class {
       body = params.payload
     }
 
-    const result: typing.PlainResult = await this.http.request({
+    const result: typing.ListResult$DepartmentDto$ = await this.http.request({
       method: 'POST',
       url: path,
       params: queryParameters,
@@ -207,6 +235,7 @@ export default class {
     })
     return result
   }
+
   /**
    * 根据部门ID查询部门
    * @method

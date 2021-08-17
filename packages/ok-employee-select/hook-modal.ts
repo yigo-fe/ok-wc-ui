@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-04-08 15:19:21
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-12 18:53:15
+ * @LastEditTime: 2021-08-16 15:05:14
  * @FilePath: /packages/ok-employee-select/hook-modal.ts
  */
 import { debounce } from 'lodash'
@@ -112,9 +112,11 @@ export default function (props: any) {
     // 处理自定义接口
     const result = props.getSubDept
       ? await props.getSubDept(department_id)
-      : await api.default.SelectDeptList({
-          display_level: 1,
-          parent_dept_id: department_id,
+      : await api.default.SelectDeptListDeptPrivateV1POST({
+          payload: {
+            display_level: 1,
+            parent_dept_id: department_id,
+          },
         })
 
     if (result.code === '000000') {
@@ -127,9 +129,11 @@ export default function (props: any) {
     // 处理自定义接口
     const result = props.queryDeptUser
       ? await props.queryDeptUser(department_id.value, queryKey.value)
-      : await api.default.SearchDeptUserInfo({
-          department_id: department_id.value,
-          param: queryKey.value,
+      : await api.default.SearchUserInfoUserPrivateV1POST({
+          payload: {
+            department_id: department_id.value,
+            param: queryKey.value,
+          },
         })
     if (result.code === '000000') {
       employeeList.value = result.data?.rows
@@ -151,7 +155,11 @@ export default function (props: any) {
     // 处理自定义接口
     const result = props.queryDeptUser
       ? await props.remoteMethod(queryKey.value)
-      : await api.default.SearchUserInfo({ param: queryKey.value })
+      : await api.default.SearchUserInfoUserPrivateV1POST({
+          payload: {
+            param: queryKey.value,
+          },
+        })
     if (result.code === '000000') {
       const data: any = result.data?.rows
       searchResultList.value = data
