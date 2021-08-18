@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-08-16 14:57:32
+ * @LastEditTime: 2021-08-18 15:47:43
  * @FilePath: /packages/ok-employee-select/index.ts
  */
 
@@ -198,6 +198,7 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
       .ant-select-multiple .ant-select-selection-search {
         position: relative;
         margin-left: 0.5px;
+        flex-shrink: 30;
       }
       .ant-select-multiple .ant-select-selection-placeholder {
         position: absolute;
@@ -354,6 +355,7 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
         'border-radius-right': props.borderRadius === 'right',
         'border-radius-none': props.borderRadius === 'none',
         'is-error': !!props.isError,
+        'is-multiple': props.multiple,
       })}
       style=${styleMap({
         height: '100%',

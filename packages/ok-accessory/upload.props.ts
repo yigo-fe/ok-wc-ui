@@ -4,7 +4,7 @@
  * @Author: 付静
  * @Date: 2021-02-05 19:42:22
  * @LastEditors: 付静
- * @LastEditTime: 2021-08-17 15:37:19
+ * @LastEditTime: 2021-08-17 17:24:43
  * @FilePath: /packages/ok-accessory/upload.props.ts
  */
 
@@ -77,7 +77,10 @@ const UploadProps = {
   },
   beforeUpload: {
     type: Function as unknown as PropType<
-      (file: File) => Promise<File | Blob> | boolean | unknown
+      (
+        file: File,
+        postFiles: File[]
+      ) => Promise<File | Blob> | boolean | unknown
     >,
   },
   headers: {

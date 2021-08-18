@@ -85,7 +85,7 @@
 
 
       <h3>人员选择-input</h3>
-      <ok-employee-select class="divider ok-employee-input" placeholder="请选择请选择请选择请选择请选择请选择请选择请选择请选择请选择请选择请选择请选择1" style="width: 200px;display: block;"></ok-employee-select>
+      <ok-employee-select class="divider ok-employee-input" placeholder="请选择请选择请选择请选择请选择请选择请选择请选择请选择请选择请选择请选择请选择1" style="width: 150px;display: block;"></ok-employee-select>
 
       <h3>人员选择-tree</h3>
       <ok-employee-select class="divider ok-employee-tree" mode="tree" placeholder="请选择3" style="width: 300px;height:40px;display: block;"></ok-employee-select>
@@ -482,7 +482,7 @@
 
 
       const okPersonGroup = document.querySelector('ok-person-group')
-      okPersonGroup.personList = personList.slice(0,7)
+      okPersonGroup.personList = personList.slice(0,6)
       okPersonGroup.width = '24px'
       okPersonGroup.height = '24px'
       // okPersonGroup.personList = personList
@@ -527,7 +527,7 @@
       
       // okUpload.fileList = ["660ece2ca6616a55e00796a43bf57281", "3440cdcbaa4d011abc19e474d0ecd993", "13e7f0f8567e02b8e32db59179708a7d"]
 
-      // okUpload.multiple = true
+      okUpload.multiple = true
       // okUpload.noBorder = true
       // okUpload.data = uploadData
       // okUpload.operation = ['preview']
@@ -638,6 +638,7 @@
       // okDeptInput.borderRadius = 'none'
       okDeptInput.multiple = true
       okDeptInput.level = 4
+      // okDeptInput.flat = true
       // okDeptInput.disabled = true
       // okDeptInput.isError = true
     //   remoteMethod,
@@ -667,6 +668,8 @@
       okDeptTree.value = ['13','14', '20', '18', '19']
       okDeptTree.multiple = true
       okDeptTree.level = 4
+      okDeptTree.flat = true
+    
       // okDeptTree.hasBorderRadius = false
       // okDeptTree.bordered = false
       // okDeptTree.disabled = true
@@ -692,8 +695,8 @@
 
 
       const okEmployeeInput = document.querySelector('.ok-employee-input')
-      okEmployeeInput.value = ['WangChao']
-      okEmployeeInput.disabled = true
+      okEmployeeInput.value = ['ChenCuiPing','FengHaiLi', 'WangYiJie']
+      // okEmployeeInput.disabled = true
       // okEmployeeInput.remoteMethod = (ids)=>{
       //   console.log('remoteMethod',ids)
       // }
@@ -712,7 +715,7 @@
       // okEmployeeInput.multiple = true
       // okEmployeeInput.borderless = true
       // okEmployeeInput.disabled = true
-      okEmployeeInput.range = ['FuJing',"FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing', 'WangChao', 'WangYiJie']
+      // okEmployeeInput.range = ['FuJing',"FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing', 'WangChao', 'WangYiJie']
       okEmployeeInput.update = (val, list)=>{
         console.log('okEmployeeInput-update-index',val,list)
         // okEmployeeInput.value = val

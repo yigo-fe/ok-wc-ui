@@ -91,6 +91,7 @@ p {
 .ok-employee-select-wraper .ant-select .ant-select-selector,
 .ok-department-select-wraper .ant-select .ant-select-selector {
   border-radius: 4px;
+  padding-right: 37px;
 }
 .ok-employee-select-wraper .ant-select .ant-select-selection-placeholder,
 .ok-department-select-wraper .ant-select .ant-select-selection-placeholder {
@@ -147,7 +148,7 @@ p {
 }
 .ok-employee-select-wraper .ant-select-multiple .ant-select-selection-item,
 .ok-department-select-wraper .ant-select-multiple .ant-select-selection-item {
-  max-width: calc(100% - 80px);
+  flex-shrink: 0;
 }
 /* 人员和部门选择没有border-radius */
 .no-border-radius .ant-select .ant-select-selector {
@@ -161,6 +162,9 @@ p {
 }
 .border-radius-none .ant-select .ant-select-selector {
   border-radius: 0;
+}
+.is-multiple.ok-employee-select-wraper .ant-select-multiple .ant-select-selection-item {
+  flex-shrink: 1;
 }
 .ok-tree-modal {
   /* 修改部门选择modal中，树父级与子集的间距 */
@@ -1118,6 +1122,7 @@ p {
 }
 .ok-employee-select.ant-select-multiple .ant-select-selector {
   border-color: var(--bl-n300-c, #DEE0E3);
+  flex-wrap: nowrap;
 }
 .ok-employee-select.ant-select-multiple.no-border .ant-select-selector {
   border: 0;
@@ -1168,6 +1173,12 @@ p {
 }
 .ok-department-select-root .ok-department-select .ant-select-selector {
   height: 100%;
+}
+.ok-department-select-root.is-inline .ok-department-select .ant-select-selector {
+  flex-wrap: nowrap;
+}
+.ok-department-select-root.is-inline .ok-department-select .ant-select-selector .ant-select-selection-item {
+  max-width: calc(100% - 60px);
 }
 .ok-department-select-root .ok-department-select .ant-select-selection-item-content {
   font-size: 14px;

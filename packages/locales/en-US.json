@@ -37,7 +37,7 @@
     }
   },
   "common": {
-    "index": "Index",
+    "index": "No.",
     "noData": "No data available",
     "selected": "Selected",
     "confirm": "Confirm",

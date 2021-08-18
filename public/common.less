@@ -95,6 +95,7 @@ p{margin:0;padding:0}
     /* 修改ant-select的border-radius */
     .ant-select-selector {
       border-radius: @ok-border-radius-base;
+      padding-right: 37px;
     }
 
     /* 修改人员和部门选择placeholder宽度 */
@@ -150,8 +151,9 @@ p{margin:0;padding:0}
   }
   // 修改tag 的maxWidth
   .ant-select-multiple .ant-select-selection-item {
-    max-width: calc(100% - 80px);
+    flex-shrink: 0;
   }
+
 }
 
 /* 人员和部门选择没有border-radius */
@@ -159,6 +161,9 @@ p{margin:0;padding:0}
 .border-radius-left .ant-select .ant-select-selector {border-radius:4px 0 0 4px}
 .border-radius-right .ant-select .ant-select-selector {border-radius:0 4px 4px 0}
 .border-radius-none .ant-select .ant-select-selector {border-radius:0}
+.is-multiple.ok-employee-select-wraper .ant-select-multiple .ant-select-selection-item {
+  flex-shrink: 1;
+}
 
 .ok-tree-modal {
   
@@ -1236,7 +1241,7 @@ p{margin:0;padding:0}
 .ok-employee-tree-wraper{width:100%}
 .ok-employee-select-wraper .ant-select.ok-employee-select {line-height: initial;}
 .ok-employee-select .ant-select-selector {height: 100%;}
-.ok-employee-select.ant-select-multiple .ant-select-selector{border-color:@bl-n300}
+.ok-employee-select.ant-select-multiple .ant-select-selector{border-color:@bl-n300; flex-wrap: nowrap;}
 .ok-employee-select.ant-select-multiple.no-border .ant-select-selector{border:0}
 .ant-select-selection-item .selected-option{display:none}
 .ant-select-selection-item .selected-head{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}
@@ -1260,6 +1265,12 @@ p{margin:0;padding:0}
 }
 .ok-department-select-root .ok-department-select .ant-select-selector {
   height: 100%;
+}
+.ok-department-select-root.is-inline .ok-department-select .ant-select-selector {
+  flex-wrap: nowrap;
+  .ant-select-selection-item {
+    max-width: calc(100% - 60px);
+  }
 }
 
 .ok-department-select-root .ok-department-select .ant-select-selection-item-content {

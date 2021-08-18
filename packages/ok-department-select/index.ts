@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-23 21:01:15
  * @LastEditors: 付静
- * @LastEditTime: 2021-08-12 10:49:09
+ * @LastEditTime: 2021-08-18 15:47:11
  * @FilePath: /packages/ok-department-select/index.ts
  */
 import './ok-department-modal'
@@ -174,6 +174,7 @@ defineComponent(
         .ant-select-multiple .ant-select-selection-search {
           position: relative;
           margin-left: 0.5px;
+          flex-shrink: 30;
         }
         .ant-select-multiple .ant-select-selection-placeholder {
           position: absolute;
@@ -321,6 +322,7 @@ defineComponent(
           'border-radius-right': props.borderRadius === 'right',
           'border-radius-none': props.borderRadius === 'none',
           'is-error': !!props.isError,
+          'is-inline': !props.flat,
         })}
       ></div>
     `
