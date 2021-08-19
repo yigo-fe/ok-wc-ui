@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-03 15:31:09
  * @LastEditors: 付静
- * @LastEditTime: 2021-08-12 15:16:07
+ * @LastEditTime: 2021-08-19 15:00:31
  * @FilePath: /packages/ok-avatar/hook.ts
  */
 import { computed, effect, ref } from 'ok-lit'
@@ -104,6 +104,10 @@ export default function (props) {
       props.personInfo?.avatar ||
       props.personInfo?.avatar_url ||
       props.personInfo?.head_image
+    // 非人员卡片时取小图像
+    if (!props.bigPic && props.personInfo?.avatar_small) {
+      url = props.personInfo.avatar_small
+    }
     // let url = ''
     if (!url) {
       handleTextAvatar()

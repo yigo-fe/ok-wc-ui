@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-04 13:47:46
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-16 16:22:37
+ * @LastEditTime: 2021-08-19 15:00:43
  * @FilePath: /packages/ok-avatar/props.ts
  */
 import { PropType } from 'ok-lit'
@@ -77,6 +77,10 @@ const props = {
   },
   count: {
     type: Number as unknown as PropType<number>,
+  },
+  bigPic: {
+    type: Boolean as unknown as PropType<boolean>,
+    default: false,
   },
 }
 

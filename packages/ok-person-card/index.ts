@@ -58,6 +58,7 @@ defineComponent('ok-person-card', { ...props }, (props, context) => {
               :round="false"
               :personInfo="JSON.stringify(personInfoCom)"
               :textStyle="JSON.stringify(textStyle)"
+              :bigPic="true"
               showMask
             ></ok-avatar>           
             <span class="user-name-wraper">
