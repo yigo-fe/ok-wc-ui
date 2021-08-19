@@ -413,7 +413,7 @@ p {
   fill: var(--bl-n400-c, #BBBFC4);
 }
 .upload-inner.has-file {
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 .upload-inner .upload-btn {
   color: var(--bl-brand-c, #4C78FC);
@@ -516,6 +516,14 @@ p {
   display: block;
   margin-top: 6px;
 }
+.ok-file-list-box.is-vertical {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30px, 386px));
+  grid-gap: 20px;
+}
+.ok-file-list-box.is-vertical .ok-file-list__item + .ok-file-list__item {
+  margin-top: 0;
+}
 .ok-file-list-box.is-subtable .item-detail {
   padding: 0 12px;
   border-radius: 0;
@@ -608,7 +616,7 @@ p {
   font-size: 0;
 }
 .ok-upload--text + .ok-file-table-wraper {
-  margin-top: 10px;
+  margin-top: 12px;
 }
 .ok-upload-list-table .ant-table-tbody > tr > td,
 .ok-upload-list-table .ant-table-thead > tr > th {

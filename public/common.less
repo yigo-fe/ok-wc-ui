@@ -444,7 +444,7 @@ p{margin:0;padding:0}
     }
   }
   &.has-file {
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
   .upload-btn {
     color:@bl-brand-c;
@@ -560,6 +560,15 @@ p{margin:0;padding:0}
     margin-top: 6px;
   }
 }
+// 平铺展示
+.ok-file-list-box.is-vertical {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30px,386px));
+  grid-gap: 20px;
+  .ok-file-list__item + .ok-file-list__item  {
+    margin-top: 0;
+  }
+}
 // 明细字表中的file-list
 .ok-file-list-box.is-subtable {
   .item-detail {
@@ -667,7 +676,7 @@ p{margin:0;padding:0}
   font-size: 0;
 }
 .ok-upload--text+.ok-file-table-wraper {
-  margin-top: 10px;
+  margin-top: 12px;
 }
 
 .ok-upload-list-table {

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-22 18:14:43
+ * @LastEditTime: 2021-08-19 15:23:16
  * @FilePath: /packages/ok-accessory/ok-upload-drag/ok-upload-drag.ts
  */
 
@@ -227,6 +227,7 @@ defineComponent(
         .showPreview=${showPreview.value}
         .showDownload=${showDownload.value}
         .showRemove=${showRemove.value}
+        .vertical=${props.vertical}
       ></ok-file-list>
     `
   }

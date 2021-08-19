@@ -4,7 +4,7 @@
  * @Author: 付静
  * @Date: 2021-02-05 19:42:22
  * @LastEditors: 付静
- * @LastEditTime: 2021-08-17 17:24:43
+ * @LastEditTime: 2021-08-19 15:50:13
  * @FilePath: /packages/ok-accessory/upload.props.ts
  */
 
@@ -167,6 +167,9 @@ const UploadProps = {
   // 处理上传成功后的数据（字段映射）
   formatUploadData: {
     type: Function as unknown as PropType<(res: any) => void>,
+  },
+  vertical: {
+    type: Boolean as unknown as PropType<boolean>,
   },
 }
 

@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-08-10 11:00:09
+ * @LastEditTime: 2021-08-19 15:25:46
  * @FilePath: /packages/ok-accessory/ok-upload-drag/ok-file-list.ts
  */
 
@@ -45,6 +45,9 @@ defineComponent(
       type: String as unknown as PropType<string>,
     },
     subtable: {
+      type: Boolean as unknown as PropType<boolean>,
+    },
+    vertical: {
       type: Boolean as unknown as PropType<boolean>,
     },
   },
@@ -305,9 +308,12 @@ defineComponent(
     return () => html`
       <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
       <ul
-        class="ok-file-list-box ${props.disabled
-          ? 'is-disabled'
-          : ''} ${props.subtable ? 'is-subtable' : ''}"
+        class=${classMap({
+          'ok-file-list-box': true,
+          'is-disabled': props.disabled,
+          'is-subtable': props.subtable,
+          'is-vertical': props.vertical,
+        })}
         style=${styleMap({
           overflow: 'auto',
           'max-height': `${props.maxHeight && props.maxHeight}`,
