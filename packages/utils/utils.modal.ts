@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-07-10 11:23:37
  * @LastEditors: 付静
- * @LastEditTime: 2021-07-10 11:55:30
+ * @LastEditTime: 2021-08-24 13:33:50
  * @FilePath: /packages/utils/utils.modal.ts
  */
 import { Modal } from 'ant-design-vue'
@@ -28,6 +28,7 @@ const confirmModal = (options: any) => {
     okText: options.okText,
     cancelText: options.cancelText,
     width: 450,
+    zIndex: 7000,
     onOk: () => {
       options.onOk()
     },
