@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-26 16:06:27
  * @LastEditors: 付静
- * @LastEditTime: 2021-08-19 15:25:46
+ * @LastEditTime: 2021-08-24 14:32:44
  * @FilePath: /packages/ok-accessory/ok-upload-drag/ok-file-list.ts
  */
 
@@ -307,6 +307,121 @@ defineComponent(
 
     return () => html`
       <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
+      <style>
+        .ok-file-list-box {
+          margin: 0;
+          padding: 0;
+          list-style: none;
+          overflow: auto;
+        }
+        .ok-file-list-box .ok-file-list__item {
+          transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+          font-size: 14px;
+          color: var(--bl-n900-c, #1f2329);
+          line-height: 1;
+          position: relative;
+          box-sizing: border-box;
+          border-radius: 4px;
+          width: 100%;
+        }
+        .ok-file-list-box .ok-file-list__item + .ok-file-list__item {
+          margin-top: 14px;
+        }
+        .ok-file-list-box .item-detail {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          background: var(--bl-n150-c, #f2f4f7);
+          padding-left: 8px;
+          padding-right: 8px;
+          height: 36px;
+          line-height: 36px;
+          max-width: 100%;
+          border-radius: 4px;
+        }
+        .ok-file-list-box .item-detail.failed {
+          background: var(--bl-danger-light-c, #fff0ef);
+        }
+        .ok-file-list-box .item-detail.failed .ok-file-list__item_file_name {
+          max-width: calc(100% - 127px);
+        }
+        .ok-file-list-box .item-detail:hover {
+          background-color: var(--bl-n200-c, #f5f6f7);
+        }
+        .ok-file-list-box .ok-file-list__item_name {
+          flex: 1;
+          width: calc(100% - 40px);
+          margin-left: 4px;
+        }
+        .ok-file-list-box .file_name_wraper {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          line-height: 1;
+        }
+        .ok-file-list-box .ok-file-list__item_file_name {
+          color: var(--bl-n900-c, #1f2329);
+          max-width: calc(100% - 96px);
+          line-height: 16px;
+        }
+        .ok-file-list-box .uploading-info {
+          display: flex;
+          align-items: center;
+        }
+        .ok-file-list-box .percentage-text {
+          font-size: 12px;
+          color: var(--bl-n500-c, #8f959e);
+          margin-right: 12px;
+        }
+        .ok-file-list-box .fail-text {
+          font-size: 12px;
+          font-weight: normal;
+          color: var(--bl-danger-c, #ff6459);
+          margin-right: 12px;
+        }
+        .ok-file-list-box .reupload-btn {
+          margin-right: 12px;
+        }
+        .ok-file-list-box .abort-btn,
+        .ok-file-list-box .reupload-btn {
+          cursor: pointer;
+        }
+        .ok-file-list-box .reupload-btn path,
+        .ok-file-list-box .abort-icon path {
+          fill: var(--bl-brand-c, #4c78fc);
+        }
+        .ok-file-list-box .file-list-progress {
+          display: block;
+          margin-top: 6px;
+        }
+        .ok-file-list-box.is-vertical {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(30px, 386px));
+          grid-gap: 20px;
+        }
+        .ok-file-list-box.is-vertical
+          .ok-file-list__item
+          + .ok-file-list__item {
+          margin-top: 0;
+        }
+        .ok-file-list-box.is-subtable .item-detail {
+          padding: 0 12px;
+          border-radius: 0;
+          background-color: #fff;
+        }
+        .ok-file-list-box.is-subtable .item-detail:hover {
+          background-color: var(--bl-n200-c, #f5f6f7);
+        }
+        .ok-file-list-box.is-subtable
+          .ok-file-list__item
+          + .ok-file-list__item {
+          margin-top: 2px;
+        }
+        .ok-file-list-box.is-subtable .ok-file-list__item_file_name {
+          color: var(--bl-n900-c, #1f2329);
+          line-height: 20px;
+        }
+      </style>
       <ul
         class=${classMap({
           'ok-file-list-box': true,
