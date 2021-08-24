@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-03-11 21:38:02
  * @LastEditors: 付静
- * @LastEditTime: 2021-08-18 15:47:43
+ * @LastEditTime: 2021-08-24 14:09:19
  * @FilePath: /packages/ok-employee-select/index.ts
  */
 
@@ -116,7 +116,7 @@ defineComponent('ok-employee-select', { ...propsOptions }, (props, context) => {
                       :propsGetInfoByEmpId="propsGetInfoByEmpId"
                       height="20px"
                     ></ok-person-cell>
-                    <span class="selected-head-name-head ellipsis1">{{ employee.employee_name }}</span>
+                    <span class="selected-head-name-head ellipsis1" style="max-width: 50px;">{{ employee.employee_name }}</span>
                   </div>
                   <div class="selected-option">
                     <ok-person-cell
