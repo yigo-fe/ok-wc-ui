@@ -751,6 +751,7 @@ p {
   height: 100%;
   position: absolute;
   top: 0;
+  left: 0;
 }
 .ok-upload-list-image .ok-upload-list__item-actions {
   display: flex;

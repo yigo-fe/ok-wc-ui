@@ -535,6 +535,9 @@
       // okUpload.hideUploader = true
       // okUpload.disabled = true
       // okUpload.limit = 3
+      okUpload.onChange = ()=>{
+        console.log('onChange')
+      }
       okUpload.onExceed = ()=>{
         console.log('附件超出了')
       }
