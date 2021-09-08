@@ -1,0 +1,144 @@
+.test{
+  background-color: transparent;
+}
+@import url('../../assets/theme.less');
+
+// 处理error style
+.ant-form-item-control.has-error .ok-upload-image{
+  border-color: @ok-error-color;
+}
+
+.ok-file-image-list {
+  font-size: 0;
+}
+
+
+.ok-upload-image {
+  .ok-upload-image-inner {
+    width: 100px;
+    height: 100px;
+    box-sizing: border-box;
+    display: inline-block;
+    background-color: @ok-white-color;
+    border: 1px solid @ok-border-color-base;
+    border-radius: @ok-border-radius-base;
+    line-height: 98px;
+    vertical-align: top;
+    cursor: pointer;
+    &:hover{
+      border-color: @ok-primary-color;
+    }
+  
+  }
+  &.disabled {
+    .ok-upload-image-inner {
+      border-color: @ok-border-color-base;
+      background-color: @ok-base-bg-color;
+      cursor: not-allowed;
+    }
+  }
+
+
+  .upload-img-icon{
+    display: block;
+    text-align: center;
+    font-size: 40px;
+    height: 100%;
+    margin: 0 auto;
+    path {
+      fill: @ok-picture-bg-color;
+    }
+  }
+}
+
+
+.ok-upload-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ok-upload-list-image {
+  margin: 0;
+  display: inline;
+  vertical-align: top;
+  .ok-upload-list__item {
+    overflow: hidden;
+    background-color: #fff;
+    border: 1px solid @ok-border-color-base;
+    border-radius: 6px;
+    box-sizing: border-box;
+    width: 100px;
+    height: 100px;
+    
+    display: inline-block;
+    transition: all .5s cubic-bezier(.55,0,.1,1);
+    font-size: 14px;
+    color: #666;
+    position: relative;
+    margin-left: 8px;
+  }
+
+  .ok-upload-list__item-thumbnail {
+    width: 100%;
+    height: 100%;
+  }
+
+  .ok-upload-list__item-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    cursor: default;
+    text-align: center;
+    color: #fff;
+    opacity: 0;
+    font-size: 20px;
+    background-color: rgba(0,0,0,.6);
+    transition: opacity .3s;
+    &:hover {
+      opacity: 1;
+    }
+    >i {
+      cursor: pointer;
+    }
+    .operation-icon + .operation-icon {
+      margin-left: 12px;
+    }
+
+  }
+}
+
+.image-process-wraper {
+  width: 100%;
+  text-align: center;
+}
+.image-progress {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.ok-process-wraper {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.image-close-btn {
+  cursor: pointer;
+}
+
+.abort-icon path {
+  fill: @ok-primary-color;
+}
+
+
+

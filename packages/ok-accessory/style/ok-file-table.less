@@ -1,0 +1,31 @@
+.test{
+  color: transparent;
+}
+
+@import url('../../assets/theme.less');
+.ok-upload-list-table {
+  .ant-table-tbody>tr>td,
+  .ant-table-thead>tr>th {
+    padding: 0 11px;
+    height: 44px;
+    line-height: 44px;
+  }
+  .ant-table-thead>tr>th {
+    color: #8f959e;
+    background-color: @ok-base-bg-color;
+    border: 0;
+  }
+  .ok-upload-list__item-actions {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.file-icon-operate {
+  svg path {
+    fill: @ok-primary-color;
+  }
+  +.file-icon-operate {
+    margin-left: 12px;
+  }
+}

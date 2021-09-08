@@ -1,10 +1,17 @@
+/*
+ * @Descripttion:
+ * @Author: 付静
+ * @Date: 2021-07-22 14:20:37
+ * @LastEditors: 付静
+ * @LastEditTime: 2021-08-02 11:20:37
+ * @FilePath: /packages/ok-person-group/index.ts
+ */
+import './more-list'
+
 import { SIZE_TYPE } from '@c/enum'
-import { Person } from '@c/ok-wc-ui.d'
-import { repeat } from 'lit-html/directives/repeat'
-import { defineComponent, html, PropType, reactive } from 'ok-lit'
+import { computed, defineComponent, html, PropType } from 'ok-lit'
 
-import okPersonGroupCss from '../assets/ok-person-group.less'
-
+import { COMMON_CSS_PATH } from '../path.config'
 /**
  * @props persons: {Array<Person>} 用户信息组
  */
@@ -12,107 +19,132 @@ import okPersonGroupCss from '../assets/ok-person-group.less'
 defineComponent(
   'ok-person-group',
   {
-    persons: {
-      type: (Object as unknown) as PropType<Array<Person>>,
-      default: [
-        {
-          id: '500',
-          name: '小辛辛-1',
-          department: 'HRBP-产品技术运营-北京',
-          email: 'masiwei@kuaishou.com',
-        },
-        // {
-        //   id: '500',
-        //   name: '小辛辛-2',
-        //   department: 'HRBP-产品技术运营-北京',
-        //   email: 'masiwei@kuaishou.com',
-        // },
-        // {
-        //   id: '500',
-        //   name: '小辛辛-3',
-        //   department: 'HRBP-产品技术运营-北京',
-        //   email: 'masiwei@kuaishou.com',
-        // },
-        // {
-        //   id: '500',
-        //   name: '小辛辛',
-        //   department: 'HRBP-产品技术运营-北京',
-        //   email: 'masiwei@kuaishou.com',
-        // },
-        // {
-        //   id: '500',
-        //   name: '小辛辛',
-        //   department: 'HRBP-产品技术运营-北京',
-        //   email: 'masiwei@kuaishou.com',
-        // },
-        // {
-        //   id: '500',
-        //   name: '小辛辛',
-        //   department: 'HRBP-产品技术运营-北京',
-        //   email: 'masiwei@kuaishou.com',
-        // },
-        // {
-        //   id: '500',
-        //   name: '小辛辛',
-        //   department: 'HRBP-产品技术运营-北京',
-        //   email: 'masiwei@kuaishou.com',
-        // },
-      ],
-      required: true,
+    personList: {
+      type: Array as unknown as PropType<any[]>,
+      default: () => {
+        return []
+      },
     },
     size: {
-      type: (String as unknown) as SIZE_TYPE,
-      default: SIZE_TYPE.MIDDLE,
-      required: true,
+      type: String as unknown as PropType<SIZE_TYPE>,
+      default: SIZE_TYPE.SMALL,
+    },
+    width: {
+      type: String as unknown as PropType<string>,
+    },
+    height: {
+      type: String as unknown as PropType<string>,
+    },
+    showDelete: {
+      type: Boolean as unknown as PropType<boolean>,
+      default: false,
+    },
+    showAll: {
+      type: Boolean as unknown as PropType<boolean>,
+      default: false,
+    },
+    detailSize: {
+      type: String as unknown as PropType<string>,
+      default: 'mini',
+    },
+    detailWidth: {
+      type: String as unknown as PropType<string>,
+    },
+    detailHeight: {
+      type: String as unknown as PropType<string>,
+    },
+    contentStyle: {
+      type: Object as unknown as PropType<{}>,
+    },
+    itemStyle: {
+      type: Object as unknown as PropType<{}>,
+    },
+    placement: {
+      type: String as unknown as PropType<string>,
+    },
+    deleteItem: {
+      // eslint-disable-next-line no-unused-vars
+      type: Function as unknown as PropType<(item: any) => void>,
+    },
+    subtitleRender: {
+      // eslint-disable-next-line no-unused-vars
+      type: Function as unknown as PropType<(item: any) => void>,
+    },
+    // 审批组件传入，卡片请求数据方法
+    propsGetInfoByEmpId: {
+      type: Function,
     },
   },
   props => {
-    const data = reactive({
-      len: props.persons.length,
+    const placement = computed(() => {
+      return props.placement
+    })
+    const showList = computed(() => {
+      return props.personList?.slice(0, 3)
     })
 
-    const isShowDetailText = (index: number): boolean => {
-      let len = data.len > 5 ? 5 : data.len
-      return len === index + 1
-    }
-    const personsRender = (person: Person, index: number) => {
-      const detailText = data.len > 1 ? `...${data.len}` : person.name
-      const detail = isShowDetailText(index)
-        ? html` <span class="detail-text"> ${detailText} </span> `
-        : ''
-      const personHtml =
-        index < 5
-          ? html`
-              <div class="person-item">
-                <ok-avatar .person=${person}></ok-avatar>
-                ${detail}
-              </div>
-            `
-          : ''
+    const popperList = computed(() => {
+      return props.showAll ? props.personList : props.personList?.slice(3)
+    })
 
-      return html`${personHtml}`
+    const deleteItem = (item: CustomEvent) => {
+      props.deleteItem && props.deleteItem(item.detail)
     }
+
+    const avatarRender = () => {
+      if (!showList.value?.length) return ''
+      return html`
+        ${showList.value.map(
+          item => html`<ok-person-cell
+            class="avatar-list"
+            style="width: auto; height: auto;"
+            .personInfo=${item}
+            .size=${props.size}
+            .width=${props.width}
+            .height=${props.height}
+            .propsGetInfoByEmpId=${props.propsGetInfoByEmpId}
+          ></ok-person-cell>`
+        )}
+        ${showList.value.length === 1
+          ? html`<span class="single-user-name ellipsis1"
+              >${showList.value[0].employee_name}</span
+            >`
+          : html`
+              <span ref="showMore" class="more"
+                >${popperList.value.length
+                  ? html`<ok-person-group-more
+                      .popperList=${popperList.value}
+                      .detailSize=${props.detailSize}
+                      .detailWidth=${props.detailWidth}
+                      .detailHeight=${props.detailHeight}
+                      .itemStyle=${props.itemStyle}
+                      .contentStyle=${props.contentStyle}
+                      .showDelete=${props.showDelete}
+                      .placement=${placement.value}
+                      .propsGetInfoByEmpId=${props.propsGetInfoByEmpId}
+                      @deleteItem=${deleteItem}
+                    ></ok-person-group-more>`
+                  : ''}</span
+              >
+            `}
+      `
+    }
+
+    // ${avatarRender()} ${props.personList.length > 1 ? popperRender() : ''}
 
     return () => html`
-      <style>
-        ${okPersonGroupCss}
-      </style>
-      <ok-popover placement="top">
-        <div class="ok-person-group ok-person-group-${props.size}">
-          ${data.len ? repeat(props.persons, personsRender) : ''}
+      <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
+      <div
+        class="ok-person-group ok-person-group-root"
+        style="max-width: 100%;"
+      >
+        <div
+          class="ok-person-group-wrap"
+          style="display: flex; align-items:center; "
+        >
+          ${avatarRender()}
         </div>
-        <!-- 人员列表 -->
-        <ul slot="content" class="person-list">
-          ${repeat(
-            props.persons,
-            (person: Person) => html`
-              <li class="person-list-item">
-                <ok-person-detail .person=${person}></ok-person-detail>
-              </li>
-            `
-          )}
-        </ul>
-      </ok-popover>
+      </div>
     `
   }
 )

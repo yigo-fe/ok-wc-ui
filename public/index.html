@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <link rel="stylesheet" href="./antd.min.css"> -->
+  <link rel="stylesheet" href="https://fe-resource.baiteda.com/lib/byteluck-theme/0.1.3/byteluck.theme.blue.ant.css" />
+  <link rel="stylesheet" href="./common.css">
+  <script src="https://fe-resource.baiteda.com/libs/webcomponentsjs-2.5.0/webcomponents-bundle.js"></script>
+  <!-- <script src="https://fe-resource.baiteda.com/lib/byteluck/byteluck.theme.load.js"></script> -->
+
+  <!-- <link rel="stylesheet" href="./green.css"> -->
+  <!-- <link rel="stylesheet" href="./common-origin.css"> -->
+  <!-- <link rel="stylesheet" href="./tippy.css"> -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.9.0/viewer.css" integrity="sha512-HHYZlJVYgHVdz/pMWo63/ya7zc22sdXeqtNzv4Oz76V3gh7R+xPqbjNUp/NRmf0R85J++Yg6R0Kkmz+TGYHz8g==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+  <!-- <script src="https://unpkg.com/jquery@3/dist/jquery.slim.min.js" crossorigin="anonymous"></script> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.9.0/viewer.min.js" integrity="sha512-0goo56vbVLOJt9J6TMouBm2uE+iPssyO+70sdrT+J5Xbb5LsdYs31Mvj4+LntfPuV+VlK0jcvcinWQG5Hs3pOg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+  <title>ok-wc-ui</title>
+  <style>
+    #app {
+      /* height: 2000px; */
+      /* width: 2000px; */
+      /* background-color: rgb(37, 216, 171); */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    main {
+      margin-top: 100px;
+      /* width: 600px; */
+      /* height: 600px; */
+    }
+    .divider {
+      margin-bottom: 20px;
+    }
+    .test-display {
+      display: none;
+    }
+    .test-css {
+      color: var(--bl-brand-c);
+    }
+    .test-tooltip {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <!-- <link rel="stylesheet" href="https://unpkg.com/element-plus/lib/theme-chalk/index.css"> -->
+<!-- 引入组件库 -->
+<!-- <script src="https://unpkg.com/element-plus/lib/index.full.js"></script> -->
+  <div id="app">
+    <main>
+
+      <div class="divider">
+        <button onclick="testClick()">test</button>
+        <button onclick="testClick2()">test2</button>
+        <!-- <button onclick="testClick3()">drawer</button> -->
+      </div>
+
+      <h3 class="test-css">测试css变量</h3>
+
+      <ok-tooltip title="zheli shi titlw aa">
+        <span class="test-tooltip">这里是trigger</span>
+      </ok-tooltip>
+
+      <!-- <div style="width: 100px;">
+        <ok-tooltip class="divider">
+          <div slot="title"><span >这里是title的slot</span></div>
+
+
+          测试tooltip测试tooltip测试tooltip测试tooltip
+        </ok-tooltip>
+
+        <ok-tooltip>测试tooltip测试</ok-tooltip>
+      </div> -->
+
+
+
+
+
+      <h3>部门选择 input </h3>
+      <ok-department-select class="divider ok-department-input" placeholder="请选择部门" style="width: 200px;display: block;"></ok-department-select>
+      <ok-department-select mode="tree" class="divider ok-department-tree" placeholder="请选择部门" style="width: 200px;display: block;"></ok-department-select>
+
+
+      <h3>人员选择-input</h3>
+      <ok-employee-select class="divider ok-employee-input" placeholder="请选择请选择请选择请选择请选择请选择请选择请选择请选择请选择请选择请选择请选择1" style="width: 150px;display: block;"></ok-employee-select>
+
+      <h3>人员选择-tree</h3>
+      <ok-employee-select class="divider ok-employee-tree" mode="tree" placeholder="请选择3" style="width: 300px;height:40px;display: block;"></ok-employee-select>
+
+      <ok-ant-person-select></ok-ant-person-select>
+      <!-- <ok-person-detail></ok-person-detail> -->
+      
+      <!-- <ok-ant-person-select></ok-ant-person-select> -->
+      <!-- <ok-ant-department-search></ok-ant-department-search> -->
+
+      <!-- <h3>image preview</h3> -->
+      <!-- <ok-image-preview></ok-image-preview> -->
+
+      <!-- <div>
+        <ul id="images">
+          <li><img src="picture-1.jpg" alt="Picture 1"></li>
+          <li><img src="picture-2.jpg" alt="Picture 2"></li>
+          <li><img src="picture-3.jpg" alt="Picture 3"></li>
+        </ul>
+      </div> -->
+      <h3>人员图像</h3>
+      <ok-avatar></ok-avatar>
+      <div class="divider"></div>
+      <!-- 人员卡片 -->
+      <h3>人员卡片</h3>
+      <ok-person-cell class="ok-person-cell1"></ok-person-cell>
+      <h3>人员卡片12</h3>
+      <div style="width: 50px; height: 50px;overflow: hidden;">
+        <ok-person-cell class="ok-person-cell3"></ok-person-cell>
+      </div>
+      
+      <h3>人员卡片 -slot </h3>
+      <ok-person-cell class="ok-person-cell2"><ok-avatar class="ok-person-cell-slot"></ok-avatar></ok-person-cell>
+      <h3>person-group </h3>
+      <ok-person-group></ok-person-group>
+      <ok-person-group-new></ok-person-group-new>
+      <!-- 多人员list -->
+      <!-- <ok-person-group ></ok-person-group> -->
+
+      <!-- <ok-person-card></ok-person-card> -->
+
+
+      <ok-button style="display:block; margin: 50px 0;"></ok-button>
+
+
+
+
+      <section  class="divider upload-demo">
+        <h3>图片预览</h3>
+        <ok-image-preview class="ok-image-preview1"></ok-image-preview>
+        <div style="margin-bottom: 20px;"></div>
+        <ok-image-preview class="ok-image-preview2"></ok-image-preview>
+
+
+        <h3>列表上传</h3>
+        <div style="width:500px">
+          <ok-upload-table></ok-upload-table>
+        </div>
+        
+
+        <h3>明细字表上传</h3>
+        <div style="display:block;">
+          <ok-upload-subtable-file style="display:block; width: 300px;"></ok-upload-subtable-file>
+
+        </div>
+        <h3>明细字表上传 - image</h3>
+        <ok-upload-subtable-image style="display:block;width: 300px;" class="ok-upload-subtable-image"></ok-upload-subtable-image>
+
+        <h3>列表上传 slot </h3>
+        <!-- <ok-upload-table style="width: 500px; display: block; font-size: 0;">
+          <div style="width: 100%;height: 150px; font-size: 14px;display: block; border: 1px solid red;">这里是slot</div>
+        </ok-upload-table> -->
+
+        <!-- <h3>拖拽上传 slot</h3>
+        <ok-upload-drag style="width: 500px; display: block; font-size: 0;">
+          <div style="width: 100%;height: 150px; font-size: 14px;display: block; border: 1px solid red;">这里是slot</div>
+        </ok-upload-drag> -->
+
+        <h3>拖拽上传</h3>
+        <ok-upload-drag style="width: 260px; display: block; "></ok-upload-drag>
+
+        <h3>antd</h3>
+        <!-- <ok-attachment-drag></ok-attachment-drag>  -->
+
+
+        <h3>图片上传</h3>
+        <ok-upload-image style="width: 420px; display: block;"></ok-upload-image>
+
+
+        <!-- <h3>图片上传 slot</h3> -->
+        <!-- <ok-upload-image style="width: 500px; display: block; font-size: 0;">
+          <div style="width: 200px;height: 200px; font-size: 14px;display: block; border: 1px solid red;">这里是slot</div>
+
+        </ok-upload-image> -->
+
+
+
+      </section>
+
+      <!-- <h3>文字多时</h3> -->
+      <!-- <div style="width: 200px;border: 1px solid #ccc;margin-bottom: 20px;">
+        <ok-tooltip title="text-文字多时，鼠标滑上显示文字多时，鼠标滑上显示文字多时，鼠标滑上显示" >
+          默认插槽-text，这里有很多很多很多很多很多很多很多很多很多很多很多很多很多很多很多很多文字
+        </ok-tooltip>
+      </div> -->
+
+      <!-- <h3>button</h3> -->
+      <!-- <ok-button></ok-button> -->
+
+      <!-- <ok-drawer>这里是drawer的slot啊</ok-drawer> -->
+      <!-- <ok-drawer>
+        <iframe src="https://check.baiteda.com/apps/desktop/approval/app_lssw3n21jb/c0c41772-5f5b-404f-b2dc-05dd4dd067e5" frameborder="0" width="100%" height="100%"></iframe>
+      </ok-drawer> -->
+    </main>
+  </div>
+  <!-- <script type="module" src="../dist/ok-wc-ui.umd.js"></script> -->
+  <script>
+
+
+    // success
+	// cv3vj7pldi1gxo65
+
+  // 'app_id': 'app_imvtxorkbj',
+  //     'form_key': 'form_0wdfaktbsv',
+  //     'element_id': 'c8k95352g4qmvurx'
+
+
+  // window.addEventListener('DOMContentLoaded', function () {
+  //   const gallery = new Viewer(document.getElementById('images'));
+  //       var viewer = new Viewer(document.getElementById('images'), {
+  //         hidden: function () {
+  //           viewer.destroy();
+  //         },
+  //       });
+
+  //       // image.click();
+  //       viewer.show();
+
+  //   });
+
+    var action = 'https://huawei.yigowork.com/apps/api/v1/private/attachment/uploadAttachments'
+    var actionImg = 'https://huawei.yigowork.com/apps/api/v1/private/attachment/uploadImages'
+    var uploadData = {
+      deletable: false,
+      'app_id': 'app_7h13wiammq',
+      'form_key': 'form_molm8sjngo',
+      'element_id': 'ck6bmtiqjnks36em'
+    }
+
+
+    const personInfo = {
+      // avatar_url: "https://wework.qpic.cn/bizmail/cMLFZrYGchIibX5icVTGibh7b2oELMc9MsJYDiaCNNmTYREjGVRjlsq3mA/0",
+      department_id: "30",
+      department_name: "前端部",
+      email: "fujing@byteluck.com",
+      employee_card: "工号",
+      employee_en_name: "付静",
+      employee_id: "FuJing",
+      employee_name: "🤡宋浩铭宋浩铭宋浩铭宋浩铭宋浩铭🤡",
+      gender: 2,
+      msg_relation_type: "WX",
+      tenant_id: "test"
+    }
+    const personInfo1 = {
+  "msg_relation_type": "WX",
+  "id": "SuJieFeng",
+  "name_en": "苏杰锋",
+  "name_zh": "苏杰锋",
+  "name_ja": "苏杰锋",
+  "name": {
+    "en": "苏杰锋",
+    "zh": "苏杰锋",
+    "ja": "苏杰锋"
+  },
+  "email": "sujiefeng@byteluck.com",
+  "org_name": "测试部",
+  "external": "https://wework.qpic.cn/bizmail/5MicbcvDmINtCeG1TpOc2BMRsl4iaaHcxibWVAeVRRaQIbgsZjvZj1icNQ/0",
+  "org_name_en": "测试部",
+  "org_name_zh": "测试部",
+  "org_name_ja": "测试部",
+  "org_name_mult_lang": {
+    "en": "测试部",
+    "zh": "测试部",
+    "ja": "测试部"
+  },
+  // "avatar": "https://wework.qpic.cn/bizmail/5MicbcvDmINtCeG1TpOc2BMRsl4iaaHcxibWVAeVRRaQIbgsZjvZj1icNQ/0",
+  "avatar": "",
+  "terminated": false
+}
+
+
+    const personList =[{
+      // avatar_url: "https://wework.qpic.cn/bizmail/cMLFZrYGchIibX5icVTGibh7b2oELMc9MsJYDiaCNNmTYREjGVRjlsq3mA/0",
+      avatar_url: "http://wework.qpic.cn/bizmail/4Pe7duia8uxNLHJudBX20fvias4eed76CHzUruEM7zLia8nlBHDicyfbibA/0",
+      // avatar_url: "",
+      department_id: "30",
+      department_name: "前端部",
+      email: "fujing@byteluck.com",
+      employee_card: "工号",
+      employee_en_name: "付静",
+      employee_id: "FuJing",
+      employee_name: "付静付静付静付静付静付静付静付静付静付静",
+      gender: 2,
+      msg_relation_type: "WX",
+      tenant_id: "test"
+    }, 
+    {
+      employee_id: "100005",
+      employee_name: "Angel",
+      gender: 2,
+      msg_relation_type: "WX",
+      department_id: "30",
+      department_name: "前端部",
+      email: "Angel@byteluck.com",
+    },
+    {
+      avatar_url: "https://wework.qpic.cn/bizmail/sM006UpbJWqyf5UJrcZ8FibaLTBEPpmn6U2bKFXMOTal6vXDR8cypCQ/0",
+      department_id: "30",
+      department_name: "前端部",
+      email: "chengxudong@byteluck.com",
+      employee_card: null,
+      employee_en_name: "程旭东",
+      employee_id: "ChengXuDong",
+      employee_name: "程旭东",
+      external_user: false,
+      gender: 1,
+      msg_relation_type: "WX",
+    },
+
+    {
+      avatar_url: "https://wework.qpic.cn/bizmail/yXFNU2p00jClcCuRWQHTU4jbf1IIh2jkRpLNGD2z5Ieoq8hqRGBHiaA/0",
+      department_id: "19",
+      department_name: "快手项目组",
+      email: "dongguangyao@byteluck.com",
+      employee_en_name: "董光耀",
+      employee_id: "DongGuangYao",
+      employee_name: "董光耀",
+      external_user: false,
+      gender: 1,
+      msg_relation_type: "WX",
+    },
+    {
+      avatar_url: "https://wework.qpic.cn/wwhead/duc2TvpEgSTPk74IwG7Bs9XwNIFXaMfiaiaJicA9EV2rGEIeYStCROfUyCgF833ZGgT0fvuibiaScia1U/0",
+      department_id: "30",
+      department_name: "前端部",
+      email: "gaojiaxing@byteluck.com",
+      employee_en_name: "高佳兴",
+      employee_id: "GaoJiaXing",
+      employee_name: "高佳兴",
+      external_user: false,
+      gender: 2,
+      msg_relation_type: "WX",
+    },
+    {
+      avatar_url: "https://wework.qpic.cn/wwhead/duc2TvpEgSTPk74IwG7Bs9XwNIFXaMfiaiaJicA9EV2rGEIeYStCROfUyCgF833ZGgT0fvuibiaScia1U/0",
+      department_id: "30",
+      department_name: "前端部",
+      email: "gaojiaxing@byteluck.com",
+      employee_en_name: "高佳兴",
+      employee_id: "GaoJiaXing",
+      employee_name: "高佳兴",
+      external_user: false,
+      gender: 2,
+      msg_relation_type: "WX",
+    },
+    {
+      avatar_url: "https://wework.qpic.cn/wwhead/duc2TvpEgSTPk74IwG7Bs9XwNIFXaMfiaiaJicA9EV2rGEIeYStCROfUyCgF833ZGgT0fvuibiaScia1U/0",
+      department_id: "30",
+      department_name: "前端部",
+      email: "gaojiaxing@byteluck.com",
+      employee_en_name: "高佳兴",
+      employee_id: "GaoJiaXing",
+      employee_name: "高佳兴",
+      external_user: false,
+      gender: 2,
+      msg_relation_type: "WX",
+    },
+    {
+      avatar_url: "https://wework.qpic.cn/wwhead/duc2TvpEgSTPk74IwG7Bs9XwNIFXaMfiaiaJicA9EV2rGEIeYStCROfUyCgF833ZGgT0fvuibiaScia1U/0",
+      department_id: "30",
+      department_name: "前端部",
+      email: "gaojiaxing@byteluck.com",
+      employee_en_name: "高佳兴",
+      employee_id: "GaoJiaXing",
+      employee_name: "高佳兴",
+      external_user: false,
+      gender: 2,
+      msg_relation_type: "WX",
+    },
+    {
+      avatar_url: "https://wework.qpic.cn/wwhead/duc2TvpEgSTPk74IwG7Bs9XwNIFXaMfiaiaJicA9EV2rGEIeYStCROfUyCgF833ZGgT0fvuibiaScia1U/0",
+      department_id: "30",
+      department_name: "前端部",
+      email: "gaojiaxing@byteluck.com",
+      employee_en_name: "高佳兴",
+      employee_id: "GaoJiaXing",
+      employee_name: "高佳兴",
+      external_user: false,
+      gender: 2,
+      msg_relation_type: "WX",
+    },
+    {
+      avatar_url: "https://wework.qpic.cn/wwhead/duc2TvpEgSTPk74IwG7Bs9XwNIFXaMfiaiaJicA9EV2rGEIeYStCROfUyCgF833ZGgT0fvuibiaScia1U/0",
+      department_id: "30",
+      department_name: "前端部",
+      email: "gaojiaxing@byteluck.com",
+      employee_en_name: "高佳兴",
+      employee_id: "GaoJiaXing",
+      employee_name: "高佳兴",
+      external_user: false,
+      gender: 2,
+      msg_relation_type: "WX",
+    },
+
+  ]
+
+    const personList2 = [
+    {
+      avatar_url: "https://wework.qpic.cn/bizmail/cMLFZrYGchIibX5icVTGibh7b2oELMc9MsJYDiaCNNmTYREjGVRjlsq3mA/0",
+      department_id: "30",
+      department_name: "前端部",
+      email: "fujing@byteluck.com",
+      employee_card: "工号",
+      employee_en_name: "付静",
+      employee_id: "FuJing",
+      employee_name: "付静",
+      gender: 2,
+      msg_relation_type: "WX",
+      tenant_id: "test"
+    },
+    {
+      avatar_url: "https://wework.qpic.cn/bizmail/sM006UpbJWqyf5UJrcZ8FibaLTBEPpmn6U2bKFXMOTal6vXDR8cypCQ/0",
+      department_id: "30",
+      department_name: "前端部",
+      email: "chengxudong@byteluck.com",
+      employee_card: null,
+      employee_en_name: "程旭东",
+      employee_id: "ChengXuDong",
+      employee_name: "程旭东",
+      external_user: false,
+      gender: 1,
+      msg_relation_type: "WX",
+    },
+    ]
+
+
+    window.onload = ()=>{
+      const okImagePreview1 = document.querySelector('.ok-image-preview1')
+      okImagePreview1.imgList = [{src:'https://test.baiteda.com/attach/image/20210624/13e7f0f8567e02b8e32db59179708a7d/1234567890.png'}]
+
+      const okImagePreview2 = document.querySelector('.ok-image-preview2')
+      okImagePreview2.imgList = [{
+        src:'https://test.baiteda.com/attach/image/20210624/3440cdcbaa4d011abc19e474d0ecd993/1111111111.png'
+      },
+      {
+        src: 'https://test.baiteda.com/attach/image/20210624/26c9539a561c07b97be33d98b6192612/1.png'
+      },
+      {
+        src: 'https://test.baiteda.com/attach/image/20210709/4f8d0630d0adfc440c0d6c25a42aec7b/小红花.png'
+      },
+    ]
+    okImagePreview2.close=()=>{
+      okImagePreview2.index= -1
+    }
+
+
+
+
+      // bl.closeLoading()
+      // bl.appendTheme('blue', ['ant'])
+      // window.okuiConfig.options.preview = true
+      const okAvatar = document.querySelector('ok-avatar')
+      okAvatar.personInfo = personInfo
+
+      const okPersonCell = document.querySelector('.ok-person-cell1')
+      okPersonCell.personInfo = personInfo1
+      okPersonCell.width = '20px'
+      okPersonCell.height = '20px'
+
+
+      const okPersonCell3 = document.querySelector('.ok-person-cell3')
+      okPersonCell3.personInfo = personInfo
+      // okPersonCell3.width = '30px'
+      // okPersonCell3.height = '30px'
+
+      // personcell slot
+      const okPersonCell2 = document.querySelector('.ok-person-cell2')
+      okPersonCell2.personInfo = personInfo1
+      const okPersonCellSlot = document.querySelector('.ok-person-cell-slot')
+      okPersonCellSlot.personInfo = personInfo
+      okPersonCellSlot.width = '30px'
+      okPersonCellSlot.height = '30px'
+      
+
+
+      const okPersonGroup = document.querySelector('ok-person-group')
+      okPersonGroup.personList = personList.slice(0,6)
+      okPersonGroup.width = '24px'
+      okPersonGroup.height = '24px'
+      // okPersonGroup.personList = personList
+
+      const okPersonGroupNew = document.querySelector('ok-person-group-new')
+      okPersonGroupNew.personList = personList
+      // okPersonGroup.personList = personList.slice(0,1)
+      // okPersonGroup.personList = personList2
+      // okPersonGroup.showAll = true
+      // okPersonGroup.width = '34px'
+      // okPersonGroup.height = '34px'
+      // okPersonGroup.contentStyle = {
+      //   color: 'red'
+      // }
+      // okPersonGroup.itemStyle = {
+      //   color: 'blue'
+      // }
+
+    //   const el = '<div>lallall</div>'
+    //   okPersonGroup.subtitleRender = (item) => {
+    //   const dom = document.createElement('div')
+    //   dom.innerHTML = el
+    //   return dom
+    // }
+
+      // const okPersonCell = document.querySelector('ok-person-cell')
+      // okPersonCell.personInfo = personInfo
+
+      // const okPersonCard = document.querySelector('ok-person-card')
+      // okPersonCard.personInfo = personInfo
+
+      const okUpload = document.querySelector('ok-upload-drag')
+      // 测试自定义接口
+      // okUpload.action = 'https://test.baiteda.com/ego_api/client/v1/taskfile/upload?taskInstanceId=1a7eedf6-c4a5-4f1f-ad01-47376bb4743c'
+      // okUpload.action = '/ego_api/client/v1/taskfile/upload?taskInstanceId=1a7eedf6-c4a5-4f1f-ad01-47376bb4743c'
+      // okUpload.headers = {
+      //   auth: '417c381769e54c878ab96fc74815c6a9'
+      // }
+      
+      
+      
+      
+      // okUpload.fileList = ["660ece2ca6616a55e00796a43bf57281", "3440cdcbaa4d011abc19e474d0ecd993", "13e7f0f8567e02b8e32db59179708a7d"]
+
+      okUpload.multiple = true
+      okUpload.vertical = true
+      // okUpload.noBorder = true
+      // okUpload.data = uploadData
+      // okUpload.operation = ['preview']
+      // okUpload.hideUploader = true
+      // okUpload.disabled = true
+      // okUpload.limit = 3
+      okUpload.onChange = ()=>{
+        console.log('onChange')
+      }
+      okUpload.onExceed = ()=>{
+        console.log('附件超出了')
+      }
+      okUpload.onError = ()=>{
+        console.log('出错了')
+      }
+      okUpload.update = (data)=>{
+        // const fileIds = data.fileLists
+        //                       .map((v) => v.response?.data?.[0]?.file_id)
+        //                       .filter((v) => v)
+        // console.log('okUpload - update', fileIds)
+        // okUpload.fileList = fileIds
+
+      }
+
+
+      const okUploadSubtable = document.querySelector('ok-upload-subtable-file')
+      // okUploadSubtable.action = action
+      // okUploadSubtable.data = uploadData
+      okUploadSubtable.multiple = true
+      // okUploadSubtable.disabled = true
+      // okUploadSubtable.operation = []
+      // okUploadSubtable.hideUploader = true
+      // okUploadSubtable.fileList = ['4f48e4389ae229fa5e8eb88dd1efee7b', '5cb3d50074108e6263d97df9007c9853']
+      okUploadSubtable.update = (data)=>{
+        console.log('file', data)
+      }
+
+      const okUploadSubtableImage = document.querySelector('.ok-upload-subtable-image')
+      // okUploadSubtableImage.action = action
+      // okUploadSubtableImage.data = uploadData
+      okUploadSubtableImage.multiple = true
+      okUploadSubtableImage.type = 'image'
+      // okUploadSubtableImage.disabled = true
+      // okUploadSubtableImage.operation = []
+      // okUploadSubtableImage.hideUploader = true
+      // okUploadSubtableImage.fileList = ['4f48e4389ae229fa5e8eb88dd1efee7b', '5cb3d50074108e6263d97df9007c9853']
+      // 4f48e4389ae229fa5e8eb88dd1efee7b
+      // 5cb3d50074108e6263d97df9007c9853
+      okUploadSubtableImage.update = (data)=>{
+        console.log('image', data)
+      }
+
+
+
+
+
+      const okUploadList = document.querySelector('ok-upload-table')
+      // okUploadList.action = action
+      // okUploadList.data = uploadData
+      okUploadList.multiple = true
+      okUploadList.fileList = ['dc791622fe5409620f3c84f2a504651a']
+      // okUploadList.disabled = true
+      // okUploadList.operation = ['download']
+      // okUploadList.hideUploader = true
+
+
+      const okUploadImg = document.querySelector('ok-upload-image')
+            okUploadImg.fileList = ['26c9539a561c07b97be33d98b6192612', '3d6115453d70478c771ff08a0a9a6eb5','0f37c3b8a497fa21409cd2a737bdc12e']
+
+      // okUploadImg.action = actionImg
+      okUploadImg.multiple = true
+      // okUploadImg.limit = 3
+      okUploadImg.noBorder = true
+      okUploadImg.onExceed = ()=>{
+        console.log('图片超出了')
+      }
+      // okUploadImg.disabled = true
+      // okUploadImg.thumbStyle = {
+      //   width: '150px',
+      //   height: '150px'
+      // }
+
+      // okUploadImg.imageStyle = {
+      //   display: 'block'
+      // }
+
+
+
+      // okUploadImg.disabled = true
+      // okUploadImg.operation = ['remove']
+      // okUploadImg.hideUploader = true
+
+      // const okAttachmentDrag = document.querySelector('ok-attachment-drag')
+      // okAttachmentDrag.action = action
+      // okAttachmentDrag.data = uploadData
+
+
+
+      okUploadImg.update = (data)=>{
+        // const fileIds = data.fileLists
+        //                   .map((v) => v.response?.data?.[0]?.file_id)
+        //                   .filter((v) => v)
+        // console.log('okUploadImg - update', fileIds)
+        // okUploadImg.fileList = fileIds
+
+      }
+
+
+      const okDeptInput = document.querySelector('.ok-department-input')
+      okDeptInput.value = ['13','14', '18', '19']
+      // okDeptInput.borderRadius = 'none'
+      okDeptInput.multiple = true
+      okDeptInput.level = 4
+      // okDeptInput.flat = true
+      // okDeptInput.disabled = true
+      // okDeptInput.isError = true
+    //   remoteMethod,
+    // getRootDept,
+    // getSubDept,
+      // okDeptInput.remoteMethod = (query, level)=>{
+      //   console.log('remoteMethod-dept')
+      // }
+      okDeptInput.update = (val, list)=>{
+        console.log('okDeptInput-update-index',val, list)
+        // okDeptInput.value = val
+      }
+      // okDeptInput.onBlur = ()=>{
+      //   console.log('onBlur')
+      // }
+      // okDeptInput.onFocus = ()=>{
+      //   console.log('onFocus')
+      // }
+      // okDeptInput.onRemove = (item)=>{
+      //   console.log('onRemove', item)
+      // }
+      // okDeptInput.onClear = ()=>{
+      //   console.log('onClear')
+      // }
+
+      const okDeptTree = document.querySelector('.ok-department-tree')
+      okDeptTree.value = ['13','14', '20', '18', '19']
+      okDeptTree.multiple = true
+      okDeptTree.level = 4
+      okDeptTree.flat = true
+    
+      // okDeptTree.hasBorderRadius = false
+      // okDeptTree.bordered = false
+      // okDeptTree.disabled = true
+      okDeptTree.update = (val, list)=>{
+        console.log('okDeptTree-update-index',val, list)
+        // okDeptTree.value = val
+      }
+
+
+      const okEmployeeTree = document.querySelector('.ok-employee-tree')
+      okEmployeeTree.value = ['LiTao', 'FuJing', 'ssssss', 'WangYiJie']
+      // okEmployeeTree.value = ['ssssss']
+      // okEmployeeTree.disabled = true 
+      okEmployeeTree.multiple = true
+      // okEmployeeTree.dialogStyle = {'z-index': 7000}
+      okEmployeeTree.modalZIndex = 5000
+      // okEmployeeTree.maskStyle = {'z-index': 7000}
+      // okEmployeeTree.range = ['FuJing',"FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing', 'WangChao', 'WangYiJie']
+      okEmployeeTree.update = (val, list)=>{
+        console.log('okEmployeeTree-update-index',val, list)
+        okEmployeeTree.value = val
+      }
+
+
+      const okEmployeeInput = document.querySelector('.ok-employee-input')
+      okEmployeeInput.value = ['ChenCuiPing','FengHaiLi', 'WangYiJie']
+      // okEmployeeInput.disabled = true
+      // okEmployeeInput.remoteMethod = (ids)=>{
+      //   console.log('remoteMethod',ids)
+      // }
+      // okEmployeeInput.borderRadius = 'none'
+      // okEmployeeInput.hasBorderRadius = false
+      // okEmployeeInput.isError = true
+      // okEmployeeInput.width = '300px'
+      // okEmployeeInput.disabled = true
+      // okEmployeeInput.bordered = false
+      // okEmployeeInput.value = []
+      // okEmployeeInput.dropdownstyle = {'z-index': 6000}
+      // okEmployeeInput.getPopupContainer = (triggerNode)=>{
+      //   // console.log('getPopupContainer', triggerNode)
+      //   return triggerNode.parentNode
+      // }
+      // okEmployeeInput.multiple = true
+      // okEmployeeInput.borderless = true
+      // okEmployeeInput.disabled = true
+      // okEmployeeInput.range = ['FuJing',"FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing', 'WangChao', 'WangYiJie']
+      okEmployeeInput.update = (val, list)=>{
+        console.log('okEmployeeInput-update-index',val,list)
+        // okEmployeeInput.value = val
+      }
+
+      // okEmployeeInput.filterOption=(query, option)=>{
+      //   return option.employee_id.toLowerCase().indexOf(query)>-1
+      // }
+
+      okEmployeeInput.onFocus = ()=>{
+        // console.log('focus')
+      }
+      okEmployeeInput.onBlur = ()=>{
+        // console.log('onBlur')
+      }
+      okEmployeeInput.onRemove = (item)=>{
+        // console.log('onRemove', item)
+      }
+      okEmployeeInput.onClear = ()=>{
+        // console.log('onClear')
+      }
+
+
+
+      // const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
+      // // okEmployeeInput2.value = ["FanShuai"]
+      // okEmployeeInput2.multiple = true
+      // // okEmployeeInput2.disabled = true
+      // // okEmployeeInput2.range = ["FanShuai", "LiTao", 'FengHaiLi','ZhangKaiMing']
+      // okEmployeeInput2.update = (val, list)=>{
+      //   console.log('okEmployeeInput2 -update-index',val, list)
+      //   okEmployeeInput2.value = val
+      // }
+
+
+      // setTimeout(()=>{
+      //   console.log('set')
+
+      //   const okEmployeeInput = document.querySelector('.ok-employee-input')
+      //   okEmployeeInput.value = ["FengHaiLi"]
+      //   const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
+      // okEmployeeInput2.value = ["LiTao"]
+      // }, 1000)
+
+
+      // const okDrawer = document.querySelector('ok-drawer')
+      // okDrawer.destroyOnClose = true
+
+
+    }
+
+    function testClick (){
+      // const okImagePreview2 = document.querySelector('.ok-image-preview2')
+      // okImagePreview2.index = 2
+      // setTimeout(()=>{
+      //   okImagePreview2.index = -1
+      // },200)
+      // const okUploadImg = document.querySelector('ok-upload-image')
+      //       okUploadImg.fileList = ['3d6115453d70478c771ff08a0a9a6eb5']
+
+
+      // const el = document.getElementById('test');
+      // el.style.display = 'block'
+
+      // gallery.show()
+      // setTimeout(()=>{
+      //   const okEmployeeInput = document.querySelector('.ok-employee-input')
+      //   okEmployeeInput.value = undefined
+
+      //   const okEmployeeTree = document.querySelector('.ok-employee-tree')
+      //   okEmployeeTree.multiple = true
+
+      // }, 500)
+
+        const okEmployeeInput = document.querySelector('.ok-employee-input')
+      // okEmployeeInput.value = ''
+      okEmployeeInput.clear()
+
+      // const okEmployeeTree = document.querySelector('.ok-employee-tree')
+      // okEmployeeTree.value = ['FuJing']
+
+
+
+      // const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
+      // okEmployeeInput2.value = ['FuJing']
+
+      // const okDeptInput = document.querySelector('.ok-department-input')
+      // okDeptInput.value = ['13','14', '17', '18', '19']
+      // okDeptInput.value = ['18']
+
+
+    }
+
+    function testClick2 (){
+      // const okUpload = document.querySelector('ok-upload-drag')
+      // okUpload.fileList = ["660ece2ca6616a55e00796a43bf57281", "13e7f0f8567e02b8e32db59179708a7d"]
+
+
+
+      const okEmployeeInput = document.querySelector('.ok-employee-input')
+      okEmployeeInput.value = []
+
+      // const okEmployeeTree = document.querySelector('.ok-employee-tree')
+      // okEmployeeTree.value = []
+
+
+      // const okEmployeeInput2 = document.querySelector('.ok-employee-input2')
+      // okEmployeeInput2.value = []
+
+      // const okDeptInput = document.querySelector('.ok-department-input')
+      // okDeptInput.value = []
+
+
+
+    }
+
+
+    function testClick3 (){
+
+ 
+
+
+
+
+      // const okDrawer = document.querySelector('ok-drawer')
+      // okDrawer.visible = true
+      // okDrawer.close = ()=>{
+      //   okDrawer.visible = false
+      // }
+
+    }
+
+
+
+  </script>
+</body>
+</html>

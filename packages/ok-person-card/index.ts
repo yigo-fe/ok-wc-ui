@@ -1,64 +1,126 @@
-import { Person } from '@c/ok-wc-ui.d'
-import { handleImage } from '@c/utils'
-import { defineComponent, html, PropType } from 'ok-lit'
+// import { Person } from '@c/ok-wc-ui.d'
 
-import ks_kim from '../assets/ks_kim.svg'
-import okPersonCardCss from '../assets/ok-person-card.less'
+import { Tooltip } from 'ant-design-vue'
+import { defineComponent, html, onMounted } from 'ok-lit'
+import { createApp, ref } from 'vue'
 
+import femaleIcon from '../assets/images/female.svg'
+import maleIcon from '../assets/images/male.svg'
+import { COMMON_CSS_PATH } from '../path.config'
+import usePersonCardHandle from './hook'
 /**
  * 人员卡片
  * @props person 人员信息
  * @slot footer-button 按钮位置自定义
  */
+import props from './props'
+import okPersonCardCss from './style/person-card.css'
 
-defineComponent(
-  'ok-person-card',
-  {
-    person: {
-      type: (Object as any) as PropType<Person>,
-      default: {
-        id: '500',
-        name: '小辛辛',
-        department: 'HRBP-产品技术运营-北京',
-        email: 'masiwei@kuaishou.com',
+defineComponent('ok-person-card', { ...props }, (props, context) => {
+  onMounted(() => {
+    const options = {
+      setup() {
+        const {
+          textStyle,
+          openApp,
+          showTeam,
+          langPack,
+          personInfoCom,
+          showSendBtn,
+          deptText,
+          statusType,
+        } = usePersonCardHandle(props)
+
+        // const statusType = ref('0')
+
+        return {
+          statusType,
+          deptText,
+          personInfoCom,
+          textStyle,
+          openApp,
+          maleIcon,
+          femaleIcon,
+          showTeam,
+          msgRelationType: ref(props.msgRelationType),
+          langPack,
+          showSendBtn,
+          i18n: ref(props.i18n),
+        }
       },
-    },
-  },
-  (props: { person: Person | undefined }) => {
-    // 打开应用
-    const openApp = () => {
-      window.location.href = `kim://username?username=${
-        props.person?.email.split('@')[0]
-      }`
+      template: `
+        <div>
+          <header class="person-image">
+            <div class="headCover"/>
+            <ok-avatar
+              width="240px"
+              height="170px"
+              :round="false"
+              :personInfo="JSON.stringify(personInfoCom)"
+              :textStyle="JSON.stringify(textStyle)"
+              :bigPic="true"
+              showMask
+            ></ok-avatar>           
+            <span class="user-name-wraper">
+              <span class="person-card-name ellipsis2" :class="{'isTerminated': statusType === '0'}">{{personInfoCom['name'][i18n]}}</span>
+              <img v-if="personInfoCom.gender ==2" :src="femaleIcon" style="width: 16px; height: 16px; margin-top:3px;" />
+              <img v-else :src="maleIcon" style="width: 16px; height: 16px;margin-top:3px;" />
+              <div v-if="statusType === '0'" style="margin-left: auto; font-size: 0; margin-top: 2px;" > <div class="terminated-text" style="margin-left:12px;height:18px;line-height:18px;padding: 0 3px;">{{langPack.terminated}}</div> </div>
+            </span>
+          </header>
+
+          <footer class="person-detail-footer">
+            <div class="content-wraper">
+              <div class="item-row">
+                  <span class="item-label">{{langPack.team}}：</span>
+                  <p v-if="!deptText || !deptText.length"> -- </p>
+                  <a-tooltip v-else :overlayStyle="{'z-index': 9999}">
+                    <template #title>
+                      <ul>
+                        <li style='font-size: 12px; line-height:18px;' v-for="dept in deptText" :key="dept"> {{dept}}</li>
+                      </ul>
+                    </template>
+                    <div class="item-content ellipsis1">{{deptText.join(' ')}}</div>
+                  </a-tooltip>
+              </div>
+              <div class="item-row">
+                  <span class="item-label">{{langPack.email}}：</span>
+                  <p v-if="!personInfoCom.email" class="item-content"> -- </p>
+                  <a-tooltip v-else :overlayStyle="{'z-index': 9999}">
+                    <template #title>
+                      <span style='font-size: 12px; line-height:18px;'>{{personInfoCom.email}}</span>
+                    </template>
+                    <div class="item-content ellipsis1">{{ personInfoCom.email || '--'}}</div>
+                  </a-tooltip>
+              </div>
+            </div>
+            <slot name="footer-button">
+              <div class="btn-wraper" v-if="showSendBtn">
+                <div @click="openApp" class="person-detail-button">
+                <img :src='langPack.sendIcon' style="width:14px;height:14px;" />
+                {{langPack.sendLark}}
+                </div>
+              </div>
+            </slot>
+          </footer>
+        </div>
+        `,
     }
-    return () => html`
-      <style>
+    const app = createApp(options)
+    app.use(Tooltip)
+    app.mount(context.$refs.showPersonCard as HTMLElement)
+  })
+
+  return () =>
+    html`
+      <style lang="less">
         ${okPersonCardCss}
       </style>
-      <div class="ok-person-detail">
-        <header class="person-image">
-          <img src=${handleImage(props.person, true)} />
-          <div class="overlay">
-            <span class="person-name">${props.person?.name}</span>
-          </div>
-        </header>
-        <footer class="person-detail-footer">
-          <div class="person-detail-info">
-            <span class="title">部门</span>
-            <span class="placeholder">${props.person?.department}</span>
-          </div>
-          <div class="person-detail-info">
-            <span class="title">邮箱</span>
-            <span class="placeholder">${props.person?.email}</span>
-          </div>
-          <slot name="footer-button">
-            <div @click=${openApp} class="person-detail-button">
-              <img src=${ks_kim} />
-              发送Kim消息
-            </div>
-          </slot>
-        </footer>
-      </div>
+      <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
+      <div
+        ref="showPersonCard"
+        class="ok-person-detail"
+        style="width: 240px;background: #fff;border-radius:14px;"
+      ></div>
     `
-  }
-)
+})

@@ -7,6 +7,12 @@ enum SIZE_TYPE {
   LARGE = 'large',
   MIDDLE = 'middle',
   SMALL = 'small',
+  MINI = 'mini',
 }
 
-export { ACTIVE_TYPE, SIZE_TYPE }
+enum GENDER_TYPE {
+  MALE = 1,
+  FEMALE = 2,
+}
+
+export { ACTIVE_TYPE, GENDER_TYPE, SIZE_TYPE }

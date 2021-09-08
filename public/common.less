@@ -1,0 +1,1391 @@
+@import url('./variable.less');
+
+// reset
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: @bl-brand-c;
+  text-decoration: none;
+}
+a:focus,
+a:hover {
+  color: @bl-brand-hover;
+}
+a:active {
+  color: @bl-brand-active;
+}
+
+p{margin:0;padding:0}
+
+
+// common
+.ellipsis1 {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: middle;
+  &::after {
+    content: '';
+    display: block;
+  }
+}
+.ellipsis2 {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+  word-break: break-word;
+  &::after {
+    content: '';
+    display: block;
+  }
+}
+.mr10{
+  margin-right: 10px;
+}
+
+/* 修改antd样式 */
+
+// 解决Safari中自动添加title的问题
+.ant-tooltip-open::after {
+  content: '';
+  display: block;
+}
+
+// 修改人员和部门dropdown样式
+.ok-dept-select-dropdown,
+.userSelectDropdown {
+  .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+    background-color: #fff;
+    color: @bl-brand-c;
+    font-weight: 400;
+  }
+
+  .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+    background-color: @bl-n200
+  }
+
+}
+
+.ant-select-selection-item {
+  user-select: auto !important;
+}
+
+
+
+
+/* 修改ant-select样式 */
+.ok-employee-select-wraper,
+.ok-department-select-wraper {
+  /*  修改光标颜色 */
+  input.ant-select-selection-search-input {
+    caret-color: @bl-brand-c;
+  }
+  .ant-input-affix-wrapper-focused {
+    box-shadow: none;
+  }
+  .ant-select {
+    /* 修改ant-select的border-radius */
+    .ant-select-selector {
+      border-radius: @ok-border-radius-base;
+      padding-right: 37px;
+    }
+
+    /* 修改人员和部门选择placeholder宽度 */
+    .ant-select-selection-placeholder {
+      right: 30px;
+    }
+
+    /* 已选tag样式 */
+    .ant-select-selection-item {
+      border-color: @bl-n200;
+      background: @bl-n200;
+    }
+
+    /* 修改人员和部门focus样式 */
+    &.ant-select-focused:not(.ant-select-disabled) .ant-select-selector {
+      border-color:@bl-brand-c;-webkit-box-shadow:none;box-shadow:none
+    }
+
+    /* 修改hover时border样式 */
+    &:not(.ant-select-disabled) .ant-select-selector:hover{border-color:@bl-brand-c;} 
+
+    /* disable时 selector的背景色 */
+    &.ant-select-disabled.ant-select-multiple .ant-select-selector {
+      background: @bl-disable;
+    }
+    /* disable时 tag的背景色 */
+    &.ant-select-disabled.ant-select-selection-item {
+      color: @bl-n600;
+      background: @ok-white-color;
+      border-color: @ok-white-color;
+    }
+
+    /* dropdown 最后一个选项，去掉下边框 */
+    .rc-virtual-list-holder-inner .ant-select-item-option:last-child .option-list-item {
+      border:0
+    }
+
+    /* dropdown 已选icon颜色 */
+    .ant-select-item-option-selected .anticon-check svg { fill: @bl-brand-c;}
+
+    /* 调整右侧搜索icon的位置 */
+    .ant-select-show-arrow .ant-select-arrow {pointer-events:auto;top:calc(50% - 7px);right:14px}
+  }
+  // 添加校验失败样式
+  &.is-error .ant-select:not(.ant-select-borderless) .ant-select-selector {
+    border-color: @bl-danger;
+  }
+  // disabled 
+  .ant-select-multiple.ant-select-disabled .ant-select-selection-item {
+    background: #fff;
+    border-color: #fff;
+    color: @bl-n600;
+  }
+  // 修改tag 的maxWidth
+  .ant-select-multiple .ant-select-selection-item {
+    flex-shrink: 0;
+  }
+
+}
+
+/* 人员和部门选择没有border-radius */
+.no-border-radius .ant-select .ant-select-selector {border-radius:0}
+.border-radius-left .ant-select .ant-select-selector {border-radius:4px 0 0 4px}
+.border-radius-right .ant-select .ant-select-selector {border-radius:0 4px 4px 0}
+.border-radius-none .ant-select .ant-select-selector {border-radius:0}
+.is-multiple.ok-employee-select-wraper .ant-select-multiple .ant-select-selection-item {
+  flex-shrink: 1;
+}
+
+.ok-tree-modal {
+  
+  .ant-modal-close-x {
+    width: 50px;
+    height: 50px;
+    padding: 15px 24px 0 0;
+    line-height: 1;
+    text-align: right;
+  }
+
+  /* 修改部门选择modal中，树父级与子集的间距 */
+  .ant-tree-child-tree > li:first-child {
+    padding-top: 0;
+  }
+
+  .ant-input-affix-wrapper-focused {
+    box-shadow: none;
+  }
+
+}
+
+// 修改‘确认弹窗’ content上边距
+.file-delete-confirm {
+  .ant-modal-confirm-body .ant-modal-confirm-content {
+    margin-top: 0;
+  }
+  .ant-modal-confirm-btns .ant-btn {
+    border-radius: 4px;
+  }
+} 
+
+
+// ant-reset
+// confirm-modal
+.ok-simple-modal {
+	padding-bottom: 0;
+	.ant-modal-content {
+		border-radius: 8px;
+	}
+	.ant-modal-confirm-body {
+		display: flex;
+		align-items: center;
+	}
+	.icon-first {
+		font-size: 22px;
+		font-weight: normal;
+		color: @bl-brand-c;
+		margin-right: 8px;
+		line-height: 22px;
+	}
+	.ant-modal-confirm-body .ant-modal-confirm-content {
+		margin-top: 0;
+		font-weight: normal;
+		font-size: 16px;
+		line-height: 22px;
+		color: @bl-n900;
+	}
+
+	// confirm 按钮边距
+	.ant-modal-confirm-btns {
+		.ant-btn + .ant-btn {
+			margin-left: 12px;
+		}
+	}
+}
+
+// buttons
+[class*='ok-simple-modal'] {
+	.ant-btn {
+		border-radius: 4px;
+		&:hover,
+		&:focus {
+			color: @bl-brand-hover;
+			border-color: @bl-brand-hover;
+		}
+	}
+	.ant-btn-primary {
+		background-color: @bl-brand-c;
+		border-color: @bl-brand-c;
+		&:hover,
+		&:focus {
+			color: #fff;
+			background-color: @bl-brand-hover;
+			border-color: @bl-brand-hover;
+		}
+	}
+  .ant-btn-link {
+    color: @bl-n900;
+    border: none;
+  }
+}
+
+
+/* ok-avatar */
+.ok-avatar-root {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 0;
+}
+
+/* ok-person-cell */
+.ok-person-cell-root,
+.ok-person-cell-root ok-avatar {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+}
+.ok-person-cell-popover.ant-popover {
+  z-index: 7000;
+}
+.ok-person-cell-popover.ant-popover .ant-popover-inner-content {
+  padding: 0;
+}
+.ok-person-cell-popover.ant-popover .ant-popover-inner {
+  background-color: transparent;
+  background-clip: padding-box;
+  box-shadow: none;
+}
+.ok-person-cell-popover.ant-popover.ant-popover-placement-left,
+.ok-person-cell-popover.ant-popover.ant-popover-placement-leftBottom,
+.ok-person-cell-popover.ant-popover.ant-popover-placement-leftTop {
+  padding-right: 6px;
+}
+.ok-person-cell-popover.ant-popover .ant-popover-arrow {
+  display: none;
+}
+
+
+/* ok-person-group */
+.ok-person-group-root {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 0;
+  line-height: 1;
+}
+.ok-person-group-root .ok-person-group-wrap {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  font-size: 14px;
+}
+.ok-person-group-wrap .avatar-list {
+  float: left;
+}
+.ok-person-group-wrap .avatar-list + .avatar-list {
+  margin-left: -8px;
+}
+
+.ok-person-group-root .person-group-single-wrap {
+  display: flex;
+  align-items: center;
+}
+.ok-person-group-root .single-user-name {
+  font-size: 14px;
+  font-weight: normal;
+  color: @bl-n900;
+  margin-left: 6px;
+  line-height: 22px;
+}
+.ok-person-group-root .more {
+  margin-left: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+/* ok-person-group-more */
+.ok-person-group-more.ant-popover {
+  min-width: unset;
+  .ant-popover-inner-content {
+    padding: 0;
+  }
+  .ant-popover-inner {
+    background-color: transparent;
+    background-clip: padding-box;
+    box-shadow: none;
+  }
+  .ant-popover-arrow {
+    display: none;
+  }
+}
+
+/* ok-person-group-more  content  */
+.ok-person-group-list-box {
+  border-radius: @ok-border-radius-base;
+  box-shadow: 0 0 9px 0 rgb(0 0 0 / 8%);
+  background-color: @ok-white-color;
+}
+.ok-person-group-popper {
+  list-style: none;
+  margin: 0;
+  max-height: 222px;
+  overflow: auto;
+  padding: 18px 1px 18px 12px;
+}
+.ok-person-group-popper .popper-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 0;
+  padding-right: 10px;
+}
+.ok-person-group-popper .popper-item:last-child {
+  margin-bottom: 0;
+}
+
+.ok-person-group-popper .popper-item-name {
+  margin-left: 6px;
+  font-weight: normal;
+  font-size: 14px;
+  color: @bl-n900;
+  max-width: 109px;
+  min-width: 69px;
+  line-height: 20px;
+}
+
+.ok-person-group-popper .popper-item-operate {
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+}
+.ok-person-group-popper .popper-item-operate:hover {
+  color: @bl-brand-c;
+}
+
+.ok-person-group-popper .person-item-close-icon {
+  width: 12px;
+  height: 12px;
+  margin-left: auto;
+  cursor: pointer;
+}
+
+// 文件上传
+.ok-upload {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  &:focus{
+    outline: none;
+  }
+  &.has-slot {
+    width: auto;
+  }
+}
+// ok-upload-drag
+.upload-inner{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  min-height: 160px;
+  padding: 34px 40px;
+  box-sizing: border-box;
+  background-color: @bl-n100;
+  color:@bl-n900;
+  font-size:14px;
+  border: 1px solid @bl-n300;
+  border-radius: @ok-border-radius-base;
+  &:hover{
+    border-color: @bl-brand-c;
+    background-color: @bl-n200;
+  }
+  &.dragover {
+    background-color: @bl-brand-label;
+    border: 1px dashed @bl-brand-c;
+  }
+  svg path {
+    fill: @bl-brand-c;
+  }
+  &.disabled {
+    cursor: not-allowed;
+    border-color: @bl-n300;
+    svg path {
+      fill: @bl-n400;
+    }
+  }
+  &.has-file {
+    margin-bottom: 12px;
+  }
+  .upload-btn {
+    color:@bl-brand-c;
+    font-weight: 500;
+    &.disabled {
+      color: @bl-n400;
+    }
+  }
+  .ok-upload-drag-icon {
+    font-size: 40px;
+    color: @bl-brand-c;
+  }
+
+  .upload-inner-text {
+    line-height: 20px;
+    margin: 10px 0 0;
+  }
+}
+
+// .ok-file-list
+.ok-file-list-box {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: auto;
+
+  .ok-file-list__item {
+    transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+    font-size: 14px;
+    color: @bl-n900;
+    line-height: 1;
+    position: relative;
+    box-sizing: border-box;
+    border-radius: @ok-border-radius-base;
+    width: 100%;
+
+  }
+  .ok-file-list__item + .ok-file-list__item  {
+    margin-top: 14px;
+  }
+
+  .item-detail {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: @bl-n150;
+    padding-left: 8px;
+    padding-right: 8px;
+    height: 36px;
+    line-height: 36px;
+    max-width: 100%;
+    border-radius: @ok-border-radius-base;
+    &.failed {
+      background: @bl-danger-light;
+      .ok-file-list__item_file_name {
+        max-width: calc(100% - 127px)
+      }
+    }
+    &:hover {
+      background-color: @bl-n200;
+    }
+
+  }
+
+  .ok-file-list__item_name {
+    flex: 1;
+    width: calc(100% - 40px);
+    margin-left: 4px;
+  }
+  
+  .file_name_wraper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    line-height: 1;
+  }
+  .ok-file-list__item_file_name {
+    color: @bl-n900;
+    max-width: calc(100% - 96px);
+    line-height: 16px;
+  }
+
+  .uploading-info {
+    display: flex;
+    align-items: center;
+  }
+  .percentage-text {
+    font-size: 12px;
+    color: @bl-n500;
+    margin-right: 12px;
+  }
+  .fail-text {
+    font-size: 12px;
+    font-weight: normal;
+    color: @bl-danger;
+    margin-right: 12px;
+  }
+  .reupload-btn {
+    margin-right: 12px;
+  }
+  .abort-btn,
+  .reupload-btn {
+    cursor: pointer;
+  }
+
+  .reupload-btn path,
+  .abort-icon path {
+    fill: @bl-brand-c;
+  }
+  
+  .file-list-progress {
+    display: block;
+    margin-top: 6px;
+  }
+}
+// 平铺展示
+.ok-file-list-box.is-vertical {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(30px,386px));
+  grid-gap: 20px;
+  .ok-file-list__item + .ok-file-list__item  {
+    margin-top: 0;
+  }
+}
+// 明细字表中的file-list
+.ok-file-list-box.is-subtable {
+  .item-detail {
+    padding: 0 12px;
+    border-radius: 0;
+    background-color: @ok-white-color;
+    &:hover {
+      background-color: @bl-n200;
+    }
+  }
+  .ok-file-list__item + .ok-file-list__item {
+    margin-top: 2px;
+  }
+  .ok-file-list__item_file_name {
+    color: @bl-n900;
+    line-height: 20px;
+  }
+}
+
+// operation
+.item-operation {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: 6px;
+}
+
+.file-icon-operate {
+  display: flex;
+  align-items: center;
+  line-height: 1;
+  cursor: pointer;
+  text-decoration: none;
+  color: @bl-brand-c;
+  &:focus,
+  &:active,
+  &:hover {
+    color: @bl-brand-c;
+  }
+  & +.file-icon-operate {
+    margin-left: 12px;
+  }
+
+  svg path {
+    fill: @bl-brand-c;
+  }
+  &:hover {
+    svg path {
+      fill: @bl-brand-hover;
+    }
+  }
+
+}
+
+
+
+// ok-upload-table
+.ok-upload--text {
+  width: auto;
+}
+.ok-upload-list-btn{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 15px;
+  height: 30px;
+  line-height: 30px;
+  border: 1px solid @bl-n300;
+  border-radius: @ok-border-radius-base;
+  text-align: center;
+  color: @bl-n900;
+  font-size: 14px;
+  .upload-icon path {
+    fill: @bl-n600;
+  }
+  .btn-text {
+    margin-left: 5px;
+  }
+  &:hover{
+    border-color: @bl-brand-c; 
+    color: @bl-brand-c;
+    .upload-icon path {
+      fill: @bl-brand-c;
+    }
+  }
+  &:active{
+    border-color: @bl-brand-active; 
+    color: @bl-brand-active;
+    .upload-icon path {
+      fill: @bl-brand-active;
+    }
+  }
+  &.disabled {
+    border-color: @bl-n300;
+    color: @bl-n400;
+    cursor: not-allowed;
+    .upload-icon path {
+      fill: @bl-n400;
+    }
+  }
+}
+
+.ok-file-table-wraper {
+  display: block;
+  font-size: 0;
+}
+.ok-upload--text+.ok-file-table-wraper {
+  margin-top: 12px;
+}
+
+.ok-upload-list-table {
+  .ant-table-tbody>tr>td,
+  .ant-table-thead>tr>th {
+    padding: 0 16px;
+    height: 40px;
+    line-height: 1;
+    color: @bl-n900
+  }
+  .ant-table-thead>tr>th {
+    color: @bl-n900;
+    background-color: @bl-n100;
+  }
+
+  .file-name-box.fail {
+    .file-name {
+      color: @bl-danger;
+    }
+  }
+
+  .ok-upload-list__item-actions {
+    display: flex;
+    align-items: center;
+  }
+
+}
+
+
+// ok-progress
+.ok-process-warp {
+
+  .ok-progress-bar__outer {
+    height: 2px;
+    border-radius: 100px;
+    background-color: @bl-n250;
+    overflow: hidden;
+    position: relative;
+    vertical-align: middle;
+  }
+  .ok-progress-bar__inner {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background-color: @bl-brand-c;
+    text-align: right;
+    border-radius: 100px;
+    line-height: 1;
+    white-space: nowrap;
+    transition: width 0.6s ease;
+  }
+
+  &.fail .ok-progress-bar__inner{
+    background-color: @bl-danger;
+  }
+
+}
+
+
+/* ok-file-icon */
+.ok-file-icon-root{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex}
+.ok-file-icon-root .ok-file-icon-img{transition: transform 0.2s;}
+.ok-file-icon-root .ok-file-icon-img.hover-bigger:hover{transform: scale(1.3); }
+
+/* ok-image */
+.ant-form-item-control.has-error .ok-upload-image-box {
+  border-color: @bl-danger;
+}
+
+.ok-upload-image-box {
+  display: inline-block;
+  width: auto;
+  margin-top: 8px;
+  vertical-align: top;
+  &.has-margin {
+    margin-right: 8px;
+  }
+
+  .ok-upload-image-inner {
+    box-sizing: border-box;
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    line-height: 98px;
+    vertical-align: top;
+    background-color: @bl-n100;
+    border: 1px solid @bl-n300;
+    border-radius: @ok-border-radius-base;
+    cursor: pointer;
+    &:hover {
+      border-color: @bl-brand-c;
+      background-color: @bl-n200;
+    }
+  
+  }
+
+  .upload-img-icon {
+    display: block;
+    text-align: center;
+    font-size: 40px;
+    height: 100%;
+    margin: 0 auto;
+    path {
+      fill: @bl-brand-c;
+    }
+  }
+
+  &.disabled .ok-upload-image-inner {
+    cursor: not-allowed;
+    background-color: @bl-n150;
+    border-color: @bl-n300;
+  }
+
+}
+
+.ok-file-image-list {
+  font-size: 0;
+  vertical-align: top;
+}
+
+.ok-upload-list-image {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  vertical-align: top;
+}
+.ok-upload-list-image .ok-upload-list__item {
+  overflow: hidden;
+  background-color: @ok-white-color;
+  border: 1px solid @bl-n300;
+  border-radius: 6px;
+  box-sizing: border-box;
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+  font-size: 14px;
+  color: @bl-n600;
+  position: relative;
+  margin-right: 8px;
+  margin-top: 8px;
+}
+
+.ok-upload-list-image .ok-upload-list__item.last {
+  margin-right: 0;
+}
+.ok-upload-list-image .ok-upload-list__item-thumbnail {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.ok-upload-list-image .ok-upload-list__item-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  cursor: default;
+  text-align: center;
+  color: @ok-white-color;
+  opacity: 0;
+  font-size: 20px;
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: opacity 0.3s;
+  .operation-icon + .operation-icon {
+    margin-left: 12px;
+  }
+  .operation-icon {
+    svg path {
+      fill: #fff;
+    }
+    &:hover {
+      svg path {
+        fill: @bl-brand-hover;
+      }
+    }
+  }
+}
+.ok-upload-list-image .ok-upload-list__item-actions:hover {
+  opacity: 1;
+}
+.ok-upload-list-image .ok-upload-list__item-actions > i {
+  cursor: pointer;
+}
+.ok-upload-list-image .image-process-wraper {
+  width: 100%;
+  text-align: center;
+  padding: 0 10px;
+}
+.ok-upload-list-image .image-progress {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+}
+.ok-upload-list-image .ok-process-wraper {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.ok-upload-list-image .image-close-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.ok-image-uploading:hover .image-close-btn {
+  opacity: 1;
+}
+.ok-upload-list-image .abort-icon path {
+  fill: @bl-brand-c;
+}
+
+.ok-upload-list-image .ok-image-process-msg {
+  color: @bl-n500;
+  &.fail {
+    color: @bl-danger;
+  }
+}
+
+
+
+// 明细子表
+.upload-btn-box-subtable {
+  box-sizing: border-box;
+  padding: 0 12px;
+}
+.upload-subtable-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid @bl-brand-c;
+  box-sizing: border-box;
+  border-radius: @ok-border-radius-base;
+  height: 32px;
+  .upload-icon path {
+    fill: @bl-brand-c;
+  }
+  .upload-text {
+    font-size: 14px;
+    color: @bl-brand-c;
+    margin-left: 8px;
+  }
+  &:hover {
+    background-color: @bl-brand-c;
+    .upload-text {
+      color: @ok-white-color;
+    }
+
+    .upload-icon path {
+      fill: @ok-white-color;
+    }
+    
+  }
+  &.has-file {
+    margin-top: 9px;
+  }
+
+}
+
+
+/* 文件删除， 二次确认 */
+.file-delete-confirm.ant-modal-confirm .ant-modal-content {
+  border-radius: @ok-border-radius-base;
+}
+.file-delete-confirm.ant-modal-confirm .ant-modal-confirm-btns button+button {
+  margin-left: 12px;
+}
+.file-delete-confirm.ant-modal-confirm .ant-modal-confirm-btns .ant-btn:first-child {
+  border: 1px solid #CCCCCC;
+}
+.file-delete-confirm.ant-modal-confirm .ant-modal-confirm-btns .ant-btn:first-child:hover {
+  color: @bl-brand-hover;
+  border-color: @bl-brand-hover;
+}
+
+.file-delete-confirm.ant-modal-confirm .ant-modal-confirm-btns .ant-btn-primary {
+  background: @bl-brand-c;
+  border-color: @bl-brand-c;
+}
+.file-delete-confirm.ant-modal-confirm .ant-modal-confirm-btns .ant-btn-primary:hover {
+  background: @bl-brand-hover;
+}
+
+
+/* 人员选择modal, 人员选择modal样式 公用样式 */
+// modal header
+.ok-tree-modal .ant-modal-header {
+  padding: 16px 24px;
+  background-color: @bl-brand-c;
+  border: 0;
+  border-radius: 8px 8px 0 0;
+}
+// modal title
+.ok-tree-modal .ant-modal-title {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+  color: @ok-white-color;
+}
+// modal content
+.ok-tree-modal .ant-modal-content {
+  border-radius: @ok-border-radius-big;
+}
+.ok-tree-modal .tree-content-wraper {
+  display: flex;
+  min-height: 400px;
+  border: 1px solid @bl-n300;
+  border-radius: @ok-border-radius-base;
+}
+
+.ok-tree-modal .tree-wraper {
+  width: 50%;
+  border-right: 1px solid @bl-n300;
+  overflow-x: auto;
+}
+// search
+.ok-tree-modal .tree-search {
+  padding: 16px 20px 12px 20px;
+}
+.ok-tree-modal .tree-search .ant-input-affix-wrapper {
+  border: 0;
+  background:@bl-n200;
+  border-radius: @ok-border-radius-base;
+}
+.ok-tree-modal .tree-search .ant-input-affix-wrapper:focus {
+  box-shadow:none;
+  border-color: @bl-brand-c;
+}
+
+.ok-tree-modal .tree-search .ant-input-affix-wrapper input {
+  background:@bl-n200;
+}
+.ok-tree-modal .tree-search-icon {
+  width: 18px;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+// icon 选中
+.ok-tree-modal .checked-icon {
+  width:16px;
+  vertical-align: middle;
+  margin-left: auto;
+}
+// icon 删除
+.ok-tree-modal .close-icon{
+  width:16px;
+  height: 16px;
+  margin-left: auto;
+  &:hover {
+    path {
+      fill: @bl-brand-c;
+    }
+  }
+}
+.ok-tree-modal .close-icon {
+  cursor: pointer;
+}
+// empty
+.ok-tree-modal .empty-text {
+  text-align: center;
+}
+
+/* selected */
+.ok-tree-modal .selected-wraper{
+  width: 50%;
+}
+
+.ok-tree-modal .selected-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px 15px 20px;
+}
+
+.ok-tree-modal .selected-msg {
+  font-size: 14px;
+  line-height: 22px;
+  color: @bl-n600;
+}
+.ok-tree-modal .clear-btn {
+  color: @bl-brand-c;
+  cursor: pointer;
+}
+
+/* modal footer */
+.ok-tree-modal .ant-modal-footer {
+  border: 0;
+  padding: 24px;
+}
+.ok-tree-modal .ant-modal-footer button {
+  border-radius: @ok-border-radius-base;
+}
+.ok-tree-modal .ant-modal-footer button+button {
+  margin-left: 12px;
+}
+.ok-tree-modal .btn-cancle.ant-btn:hover {
+  color: @bl-brand-c;
+  border-color: @bl-brand-c;
+}
+.ok-tree-modal .ant-modal-footer .btn-ok {
+  background: @bl-brand-c;
+  &:hover {
+    background: @bl-brand-hover;
+  }
+}
+
+  /* 人员选择modal */
+.ok-employee-tree-modal .breadcrumb-separator{color:@bl-n600}
+.ok-employee-tree-modal .ant-breadcrumb {
+  padding: 0 20px;
+  margin-bottom: 10px;
+}
+/* 面包屑hover */
+.ok-employee-tree-modal .ant-breadcrumb a:hover {
+  color: @bl-brand-c;
+}
+
+.ok-employee-tree-modal .list-wraper,
+.ok-employee-tree-modal .search-list,
+.ok-employee-tree-modal .selected-list {
+  max-height: 400px;
+  overflow: auto;
+}
+.ok-employee-tree-modal .item-detail {
+  display: flex;
+  align-items: center;
+  justify-content: initial;
+  height: 40px;
+  padding: 0 20px;
+  margin: 0;
+  cursor: pointer;
+}
+.ok-employee-tree-modal .item-detail.selected,
+.ok-employee-tree-modal .item-detail:hover {
+  background-color: @bl-n150;
+}
+.ok-employee-tree-modal  .employee-name {
+  margin:0 8px;
+  font-size: 14px;
+  color: @bl-n900;
+  flex-shrink: 0;
+}
+
+.ok-employee-tree-modal .email {
+  font-size: 12px;
+  color: @bl-n600;
+  margin-right: 10px;
+}
+
+.ok-employee-tree-modal .dept-icon {
+  width: 18px;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+
+/* poper 样式 */
+/* .ok-employee */
+.ok-employee-more .ant-popover {
+  z-index: 6000;
+}
+.ok-employee-more .more-content {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 296px;
+}
+.ok-employee-more .more-item {
+  display: flex;
+  align-items: center;
+  background: @bl-n200;
+  margin: 3px 4px 3px 0;
+  flex-shrink: 0;
+  padding: 0 8px 0 2px;
+  border-radius: 2px;
+}
+.ok-employee-more .head-close-icon {
+  width: 12px;
+    height: 12px;
+    vertical-align: middle;
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+.ok-employee-more .ant-popover-inner-content {
+  padding: 3px;
+}
+.ok-employee-more .employee-avatar {
+  font-size: 0;
+}
+
+.ok-employee-more .employee-name {
+  line-height: 22px;
+  margin-left: 6px;
+  vertical-align: middle;
+  max-width: 80px;
+  font-size: 14px;
+  color: @bl-n600;
+  font-weight: normal;
+}
+
+
+
+/* ok-employee-select dropdown 样式 */
+.userSelectDropdown .ant-select-dropdown {
+  z-index: 5500;
+}
+.userSelectDropdown	.selected-head {
+		display: none;
+}
+.userSelectDropdown	.option-list-item {
+  padding: 10px 40px 8px 18px;
+  border-bottom: 1px solid @bl-n250;
+  font-weight: normal;
+}
+.userSelectDropdown	.ant-select-item {
+  padding: 0;
+}
+
+.userSelectDropdown	.selected-option {
+  display: flex;
+  align-items: center;
+}
+
+.userSelectDropdown	.user-img__avatar {
+  width: 40px;
+  height: 40px;
+}
+
+.userSelectDropdown	.user-img__name {
+  margin-right: 10px;
+  max-width: 35%;
+}
+.userSelectDropdown	.user-img__email {
+  flex: 1;
+}
+.userSelectDropdown	.user-img__content {
+  width: calc(100% - 50px);
+  margin-left: 10px;
+  font-size: 12px;
+}
+
+.userSelectDropdown	.user-img__content>p {
+  line-height: 18px;
+  margin: 0;
+  max-width: 100%;
+}
+
+.userSelectDropdown .more {
+  display: none;
+}
+
+.userSelectDropdown.ant-select-dropdown .ant-select-dropdown-content .ant-select-item-option-state {
+  line-height: 60px;
+  padding-right: 12px;
+  position: absolute;
+  right: 0;
+}
+
+/* 人员选择样式 */
+.ok-employee-tree-wraper{width:100%}
+.ok-employee-select-wraper .ant-select.ok-employee-select {line-height: initial;}
+.ok-employee-select .ant-select-selector {height: 100%;}
+.ok-employee-select.ant-select-multiple .ant-select-selector{border-color:@bl-n300; flex-wrap: nowrap;}
+.ok-employee-select.ant-select-multiple.no-border .ant-select-selector{border:0}
+.ant-select-selection-item .selected-option{display:none}
+.ant-select-selection-item .selected-head{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}
+.ant-select-selection-item .user-img__avatar__head{width:20px;height:20px;font-size:0}
+.ant-select-selection-item .selected-head-name-head{max-width:50px;margin-left:6px;font-size:14px;font-weight:400; color: @bl-n600;}
+.head-clear-icon,.head-search-icon{width:16px;height:16px}
+.ok-employee-select .ant-select-selection-item-content {
+  font-size: 14px;
+  font-weight: 400;
+  color: @bl-n900;
+}
+
+/* 部门选择 */
+/* ok-department-select */
+.ok-department-select-root.ok-department-select-wraper {
+  width: 100%;
+  height: 100%;
+}
+.ok-department-select-root .ant-select.ok-department-select {
+  line-height: initial;
+}
+.ok-department-select-root .ok-department-select .ant-select-selector {
+  height: 100%;
+}
+.ok-department-select-root.is-inline .ok-department-select .ant-select-selector {
+  flex-wrap: nowrap;
+  .ant-select-selection-item {
+    max-width: calc(100% - 60px);
+  }
+}
+
+.ok-department-select-root .ok-department-select .ant-select-selection-item-content {
+  font-size: 14px;
+  font-weight: 400;
+  color: @bl-n600;
+}
+.ok-department-select-root .head-search-icon,
+.ok-department-select-root .head-clear-icon {
+  width: 16px;
+  height: 16px;
+}
+
+// department modal
+// 文件icon
+.dept-tree-content-wraper .tree-item-icon {
+  width: 18px;
+  height: 18px;
+  margin: 0 5px 0 8px;
+}
+
+/* 修改checkbox样式 */
+.dept-tree-content-wraper .ant-checkbox-inner {
+  position: relative;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 16px;
+  height: 16px;
+  background-color: @ok-white-color;
+  border: 1px solid @bl-n300;
+  border-radius: @ok-border-radius-base;
+  border-collapse: separate;
+  transition: all 0.3s;
+}
+.dept-tree-content-wraper .ant-checkbox-checked .ant-checkbox-inner {
+  background-color: @bl-brand-c;
+  border-color: @bl-brand-c;
+}
+
+  /* 修改item样式 */
+.dept-tree-content-wraper .department-tree-item {
+  display: flex;
+  align-items: center;
+}
+.dept-tree-content-wraper .search-result-item,
+.dept-tree-content-wraper .selected-department-item {
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  height: 40px;
+}
+.dept-tree-content-wraper .search-result-item:hover,
+.dept-tree-content-wraper .selected-department-item:hover {
+  background-color: @bl-n150;
+}
+
+.dept-tree-content-wraper .ant-tree li {
+  padding: 0;
+}
+.dept-tree-content-wraper .ant-tree li .ant-tree-node-content-wrapper {
+  height: 40px;
+  line-height: 40px;
+  width: calc(100% - 24px);
+}
+.dept-tree-content-wraper .ant-tree-title {
+  display: block;
+}
+
+.dept-tree-content-wraper .ant-tree li span.ant-tree-switcher {
+  top: 8px;
+}
+
+.dept-tree-content-wraper .tree-content {
+  padding: 0 20px 0 15px;
+}
+
+.dept-tree-content-wraper .tree-content.department {
+  max-height: 400px;
+  overflow: auto;
+}
+
+
+/* 人员卡片 */
+.ok-person-detail{width:240px;overflow:hidden;font-style:normal;cursor:default;background:@ok-white-color;border-radius:14px;-webkit-box-shadow:0 2px 8px rgba(0,0,0,.12);box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.ok-person-detail .person-image{position:relative;width:100%;height:170px}
+.ok-person-detail .person-image .person-name{position:absolute;bottom:24px;left:16px;font-size:16px;font-weight:600;line-height:24px;color:@ok-white-color;word-wrap:break-word;white-space:pre-wrap;max-width:calc(100% - 22px);margin-right:6px}
+.ok-person-detail .person-detail-footer{-webkit-box-sizing:border-box;box-sizing:border-box}
+.ok-person-detail .person-detail-footer .person-detail-info{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;margin-bottom:12px;font-size:12px}
+.ok-person-detail .person-detail-footer .person-detail-info .title{width:28px;margin-right:10px;color:@bl-n500}
+.ok-person-detail .person-detail-footer .person-detail-info .placeholder{-webkit-box-flex:1;-webkit-flex:1;-ms-flex:1;flex:1;overflow:hidden;text-align:left;word-break:break-word;white-space:pre-wrap}
+.ok-person-detail .person-detail-footer .person-detail-button{-webkit-box-sizing:border-box;box-sizing:border-box;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;height:32px;font-size:12px;line-height:22px;color:@bl-brand-c;cursor:pointer;border-radius:4px}
+.ok-person-detail .person-detail-footer .person-detail-button img{margin-right:6px}
+.ok-person-detail .headCover{position:absolute;top:0;width:100%;height:170px;background:-webkit-gradient(linear,left top, left bottom,from(rgba(0,0,0,.0001)),color-stop(99.42%, rgba(0,0,0,.6)));background:linear-gradient(180deg,rgba(0,0,0,.0001),rgba(0,0,0,.6) 99.42%);opacity:.6}
+.ok-person-detail .person-card-name{margin-right:6px;max-width:calc(100% - 22px); line-height: 22px;}
+.ok-person-detail .person-card-name.isTerminated{max-width:calc(100% - 90px)}
+.ok-person-detail .user-name-wraper{position:absolute;bottom:14px;font-size:16px;font-weight:500;color:@ok-white-color;-webkit-transition:bottom .1s ease-in-out;transition:bottom .1s ease-in-out;width:calc(100% - 28px);left:14px;display:flex;}
+.ok-person-detail .terminated-text{flex-shrink: 0;font-size:12px;line-height:12px;font-weight:400;padding:3px;border-radius:4px;background-color:rgba(14,14,14,.5);margin-left:auto;vertical-align:middle}
+.ok-person-detail .person-detail-button{background:@bl-brand-label;border-radius:4px;border:none;padding:3px 2px}
+.ok-person-detail .content-wraper{padding:14px;height:auto;font-size:12px;line-height:22px;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column}
+.ok-person-detail .item-row{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;margin:0;line-height:18px}
+.ok-person-detail .item-row+.item-row{margin-top:12px}
+.ok-person-detail .item-row>.item-label{-webkit-flex-shrink:0;-ms-flex-negative:0;flex-shrink:0;margin-right:6px;color:@bl-n500}
+.ok-person-detail .item-row>.item-content{color:@bl-n900;}
+.ok-person-detail .btn-wraper{padding:0 14px 14px}
+
+// tippy animation
+.tippy-box[data-animation=scale][data-placement^=top]{transform-origin:bottom}.tippy-box[data-animation=scale][data-placement^=bottom]{transform-origin:top}.tippy-box[data-animation=scale][data-placement^=left]{transform-origin:right}.tippy-box[data-animation=scale][data-placement^=right]{transform-origin:left}.tippy-box[data-animation=scale][data-state=hidden]{transform:scale(.5);opacity:0}

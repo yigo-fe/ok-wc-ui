@@ -1,10 +1,12 @@
 import cjs from '@rollup/plugin-commonjs'
 import image from '@rollup/plugin-image'
+import rollupjson from '@rollup/plugin-json'
 import autoprefixer from 'autoprefixer'
 import rimraf from 'rimraf'
 import alias from 'rollup-plugin-alias'
+import copy from 'rollup-plugin-copy'
 import filesize from 'rollup-plugin-filesize'
-import json from 'rollup-plugin-json'
+// import json from 'rollup-plugin-json'
 import livereload from 'rollup-plugin-livereload'
 import postcss from 'rollup-plugin-postcss'
 import replace from 'rollup-plugin-replace'
@@ -34,7 +36,8 @@ const createConfig = format => {
   const plugins = [
     alias(),
     nodeResolve(),
-    json(),
+    rollupjson(),
+    // json(),
     postcss({
       extract: false,
       inject: false,
@@ -42,15 +45,25 @@ const createConfig = format => {
       minimize: true,
       plugins: [autoprefixer],
     }),
-    cjs(),
     ts(),
     image(),
     babelPlugin,
+    cjs({
+      browser: true,
+    }),
     filesize({ showBrotliSize: true }),
     replace({
       'process.env.NODE_ENV': JSON.stringify(
         isPrd ? 'production' : 'development'
       ),
+      'process.env.PACKAGE_VERSION': pkg.version,
+    }),
+    // copy 静态资源
+    copy({
+      targets: [
+        { src: 'public/common.css', dest: 'dist' },
+        { src: 'public/antd.min.css', dest: 'dist' },
+      ],
     }),
   ]
 
@@ -73,8 +86,8 @@ const createConfig = format => {
     plugins.push(
       serve({
         open: true,
-        port: 8001,
-        openPage: '/example/index.html',
+        port: 8000,
+        openPage: '/public/index.html',
       }),
       livereload()
     )
@@ -85,9 +98,20 @@ const createConfig = format => {
     output,
     external,
     plugins,
+    onwarn: function (warning) {
+      // Skip certain warnings
+
+      // should intercept ... but doesn't in some rollup versions
+      if (warning.code === 'THIS_IS_UNDEFINED') {
+        return
+      }
+
+      // console.warn everything else
+      console.warn(warning.message)
+    },
   }
 }
 
-const formats = isPrd ? ['esm', 'cjs', 'umd'] : ['umd']
-
+// const formats = isPrd ? ['esm', 'cjs', 'umd'] : ['umd']
+const formats = isPrd ? ['umd'] : ['umd']
 export default () => formats.map(createConfig)

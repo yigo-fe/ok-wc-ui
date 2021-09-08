@@ -19,6 +19,8 @@ module.exports = {
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
+    'no-misleading-character-class': 'off',
+    'no-useless-escape': 'off',
   },
   plugins: ['simple-import-sort', '@typescript-eslint', 'prettier'],
 }

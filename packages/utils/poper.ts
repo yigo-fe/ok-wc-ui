@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+// import 'tippy.js/animations/shift-away.css'
+
 import { POPOVER_PLACEMENT } from '@c/ok-wc-ui'
 import tippy, {
   createSingleton,
@@ -18,11 +21,18 @@ import tippy, {
  * @offset 偏移量
  */
 class PopoverOptions {
+  public onTrigger?: (instance: Instance, event: MouseEvent) => void
+  public onShow?: () => void
   public placement?: POPOVER_PLACEMENT
   // public delayShow: number
+  public popperOptions?: {
+    strategy?: 'fixed'
+    modifiers?: any
+  }
   public arrow?: boolean
   public trigger?: 'click' | 'focus' | undefined
   public theme?: string
+  public animation?: string
   public offset?: [number, number]
   // public animateFill: boolean
   public appendTo?: 'parent' | Element | ((ref: Element) => Element)
@@ -61,8 +71,12 @@ class PopoverOptions {
     this.delay = props?.delay ?? 0
     this.trigger = props?.trigger ?? undefined
     this.hideOnClick = props?.hideOnClick ?? false
-    this.offset = props?.offset ?? [0, 0]
+    this.offset = props?.offset ?? [0, 8]
     this.interactive = props?.interactive ?? true
+    this.popperOptions = props?.popperOptions
+    this.onTrigger = props?.onTrigger
+    this.onShow = props?.onShow
+    this.animation = 'scale'
   }
 }
 

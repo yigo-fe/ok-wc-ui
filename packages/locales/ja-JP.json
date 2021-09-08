@@ -1,0 +1,53 @@
+{
+  "control": {
+    "personCard": {
+      "terminated": "使用停止",
+      "department": "部署",
+      "email": "メール",
+      "sendLark":"{title}メッセージを送る",
+      "wechat": "WeChat Work",
+      "ME": "ME",
+      "lark": "Lark",
+      "dingtalk": "DingTalk"
+    },
+    "imageUpload": {
+      "deleteTip": "この画像を消去しますか？",
+      "uploadBtnText":"画像アップロード"
+    },
+    "attachmentUpload": {
+      "unpreviewMsg": "一時閲覧の状態でアップロードは不可",
+      "previewMsg": "ファイルはサポートしていません。",
+      "deleteTip": "ファイルは消去しますか？",
+      "uploadBtnText":"添付アップロード", 
+      "uploadBtnTable": "クリックしてアップロード", 
+      "uploadBtndDrag": "クリックしてアップロード", 
+      "uploadTable": {        
+        "fileName": "ファイル名",
+        "creator": "作成者",
+        "createTime": "アップロード日付",
+        "operation": "操作"
+      },
+      "dragTip": "ここにドロップまたは"
+    },
+    "employeeSelect": {
+      "title": "メンバー選択"
+    },
+    "departmentSelect": {
+      "title": "部署選択"  
+    }
+  },
+  "common": {
+    "index": "番号",
+    "noData": "データ無",
+    "selected": "選択済",
+    "confirm": "はい",
+    "cancel": "いいえ",
+    "loading": "取組中",
+    "clear": "リセット",
+    "uploadFail": "アップデート失敗"
+  },
+  "placeholder": {
+    "employeePlaceholder": "お名前、メールアドレス、社員番号を入力して下さい",
+    "deptPlaceholder": "部署名を入力して下さい"
+  }
+}

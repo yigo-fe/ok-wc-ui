@@ -18,18 +18,19 @@ export default function (treeshake = true, polyfills = false) {
       ]
     : [['@babel/plugin-transform-typescript', { isTSX: 'preserve' }]]
 
-  const presets = [[
-          '@babel/preset-env',
-          {
-            modules: false,
-            useBuiltIns: 'usage',
-            corejs: { version: '3' },
-            targets: {
-              ie: '10',
-            },
-          },
-        ],
-      ]
+  const presets = [
+    [
+      '@babel/preset-env',
+      {
+        modules: false,
+        useBuiltIns: 'usage',
+        corejs: { version: '3' },
+        targets: {
+          ie: '10',
+        },
+      },
+    ],
+  ]
 
   return babel({
     plugins,

@@ -1,0 +1,33 @@
+//
+.test{
+  background: transparent;
+}
+
+@import url('../../assets/theme.less');
+
+.ok-progress-bar__outer {
+  height: 2px;
+  border-radius: 100px;
+  background-color: @ok-process-bg-color;
+  overflow: hidden;
+  position: relative;
+  vertical-align: middle;
+}
+.ok-progress-bar__inner {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background-color: @ok-process-inner-color;
+  text-align: right;
+  border-radius: 100px;
+  line-height: 1;
+  white-space: nowrap;
+  transition: width 0.6s ease;
+  &.success {
+    background-color: #67C23A;
+  }
+  &.fail {
+    background-color: @ok-error-color;
+  }
+}

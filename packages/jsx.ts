@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { SIZE_TYPE } from './enum'
 import { Person, POPOVER_PLACEMENT } from './ok-wc-ui'
 
@@ -5,9 +6,7 @@ declare global {
   namespace JSX {
     interface IntrinsicElements {
       'ok-avatar': OkAvatarAttributes // 人员头像
-      'ok-person': OkPersonAttributes // 人员信息
       'ok-person-group': OkPersonGroupAttributes // 人员信息组
-      'ok-person-detail': OkPersonDetailAttributes // 人员卡片
       'ok-popper': OkPopoverAttributes // 弹层
     }
 
@@ -31,6 +30,22 @@ declare global {
     }
     interface OkPersonDetailAttributes {
       person: Person
+    }
+  }
+
+  interface Window {
+    // ok-wc-ui 配置
+    okuiConfig: {
+      env?: string // 环境配置 DEV PRD
+      apiPath: string // 接口地址
+      sourceHost?: string
+      basePath?: string
+      cardPath?: string
+      options?: {
+        preview?: boolean
+      }
+      locale?: string
+      theme?: string
     }
   }
 }

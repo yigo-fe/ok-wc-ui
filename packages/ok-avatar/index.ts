@@ -1,32 +1,51 @@
-import { Person } from '@c/ok-wc-ui.d'
-import { handleImage } from '@c/utils'
-import { defineComponent, html, PropType } from 'ok-lit'
-
-import okAvatarCss from '../assets/ok-avatar.less'
-
-/**
- * person: {Person} 用户信息
- * TODO:
- * 头像形状：circle ｜ square
- * 文字头像：背景色自定义
+/*
+ * @Descripttion:
+ * @Author: 付静
+ * @Date: 2021-02-18 16:01:20
+ * @LastEditors: 付静
+ * @LastEditTime: 2021-07-19 10:09:21
+ * @FilePath: /packages/ok-avatar/index.ts
  */
 
+import { defineComponent, html, onMounted } from 'ok-lit'
+import { createApp } from 'vue'
+
+import { COMMON_CSS_PATH } from '../path.config'
+import useAvatarHandler from './hook'
+import props from './props'
 defineComponent(
   'ok-avatar',
   {
-    person: {
-      type: (Object as unknown) as PropType<Person>,
-      required: true,
-    },
+    ...props,
   },
-  props => {
+  (props, context) => {
+    onMounted(() => {
+      const options = {
+        setup() {
+          const params = useAvatarHandler(props)
+
+          return {
+            ...params,
+          }
+        },
+        template: `
+        <div class="avatar-wapper" :style="avatarWapperAll">
+          <div :class="[avatarClass, round && 'round']" class="tagAavtar" :style="avatarStyleAll" >
+            <div v-if="count" class="name-text" :style="avatarTextStyle">{{count>9 ? '9+' : count}}</div>
+            <div v-else-if="!hasAvatar" class="name-text" :style="avatarTextStyle">{{showName}}</div>
+          </div>
+        </div>
+      `,
+      }
+      // console.log('context.$refs.showUser', Vue)
+      const app = createApp(options)
+
+      app.mount(context.$refs.showUser as HTMLElement)
+    })
+
     return () => html`
-      <style>
-        ${okAvatarCss}
-      </style>
-      <span class="ok-avatar">
-        <img src="${handleImage(props.person)}" />
-      </span>
+      <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
+      <div ref="showUser" class="ok-avatar ok-avatar-root"></div>
     `
   }
 )
