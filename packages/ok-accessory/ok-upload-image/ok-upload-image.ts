@@ -9,7 +9,7 @@
 
 import { classMap } from 'lit-html/directives/class-map.js'
 import { styleMap } from 'lit-html/directives/style-map'
-import { debounce } from 'lodash'
+import debounce from 'lodash/debounce'
 import { defineComponent, html, onMounted, onUnmounted, PropType } from 'ok-lit'
 import { ref } from 'vue'
 
