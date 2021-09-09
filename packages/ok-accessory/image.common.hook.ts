@@ -44,7 +44,7 @@ export default function (props, context) {
       return
     }
     if (file) {
-      const path = file?.response?.data?.[0].file_path
+      const path = file?.response?.data?.[0].origin_url
       // todo 兼容
       let url: any = ''
       if (path && /^\/\//.test(path)) {
