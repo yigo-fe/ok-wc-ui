@@ -83,7 +83,7 @@ defineComponent(
                 :height="height"
                 :propsGetInfoByEmpId="propsGetInfoByEmpId"
                 :avatarStyle="avatarStyle"
-                style="display: inline-block"
+                style="display: inline-block; vertical-align: middle"
               ></ok-person-cell>
               <span class="single-user-name ellipsis1">{{personList[0].employee_name}}</span>
             </div>
@@ -134,6 +134,17 @@ defineComponent(
     return () => html`
       <link rel="stylesheet" .href="${ANTD_VUE_CDN}" />
       <link rel="stylesheet" .href="${COMMON_CSS_PATH}" />
+      <style>
+        .single-user-name {
+          font-size: 14px;
+          font-weight: normal;
+          color: var(--bl-n900-c, #1f2329);
+          margin-left: 6px;
+          line-height: 22px;
+          display: inline-block;
+          vertical-align: middle;
+        }
+      </style>
       <div
         ref="showPersonGroup"
         class="ok-person-group-root"
