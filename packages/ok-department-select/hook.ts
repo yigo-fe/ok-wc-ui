@@ -281,6 +281,12 @@ export default function (props: any, okDepartmentInput: any) {
     el.removeAttribute('readonly')
     el.removeAttribute('unselectable')
     el.removeAttribute('style')
+    if (e.target !== el) {
+      setTimeout(() => {
+        el.focus()
+      }, 50)
+    }
+
     props.onFocus && props.onFocus(e)
   }
 
