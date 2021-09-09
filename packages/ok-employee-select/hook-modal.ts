@@ -6,7 +6,7 @@
  * @LastEditTime: 2021-08-16 15:05:14
  * @FilePath: /packages/ok-employee-select/hook-modal.ts
  */
-import { debounce } from 'lodash'
+import debounce from 'lodash/debounce'
 import { computed, ref, watch } from 'vue'
 
 import folder from '../assets/file-icon/icon_file-folder_colorful.svg'

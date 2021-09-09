@@ -6,7 +6,7 @@
  * @LastEditTime: 2021-07-29 19:56:08
  * @FilePath: /packages/ok-department-select/hook.ts
  */
-import { debounce } from 'lodash'
+import debounce from 'lodash/debounce'
 import { effect } from 'ok-lit'
 import { computed, h, nextTick, ref, watch } from 'vue'
 
@@ -281,6 +281,12 @@ export default function (props: any, okDepartmentInput: any) {
     el.removeAttribute('readonly')
     el.removeAttribute('unselectable')
     el.removeAttribute('style')
+    if (e.target !== el) {
+      setTimeout(() => {
+        el.focus()
+      }, 50)
+    }
+
     props.onFocus && props.onFocus(e)
   }
 

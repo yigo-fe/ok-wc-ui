@@ -96,7 +96,7 @@ defineComponent(
 
           <template #suffixIcon>
             <img v-if="isMouseenter && !disabled && value.length" :src="closeIcon" style="height:14px; width: 14px;" class="head-clear-icon" @click="clearSelected" />
-            <img v-else :src="searchIcon" style="height:14px; width: 14px;" class="head-search-icon"/>
+            <img v-else :src="searchIcon" style="height:14px; width: 14px;" class="head-search-icon" @click="handleFocus"/>
           </template>
 
           <template #notFoundContent>

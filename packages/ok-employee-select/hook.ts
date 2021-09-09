@@ -6,7 +6,7 @@
  * @LastEditTime: 2021-08-16 15:04:59
  * @FilePath: /packages/ok-employee-select/hook.ts
  */
-import { debounce } from 'lodash'
+import debounce from 'lodash/debounce'
 import { effect } from 'ok-lit'
 import { computed, h, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 
@@ -314,9 +314,11 @@ export default function (props: any, context: any, okEmployeeInput: any) {
     el.removeAttribute('readonly')
     el.removeAttribute('unselectable')
     el.removeAttribute('style')
-    // setTimeout(() => {
-    //   el.focus()
-    // }, 50)
+    if (e.target !== el) {
+      setTimeout(() => {
+        el.focus()
+      }, 50)
+    }
 
     props.onFocus && props.onFocus(e)
   }
