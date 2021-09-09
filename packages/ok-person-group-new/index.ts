@@ -76,13 +76,14 @@ defineComponent(
         },
         template: `
             <div v-if="personList.length===1" class="person-group-single-wrap">
-              <ok-person-cell 
+              <ok-person-cell
                 :personInfo="personList[0]"
                 :size="size"
                 :width="width"
                 :height="height"
                 :propsGetInfoByEmpId="propsGetInfoByEmpId"
                 :avatarStyle="avatarStyle"
+                style="display: inline-block"
               ></ok-person-cell>
               <span class="single-user-name ellipsis1">{{personList[0].employee_name}}</span>
             </div>
