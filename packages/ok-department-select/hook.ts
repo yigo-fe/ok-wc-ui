@@ -226,9 +226,10 @@ export default function (props: any, okDepartmentInput: any) {
   }
 
   // 清除， 删除全部
-  const clearSelected = () => {
+  const clearSelected = (e: FocusEvent) => {
     value.value = []
     props.onClear && props.onClear()
+    closeOpen(e)
   }
 
   // 删除单个部门
