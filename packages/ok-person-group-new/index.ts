@@ -145,6 +145,9 @@ defineComponent(
           vertical-align: middle;
         }
       </style>
+      <style>
+        ${props.inlineStyle}
+      </style>
       <div
         ref="showPersonGroup"
         class="ok-person-group-root"

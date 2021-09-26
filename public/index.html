@@ -94,7 +94,7 @@
 
       <ok-ant-person-select></ok-ant-person-select>
       <!-- <ok-person-detail></ok-person-detail> -->
-      
+
       <!-- <ok-ant-person-select></ok-ant-person-select> -->
       <!-- <ok-ant-department-search></ok-ant-department-search> -->
 
@@ -118,11 +118,11 @@
       <div style="width: 50px; height: 50px;overflow: hidden;">
         <ok-person-cell class="ok-person-cell3"></ok-person-cell>
       </div>
-      
+
       <h3>人员卡片 -slot </h3>
       <ok-person-cell class="ok-person-cell2"><ok-avatar class="ok-person-cell-slot"></ok-avatar></ok-person-cell>
       <h3>person-group </h3>
-      <ok-person-group></ok-person-group>
+      <ok-person-group inline-style=".single-user-name {color: red;}"></ok-person-group>
       <ok-person-group-new></ok-person-group-new>
       <!-- 多人员list -->
       <!-- <ok-person-group ></ok-person-group> -->
@@ -146,7 +146,7 @@
         <div style="width:500px">
           <ok-upload-table></ok-upload-table>
         </div>
-        
+
 
         <h3>明细字表上传</h3>
         <div style="display:block;">
@@ -293,7 +293,7 @@
       gender: 2,
       msg_relation_type: "WX",
       tenant_id: "test"
-    }, 
+    },
     {
       employee_id: "100005",
       employee_name: "Angel",
@@ -480,11 +480,11 @@
       okPersonCellSlot.personInfo = personInfo
       okPersonCellSlot.width = '30px'
       okPersonCellSlot.height = '30px'
-      
+
 
 
       const okPersonGroup = document.querySelector('ok-person-group')
-      okPersonGroup.personList = personList.slice(0,6)
+      okPersonGroup.personList = personList.slice(0,1)
       okPersonGroup.width = '24px'
       okPersonGroup.height = '24px'
       // okPersonGroup.personList = personList
@@ -523,10 +523,10 @@
       // okUpload.headers = {
       //   auth: '417c381769e54c878ab96fc74815c6a9'
       // }
-      
-      
-      
-      
+
+
+
+
       // okUpload.fileList = ["660ece2ca6616a55e00796a43bf57281", "3440cdcbaa4d011abc19e474d0ecd993", "13e7f0f8567e02b8e32db59179708a7d"]
 
       okUpload.multiple = true
@@ -675,7 +675,7 @@
       okDeptTree.multiple = true
       okDeptTree.level = 4
       okDeptTree.flat = true
-    
+
       // okDeptTree.hasBorderRadius = false
       // okDeptTree.bordered = false
       // okDeptTree.disabled = true
@@ -688,7 +688,7 @@
       const okEmployeeTree = document.querySelector('.ok-employee-tree')
       okEmployeeTree.value = ['LiTao', 'FuJing', 'ssssss', 'WangYiJie']
       // okEmployeeTree.value = ['ssssss']
-      // okEmployeeTree.disabled = true 
+      // okEmployeeTree.disabled = true
       okEmployeeTree.multiple = true
       // okEmployeeTree.dialogStyle = {'z-index': 7000}
       okEmployeeTree.modalZIndex = 5000
@@ -841,7 +841,7 @@
 
     function testClick3 (){
 
- 
+
 
 
 

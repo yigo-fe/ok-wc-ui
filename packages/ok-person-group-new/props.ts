@@ -70,6 +70,9 @@ const props = {
   propsGetInfoByEmpId: {
     type: Function,
   },
+  inlineStyle: {
+    type: String as unknown as PropType<string>,
+  },
 }
 
 export default props
