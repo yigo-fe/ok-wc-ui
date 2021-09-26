@@ -115,7 +115,7 @@ p{margin:0;padding:0}
     }
 
     /* 修改hover时border样式 */
-    &:not(.ant-select-disabled) .ant-select-selector:hover{border-color:@bl-brand-c;} 
+    &:not(.ant-select-disabled) .ant-select-selector:hover{border-color:@bl-brand-c;}
 
     /* disable时 selector的背景色 */
     &.ant-select-disabled.ant-select-multiple .ant-select-selector {
@@ -123,9 +123,14 @@ p{margin:0;padding:0}
     }
     /* disable时 tag的背景色 */
     &.ant-select-disabled.ant-select-selection-item {
-      color: @bl-n600;
+      color: @bl-n900;
       background: @ok-white-color;
       border-color: @ok-white-color;
+      .ant-select-selection-item-content {
+        color: @bl-n900;
+        background: @ok-white-color;
+        border-color: @ok-white-color;
+      }
     }
 
     /* dropdown 最后一个选项，去掉下边框 */
@@ -143,11 +148,16 @@ p{margin:0;padding:0}
   &.is-error .ant-select:not(.ant-select-borderless) .ant-select-selector {
     border-color: @bl-danger;
   }
-  // disabled 
+  // disabled
   .ant-select-multiple.ant-select-disabled .ant-select-selection-item {
     background: #fff;
     border-color: #fff;
-    color: @bl-n600;
+    color: @bl-n900;
+    .ant-select-selection-item-content {
+      color: @bl-n900;
+      background: @ok-white-color;
+      border-color: @ok-white-color;
+    }
   }
   // 修改tag 的maxWidth
   .ant-select-multiple .ant-select-selection-item {
@@ -166,7 +176,7 @@ p{margin:0;padding:0}
 }
 
 .ok-tree-modal {
-  
+
   .ant-modal-close-x {
     width: 50px;
     height: 50px;
@@ -194,7 +204,7 @@ p{margin:0;padding:0}
   .ant-modal-confirm-btns .ant-btn {
     border-radius: 4px;
   }
-} 
+}
 
 
 // ant-reset
@@ -514,7 +524,7 @@ p{margin:0;padding:0}
     width: calc(100% - 40px);
     margin-left: 4px;
   }
-  
+
   .file_name_wraper {
     display: flex;
     align-items: center;
@@ -554,7 +564,7 @@ p{margin:0;padding:0}
   .abort-icon path {
     fill: @bl-brand-c;
   }
-  
+
   .file-list-progress {
     display: block;
     margin-top: 6px;
@@ -648,14 +658,14 @@ p{margin:0;padding:0}
     margin-left: 5px;
   }
   &:hover{
-    border-color: @bl-brand-c; 
+    border-color: @bl-brand-c;
     color: @bl-brand-c;
     .upload-icon path {
       fill: @bl-brand-c;
     }
   }
   &:active{
-    border-color: @bl-brand-active; 
+    border-color: @bl-brand-active;
     color: @bl-brand-active;
     .upload-icon path {
       fill: @bl-brand-active;
@@ -771,7 +781,7 @@ p{margin:0;padding:0}
       border-color: @bl-brand-c;
       background-color: @bl-n200;
     }
-  
+
   }
 
   .upload-img-icon {
@@ -940,7 +950,7 @@ p{margin:0;padding:0}
     .upload-icon path {
       fill: @ok-white-color;
     }
-    
+
   }
   &.has-file {
     margin-top: 9px;
