@@ -1,14 +1,14 @@
 <template>
-  <div>
+  <div class="ok-person-detail">
     <header class="person-image">
       <div class="headCover" />
       <ok-avatar
         width="240px"
         height="170px"
-        :round="false"
-        :personInfo="personInfoCom"
-        :textStyle="textStyle"
-        :bigPic="true"
+        .round="false"
+        .personInfo="personInfoCom"
+        .textStyle="textStyle"
+        .bigPic="true"
         showMask
       ></ok-avatar>
       <span class="user-name-wraper">
@@ -104,6 +104,7 @@ export default defineComponent({
     props: defineProps,
     components: {'a-tooltip': Tooltip},
     setup(props) {
+      console.log(props.personInfo, 'personcard')
         const {
           textStyle,
           openApp,

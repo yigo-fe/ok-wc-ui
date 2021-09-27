@@ -10,19 +10,22 @@
       ></ok-avatar>
     </slot>
   </span>
-  <ok-person-card
+  <div
     ref="personCard"
-    .personInfo="personInfo"
-    .toOpenId="toOpenId"
-    .isAwaken="isAwaken"
-    .deptList="deptList"
-    .statusType="statusType"
-  ></ok-person-card>
+  >
+    <ok-person-card
+      .personInfo="personInfo"
+      .toOpenId="toOpenId"
+      .isAwaken="isAwaken"
+      .deptList="deptList"
+      .statusType="statusType"
+    ></ok-person-card>
+  </div>
 </template>
 <script lang="ts">
 import { defineComponent, watch, ref, onMounted, onUnmounted } from "vue";
-import okAvatar from "../ok-avatar/index.ce.vue";
-import okPersonCard from "../ok-person-card/index.ce.vue"
+// import okAvatar from "../ok-avatar/index.ce.vue";
+// import okPersonCard from "../ok-person-card/index.vue"
 import defineProps from './props'
 import { apiInitPersoncard } from '../services/api'
 import { hideAll } from 'tippy.js'
@@ -30,8 +33,8 @@ import { setPopover } from '../utils'
 export default defineComponent({
   props: defineProps,
   components: {
-    "ok-avatar": okAvatar,
-    "ok-person-card": okPersonCard,
+    // "ok-avatar": okAvatar,
+    // "ok-person-card": okPersonCard,
     //     // 'ok-person-ant': okPersonAnt,
   },
   setup(props, contxt) {

@@ -11,7 +11,17 @@ import { PropType } from 'vue'
 const props = {
   personInfo: {
     // 人员信息
-    type: Object as unknown as PropType<object>,
+    type:Object as PropType<{
+      msg_relation_type: string,
+      department_name: string,
+      employee_name: string,
+      name: string,
+      avatar: string,
+      avatar_url: string,
+      head_image: string,
+      avatar_small: string,
+      gender: number
+    }>,
     default() {
       return {}
     },
