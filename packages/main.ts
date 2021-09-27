@@ -1,4 +1,5 @@
 import { defineCustomElement } from 'vue'
+import './assets/styles/common.less'
 import okAvatar from './ok-avatar/index.ce.vue'
 import okPersonCard from './ok-person-card/index.ce.vue'
 import okPersonCell from './ok-person-cell/index.ce.vue'

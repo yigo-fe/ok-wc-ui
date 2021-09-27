@@ -35,6 +35,32 @@
       gender: 1,
       msg_relation_type: "WX",
     },
+    {
+      avatar_url: "https://wework.qpic.cn/bizmail/sM006UpbJWqyf5UJrcZ8FibaLTBEPpmn6U2bKFXMOTal6vXDR8cypCQ/0",
+      department_id: "30",
+      department_name: "前端部",
+      email: "chengxudong@byteluck.com",
+      employee_card: null,
+      employee_en_name: "程旭东",
+      employee_id: "ChengXuDong",
+      employee_name: "程旭东",
+      external_user: false,
+      gender: 1,
+      msg_relation_type: "WX",
+    },
+    {
+      avatar_url: "https://wework.qpic.cn/bizmail/sM006UpbJWqyf5UJrcZ8FibaLTBEPpmn6U2bKFXMOTal6vXDR8cypCQ/0",
+      department_id: "30",
+      department_name: "前端部",
+      email: "chengxudong@byteluck.com",
+      employee_card: null,
+      employee_en_name: "程旭东",
+      employee_id: "ChengXuDong",
+      employee_name: "程旭东",
+      external_user: false,
+      gender: 1,
+      msg_relation_type: "WX",
+    },
   ]
 
 </script>

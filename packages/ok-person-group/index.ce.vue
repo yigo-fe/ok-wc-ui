@@ -70,7 +70,6 @@ export default defineComponent({
   props: defineProps,
   components: {
     "ok-avatar-group": okAvatarGroup,
-    // "ok-person-cell": ,
     "a-popover": Popover,
   },
   setup(props) {
@@ -135,3 +134,17 @@ export default defineComponent({
   },
 });
 </script>
+<style lang="less">
+  .ok-person-group-wrap {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    font-size: 14px;
+  }
+  .ok-person-group-wrap .avatar-list {
+    float: left;
+  }
+  .ok-person-group-wrap .avatar-list + .avatar-list {
+    margin-left: -8px;
+  }
+</style>

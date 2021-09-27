@@ -51,7 +51,12 @@ export default function (props: ExtractPropTypes<typeof defineProps>) {
     return typeof data === 'object' ? data[props.i18n] : data
   })
   // person-group组 更多数字样式
-  const count = computed(() => props.count)
+  const count = computed(() => {
+    if (typeof props.count === 'string') {
+      return parseInt(props.count) ?? 0
+    }
+    return props.count
+  })
 
   const mask = 'var(--bl-n250-c, #E8EAED)'
 

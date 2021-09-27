@@ -1,21 +1,22 @@
 <template>
-  <ok-avatar
-    v-for="(item, index) in showList"
-    :key="item.employee_id"
-    class="avatar-list"
-    style="width: auto; height: auto"
-    :avatarStyle="avatarStyle"
-    :personInfo="item"
-    :size="size"
-    :width="width"
-    :height="height"
-    :count="index === 3 ? count : 0"
-    :textStyle="index === 3 ? textStyle : {}"
-  ></ok-avatar>
+  <div class="ok-person-group-wrap">
+    <ok-avatar
+      v-for="(item, index) in showList"
+      :key="item.employee_id"
+      class="avatar-list"
+      style="width: auto; height: auto"
+      .avatarStyle="avatarStyle"
+      .personInfo="item"
+      .size="size"
+      .width="width"
+      .height="height"
+      .count="index == 3 ? count : 0"
+      .textStyle="index == 3 ? textStyle : {}"
+    ></ok-avatar>
+  </div>
 </template>
 <script lang="ts">
 import { computed, defineComponent, PropType } from "vue"
-import okAvatar from '../ok-avatar/index.ce.vue'
 export default defineComponent({
   props: {
     size: {
@@ -39,9 +40,6 @@ export default defineComponent({
         return [];
       },
     },
-  },
-  components: {
-      'ok-avatar': okAvatar,
   },
   setup(props) {
     const size = computed(() => props.size);

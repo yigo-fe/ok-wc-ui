@@ -11,7 +11,7 @@ import { PropType } from 'vue'
 const props = {
   personInfo: {
     // 人员信息
-    type: Object as PropType<{ 
+    type: Object as PropType<{
       employee_name: string,
       name: string,
       avatar: string,
@@ -85,7 +85,7 @@ const props = {
     },
   },
   count: {
-    type: Number as PropType<number>,
+    type: Number as PropType<number | string>,
   },
   bigPic: {
     type: Boolean as PropType<boolean>,
