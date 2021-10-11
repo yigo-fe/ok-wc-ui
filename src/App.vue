@@ -6,6 +6,10 @@
   <ok-person-cell .person-info="personList2[1]"></ok-person-cell>
   <h3>ok-person-group</h3>
   <ok-person-group .personList="personList2"></ok-person-group>
+  <h3>ok-employee-select</h3>
+  <ok-employee-select multiple="true" mode="tree"></ok-employee-select>
+  <h3>ok-department-select</h3>
+  <ok-department-select multiple="true" mode="tree"></ok-department-select>
 </template>
 <script setup lang="ts">
   const personList2 = [

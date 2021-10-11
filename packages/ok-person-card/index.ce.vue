@@ -104,7 +104,6 @@ export default defineComponent({
     props: defineProps,
     components: {'a-tooltip': Tooltip},
     setup(props) {
-      console.log(props.personInfo, 'personcard')
         const {
           textStyle,
           openApp,
