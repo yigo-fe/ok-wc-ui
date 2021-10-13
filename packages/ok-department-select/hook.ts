@@ -242,7 +242,7 @@ export default function (props: any, okDepartmentInput: any) {
   }
 
 
-  const maxTagPlaceholder = async () => {
+  const maxTagPlaceholder = () => {
     return h(okDepartmentMore, {
       exceedList: exceedList.value,
       disabled: disabled.value,

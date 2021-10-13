@@ -16,15 +16,15 @@
 
 <script lang="ts">
 
-import { Popover } from 'ant-design-vue'
-import { defineComponent, ref, computed, PropType } from 'vue'
+  import { Popover } from 'ant-design-vue'
+  import { defineComponent, ref, computed, PropType } from 'vue'
 
-import close from '../assets/images/closed.svg'
-import { ANTD_VUE_CDN } from '../path.config'
+  import close from '../assets/images/closed.svg'
+  import { ANTD_VUE_CDN } from '../path.config'
 
 
-export default defineComponent({
-  props: {
+  export default defineComponent({
+    props: {
       exceedList: {
         type: Array as unknown as PropType<[]>,
       },
