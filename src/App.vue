@@ -10,6 +10,36 @@
   <ok-employee-select multiple="true" mode="tree"></ok-employee-select>
   <h3>ok-department-select</h3>
   <ok-department-select multiple="true" mode="tree"></ok-department-select>
+  <h3>ok-tooltip</h3>
+  <div style="width: 20px; display: inline-block">
+    <ok-tooltip .title="'就难分难舍防溺水你发你水电费那棵树的南方可能是的分开那棵树的烦恼可能是的反馈'">
+      <span>复制</span>
+    </ok-tooltip>
+  </div>
+  <div class="item">
+    <h3>ok-upload-drag</h3>
+    <ok-upload-drag></ok-upload-drag>
+  </div>
+ <div class="item">
+   <h3>ok-file-icon</h3>
+   <ok-file-icon></ok-file-icon>
+ </div>
+  <div class="item">
+    <h3>ok-upload-subtable-file</h3>
+    <ok-upload-subtable-file></ok-upload-subtable-file>
+  </div>
+  <div class="item">
+    <h3>ok-upload-table</h3>
+    <ok-upload-table></ok-upload-table>
+  </div>
+  <div class="item">
+    <h3>ok-upload-subtable-image</h3>
+    <ok-upload-subtable-image></ok-upload-subtable-image>
+  </div>
+  <div class="item">
+    <h3>ok-upload-image</h3>
+    <ok-upload-image></ok-upload-image>
+  </div>
 </template>
 <script setup lang="ts">
   const personList2 = [
@@ -77,4 +107,9 @@
   color: #2c3e50;
   margin-top: 60px;
 }
+  .item {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    border-bottom: 1px solid red
+  }
 </style>

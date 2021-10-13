@@ -8,7 +8,7 @@
  */
 import debounce from 'lodash/debounce'
 import { computed, h, nextTick, ref, watch, watchEffect } from 'vue'
-
+import okDepartmentMore from './ok-department-more.vue'
 import close from '../assets/images/closed.svg'
 import search from '../assets/images/search.svg'
 import { apiInit } from '../services/api'
@@ -243,7 +243,7 @@ export default function (props: any, okDepartmentInput: any) {
 
 
   const maxTagPlaceholder = async () => {
-    return h('ok-department-more', {
+    return h(okDepartmentMore, {
       exceedList: exceedList.value,
       disabled: disabled.value,
       onDelete: exceedDelete,

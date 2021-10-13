@@ -6,6 +6,7 @@ import close from '../assets/images/closed.svg'
 import search from '../assets/images/search.svg'
 import { apiInit } from '../services/api'
 import { isSameArray } from '../utils/index'
+import okEmployeeMore from './ok-employee-more.vue'
 export default function (props: any, okEmployeeInput: any) {
   const testVal = ref([])
   watchEffect(() => {
@@ -202,7 +203,7 @@ export default function (props: any, okEmployeeInput: any) {
       }
       // infoMap 中取值， 避免频繁请求接口数据
       exceedList.value = exceedIds.map(v => infoMap.value[v]).filter(v => v)
-      console.log(exceedList.value, 'exceedList')
+      console.log(exceedList.value, '设置exceedList')
     }
   }
   const showEmployeeSelect = ref()
@@ -292,8 +293,7 @@ export default function (props: any, okEmployeeInput: any) {
 
   // 渲染更多弹窗
   const maxTagPlaceholder = () => {
-
-    return h('ok-employee-more', {
+    return h(okEmployeeMore, {
       exceedList: exceedList.value,
       disabled: disabled.value,
       onDelete: exceedDelete,

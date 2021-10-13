@@ -7,8 +7,6 @@
  * @LastEditTime: 2021-07-29 19:56:24
  * @FilePath: /packages/ok-department-select/department-props.ts
  */
-import { PropType } from 'ok-lit'
-
 export type ModeType = 'tree' | 'default'
 
 const propsOptions = {
