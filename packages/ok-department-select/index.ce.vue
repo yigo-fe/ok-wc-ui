@@ -1,5 +1,5 @@
 <template>
-  <link rel="stylesheet" href="https://fe-resource.baiteda.com/lib/byteluck/byteluck.theme.blue.ant.css?t=1632896784891%22">
+  <link rel="stylesheet" href="https://fe-resource.baiteda.com/libs/antdv-2.1.6/antd.min.css">
   <div ref="showDeptSelect"
        :class="{
         'ok-department-select-wraper': true,
