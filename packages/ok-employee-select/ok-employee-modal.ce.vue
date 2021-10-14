@@ -54,7 +54,7 @@
                    v-for="employee in employeeList"
                    :key="employee.employee_id"
                    @click="handleEmployeeSelect(employee.employee_id)">
-                  <ok-person-cell :personInfo="employee"></ok-person-cell>
+                  <ok-person-cell .personInfo="employee"></ok-person-cell>
                   <span class="employee-name">{{employee.employee_name}}</span>
                   <span class="email ellipsis1">{{employee.email}}</span>
                   <img v-if="isSelected(employee.employee_id)" :src="checkedIcon" class="checked-icon" />
@@ -71,7 +71,7 @@
                 v-for="employee in searchResultList"
                 :key="employee.employee_id"
                 @click="handleEmployeeSelect(employee.employee_id)">
-                <ok-person-cell :personInfo="employee"></ok-person-cell>
+                <ok-person-cell .personInfo="employee"></ok-person-cell>
                 <span class="employee-name">{{employee.employee_name}}</span>
                 <span class="email ellipsis1">{{employee.email}}</span>
                 <img v-if="isSelected(employee.employee_id)" :src="checkedIcon" class="checked-icon" />
@@ -92,7 +92,7 @@
                 v-for="employee in selectedList"
                 :key="employee.employee_id"
               >
-                <ok-person-cell :personInfo="employee"></ok-person-cell>
+                <ok-person-cell .personInfo="employee"></ok-person-cell>
                 <span class="employee-name ellipsis1">{{employee.employee_name}}</span>
                 <span class="email ellipsis1">{{employee.email}}</span>
                 <span class="close-icon" @click="cancelSelect(employee.employee_id)">
