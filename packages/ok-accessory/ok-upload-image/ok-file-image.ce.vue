@@ -62,7 +62,7 @@
       </div>
 
       <img
-        v-if="item?.response && item?.response?.data[0]?.thumb_url"
+        v-if="item.response && item.response.data[0].thumb_url"
         class="ok-upload-list__item-thumbnail"
         :src="item.response.data[0].thumb_url"
       />

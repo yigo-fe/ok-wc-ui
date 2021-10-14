@@ -62,7 +62,7 @@ export default function (props: any) {
   const searchResultList = ref<any[]>([])
   // 已选人员信息集合
   const selectedList = computed(() =>
-    tempSelected.value.map(v => infoMapInner.value[v]).filter(v => v)
+    tempSelected.value.map((v: any) => infoMapInner.value[v]).filter((v: any) => v)
   )
 
   // 入口： 获取根目录

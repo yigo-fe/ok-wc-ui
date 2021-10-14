@@ -69,9 +69,9 @@
     ref="inputRef"
     class="ok-upload__input"
     type="file"
-    .name="name"
-    .multiple="multiple"
-    .accept="accept"
+    :name="name"
+    :multiple="multiple"
+    :accept="accept"
     @change="handleChange"
   />
   </div>

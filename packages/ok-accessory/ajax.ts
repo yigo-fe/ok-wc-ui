@@ -97,7 +97,7 @@ export default function upload(option: OkUploadRequestOptions) {
     xhr.withCredentials = true
   }
 
-  const headers = option.headers || {}
+  const headers: Record<any, any> = option.headers || {}
 
   for (const item in headers) {
     // eslint-disable-next-line no-prototype-builtins

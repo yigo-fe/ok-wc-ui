@@ -52,7 +52,7 @@ type UpdateFile = {
   raw?: OkFile
 }
 
-export default function (props, context, config) {
+export default function (props: any, context: any, config: any) {
   const reqs = ref({})
   let fileId = 0
   const fileLists = ref([] as any)
@@ -77,7 +77,7 @@ export default function (props, context, config) {
   const isUploading = ref(false)
 
   // 所有已上传文件 file_id 和 file 的map
-  const fileMap = reactive({})
+  const fileMap = reactive<any>({})
 
   /**
    *  文件上传前数据处理：判断limit, multiple; 添加UID; beforeUpload 钩子处理
@@ -129,7 +129,7 @@ export default function (props, context, config) {
    * 选择文件后添加文件到传输列表
    * @param file 要添加到传输列表的文件
    */
-  const handleFileList = file => {
+  const handleFileList = (file: any) => {
     fileLists.value.push({
       name: file.name,
       percentage: 0,
@@ -179,7 +179,7 @@ export default function (props, context, config) {
           props.formatUploadData && props.formatUploadData(res)
           // 处理上传成功数据
           handleSuccess(res, rawFile)
-          delete reqs.value[uid]
+          delete (reqs.value as any)[uid]
         } else {
           handleError(res, rawFile)
         }
@@ -190,17 +190,17 @@ export default function (props, context, config) {
         // delete reqs.value[uid]
       },
     }
-    const req = props.httpRequest(options)
-    reqs.value[uid] = req
+    const req: any = props.httpRequest(options);
+    (reqs.value as any)[uid] = req
     if (req instanceof Promise) {
       req.then(options.onSuccess, options.onError)
     }
   }
 
   // 从上传列表中删除文件
-  const removeFileList = file => {
+  const removeFileList = (file: any) => {
     const uid = Array.isArray(file) ? file[0].uid : file.uid
-    let idx = fileLists.value.findIndex(v => v.uid === uid)
+    let idx = fileLists.value.findIndex((v: any) => v.uid === uid)
     if (idx === -1) {
       // console.warn('文件不存在')
       return
@@ -210,9 +210,9 @@ export default function (props, context, config) {
     handleOnChange(file)
   }
   // 终止上传
-  const handleAbort = data => {
+  const handleAbort = (data: any) => {
     const file = data.detail
-    const _reqs = reqs.value
+    const _reqs: any = reqs.value
     if (file) {
       const uid = file.uid
       if (_reqs[uid]) {
@@ -235,7 +235,7 @@ export default function (props, context, config) {
       props.onProgress({ e, file, fileLists: fileLists.value })
   }
 
-  const handleSuccess = (res, file: OkFile) => {
+  const handleSuccess = (res: any, file: OkFile) => {
     // 收集已上传文件
     const uploadedFile = res?.data?.[0]
     const file_id = uploadedFile?.file_id
@@ -256,7 +256,7 @@ export default function (props, context, config) {
     isUploading.value = idx > -1
   }
 
-  const handleError = (err, file: OkFile) => {
+  const handleError = (err: any, file: OkFile) => {
     // 更新状态
     updateStatus({ status: 'fail' }, file)
     // 从列表中删除 TODO: 具体交互待产品确认
@@ -268,11 +268,11 @@ export default function (props, context, config) {
       props.onError({ error: err, file, fileLists: fileLists.value })
   }
 
-  const handleExceed = file => {
+  const handleExceed = (file: FileList) => {
     props.onExceed && props.onExceed({ file, fileLists: fileLists.value })
   }
 
-  const handleOnChange = file => {
+  const handleOnChange = (file: File) => {
     props.onChange && props.onChange({ file, fileLists: fileLists.value })
   }
 
@@ -285,8 +285,8 @@ export default function (props, context, config) {
    * 删除文件
    * @param data emit事件
    */
-  const handleDetele = data => {
-    let idx = fileLists.value.findIndex(v => v.uid === data.detail?.[0]?.uid)
+  const handleDetele = (data: any) => {
+    let idx = fileLists.value.findIndex((v: any) => v.uid === data.detail?.[0]?.uid)
     if (idx === -1) {
       // console.warn('文件不存在')
       return
@@ -317,8 +317,8 @@ export default function (props, context, config) {
    * 下载
    * @param data
    */
-  const handleDownload = data => {
-    let file = fileLists.value.find(v => v.uid === data.detail?.[0]?.uid)
+  const handleDownload = (data: any) => {
+    let file = fileLists.value.find((v: any) => v.uid === data.detail?.[0]?.uid)
     // 自定义下载
     if (props.customDownload) {
       props.customDownload(file)
@@ -341,18 +341,18 @@ export default function (props, context, config) {
    * @param data 待更新的字段
    * @param file 待更新的文件
    */
-  const updateStatus = (data: UpdateFile, file) => {
+  const updateStatus = (data: any, file: any) => {
     const uid = Array.isArray(file) ? file[0].uid : file.uid
-    let curFile = fileLists.value.find(v => v.uid === uid)
+    let curFile = fileLists.value.find((v: any) => v.uid === uid)
     if (!curFile) return
-    Object.keys(data).forEach(key => {
+    Object.keys(data).forEach((key: any) => {
       curFile[key] = data[key]
     })
   }
 
   // 仅限于fileList 回显
   const displayFileList = (defaultFileList: any) => {
-    defaultFileList.forEach(file => {
+    defaultFileList.forEach((file: any) => {
       const file_id = file.file_id
       // 更新fileList展示
       fileLists.value.push({
@@ -390,7 +390,7 @@ export default function (props, context, config) {
         .map((v: any) => v.response?.data?.[0]?.file_id)
         .filter((v: any) => v)
 
-      same = l1 ? propsValue.value.every(v => fileIds.indexOf(v) > -1) : true
+      same = l1 ? propsValue.value.every((v: any) => fileIds.indexOf(v) > -1) : true
     }
     return same
   }

@@ -298,7 +298,7 @@ export default function (props: any, okDepartmentInput: any) {
     let same = false
     if (l1 === l2) {
       same = l1
-        ? propsValue.value.every(v => value.value.indexOf(v) > -1)
+        ? propsValue.value.every((v: any) => value.value.indexOf(v) > -1)
         : true
     }
     return same

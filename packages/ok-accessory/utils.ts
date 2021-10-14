@@ -8,7 +8,7 @@
  */
 
 // 根据文件名称获取文件类型（后缀名）
-const getFileType = filePath => {
+const getFileType = (filePath: string) => {
   if (!filePath) return
   var startIndex = filePath.lastIndexOf('.')
   if (startIndex != -1)

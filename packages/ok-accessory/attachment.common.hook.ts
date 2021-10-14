@@ -12,9 +12,10 @@ import { i18n } from '../locales'
 import { apiInit } from '../services/api'
 import useUploadHandler from './upload.base.hook'
 
-export default function (props, context) {
+export default function (props: any, context: any) {
   const api = apiInit()
   // 删除文件
+  // @ts-ignore
   const remove = async ({ file, fileLists, index }) => {
     const fileId = file.response?.data[0].file_id
 
@@ -43,8 +44,8 @@ export default function (props, context) {
    * 预览: 文件
    * @param data
    */
-  const handlePreview = data => {
-    let file = fileLists.value.find(v => v.uid === data.detail[0].file.uid)
+  const handlePreview = (data: any) => {
+    let file = fileLists.value.find((v: any) => v.uid === data.detail[0].file.uid)
     // 自定义预览
     if (props.customPreview) {
       props.customPreview(file)

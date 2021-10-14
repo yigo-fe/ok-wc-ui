@@ -8,7 +8,7 @@
  * @FilePath: /packages/ok-accessory/upload.props.ts
  */
 
-import { PropType } from 'ok-lit'
+import { PropType } from 'vue'
 
 import ajax from './ajax'
 import type { ListType, OkFile } from './upload.type'
