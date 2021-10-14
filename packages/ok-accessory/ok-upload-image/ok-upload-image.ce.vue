@@ -1,11 +1,10 @@
 <template>
-  <link rel="stylesheet" href="https://fe-resource.baiteda.com/lib/byteluck/byteluck.theme.blue.ant.css?t=1632896784891%22">
   <div class="ok-upload-imge-root" ref="showUploadImage">
     <ok-file-image
       class="ok-file-image-list"
       @preview="handlePreview"
       @delete="handleDetele"
-      @download="handleDownloa"
+      @download="handleDownload"
       @abort="handleAbort"
       @remove="handleRemoveFileList"
       @reupload="handleReupload"

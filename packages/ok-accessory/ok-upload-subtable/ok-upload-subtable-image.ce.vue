@@ -1,6 +1,4 @@
 <template>
-  <link rel="stylesheet" href="https://fe-resource.baiteda.com/lib/byteluck/byteluck.theme.blue.ant.css?t=1632896784891%22">
-
   <ok-file-list
     @preview="handlePreview"
     @delete="handleDetele"

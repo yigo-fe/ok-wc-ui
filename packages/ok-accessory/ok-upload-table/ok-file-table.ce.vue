@@ -25,7 +25,7 @@
       </template>
       <template #creator="{ record }">
         <div v-if="record.response" style="display:flex; align-items:center;">
-          <ok-person-cell :personInfo="record.response.data[0].creator" width="22px" height="22px"></ok-person-cell>
+          <ok-person-cell .personInfo="record.response.data[0].creator" width="22px" height="22px"></ok-person-cell>
           <span style="margin-left:6px;">{{record.response.data[0].creator.employee_name}}</span>
         </div>
       </template>

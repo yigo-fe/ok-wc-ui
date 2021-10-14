@@ -199,7 +199,8 @@ export default function (props, context, config) {
 
   // 从上传列表中删除文件
   const removeFileList = file => {
-    let idx = fileLists.value.findIndex(v => v.uid === file.uid)
+    const uid = Array.isArray(file) ? file[0].uid : file.uid
+    let idx = fileLists.value.findIndex(v => v.uid === uid)
     if (idx === -1) {
       // console.warn('文件不存在')
       return
@@ -341,7 +342,8 @@ export default function (props, context, config) {
    * @param file 待更新的文件
    */
   const updateStatus = (data: UpdateFile, file) => {
-    let curFile = fileLists.value.find(v => v.uid === file.uid)
+    const uid = Array.isArray(file) ? file[0].uid : file.uid
+    let curFile = fileLists.value.find(v => v.uid === uid)
     if (!curFile) return
     Object.keys(data).forEach(key => {
       curFile[key] = data[key]

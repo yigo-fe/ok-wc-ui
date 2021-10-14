@@ -1,5 +1,4 @@
 <template>
-  <link rel="stylesheet" href="https://fe-resource.baiteda.com/lib/byteluck/byteluck.theme.blue.ant.css?t=1632896784891%22">
   <span ref="showFileIcon" class="ok-file-icon ok-file-icon-root">
     <img :src='fileIcon' :style="{height: height, width: 'auto', 'vertical-align':'middle'}" class="ok-file-icon-img" :class="{'hover-bigger': hoverBigger}" />
   </span>
