@@ -16,7 +16,7 @@
 
   <div v-if="!hideUploader" class="ok-upload ok-upload--subtable" @click="handleClick">
     <slot>
-      <div :class="upload-btn-box-subtable">
+      <div class="upload-btn-box-subtable">
         <div
           :class="{
             'upload-subtable-inner': true,
@@ -51,9 +51,9 @@
       ref="inputRef"
       class="ok-upload__input"
       type="file"
-      .name="name"
-      .multiple="multiple"
-      .accept="accept"
+      :name="name"
+      :multiple="multiple"
+      :accept="accept"
       @change="handleChange"
     />
   </div>
@@ -113,7 +113,7 @@
        * 点击上传选中文件
        * @param e 选中的文件
        */
-      const handleChange = (e: DragEvent) => {
+      const handleChange = (e: any) => {
         const files = (e.target as HTMLInputElement).files
         if (!files) return
         uploadFiles(files)

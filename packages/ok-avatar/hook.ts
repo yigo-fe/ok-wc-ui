@@ -60,6 +60,22 @@ export default function (props: ExtractPropTypes<typeof defineProps>) {
 
   const mask = 'var(--bl-n250-c, #E8EAED)'
 
+  // 样式格式化
+  const formatStyle = (style:any) => {
+    if(typeof style.value.height === 'number') {
+      style.value = {
+        ...style.value,
+        height: style.value.height + 'px'
+      }
+    }
+    if(typeof style.value.width === 'number') {
+      style.value = {
+        ...style.value,
+        width: style.value.width + 'px'
+      }
+    }
+  }
+
   // 获取用户图像
   const getAvatarStyle = () => {
     // 处理header
@@ -91,7 +107,7 @@ export default function (props: ExtractPropTypes<typeof defineProps>) {
     props.width && (avatarWapperAll.value.width = props.width)
     props.height && (avatarWapperAll.value.height = props.height)
     avatarWapperAll.value = { ...avatarWapperAll.value, ...props.avatarWapper }
-
+    formatStyle(avatarWapperAll)
     if (round.value && props.width) {
       scale = Number(props.width.replace('px', '')) / 32
     }
@@ -108,6 +124,7 @@ export default function (props: ExtractPropTypes<typeof defineProps>) {
     }
 
     avatarStyleAll.value = { ...avatarStyleAll.value, ...props.avatarStyle }
+    formatStyle(avatarStyleAll)
 
     // 处理avatar
     let url =

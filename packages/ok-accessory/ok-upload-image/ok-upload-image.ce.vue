@@ -24,8 +24,7 @@
         'ok-upload': true,
         'ok-upload-image-box': true,
         disabled: disabled,
-        'has-margin': fileLists &&
-        fileLists.length % maxImgCount.value === 0,
+        'has-margin': fileLists && fileLists.length % maxImgCount === 0
     }"
     style="width: auto;"
     @click="handleClick"
@@ -135,7 +134,7 @@
        * 列表上传选中文件
        * @param e 选中的文件
        */
-      const handleChange = (e: DragEvent) => {
+      const handleChange = (e: any) => {
         const files = (e.target as HTMLInputElement).files
         if (!files) return
         uploadFiles(files)

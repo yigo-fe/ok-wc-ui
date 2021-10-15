@@ -50,7 +50,7 @@ export default function (props: any) {
   // 查询参数 - 人员搜索关键字
   let queryKey = ref('')
   // 组织架构树 - 部门列表
-  const deptList = ref<string[]>([])
+  const deptList = ref<any[]>([])
   // 组织架构树 - 人员列表
   const employeeList = ref<any>([])
   // 搜索结果 - 人员列表

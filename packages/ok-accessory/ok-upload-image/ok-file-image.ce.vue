@@ -4,13 +4,13 @@
       v-for="(item, index) in fileList"
       :key="index"
       :class="{
-    'ok-upload-list__item': true,
-    disabled: disabled,
-    last: (index + 1) % rowNumber === 0,
-    'is-uploading': item.status === 'uploading',
-    'is-success': item.status === 'success',
-    'is-fail': item.status === 'fail',
-    }"
+        'ok-upload-list__item': true,
+        disabled: disabled,
+        last: (index + 1) % rowNumber === 0,
+        'is-uploading': item.status === 'uploading',
+        'is-success': item.status === 'success',
+        'is-fail': item.status === 'fail'
+       }"
       :style="thumbStyle"
     >
       <!--进入条-->
@@ -50,8 +50,8 @@
                 'ok-image-process-msg': true,
                 fail: item.status === 'fail',
               }"
-            >{{item.status === 'uploading'
-            ? percentage : uploadFailText}}</span
+            >
+              {{item.status === 'uploading' ? parseInt((item.percentage || 0).toFixed(), 10) : uploadFailText}}</span
             >
           <ok-progress
             class="image-progress"
@@ -211,7 +211,7 @@
   export default defineComponent({
     props: {
       fileList: {
-        type: Array as unknown as PropType<UploadFile[]>,
+        type: Array as unknown as PropType<any[]>,
         default: () => [] as UploadFile[],
       },
       listType: {
@@ -239,6 +239,7 @@
       },
       rowNumber: {
         type: Number as unknown as PropType<number>,
+        default: 0
       },
     },
     emits: ['preview', 'download', 'reupload', 'uploading', 'abort', 'remove', 'fail', 'delete'],

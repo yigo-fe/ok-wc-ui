@@ -23,7 +23,7 @@
   export default defineComponent({
     props: {
       exceedList: {
-        type: Array as unknown as PropType<[]>,
+        type: Array as unknown as PropType<any[]>,
       },
       disabled: {
         type: Boolean as unknown as PropType<boolean>,

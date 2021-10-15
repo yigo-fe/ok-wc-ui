@@ -135,6 +135,7 @@ export default defineComponent({
 })
 </script>
 <style lang="less">
+  @import '../assets/styles/common.less';
 .ok-person-detail{width:240px;overflow:hidden;font-style:normal;cursor:default;background:#fff;border-radius:14px;-webkit-box-shadow:0 2px 8px rgba(0,0,0,.12);box-shadow:0 2px 8px rgba(0,0,0,.12)}
 .ok-person-detail .person-image{position:relative;width:100%;height:170px}
 .ok-person-detail .person-image .person-name{position:absolute;bottom:24px;left:16px;font-size:16px;font-weight:600;line-height:24px;color:#fff;word-wrap:break-word;white-space:pre-wrap;max-width:calc(100% - 22px);margin-right:6px}

@@ -172,7 +172,7 @@ export default defineComponent({
      * 点击上传选中文件
      * @param e 选中的文件
      */
-    const handleChange = (e: DragEvent) => {
+    const handleChange = (e: any) => {
       const files = (e.target as HTMLInputElement).files
       if (!files) return
       uploadFiles(files)
@@ -183,7 +183,7 @@ export default defineComponent({
      *
      */
     const dragover = ref(false)
-    const onDrop = (e: DragEvent) => {
+    const onDrop = (e: any) => {
       e.preventDefault()
       if (disabled.value) return
       let files = (e.dataTransfer as DataTransfer).files
@@ -194,12 +194,12 @@ export default defineComponent({
       uploadFiles(files)
     }
 
-    const onDragover = (e: DragEvent) => {
+    const onDragover = (e: any) => {
       e.preventDefault()
       if (!disabled.value) dragover.value = true
     }
 
-    const onDragleave = (e: DragEvent) => {
+    const onDragleave = (e: any) => {
       e.preventDefault()
       dragover.value = false
     }

@@ -1,11 +1,10 @@
 <template>
-    <div>
-        <ok-person-tippy
-          :personInfo="personInfo"
-          :i18n="i18n"
-          :avatarClass="avatarClass"
-          :size="size"
-          :width="width"
+    <div><ok-person-tippy
+          .personInfo="personInfo"
+          .i18n="i18n"
+          .avatarClass="avatarClass"
+          .size="size"
+          .width="width"
           .height="height"
           .round="round"
           .background="background"
@@ -14,8 +13,7 @@
           .textStyle="textStyle"
           .hidePopper="hidePopper"
           .propsGetInfoByEmpId="propsGetInfoByEmpId"
-          ><slot>
-            <ok-avatar
+          ><slot><ok-avatar
               .personInfo="personInfo"
               .size="size"
               .width="width"
@@ -28,14 +26,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { isWindowsWxchat } from '../ok-person-card/broswer'
-import okPersonTippy from './popover-tippy.ce.vue'
 // import okPersonAnt from './popover-ant'
 
 import defineProps from './props'
 export default defineComponent({
     props: defineProps,
     components: {
-        'ok-person-tippy': okPersonTippy,
     },
     setup(props) {
         const showAntPopover = isWindowsWxchat()

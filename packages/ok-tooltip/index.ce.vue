@@ -33,7 +33,7 @@
 <template>
  <div>
    <link rel="stylesheet" href="https://fe-resource.baiteda.com/libs/antdv-2.1.6/antd.min.css">
-   <div :id="id">
+   <div>
      <a-tooltip
        :title="title"
        :visible="visible"

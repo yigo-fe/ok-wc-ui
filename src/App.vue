@@ -5,7 +5,7 @@
   <h3>ok-person-cell</h3>
   <ok-person-cell .person-info="personList2[1]"></ok-person-cell>
   <h3>ok-person-group</h3>
-  <ok-person-group .personList="personList2"></ok-person-group>
+<!--  <ok-person-group .personList="personList2.slice(0, 1)"></ok-person-group>-->
   <h3>ok-employee-select</h3>
   <ok-employee-select multiple="true" mode="tree"></ok-employee-select>
   <h3>ok-department-select</h3>
@@ -42,7 +42,7 @@
   </div>
 </template>
 <script setup lang="ts">
-  const personList2 = [
+  const personList2:any = [
     {
       avatar_url: "https://wework.qpic.cn/bizmail/cMLFZrYGchIibX5icVTGibh7b2oELMc9MsJYDiaCNNmTYREjGVRjlsq3mA/0",
       department_id: "30",
