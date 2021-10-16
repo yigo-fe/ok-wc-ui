@@ -13,7 +13,8 @@
           .textStyle="textStyle"
           .hidePopper="hidePopper"
           .propsGetInfoByEmpId="propsGetInfoByEmpId"
-          ><slot><ok-avatar
+          ><slot>
+            <ok-avatar
               .personInfo="personInfo"
               .size="size"
               .width="width"

@@ -135,6 +135,7 @@ export default defineComponent({
 });
 </script>
 <style lang="less">
+
   .ok-person-group-wrap {
     display: flex;
     align-items: center;

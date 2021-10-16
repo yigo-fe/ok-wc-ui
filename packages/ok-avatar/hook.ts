@@ -6,7 +6,7 @@
  * @LastEditTime: 2021-08-19 15:00:31
  * @FilePath: /packages/ok-avatar/hook.ts
  */
-import { computed, effect, ref, ExtractPropTypes } from 'vue'
+import { computed, watch, ref, ExtractPropTypes } from 'vue'
 import defineProps from './props'
 
 export default function (props: ExtractPropTypes<typeof defineProps>) {
@@ -109,7 +109,8 @@ export default function (props: ExtractPropTypes<typeof defineProps>) {
     avatarWapperAll.value = { ...avatarWapperAll.value, ...props.avatarWapper }
     formatStyle(avatarWapperAll)
     if (round.value && props.width) {
-      scale = Number(props.width.replace('px', '')) / 32
+      const width = typeof props.width === 'string' ? props.width.replace('px', '') : props.width
+      scale = Number(width) / 32
     }
 
     if (!round.value) {
@@ -147,7 +148,7 @@ export default function (props: ExtractPropTypes<typeof defineProps>) {
         avatarStyleAll.value['background'] = count.value
           ? `${mask}`
           : `${bg_url}`
-
+        console.log(bg_url, avatarStyleAll.value)
         if (count.value) {
           // 处理文字样式
           avatarTextStyle.value['font-size'] = '12px'
@@ -215,9 +216,12 @@ export default function (props: ExtractPropTypes<typeof defineProps>) {
     return originName.substr(-2)
   }
 
-  effect(() => {
+  watch(()=> props,() => {
     if (props.personInfo?.employee_name || props.personInfo?.name)
       getAvatarStyle()
+  }, {
+    immediate: true,
+    deep: true
   })
 
   return {
