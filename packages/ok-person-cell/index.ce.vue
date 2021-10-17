@@ -13,6 +13,7 @@
           .textStyle="textStyle"
           .hidePopper="hidePopper"
           .propsGetInfoByEmpId="propsGetInfoByEmpId"
+          style="line-height: 1"
           ><slot>
             <ok-avatar
               .personInfo="personInfo"
