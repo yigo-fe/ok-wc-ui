@@ -170,9 +170,6 @@ const UploadProps = {
   },
   vertical: {
     type: Boolean as unknown as PropType<boolean>,
-  },
-  instance: {
-    type: Object as unknown as PropType<any>
   }
 }
 

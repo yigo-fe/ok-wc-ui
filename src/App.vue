@@ -5,7 +5,7 @@
   <h3>ok-person-cell</h3>
   <ok-person-cell .person-info="personList2[1]"></ok-person-cell>
   <h3>ok-person-group</h3>
-<!--  <ok-person-group .personList="personList2.slice(0, 1)"></ok-person-group>-->
+  <ok-person-group .personList="personList2.slice(0, 1)" inline-style="div {color: red}"></ok-person-group>
   <h3>ok-employee-select</h3>
   <ok-employee-select multiple="true" mode="tree"></ok-employee-select>
   <h3>ok-department-select</h3>
@@ -18,7 +18,7 @@
   </div>
   <div class="item">
     <h3>ok-upload-drag</h3>
-    <ok-upload-drag ref="uploadDragRef" :instance="uploadDragRef"></ok-upload-drag>
+    <ok-upload-drag></ok-upload-drag>
   </div>
  <div class="item">
    <h3>ok-file-icon</h3>
@@ -97,7 +97,6 @@
       msg_relation_type: "WX",
     },
   ]
-  const uploadDragRef = ref()
 </script>
 <style>
 #app {

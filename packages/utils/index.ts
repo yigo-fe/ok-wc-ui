@@ -12,8 +12,9 @@ const isSameArray = (arr1: any, arr2: any) => {
 
 const customDefineExpose = (exposeMap: Record<any, any>, instance: any) => {
   if (instance) {
+    const dom = instance.ctx.$el.parentNode.host
     Object.keys(exposeMap).forEach(key => {
-      Object.defineProperty(instance, key, {
+      Object.defineProperty(dom, key, {
         value: exposeMap[key]
       })
     })

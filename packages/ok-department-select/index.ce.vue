@@ -91,7 +91,7 @@
     Select,
     Tree,
   } from 'ant-design-vue';
-  import { defineComponent, defineExpose, ref, onMounted } from 'vue';
+  import { defineComponent, defineExpose, ref, onMounted, getCurrentInstance } from 'vue';
   import './custom';
   import { i18n } from '../locales';
   import { ANTD_VUE_CDN, COMMON_CSS_PATH } from '../path.config';
@@ -113,6 +113,7 @@
       'a-popover': Popover
     },
     setup(props) {
+      const instance = getCurrentInstance()
       const okDepartmentInput: any = ref(null)
       const params = useDepartmentSelect(props, okDepartmentInput)
 
@@ -138,7 +139,7 @@
       defineExpose(exposeMap)
       onMounted(() => {
         setTimeout(() => {
-          customDefineExpose(exposeMap, props.instance)
+          customDefineExpose(exposeMap, instance)
         })
       })
       return {

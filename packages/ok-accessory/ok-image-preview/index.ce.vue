@@ -11,7 +11,7 @@
 <script lang="ts">
 
 import { Image } from 'ant-design-vue'
-import { computed, defineComponent, ref, defineExpose, PropType, onMounted } from 'vue'
+import { computed, defineComponent, ref, defineExpose, PropType, onMounted, getCurrentInstance } from 'vue'
 
 import { ANTD_VUE_CDN, COMMON_CSS_PATH } from '../../path.config'
 import { sourceHost } from '../../services/api'
@@ -21,14 +21,12 @@ export default defineComponent({
     imgList: {
       type: Array as unknown as PropType<[]>,
     },
-    instance: {
-      type: Object
-    }
   },
   components: {
     'a-image-preview-group': Image
   },
   setup(props) {
+    const instance = getCurrentInstance()
     // 处理传入的imgList数据，统一转为数组
     const list = computed(() => {
       let num: any = []
@@ -69,9 +67,7 @@ export default defineComponent({
     defineExpose({ preview })
     onMounted(() => {
       setTimeout(() => {
-        if (props.instance) {
-          customDefineExpose({preview}, props.instance)
-        }
+        customDefineExpose({preview}, instance)
       })
     })
 

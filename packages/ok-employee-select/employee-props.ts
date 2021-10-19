@@ -152,9 +152,6 @@ const propsOptions = {
     type: Function as unknown as PropType<
       (department_id: string, param: string) => Promise<unknown>
     >,
-  },
-  instance: {
-    type: Object
   }
 }
 

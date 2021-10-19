@@ -121,9 +121,6 @@ const propsOptions = {
     type: Function as unknown as PropType<
       (parent_dept_id: string, display_level: number) => Promise<unknown>
     >,
-  },
-  instance: {
-    type: Object
   }
 }
 

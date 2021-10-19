@@ -174,7 +174,7 @@ export default defineComponent({
     onMounted(() => {
       setTimeout(() => {
         // 暴露组件的方法
-        customDefineExpose(exposeMap, props.instance)
+        customDefineExpose(exposeMap, instance)
       })
     })
 
