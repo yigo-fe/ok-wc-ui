@@ -18,7 +18,7 @@
   </div>
   <div class="item">
     <h3>ok-upload-drag</h3>
-    <ok-upload-drag></ok-upload-drag>
+    <ok-upload-drag ref="uploadDragRef" :instance="uploadDragRef"></ok-upload-drag>
   </div>
  <div class="item">
    <h3>ok-file-icon</h3>
@@ -42,6 +42,7 @@
   </div>
 </template>
 <script setup lang="ts">
+  import { ref } from 'vue'
   const personList2:any = [
     {
       avatar_url: "https://wework.qpic.cn/bizmail/cMLFZrYGchIibX5icVTGibh7b2oELMc9MsJYDiaCNNmTYREjGVRjlsq3mA/0",
@@ -96,7 +97,7 @@
       msg_relation_type: "WX",
     },
   ]
-
+  const uploadDragRef = ref()
 </script>
 <style>
 #app {

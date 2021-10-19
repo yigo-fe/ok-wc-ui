@@ -91,12 +91,13 @@
     Select,
     Tree,
   } from 'ant-design-vue';
-  import { defineComponent, defineExpose, ref } from 'vue';
+  import { defineComponent, defineExpose, ref, onMounted } from 'vue';
   import './custom';
   import { i18n } from '../locales';
   import { ANTD_VUE_CDN, COMMON_CSS_PATH } from '../path.config';
   import { propsOptions } from './department-props';
   import useDepartmentSelect from './hook';
+  import {customDefineExpose} from '../utils'
 
   export default defineComponent({
     props: {
@@ -124,15 +125,21 @@
         okDepartmentInput.value?.blur()
       }
 
-      // 暴露方法
-      defineExpose({
+      const exposeMap = {
         clear: params.clearSelected,
         focus: () => {
           okDepartmentInput.value?.focus()
         },
         blur: () => {
           okDepartmentInput.value?.blur()
-        },
+        }
+      }
+      // 暴露方法
+      defineExpose(exposeMap)
+      onMounted(() => {
+        setTimeout(() => {
+          customDefineExpose(exposeMap, props.instance)
+        })
       })
       return {
         okDepartmentInput,

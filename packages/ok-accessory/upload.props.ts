@@ -8,7 +8,7 @@
  * @FilePath: /packages/ok-accessory/upload.props.ts
  */
 
-import { PropType } from 'vue'
+import {defineExpose, PropType} from 'vue'
 
 import ajax from './ajax'
 import type { ListType, OkFile } from './upload.type'
@@ -171,6 +171,9 @@ const UploadProps = {
   vertical: {
     type: Boolean as unknown as PropType<boolean>,
   },
+  instance: {
+    type: Object as unknown as PropType<any>
+  }
 }
 
 export { UploadProps }

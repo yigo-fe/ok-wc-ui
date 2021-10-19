@@ -153,6 +153,9 @@ const propsOptions = {
       (department_id: string, param: string) => Promise<unknown>
     >,
   },
+  instance: {
+    type: Object
+  }
 }
 
 export { propsOptions }

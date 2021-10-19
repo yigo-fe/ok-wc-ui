@@ -122,6 +122,9 @@ const propsOptions = {
       (parent_dept_id: string, display_level: number) => Promise<unknown>
     >,
   },
+  instance: {
+    type: Object
+  }
 }
 
 export { propsOptions }

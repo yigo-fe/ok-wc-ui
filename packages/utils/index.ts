@@ -10,4 +10,14 @@ const isSameArray = (arr1: any, arr2: any) => {
   return same
 }
 
-export { isSameArray }
+const customDefineExpose = (exposeMap: Record<any, any>, instance: any) => {
+  if (instance) {
+    Object.keys(exposeMap).forEach(key => {
+      Object.defineProperty(instance, key, {
+        value: exposeMap[key]
+      })
+    })
+  }
+}
+
+export { isSameArray, customDefineExpose }

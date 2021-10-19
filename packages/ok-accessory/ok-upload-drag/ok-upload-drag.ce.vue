@@ -126,6 +126,7 @@ import { i18n } from '../../locales'
 import { COMMON_CSS_PATH } from '../../path.config'
 import useAttachmentHandle from '../attachment.common.hook'
 import { UploadProps } from '../upload.props'
+import {customDefineExpose} from '../../utils/index'
 export default defineComponent({
   props: {
     ...UploadProps
@@ -166,7 +167,16 @@ export default defineComponent({
       fileLists.value = []
     }
 
-    defineExpose({ handleClick, handleRemoveAllFileList })
+    const exposeMap: Record<any, any> = {
+      handleClick, handleRemoveAllFileList
+    }
+    defineExpose(exposeMap)
+    onMounted(() => {
+      setTimeout(() => {
+        // 暴露组件的方法
+        customDefineExpose(exposeMap, props.instance)
+      })
+    })
 
     /**
      * 点击上传选中文件
