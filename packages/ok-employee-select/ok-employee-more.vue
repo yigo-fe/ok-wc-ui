@@ -37,7 +37,6 @@
     },
     emits: ['delete'],
     setup(props, {emit}) {
-      console.log(props, props.exceedList)
       const disabled = computed(() => props.disabled)
 
       const closeIcon = close

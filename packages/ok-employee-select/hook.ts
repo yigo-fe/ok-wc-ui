@@ -203,7 +203,6 @@ export default function (props: any, okEmployeeInput: any) {
       }
       // infoMap 中取值， 避免频繁请求接口数据
       exceedList.value = exceedIds.map(v => infoMap.value[v]).filter(v => v)
-      console.log(exceedList.value, '设置exceedList')
     }
   }
   const showEmployeeSelect = ref()

@@ -148,7 +148,6 @@ export default function (props: ExtractPropTypes<typeof defineProps>) {
         avatarStyleAll.value['background'] = count.value
           ? `${mask}`
           : `${bg_url}`
-        console.log(bg_url, avatarStyleAll.value)
         if (count.value) {
           // 处理文字样式
           avatarTextStyle.value['font-size'] = '12px'

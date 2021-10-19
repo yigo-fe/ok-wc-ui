@@ -148,4 +148,7 @@ export default defineComponent({
   .ok-person-group-wrap .avatar-list + .avatar-list {
     margin-left: -8px;
   }
+  .single-user-name {
+    vertical-align: middle;
+  }
 </style>

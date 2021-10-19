@@ -226,3 +226,6 @@
     }
   })
 </script>
+<style lang="less">
+  @import '../../packages/assets/styles/variable.less';
+</style>
