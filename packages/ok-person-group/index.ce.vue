@@ -61,7 +61,7 @@
   </a-popover>
 </template>
 <script lang="ts">
-import { computed, defineComponent } from "vue";
+import { computed, defineComponent, onMounted, getCurrentInstance, ComponentInternalInstance } from "vue";
 import { Popover } from "ant-design-vue";
 import defineProps from "./props";
 import okAvatarGroup from "./ok-avatar-group.ce.vue";
@@ -73,6 +73,7 @@ export default defineComponent({
     "a-popover": Popover,
   },
   setup(props) {
+    const instance: any = getCurrentInstance()
     const detailSize = computed(() => props.detailSize);
     const size = computed(() => props.size);
     const height = computed(() => props.height);
@@ -112,6 +113,17 @@ export default defineComponent({
       props.deleteItem && props.deleteItem(item.detail);
     };
 
+    onMounted(() => {
+      // 添加props传入行内样式
+      setTimeout(() => {
+        const root = instance?.ctx?.$el.parentNode
+        if (props.inlineStyle) {
+          const style = document.createElement('style')
+          style.innerHTML = props.inlineStyle
+          root.appendChild(style)
+        }
+      }, 100)
+    })
     return {
       placement,
       avatarStyle,
