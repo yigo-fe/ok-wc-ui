@@ -135,7 +135,8 @@
       'a-button': Button,
       'a-breadcrumb': Breadcrumb,
       'a-breadcrumb-item': Breadcrumb.Item,
-      'a-tooltip': Tooltip
+      'a-tooltip': Tooltip,
+      'a-input': Input
     },
     props: {
       multiple: {
