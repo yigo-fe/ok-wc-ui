@@ -1,5 +1,5 @@
 <template>
-  <div v-if="personList.length === 1" class="person-group-single-wrap">
+  <div v-if="personList.length === 1" class="person-group-single-wrap" ref="instanceRef">
     <ok-person-cell
       .personInfo="personList[0]"
       .size="size"
@@ -16,6 +16,7 @@
   <a-popover
     v-else
     :placement="placement"
+    ref="instanceRef"
     overlayClassName="ok-person-group-more"
   >
     <template #content>
@@ -116,7 +117,7 @@ export default defineComponent({
     onMounted(() => {
       // 添加props传入行内样式
       setTimeout(() => {
-        const root = instance?.ctx?.$el.parentNode
+        const root = instance?.refs?.instanceRef
         if (props.inlineStyle) {
           const style = document.createElement('style')
           style.innerHTML = props.inlineStyle

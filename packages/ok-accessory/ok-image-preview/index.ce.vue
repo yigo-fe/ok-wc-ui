@@ -15,7 +15,7 @@ import { computed, defineComponent, ref, defineExpose, PropType, onMounted, getC
 
 import { ANTD_VUE_CDN, COMMON_CSS_PATH } from '../../path.config'
 import { sourceHost } from '../../services/api'
-import { customDefineExpose } from '../../utils'
+import { customDefineExpose, getHostNode } from '../../utils'
 export default defineComponent({
   props: {
     imgList: {
@@ -26,7 +26,7 @@ export default defineComponent({
     'a-image-preview-group': Image
   },
   setup(props) {
-    const instance = getCurrentInstance()
+    const instance: any = getCurrentInstance()
     // 处理传入的imgList数据，统一转为数组
     const list = computed(() => {
       let num: any = []
@@ -66,9 +66,10 @@ export default defineComponent({
     }
     defineExpose({ preview })
     onMounted(() => {
-      setTimeout(() => {
-        customDefineExpose({preview}, instance)
-      })
+        setTimeout(() =>{
+          const dom = getHostNode(instance.refs.showImagePreview)
+          customDefineExpose({preview}, dom)
+        }, 1000)
     })
 
     return {

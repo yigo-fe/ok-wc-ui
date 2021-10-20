@@ -126,7 +126,7 @@ import { i18n } from '../../locales'
 import { COMMON_CSS_PATH } from '../../path.config'
 import useAttachmentHandle from '../attachment.common.hook'
 import { UploadProps } from '../upload.props'
-import {customDefineExpose} from '../../utils/index'
+import {customDefineExpose, getHostNode} from '../../utils/index'
 export default defineComponent({
   props: {
     ...UploadProps
@@ -172,10 +172,11 @@ export default defineComponent({
     }
     defineExpose(exposeMap)
     onMounted(() => {
-      setTimeout(() => {
         // 暴露组件的方法
-        customDefineExpose(exposeMap, instance)
-      })
+      setTimeout(() =>{
+        const dom = getHostNode(instance.refs.inputRef)
+        customDefineExpose(exposeMap, dom)
+      }, 1000)
     })
 
     /**

@@ -97,7 +97,7 @@
   import { ANTD_VUE_CDN, COMMON_CSS_PATH } from '../path.config';
   import { propsOptions } from './department-props';
   import useDepartmentSelect from './hook';
-  import {customDefineExpose} from '../utils'
+  import {customDefineExpose, getHostNode} from '../utils'
 
   export default defineComponent({
     props: {
@@ -113,7 +113,7 @@
       'a-popover': Popover
     },
     setup(props) {
-      const instance = getCurrentInstance()
+      const instance: any = getCurrentInstance()
       const okDepartmentInput: any = ref(null)
       const params = useDepartmentSelect(props, okDepartmentInput)
 
@@ -139,7 +139,8 @@
       defineExpose(exposeMap)
       onMounted(() => {
         setTimeout(() => {
-          customDefineExpose(exposeMap, instance)
+          const dom = getHostNode(instance.refs.showDeptSelect)
+          customDefineExpose(exposeMap, dom)
         })
       })
       return {
