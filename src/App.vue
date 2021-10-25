@@ -5,7 +5,7 @@
   <h3>ok-person-cell</h3>
   <ok-person-cell .person-info="personList2[1]"></ok-person-cell>
   <h3>ok-person-group</h3>
-  <ok-person-group .personList="personList2.slice(0, 1)" inline-style="div {color: red}"></ok-person-group>
+<!--  <ok-person-group .personList="personList2.slice(0, 1)" inline-style="div {color: red}"></ok-person-group>-->
   <h3>ok-employee-select</h3>
   <ok-employee-select multiple="true" mode="tree"></ok-employee-select>
   <h3>ok-department-select</h3>

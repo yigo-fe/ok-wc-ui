@@ -25,10 +25,12 @@ const customDefineExpose = (exposeMap: Record<any, any>, dom: any) => {
 // 获取当前的根节点
 // @ts-ignore
 const getHostNode = (dom: any) => {
-  if (dom.parentNode) {
+  if (dom && dom.parentNode) {
     return getHostNode(dom.parentNode)
-  } else {
+  } else if(dom) {
     return dom.host
+  } else {
+    return ''
   }
 }
 

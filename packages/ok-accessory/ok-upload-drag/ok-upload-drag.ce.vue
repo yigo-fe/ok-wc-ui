@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="!hideUploader"
     :class="{
   'ok-upload': true,
   'ok-upload--drag': true,
@@ -17,7 +18,7 @@
         'upload-inner': true,
          disabled: disabled,
         dragover: dragover,
-        'has-file': fileLists,
+        'has-file': fileLists && fileLists.length,
         }">
     <svg
       t="1622689766057"
@@ -65,6 +66,7 @@
   </slot>
 
   <input
+    v-if="!hideUploader"
     style="display: none"
     ref="inputRef"
     class="ok-upload__input"
@@ -235,6 +237,7 @@ export default defineComponent({
       showPreview,
       showDownload,
       showRemove,
+      hideUploader
     }
   }
 })
