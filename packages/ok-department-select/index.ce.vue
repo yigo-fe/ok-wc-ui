@@ -153,7 +153,7 @@
   })
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
   @import url('../assets/styles/common.less');
   .ant-select {
     box-sizing: border-box;

@@ -21,12 +21,12 @@
       <ok-file-icon .type="getFileType(item.name)"></ok-file-icon>
       <div class="ok-file-list__item_name">
         <div class="file_name_wraper">
-          <ok-tooltip
-            .textStyle="{ 'line-height': '18px' }"
-            style="max-width: calc(100% - 127px)"
-            .title="item.name"
-          ></ok-tooltip>
-
+          <div style="max-width: calc(100% - 127px); display: inline-block">
+            <ok-tooltip
+              .textStyle="{ 'line-height': '18px' }"
+              .title="item.name"
+            ></ok-tooltip>
+          </div>
 
           <div class="uploading-info" v-if="item.status === 'uploading'">
             <span class="percentage-text">{{parseInt((item.percentage || 0).toFixed(), 10)}}</span>
