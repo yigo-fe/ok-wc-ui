@@ -121,6 +121,8 @@ type tipType = 'auto' | 'aways' | 'none'
   })
 </script>
 <style lang="less" scoped>
+  @import '../assets/styles/common.less';
+
   :host {
     display: inline-block;
   }

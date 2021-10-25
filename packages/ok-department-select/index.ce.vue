@@ -154,6 +154,7 @@
 </script>
 
 <style lang="less" scoped>
+  @import url('../assets/styles/common.less');
   .ant-select {
     box-sizing: border-box;
     margin: 0;

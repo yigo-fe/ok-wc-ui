@@ -228,5 +228,5 @@
   })
 </script>
 <style lang="less">
-  @import '../../packages/assets/styles/variable.less';
+  @import '../assets/styles/common.less';
 </style>

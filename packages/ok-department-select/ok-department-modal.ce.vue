@@ -253,5 +253,5 @@ export default defineComponent({
 })
 </script>
 <style lang="less">
-  @import '../../packages/assets/styles/variable.less';
+  @import url('../assets/styles/common.less');
 </style>
