@@ -21,7 +21,8 @@ export default defineConfig({
         globals: {
           vue: 'Vue',
           'ant-design-vue': 'antd'
-        }
+        },
+        assetFileNames: `[name].[ext]`
       }
     }
   },
