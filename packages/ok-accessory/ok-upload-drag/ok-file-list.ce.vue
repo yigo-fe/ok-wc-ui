@@ -29,7 +29,7 @@
           </div>
 
           <div class="uploading-info" v-if="item.status === 'uploading'">
-            <span class="percentage-text">{{parseInt((item.percentage || 0).toFixed(), 10)}}</span>
+            <span class="percentage-text">{{parseInt((item.percentage || 0).toFixed(), 10)}}%</span>
             <span class="abort-btn" @click="handleAbort(item)">
             <svg
               t="1616573273136"
