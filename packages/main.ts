@@ -5,6 +5,7 @@ import okPersonCard from './ok-person-card/index.ce.vue'
 import okPersonCell from './ok-person-cell/index.ce.vue'
 import okPersonTippy from './ok-person-cell/popover-tippy.ce.vue'
 import okPersonGroup from './ok-person-group/index.ce.vue'
+import okAvatarGroup from './ok-person-group/ok-avatar-group.ce.vue'
 import okEmployeeSelect from './ok-employee-select/index.ce.vue'
 import okDepartmentSelect from './ok-department-select/index.ce.vue'
 import okTooltip from './ok-tooltip/index.ce.vue'
@@ -29,6 +30,7 @@ const okPersonCardElement = defineCustomElement(okPersonCard)
 const okPersonCellElement = defineCustomElement(okPersonCell)
 const okPersonGroupElement = defineCustomElement(okPersonGroup)
 const okPersonTippyElement = defineCustomElement(okPersonTippy)
+const okAvatarGroupElement = defineCustomElement(okAvatarGroup)
 
 const okEmployeeSelectElement = defineCustomElement(okEmployeeSelect)
 
@@ -68,3 +70,4 @@ customElements.define('ok-file-icon', okFileIconElement)
 customElements.define('ok-upload-table', okUploadTableElement)
 customElements.define('ok-file-table', okFileTableElement)
 customElements.define('ok-person-tippy', okPersonTippyElement)
+customElements.define('ok-avatar-group', okAvatarGroupElement)
