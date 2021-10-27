@@ -51,7 +51,7 @@
                 fail: item.status === 'fail',
               }"
             >
-              {{item.status === 'uploading' ? parseInt((item.percentage || 0).toFixed(), 10) : uploadFailText}}</span
+              {{item.status === 'uploading' ? parseInt((item.percentage || 0).toFixed(), 10) + '%' : uploadFailText}}</span
             >
           <ok-progress
             class="image-progress"
