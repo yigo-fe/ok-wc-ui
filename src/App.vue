@@ -1,7 +1,7 @@
 
 <template>
   <h3>ok-avatar</h3>
-  <ok-avatar .person-info="personList2[1]"></ok-avatar>
+  <!-- <ok-avatar .person-info="personList2[1]"></ok-avatar> -->
   <h3>ok-person-cell</h3>
   <ok-person-cell .person-info="personList2[1]"></ok-person-cell>
   <h3>ok-person-group</h3>

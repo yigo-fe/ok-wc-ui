@@ -30,10 +30,11 @@ import defineProps from './props'
 import { apiInitPersoncard } from '../services/api'
 import { hideAll } from 'tippy.js'
 import { setPopover } from '../utils'
+import okAvatar from '../ok-avatar/index.ce.vue'
 export default defineComponent({
   props: defineProps,
   components: {
-    // "ok-avatar": okAvatar,
+    "ok-avatar": okAvatar,
     // "ok-person-card": okPersonCard,
     //     // 'ok-person-ant': okPersonAnt,
   },

@@ -99,10 +99,11 @@ import defineProps from './props'
 import femaleIcon from '../assets/images/female.svg'
 import maleIcon from '../assets/images/male.svg'
 import { Tooltip } from 'ant-design-vue'
+import okAvatar from '../ok-avatar/index.ce.vue'
 
 export default defineComponent({
     props: defineProps,
-    components: {'a-tooltip': Tooltip},
+    components: {'a-tooltip': Tooltip, 'ok-avatar': okAvatar},
     setup(props) {
         const {
           textStyle,
