@@ -195,9 +195,15 @@ export default function (props: any, okDepartmentInput: any) {
   // 打开modal
   const handleOpenModal = () => {
     visible.value = true
+    nextTick(() => {
+      document.body.style.overflow = 'hidden'
+    })
   }
   const handleCloseModal = () => {
     visible.value = false
+    nextTick(() => {
+      document.body.style.overflow = ''
+    })
   }
 
   const handleInputClick = (evt: any) => {

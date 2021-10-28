@@ -235,10 +235,16 @@ export default function (props: any, okEmployeeInput: any) {
   const isOpen = ref(false)
   const setOpen = () => {
     isOpen.value = true
+    nextTick(() => {
+      document.body.style.overflow = 'hidden'
+    })
   }
   const closeOpen = (e: any) => {
     props.onBlur && props.onBlur(e)
     isOpen.value = false
+    nextTick(() => {
+      document.body.style.overflow = ''
+    })
   }
 
   // 打开modal
