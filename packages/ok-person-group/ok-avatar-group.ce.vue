@@ -17,7 +17,6 @@
 </template>
 <script lang="ts">
 import { computed, defineComponent, PropType } from "vue"
-import okAvatar from '../ok-avatar/index.ce.vue'
 export default defineComponent({
   props: {
     size: {
@@ -41,9 +40,6 @@ export default defineComponent({
         return [];
       },
     },
-  },
-  components: {
-    "ok-avatar": okAvatar,
   },
   setup(props) {
     const size = computed(() => props.size);

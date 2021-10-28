@@ -28,14 +28,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { isWindowsWxchat } from '../ok-person-card/broswer'
-import okAvatar from '../ok-avatar/index.ce.vue'
 // import okPersonAnt from './popover-ant'
 
 import defineProps from './props'
 export default defineComponent({
     props: defineProps,
     components: {
-        "ok-avatar": okAvatar,
     },
     setup(props) {
         const showAntPopover = isWindowsWxchat()
