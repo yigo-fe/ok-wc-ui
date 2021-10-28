@@ -20,6 +20,7 @@ export default function (props: ExtractPropTypes<typeof defineProps>) {
     display: 'inline-block',
     'vertical-align': 'middle',
     cursor: 'default',
+    lineHeight: 1
   })
   // 人员图像样式
   const avatarStyleAll = ref({
