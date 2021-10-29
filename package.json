@@ -1,6 +1,6 @@
 {
   "name": "ok-wc-ui",
-  "version": "2.0.14-beta.8",
+  "version": "2.0.14-beta.9",
   "main": "./dist/ok-wc-ui.umd.js",
   "module": "./dist/ok-wc-ui.es.js",
   "exports": {
@@ -16,12 +16,12 @@
     "postpublish": "npm run build && node ./cdn-upload.js"
   },
   "dependencies": {
-    "ant-design-vue": "^2.1.6",
+    "ant-design-vue": "2.1.6",
     "axios": "^0.21.4",
     "ok-i18n": "^3.0.0",
     "qs": "^6.10.1",
     "tippy.js": "^6.3.1",
-    "vue": "^3.2.19"
+    "vue": "3.2.19"
   },
   "devDependencies": {
     "@byteluck/ego-fe-oss-client": "^1.2.2",
