@@ -211,10 +211,7 @@ export default defineComponent({
         >,
     },
     change: {
-      type: Function as unknown as PropType<
-        // eslint-disable-next-line no-unused-vars
-        (ids: string[]) => void
-        >,
+      type: Function,
     },
     close: {
       type: Function as unknown as PropType<() => void>,

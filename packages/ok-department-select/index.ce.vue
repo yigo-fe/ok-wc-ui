@@ -60,7 +60,7 @@
       >{{ item.display_value }}</a-select-option
       >
     </a-select>
-    <ok-department-modal
+    <department-modal
       v-if="mode==='tree'"
       :visible="visible"
       :inputValue="value"
@@ -76,7 +76,7 @@
       :remoteMethod="remoteMethod"
       :getRootDept="getRootDept"
       :getSubDept="getSubDept"
-    ></ok-department-modal>
+    ></department-modal>
 
   </div>
 </template>
@@ -111,7 +111,7 @@
       'a-checkbox': Checkbox,
       'a-input': Input,
       'a-popover': Popover,
-      'ok-department-modal': OkDepartmentModal
+      'department-modal': OkDepartmentModal
     },
     setup(props) {
       const instance: any = getCurrentInstance()
