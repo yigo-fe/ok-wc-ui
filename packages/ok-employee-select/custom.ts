@@ -1,1 +1,0 @@
-import {defineCustomElement} from "vue"import okEmployeeModal from './ok-employee-modal.ce.vue'const okEmployeeModalElement = defineCustomElement(okEmployeeModal)customElements.define('ok-employee-modal', okEmployeeModalElement)

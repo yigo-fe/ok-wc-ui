@@ -1,1 +1,0 @@
-import {defineCustomElement} from "vue"import okDepartmenModal from './ok-department-modal.ce.vue'const okDepartmentModalElement = defineCustomElement(okDepartmenModal)customElements.define('ok-department-modal', okDepartmentModalElement)

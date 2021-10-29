@@ -62,20 +62,20 @@
     </a-select>
     <ok-department-modal
       v-if="mode==='tree'"
-      .visible="visible"
-      .inputValue="value"
-      .multiple="multiple"
-      .displayLevel="displayLevel"
-      .secrecy="secrecy"
-      .getContainerModal="getContainerModal"
-      .modalZIndex="modalZIndex"
-      .infoMap="infoMap"
-      .collect="collectMap"
-      .change="handleModalChange"
-      .close="handleCloseModal"
-      .remoteMethod="remoteMethod"
-      .getRootDept="getRootDept"
-      .getSubDept="getSubDept"
+      :visible="visible"
+      :inputValue="value"
+      :multiple="multiple"
+      :displayLevel="displayLevel"
+      :secrecy="secrecy"
+      :getContainerModal="getContainerModal"
+      :modalZIndex="modalZIndex"
+      :infoMap="infoMap"
+      :collect="collectMap"
+      :change="handleModalChange"
+      :close="handleCloseModal"
+      :remoteMethod="remoteMethod"
+      :getRootDept="getRootDept"
+      :getSubDept="getSubDept"
     ></ok-department-modal>
 
   </div>
@@ -92,12 +92,12 @@
     Tree,
   } from 'ant-design-vue';
   import { defineComponent, defineExpose, ref, onMounted, getCurrentInstance } from 'vue';
-  import './custom';
   import { i18n } from '../locales';
   import { ANTD_VUE_CDN, COMMON_CSS_PATH } from '../path.config';
   import { propsOptions } from './department-props';
   import useDepartmentSelect from './hook';
   import {customDefineExpose, getHostNode} from '../utils'
+  import OkDepartmentModal from './ok-department-modal.vue'
 
   export default defineComponent({
     props: {
@@ -110,7 +110,8 @@
       'a-button': Button,
       'a-checkbox': Checkbox,
       'a-input': Input,
-      'a-popover': Popover
+      'a-popover': Popover,
+      'ok-department-modal': OkDepartmentModal
     },
     setup(props) {
       const instance: any = getCurrentInstance()
