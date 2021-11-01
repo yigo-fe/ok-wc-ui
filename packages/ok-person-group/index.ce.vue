@@ -52,25 +52,25 @@
       </div>
     </template>
 
-    <ok-avatar-group
+    <avatar-group
       style="display: inline-block; font-size: 0; vertical-align: middle"
       :size="size"
       :width="width"
       :height="height"
       :personList="personList"
-    ></ok-avatar-group>
+    ></avatar-group>
   </a-popover>
 </template>
 <script lang="ts">
 import { computed, defineComponent, onMounted, getCurrentInstance, ComponentInternalInstance } from "vue";
 import { Popover } from "ant-design-vue";
 import defineProps from "./props";
-import okAvatarGroup from "./ok-avatar-group.ce.vue";
+import avatarGroup from "./ok-avatar-group.ce.vue";
 import close from '../assets/images/closed.svg'
 export default defineComponent({
   props: defineProps,
   components: {
-    "ok-avatar-group": okAvatarGroup,
+    "avatar-group": avatarGroup,
     "a-popover": Popover,
   },
   setup(props) {
@@ -121,7 +121,9 @@ export default defineComponent({
         if (props.inlineStyle) {
           const style = document.createElement('style')
           style.innerHTML = props.inlineStyle
-          root.appendChild(style)
+          if (root && root.appendChild) {
+            root.appendChild(style)
+          }
         }
       }, 100)
     })

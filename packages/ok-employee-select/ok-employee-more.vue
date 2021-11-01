@@ -4,7 +4,7 @@
       <template #content>
         <div class="more-content">
           <p class="more-item" v-for="employee in exceedList" :key="employee.employee_id">
-            <ok-person-cell class="employee-avatar" size="mini" :personInfo="employee"></ok-person-cell>
+            <ok-person-cell class="employee-avatar" size="mini" .personInfo="employee"></ok-person-cell>
             <span class="employee-name ellipsis1">{{employee.employee_name}}</span>
             <img v-if="!disabled" :src="closeIcon" class="head-close-icon" @click="deleteSelected(employee.employee_id)" />
           </p>

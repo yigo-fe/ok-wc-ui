@@ -12,7 +12,7 @@
       <template #name="{ record }">
         <div class="file-name-box" :class="{fail:record.status==='fail' }" >
           <div style="display:flex; align-items:center;line-height:1; margin-bottom:3px;">
-            <ok-file-icon :type="record.suffix"></ok-file-icon>
+            <ok-file-icon .type="record.suffix"></ok-file-icon>
             <span style="margin-left:6px;" class="file-name">{{record.name}}</span>
           </div>
           <ok-progress

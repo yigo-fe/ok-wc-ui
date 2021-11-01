@@ -8,7 +8,7 @@
       @abort="handleAbort"
       @remove="handleRemoveFileList"
       @reupload="handleReupload"
-      :style="imageStyle"
+      .style="imageStyle"
       .fileList="fileLists"
       .listType="listType"
       .showPreview="showPreview"
