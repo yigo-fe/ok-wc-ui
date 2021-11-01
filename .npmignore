@@ -1,0 +1,34 @@
+build/
+node_modules/
+example/
+packages/
+
+# html file
+index.html
+
+# config file
+.browserslistrc
+.editorconfig
+.eslintignore
+.eslintrc.js
+.prettierrc.js
+.stylelintrc
+commitlint.config.js
+rollup.config.js
+vite.config.js
+tsconfig.json
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.travis.yml
+*.map
+dist/demo.html
+
+.idea
+.vscode
+.bitmap
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+.github/
