@@ -286,8 +286,8 @@ export default function (props: any, okEmployeeInput: any) {
   }
 
   // ‘更过’ 弹窗中的删除
-  const exceedDelete = (e: CustomEvent) => {
-    handleDelete(e.detail)
+  const exceedDelete = (e: string) => {
+    handleDelete(e)
   }
 
   // 渲染更多弹窗
