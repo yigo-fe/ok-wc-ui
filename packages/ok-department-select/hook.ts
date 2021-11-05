@@ -237,8 +237,8 @@ export default function (props: any, okDepartmentInput: any) {
     props.onRemove && props.onRemove(infoMap.value[department_id])
   }
 
-  const exceedDelete = (e: CustomEvent) => {
-    handleDelete(e.detail)
+  const exceedDelete = (e: string) => {
+    handleDelete(e)
   }
 
 
