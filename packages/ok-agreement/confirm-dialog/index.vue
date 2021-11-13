@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="ok-agreement-confirm-dialog-mask"></div>
-        <div class="ok-agreement-confirm-dialog">
+        <div class="ok-agreement-confirm-dialog-mask" v-if="inner_visible"></div>
+        <div class="ok-agreement-confirm-dialog" :class="[device]" v-if="inner_visible">
             <div class="header">
                 <img :src="logo" alt="logo">
             </div>
@@ -11,35 +11,39 @@
                 </slot>
             </div>
             <div class="footer">
-                <div class="getout button">不同意并退出</div>
-                <div class="agree button">同意</div>
+                <div class="getout button" @click="onChange('getout')">不同意并退出</div>
+                <div class="agree button" @click="onChange('agree')">同意</div>
             </div>
         </div>
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType } from 'vue'
+import { defineComponent, PropType, ref, watch } from 'vue'
 export default defineComponent({
     props: {
         device: {
             type: String as PropType<'desktop' | 'mobile'>,
         },
-        width: {
-            type: String as PropType<string>,
-        },
-        height: {
-            type: String as PropType<string>,
-        },
-        logo: {
-            type: String as PropType<string>,
-        },
-        companyName: {
-            type: String as PropType<string>,
-            default: '百特搭',
-        },
+        logo: String,
+        companyName: String,
+        visible: String as PropType<'true' | 'false'>
     },
-    setup(props) {
-        
+    setup(props, {emit}) {
+        const inner_visible = ref(props.visible === 'true')
+        watch(
+            () => props.visible,
+            (newValue, oldValue) => {
+                inner_visible.value = newValue === 'true'
+            }
+        )
+        const onChange = (val: any) => {
+            inner_visible.value = false
+            emit('change', val)
+        }
+        return {
+            onChange,
+            inner_visible,
+        }
     },
 })
 </script>
