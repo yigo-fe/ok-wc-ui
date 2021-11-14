@@ -1,7 +1,7 @@
 <template>
     <div class="ok-agreement-list-link" :class="[layout]" >
         <div class="link-item" v-for="item in AGREEMENTS">
-            <a :href="item.url">{{ item.name }}</a>
+            <a :href="item.url" target="_blank">{{ item.name }}</a>
         </div>
     </div>
 </template>

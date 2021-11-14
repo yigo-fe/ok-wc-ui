@@ -3,7 +3,7 @@
         <a-checkbox @change="onChange">
             我已阅读并同意 
             <template v-for="item in AGREEMENTS">
-                《<a :href="item.url">{{ item.name }}</a>》
+                《<a :href="item.url" target="_blank">{{ item.name }}</a>》
             </template>
         </a-checkbox>
     </div>
