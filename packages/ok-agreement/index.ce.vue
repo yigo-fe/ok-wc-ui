@@ -1,5 +1,5 @@
 <template>
-    <component :is="type" v-bind="$attrs"></component>
+    <component :is="type" v-bind="$attrs" @change="onChange"></component>
 </template>
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
@@ -15,8 +15,10 @@ export default defineComponent({
     props: {
         type: String as PropType<'agree-check' | 'confirm-dialog' | 'list-links'>,
     },
-    setup(props) {
-        const onChange = (val: any) => {}
+    setup(props, {emit}) {
+        const onChange = (val: any) => {
+            emit('change', val)
+        }
         return {
             onChange
         }

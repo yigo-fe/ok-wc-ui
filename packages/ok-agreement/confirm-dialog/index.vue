@@ -11,7 +11,7 @@
                 </slot>
             </div>
             <div class="footer">
-                <div class="getout button" @click="onChange('getout')">不同意并退出</div>
+                <div class="getout button" @click="onChange('escape')">不同意并退出</div>
                 <div class="agree button" @click="onChange('agree')">同意</div>
             </div>
         </div>
@@ -29,6 +29,7 @@ export default defineComponent({
         companyName: String,
         visible: String as PropType<'true' | 'false'>
     },
+    emits:['change'],
     setup(props, {emit}) {
         const inner_visible = ref(props.visible === 'true')
         watch(
