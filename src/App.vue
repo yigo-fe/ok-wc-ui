@@ -40,6 +40,13 @@
     <h3>ok-upload-image</h3>
     <ok-upload-image></ok-upload-image>
   </div>
+  <div class="item">
+    <h3>ok-agreement</h3>
+    <ok-agreement type="confirm-dialog" device="desktop" logo="https://test.baiteda.com/attach/image/20211103/dea98ba2b70170c291c984a44bbcf1b7/%E7%99%BE%E7%89%B9%E6%90%AD.png" visible="true" company-name="QIYU" @change="handler"></ok-agreement>
+    <!-- <ok-agreement type="confirm-dialog" device="mobile" logo="https://test.baiteda.com/attach/image/20211103/dea98ba2b70170c291c984a44bbcf1b7/%E7%99%BE%E7%89%B9%E6%90%AD.png" visible="true" company-name="百特搭"></ok-agreement> -->
+    <ok-agreement type="agree-check" @change="handler"></ok-agreement>
+    <ok-agreement type="list-links" layout="vertical"></ok-agreement>
+  </div>
 </template>
 <script setup lang="ts">
   import { ref } from 'vue'
@@ -97,6 +104,9 @@
       msg_relation_type: "WX",
     },
   ]
+  const handler = (result: any) => {
+    console.log(result)
+  }
 </script>
 <style>
 #app {
