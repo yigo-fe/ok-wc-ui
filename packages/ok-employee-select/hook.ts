@@ -380,6 +380,7 @@ export default function (props: any, okEmployeeInput: any) {
   }
 
   const updateValue = () => {
+		debugger
     // 更新组件外部value
     !hasInitValue &&
       props.update &&
