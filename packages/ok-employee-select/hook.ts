@@ -14,7 +14,12 @@ export default function (props: any, okEmployeeInput: any) {
   })
   // 7.8 修改: 进去就有值时，首次不触发update
   let hasInitValue = !!props.value?.length
-
+	if (hasInitValue) {
+		// 防止在挂载期间值已经被修改
+		onMounted(() => {
+			hasInitValue = false
+		})
+	}
   const api = apiInit()
   // placeholder
   const placeholder = computed(() => props.placeholder)
@@ -375,6 +380,7 @@ export default function (props: any, okEmployeeInput: any) {
   }
 
   const updateValue = () => {
+		debugger
     // 更新组件外部value
     !hasInitValue &&
       props.update &&
