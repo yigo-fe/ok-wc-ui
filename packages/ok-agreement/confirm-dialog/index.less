@@ -25,18 +25,17 @@
 
 .desktop.ok-agreement-confirm-dialog {
     width: 480px;
-    height: 312px;
     left: calc(50% - 240px); 
     top: 100px;
     padding: 24px;
-    .header .logo {
-        width: 106px;
-        height: 28px;
+    .header {
+        margin-bottom: 16px;
     }
     .body {
         font-size: 14px;
         line-height: 24px;
         color: var(--bl-n600-c);
+        margin-bottom: 24px;
     }
     .footer {
         line-height: 14px;
@@ -66,15 +65,18 @@
 
 .mobile.ok-agreement-confirm-dialog {
     width: 290px;
-    height: 380px;
     left: calc(50% - 145px); 
-    top: calc(50% - 190px);
+    top: 50%;
+    transform: translateY(-50%);
     padding-top: 24px;
+    .header {
+        margin-bottom: 16px;
+    }
     .body {
         font-size: 12px;
         line-height: 24px;
         color: #646a73;
-        padding: 0 24px;
+        padding: 0 24px 24px 24px;
     }
     .header {
         padding: 0 24px;
