@@ -3,7 +3,7 @@
         <div class="ok-agreement-confirm-dialog-mask" v-if="inner_visible"></div>
         <div class="ok-agreement-confirm-dialog" :class="[device]" v-if="inner_visible">
             <div class="header">
-                <img :src="logo" alt="logo">
+                <img :src="logo" alt="logo" class="logo">
             </div>
             <div class="body">
                 <slot name="body">
