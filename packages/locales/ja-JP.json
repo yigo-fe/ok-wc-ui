@@ -34,6 +34,10 @@
     },
     "departmentSelect": {
       "title": "部署選択"  
+    },
+    "confirmDialog": {
+      "agree": "同意する",
+      "escape": "終了します"
     }
   },
   "common": {
