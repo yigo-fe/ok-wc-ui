@@ -1,6 +1,6 @@
 <template>
     <div><ok-person-tippy
-          .personInfo="personInfo"
+          .personInfo="innerPersonInfo"
           .i18n="i18n"
           .avatarClass="avatarClass"
           .size="size"
@@ -16,7 +16,7 @@
           style="line-height: 1"
           ><slot>
             <ok-avatar
-              .personInfo="personInfo"
+              .personInfo="innerPersonInfo"
               .size="size"
               .width="width"
               .height="height"
@@ -26,7 +26,7 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
 import { isWindowsWxchat } from '../ok-person-card/broswer'
 // import okPersonAnt from './popover-ant'
 
@@ -37,8 +37,23 @@ export default defineComponent({
     },
     setup(props) {
         const showAntPopover = isWindowsWxchat()
+        const innerPersonInfo = computed(() => {
+            if (typeof(props.personInfo) === 'string') {
+                let info = {}
+                try {
+                    info = JSON.parse(props.personInfo)
+                    return info
+                } catch (e) {
+                    return {}
+                }
+            } else {
+                return props.personInfo
+            }
+        })
+        // console.log('personInfo:', props.personInfo)
         return {
-            showAntPopover
+            showAntPopover,
+            innerPersonInfo
         }
     }
 })
