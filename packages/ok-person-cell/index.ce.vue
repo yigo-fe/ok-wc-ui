@@ -1,5 +1,5 @@
 <template>
-    <div><ok-person-tippy
+    <div class="ok-person-cell"><ok-person-tippy
           .personInfo="innerPersonInfo"
           .i18n="i18n"
           .avatarClass="avatarClass"
@@ -58,3 +58,8 @@ export default defineComponent({
     }
 })
 </script>
+<style lang="less">
+.ok-person-cell {
+    display: inline-block;
+}
+</style>
