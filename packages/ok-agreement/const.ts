@@ -7,7 +7,7 @@ export enum AGREEMENTS_TYPE {
 export const AGREEMENTS = [
     {
         key: AGREEMENTS_TYPE.SA,
-        name: '产品服务协议',
+        name: '用户协议',
         enName: '',
         url: 'https://fe-resource.baiteda.com/services-statement/v1.0/services.html',
         enUrl: ''
@@ -21,7 +21,7 @@ export const AGREEMENTS = [
     },
     {
         key: AGREEMENTS_TYPE.IPRs,
-        name: '知识产权条款',
+        name: '知识产权声明',
         enName: '',
         url: 'https://fe-resource.baiteda.com/services-statement/v1.0/IPRs.html',
         enUrl: ''
