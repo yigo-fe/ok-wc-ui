@@ -14,7 +14,7 @@ export const AGREEMENTS = [
     },
     {
         key: AGREEMENTS_TYPE.PP,
-        name: '隐私条款',
+        name: '隐私政策',
         enName: 'Privacy Policy',
         url: 'https://fe-resource.baiteda.com/services-statement/v1.0/privacy.html',
         enUrl: ''
