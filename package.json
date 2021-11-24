@@ -1,6 +1,6 @@
 {
   "name": "ok-wc-ui",
-  "version": "2.0.16",
+  "version": "2.0.17",
   "main": "./dist/ok-wc-ui.umd.js",
   "module": "./dist/ok-wc-ui.es.js",
   "exports": {
