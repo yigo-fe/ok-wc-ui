@@ -352,6 +352,7 @@ export default function (props: any, context: any, config: any) {
 
   // 仅限于fileList 回显
   const displayFileList = (defaultFileList: any) => {
+	  fileLists.value = []
     defaultFileList.forEach((file: any) => {
       const file_id = file.file_id
       // 更新fileList展示
@@ -371,10 +372,18 @@ export default function (props: any, context: any, config: any) {
     })
   }
 
+	let rejectGetDefaultFileList: Function | null = null
   // 获取默认列表
   const handleDefaultlist = async (ids: string[]) => {
-    const result = await config.getDefaultFileList(ids)
-    if (result.code === '000000') {
+		// 如果有上一次的请求，就把上一次的终止掉
+		if (rejectGetDefaultFileList) {
+			rejectGetDefaultFileList()
+		}
+    const result = await Promise.race([config.getDefaultFileList(ids), new Promise((resolve, reject) => {
+	    rejectGetDefaultFileList = reject
+    })])
+	  rejectGetDefaultFileList = null
+    if (result && result.code === '000000') {
       displayFileList(result.data)
     }
   }

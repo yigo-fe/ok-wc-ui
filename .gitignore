@@ -102,6 +102,7 @@ dist
 
 # TernJS port file
 .tern-port
+/.idea
 /.idea/misc.xml
 /.idea/modules.xml
 /.idea/ok-wc-ui.iml
