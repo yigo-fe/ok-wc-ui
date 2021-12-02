@@ -170,7 +170,9 @@ export default defineComponent({
     }
 
     const exposeMap: Record<any, any> = {
-      handleClick, handleRemoveAllFileList
+      handleClick,
+	    handleRemoveAllFileList,
+	    uploadFiles
     }
     defineExpose(exposeMap)
     onMounted(() => {
