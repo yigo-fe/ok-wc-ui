@@ -21,9 +21,17 @@
     flex-direction: column;
     justify-content: space-between;
     text-align: left;
-    .header .logo {
-        max-width: 154px;
-        max-height: 28px;
+    .header {
+        .logo {
+            max-width: 154px;
+            max-height: 28px;
+        }
+        .title {
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 28px;
+            color: var(--bl-n900-c);
+        }
     }
 }
 
@@ -34,11 +42,6 @@
     padding: 24px;
     .header {
         margin-bottom: 16px;
-        .title {
-            font-weight: 500;
-            font-size: 20px;
-            line-height: 28px;
-        }
     }
     .body {
         font-size: 14px;
@@ -80,11 +83,6 @@
     padding-top: 24px;
     .header {
         margin-bottom: 16px;
-        .title {
-            font-weight: 500;
-            font-size: 20px;
-            line-height: 28px;
-        }
     }
     .body {
         font-size: 12px;
