@@ -173,6 +173,9 @@ export default function (props: any, context: any, config: any) {
 			}
 		}
 		if (canUploadFileList.length !== fileList.length) {
+			if (props.onCheckFileError === undefined) {
+				console.warn('Please pass me the onCheckFileError method, otherwise you may not get the error information for the built-in checkup')
+			}
 			props.onCheckFileError?.(checkResult)
 		}
 		return canUploadFileList
