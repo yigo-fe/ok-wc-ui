@@ -170,7 +170,37 @@ const UploadProps = {
   },
   vertical: {
     type: Boolean as unknown as PropType<boolean>,
-  }
+  },
+	/**
+	 * 校验文件名称的长度
+	 * */
+	checkFileName: {
+		type: Number
+	},
+	/**
+	 * 校验文件大小
+	 * */
+	checkFileSize: {
+		type: Number
+	},
+	/**
+	 * 校验文件类型
+	 * */
+	checkFileType: {
+		type: Array as PropType<string[]>,
+	},
+	/**
+	 * 校验错误的回调函数
+	 * */
+	onCheckFileError: {
+		type: Function as PropType<(errors: CheckFileResult) => void>
+	}
 }
 
-export { UploadProps }
+interface CheckFileResult {
+	filename: File[]
+	filesize: File[]
+	filetype: File[]
+}
+
+export { UploadProps, CheckFileResult }

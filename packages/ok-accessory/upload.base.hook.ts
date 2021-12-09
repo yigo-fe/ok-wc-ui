@@ -44,6 +44,7 @@ import { isSameArray } from '../utils/index'
 import { confirmModal } from '../utils/utils.modal'
 import type { OkFile, UploadStatus } from './upload.type'
 import { download } from './utils'
+import {CheckFileResult} from "./upload.props";
 type UpdateFile = {
   percentage?: number
   status?: UploadStatus
@@ -106,12 +107,13 @@ export default function (props: any, context: any, config: any) {
     if (postFiles.length === 0) {
       return
     }
-    postFiles.forEach(rawFile => {
+	  const uploadFileList = handlerCheckFileList(postFiles)
+	  uploadFileList.forEach(rawFile => {
       let file = rawFile as OkFile
       // 文件格式及大小都在组件外部判断
       if (
         !props.beforeUpload ||
-        (props.beforeUpload && props.beforeUpload(file, postFiles))
+        (props.beforeUpload && props.beforeUpload(file, uploadFileList))
       ) {
         file.uid = fileId
         fileId++
@@ -124,6 +126,57 @@ export default function (props: any, context: any, config: any) {
       }
     })
   }
+
+	const getFileType = (filePath: string) => {
+		const startIndex = filePath.lastIndexOf('.')
+		if (startIndex != -1)
+			return filePath.substring(startIndex + 1, filePath.length).toLowerCase()
+		else return ''
+	}
+
+	/**
+	 * 内置校验附件
+	 * */
+	const handlerCheckFileList = (fileList: File[]): File[] => {
+		const canUploadFileList = fileList.slice()
+		const checkResult: CheckFileResult = {
+			filename: [],
+			filesize: [],
+			filetype: []
+		}
+		for (let i = 0; i < canUploadFileList.length; i++) {
+			const file = canUploadFileList[i]
+			let success = true
+			// 按照 类型 => 大小 => 名称长度 的顺序进行校验
+			if (props.checkFileType !== undefined) {
+				const checkFileType = props.checkFileType.map((item: string) => item.toLowerCase())
+				if (!checkFileType.includes(getFileType(file.name))) {
+					checkResult.filetype.push(file)
+					success = false
+				}
+			}
+			if (props.checkFileSize !== undefined) {
+				if (file.size > props.checkFileSize) {
+					checkResult.filesize.push(file)
+					success = false
+				}
+			}
+			if (props.checkFileName !== undefined) {
+				if (file.name.length > props.checkFileName) {
+					checkResult.filename.push(file)
+					success = false
+				}
+			}
+			if (!success) {
+				canUploadFileList.splice(i, 1)
+				i--
+			}
+		}
+		if (canUploadFileList.length !== fileList.length) {
+			props.onCheckFileError?.(checkResult)
+		}
+		return canUploadFileList
+	}
 
   /**
    * 选择文件后添加文件到传输列表
