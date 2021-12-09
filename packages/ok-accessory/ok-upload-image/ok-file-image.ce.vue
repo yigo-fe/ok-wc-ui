@@ -267,7 +267,7 @@ export default defineComponent({
 		const handlePreview = (file: UploadFile, index: number) => {
 			emit('preview', { file, index })
 		}
-		const noSupportThumb = ['tiff', 'tiff', 'bmp']
+		const noSupportThumb = ['tif', 'tiff', 'bmp']
 		const isDefaultThumb = (item: any): boolean => {
 			return noSupportThumb.includes(
 				item.response.data[0].file_name.substring(
