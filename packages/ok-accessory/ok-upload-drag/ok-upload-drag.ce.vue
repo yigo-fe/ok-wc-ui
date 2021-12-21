@@ -118,19 +118,13 @@
  *
  */
 
-import {
-	ref,
-	defineComponent,
-	onMounted,
-	getCurrentInstance,
-	defineExpose,
-} from 'vue'
+import {defineComponent, defineExpose, getCurrentInstance, onMounted, ref,} from 'vue'
 
-import { i18n } from '../../locales'
-import { COMMON_CSS_PATH } from '../../path.config'
+import {i18n} from '../../locales'
 import useAttachmentHandle from '../attachment.common.hook'
-import { UploadProps } from '../upload.props'
-import { customDefineExpose, getHostNode } from '../../utils/index'
+import {UploadProps} from '../upload.props'
+import {customDefineExpose, getHostNode} from '../../utils/index'
+
 export default defineComponent({
 	props: {
 		...UploadProps,
@@ -177,11 +171,13 @@ export default defineComponent({
 			uploadFiles,
 		}
 		defineExpose(exposeMap)
+		const hasSlot = ref(false)
 		onMounted(() => {
 			// 暴露组件的方法
 			setTimeout(() => {
 				const dom = getHostNode(instance.refs.inputRef)
 				customDefineExpose(exposeMap, dom)
+				hasSlot.value = dom.children.length > 0
 			}, 1000)
 		})
 
@@ -221,7 +217,6 @@ export default defineComponent({
 			dragover.value = false
 		}
 
-		const hasSlot = ref(false)
 		return {
 			i18n,
 			hasSlot,
