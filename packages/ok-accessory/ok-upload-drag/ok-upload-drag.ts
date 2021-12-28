@@ -2,8 +2,8 @@
  * @Descripttion:
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
- * @LastEditors: 付静
- * @LastEditTime: 2021-08-19 15:23:16
+ * @LastEditors: seadon
+ * @LastEditTime: 2021-12-28 17:19:15
  * @FilePath: /packages/ok-accessory/ok-upload-drag/ok-upload-drag.ts
  */
 
@@ -55,6 +55,7 @@ defineComponent(
       fileLists,
       hideUploader,
       disabled,
+      displayFileLists,
       uploadFiles,
       handlePreview,
       handleDetele,
@@ -82,7 +83,7 @@ defineComponent(
       fileLists.value = []
     }
 
-    context.expose({ handleClick, handleRemoveAllFileList })
+    context.expose({ handleClick, handleRemoveAllFileList, displayFileLists })
 
     /**
      * 点击上传选中文件

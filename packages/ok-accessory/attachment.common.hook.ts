@@ -2,8 +2,8 @@
  * @Descripttion: 文件上传公用逻辑处理
  * @Author: 付静
  * @Date: 2021-07-10 11:15:37
- * @LastEditors: 付静
- * @LastEditTime: 2021-08-16 15:08:56
+ * @LastEditors: seadon
+ * @LastEditTime: 2021-12-28 17:19:32
  * @FilePath: /packages/ok-accessory/attachment.common.hook.ts
  */
 import { message } from 'ant-design-vue'
@@ -98,6 +98,7 @@ export default function (props, context) {
     fileLists,
     hideUploader,
     disabled,
+    displayFileLists,
     displayFileList,
     uploadFiles,
     handleDetele,
@@ -114,6 +115,7 @@ export default function (props, context) {
     fileLists,
     hideUploader,
     disabled,
+    displayFileLists,
     displayFileList,
     uploadFiles,
     handlePreview,
