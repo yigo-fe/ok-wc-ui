@@ -3,7 +3,7 @@
  * @Author: 付静
  * @Date: 2021-01-25 16:18:27
  * @LastEditors: seadon
- * @LastEditTime: 2021-12-09 13:39:30
+ * @LastEditTime: 2021-12-28 14:59:25
  * @FilePath: /packages/ok-accessory/upload.base.hook.ts
  */
 
@@ -430,6 +430,8 @@ export default function (props: any, context: any, config: any) {
 		})
 	}
 
+	// 当前展示列表数据
+	const displayFileLists = ref()
 	let rejectGetDefaultFileList: Function | null = null
 	// 获取默认列表
 	const handleDefaultlist = async (ids: string[]) => {
@@ -445,6 +447,7 @@ export default function (props: any, context: any, config: any) {
 		])
 		rejectGetDefaultFileList = null
 		if (result && result.code === '000000') {
+			displayFileLists.value = result.data
 			displayFileList(result.data)
 		}
 	}
@@ -495,6 +498,7 @@ export default function (props: any, context: any, config: any) {
 		fileLists,
 		hideUploader,
 		disabled,
+		displayFileLists,
 		displayFileList,
 		uploadFiles,
 		handleDetele,

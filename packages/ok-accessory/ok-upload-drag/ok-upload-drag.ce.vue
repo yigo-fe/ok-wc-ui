@@ -138,6 +138,7 @@ export default defineComponent({
 			fileLists,
 			hideUploader,
 			disabled,
+			displayFileLists,
 			uploadFiles,
 			handlePreview,
 			handleDetele,
@@ -166,6 +167,7 @@ export default defineComponent({
 		}
 
 		const exposeMap: Record<any, any> = {
+			displayFileLists,
 			handleClick,
 			handleRemoveAllFileList,
 			uploadFiles,
