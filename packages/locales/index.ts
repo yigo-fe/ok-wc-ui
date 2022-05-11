@@ -10,7 +10,7 @@ import ja from './ja-JP.json'
 
 const i18n = new OkI18n({
   locale:
-    localStorage.getItem('locale') || window.okuiConfig?.locale || 'zh-CN',
+  window.okuiConfig?.locale ||  localStorage.getItem('locale')  || 'zh-CN',
   messages: {
     enUS: en,
     jaJP: ja,
