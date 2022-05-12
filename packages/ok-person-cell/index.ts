@@ -55,6 +55,7 @@ defineComponent(
             .textStyle=${props.textStyle}
             .hidePopper=${props.hidePopper}
             .propsGetInfoByEmpId=${props.propsGetInfoByEmpId}
+            .placement=${props.placement}
             ><slot>
               <ok-avatar
                 .personInfo=${props.personInfo}

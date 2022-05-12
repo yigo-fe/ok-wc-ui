@@ -1,10 +1,9 @@
 /*
- * @Descripttion:
+ * @Descripttion: tippy弹出组件
  * @Author: 付静
+ * @LastEditors: seadon
  * @Date: 2021-06-30 10:34:30
- * @LastEditors: 付静
- * @LastEditTime: 2021-08-17 11:00:42
- * @FilePath: /packages/ok-person-cell/popover-tippy.ts
+ * @LastEditTime: 2022-05-13 07:00:28
  */
 import { setPopover } from '@c/utils'
 import {
@@ -114,6 +113,7 @@ defineComponent(
         contxt.$refs['person-card'] as HTMLElement,
         {
           appendTo: document.body,
+          placement: props.placement,
           popperOptions: {
             strategy: 'fixed',
             modifiers: [

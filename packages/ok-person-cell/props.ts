@@ -1,13 +1,14 @@
 /*
- * @Descripttion:
+ * @Descripttion: 人员组件属性
  * @Author: 付静
+ * @LastEditors: seadon
  * @Date: 2021-03-04 13:47:46
- * @LastEditors: 付静
- * @LastEditTime: 2021-05-10 18:40:25
- * @FilePath: /packages/ok-person-cell/props.ts
+ * @LastEditTime: 2022-05-13 06:33:09
  */
 
 import { PropType } from 'ok-lit'
+
+import { POPOVER_PLACEMENT } from '../ok-wc-ui'
 const props = {
   personInfo: {
     // 人员信息
@@ -84,6 +85,9 @@ const props = {
   // 审批组件传入，卡片请求数据方法
   propsGetInfoByEmpId: {
     type: Function,
+  },
+  placement: {
+    type: String as unknown as PropType<POPOVER_PLACEMENT>,
   },
 }
 

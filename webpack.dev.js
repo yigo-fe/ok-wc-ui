@@ -1,10 +1,9 @@
 /*
- * @Descripttion:
+ * @Descripttion: dev配置
  * @Author: 付静
+ * @LastEditors: seadon
  * @Date: 2021-02-07 11:11:51
- * @LastEditors: 付静
- * @LastEditTime: 2021-08-24 13:49:52
- * @FilePath: /webpack.dev.js
+ * @LastEditTime: 2022-05-13 06:37:20
  */
 const webpackBaseConf = require('./webpack.base.config.js')
 const { merge } = require('webpack-merge')
@@ -13,7 +12,7 @@ module.exports = merge(webpackBaseConf, {
   mode: 'development',
   entry: {
     index: [
-      'webpack-dev-server/client?http://172.16.1.190:7000/',
+      'webpack-dev-server/client?http://192.168.31.163:7000/',
       'webpack/hot/dev-server',
       './packages/index.ts',
     ],
@@ -25,7 +24,7 @@ module.exports = merge(webpackBaseConf, {
     port: 7000,
     open: true,
     publicPath: '',
-    host: '172.16.1.190',
+    host: '192.168.31.163',
     proxy: {
       '/apps/api': {
         target: 'https://test.baiteda.com/',
